@@ -5,4 +5,10 @@
  */
 export const environment = {
   production: true,
+  baseUrl: "https://stage.c2u.io:2001",
+  baseUrlOidc: "https://stage.c2u.io:7001",
+  transactionsUrl: "https://stage.c2u.io:15001",
+  // baseUrl: 'https://cash2u.io:2001',
+  // baseUrlOidc: 'https://cash2u.io:7001',
+  // transactionsUrl: 'https://cash2u.io:15001',
 };
