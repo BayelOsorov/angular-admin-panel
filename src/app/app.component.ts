@@ -15,21 +15,11 @@ import { SeoService } from './@core/utils/seo.service';
 export class AppComponent implements OnInit {
     constructor(
         private analytics: AnalyticsService,
-        private seoService: SeoService,
-        public oidcSecurityService: OidcSecurityService
+        private seoService: SeoService
     ) {}
 
     ngOnInit(): void {
         this.analytics.trackPageViews();
         this.seoService.trackCanonicalChanges();
-        this.oidcSecurityService
-            .checkAuth()
-            .subscribe(
-                ({ isAuthenticated, userData, accessToken, idToken }) => {
-                    if (!isAuthenticated) {
-                        this.oidcSecurityService.authorize();
-                    }
-                }
-            );
     }
 }

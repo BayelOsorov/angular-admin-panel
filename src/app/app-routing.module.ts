@@ -8,12 +8,12 @@ import {
     NbRequestPasswordComponent,
     NbResetPasswordComponent,
 } from '@nebular/auth';
-import { AuthGuard } from './guards/auth.guard';
+import { AutoLoginAllRoutesGuard } from 'angular-auth-oidc-client';
 
 export const routes: Routes = [
     {
         path: 'pages',
-        canActivate: [AuthGuard],
+        canActivate: [AutoLoginAllRoutesGuard],
         loadChildren: () =>
             import('./pages/pages.module').then((m) => m.PagesModule),
     },
