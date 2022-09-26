@@ -12,7 +12,7 @@
     "scripts": {
         "ng": "ng",
         "conventional-changelog": "conventional-changelog",
-        "start": "ng serve --port 3001 --open",
+        "start": "ng serve --port 3000 --open",
         "build": "ng build",
         "build:prod": "npm run build -- --configuration production --aot",
         "test": "ng test",
