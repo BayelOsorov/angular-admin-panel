@@ -9,8 +9,8 @@ import { environment } from '../../environments/environment';
                 authority: environment.baseUrlOidc,
                 redirectUrl: window.location.origin + '/cb',
                 postLogoutRedirectUri: window.location.origin + '/logout',
-                clientId: 'partner_admin_app',
-                scope: 'openid profile offline_access', // 'openid profile ' + your scopes
+                clientId: 'admin_idp_client',
+                scope: 'openid profile roles offline_access IdentityServerApi', // 'openid profile ' + your scopes
                 responseType: 'code',
                 silentRenew: true,
                 useRefreshToken: true,
