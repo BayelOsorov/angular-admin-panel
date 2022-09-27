@@ -12,7 +12,7 @@ export class StaffComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     listStaff: IStaff;
     settings = {
-        hideSubHeader: true,
+        hideSubHeader: false,
         delete: {
             deleteButtonContent: `<i class="nb-trash"></i>`,
             confirmDelete: true,
@@ -20,9 +20,14 @@ export class StaffComponent implements OnInit, OnDestroy {
         actions: {
             delete: true,
             edit: false,
+            add: false,
             position: 'right',
+            columnTitle: '',
         },
-        pager: { perPage: 20 },
+        pager: {
+            perPage: 5,
+            display: true,
+        },
         columns: {
             name: {
                 title: 'ФИО',
@@ -35,6 +40,9 @@ export class StaffComponent implements OnInit, OnDestroy {
             },
             roles: {
                 title: 'Роль',
+                type: 'text',
+                // width: '10%',
+                filter: false,
                 valuePrepareFunction: (item) => this.getRoles(item),
             },
         },
