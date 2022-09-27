@@ -12,7 +12,7 @@ import { AutoLoginAllRoutesGuard } from 'angular-auth-oidc-client';
 
 export const routes: Routes = [
     {
-        path: 'pages',
+        path: '',
         canActivate: [AutoLoginAllRoutesGuard],
         loadChildren: () =>
             import('./pages/pages.module').then((m) => m.PagesModule),
@@ -47,8 +47,8 @@ export const routes: Routes = [
             },
         ],
     },
-    { path: '', redirectTo: 'pages', pathMatch: 'full' },
-    { path: '**', redirectTo: 'pages' },
+    { path: '', redirectTo: '', pathMatch: 'full' },
+    { path: '**', redirectTo: '' },
 ];
 
 const config: ExtraOptions = {
