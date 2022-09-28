@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="onFirstSubmit()">
     <div class="form-group">
         <label for="exampleInputEmail1" class="label">Ф.И.О</label>
         <input
@@ -7,6 +7,11 @@
             fullWidth
             id="exampleInputEmail1"
             placeholder="Ф.И.О"
+            formControlName="firstCtrl"
+            [ngClass]="{
+                'form-control-danger':
+                    form.invalid && (form.dirty || form.touched)
+            }"
         />
     </div>
     <div class="form-group">
@@ -17,6 +22,11 @@
             fullWidth
             id="exampleInputPassword1"
             placeholder="Логин"
+            formControlName="secondCtrl"
+            [ngClass]="{
+                'form-control-danger':
+                    form.invalid && (form.dirty || form.touched)
+            }"
         />
     </div>
     <button type="submit" nbButton status="danger">Редактировать</button>

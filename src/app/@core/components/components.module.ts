@@ -9,8 +9,6 @@ import {
     NbStepperModule,
 } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule as ngFormsModule } from '@angular/forms';
 
 import { CreateStaffModalComponent } from './staff/createStaffModal/create-staff-modal/create-staff-modal.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
@@ -20,10 +18,9 @@ import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
         CommonModule,
         NbStepperModule,
         NbCardModule,
-        FormsModule,
         ReactiveFormsModule,
+        FormsModule,
         NbButtonModule,
-        ngFormsModule,
         NbSelectModule,
         NbInputModule,
         NbListModule,
