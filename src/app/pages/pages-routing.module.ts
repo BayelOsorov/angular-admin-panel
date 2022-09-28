@@ -2,7 +2,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { StaffComponent } from './staff/staff/staff.component';
+import { StaffComponent } from './staff/list-staff/staff.component';
+import { DetailStaffComponent } from './staff/detail-staff/detail-staff/detail-staff.component';
 
 const routes: Routes = [
     {
@@ -12,6 +13,10 @@ const routes: Routes = [
             {
                 path: 'staff',
                 component: StaffComponent,
+            },
+            {
+                path: 'staff-detail/:id',
+                component: DetailStaffComponent,
             },
             {
                 path: '',

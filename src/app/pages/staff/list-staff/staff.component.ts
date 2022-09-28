@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { elementAt } from 'rxjs/operators';
-import { IStaff } from '../../../@core/models/staff/staff';
+import { IListStaff } from '../../../@core/models/staff/staff';
 import { StaffService } from '../../../@core/services/staff/staff.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { StaffService } from '../../../@core/services/staff/staff.service';
 })
 export class StaffComponent implements OnInit, OnDestroy {
     subscription: Subscription;
-    listStaff: IStaff;
+    listStaff: IListStaff;
     settings = {
         hideSubHeader: false,
         delete: {
@@ -47,7 +48,7 @@ export class StaffComponent implements OnInit, OnDestroy {
             },
         },
     };
-    constructor(private staffService: StaffService) {}
+    constructor(private staffService: StaffService, private router: Router) {}
 
     ngOnInit(): void {
         this.subscription = this.staffService.getListStaff().subscribe({
@@ -67,6 +68,10 @@ export class StaffComponent implements OnInit, OnDestroy {
         } else {
             event.confirm.reject();
         }
+    }
+    onUserRowSelect(event): void {
+        this.router.navigate([`staff-detail/${event.data.id}`]);
+        console.log(event);
     }
     getRoles(item) {
         return item.length > 1 ? item.map((elem) => elem.title) : item[0].title;

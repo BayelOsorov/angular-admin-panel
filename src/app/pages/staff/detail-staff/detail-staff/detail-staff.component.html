@@ -1,0 +1,30 @@
+<nb-card>
+    <!-- <nb-card-header> Сотрудники </nb-card-header> -->
+
+    <nb-card-body>
+        <nb-card class="list-card">
+            <nb-card-body class="lists row">
+                <nb-list class="col-md-6">
+                    <nb-list-item>ФИО</nb-list-item>
+                    <nb-list-item>Логин</nb-list-item>
+                    <nb-list-item>Роли</nb-list-item>
+                </nb-list>
+                <nb-list *ngIf="staffDetail" class="col-md-6">
+                    <nb-list-item>{{ staffDetail.name }}</nb-list-item>
+                    <nb-list-item>{{ staffDetail.userName }}</nb-list-item>
+                    <nb-list-item>
+                        <ng-container *ngFor="let role of staffDetail.roles">
+                            {{ role.title + ', ' }}
+                        </ng-container>
+                    </nb-list-item>
+                </nb-list>
+            </nb-card-body>
+            <div class="d-flex justify-content-around mb-3">
+                <button (click)="openEditModal()" nbButton status="success">
+                    Редактировать
+                </button>
+                <button nbButton status="primary">Изменить пароль</button>
+            </div>
+        </nb-card>
+    </nb-card-body></nb-card
+>

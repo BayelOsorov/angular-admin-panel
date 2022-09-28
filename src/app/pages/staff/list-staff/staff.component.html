@@ -6,6 +6,7 @@
             [settings]="settings"
             [source]="listStaff?.items"
             (deleteConfirm)="onDeleteConfirm($event)"
+            (userRowSelect)="onUserRowSelect($event)"
         >
         </ng2-smart-table>
     </nb-card-body>
