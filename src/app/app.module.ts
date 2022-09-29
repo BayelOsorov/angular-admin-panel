@@ -21,6 +21,8 @@ import {
     NbWindowModule,
 } from '@nebular/theme';
 import { AuthConfigModule } from './auth/auth-config.module';
+import { ComponentsModule } from './@core/components/components.module';
+import { DemoNgZorroAntdModule } from './pages/ng-zorro-antd.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -41,6 +43,8 @@ import { AuthConfigModule } from './auth/auth-config.module';
         CoreModule.forRoot(),
         ThemeModule.forRoot(),
         AuthConfigModule,
+        ComponentsModule,
+        DemoNgZorroAntdModule,
     ],
     bootstrap: [AppComponent],
 })

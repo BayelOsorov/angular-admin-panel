@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { forwardRef, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     NbButtonModule,
@@ -8,7 +8,11 @@ import {
     NbSelectModule,
     NbStepperModule,
 } from '@nebular/theme';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+    FormsModule,
+    NG_VALUE_ACCESSOR,
+    ReactiveFormsModule,
+} from '@angular/forms';
 
 import { CreateStaffModalComponent } from './staff/createStaffModal/create-staff-modal/create-staff-modal.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';

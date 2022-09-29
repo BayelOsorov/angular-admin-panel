@@ -1,7 +1,17 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit, Optional } from '@angular/core';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
+import { NbWindowRef } from '@nebular/theme';
+
 import { IDetailStaff } from '../../../models/staff/staff';
+import { StaffService } from '../../../services/staff/staff.service';
+
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { catchError, debounceTime, map, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'ngx-edit-staff',
@@ -9,27 +19,56 @@ import { IDetailStaff } from '../../../models/staff/staff';
     styleUrls: ['./edit-staff.component.scss'],
 })
 export class EditStaffComponent implements OnInit, OnDestroy {
-    @Input() staffDetail: IDetailStaff;
     form: FormGroup;
+    staffDetail: IDetailStaff;
+    searchChange$ = new BehaviorSubject('');
+    optionList = [];
+    selectedUser?: string;
+    isLoading = false;
 
     private destroy$: Subject<void> = new Subject<void>();
-    constructor(private fb: FormBuilder) {}
 
+    constructor(
+        private fb: FormBuilder,
+        private staffService: StaffService,
+        @Optional() private dialogRef: NbWindowRef<any>
+    ) {}
+    onSearch(value: string): void {
+        this.isLoading = true;
+        this.searchChange$.next(value);
+    }
     ngOnInit(): void {
+        console.log(this.staffDetail);
+
         this.form = this.fb.group({
-            firstCtrl: ['', Validators.required],
-            secondCtrl: ['', Validators.required],
+            name: [this.staffDetail?.name, Validators.required],
+            userName: [this.staffDetail?.userName, Validators.required],
+            roles: ['', Validators.required],
         });
 
-        console.log(this.staffDetail);
+        /* eslint-disable @typescript-eslint/no-explicit-any */
+        const getRandomNameList = (name: string): Observable<any> =>
+            this.staffService.getRolesStaff().pipe(
+                catchError(() => of({ results: [] })),
+                map((res: any) => res)
+            );
+        const optionList$: Observable<string[]> = this.searchChange$
+            .asObservable()
+            .pipe(debounceTime(500))
+            .pipe(switchMap(getRandomNameList));
+        optionList$.subscribe((data) => {
+            this.optionList = data;
+            this.isLoading = false;
+        });
     }
     onFirstSubmit() {
-        //    .pipe(
-        //                 takeUntil(this.destroy$)
-        //             )
+        this.form.markAsDirty();
+        console.log(this.form.value);
+
+        // this.dialogRef.close();
     }
     ngOnDestroy() {
-        // this.destroy$.next();
-        // this.destroy$.complete();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

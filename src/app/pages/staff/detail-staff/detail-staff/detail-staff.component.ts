@@ -31,7 +31,6 @@ export class DetailStaffComponent implements OnInit, OnDestroy {
     constructor(
         private staffService: StaffService,
         private route: ActivatedRoute,
-        private dialogService: NbDialogService,
         private windowService: NbWindowService
     ) {}
 
@@ -55,6 +54,9 @@ export class DetailStaffComponent implements OnInit, OnDestroy {
         const activeModal = this.windowService.open(component, {
             closeOnBackdropClick,
             title: 'Редактирование сотрудника',
+            context: {
+                staffDetail: this.staffDetail,
+            },
         });
         activeModal.componentInstance.staffDetail = this.staffDetail;
     }

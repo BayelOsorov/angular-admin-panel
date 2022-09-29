@@ -25,4 +25,16 @@ export class StaffService {
                 `/Administration/api/v1/Users/Delete/${id}`
         );
     }
+    editStaff(id: string, data) {
+        return this.http.put(
+            environment.baseUrlOidc +
+                `/Administration/api/v1/Users/Update/${id}`,
+            data
+        );
+    }
+    getRolesStaff() {
+        return this.http.get(
+            environment.baseUrlOidc + `/Administration/api/v1/Roles/List`
+        );
+    }
 }
