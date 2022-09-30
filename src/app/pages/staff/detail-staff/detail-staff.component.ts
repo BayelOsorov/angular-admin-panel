@@ -9,10 +9,9 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { NbDialogService, NbWindowService } from '@nebular/theme';
 import { Subscription } from 'rxjs';
-import { EditStaffComponent } from '../../../../@core/components/staff/edit-staff/edit-staff.component';
-import { IDetailStaff } from '../../../../@core/models/staff/staff';
-import { StaffService } from '../../../../@core/services/staff/staff.service';
-
+import { EditStaffComponent } from '../../../@core/components/staff/edit-staff/edit-staff.component';
+import { IDetailStaff } from '../../../@core/models/staff/staff';
+import { StaffService } from '../../../@core/services/staff/staff.service';
 @Component({
     templateUrl: './detail-staff.component.html',
     styleUrls: ['./detail-staff.component.scss'],

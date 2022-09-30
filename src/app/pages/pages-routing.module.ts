@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { StaffComponent } from './staff/list-staff/staff.component';
-import { DetailStaffComponent } from './staff/detail-staff/detail-staff/detail-staff.component';
+import { DetailStaffComponent } from './staff/detail-staff/detail-staff.component';
 
 const routes: Routes = [
     {

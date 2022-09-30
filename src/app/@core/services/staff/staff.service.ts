@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { IDetailStaff, IListStaff } from '../../models/staff/staff';
+import { IDetailStaff, IListStaff, IStaffRole } from '../../models/staff/staff';
 
 @Injectable({
     providedIn: 'root',
@@ -33,7 +33,7 @@ export class StaffService {
         );
     }
     getRolesStaff() {
-        return this.http.get(
+        return this.http.get<IStaffRole[]>(
             environment.baseUrlOidc + `/Administration/api/v1/Roles/List`
         );
     }

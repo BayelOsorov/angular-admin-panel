@@ -12,7 +12,7 @@ import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { StaffComponent } from './staff/list-staff/staff.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { DetailStaffComponent } from './staff/detail-staff/detail-staff/detail-staff.component';
+import { DetailStaffComponent } from './staff/detail-staff/detail-staff.component';
 
 @NgModule({
     imports: [

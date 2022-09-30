@@ -1,4 +1,4 @@
-import { forwardRef, NgModule } from '@angular/core';
+import { forwardRef, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     NbButtonModule,
@@ -16,6 +16,8 @@ import {
 
 import { CreateStaffModalComponent } from './staff/createStaffModal/create-staff-modal/create-staff-modal.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @NgModule({
     imports: [
@@ -28,7 +30,10 @@ import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
         NbSelectModule,
         NbInputModule,
         NbListModule,
+        NgMultiSelectDropDownModule,
+        NzSelectModule,
     ],
     declarations: [CreateStaffModalComponent, EditStaffComponent],
+    schemas: [NO_ERRORS_SCHEMA],
 })
 export class ComponentsModule {}

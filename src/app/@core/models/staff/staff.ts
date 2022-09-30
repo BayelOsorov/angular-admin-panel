@@ -18,13 +18,12 @@ export interface IDetailStaff {
     twoFactorEnabled: true;
     lockoutEnd: '2022-09-27T04:55:21.053Z';
     accessFailedCount: 0;
-    roles: [
-        {
-            id: 'string';
-            name: 'string';
-            normalizedName: 'string';
-            concurrencyStamp: 'string';
-            title: 'string';
-        }
-    ];
+    roles: IStaffRole[];
+}
+export interface IStaffRole {
+    id: 'string';
+    name: 'string';
+    normalizedName: 'string';
+    concurrencyStamp: 'string';
+    title: 'string';
 }
