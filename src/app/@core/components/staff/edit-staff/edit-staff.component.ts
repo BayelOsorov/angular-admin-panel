@@ -116,23 +116,15 @@ export class EditStaffComponent implements OnInit, OnDestroy {
 
     private destroy$: Subject<void> = new Subject<void>();
 
-    constructor(
-        private fb: FormBuilder,
-        private staffService: StaffService,
-        @Optional() private dialogRef: NbWindowRef<any>
-    ) {}
-    onSearch(value: string): void {
-        this.isLoading = true;
-        this.searchChange$.next(value);
-    }
+    constructor(private fb: FormBuilder, private staffService: StaffService) {}
+
+    compareFn = (o1: any, o2: any) => (o1 && o2 ? o1.id === o2.id : o1 === o2);
     ngOnInit(): void {
         this.form = this.fb.group({
             name: [this.staffDetail?.name, Validators.required],
             userName: [this.staffDetail?.userName, Validators.required],
-            roles: [],
+            roles: [this.staffDetail?.roles],
         });
-
-        /* eslint-disable @typescript-eslint/no-explicit-any */
         const getRandomNameList = (name: string): Observable<any> =>
             this.staffService.getRolesStaff().pipe(
                 catchError(() => of({ results: [] })),
@@ -140,7 +132,6 @@ export class EditStaffComponent implements OnInit, OnDestroy {
             );
         const optionList$: Observable<string[]> = this.searchChange$
             .asObservable()
-            .pipe(debounceTime(500))
             .pipe(switchMap(getRandomNameList));
         optionList$.subscribe((data) => {
             this.optionList = data;
