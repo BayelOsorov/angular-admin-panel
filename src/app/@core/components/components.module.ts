@@ -18,6 +18,7 @@ import { CreateStaffModalComponent } from './staff/createStaffModal/create-staff
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { ChangePasswordModalComponent } from './staff/change-password-modal/change-password-modal.component';
 
 @NgModule({
     imports: [
@@ -33,7 +34,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         NgMultiSelectDropDownModule,
         NzSelectModule,
     ],
-    declarations: [CreateStaffModalComponent, EditStaffComponent],
+    declarations: [CreateStaffModalComponent, EditStaffComponent, ChangePasswordModalComponent],
     schemas: [NO_ERRORS_SCHEMA],
 })
 export class ComponentsModule {}

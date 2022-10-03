@@ -15,6 +15,7 @@ import { LayoutService, StateService } from './utils';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http/http.service';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
+import { HttpErrorInterceptor } from './interceptors/error.interceptor';
 
 const socialLinks = [
     {
@@ -52,6 +53,11 @@ export const NB_CORE_PROVIDERS = [
     {
         provide: HTTP_INTERCEPTORS,
         useClass: BaseUrlInterceptor,
+        multi: true,
+    },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpErrorInterceptor,
         multi: true,
     },
     ...DATA_SERVICES,

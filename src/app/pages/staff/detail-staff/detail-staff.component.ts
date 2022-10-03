@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { NbDialogService, NbWindowService } from '@nebular/theme';
 import { Subscription } from 'rxjs';
+import { ChangePasswordModalComponent } from '../../../@core/components/staff/change-password-modal/change-password-modal.component';
 import { EditStaffComponent } from '../../../@core/components/staff/edit-staff/edit-staff.component';
 import { IDetailStaff } from '../../../@core/models/staff/staff';
 import { StaffService } from '../../../@core/services/staff/staff.service';
@@ -37,26 +38,39 @@ export class DetailStaffComponent implements OnInit, OnDestroy {
         this.route.params.subscribe((params) => {
             this.staffId = params['id'];
         });
+        this.getStaffDetail();
+    }
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
+    openEditModal() {
+        this.openModal(false, EditStaffComponent, {
+            title: 'Редактирование сотрудника',
+            context: {
+                staffDetail: this.staffDetail,
+            },
+        });
+    }
+    openChangePassModal() {
+        this.openModal(false, ChangePasswordModalComponent, {
+            title: 'Изменения пароля',
+        });
+    }
+    getStaffDetail() {
         this.subscription = this.staffService
             .getDetailStaff(this.staffId)
             .subscribe({
                 next: (data) => (this.staffDetail = data),
             });
     }
-    ngOnDestroy(): void {
-        this.subscription.unsubscribe();
-    }
-    openEditModal() {
-        this.openModal(false, EditStaffComponent);
-    }
-    protected openModal(closeOnBackdropClick: boolean, component) {
-        const activeModal = this.windowService.open(component, {
-            closeOnBackdropClick,
-            title: 'Редактирование сотрудника',
-            context: {
-                staffDetail: this.staffDetail,
-            },
-        });
-        activeModal.componentInstance.staffDetail = this.staffDetail;
+    protected openModal(closeOnBackdropClick: boolean, component, props) {
+        this.windowService
+            .open(component, {
+                closeOnBackdropClick,
+                ...props,
+            })
+            .onClose.subscribe(
+                (val) => val === 'edit' && this.getStaffDetail()
+            );
     }
 }

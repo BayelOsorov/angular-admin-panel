@@ -6,7 +6,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
@@ -23,8 +23,8 @@ import {
 import { AuthConfigModule } from './auth/auth-config.module';
 import { ComponentsModule } from './@core/components/components.module';
 import { DemoNgZorroAntdModule } from './pages/ng-zorro-antd.module';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpErrorInterceptor } from './@core/interceptors/error.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     declarations: [AppComponent],
@@ -47,7 +47,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         AuthConfigModule,
         ComponentsModule,
         DemoNgZorroAntdModule,
+        ToastrModule.forRoot({
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+        }),
     ],
     bootstrap: [AppComponent],
+    providers: [],
 })
 export class AppModule {}
