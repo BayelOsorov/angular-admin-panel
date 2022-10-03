@@ -15,12 +15,16 @@ export class HandleErrorService {
                 // eslint-disable-next-line guard-for-in
                 for (const property in err.error.errors) {
                     errorMessage +=
-                        property + ': ' + err.error.errors[property] + '\n   ';
+                        `\r\n ` + property + ': ' + err.error.errors[property];
                 }
             }
-            // if (err && err.error) {
-            //     errorMessage += err.error.title;
-            // }
+            if (err && err.error) {
+                // eslint-disable-next-line guard-for-in
+                for (const property in err.error) {
+                    errorMessage +=
+                        `\r\n ` + property + ': ' + err.error[property];
+                }
+            }
         } else {
             errorMessage = 'Ошибка сервера';
         }

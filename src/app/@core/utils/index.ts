@@ -1,4 +1,4 @@
 import { LayoutService } from './layout.service';
 import { StateService } from './state.service';
-
-export { LayoutService, StateService };
+import { GeneratePassword } from './generatePassword';
+export { LayoutService, StateService, GeneratePassword };

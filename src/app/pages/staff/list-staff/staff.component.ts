@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NbWindowService } from '@nebular/theme';
 import { Subscription } from 'rxjs';
+import { CreateStaffModalComponent } from '../../../@core/components/staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 import { IListStaff } from '../../../@core/models/staff/staff';
 import { StaffService } from '../../../@core/services/staff/staff.service';
 
@@ -17,6 +19,12 @@ export class StaffComponent implements OnInit, OnDestroy {
             deleteButtonContent: `<i class="nb-trash"></i>`,
             confirmDelete: true,
         },
+        add: {
+            addButtonContent: '<i class="nb-plus"></i>',
+            createButtonContent: '<i class="nb-checkmark"></i>',
+            cancelButtonContent: '<i class="nb-close"></i>',
+            confirmCreate: true,
+        },
         actions: {
             delete: true,
             edit: false,
@@ -25,7 +33,7 @@ export class StaffComponent implements OnInit, OnDestroy {
             columnTitle: '',
         },
         pager: {
-            perPage: 5,
+            perPage: 20,
             display: true,
         },
         columns: {
@@ -47,17 +55,25 @@ export class StaffComponent implements OnInit, OnDestroy {
             },
         },
     };
-    constructor(private staffService: StaffService, private router: Router) {}
+    constructor(
+        private staffService: StaffService,
+        private router: Router,
+        private windowService: NbWindowService
+    ) {}
 
     ngOnInit(): void {
-        this.subscription = this.staffService.getListStaff().subscribe({
-            next: (data) => (this.listStaff = data),
-        });
+        this.getListStaff();
     }
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
+    getListStaff() {
+        this.subscription = this.staffService.getListStaff().subscribe({
+            next: (data) => (this.listStaff = data),
+        });
+    }
+
     onDeleteConfirm(event): void {
         if (window.confirm('Are you sure you want to delete?')) {
             event.confirm.resolve();
@@ -70,9 +86,24 @@ export class StaffComponent implements OnInit, OnDestroy {
     }
     onUserRowSelect(event): void {
         this.router.navigate([`staff-detail/${event.data.id}`]);
-        console.log(event);
     }
     getRoles(item) {
         return item.length > 1 ? item.map((elem) => elem.title) : item[0].title;
+    }
+    openCreateModal() {
+        this.openModal(false, CreateStaffModalComponent, {
+            title: 'Добавление сотрудника',
+            context: {},
+        });
+    }
+    protected openModal(closeOnBackdropClick: boolean, component, props) {
+        this.windowService
+            .open(component, {
+                closeOnBackdropClick,
+                ...props,
+            })
+            .onClose.subscribe(
+                (val) => val === 'create' && this.getListStaff()
+            );
     }
 }

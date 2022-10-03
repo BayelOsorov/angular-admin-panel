@@ -14,11 +14,11 @@ import {
     ReactiveFormsModule,
 } from '@angular/forms';
 
-import { CreateStaffModalComponent } from './staff/createStaffModal/create-staff-modal/create-staff-modal.component';
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ChangePasswordModalComponent } from './staff/change-password-modal/change-password-modal.component';
+import { CreateStaffModalComponent } from './staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 
 @NgModule({
     imports: [
@@ -34,7 +34,11 @@ import { ChangePasswordModalComponent } from './staff/change-password-modal/chan
         NgMultiSelectDropDownModule,
         NzSelectModule,
     ],
-    declarations: [CreateStaffModalComponent, EditStaffComponent, ChangePasswordModalComponent],
+    declarations: [
+        CreateStaffModalComponent,
+        EditStaffComponent,
+        ChangePasswordModalComponent,
+    ],
     schemas: [NO_ERRORS_SCHEMA],
 })
 export class ComponentsModule {}

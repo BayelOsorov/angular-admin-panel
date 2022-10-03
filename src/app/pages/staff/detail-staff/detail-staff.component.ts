@@ -54,6 +54,9 @@ export class DetailStaffComponent implements OnInit, OnDestroy {
     openChangePassModal() {
         this.openModal(false, ChangePasswordModalComponent, {
             title: 'Изменения пароля',
+            context: {
+                staffId: this.staffId,
+            },
         });
     }
     getStaffDetail() {

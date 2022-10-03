@@ -37,4 +37,17 @@ export class StaffService {
             environment.baseUrlOidc + `/Administration/api/v1/Roles/List`
         );
     }
+    changeStaffPassword(id: string, data) {
+        return this.http.post(
+            environment.baseUrlOidc +
+                `/Administration/api/v1/Users/ChangePassword?id=${id}`,
+            data
+        );
+    }
+    createStaff(data) {
+        return this.http.post(
+            environment.baseUrlOidc + `/Administration/api/v1/Users/Create`,
+            data
+        );
+    }
 }

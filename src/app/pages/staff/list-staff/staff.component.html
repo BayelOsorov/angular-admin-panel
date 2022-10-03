@@ -1,5 +1,11 @@
 <nb-card>
-    <nb-card-header> Сотрудники </nb-card-header>
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Сотрудники</strong>
+
+        <button (click)="openCreateModal()" nbButton status="primary">
+            Добавить
+        </button>
+    </nb-card-header>
 
     <nb-card-body>
         <ng2-smart-table

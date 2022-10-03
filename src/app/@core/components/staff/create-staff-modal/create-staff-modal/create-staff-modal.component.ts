@@ -1,37 +1,22 @@
 import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
-import {
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbWindowRef } from '@nebular/theme';
 
-import { IDetailStaff } from '../../../models/staff/staff';
-import { StaffService } from '../../../services/staff/staff.service';
-
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import {
-    catchError,
-    debounceTime,
-    map,
-    switchMap,
-    takeUntil,
-} from 'rxjs/operators';
+import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { StaffService } from '../../../../services/staff/staff.service';
+import { GeneratePassword } from '../../../../utils';
 @Component({
-    selector: 'ngx-edit-staff',
-    templateUrl: './edit-staff.component.html',
-    styleUrls: ['./edit-staff.component.scss'],
+    selector: 'ngx-create-staff-modal',
+    templateUrl: './create-staff-modal.component.html',
+    styleUrls: ['./create-staff-modal.component.scss'],
 })
-export class EditStaffComponent implements OnInit, OnDestroy {
+export class CreateStaffModalComponent implements OnInit, OnDestroy {
     form: FormGroup;
-    staffDetail: IDetailStaff;
     searchChange$ = new BehaviorSubject('');
     optionList = [];
-    selectedUser?: string;
     isLoading = false;
-
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -41,12 +26,13 @@ export class EditStaffComponent implements OnInit, OnDestroy {
         @Optional() private dialogRef: NbWindowRef<any>
     ) {}
 
-    compareFn = (o1: any, o2: any) => (o1 && o2 ? o1.id === o2.id : o1 === o2);
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: [this.staffDetail?.name, Validators.required],
-            userName: [this.staffDetail?.userName, Validators.required],
-            roles: [[this.staffDetail?.roles], [Validators.required]],
+            name: ['', Validators.required],
+            userName: ['', Validators.required],
+            roles: [[], [Validators.required]],
+            password: ['', Validators.required],
+            passwordConfirmation: ['', Validators.required],
         });
         const getRoles = (name: string): Observable<any> =>
             this.staffService.getRolesStaff().pipe(
@@ -61,19 +47,21 @@ export class EditStaffComponent implements OnInit, OnDestroy {
             this.isLoading = false;
         });
     }
+    generatePassword() {
+        const password = GeneratePassword();
+        this.form.controls['password'].setValue(password);
+        this.form.controls['passwordConfirmation'].setValue(password);
+    }
 
-    onFirstSubmit() {
+    onSubmit() {
         if (this.form.valid) {
             const newRoles = this.form.value.roles.map((item) => item.id);
             this.staffService
-                .editStaff(this.staffDetail.id, {
-                    ...this.form.value,
-                    roles: newRoles,
-                })
+                .createStaff({ ...this.form.value, roles: newRoles })
                 .pipe(takeUntil(this.destroy$))
                 .subscribe((data) => {
-                    this.toaster.success('Успешно отредактировано!');
-                    this.dialogRef.close('edit');
+                    this.toaster.success('Успешно создано!');
+                    this.dialogRef.close('create');
                 });
         }
     }
