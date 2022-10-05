@@ -7,13 +7,20 @@
         </button>
     </nb-card-header>
 
-    <nb-card-body>
+    <nb-card-body *ngIf="listStaff">
         <ng2-smart-table
             [settings]="settings"
-            [source]="listStaff?.items"
+            [source]="listStaff.items"
             (deleteConfirm)="onDeleteConfirm($event)"
             (userRowSelect)="onUserRowSelect($event)"
         >
         </ng2-smart-table>
+        <nz-pagination
+            class="custom-pagination"
+            (nzPageIndexChange)="changePage($event)"
+            [nzPageIndex]="listStaff.pageNumber"
+            [nzTotal]="listStaff.totalItemCount"
+            [nzPageSize]="listStaff.pageSize"
+        ></nz-pagination>
     </nb-card-body>
 </nb-card>

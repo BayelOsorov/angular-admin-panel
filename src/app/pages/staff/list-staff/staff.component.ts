@@ -68,8 +68,8 @@ export class StaffComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
-    getListStaff() {
-        this.subscription = this.staffService.getListStaff().subscribe({
+    getListStaff(page = 1) {
+        this.subscription = this.staffService.getListStaff(page).subscribe({
             next: (data) => (this.listStaff = data),
         });
     }
@@ -95,6 +95,9 @@ export class StaffComponent implements OnInit, OnDestroy {
             title: 'Добавление сотрудника',
             context: {},
         });
+    }
+    changePage(e) {
+        this.getListStaff(e);
     }
     protected openModal(closeOnBackdropClick: boolean, component, props) {
         this.windowService

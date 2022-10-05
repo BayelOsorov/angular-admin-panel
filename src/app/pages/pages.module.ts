@@ -13,6 +13,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { StaffComponent } from './staff/list-staff/staff.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DetailStaffComponent } from './staff/detail-staff/detail-staff.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import { DetailStaffComponent } from './staff/detail-staff/detail-staff.componen
         NbListModule,
         NbTreeGridModule,
         NbButtonModule,
+        NzPaginationModule,
     ],
     declarations: [PagesComponent, StaffComponent, DetailStaffComponent],
 })
