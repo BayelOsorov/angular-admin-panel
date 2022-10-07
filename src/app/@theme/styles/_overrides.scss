@@ -6,7 +6,11 @@
             right: 0.41rem !important;
         }
     }
-}
-[_nghost-kdp-c131] nb-layout-header.fixed {
-    z-index: 999 !important;
+    .cdk-global-scrollblock {
+        position: static !important;
+        overflow-y: auto !important;
+    }
+    nb-layout-header.fixed {
+        z-index: 100 !important;
+    }
 }
