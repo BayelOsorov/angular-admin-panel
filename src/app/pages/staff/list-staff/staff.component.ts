@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { CreateStaffModalComponent } from '../../../@core/components/staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 import { IListStaff } from '../../../@core/models/staff/staff';
 import { StaffService } from '../../../@core/services/staff/staff.service';
-
 @Component({
     templateUrl: './staff.component.html',
     styleUrls: ['./staff.component.scss'],
@@ -13,11 +13,14 @@ import { StaffService } from '../../../@core/services/staff/staff.service';
 export class StaffComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     listStaff: IListStaff;
+    visible: boolean;
+
     settings = {
+        mode: 'external',
         hideSubHeader: false,
         delete: {
             deleteButtonContent: `<i class="nb-trash"></i>`,
-            confirmDelete: true,
+            confirmDelete: false,
         },
         add: {
             addButtonContent: '<i class="nb-plus"></i>',
@@ -55,10 +58,12 @@ export class StaffComponent implements OnInit, OnDestroy {
             },
         },
     };
+
     constructor(
         private staffService: StaffService,
         private router: Router,
-        private windowService: NbWindowService
+        private windowService: NbWindowService,
+        private toaster: ToastrService
     ) {}
 
     ngOnInit(): void {
@@ -75,14 +80,12 @@ export class StaffComponent implements OnInit, OnDestroy {
     }
 
     onDeleteConfirm(event): void {
-        if (window.confirm('Are you sure you want to delete?')) {
-            event.confirm.resolve();
-            this.staffService.deleteStaff(event.data.id).subscribe({
-                next: (data) => console.log(data),
-            });
-        } else {
-            event.confirm.reject();
-        }
+        this.staffService.deleteStaff(event.data.id).subscribe({
+            next: (data) => {
+                this.toaster.success('Успешно удалено!');
+                this.getListStaff(1);
+            },
+        });
     }
     onUserRowSelect(event): void {
         this.router.navigate([`staff-detail/${event.data.id}`]);
@@ -99,6 +102,7 @@ export class StaffComponent implements OnInit, OnDestroy {
     changePage(e) {
         this.getListStaff(e);
     }
+
     protected openModal(closeOnBackdropClick: boolean, component, props) {
         this.windowService
             .open(component, {

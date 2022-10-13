@@ -14,6 +14,8 @@ import { StaffComponent } from './staff/list-staff/staff.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DetailStaffComponent } from './staff/detail-staff/detail-staff.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { ConfirmDialogComponent } from '../@core/components/confirm-dialog/confirm-dialog.component';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 @NgModule({
     imports: [
@@ -26,6 +28,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
         NbTreeGridModule,
         NbButtonModule,
         NzPaginationModule,
+        NzPopoverModule,
     ],
     declarations: [PagesComponent, StaffComponent, DetailStaffComponent],
 })

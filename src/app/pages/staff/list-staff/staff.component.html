@@ -11,7 +11,7 @@
         <ng2-smart-table
             [settings]="settings"
             [source]="listStaff.items"
-            (deleteConfirm)="onDeleteConfirm($event)"
+            (delete)="onDeleteConfirm($event)"
             (userRowSelect)="onUserRowSelect($event)"
         >
         </ng2-smart-table>
