@@ -26,28 +26,48 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
         ],
     },
-    // {
-    //     title: 'Forms',
-    //     icon: 'edit-2-outline',
-    //     children: [
-    //         {
-    //             title: 'Form Inputs',
-    //             link: '/pages/forms/inputs',
-    //         },
-    //         {
-    //             title: 'Form Layouts',
-    //             link: '/pages/forms/layouts',
-    //         },
-    //         {
-    //             title: 'Buttons',
-    //             link: '/pages/forms/buttons',
-    //         },
-    //         {
-    //             title: 'Datepicker',
-    //             link: '/pages/forms/datepicker',
-    //         },
-    //     ],
-    // },
+    {
+        title: 'Каталог',
+        icon: 'edit-2-outline',
+        children: [
+            {
+                title: 'Бренды',
+                link: '/catalog/brands',
+            },
+            {
+                title: 'Категории',
+                link: '/catalog/categories',
+            },
+            {
+                title: 'Группы',
+                link: '/catalog/groups',
+            },
+            {
+                title: 'Населенные пункты',
+                link: '/catalog/localities',
+            },
+            {
+                title: 'Торговые центры',
+                link: '/catalog/malls',
+            },
+            {
+                title: 'Партнеры',
+                link: '/catalog/partners',
+            },
+            {
+                title: 'Тэги',
+                link: '/catalog/tags',
+            },
+            {
+                title: 'Продукты',
+                link: '/catalog/products',
+            },
+            {
+                title: 'Акции',
+                link: '/catalog/partner-proms',
+            },
+        ],
+    },
     // {
     //     title: 'UI Features',
     //     icon: 'keypad-outline',

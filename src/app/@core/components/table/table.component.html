@@ -1,0 +1,17 @@
+<ng-container *ngIf="tableData && tableData.items.length > 0">
+    <ng2-smart-table
+        [settings]="settings"
+        [source]="tableData.items"
+        (delete)="onDelete($event)"
+        (userRowSelect)="onRowSelect($event)"
+    >
+    </ng2-smart-table>
+    <nz-pagination
+        *ngIf="tableData.totalItemCount > 20"
+        class="custom-pagination"
+        (nzPageIndexChange)="changePage($event)"
+        [nzPageIndex]="tableData.pageNumber"
+        [nzTotal]="tableData.totalItemCount"
+        [nzPageSize]="tableData.pageSize"
+    ></nz-pagination>
+</ng-container>

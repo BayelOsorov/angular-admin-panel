@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { StaffComponent } from './staff/list-staff/staff.component';
 import { DetailStaffComponent } from './staff/detail-staff/detail-staff.component';
+import { BrandsComponent } from './catalog/brands/brands.component';
 
 const routes: Routes = [
     {
@@ -17,6 +18,10 @@ const routes: Routes = [
             {
                 path: 'staff-detail/:id',
                 component: DetailStaffComponent,
+            },
+            {
+                path: 'catalog/brands',
+                component: BrandsComponent,
             },
             {
                 path: '',

@@ -20,6 +20,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ChangePasswordModalComponent } from './staff/change-password-modal/change-password-modal.component';
 import { CreateStaffModalComponent } from './staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
     imports: [
@@ -40,8 +41,9 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
         EditStaffComponent,
         ChangePasswordModalComponent,
         ConfirmDialogComponent,
+        // TableComponent,
     ],
-    schemas: [NO_ERRORS_SCHEMA],
+    // schemas: [NO_ERRORS_SCHEMA],
     exports: [ConfirmDialogComponent],
 })
 export class ComponentsModule {}

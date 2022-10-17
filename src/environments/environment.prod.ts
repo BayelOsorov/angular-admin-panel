@@ -7,6 +7,9 @@ export const environment = {
     production: true,
     baseUrl: 'https://stage.c2u.io:2001',
     baseUrlOidc: 'https://stage.c2u.io:2021',
+    catalogUrl: 'https://stage.c2u.io:28001',
+
     // baseUrl: 'https://cash2u.io:2001',
-    // baseUrlOidc: 'https://stage.c2u.io:2021',
+    // baseUrlOidc: 'https://cash2u.io:2021',
+    // catalogUrl: 'https://cash2u.io:28001',
 };

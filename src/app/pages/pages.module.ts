@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import {
     NbButtonModule,
     NbCardModule,
@@ -15,6 +15,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DetailStaffComponent } from './staff/detail-staff/detail-staff.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { BrandsComponent } from './catalog/brands/brands.component';
+import { TableComponent } from '../@core/components/table/table.component';
 
 @NgModule({
     imports: [
@@ -29,6 +31,13 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
         NzPaginationModule,
         NzPopoverModule,
     ],
-    declarations: [PagesComponent, StaffComponent, DetailStaffComponent],
+    declarations: [
+        PagesComponent,
+        StaffComponent,
+        DetailStaffComponent,
+        BrandsComponent,
+        TableComponent,
+    ],
+    // schemas: [NO_ERRORS_SCHEMA],
 })
 export class PagesModule {}

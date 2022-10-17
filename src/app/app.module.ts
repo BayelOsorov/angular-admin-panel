@@ -17,7 +17,7 @@ import {
 } from '@nebular/theme';
 import { AuthConfigModule } from './auth/auth-config.module';
 import { ComponentsModule } from './@core/components/components.module';
-import { DemoNgZorroAntdModule } from './pages/ng-zorro-antd.module';
+import { DemoNgZorroAntdModule } from './@core/utils/ng-zorro-antd.module';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
