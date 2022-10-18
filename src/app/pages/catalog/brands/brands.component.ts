@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NbWindowService } from '@nebular/theme';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { BrandActionsModalComponent } from '../../../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
 import { IListBrand } from '../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../@core/services/catalog/brands/brands.service';
 
@@ -30,7 +32,10 @@ export class BrandsComponent implements OnInit, OnDestroy {
     };
     private destroy$: Subject<void> = new Subject<void>();
 
-    constructor(private brandService: BrandsService) {}
+    constructor(
+        private brandService: BrandsService,
+        private windowService: NbWindowService
+    ) {}
 
     ngOnInit(): void {
         this.getBrands(1, '');
@@ -44,5 +49,32 @@ export class BrandsComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
+    }
+    public openCreateModal() {
+        // this.openModal(false, BrandActionsModalComponent, {
+        //     title: 'Добавление бренда',
+        //     context: {},
+        // });
+    }
+    public openEditModal(data) {
+        // this.openModal(false, BrandActionsModalComponent, {
+        //     title: 'Редактирование бренда',
+        //     context: {},
+        // });
+
+        this.windowService.open(BrandActionsModalComponent, {
+            closeOnBackdropClick: false,
+            title: 'Редактирование бренда',
+            context: { brandData: data },
+        });
+    }
+    public openModal(closeOnBackdropClick: boolean, component, props) {
+        this.windowService.open(component, {
+            closeOnBackdropClick,
+            ...props,
+        });
+        // .onClose.subscribe(
+        //     (val) => val === 'create' && this.getListStaff()
+        // );
     }
 }

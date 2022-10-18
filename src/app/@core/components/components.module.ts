@@ -21,6 +21,7 @@ import { ChangePasswordModalComponent } from './staff/change-password-modal/chan
 import { CreateStaffModalComponent } from './staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { TableComponent } from './table/table.component';
+import { BrandActionsModalComponent } from './catalog/brand/brand-actions-modal/brand-actions-modal.component';
 
 @NgModule({
     imports: [
@@ -41,6 +42,7 @@ import { TableComponent } from './table/table.component';
         EditStaffComponent,
         ChangePasswordModalComponent,
         ConfirmDialogComponent,
+        BrandActionsModalComponent,
         // TableComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA],

@@ -1,8 +1,9 @@
-<ng-container *ngIf="tableData && tableData.items.length > 0">
+<ng-container *ngIf="tableData">
     <ng2-smart-table
         [settings]="settings"
         [source]="tableData.items"
         (delete)="onDelete($event)"
+        (edit)="onEdit($event)"
         (userRowSelect)="onRowSelect($event)"
     >
     </ng2-smart-table>

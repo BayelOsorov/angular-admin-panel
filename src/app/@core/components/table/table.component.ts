@@ -6,7 +6,12 @@ import {
     ChangeDetectorRef,
     OnChanges,
     SimpleChanges,
+    AfterContentChecked,
+    AfterViewChecked,
+    AfterContentInit,
+    AfterViewInit,
 } from '@angular/core';
+import { NbWindowService } from '@nebular/theme';
 import { LocalDataSource } from 'ng2-smart-table';
 import { IListBrand } from '../../models/catalog/brand';
 
@@ -16,11 +21,16 @@ import { IListBrand } from '../../models/catalog/brand';
     styleUrls: ['./table.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableComponent implements OnInit, OnChanges {
+export class TableComponent implements OnInit, AfterContentChecked {
     @Input() tableColumns;
     @Input() tableData;
+    @Input() openEditModal: (any) => void;
+
     settings = {};
-    constructor(private cd: ChangeDetectorRef) {}
+    constructor(
+        private cd: ChangeDetectorRef,
+        private windowService: NbWindowService
+    ) {}
 
     ngOnInit(): void {
         this.settings = {
@@ -30,9 +40,12 @@ export class TableComponent implements OnInit, OnChanges {
                 deleteButtonContent: `<i class="nb-trash"></i>`,
                 confirmDelete: false,
             },
+            edit: {
+                editButtonContent: '<i class="nb-edit"></i>',
+            },
             actions: {
                 delete: true,
-                edit: false,
+                edit: true,
                 add: false,
                 position: 'right',
                 columnTitle: '',
@@ -44,13 +57,17 @@ export class TableComponent implements OnInit, OnChanges {
             columns: this.tableColumns,
         };
     }
-    onDelete(event) {
-        console.log(event);
+    onDelete(event) {}
+    onRowSelect(event) {}
+    onEdit(event) {
+        this.openEditModal(event.data);
     }
-    onRowSelect(event) {
-        console.log(event);
-    }
-    ngOnChanges(changes: SimpleChanges): void {
+    // ngAfterContentInit() {
+    //     setTimeout(() => {
+    //         this.cd.detectChanges();
+    //     }, 0);
+    // }
+    ngAfterContentChecked() {
         setTimeout(() => {
             this.cd.detectChanges();
         }, 0);

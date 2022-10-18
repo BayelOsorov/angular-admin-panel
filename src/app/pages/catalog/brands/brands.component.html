@@ -1,7 +1,16 @@
 <nb-card>
-    <!-- <nb-card-header> Сотрудники </nb-card-header> -->
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Бренды</strong>
+        <button (click)="openCreateModal()" nbButton status="primary">
+            Добавить
+        </button>
+    </nb-card-header>
 
     <nb-card-body>
-        <ngx-custom-table [tableColumns]="tableColumns" [tableData]="listBrand">
+        <ngx-custom-table
+            [tableColumns]="tableColumns"
+            [tableData]="listBrand"
+            [openEditModal]="openEditModal"
+        >
         </ngx-custom-table> </nb-card-body
 ></nb-card>
