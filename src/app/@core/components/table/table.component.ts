@@ -14,6 +14,7 @@ import {
 import { NbWindowService } from '@nebular/theme';
 import { LocalDataSource } from 'ng2-smart-table';
 import { IListBrand } from '../../models/catalog/brand';
+import { BrandsService } from '../../services/catalog/brands/brands.service';
 
 @Component({
     selector: 'ngx-custom-table',
@@ -25,11 +26,13 @@ export class TableComponent implements OnInit, AfterContentChecked {
     @Input() tableColumns;
     @Input() tableData;
     @Input() openEditModal: (any) => void;
+    @Input() deleteItem: (any) => void;
 
     settings = {};
     constructor(
         private cd: ChangeDetectorRef,
-        private windowService: NbWindowService
+        private windowService: NbWindowService,
+        private brandService: BrandsService
     ) {}
 
     ngOnInit(): void {
@@ -57,7 +60,10 @@ export class TableComponent implements OnInit, AfterContentChecked {
             columns: this.tableColumns,
         };
     }
-    onDelete(event) {}
+    onDelete(event) {
+        this.deleteItem(event.data.id);
+        console.log(event);
+    }
     onRowSelect(event) {}
     onEdit(event) {
         this.openEditModal(event.data);

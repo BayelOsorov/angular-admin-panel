@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BrandActionsModalComponent } from '../../../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
@@ -34,7 +35,8 @@ export class BrandsComponent implements OnInit, OnDestroy {
 
     constructor(
         private brandService: BrandsService,
-        private windowService: NbWindowService
+        private windowService: NbWindowService,
+        private toaster: ToastrService
     ) {}
 
     ngOnInit(): void {
@@ -46,15 +48,24 @@ export class BrandsComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listBrand = res));
     }
+    deleteBrand(id) {
+        this.brandService
+            .deleteBrand(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getBrands(1, '');
+            });
+    }
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
     }
     public openCreateModal() {
-        // this.openModal(false, BrandActionsModalComponent, {
-        //     title: 'Добавление бренда',
-        //     context: {},
-        // });
+        this.openModal(false, BrandActionsModalComponent, {
+            title: 'Добавление бренда',
+            context: {},
+        });
     }
     public openEditModal(data) {
         // this.openModal(false, BrandActionsModalComponent, {
@@ -62,19 +73,24 @@ export class BrandsComponent implements OnInit, OnDestroy {
         //     context: {},
         // });
 
-        this.windowService.open(BrandActionsModalComponent, {
-            closeOnBackdropClick: false,
-            title: 'Редактирование бренда',
-            context: { brandData: data },
-        });
+        this.windowService
+            .open(BrandActionsModalComponent, {
+                closeOnBackdropClick: false,
+                title: 'Редактирование бренда',
+                context: { brandData: data },
+            })
+            .onClose.subscribe(
+                (val) => val === 'edit' && this.getBrands(1, '')
+            );
     }
     public openModal(closeOnBackdropClick: boolean, component, props) {
-        this.windowService.open(component, {
-            closeOnBackdropClick,
-            ...props,
-        });
-        // .onClose.subscribe(
-        //     (val) => val === 'create' && this.getListStaff()
-        // );
+        this.windowService
+            .open(component, {
+                closeOnBackdropClick,
+                ...props,
+            })
+            .onClose.subscribe(
+                (val) => val === 'create' && this.getBrands(1, '')
+            );
     }
 }

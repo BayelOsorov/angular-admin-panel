@@ -27,7 +27,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         ],
     },
     {
-        title: 'Каталог',
+        title: 'Партнеры',
         icon: 'edit-2-outline',
         children: [
             {

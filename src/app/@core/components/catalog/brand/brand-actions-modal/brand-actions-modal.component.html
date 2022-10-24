@@ -10,21 +10,24 @@
             formControlName="name"
         />
     </div>
+    <img [src]="logoImg" alt="" width="200" class="center" />
     <div class="form-group">
         <label for="exampleInputPassword1" class="label">Лого</label>
+        <!-- <input type="text" nbInput fullWidth formControlName="Logo" /> -->
+
         <input
-            type="text"
-            nbInput
-            fullWidth
             id="exampleInputPassword1"
             placeholder="Лого"
-            formControlName="logo"
+            class="form-control"
+            type="file"
+            (change)="onFileChange($event)"
+            id="formFile"
         />
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1" class="label">Заказ</label>
         <input
-            type="text"
+            type="number"
             nbInput
             fullWidth
             id="exampleInputPassword1"
@@ -33,17 +36,25 @@
         />
     </div>
     <div class="form-group">
+        <label for="exampleInputPassword1" class="label">Активно</label>
+        <!-- selected="form.controls.isActive" -->
+        <nb-select fullWidth formControlName="isActive" placeholder="Активно">
+            <nb-option [value]="true">Да</nb-option>
+            <nb-option [value]="false">Нeт</nb-option>
+        </nb-select>
+    </div>
+    <div class="form-group">
         <label for="exampleInputPassword1" class="label">Категория</label>
 
+        <!-- [(ngModel)]="form.controls.categoryId" -->
         <nz-select
             ngDefaultControl
             formControlName="categoryId"
-            nzMode="multiple"
+            nzMode="default"
             class="w-100"
-            nzPlaceHolder="Выберите роль"
+            nzPlaceHolder="Выберите категорию"
             nzAllowClear
             nzServerSearch
-            [(ngModel)]="brandData.categoryId"
             [compareWith]="compareFn"
             nzSize="large"
             (nzOnSearch)="onSearch($event)"
