@@ -4,16 +4,11 @@ import {
     ChangeDetectionStrategy,
     Input,
     ChangeDetectorRef,
-    OnChanges,
-    SimpleChanges,
     AfterContentChecked,
-    AfterViewChecked,
-    AfterContentInit,
-    AfterViewInit,
+    EventEmitter,
+    Output,
 } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
-import { LocalDataSource } from 'ng2-smart-table';
-import { IListBrand } from '../../models/catalog/brand';
 import { BrandsService } from '../../services/catalog/brands/brands.service';
 
 @Component({
@@ -23,10 +18,11 @@ import { BrandsService } from '../../services/catalog/brands/brands.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit, AfterContentChecked {
+    @Output() deleteItemEvent = new EventEmitter<number>();
+    @Output() openModalEvent = new EventEmitter<number>();
+
     @Input() tableColumns;
     @Input() tableData;
-    @Input() openEditModal: (any) => void;
-    @Input() deleteItem: (any) => void;
 
     settings = {};
     constructor(
@@ -57,16 +53,16 @@ export class TableComponent implements OnInit, AfterContentChecked {
                 perPage: 20,
                 display: true,
             },
+            noDataMessage: 'Список пуст!',
             columns: this.tableColumns,
         };
     }
     onDelete(event) {
-        this.deleteItem(event.data.id);
-        console.log(event);
+        this.deleteItemEvent.emit(event.data.id);
     }
     onRowSelect(event) {}
     onEdit(event) {
-        this.openEditModal(event.data);
+        this.openModalEvent.emit(event.data);
     }
     // ngAfterContentInit() {
     //     setTimeout(() => {

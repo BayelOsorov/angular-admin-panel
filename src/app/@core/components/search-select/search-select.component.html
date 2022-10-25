@@ -1,0 +1,24 @@
+<nz-select
+    ngDefaultControl
+    formControlName="categoryId"
+    nzMode="default"
+    class="w-100"
+    [nzPlaceHolder]="placeholder"
+    nzAllowClear
+    nzServerSearch
+    [compareWith]="compareFn"
+    nzSize="large"
+    (nzOnSearch)="onSearch($event)"
+>
+    <ng-container *ngIf="!isLoading">
+        <nz-option
+            *ngFor="let o of data"
+            [nzValue]="o.id"
+            [nzLabel]="o.name"
+        ></nz-option>
+    </ng-container>
+    <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+        <span nz-icon nzType="loading" class="loading-icon"></span>
+        Загрузка...
+    </nz-option>
+</nz-select>

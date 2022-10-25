@@ -7,18 +7,17 @@
                 [placeholder]="'Название бренда'"
             >
             </ngx-input-search>
-            <button (click)="openCreateModal()" nbButton status="primary">
-                Добавить
-            </button>
+            <a routerLink="/catalog/partners/create">
+                <button nbButton status="primary">Добавить</button>
+            </a>
         </div>
     </nb-card-header>
 
     <nb-card-body>
         <ngx-custom-table
-            (deleteItemEvent)="deleteBrand($event)"
-            (openModalEvent)="openEditModal($event)"
+            (deleteItemEvent)="deletePartner($event)"
             [tableColumns]="tableColumns"
-            [tableData]="listBrand"
+            [tableData]="listPartner"
         >
         </ngx-custom-table> </nb-card-body
 ></nb-card>

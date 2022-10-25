@@ -35,6 +35,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 link: '/catalog/brands',
             },
             {
+                title: 'Партнеры',
+                link: '/catalog/partners',
+            },
+            {
                 title: 'Категории',
                 link: '/catalog/categories',
             },

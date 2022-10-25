@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header>Создание партнера</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Название</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Название"
+                                formControlName="name"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Описание</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="description"
+                                formControlName="description"
+                            />
+                        </div>
+                    </div>
+                    <img [src]="logoImg" alt="" width="200" class="center" />
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Лого</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                id="exampleInputPassword1"
+                                placeholder="Лого"
+                                class="form-control"
+                                type="file"
+                                (change)="onFileChange($event)"
+                                id="formFile"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Заказ</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="number"
+                                nbInput
+                                fullWidth
+                                id="exampleInputPassword1"
+                                placeholder="Заказ"
+                                formControlName="order"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Активен</label
+                        >
+                        <div class="col-sm-9">
+                            <nb-select
+                                fullWidth
+                                formControlName="isActive"
+                                placeholder="Активен"
+                            >
+                                <nb-option [value]="true">Да</nb-option>
+                                <nb-option [value]="false">Нeт</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Категория</label
+                        >
+                        <div class="col-sm-9"></div>
+                    </div>
+                    <button type="submit" nbButton status="danger">
+                        Подтвердить
+                    </button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
