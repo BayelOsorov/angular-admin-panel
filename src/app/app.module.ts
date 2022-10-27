@@ -36,9 +36,9 @@ import { ToastrModule } from 'ngx-toastr';
         NbChatModule.forRoot({
             messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
         }),
+        AuthConfigModule,
         CoreModule.forRoot(),
         ThemeModule.forRoot(),
-        AuthConfigModule,
         ComponentsModule,
         DemoNgZorroAntdModule,
         ToastrModule.forRoot({
