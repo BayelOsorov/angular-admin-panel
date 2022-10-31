@@ -4,9 +4,9 @@ export interface IDetailPartner {
     logo: 'string';
     isActive: true;
     description: {
-        additionalProp1: 'string';
-        additionalProp2: 'string';
-        additionalProp3: 'string';
+        kg: 'string';
+        ru: 'string';
+        uz: 'string';
     };
     categoryId: 0;
     productId: 0;
@@ -15,9 +15,9 @@ export interface IDetailPartner {
         {
             id: 0;
             name: {
-                additionalProp1: 'string';
-                additionalProp2: 'string';
-                additionalProp3: 'string';
+                kg: 'string';
+                ru: 'string';
+                uz: 'string';
             };
         }
     ];

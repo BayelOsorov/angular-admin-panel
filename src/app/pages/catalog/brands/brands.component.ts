@@ -96,7 +96,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
             })
             .onClose.subscribe(
                 (val) =>
-                    val === 'create' || (val === 'edit' && this.getBrands())
+                    (val === 'create' || val === 'edit') && this.getBrands()
             );
     }
 }

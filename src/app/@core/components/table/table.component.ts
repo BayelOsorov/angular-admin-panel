@@ -20,6 +20,7 @@ import { BrandsService } from '../../services/catalog/brands/brands.service';
 export class TableComponent implements OnInit, AfterContentChecked {
     @Output() deleteItemEvent = new EventEmitter<number>();
     @Output() openModalEvent = new EventEmitter<number>();
+    @Output() rowSelectEvent = new EventEmitter<number>();
 
     @Input() tableColumns;
     @Input() tableData;
@@ -60,7 +61,9 @@ export class TableComponent implements OnInit, AfterContentChecked {
     onDelete(event) {
         this.deleteItemEvent.emit(event.data.id);
     }
-    onRowSelect(event) {}
+    onRowSelect(event) {
+        this.rowSelectEvent.emit(event.data.id);
+    }
     onEdit(event) {
         this.openModalEvent.emit(event.data);
     }

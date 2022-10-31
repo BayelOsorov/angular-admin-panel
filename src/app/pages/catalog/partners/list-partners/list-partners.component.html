@@ -1,10 +1,10 @@
 <nb-card>
     <nb-card-header>
-        <strong>Бренды</strong>
+        <strong>Партнеры</strong>
         <div class="d-flex justify-content-between mt-3">
             <ngx-input-search
                 (searchEvent)="onSearch($event)"
-                [placeholder]="'Название бренда'"
+                [placeholder]="'Название партнера'"
             >
             </ngx-input-search>
             <a routerLink="/catalog/partners/create">
@@ -16,6 +16,8 @@
     <nb-card-body>
         <ngx-custom-table
             (deleteItemEvent)="deletePartner($event)"
+            (openModalEvent)="updatePartner($event)"
+            (rowSelectEvent)="userRowSelect($event)"
             [tableColumns]="tableColumns"
             [tableData]="listPartner"
         >

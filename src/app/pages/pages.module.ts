@@ -6,6 +6,7 @@ import {
     NbListModule,
     NbMenuModule,
     NbSelectModule,
+    NbTabsetModule,
     NbTreeGridModule,
 } from '@nebular/theme';
 
@@ -25,6 +26,11 @@ import { ActionsPartnerComponent } from './catalog/partners/actions-partner/acti
 import { SearchSelectComponent } from '../@core/components/search-select/search-select.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoriesComponent } from './catalog/categories/categories.component';
+import { ComponentsModule } from '../@core/components/components.module';
+import { ListTagsComponent } from './catalog/taggs/list-tags/list-tags.component';
+import { ListProductsComponent } from './catalog/products/list-products/list-products.component';
+import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail-partner.component';
 
 @NgModule({
     imports: [
@@ -43,6 +49,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         NzPopoverModule,
         NzSelectModule,
         NbSelectModule,
+        NbTabsetModule,
+        ComponentsModule,
     ],
     declarations: [
         PagesComponent,
@@ -51,9 +59,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         BrandsComponent,
         TableComponent,
         InputSearchComponent,
-        SearchSelectComponent,
+        // SearchSelectComponent,
         ListPartnersComponent,
         ActionsPartnerComponent,
+        CategoriesComponent,
+        ListTagsComponent,
+        ListProductsComponent,
+        DetailPartnerComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA],
 })

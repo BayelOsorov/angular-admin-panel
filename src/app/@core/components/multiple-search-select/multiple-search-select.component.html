@@ -1,6 +1,6 @@
 <nz-select
     ngDefaultControl
-    nzMode="default"
+    nzMode="multiple"
     class="w-100"
     [nzPlaceHolder]="placeholder"
     nzAllowClear
@@ -15,7 +15,7 @@
         <nz-option
             *ngFor="let o of data"
             [nzValue]="o.id"
-            [nzLabel]="o.name"
+            [nzLabel]="o.name.ru"
         ></nz-option>
     </ng-container>
     <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>

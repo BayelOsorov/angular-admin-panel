@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -19,7 +20,8 @@ export class ListPartnersComponent implements OnInit {
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private partnersService: PartnersService,
-        private toaster: ToastrService
+        private toaster: ToastrService,
+        private router: Router
     ) {}
     getPartners(page = 1) {
         this.partnersService
@@ -28,7 +30,12 @@ export class ListPartnersComponent implements OnInit {
             .subscribe((res) => (this.listPartner = res));
     }
     onSearch(event) {}
-
+    updatePartner(data) {
+        this.router.navigate([`catalog/partners/update/${data.id}`]);
+    }
+    userRowSelect(id) {
+        this.router.navigate([`catalog/partners/detail/${id}`]);
+    }
     deletePartner(event) {}
 
     ngOnInit(): void {

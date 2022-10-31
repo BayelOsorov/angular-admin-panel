@@ -1,0 +1,11 @@
+<form [formGroup]="form" (ngSubmit)="onFirstSubmit()">
+    <ngx-localization-inputs
+        [controlRu]="form.get('ru')"
+        [controlKy]="form.get('kg')"
+        [controlUz]="form.get('uz')"
+        [label]="'Название тега'"
+        [placeholder]="'Введите название тега'"
+    >
+    </ngx-localization-inputs>
+    <button type="submit" nbButton status="danger">Подтвердить</button>
+</form>

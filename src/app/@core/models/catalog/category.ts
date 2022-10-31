@@ -16,4 +16,5 @@ export interface IDetailCategory {
     isDeleted: true;
     workFromDate: '2022-10-18T10:31:58.017Z';
     parentId: 0;
+    backgroundColor: 'string';
 }

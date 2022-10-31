@@ -28,13 +28,21 @@
                             >Описание</label
                         >
                         <div class="col-sm-9">
-                            <textarea
+                            <!-- <textarea
                                 rows="2"
                                 nbInput
                                 fullWidth
                                 placeholder="Описание"
                                 formControlName="description"
-                            ></textarea>
+                            ></textarea> -->
+                            <ngx-localization-inputs
+                                [controlRu]="form.get('descRu')"
+                                [controlKy]="form.get('descKg')"
+                                [controlUz]="form.get('descUz')"
+                                [label]="'Описание'"
+                                [placeholder]="'Введите описание'"
+                            >
+                            </ngx-localization-inputs>
                         </div>
                     </div>
                     <img [src]="logoImg" alt="" width="200" class="center" />
@@ -50,28 +58,12 @@
                                 placeholder="Лого"
                                 class="form-control"
                                 type="file"
-                                (change)="onFileChange($event)"
+                                (change)="onFileChange($event, 'logo')"
                                 id="formFile"
                             />
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label
-                            for="exampleInputPassword1"
-                            class="label col-sm-3 col-form-label"
-                            >Заказ</label
-                        >
-                        <div class="col-sm-9">
-                            <input
-                                type="number"
-                                nbInput
-                                fullWidth
-                                id="exampleInputPassword1"
-                                placeholder="Заказ"
-                                formControlName="order"
-                            />
-                        </div>
-                    </div>
+
                     <div class="form-group row">
                         <label
                             for="exampleInputPassword1"
@@ -97,6 +89,9 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [control]="form.get('categoryId')"
+                                (searchEmit)="getCategories($event)"
+                                [data]="categories"
                                 [placeholder]="'Категория'"
                             ></ngx-search-select>
                         </div>
@@ -109,6 +104,9 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [control]="form.get('brandId')"
+                                (searchEmit)="getBrands($event)"
+                                [data]="brands"
                                 [placeholder]="'Бренд'"
                             ></ngx-search-select>
                         </div>
@@ -121,12 +119,29 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [control]="form.get('productId')"
+                                (searchEmit)="getProducts($event)"
+                                [data]="products"
                                 [placeholder]="'Продукт'"
                             ></ngx-search-select>
                         </div>
                     </div>
-
                     <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Теги</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-multiple-search-select
+                                [control]="form.get('tags')"
+                                (searchEmit)="getTags($event)"
+                                [data]="tags"
+                                [placeholder]="'Теги'"
+                            ></ngx-multiple-search-select>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group row">
                         <label
                             for="exampleInputPassword1"
                             class="label col-sm-3 col-form-label"
@@ -138,27 +153,42 @@
                                 placeholder="Галерея"
                                 class="form-control"
                                 type="file"
-                                (change)="onFileChange($event)"
+                                (change)="onFileChange($event, 'gallery')"
                                 id="formFile"
                                 multiple
                             />
                         </div>
                     </div>
-                    <div class="gallery">
-                        <ng-container *ngFor="let i of gallery">
-                            <div class="gallery__item">
-                                <img [src]="i.img" alt="" />
-                                <button
-                                    (click)="deleteImage(i.id)"
-                                    nbButton
-                                    status="danger"
-                                >
-                                    X
-                                </button>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                        ></label>
+                        <div class="col-sm-9">
+                            <div class="gallery">
+                                <ng-container *ngFor="let i of gallery">
+                                    <div class="gallery__item">
+                                        <img [src]="i.img" alt="" />
+                                        <button
+                                            (click)="deleteImage(i.id)"
+                                            nbButton
+                                            status="danger"
+                                        >
+                                            X
+                                        </button>
+                                    </div>
+                                </ng-container>
                             </div>
-                        </ng-container>
-                    </div>
-                    <button type="submit" nbButton status="danger">
+                        </div>
+                    </div> -->
+
+                    <button
+                        class="center-button"
+                        type="submit"
+                        nbButton
+                        status="danger"
+                    >
                         Подтвердить
                     </button>
                 </form>

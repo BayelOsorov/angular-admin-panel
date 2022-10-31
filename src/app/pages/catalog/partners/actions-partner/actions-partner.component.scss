@@ -1,6 +1,6 @@
 .gallery {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-wrap: wrap;
     &__item {
         position: relative;
@@ -17,4 +17,9 @@
             object-fit: contain;
         }
     }
+}
+.center-button {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
 }

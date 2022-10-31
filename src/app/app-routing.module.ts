@@ -7,13 +7,13 @@ import { NbLoginComponent } from '@nebular/auth';
 
 export const routes: Routes = [
     {
-        path: 'pages',
+        path: '',
         canActivate: [AutoLoginAllRoutesGuard],
         loadChildren: () =>
             import('./pages/pages.module').then((m) => m.PagesModule),
     },
-    { path: '', redirectTo: 'pages', pathMatch: 'full' },
-    { path: '**', redirectTo: 'pages' },
+    { path: '', redirectTo: '', pathMatch: 'full' },
+    { path: '**', redirectTo: '' },
 ];
 
 const config: ExtraOptions = {
