@@ -1,0 +1,25 @@
+<nb-card>
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Сотрудники</strong>
+        <button (click)="openCreateModal()" nbButton status="primary">
+            Добавить
+        </button>
+    </nb-card-header>
+
+    <nb-card-body *ngIf="listStaff">
+        <ng2-smart-table
+            [settings]="settings"
+            [source]="listStaff.items"
+            (delete)="onDeleteConfirm($event)"
+            (userRowSelect)="onUserRowSelect($event)"
+        >
+        </ng2-smart-table>
+        <nz-pagination
+            class="custom-pagination"
+            (nzPageIndexChange)="changePage($event)"
+            [nzPageIndex]="listStaff.pageNumber"
+            [nzTotal]="listStaff.totalItemCount"
+            [nzPageSize]="listStaff.pageSize"
+        ></nz-pagination>
+    </nb-card-body>
+</nb-card>

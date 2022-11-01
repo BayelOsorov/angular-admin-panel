@@ -1,0 +1,18 @@
+<nb-card>
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Теги</strong>
+
+        <button (click)="openCreateModal()" nbButton status="primary">
+            Добавить
+        </button>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (deleteItemEvent)="deleteProduct($event)"
+            (openModalEvent)="openEditModal($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listProducts"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

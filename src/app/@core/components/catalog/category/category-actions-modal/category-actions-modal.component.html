@@ -1,0 +1,115 @@
+<form [formGroup]="form" (ngSubmit)="onFirstSubmit()">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="label">Название</label>
+                <input
+                    type="text"
+                    nbInput
+                    fullWidth
+                    id="exampleInputEmail1"
+                    placeholder="Название"
+                    formControlName="name"
+                />
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="label">Заказ</label>
+                <input
+                    type="number"
+                    nbInput
+                    fullWidth
+                    id="exampleInputPassword1"
+                    placeholder="Заказ"
+                    formControlName="order"
+                />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="label">Активен</label>
+                <!-- selected="form.controls.isActive" -->
+                <nb-select
+                    fullWidth
+                    formControlName="isActive"
+                    placeholder="Активен"
+                >
+                    <nb-option [value]="true">Да</nb-option>
+                    <nb-option [value]="false">Нeт</nb-option>
+                </nb-select>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="label"
+                    >Цвет заднего фона</label
+                >
+                <input
+                    type="color"
+                    nbInput
+                    fullWidth
+                    id="exampleInputEmail1"
+                    placeholder="Цвет заднего фона"
+                    formControlName="backgroundColor"
+                />
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="label"
+                    >Действует с</label
+                >
+                <input
+                    fullWidth
+                    nbInput
+                    placeholder="Действует с"
+                    [nbDatepicker]="formpicker"
+                    formControlName="workFromDate"
+                />
+                <nb-datepicker [min]="min" #formpicker></nb-datepicker>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="label"
+                    >Категория</label
+                >
+
+                <ngx-search-select
+                    (searchEmit)="getCategories($event)"
+                    [control]="form.get('parentId')"
+                    [data]="categoryList"
+                    [placeholder]="'Выберите категорию'"
+                ></ngx-search-select>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="label">Лого</label>
+                <!-- <input type="text" nbInput fullWidth formControlName="Logo" /> -->
+
+                <input
+                    id="exampleInputPassword1"
+                    placeholder="Лого"
+                    class="form-control"
+                    type="file"
+                    (change)="onFileChange($event)"
+                    id="formFile"
+                />
+            </div>
+        </div>
+        <img
+            [src]="logoImg | useHttpImgSrc"
+            alt=""
+            width="200"
+            class="center"
+        />
+    </div>
+
+    <button type="submit" nbButton status="danger">Подтвердить</button>
+</form>

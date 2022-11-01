@@ -1,0 +1,13 @@
+<ng-template #form>
+    <div class="p-2">
+        <div class="d-flex">
+            <button size="small" nbButton status="success" type="submit" ghost>
+                Подтвердить
+            </button>
+            <button size="small" nbButton status="danger" type="submit" ghost>
+                Отменить
+            </button>
+        </div>
+    </div>
+</ng-template>
+<button nbButton status="warning" [nbPopover]="form">With form</button>

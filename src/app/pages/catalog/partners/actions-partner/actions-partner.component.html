@@ -1,0 +1,167 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header>Создание партнера</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Название</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Название"
+                                formControlName="name"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Короткое описание</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-localization-inputs
+                                [controlRu]="form.get('shortDescRu')"
+                                [controlKy]="form.get('shortDescKg')"
+                                [controlUz]="form.get('shortDescUz')"
+                                [label]="'Короткое описание'"
+                                [placeholder]="'Введите короткое описание'"
+                            >
+                            </ngx-localization-inputs>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Описание</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-localization-inputs
+                                [controlRu]="form.get('descRu')"
+                                [controlKy]="form.get('descKg')"
+                                [controlUz]="form.get('descUz')"
+                                [label]="'Описание'"
+                                [placeholder]="'Введите описание'"
+                            >
+                            </ngx-localization-inputs>
+                        </div>
+                    </div>
+                    <img [src]="logoImg" alt="" width="200" class="center" />
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Лого</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                id="exampleInputPassword1"
+                                placeholder="Лого"
+                                class="form-control"
+                                type="file"
+                                (change)="onFileChange($event, 'logo')"
+                                id="formFile"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Активен</label
+                        >
+                        <div class="col-sm-9">
+                            <nb-select
+                                fullWidth
+                                formControlName="isActive"
+                                placeholder="Активен"
+                            >
+                                <nb-option [value]="true">Да</nb-option>
+                                <nb-option [value]="false">Нeт</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Категория</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-search-select
+                                [control]="form.get('categoryId')"
+                                (searchEmit)="getCategories($event)"
+                                [data]="categories"
+                                [placeholder]="'Категория'"
+                            ></ngx-search-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Бренд</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-search-select
+                                [control]="form.get('brandId')"
+                                (searchEmit)="getBrands($event)"
+                                [data]="brands"
+                                [placeholder]="'Бренд'"
+                            ></ngx-search-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Продукт</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-search-select
+                                [control]="form.get('productId')"
+                                (searchEmit)="getProducts($event)"
+                                [data]="products"
+                                [placeholder]="'Продукт'"
+                            ></ngx-search-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Теги</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-multiple-search-select
+                                [control]="form.get('tags')"
+                                (searchEmit)="getTags($event)"
+                                [data]="tags"
+                                [placeholder]="'Теги'"
+                            ></ngx-multiple-search-select>
+                        </div>
+                    </div>
+
+                    <button
+                        class="center-button"
+                        type="submit"
+                        nbButton
+                        status="danger"
+                    >
+                        Подтвердить
+                    </button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

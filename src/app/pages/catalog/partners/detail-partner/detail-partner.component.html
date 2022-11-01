@@ -1,0 +1,58 @@
+<nb-card>
+    <nb-card-header></nb-card-header>
+    <nb-card-body>
+        <nb-card>
+            <nb-tabset>
+                <nb-tab tabTitle="Информация">
+                    <div *ngIf="partner" class="d-flex">
+                        <div class="col-6 col-md-4">
+                            <nb-card class="list-card" size="small">
+                                <div class="grid-view">
+                                    <img
+                                        class="center-img"
+                                        src="{{ partner.logo }}"
+                                        alt="logo"
+                                    />
+                                </div>
+                            </nb-card>
+                        </div>
+                        <div class="col-md-8">
+                            <nb-card class="list-card">
+                                <div class="header">
+                                    <div>
+                                        <p>Название</p>
+                                    </div>
+
+                                    <div class="detail">Puma</div>
+                                </div>
+                                <div class="header">
+                                    <div>
+                                        <p>Название</p>
+                                    </div>
+
+                                    <div class="detail">Puma</div>
+                                </div>
+                                <div class="header">
+                                    <div>
+                                        <p>Название</p>
+                                    </div>
+
+                                    <div class="detail">Puma</div>
+                                </div>
+                            </nb-card>
+                        </div>
+                    </div>
+                </nb-tab>
+                <nb-tab tabTitle="Галерея">
+                    <ngx-gallery [partnerId]="partnerId"></ngx-gallery>
+                </nb-tab>
+                <nb-tab tabTitle="Филиалы">
+                    <span>Content #2</span>
+                </nb-tab>
+                <nb-tab tabTitle="Аккаунты">
+                    <span>Content #3</span>
+                </nb-tab>
+            </nb-tabset>
+        </nb-card>
+    </nb-card-body>
+</nb-card>

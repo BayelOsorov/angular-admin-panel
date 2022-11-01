@@ -1,0 +1,76 @@
+<form [formGroup]="form" (ngSubmit)="onFirstSubmit()">
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="label">Название</label>
+        <input
+            type="text"
+            nbInput
+            fullWidth
+            id="exampleInputEmail1"
+            placeholder="Название"
+            formControlName="name"
+        />
+    </div>
+    <img [src]="logoImg" alt="" width="200" class="center" />
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="label">Лого</label>
+        <!-- <input type="text" nbInput fullWidth formControlName="Logo" /> -->
+
+        <input
+            id="exampleInputPassword1"
+            placeholder="Лого"
+            class="form-control"
+            type="file"
+            (change)="onFileChange($event)"
+            id="formFile"
+        />
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="label">Заказ</label>
+        <input
+            type="number"
+            nbInput
+            fullWidth
+            id="exampleInputPassword1"
+            placeholder="Заказ"
+            formControlName="order"
+        />
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="label">Активен</label>
+        <!-- selected="form.controls.isActive" -->
+        <nb-select fullWidth formControlName="isActive" placeholder="Активен">
+            <nb-option [value]="true">Да</nb-option>
+            <nb-option [value]="false">Нeт</nb-option>
+        </nb-select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="label">Категория</label>
+
+        <!-- [(ngModel)]="form.controls.categoryId" -->
+        <nz-select
+            ngDefaultControl
+            formControlName="categoryId"
+            nzMode="default"
+            class="w-100"
+            nzPlaceHolder="Выберите категорию"
+            nzAllowClear
+            nzServerSearch
+            [compareWith]="compareFn"
+            nzSize="large"
+            (nzOnSearch)="onSearch($event)"
+        >
+            <ng-container *ngIf="!isLoading">
+                <nz-option
+                    *ngFor="let o of categoryList"
+                    [nzValue]="o.id"
+                    [nzLabel]="o.name"
+                ></nz-option>
+            </ng-container>
+            <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                <span nz-icon nzType="loading" class="loading-icon"></span>
+                Загрузка...
+            </nz-option>
+        </nz-select>
+    </div>
+    <button type="submit" nbButton status="danger">Подтвердить</button>
+</form>

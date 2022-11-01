@@ -15,6 +15,7 @@ import { LayoutService, StateService } from './utils';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http/http.service';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
+import { HttpErrorInterceptor } from './interceptors/error.interceptor';
 
 const socialLinks = [
     {
@@ -54,37 +55,42 @@ export const NB_CORE_PROVIDERS = [
         useClass: BaseUrlInterceptor,
         multi: true,
     },
-    ...DATA_SERVICES,
-    ...NbAuthModule.forRoot({
-        strategies: [
-            NbDummyAuthStrategy.setup({
-                name: 'email',
-                delay: 3000,
-            }),
-        ],
-        forms: {
-            login: {
-                socialLinks,
-            },
-            register: {
-                socialLinks,
-            },
-        },
-    }).providers,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpErrorInterceptor,
+        multi: true,
+    },
+    // ...DATA_SERVICES,
+    // ...NbAuthModule.forRoot({
+    //     strategies: [
+    //         NbDummyAuthStrategy.setup({
+    //             name: 'email',
+    //             delay: 3000,
+    //         }),
+    //     ],
+    //     forms: {
+    //         login: {
+    //             socialLinks,
+    //         },
+    //         register: {
+    //             socialLinks,
+    //         },
+    //     },
+    // }).providers,
 
-    NbSecurityModule.forRoot({
-        accessControl: {
-            guest: {
-                view: '*',
-            },
-            user: {
-                parent: 'guest',
-                create: '*',
-                edit: '*',
-                remove: '*',
-            },
-        },
-    }).providers,
+    // NbSecurityModule.forRoot({
+    //     accessControl: {
+    //         guest: {
+    //             view: '*',
+    //         },
+    //         user: {
+    //             parent: 'guest',
+    //             create: '*',
+    //             edit: '*',
+    //             remove: '*',
+    //         },
+    //     },
+    // }).providers,
 
     {
         provide: NbRoleProvider,

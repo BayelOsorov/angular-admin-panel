@@ -1,12 +1,7 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
@@ -21,6 +16,12 @@ import {
     NbWindowModule,
 } from '@nebular/theme';
 import { AuthConfigModule } from './auth/auth-config.module';
+import { ComponentsModule } from './@core/components/components.module';
+import { DemoNgZorroAntdModule } from './@core/utils/ng-zorro-antd.module';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpInterceptorService } from './@core/services/http/http.service';
+import { BaseUrlInterceptor } from './@core/interceptors/base-url.interceptor';
+import { HttpErrorInterceptor } from './@core/interceptors/error.interceptor';
 
 @NgModule({
     declarations: [AppComponent],
@@ -38,10 +39,17 @@ import { AuthConfigModule } from './auth/auth-config.module';
         NbChatModule.forRoot({
             messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
         }),
+        AuthConfigModule,
         CoreModule.forRoot(),
         ThemeModule.forRoot(),
-        AuthConfigModule,
+        ComponentsModule,
+        DemoNgZorroAntdModule,
+        ToastrModule.forRoot({
+            timeOut: 5000,
+            positionClass: 'toast-top-right',
+        }),
     ],
     bootstrap: [AppComponent],
+    providers: [],
 })
 export class AppModule {}

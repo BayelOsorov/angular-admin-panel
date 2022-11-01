@@ -12,4 +12,5 @@ export const environment = {
     production: false,
     baseUrl: 'https://stage.c2u.io:2001',
     baseUrlOidc: 'https://stage.c2u.io:2021',
+    catalogUrl: 'https://stage.c2u.io:28001',
 };
