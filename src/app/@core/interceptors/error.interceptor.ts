@@ -9,6 +9,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HandleErrorService } from '../services/http/handle-error.service';
+import { environment } from '../../../environments/environment';
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
     constructor(private error: HandleErrorService) {}
@@ -19,6 +20,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
         // returning an observable to complete the request cycle
+        if (this.skipUrl(req.url)) {
+            return next.handle(req);
+        }
         return new Observable((observer) => {
             next.handle(req).subscribe(
                 (res: HttpResponse<any>) => {
@@ -33,5 +37,18 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 }
             );
         });
+    }
+
+    private skipUrl(url: string): boolean {
+        if (url.toLowerCase().endsWith('config.json')) {
+            return true;
+        }
+        if (url.toLowerCase().endsWith('.well-known/openid-configuration')) {
+            return true;
+        }
+        if (url.toLowerCase().includes('identity-service.io')) {
+            return true;
+        }
+        return false;
     }
 }

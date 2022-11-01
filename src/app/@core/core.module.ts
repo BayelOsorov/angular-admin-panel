@@ -60,37 +60,37 @@ export const NB_CORE_PROVIDERS = [
         useClass: HttpErrorInterceptor,
         multi: true,
     },
-    ...DATA_SERVICES,
-    ...NbAuthModule.forRoot({
-        strategies: [
-            NbDummyAuthStrategy.setup({
-                name: 'email',
-                delay: 3000,
-            }),
-        ],
-        forms: {
-            login: {
-                socialLinks,
-            },
-            register: {
-                socialLinks,
-            },
-        },
-    }).providers,
+    // ...DATA_SERVICES,
+    // ...NbAuthModule.forRoot({
+    //     strategies: [
+    //         NbDummyAuthStrategy.setup({
+    //             name: 'email',
+    //             delay: 3000,
+    //         }),
+    //     ],
+    //     forms: {
+    //         login: {
+    //             socialLinks,
+    //         },
+    //         register: {
+    //             socialLinks,
+    //         },
+    //     },
+    // }).providers,
 
-    NbSecurityModule.forRoot({
-        accessControl: {
-            guest: {
-                view: '*',
-            },
-            user: {
-                parent: 'guest',
-                create: '*',
-                edit: '*',
-                remove: '*',
-            },
-        },
-    }).providers,
+    // NbSecurityModule.forRoot({
+    //     accessControl: {
+    //         guest: {
+    //             view: '*',
+    //         },
+    //         user: {
+    //             parent: 'guest',
+    //             create: '*',
+    //             edit: '*',
+    //             remove: '*',
+    //         },
+    //     },
+    // }).providers,
 
     {
         provide: NbRoleProvider,

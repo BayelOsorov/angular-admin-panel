@@ -35,6 +35,7 @@ const routes: Routes = [
                 path: 'catalog/partners',
                 component: ListPartnersComponent,
             },
+
             {
                 path: 'catalog/partners/create',
                 component: ActionsPartnerComponent,

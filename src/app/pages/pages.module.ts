@@ -1,4 +1,4 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
     NbButtonModule,
     NbCardModule,
@@ -23,7 +23,6 @@ import { TableComponent } from '../@core/components/table/table.component';
 import { InputSearchComponent } from '../@core/components/input-search/input-search.component';
 import { ListPartnersComponent } from './catalog/partners/list-partners/list-partners.component';
 import { ActionsPartnerComponent } from './catalog/partners/actions-partner/actions-partner.component';
-import { SearchSelectComponent } from '../@core/components/search-select/search-select.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriesComponent } from './catalog/categories/categories.component';
@@ -59,7 +58,6 @@ import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail
         BrandsComponent,
         TableComponent,
         InputSearchComponent,
-        // SearchSelectComponent,
         ListPartnersComponent,
         ActionsPartnerComponent,
         CategoriesComponent,
@@ -67,6 +65,5 @@ import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail
         ListProductsComponent,
         DetailPartnerComponent,
     ],
-    // schemas: [NO_ERRORS_SCHEMA],
 })
 export class PagesModule {}
