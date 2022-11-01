@@ -1,0 +1,30 @@
+.gallery {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &__item {
+        position: relative;
+        margin-top: 10px;
+        .btn {
+            width: 30px;
+            height: 30px;
+            top: 3px;
+            position: absolute;
+        }
+        .delete-btn {
+            right: 3px;
+        }
+        .edit-btn {
+            left: 3px;
+        }
+        img {
+            width: 200px;
+            object-fit: contain;
+        }
+    }
+}
+.center-button {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}

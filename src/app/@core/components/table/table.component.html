@@ -9,7 +9,7 @@
     </ng2-smart-table>
     <nz-pagination
         *ngIf="tableData.totalItemCount > 20"
-        class="custom-pagination"
+        class="custom-pagination header"
         (nzPageIndexChange)="changePage($event)"
         [nzPageIndex]="tableData.pageNumber"
         [nzTotal]="tableData.totalItemCount"

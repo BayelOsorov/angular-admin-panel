@@ -11,6 +11,7 @@ import {
     NbDatepickerModule,
     NbInputModule,
     NbListModule,
+    NbPopoverModule,
     NbSelectModule,
     NbStepperModule,
 } from '@nebular/theme';
@@ -30,6 +31,8 @@ import { LocalizationInputsComponent } from './localization-inputs/localization-
 import { TagActionsModalComponent } from './catalog/tag/tag-actions-modal/tag-actions-modal.component';
 import { ProductActionsModalComponent } from './catalog/product/product-actions-modal/product-actions-modal.component';
 import { MultipleSearchSelectComponent } from './multiple-search-select/multiple-search-select.component';
+import { GalleryComponent } from './catalog/partners/gallery/gallery.component';
+import { ImageActionsModalComponent } from './catalog/partners/image-actions-modal/image-actions-modal.component';
 
 @NgModule({
     imports: [
@@ -41,6 +44,7 @@ import { MultipleSearchSelectComponent } from './multiple-search-select/multiple
         NbButtonModule,
         NbSelectModule,
         NbInputModule,
+        NbPopoverModule,
         NbListModule,
         NgMultiSelectDropDownModule,
         NbDatepickerModule,
@@ -59,6 +63,8 @@ import { MultipleSearchSelectComponent } from './multiple-search-select/multiple
         TagActionsModalComponent,
         ProductActionsModalComponent,
         MultipleSearchSelectComponent,
+        GalleryComponent,
+        ImageActionsModalComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -66,6 +72,7 @@ import { MultipleSearchSelectComponent } from './multiple-search-select/multiple
         SearchSelectComponent,
         LocalizationInputsComponent,
         MultipleSearchSelectComponent,
+        GalleryComponent,
     ],
 })
 export class ComponentsModule {}

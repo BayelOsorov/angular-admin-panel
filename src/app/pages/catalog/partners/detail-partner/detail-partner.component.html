@@ -10,7 +10,7 @@
                                 <div class="grid-view">
                                     <img
                                         class="center-img"
-                                        src="{{ partner.logoImageUrl }}"
+                                        src="{{ partner.logo }}"
                                         alt="logo"
                                     />
                                 </div>
@@ -20,37 +20,31 @@
                             <nb-card class="list-card">
                                 <div class="header">
                                     <div>
-                                        <h6>H6. Heading</h6>
+                                        <p>Название</p>
                                     </div>
 
-                                    <div class="detail">
-                                        800 1.125rem (18px)
-                                    </div>
+                                    <div class="detail">Puma</div>
                                 </div>
                                 <div class="header">
                                     <div>
-                                        <h6>H6. Heading</h6>
+                                        <p>Название</p>
                                     </div>
 
-                                    <div class="detail">
-                                        800 1.125rem (18px)
-                                    </div>
+                                    <div class="detail">Puma</div>
                                 </div>
                                 <div class="header">
                                     <div>
-                                        <h6>H6. Heading</h6>
+                                        <p>Название</p>
                                     </div>
 
-                                    <div class="detail">
-                                        800 1.125rem (18px)
-                                    </div>
+                                    <div class="detail">Puma</div>
                                 </div>
                             </nb-card>
                         </div>
                     </div>
                 </nb-tab>
                 <nb-tab tabTitle="Галерея">
-                    <span>Content #3</span>
+                    <ngx-gallery [partnerId]="partnerId"></ngx-gallery>
                 </nb-tab>
                 <nb-tab tabTitle="Филиалы">
                     <span>Content #2</span>

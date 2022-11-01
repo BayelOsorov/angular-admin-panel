@@ -150,7 +150,9 @@ export class ActionsPartnerComponent implements OnInit {
             descRu: ['', Validators.required],
             descKg: ['', Validators.required],
             descUz: ['', Validators.required],
-
+            shortDescRu: ['', Validators.required],
+            shortDescKg: ['', Validators.required],
+            shortDescUz: ['', Validators.required],
             categoryId: ['', Validators.required],
             productId: ['', Validators.required],
             brandId: ['', Validators.required],
@@ -197,6 +199,16 @@ export class ActionsPartnerComponent implements OnInit {
                         );
                         this.form.controls['descUz'].setValue(
                             data.description.uz
+                        );
+
+                        this.form.controls['shortDescRu'].setValue(
+                            data.shortDescription.ru
+                        );
+                        this.form.controls['shortDescKg'].setValue(
+                            data.shortDescription.kg
+                        );
+                        this.form.controls['shortDescUz'].setValue(
+                            data.shortDescription.uz
                         );
                     },
                 });

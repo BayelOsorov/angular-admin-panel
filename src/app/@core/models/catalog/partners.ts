@@ -8,6 +8,11 @@ export interface IDetailPartner {
         ru: 'string';
         uz: 'string';
     };
+    shortDescription: {
+        kg: 'string';
+        ru: 'string';
+        uz: 'string';
+    };
     categoryId: 0;
     productId: 0;
     brandId: 0;

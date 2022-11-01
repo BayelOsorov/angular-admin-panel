@@ -71,4 +71,11 @@ export class PartnersService {
             HttpOptions
         );
     }
+    editPartnerImage(partnerId: number, imgId: number, data) {
+        return this.http.put(
+            environment.catalogUrl +
+                `/Administration/api/v1/partners/${partnerId}/images/${imgId}`,
+            data
+        );
+    }
 }

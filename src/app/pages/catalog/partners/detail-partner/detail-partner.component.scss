@@ -34,10 +34,17 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        padding-bottom: 1rem;
-        margin-bottom: 1rem;
+        padding-top: 10px;
+        padding-bottom: 10px;
         border-bottom: 1px solid nb-theme(divider-color);
+        padding-left: 25px;
+        margin-left: 10px;
 
+        margin-right: 10px;
+
+        p {
+            margin-bottom: 0;
+        }
         &:last-child {
             border-bottom: none;
         }
