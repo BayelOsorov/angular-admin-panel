@@ -73,6 +73,7 @@ import { ImageActionsModalComponent } from './catalog/partners/image-actions-mod
         LocalizationInputsComponent,
         MultipleSearchSelectComponent,
         GalleryComponent,
+        UseHttpImageSourcePipe,
     ],
 })
 export class ComponentsModule {}

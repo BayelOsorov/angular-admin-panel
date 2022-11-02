@@ -64,10 +64,13 @@ export class BrandsComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listBrand = res));
     }
     deleteBrand(id: number): void {
-        this.brandService.deleteBrand(id).subscribe((res) => {
-            this.toaster.success('Успешно удалено!');
-            this.getBrands();
-        });
+        this.brandService
+            .deleteBrand(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getBrands();
+            });
     }
     onSearch(event) {
         this.getBrands(1, event);

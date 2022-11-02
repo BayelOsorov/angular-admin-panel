@@ -54,10 +54,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 title: 'Торговые центры',
                 link: '/catalog/malls',
             },
-            {
-                title: 'Партнеры',
-                link: '/catalog/partners',
-            },
+
             {
                 title: 'Тэги',
                 link: '/catalog/tags',

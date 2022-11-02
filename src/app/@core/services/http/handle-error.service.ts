@@ -20,7 +20,7 @@ export class HandleErrorService {
                         `\r\n ` + property + ': ' + err.error.errors[property];
                 }
             }
-            if (err && err.error) {
+            if (err && err.error && !err.error.errors) {
                 // eslint-disable-next-line guard-for-in
                 for (const property in err.error) {
                     errorMessage +=

@@ -39,10 +39,13 @@ export class ListProductsComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listProducts = res));
     }
     deleteProduct(id: number): void {
-        this.productService.deleteProduct(id).subscribe((res) => {
-            this.toaster.success('Успешно удалено!');
-            this.getProdgetListProducts();
-        });
+        this.productService
+            .deleteProduct(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getProdgetListProducts();
+            });
     }
     onSearch(event) {
         this.getProdgetListProducts(1, event);

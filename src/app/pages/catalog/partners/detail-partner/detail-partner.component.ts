@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CategoriesService } from '../../../../@core/services/catalog/categories/categories.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
+import { CategoriesComponent } from '../../categories/categories.component';
 
 @Component({
     templateUrl: './detail-partner.component.html',
@@ -12,12 +14,16 @@ import { PartnersService } from '../../../../@core/services/catalog/partners/par
 export class DetailPartnerComponent implements OnInit {
     partner;
     partnerId: number;
+    categoryName;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private toaster: ToastrService,
         private partnersService: PartnersService,
-        private route: ActivatedRoute
-    ) {}
+        private route: ActivatedRoute,
+        private categoryService: CategoriesService
+    ) {
+        this.categoryName = this.categoryService.getDetailCategory(3);
+    }
     getDetailPartner() {
         this.partnersService
             .getDetailPartner(this.partnerId)
@@ -29,5 +35,6 @@ export class DetailPartnerComponent implements OnInit {
             this.partnerId = params['id'];
         });
         this.getDetailPartner();
+        console.log(this.categoryName);
     }
 }

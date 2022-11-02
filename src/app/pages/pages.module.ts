@@ -30,6 +30,7 @@ import { ComponentsModule } from '../@core/components/components.module';
 import { ListTagsComponent } from './catalog/taggs/list-tags/list-tags.component';
 import { ListProductsComponent } from './catalog/products/list-products/list-products.component';
 import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail-partner.component';
+import { UseHttpImageSourcePipe } from '../@core/components/secured-image/secured-image.component';
 
 @NgModule({
     imports: [

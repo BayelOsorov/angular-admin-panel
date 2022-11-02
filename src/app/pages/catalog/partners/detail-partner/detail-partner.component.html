@@ -10,7 +10,7 @@
                                 <div class="grid-view">
                                     <img
                                         class="center-img"
-                                        src="{{ partner.logo }}"
+                                        [src]="partner.logo | useHttpImgSrc"
                                         alt="logo"
                                     />
                                 </div>
@@ -27,17 +27,19 @@
                                 </div>
                                 <div class="header">
                                     <div>
-                                        <p>Название</p>
+                                        <p>Описание</p>
                                     </div>
 
                                     <div class="detail">Puma</div>
                                 </div>
                                 <div class="header">
                                     <div>
-                                        <p>Название</p>
+                                        <p>Категория</p>
                                     </div>
 
-                                    <div class="detail">Puma</div>
+                                    <div class="detail">
+                                        {{ categoryName | async }}
+                                    </div>
                                 </div>
                             </nb-card>
                         </div>

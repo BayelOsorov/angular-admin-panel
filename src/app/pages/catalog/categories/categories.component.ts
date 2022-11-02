@@ -45,10 +45,13 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listCategory = res));
     }
     deleteCategory(id: number): void {
-        this.categoryService.deleteCategory(id).subscribe((res) => {
-            this.toaster.success('Успешно удалено!');
-            this.getCategories();
-        });
+        this.categoryService
+            .deleteCategory(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getCategories();
+            });
     }
     onSearch(event) {
         this.getCategories(1, event);

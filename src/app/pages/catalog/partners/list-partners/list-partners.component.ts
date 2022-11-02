@@ -36,7 +36,15 @@ export class ListPartnersComponent implements OnInit {
     userRowSelect(id) {
         this.router.navigate([`catalog/partners/detail/${id}`]);
     }
-    deletePartner(event) {}
+    deletePartner(id) {
+        this.partnersService
+            .deletePartner(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getPartners();
+            });
+    }
 
     ngOnInit(): void {
         this.getPartners();

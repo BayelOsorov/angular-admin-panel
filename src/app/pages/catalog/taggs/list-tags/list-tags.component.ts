@@ -41,10 +41,13 @@ export class ListTagsComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listTags = res));
     }
     deleteTag(id: number): void {
-        this.tagsService.deleteTag(id).subscribe((res) => {
-            this.toaster.success('Успешно удалено!');
-            this.getTags();
-        });
+        this.tagsService
+            .deleteTag(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getTags();
+            });
     }
     onSearch(event) {
         this.getTags(1, event);

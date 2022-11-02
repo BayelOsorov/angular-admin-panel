@@ -67,6 +67,11 @@ export class ActionsPartnerComponent implements OnInit {
                             kg: this.form.value.descKg,
                             uz: this.form.value.descUz,
                         },
+                        shortDescription: {
+                            ru: this.form.value.shortDescRu,
+                            kg: this.form.value.shortDescKg,
+                            uz: this.form.value.shortDescUz,
+                        },
                     })
                     .pipe(takeUntil(this.destroy$))
                     .subscribe((res) => {
@@ -83,6 +88,11 @@ export class ActionsPartnerComponent implements OnInit {
                         ru: this.form.value.descRu,
                         kg: this.form.value.descKg,
                         uz: this.form.value.descUz,
+                    },
+                    shortDescription: {
+                        ru: this.form.value.shortDescRu,
+                        kg: this.form.value.shortDescKg,
+                        uz: this.form.value.shortDescUz,
                     },
                 })
                 .pipe(takeUntil(this.destroy$))
@@ -167,7 +177,7 @@ export class ActionsPartnerComponent implements OnInit {
                 .pipe(
                     takeUntil(this.destroy$),
                     map((res) => {
-                        if (res.tags.length > 0) {
+                        if (res.tags && res.tags.length > 0) {
                             const newTags = res.tags.map((item) => item.id);
                             return { ...res, tags: newTags };
                         }

@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { IDetailPartner, IListPartner } from '../../../models/catalog/partners';
+import {
+    IDetailPartner,
+    IListPartner,
+    IListPartnerImages,
+} from '../../../models/catalog/partners';
 import { HttpOptions } from '../../../utils';
 
 @Injectable({
@@ -51,8 +55,8 @@ export class PartnersService {
             data
         );
     }
-    getListPartnerImages(id, page = 1) {
-        return this.http.get(
+    getListPartnerImages(page = 1, id) {
+        return this.http.get<IListPartnerImages>(
             environment.catalogUrl +
                 `/Administration/api/v1/partners/${id}/images?page=${page}&pageSize=20`
         );
@@ -76,6 +80,12 @@ export class PartnersService {
             environment.catalogUrl +
                 `/Administration/api/v1/partners/${partnerId}/images/${imgId}`,
             data
+        );
+    }
+    deletePartnerImage(partnerId: number, imgId: string) {
+        return this.http.delete(
+            environment.catalogUrl +
+                `/Administration/api/v1/partners/${partnerId}/images/${imgId}`
         );
     }
 }
