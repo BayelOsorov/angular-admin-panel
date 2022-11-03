@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { IListProducts } from '../../../models/catalog/catalog';
+import { IDetailProduct, IListProducts } from '../../../models/catalog/catalog';
 
 @Injectable({
     providedIn: 'root',
@@ -15,7 +15,7 @@ export class ProductsService {
         );
     }
     getDetailProduct(id: number) {
-        return this.http.get(
+        return this.http.get<IDetailProduct>(
             environment.catalogUrl + `/Administration/api/v1/products/${id}`
         );
     }

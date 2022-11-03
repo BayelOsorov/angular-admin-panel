@@ -31,3 +31,26 @@ export interface IListProducts {
     hasPreviousPage: true;
     hasNextPage: true;
 }
+export interface IDetailProduct {
+    id: 0;
+    name: 'string';
+    isActive: true;
+}
+export interface IDetailLocality {
+    id: 0;
+    name: {
+        ru: 'string';
+        kg: 'string';
+        uz: 'string';
+    };
+    isActive: true;
+}
+export interface IListLocalities {
+    items: [IDetailLocality];
+    pageCount: 0;
+    totalItemCount: 0;
+    pageNumber: 0;
+    pageSize: 0;
+    hasPreviousPage: true;
+    hasNextPage: true;
+}

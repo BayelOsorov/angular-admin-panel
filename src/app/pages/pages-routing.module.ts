@@ -11,6 +11,9 @@ import { CategoriesComponent } from './catalog/categories/categories.component';
 import { ListTagsComponent } from './catalog/taggs/list-tags/list-tags.component';
 import { ListProductsComponent } from './catalog/products/list-products/list-products.component';
 import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail-partner.component';
+import { LocalitiesComponent } from './catalog/localities/localities.component';
+import { ListMallsComponent } from './catalog/malls/list-malls/list-malls.component';
+import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.component';
 
 const routes: Routes = [
     {
@@ -59,6 +62,27 @@ const routes: Routes = [
             {
                 path: 'catalog/products',
                 component: ListProductsComponent,
+            },
+            {
+                path: 'catalog/localities',
+                component: LocalitiesComponent,
+            },
+
+            {
+                path: 'catalog/malls',
+                component: ListMallsComponent,
+            },
+            {
+                path: 'catalog/malls/create',
+                component: ActionsMallComponent,
+            },
+            {
+                path: 'catalog/malls/update/:id',
+                component: ActionsMallComponent,
+            },
+            {
+                path: 'catalog/malls/detail/:id',
+                component: DetailPartnerComponent,
             },
             {
                 path: '',

@@ -33,6 +33,8 @@ import { ProductActionsModalComponent } from './catalog/product/product-actions-
 import { MultipleSearchSelectComponent } from './multiple-search-select/multiple-search-select.component';
 import { GalleryComponent } from './catalog/partners/gallery/gallery.component';
 import { ImageActionsModalComponent } from './catalog/partners/image-actions-modal/image-actions-modal.component';
+import { LocalityActionsModalComponent } from './catalog/locality/locality-actions-modal/locality-actions-modal.component';
+import { CustomMapComponent } from './custom-map/custom-map.component';
 
 @NgModule({
     imports: [
@@ -65,6 +67,8 @@ import { ImageActionsModalComponent } from './catalog/partners/image-actions-mod
         MultipleSearchSelectComponent,
         GalleryComponent,
         ImageActionsModalComponent,
+        LocalityActionsModalComponent,
+        CustomMapComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -74,6 +78,7 @@ import { ImageActionsModalComponent } from './catalog/partners/image-actions-mod
         MultipleSearchSelectComponent,
         GalleryComponent,
         UseHttpImageSourcePipe,
+        CustomMapComponent,
     ],
 })
 export class ComponentsModule {}

@@ -27,10 +27,12 @@
                                 </div>
                                 <div class="header">
                                     <div>
-                                        <p>Описание</p>
+                                        <p>Описание на RU</p>
                                     </div>
 
-                                    <div class="detail">Puma</div>
+                                    <div class="detail">
+                                        {{ partner.description.ru }}
+                                    </div>
                                 </div>
                                 <div class="header">
                                     <div>
@@ -38,7 +40,25 @@
                                     </div>
 
                                     <div class="detail">
-                                        {{ categoryName | async }}
+                                        {{ (category | async)?.name }}
+                                    </div>
+                                </div>
+                                <div class="header">
+                                    <div>
+                                        <p>Бренд</p>
+                                    </div>
+
+                                    <div class="detail">
+                                        {{ (brand | async)?.name }}
+                                    </div>
+                                </div>
+                                <div class="header">
+                                    <div>
+                                        <p>Продукт</p>
+                                    </div>
+
+                                    <div class="detail">
+                                        {{ (product | async)?.name }}
                                     </div>
                                 </div>
                             </nb-card>

@@ -3,14 +3,15 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IListPartner } from '../../../../@core/models/catalog/partners';
-import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
+import { IListMalls } from '../../../../@core/models/catalog/malls';
+import { MallsService } from '../../../../@core/services/catalog/malls/malls.service';
+
 @Component({
-    templateUrl: './list-partners.component.html',
-    styleUrls: ['./list-partners.component.scss'],
+    templateUrl: './list-malls.component.html',
+    styleUrls: ['./list-malls.component.scss'],
 })
-export class ListPartnersComponent implements OnInit, OnDestroy {
-    listPartner: IListPartner;
+export class ListMallsComponent implements OnInit, OnDestroy {
+    listMalls: IListMalls;
     tableColumns = {
         id: { title: '№', type: 'number' },
         name: { title: 'Название', type: 'string' },
@@ -19,35 +20,37 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
-        private partnersService: PartnersService,
+        private mallsService: MallsService,
         private toaster: ToastrService,
         private router: Router
     ) {}
-    getPartners(page = 1) {
-        this.partnersService
-            .getListPartners(page)
+    getMalls(page = 1, name = '') {
+        this.mallsService
+            .getListMalls(page, name)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => (this.listPartner = res));
+            .subscribe((res) => (this.listMalls = res));
     }
-    onSearch(event) {}
-    updatePartner(data) {
-        this.router.navigate([`catalog/partners/update/${data.id}`]);
+    onSearch(event) {
+        this.getMalls(1, event);
+    }
+    updateMall(data) {
+        this.router.navigate([`catalog/malls/update/${data.id}`]);
     }
     userRowSelect(id) {
-        this.router.navigate([`catalog/partners/detail/${id}`]);
+        this.router.navigate([`catalog/malls/detail/${id}`]);
     }
-    deletePartner(id) {
-        this.partnersService
-            .deletePartner(id)
+    deleteMall(id) {
+        this.mallsService
+            .deleteMall(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.toaster.success('Успешно удалено!');
-                this.getPartners();
+                this.getMalls();
             });
     }
 
     ngOnInit(): void {
-        this.getPartners();
+        this.getMalls();
     }
     ngOnDestroy() {
         this.destroy$.next();

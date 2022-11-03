@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { environment } from '../../../../../../environments/environment';
 import { IDetailCategory } from '../../../../models/catalog/category';
 import { CategoriesService } from '../../../../services/catalog/categories/categories.service';
-import { blobToBase64, toBase64 } from '../../../../utils/toBase64';
+import { toBase64 } from '../../../../utils/toBase64';
 
 @Component({
     selector: 'ngx-category-actions-modal',

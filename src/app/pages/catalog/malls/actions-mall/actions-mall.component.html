@@ -1,0 +1,195 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header>Создание партнера</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Название</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Введите название"
+                                formControlName="name"
+                            />
+                        </div>
+                    </div>
+
+                    <img [src]="logoImg" alt="" width="200" class="center" />
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Лого</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                id="exampleInputPassword1"
+                                placeholder="Лого"
+                                class="form-control"
+                                type="file"
+                                (change)="onFileChange($event, 'logo')"
+                                id="formFile"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Адрес
+                        </label>
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Введите адрес"
+                                formControlName="address"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Начало рабочего времени</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                nbInput
+                                fullWidth
+                                formControlName="workingHourStart"
+                                type="text"
+                                [nbTimepicker]="timepicker"
+                            />
+                            <nb-timepicker #timepicker></nb-timepicker>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Конец рабочего времени</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                fullWidth
+                                nbInput
+                                formControlName="workingHourEnd"
+                                type="text"
+                                [nbTimepicker]="timepickermy"
+                            />
+                            <nb-timepicker #timepickermy></nb-timepicker>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Описание</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Введите описание"
+                                formControlName="description"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Порядок</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="number"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Введите порядок"
+                                formControlName="order"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Тип</label
+                        >
+                        <div class="col-sm-9">
+                            <nb-select
+                                fullWidth
+                                formControlName="type"
+                                placeholder="Тип"
+                            >
+                                <nb-option value="10">Торговый центр</nb-option>
+                                <nb-option value="20">Базар</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Активен</label
+                        >
+                        <div class="col-sm-9">
+                            <nb-select
+                                fullWidth
+                                formControlName="isActive"
+                                placeholder="Активен"
+                            >
+                                <nb-option [value]="true">Да</nb-option>
+                                <nb-option [value]="false">Нeт</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Населенный пункт</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-multiple-search-select
+                                [control]="form.get('localityId')"
+                                (searchEmit)="getLocalities($event)"
+                                [data]="localities"
+                                [placeholder]="'Введите населенный пункт'"
+                                [type]="'default'"
+                            ></ngx-multiple-search-select>
+                        </div>
+                    </div>
+                    <ngx-custom-map></ngx-custom-map>
+                    <button
+                        class="center-button"
+                        type="submit"
+                        nbButton
+                        status="danger"
+                    >
+                        Подтвердить
+                    </button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { IDetailPartner } from '../../../../@core/models/catalog/partners';
 import { BrandsService } from '../../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../../@core/services/catalog/categories/categories.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
@@ -16,7 +15,7 @@ import { toBase64 } from '../../../../@core/utils/toBase64';
     templateUrl: './actions-partner.component.html',
     styleUrls: ['./actions-partner.component.scss'],
 })
-export class ActionsPartnerComponent implements OnInit {
+export class ActionsPartnerComponent implements OnInit, OnDestroy {
     form: FormGroup;
     logoImg;
     categories = [];
@@ -225,5 +224,9 @@ export class ActionsPartnerComponent implements OnInit {
         }
 
         this.getData();
+    }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

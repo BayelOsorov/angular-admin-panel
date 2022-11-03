@@ -1,40 +1,61 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { IDetailBrand } from '../../../../@core/models/catalog/brand';
+import { IDetailProduct } from '../../../../@core/models/catalog/catalog';
+import { IDetailCategory } from '../../../../@core/models/catalog/category';
+import { BrandsService } from '../../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../../@core/services/catalog/categories/categories.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
+import { ProductsService } from '../../../../@core/services/catalog/products/products.service';
 import { CategoriesComponent } from '../../categories/categories.component';
 
 @Component({
     templateUrl: './detail-partner.component.html',
     styleUrls: ['./detail-partner.component.scss'],
 })
-export class DetailPartnerComponent implements OnInit {
+export class DetailPartnerComponent implements OnInit, OnDestroy {
     partner;
     partnerId: number;
-    categoryName;
+    category: Observable<IDetailCategory>;
+    brand: Observable<IDetailBrand>;
+    product: Observable<IDetailProduct>;
+
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private toaster: ToastrService,
         private partnersService: PartnersService,
         private route: ActivatedRoute,
-        private categoryService: CategoriesService
-    ) {
-        this.categoryName = this.categoryService.getDetailCategory(3);
-    }
+        private categoryService: CategoriesService,
+        private brandService: BrandsService,
+        private productService: ProductsService
+    ) {}
+
     getDetailPartner() {
         this.partnersService
             .getDetailPartner(this.partnerId)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((data) => (this.partner = data));
+            .subscribe((data) => {
+                this.partner = data;
+                this.category = this.categoryService.getDetailCategory(
+                    data.categoryId
+                );
+                this.brand = this.brandService.getDetailBrand(data.brandId);
+                this.product = this.productService.getDetailProduct(
+                    data.productId
+                );
+            });
     }
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
             this.partnerId = params['id'];
         });
         this.getDetailPartner();
-        console.log(this.categoryName);
+    }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

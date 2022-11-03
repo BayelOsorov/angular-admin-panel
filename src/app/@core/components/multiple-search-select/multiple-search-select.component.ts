@@ -8,6 +8,7 @@ import { AbstractControl, FormControl } from '@angular/forms';
 export class MultipleSearchSelectComponent implements OnInit {
     @Output() searchEmit = new EventEmitter<string>();
     @Input() control: AbstractControl = new FormControl();
+    @Input() type = 'multiple';
 
     @Input() placeholder: string;
     @Input() data;

@@ -1,0 +1,25 @@
+<nb-card>
+    <nb-card-header>
+        <strong>Торговые центры</strong>
+        <div class="d-flex justify-content-between mt-3">
+            <ngx-input-search
+                (searchEvent)="onSearch($event)"
+                [placeholder]="'Название торгового центра'"
+            >
+            </ngx-input-search>
+            <a routerLink="/catalog/malls/create">
+                <button nbButton status="primary">Добавить</button>
+            </a>
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (deleteItemEvent)="deleteMall($event)"
+            (openModalEvent)="updateMall($event)"
+            (rowSelectEvent)="userRowSelect($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listMalls"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

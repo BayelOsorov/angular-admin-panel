@@ -7,7 +7,9 @@ import {
     NbMenuModule,
     NbSelectModule,
     NbTabsetModule,
+    NbTimepickerModule,
     NbTreeGridModule,
+    NB_TIME_PICKER_CONFIG,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
@@ -31,6 +33,9 @@ import { ListTagsComponent } from './catalog/taggs/list-tags/list-tags.component
 import { ListProductsComponent } from './catalog/products/list-products/list-products.component';
 import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail-partner.component';
 import { UseHttpImageSourcePipe } from '../@core/components/secured-image/secured-image.component';
+import { LocalitiesComponent } from './catalog/localities/localities.component';
+import { ListMallsComponent } from './catalog/malls/list-malls/list-malls.component';
+import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.component';
 
 @NgModule({
     imports: [
@@ -50,6 +55,7 @@ import { UseHttpImageSourcePipe } from '../@core/components/secured-image/secure
         NzSelectModule,
         NbSelectModule,
         NbTabsetModule,
+        NbTimepickerModule,
         ComponentsModule,
     ],
     declarations: [
@@ -65,6 +71,15 @@ import { UseHttpImageSourcePipe } from '../@core/components/secured-image/secure
         ListTagsComponent,
         ListProductsComponent,
         DetailPartnerComponent,
+        LocalitiesComponent,
+        ListMallsComponent,
+        ActionsMallComponent,
+    ],
+    providers: [
+        {
+            provide: NB_TIME_PICKER_CONFIG,
+            useValue: {},
+        },
     ],
 })
 export class PagesModule {}
