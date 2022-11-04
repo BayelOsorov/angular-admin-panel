@@ -18,9 +18,19 @@ export class ListTagsComponent implements OnInit, OnDestroy {
             type: 'number',
         },
         name: {
-            title: 'Название',
+            title: 'Название на Ru',
             type: 'string',
             valuePrepareFunction: (item) => item.ru,
+        },
+        'name.kg': {
+            title: 'Название на KG',
+            type: 'string',
+            valuePrepareFunction: (cell, row) => row.name.kg,
+        },
+        'name.uz': {
+            title: 'Название на UZ',
+            type: 'string',
+            valuePrepareFunction: (cell, row) => row.name.uz,
         },
     };
     private destroy$: Subject<void> = new Subject<void>();

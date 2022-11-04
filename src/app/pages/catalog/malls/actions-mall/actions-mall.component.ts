@@ -32,7 +32,12 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
         if (this.form.valid) {
             if (this.mallData) {
                 this.mallsService
-                    .editMall(this.mallData.id, this.form.value)
+                    .editMall(this.mallData.id, {
+                        location: {
+                            type: 'Point',
+                            coordinates: this.form.value.location,
+                        },
+                    })
                     .pipe(takeUntil(this.destroy$))
                     .subscribe((res) => {
                         this.toaster.success('Успешно отредактировано!');
@@ -42,7 +47,13 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
             }
 
             this.mallsService
-                .createMall(this.form.value)
+                .createMall({
+                    ...this.form.value,
+                    location: {
+                        type: 'Point',
+                        coordinates: this.form.value.location,
+                    },
+                })
                 .pipe(takeUntil(this.destroy$))
                 .subscribe((res) => {
                     this.toaster.success('Успешно создано!');
@@ -66,16 +77,42 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
             });
         }
     }
+    padTo2Digits(num) {
+        return String(num).padStart(2, '0');
+    }
+    timeChange(time, type) {
+        const date = new Date(time.time);
+        console.log(time.time);
+
+        const hoursAndMinutes =
+            this.padTo2Digits(date.getHours()) +
+            ':' +
+            this.padTo2Digits(date.getMinutes());
+        if (type === 'start') {
+            this.form.patchValue({
+                workingHourStart: hoursAndMinutes,
+            });
+            return;
+        }
+        this.form.patchValue({
+            workingHourEnd: hoursAndMinutes,
+        });
+    }
     getLocalities(name = '') {
         this.localitiesService.getListLocalities(1, name).subscribe((data) => {
             this.localities = data.items;
+        });
+    }
+    markMap(loc) {
+        this.form.patchValue({
+            location: loc,
         });
     }
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', Validators.required],
             logo: ['', Validators.required],
-            isActive: ['', Validators.required],
+            isActive: [true, Validators.required],
             address: ['', Validators.required],
             description: ['', Validators.required],
             order: ['', Validators.required],

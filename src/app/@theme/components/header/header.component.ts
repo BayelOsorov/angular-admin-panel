@@ -107,7 +107,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     shortName(fullName: string) {
         const surname = fullName.split(' ')[0];
         const name = fullName.split(' ')[1].slice(0, 1);
-        const patronymic = fullName.split(' ')[2].slice(0, 1);
-        return surname + ' ' + name + '. ' + patronymic + '.';
+        return surname + ' ' + name + '.';
     }
 }

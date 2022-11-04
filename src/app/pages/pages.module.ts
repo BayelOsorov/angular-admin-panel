@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {
+    NbAlertModule,
     NbButtonModule,
     NbCardModule,
     NbInputModule,
@@ -41,6 +42,7 @@ import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.
     imports: [
         PagesRoutingModule,
         ThemeModule,
+        NbAlertModule,
         NbMenuModule,
         ReactiveFormsModule,
         FormsModule,

@@ -86,7 +86,7 @@ const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: 'catalog/brands',
+                redirectTo: '',
                 pathMatch: 'full',
             },
         ],

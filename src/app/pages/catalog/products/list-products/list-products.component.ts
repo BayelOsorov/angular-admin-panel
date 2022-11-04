@@ -20,6 +20,11 @@ export class ListProductsComponent implements OnInit, OnDestroy {
             title: 'Название',
             type: 'string',
         },
+        isActive: {
+            title: 'Активен',
+            type: 'string',
+            valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
+        },
     };
     private destroy$: Subject<void> = new Subject<void>();
 

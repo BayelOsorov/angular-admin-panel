@@ -24,7 +24,7 @@ export class ProductActionsModalComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', Validators.required],
-            isActive: ['', Validators.required],
+            isActive: [true, Validators.required],
         });
         if (this.itemData) {
             this.form.controls['name'].setValue(this.itemData.name);

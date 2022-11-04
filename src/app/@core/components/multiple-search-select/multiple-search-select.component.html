@@ -10,6 +10,7 @@
     nzSize="large"
     (nzOnSearch)="onSearch($event)"
     [formControl]="control"
+    [nzNotFoundContent]="'Список пуст'"
 >
     <ng-container *ngIf="!isLoading">
         <nz-option

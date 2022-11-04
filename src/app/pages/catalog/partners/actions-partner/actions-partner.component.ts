@@ -155,7 +155,7 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
         this.form = this.fb.group({
             name: ['', Validators.required],
             logo: ['', Validators.required],
-            isActive: ['', Validators.required],
+            isActive: [true, Validators.required],
             descRu: ['', Validators.required],
             descKg: ['', Validators.required],
             descUz: ['', Validators.required],

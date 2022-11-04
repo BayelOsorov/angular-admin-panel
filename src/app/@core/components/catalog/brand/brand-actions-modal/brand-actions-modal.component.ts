@@ -35,7 +35,7 @@ export class BrandActionsModalComponent implements OnInit, OnDestroy {
         this.form = this.fb.group({
             name: ['', Validators.required],
             Logo: ['', Validators.required],
-            isActive: ['', Validators.required],
+            isActive: [true, Validators.required],
             order: ['', Validators.required],
             categoryId: ['', Validators.required],
         });

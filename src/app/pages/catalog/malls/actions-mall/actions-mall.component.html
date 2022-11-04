@@ -66,14 +66,16 @@
                             >Начало рабочего времени</label
                         >
                         <div class="col-sm-9">
+                            <!-- formControlName="workingHourStart" -->
                             <input
                                 nbInput
                                 fullWidth
-                                formControlName="workingHourStart"
-                                type="text"
                                 [nbTimepicker]="timepicker"
                             />
-                            <nb-timepicker #timepicker></nb-timepicker>
+                            <nb-timepicker
+                                (onSelectTime)="timeChange($event, 'start')"
+                                #timepicker
+                            ></nb-timepicker>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -83,14 +85,16 @@
                             >Конец рабочего времени</label
                         >
                         <div class="col-sm-9">
+                            <!-- formControlName="workingHourEnd" -->
                             <input
                                 fullWidth
                                 nbInput
-                                formControlName="workingHourEnd"
-                                type="text"
                                 [nbTimepicker]="timepickermy"
                             />
-                            <nb-timepicker #timepickermy></nb-timepicker>
+                            <nb-timepicker
+                                (onSelectTime)="timeChange($event, 'end')"
+                                #timepickermy
+                            ></nb-timepicker>
                         </div>
                     </div>
 
@@ -140,8 +144,10 @@
                                 formControlName="type"
                                 placeholder="Тип"
                             >
-                                <nb-option value="10">Торговый центр</nb-option>
-                                <nb-option value="20">Базар</nb-option>
+                                <nb-option value="Mall"
+                                    >Торговый центр</nb-option
+                                >
+                                <nb-option value="Market">Базар</nb-option>
                             </nb-select>
                         </div>
                     </div>
@@ -179,7 +185,19 @@
                             ></ngx-multiple-search-select>
                         </div>
                     </div>
-                    <ngx-custom-map></ngx-custom-map>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Локация</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-custom-map
+                                (markLocationEvent)="markMap($event)"
+                                [baseLocation]="mallData && mallData.location"
+                            ></ngx-custom-map>
+                        </div>
+                    </div>
                     <button
                         class="center-button"
                         type="submit"

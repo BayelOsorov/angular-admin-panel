@@ -22,6 +22,17 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             title: 'Название',
             type: 'string',
         },
+        backgroundColor: {
+            title: 'Цвет фона',
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                `<div class='customformat'><i class='fa fa-check text-success' aria-hidden='true'></i></div>`,
+        },
+        isActive: {
+            title: 'Активен',
+            type: 'string',
+            valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
+        },
         order: {
             title: 'Заказ',
             type: 'string',

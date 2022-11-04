@@ -24,6 +24,7 @@ export class TableComponent implements OnInit, AfterContentChecked {
 
     @Input() tableColumns;
     @Input() tableData;
+    @Input() productName;
 
     settings = {};
     constructor(
@@ -67,11 +68,6 @@ export class TableComponent implements OnInit, AfterContentChecked {
     onEdit(event) {
         this.openModalEvent.emit(event.data);
     }
-    // ngAfterContentInit() {
-    //     setTimeout(() => {
-    //         this.cd.detectChanges();
-    //     }, 0);
-    // }
     ngAfterContentChecked() {
         setTimeout(() => {
             this.cd.detectChanges();

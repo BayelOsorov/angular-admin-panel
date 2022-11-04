@@ -1,6 +1,6 @@
 <nb-card>
     <nb-card-header class="d-flex justify-content-between">
-        <strong>Теги</strong>
+        <strong>Продукты</strong>
 
         <button (click)="openCreateModal()" nbButton status="primary">
             Добавить
@@ -13,6 +13,7 @@
             (openModalEvent)="openEditModal($event)"
             [tableColumns]="tableColumns"
             [tableData]="listProducts"
+            [productName]="'ни одного продукта'"
         >
         </ngx-custom-table> </nb-card-body
 ></nb-card>

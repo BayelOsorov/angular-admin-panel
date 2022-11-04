@@ -1,4 +1,4 @@
-<ng-container *ngIf="tableData">
+<ng-container *ngIf="tableData && tableData.items.length > 0">
     <ng2-smart-table
         [settings]="settings"
         [source]="tableData.items"
@@ -15,4 +15,7 @@
         [nzTotal]="tableData.totalItemCount"
         [nzPageSize]="tableData.pageSize"
     ></nz-pagination>
+</ng-container>
+<ng-container *ngIf="tableData && tableData.items.length === 0">
+    <nb-alert outline="primary">Здесь пока нет {{ productName }}</nb-alert>
 </ng-container>

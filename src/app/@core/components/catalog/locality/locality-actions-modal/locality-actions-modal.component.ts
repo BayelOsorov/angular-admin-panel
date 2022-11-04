@@ -26,7 +26,7 @@ export class LocalityActionsModalComponent implements OnInit, OnDestroy {
             ru: ['', Validators.required],
             uz: ['', Validators.required],
             kg: ['', Validators.required],
-            isActive: ['', Validators.required],
+            isActive: [true, Validators.required],
         });
         if (this.itemData) {
             this.form.controls['ru'].setValue(this.itemData.name.ru);

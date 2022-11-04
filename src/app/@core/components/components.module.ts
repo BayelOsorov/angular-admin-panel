@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+    NbAlertModule,
     NbButtonModule,
     NbCardModule,
     NbDatepickerModule,
@@ -39,6 +40,7 @@ import { CustomMapComponent } from './custom-map/custom-map.component';
 @NgModule({
     imports: [
         CommonModule,
+        NbAlertModule,
         NbStepperModule,
         NbCardModule,
         ReactiveFormsModule,
