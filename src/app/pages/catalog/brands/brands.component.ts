@@ -1,26 +1,14 @@
-import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    OnDestroy,
-    OnInit,
-    ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
-import { AnyTxtRecord } from 'dns';
 import { ToastrService } from 'ngx-toastr';
-import { fromEvent, Subject, throwError } from 'rxjs';
-import { catchError, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { BrandActionsModalComponent } from '../../../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
-import { TableComponent } from '../../../@core/components/table/table.component';
+import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListBrand } from '../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../@core/services/catalog/brands/brands.service';
-import {
-    filter,
-    debounceTime,
-    distinctUntilChanged,
-    tap,
-} from 'rxjs/operators';
 
 @Component({
     templateUrl: './brands.component.html',
@@ -33,6 +21,14 @@ export class BrandsComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
         },
+        logo: {
+            title: 'Лого',
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                `<img width='43' height='43' class="bg-info rounded-circle" src="${this.getImgSrc(
+                    item
+                )}" />`,
+        },
         name: {
             title: 'Название',
             type: 'string',
@@ -42,7 +38,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
             type: 'number',
         },
         order: {
-            title: 'Заказ',
+            title: 'Порядок',
             type: 'string',
         },
     };
@@ -50,10 +46,15 @@ export class BrandsComponent implements OnInit, OnDestroy {
 
     constructor(
         private brandService: BrandsService,
+        private router: Router,
         private windowService: NbWindowService,
-        private toaster: ToastrService
+        private toaster: ToastrService,
+        private httpImgSrc: UseHttpImageSourcePipe,
+        private domSanitizer: DomSanitizer
     ) {}
-
+    getImgSrc(imagePath: string) {
+        return this.httpImgSrc.transform(imagePath);
+    }
     ngOnInit(): void {
         this.getBrands();
     }
@@ -86,10 +87,11 @@ export class BrandsComponent implements OnInit, OnDestroy {
         });
     }
     public openEditModal(data) {
-        this.openModal(false, BrandActionsModalComponent, {
-            title: 'Редактирование бренда',
-            context: { brandData: data },
-        });
+        // this.openModal(false, BrandActionsModalComponent, {
+        //     title: 'Редактирование бренда',
+        //     context: { brandData: data },
+        // });
+        this.router.navigate([`catalog/brands/update/${data.id}`]);
     }
     public openModal(closeOnBackdropClick: boolean, component, props) {
         this.windowService

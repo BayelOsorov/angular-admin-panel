@@ -7,9 +7,9 @@
                 [placeholder]="'Название бренда'"
             >
             </ngx-input-search>
-            <button (click)="openCreateModal()" nbButton status="primary">
-                Добавить
-            </button>
+            <a routerLink="/catalog/brands/create">
+                <button nbButton status="primary">Добавить</button>
+            </a>
         </div>
     </nb-card-header>
 

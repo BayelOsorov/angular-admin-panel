@@ -1,7 +1,13 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <nb-card>
-            <nb-card-header>Создание партнера</nb-card-header>
+            <nb-card-header
+                >{{
+                    this.partnerId
+                        ? 'Редактирование партнера'
+                        : 'Создание партнера'
+                }}
+            </nb-card-header>
             <nb-card-body>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="form-group row">
@@ -77,6 +83,8 @@
                         >
                         <div class="col-sm-9">
                             <input
+                                nbInput
+                                fullWidth
                                 id="exampleInputPassword1"
                                 placeholder="Лого"
                                 class="form-control"

@@ -37,6 +37,8 @@ import { UseHttpImageSourcePipe } from '../@core/components/secured-image/secure
 import { LocalitiesComponent } from './catalog/localities/localities.component';
 import { ListMallsComponent } from './catalog/malls/list-malls/list-malls.component';
 import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.component';
+import { ActionsBrandComponent } from './catalog/brands/actions-brand/actions-brand.component';
+import { ListNewsComponent } from './catalog/news/list-news/list-news.component';
 
 @NgModule({
     imports: [
@@ -76,12 +78,15 @@ import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.
         LocalitiesComponent,
         ListMallsComponent,
         ActionsMallComponent,
+        ActionsBrandComponent,
+        ListNewsComponent,
     ],
     providers: [
         {
             provide: NB_TIME_PICKER_CONFIG,
             useValue: {},
         },
+        UseHttpImageSourcePipe,
     ],
 })
 export class PagesModule {}

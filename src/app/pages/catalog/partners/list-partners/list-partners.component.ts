@@ -15,7 +15,7 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
         id: { title: '№', type: 'number' },
         name: { title: 'Название', type: 'string' },
         categoryId: { title: 'Категория', type: 'number' },
-        order: { title: 'Заказ', type: 'string' },
+        order: { title: 'Порядок', type: 'string' },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(

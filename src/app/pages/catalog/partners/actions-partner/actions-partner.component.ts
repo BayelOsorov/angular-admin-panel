@@ -185,8 +185,6 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
                 )
                 .subscribe({
                     next: (data) => {
-                        console.log(data);
-
                         this.partnerData = data;
                         this.form.controls['name'].setValue(data.name);
                         this.form.controls['isActive'].setValue(data.isActive);
