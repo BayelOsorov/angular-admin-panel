@@ -4,6 +4,7 @@ import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-img.component';
 import { CategoryActionsModalComponent } from '../../../@core/components/catalog/category/category-actions-modal/category-actions-modal.component';
 import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListCategories } from '../../../@core/models/catalog/category';
@@ -22,11 +23,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         },
         logo: {
             title: 'Лого',
-            type: 'html',
-            valuePrepareFunction: (item) =>
-                `<img width='43' height='43' class="bg-info rounded-circle" src="${this.getImgSrc(
-                    item
-                )}" />`,
+            type: 'custom',
+            renderComponent: AvatarImgComponent,
         },
         name: {
             title: 'Название',
@@ -37,7 +35,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             type: 'html',
             valuePrepareFunction: (item) =>
                 this.domSanitizer.bypassSecurityTrustHtml(
-                    `<div class="row">&nbsp; <div class="colorSpan mx-auto" style='background-color: ${item};width:30px'></div> </div>`
+                    `<div class="row">&nbsp; <div class="colorSpan mx-auto" style='background-color: ${item};width:30px'></div></div>`
                 ),
         },
         isActive: {
@@ -56,12 +54,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         private categoryService: CategoriesService,
         private windowService: NbWindowService,
         private toaster: ToastrService,
-        private domSanitizer: DomSanitizer,
-        private httpImgSrc: UseHttpImageSourcePipe
+        private domSanitizer: DomSanitizer
     ) {}
-    getImgSrc(imagePath: string): string | SafeUrl {
-        return this.httpImgSrc.transform(imagePath);
-    }
     ngOnInit(): void {
         this.getCategories();
     }

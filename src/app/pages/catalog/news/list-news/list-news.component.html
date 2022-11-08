@@ -1,1 +1,25 @@
-<p>list-news works!</p>
+<nb-card>
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Новости</strong>
+        <!-- <ngx-input-search
+                (searchEvent)="onSearch($event)"
+                [placeholder]="'Название новости'"
+            >
+            </ngx-input-search> -->
+
+        <a routerLink="/catalog/news/create">
+            <button nbButton status="primary">Добавить</button>
+        </a>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (deleteItemEvent)="deleteNews($event)"
+            (openModalEvent)="updateNews($event)"
+            (rowSelectEvent)="userRowSelect($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listNews"
+            [productName]="'ни одной новости'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

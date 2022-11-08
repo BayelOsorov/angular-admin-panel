@@ -67,6 +67,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 title: 'Акции',
                 link: '/catalog/partner-proms',
             },
+            {
+                title: 'Новости',
+                link: '/catalog/news',
+            },
         ],
     },
     // {

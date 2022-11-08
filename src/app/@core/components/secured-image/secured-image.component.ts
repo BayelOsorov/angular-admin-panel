@@ -33,7 +33,7 @@ export class UseHttpImageSourcePipe implements PipeTransform, OnDestroy {
         this.setUpSubscription();
     }
 
-    transform(imagePath: string): string | SafeUrl {
+    transform(imagePath: string) {
         // we emit a new value
         this.transformValue.next(imagePath);
 

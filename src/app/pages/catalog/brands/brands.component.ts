@@ -5,6 +5,7 @@ import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-img.component';
 import { BrandActionsModalComponent } from '../../../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
 import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListBrand } from '../../../@core/models/catalog/brand';
@@ -23,11 +24,8 @@ export class BrandsComponent implements OnInit, OnDestroy {
         },
         logo: {
             title: 'Лого',
-            type: 'html',
-            valuePrepareFunction: (item) =>
-                `<img width='43' height='43' class="bg-info rounded-circle" src="${this.getImgSrc(
-                    item
-                )}" />`,
+            type: 'custom',
+            renderComponent: AvatarImgComponent,
         },
         name: {
             title: 'Название',
@@ -48,13 +46,8 @@ export class BrandsComponent implements OnInit, OnDestroy {
         private brandService: BrandsService,
         private router: Router,
         private windowService: NbWindowService,
-        private toaster: ToastrService,
-        private httpImgSrc: UseHttpImageSourcePipe,
-        private domSanitizer: DomSanitizer
+        private toaster: ToastrService
     ) {}
-    getImgSrc(imagePath: string) {
-        return this.httpImgSrc.transform(imagePath);
-    }
     ngOnInit(): void {
         this.getBrands();
     }

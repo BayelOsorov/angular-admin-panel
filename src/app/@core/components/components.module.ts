@@ -36,6 +36,7 @@ import { GalleryComponent } from './catalog/partners/gallery/gallery.component';
 import { ImageActionsModalComponent } from './catalog/partners/image-actions-modal/image-actions-modal.component';
 import { LocalityActionsModalComponent } from './catalog/locality/locality-actions-modal/locality-actions-modal.component';
 import { CustomMapComponent } from './custom-map/custom-map.component';
+import { AvatarImgComponent } from './avatar-img/avatar-img.component';
 
 @NgModule({
     imports: [
@@ -71,6 +72,7 @@ import { CustomMapComponent } from './custom-map/custom-map.component';
         ImageActionsModalComponent,
         LocalityActionsModalComponent,
         CustomMapComponent,
+        AvatarImgComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -81,6 +83,7 @@ import { CustomMapComponent } from './custom-map/custom-map.component';
         GalleryComponent,
         UseHttpImageSourcePipe,
         CustomMapComponent,
+        AvatarImgComponent,
     ],
 })
 export class ComponentsModule {}

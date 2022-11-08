@@ -12,6 +12,13 @@
                         <label for="exampleInputEmail1" class="label"
                             >Название</label
                         >
+                        <!-- [status]="
+                                form.get('name').invalid &&
+                                (form.get('name').dirty ||
+                                    form.get('name').touched)
+                                    ? 'danger'
+                                    : 'default'
+                            " -->
                         <input
                             type="text"
                             nbInput
@@ -19,7 +26,18 @@
                             id="exampleInputEmail1"
                             placeholder="Название"
                             formControlName="name"
+                            required="true"
                         />
+                        <!-- <div
+                            *ngIf="
+                                form.get('name').invalid &&
+                                (form.get('name').dirty ||
+                                    form.get('name').touched)
+                            "
+                            class=""
+                        >
+                            Please choose a username.
+                        </div> -->
                     </div>
 
                     <div class="form-group">

@@ -39,6 +39,7 @@ import { ListMallsComponent } from './catalog/malls/list-malls/list-malls.compon
 import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.component';
 import { ActionsBrandComponent } from './catalog/brands/actions-brand/actions-brand.component';
 import { ListNewsComponent } from './catalog/news/list-news/list-news.component';
+import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.component';
 
 @NgModule({
     imports: [
@@ -80,6 +81,7 @@ import { ListNewsComponent } from './catalog/news/list-news/list-news.component'
         ActionsMallComponent,
         ActionsBrandComponent,
         ListNewsComponent,
+        ActionsNewsComponent,
     ],
     providers: [
         {

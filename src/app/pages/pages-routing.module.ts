@@ -16,6 +16,8 @@ import { ListMallsComponent } from './catalog/malls/list-malls/list-malls.compon
 import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.component';
 import { BrandActionsModalComponent } from '../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
 import { ActionsBrandComponent } from './catalog/brands/actions-brand/actions-brand.component';
+import { ListNewsComponent } from './catalog/news/list-news/list-news.component';
+import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.component';
 
 const routes: Routes = [
     {
@@ -93,6 +95,18 @@ const routes: Routes = [
             {
                 path: 'catalog/malls/detail/:id',
                 component: DetailPartnerComponent,
+            },
+            {
+                path: 'catalog/news',
+                component: ListNewsComponent,
+            },
+            {
+                path: 'catalog/news/create',
+                component: ActionsNewsComponent,
+            },
+            {
+                path: 'catalog/news/update/:id',
+                component: ActionsNewsComponent,
             },
             {
                 path: '',
