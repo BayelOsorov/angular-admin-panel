@@ -10,6 +10,7 @@ import { BrandActionsModalComponent } from '../../../@core/components/catalog/br
 import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListBrand } from '../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../@core/services/catalog/brands/brands.service';
+import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';
 
 @Component({
     templateUrl: './brands.component.html',
@@ -17,6 +18,7 @@ import { BrandsService } from '../../../@core/services/catalog/brands/brands.ser
 })
 export class BrandsComponent implements OnInit, OnDestroy {
     listBrand: IListBrand;
+    categoryList = [];
     tableColumns = {
         id: {
             title: '№',
@@ -44,6 +46,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
 
     constructor(
         private brandService: BrandsService,
+        private categoryService: CategoriesService,
         private router: Router,
         private windowService: NbWindowService,
         private toaster: ToastrService
@@ -56,6 +59,14 @@ export class BrandsComponent implements OnInit, OnDestroy {
             .getListBrand(page, name)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listBrand = res));
+    }
+    getCategories(name = '') {
+        this.categoryService
+            .getListCategories(1, name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.categoryList = res.items;
+            });
     }
     deleteBrand(id: number): void {
         this.brandService

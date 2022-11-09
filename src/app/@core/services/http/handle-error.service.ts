@@ -12,6 +12,9 @@ export class HandleErrorService {
             errorMessage = 'Ошибка сервера';
             return this.toaster.error(errorMessage);
         }
+        if (err.status === 404) {
+            return this.toaster.error(err.message);
+        }
         if (err.error) {
             if (err && err.error.errors) {
                 // eslint-disable-next-line guard-for-in

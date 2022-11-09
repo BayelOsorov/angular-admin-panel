@@ -90,3 +90,22 @@
         color: nb-theme(select-outline-basic-text-color);
     }
 }
+::ng-deep
+    .ant-select-status-error.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input)
+    .ant-select-selector {
+    background-color: nb-theme(input-danger-background-color);
+    border-color: nb-theme(input-danger-border-color) !important;
+}
+.small-input {
+    width: 250px !important;
+    // height: 40px !important;
+    // ::ng-deep
+    //     .ant-select-single.ant-select-lg:not(.ant-select-customize-input)
+    //     .ant-select-selector {
+    //     height: 45px !important;
+    // }
+    ::ng-deep .ant-select-selector {
+        height: 37.5px !important;
+        padding: 0.2rem 0rem 0.3rem 1.125rem;
+    }
+}

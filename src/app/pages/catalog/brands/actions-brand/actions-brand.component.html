@@ -105,6 +105,7 @@
                             >Категория</label
                         >
                         <ngx-search-select
+                            [submitted]="submitted"
                             (searchEmit)="getCategories($event)"
                             [control]="form.get('categoryId')"
                             [data]="categoryList"

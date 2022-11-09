@@ -12,7 +12,8 @@ export class MultipleSearchSelectComponent implements OnInit {
 
     @Input() placeholder: string;
     @Input() data;
-
+    @Input() submitted = false;
+    @Input() isRequired = true;
     isLoading = false;
 
     constructor() {}

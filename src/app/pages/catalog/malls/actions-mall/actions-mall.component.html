@@ -218,6 +218,8 @@
                         >
                         <div class="col-sm-9">
                             <ngx-multiple-search-select
+                                [isRequired]="false"
+                                [submitted]="submitted"
                                 [control]="form.get('localityId')"
                                 (searchEmit)="getLocalities($event)"
                                 [data]="localities"

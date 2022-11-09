@@ -118,6 +118,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [submitted]="submitted"
                                 [control]="form.get('productId')"
                                 (searchEmit)="getProducts($event)"
                                 [data]="products"

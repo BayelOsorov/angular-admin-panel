@@ -7,6 +7,14 @@
                 [placeholder]="'Название бренда'"
             >
             </ngx-input-search>
+            <ngx-search-select
+                [size]="'default'"
+                (searchEmit)="getCategories($event)"
+                [isRequired]="false"
+                [submitted]="false"
+                [data]="categoryList"
+                [placeholder]="'Название категории'"
+            ></ngx-search-select>
             <a routerLink="/catalog/brands/create">
                 <button nbButton status="primary">Добавить</button>
             </a>

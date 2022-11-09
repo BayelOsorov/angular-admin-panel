@@ -11,8 +11,11 @@ export class SearchSelectComponent implements OnInit {
     @Input() control: AbstractControl = new FormControl();
 
     @Input() mode = 'default';
+    @Input() size = 'large';
     @Input() placeholder: string;
     @Input() data;
+    @Input() submitted = false;
+    @Input() isRequired = true;
 
     isLoading = false;
 

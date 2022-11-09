@@ -131,6 +131,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [submitted]="submitted"
                                 [control]="form.get('categoryId')"
                                 (searchEmit)="getCategories($event)"
                                 [data]="categories"
@@ -146,6 +147,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [submitted]="submitted"
                                 [control]="form.get('brandId')"
                                 (searchEmit)="getBrands($event)"
                                 [data]="brands"
@@ -161,6 +163,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [submitted]="submitted"
                                 [control]="form.get('productId')"
                                 (searchEmit)="getProducts($event)"
                                 [data]="products"
@@ -177,6 +180,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-multiple-search-select
+                                [submitted]="submitted"
                                 [control]="form.get('tags')"
                                 (searchEmit)="getTags($event)"
                                 [data]="tags"

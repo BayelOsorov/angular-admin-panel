@@ -11,6 +11,10 @@
     (nzOnSearch)="onSearch($event)"
     [formControl]="control"
     [nzNotFoundContent]="'Список пуст'"
+    [nzStatus]="isRequired && submitted && control.errors?.['required']
+                                    ? 'error'
+                                    : ''
+                            "
 >
     <ng-container *ngIf="!isLoading">
         <nz-option

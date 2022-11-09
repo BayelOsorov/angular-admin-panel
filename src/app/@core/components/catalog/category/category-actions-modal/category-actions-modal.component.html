@@ -100,8 +100,11 @@
                 >
 
                 <ngx-search-select
+                    [size]="'default'"
                     (searchEmit)="getCategories($event)"
                     [control]="form.get('parentId')"
+                    [isRequired]="false"
+                    [submitted]="submitted"
                     [data]="categoryList"
                     [placeholder]="'Выберите категорию'"
                 ></ngx-search-select>
