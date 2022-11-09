@@ -1,5 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onFirstSubmit()">
     <ngx-localization-inputs
+        [submitted]="submitted"
         [controlRu]="form.get('ru')"
         [controlKy]="form.get('kg')"
         [controlUz]="form.get('uz')"

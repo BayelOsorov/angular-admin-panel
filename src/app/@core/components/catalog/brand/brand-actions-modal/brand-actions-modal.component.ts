@@ -19,6 +19,7 @@ export class BrandActionsModalComponent implements OnInit, OnDestroy {
     categoryList = [];
     isLoading = false;
     logoImg;
+    submitted = false;
     searchChange$ = new BehaviorSubject('');
 
     private destroy$: Subject<void> = new Subject<void>();
@@ -72,6 +73,7 @@ export class BrandActionsModalComponent implements OnInit, OnDestroy {
             });
     }
     onFirstSubmit() {
+        this.submitted = true;
         if (this.form.valid) {
             console.log(this.form.value);
             if (this.brandData) {

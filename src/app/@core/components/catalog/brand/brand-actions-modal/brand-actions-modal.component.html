@@ -8,6 +8,11 @@
             id="exampleInputEmail1"
             placeholder="Название"
             formControlName="name"
+            [status]="
+                                submitted && (form.get('name')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
         />
     </div>
     <img [src]="logoImg" alt="" width="200" class="center" />
@@ -20,10 +25,14 @@
             fullWidth
             id="exampleInputPassword1"
             placeholder="Лого"
-            class="form-control"
             type="file"
             (change)="onFileChange($event)"
             id="formFile"
+            [status]="
+                                submitted && (form.get('logo')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
         />
     </div>
     <div class="form-group">
@@ -35,6 +44,11 @@
             id="exampleInputPassword1"
             placeholder="Порядок"
             formControlName="order"
+            [status]="
+                                submitted && (form.get('order')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
         />
     </div>
     <div class="form-group">

@@ -17,6 +17,8 @@ export class LocalizationInputsComponent implements OnInit {
     @Input() controlKy: AbstractControl = new FormControl();
     @Input() controlUz: AbstractControl = new FormControl();
     @Input() placeholder: string;
+    @Input() submitted = false;
+
     @Input() label: string;
     constructor() {}
 

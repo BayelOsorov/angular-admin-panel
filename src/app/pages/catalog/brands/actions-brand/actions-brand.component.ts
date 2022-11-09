@@ -17,6 +17,7 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
     form: FormGroup;
     brandData: IDetailBrand;
     brandId: number;
+    submitted = false;
     categoryList = [];
     isLoading = false;
     logoImg;
@@ -74,6 +75,8 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
     }
 
     onFirstSubmit() {
+        this.submitted = true;
+
         if (this.form.valid) {
             console.log(this.form.value);
             if (this.brandData) {

@@ -18,6 +18,11 @@
                                 id="exampleInputEmail1"
                                 placeholder="Введите название"
                                 formControlName="name"
+                                [status]="
+                                submitted && (form.get('name')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                         </div>
                     </div>
@@ -35,10 +40,14 @@
                                 fullWidth
                                 id="exampleInputPassword1"
                                 placeholder="Лого"
-                                class="form-control"
                                 type="file"
                                 (change)="onFileChange($event, 'logo')"
                                 id="formFile"
+                                [status]="
+                                submitted && (form.get('logo')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                         </div>
                     </div>
@@ -57,6 +66,11 @@
                                 id="exampleInputEmail1"
                                 placeholder="Введите адрес"
                                 formControlName="address"
+                                [status]="
+                                submitted && (form.get('address')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                         </div>
                     </div>
@@ -73,6 +87,11 @@
                                 nbInput
                                 fullWidth
                                 [nbTimepicker]="timepicker"
+                                [status]="
+                                submitted && (form.get('workingHourStart')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                             <nb-timepicker
                                 (onSelectTime)="timeChange($event, 'start')"
@@ -92,6 +111,11 @@
                                 fullWidth
                                 nbInput
                                 [nbTimepicker]="timepickermy"
+                                [status]="
+                                submitted && (form.get('workingHourEnd')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                             <nb-timepicker
                                 (onSelectTime)="timeChange($event, 'end')"
@@ -114,6 +138,11 @@
                                 id="exampleInputEmail1"
                                 placeholder="Введите описание"
                                 formControlName="description"
+                                [status]="
+                                submitted && (form.get('description')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                         </div>
                     </div>
@@ -131,6 +160,11 @@
                                 id="exampleInputEmail1"
                                 placeholder="Введите порядок"
                                 formControlName="order"
+                                [status]="
+                                submitted && (form.get('order')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                         </div>
                     </div>
@@ -145,6 +179,11 @@
                                 fullWidth
                                 formControlName="type"
                                 placeholder="Тип"
+                                [status]="
+                                submitted && (form.get('type')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             >
                                 <nb-option value="Mall"
                                     >Торговый центр</nb-option

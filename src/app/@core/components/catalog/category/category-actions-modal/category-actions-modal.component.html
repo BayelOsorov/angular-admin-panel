@@ -10,6 +10,11 @@
                     id="exampleInputEmail1"
                     placeholder="Название"
                     formControlName="name"
+                    [status]="
+                                submitted && (form.get('name')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
             </div>
         </div>
@@ -24,6 +29,11 @@
                     id="exampleInputPassword1"
                     placeholder="Порядок"
                     formControlName="order"
+                    [status]="
+                                submitted && (form.get('order')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
             </div>
         </div>
@@ -54,11 +64,16 @@
                     id="exampleInputEmail1"
                     placeholder="Цвет заднего фона"
                     formControlName="backgroundColor"
+                    [status]="
+                                submitted && (form.get('backgroundColor')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
             </div>
         </div>
 
-        <div class="col-sm-6">
+        <!-- <div class="col-sm-6">
             <div class="form-group">
                 <label for="exampleInputEmail1" class="label"
                     >Действует с</label
@@ -69,10 +84,15 @@
                     placeholder="Действует с"
                     [nbDatepicker]="formpicker"
                     formControlName="workFromDate"
+                       [status]="
+                                submitted && (form.get('order')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
                 <nb-datepicker [min]="min" #formpicker></nb-datepicker>
             </div>
-        </div>
+        </div> -->
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="exampleInputPassword1" class="label"
@@ -98,10 +118,14 @@
                     fullWidth
                     id="exampleInputPassword1"
                     placeholder="Лого"
-                    class="form-control"
                     type="file"
                     (change)="onFileChange($event)"
                     id="formFile"
+                    [status]="
+                                submitted && (form.get('logo')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
             </div>
         </div>

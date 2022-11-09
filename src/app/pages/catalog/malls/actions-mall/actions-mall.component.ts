@@ -15,6 +15,7 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
     form: FormGroup;
     logoImg;
     mallData;
+    submitted = false;
     mallId: number;
     localities = [];
     private destroy$: Subject<void> = new Subject<void>();
@@ -28,7 +29,7 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
     ) {}
 
     onSubmit() {
-        console.log(this.form.value);
+        this.submitted = true;
         if (this.form.valid) {
             if (this.mallData) {
                 this.mallsService

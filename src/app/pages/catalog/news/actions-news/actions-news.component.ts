@@ -16,6 +16,7 @@ export class ActionsNewsComponent implements OnInit, OnDestroy {
     coverImg;
     newsId;
     newsData;
+    submitted = false;
     products = [];
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -28,6 +29,7 @@ export class ActionsNewsComponent implements OnInit, OnDestroy {
     ) {}
 
     onSubmit() {
+        this.submitted = true;
         if (this.form.valid) {
             if (this.newsData) {
                 this.newsService

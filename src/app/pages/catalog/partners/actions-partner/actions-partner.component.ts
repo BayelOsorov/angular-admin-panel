@@ -18,6 +18,7 @@ import { toBase64 } from '../../../../@core/utils/toBase64';
 export class ActionsPartnerComponent implements OnInit, OnDestroy {
     form: FormGroup;
     logoImg;
+    submitted = false;
     categories = [];
     brands = [];
     tags = [];
@@ -56,6 +57,7 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
     ) {}
 
     onSubmit() {
+        this.submitted = true;
         if (this.form.valid) {
             if (this.partnerData) {
                 this.partnersService
@@ -163,7 +165,7 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
             shortDescKg: ['', Validators.required],
             shortDescUz: ['', Validators.required],
             categoryId: ['', Validators.required],
-            productId: ['', Validators.required],
+            productId: [[], Validators.required],
             brandId: ['', Validators.required],
             tags: [[], Validators.required],
         });

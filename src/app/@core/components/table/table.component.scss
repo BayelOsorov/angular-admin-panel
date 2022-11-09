@@ -1,6 +1,13 @@
+@import '../../../@theme/styles/themes';
 ::ng-deep .ant-pagination-item {
     color: black;
 }
 // ::ng-deep a:not([href]):not([tabindex]) {
 //     background: blue;
 // }
+.text {
+    color: nb-theme(text-basic-color);
+}
+::ng-deep .ng2-smart-sort-link {
+    color: nb-theme(text-basic-color) !important;
+}

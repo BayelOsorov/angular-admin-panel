@@ -37,6 +37,11 @@
                                 id="exampleInputEmail1"
                                 placeholder="Введите название"
                                 formControlName="name"
+                                [status]="
+                                submitted && (form.get('name')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                         </div>
                     </div>
@@ -51,6 +56,7 @@
                                 [controlRu]="form.get('shortDescRu')"
                                 [controlKy]="form.get('shortDescKg')"
                                 [controlUz]="form.get('shortDescUz')"
+                                [submitted]="submitted"
                                 [label]="'Короткое описание'"
                                 [placeholder]="'Введите короткое описание'"
                             >
@@ -68,6 +74,7 @@
                                 [controlRu]="form.get('descRu')"
                                 [controlKy]="form.get('descKg')"
                                 [controlUz]="form.get('descUz')"
+                                [submitted]="submitted"
                                 [label]="'Описание'"
                                 [placeholder]="'Введите описание'"
                             >
@@ -87,10 +94,14 @@
                                 fullWidth
                                 id="exampleInputPassword1"
                                 placeholder="Лого"
-                                class="form-control"
                                 type="file"
                                 (change)="onFileChange($event, 'logo')"
                                 id="formFile"
+                                [status]="
+                                submitted && (form.get('logo')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                         </div>
                     </div>
@@ -154,6 +165,7 @@
                                 (searchEmit)="getProducts($event)"
                                 [data]="products"
                                 [placeholder]="'Продукт'"
+                                [mode]="'multiple'"
                             ></ngx-search-select>
                         </div>
                     </div>

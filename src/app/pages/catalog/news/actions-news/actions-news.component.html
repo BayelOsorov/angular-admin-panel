@@ -16,6 +16,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-localization-inputs
+                                [submitted]="submitted"
                                 [controlRu]="form.get('titleRu')"
                                 [controlKy]="form.get('titleKg')"
                                 [controlUz]="form.get('titleUz')"
@@ -33,6 +34,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-localization-inputs
+                                [submitted]="submitted"
                                 [controlRu]="form.get('textRu')"
                                 [controlKy]="form.get('textKg')"
                                 [controlUz]="form.get('textUz')"
@@ -50,6 +52,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-localization-inputs
+                                [submitted]="submitted"
                                 [controlRu]="form.get('shortTextRu')"
                                 [controlKy]="form.get('shortTextKg')"
                                 [controlUz]="form.get('shortTextUz')"
@@ -72,10 +75,14 @@
                                 fullWidth
                                 id="exampleInputPassword1"
                                 placeholder="Обложка"
-                                class="form-control"
                                 type="file"
                                 (change)="onFileChange($event, 'cover')"
                                 id="formFile"
+                                [status]="
+                                submitted && (form.get('cover')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                             <img
                                 [src]="coverImg | useHttpImgSrc"
