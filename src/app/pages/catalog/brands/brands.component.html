@@ -29,6 +29,7 @@
         <ngx-custom-table
             (deleteItemEvent)="deleteBrand($event)"
             (openModalEvent)="openEditModal($event)"
+            (changePageEvent)="getBrands($event)"
             [tableColumns]="tableColumns"
             [tableData]="listBrand"
             [productName]="'ни одного бренда'"

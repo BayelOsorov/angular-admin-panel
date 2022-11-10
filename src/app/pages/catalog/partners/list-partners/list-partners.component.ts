@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IListPartner } from '../../../../@core/models/catalog/partners';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
+import { tableNumbering } from '../../../../@core/utils';
 @Component({
     templateUrl: './list-partners.component.html',
     styleUrls: ['./list-partners.component.scss'],
@@ -12,7 +13,12 @@ import { PartnersService } from '../../../../@core/services/catalog/partners/par
 export class ListPartnersComponent implements OnInit, OnDestroy {
     listPartner: IListPartner;
     tableColumns = {
-        id: { title: '№', type: 'number' },
+        index: {
+            title: '№',
+            type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listPartner.pageNumber, cell.row.index),
+        },
         name: { title: 'Название', type: 'string' },
         categoryId: { title: 'Категория', type: 'number' },
         order: { title: 'Порядок', type: 'string' },

@@ -100,7 +100,6 @@
                 >
 
                 <ngx-search-select
-                    [size]="'default'"
                     (searchEmit)="getCategories($event)"
                     [control]="form.get('parentId')"
                     [isRequired]="false"
@@ -114,8 +113,6 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="exampleInputPassword1" class="label">Лого</label>
-                <!-- <input type="text" nbInput fullWidth formControlName="Logo" /> -->
-
                 <input
                     nbInput
                     fullWidth
@@ -140,5 +137,7 @@
         />
     </div>
 
-    <button type="submit" nbButton status="danger">Подтвердить</button>
+    <button class="d-flex mx-auto" type="submit" nbButton status="primary">
+        Подтвердить
+    </button>
 </form>

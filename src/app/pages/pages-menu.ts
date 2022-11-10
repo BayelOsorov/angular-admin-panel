@@ -31,6 +31,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'edit-2-outline',
         children: [
             {
+                title: 'Населенные пункты',
+                link: '/catalog/localities',
+            },
+            {
                 title: 'Бренды',
                 link: '/catalog/brands',
             },
@@ -46,12 +50,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 title: 'Группы',
                 link: '/catalog/groups',
             },
+
             {
-                title: 'Населенные пункты',
-                link: '/catalog/localities',
-            },
-            {
-                title: 'Торговые центры',
+                title: 'Места',
                 link: '/catalog/malls',
             },
 

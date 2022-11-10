@@ -17,6 +17,7 @@
         <ngx-custom-table
             (deleteItemEvent)="deleteLocality($event)"
             (openModalEvent)="openEditModal($event)"
+            (changePageEvent)="getLocalities($event)"
             [tableColumns]="tableColumns"
             [tableData]="listLocalities"
             [productName]="'ни одного населенного пункта'"

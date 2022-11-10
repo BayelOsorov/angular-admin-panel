@@ -3,6 +3,7 @@ import {
     NbAlertModule,
     NbButtonModule,
     NbCardModule,
+    NbIconModule,
     NbInputModule,
     NbListModule,
     NbMenuModule,
@@ -40,6 +41,7 @@ import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.
 import { ActionsBrandComponent } from './catalog/brands/actions-brand/actions-brand.component';
 import { ListNewsComponent } from './catalog/news/list-news/list-news.component';
 import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.component';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
     imports: [
@@ -62,6 +64,8 @@ import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.c
         NbTabsetModule,
         NbTimepickerModule,
         ComponentsModule,
+        // NbIconModule,
+        // NbEvaIconsModule,
     ],
     declarations: [
         PagesComponent,

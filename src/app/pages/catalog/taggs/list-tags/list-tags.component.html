@@ -15,6 +15,7 @@
 
     <nb-card-body>
         <ngx-custom-table
+            (changePageEvent)="getTags($event)"
             (deleteItemEvent)="deleteTag($event)"
             (openModalEvent)="openEditModal($event)"
             [tableColumns]="tableColumns"

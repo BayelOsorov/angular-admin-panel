@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TagActionsModalComponent } from '../../../../@core/components/catalog/tag/tag-actions-modal/tag-actions-modal.component';
 import { TagsService } from '../../../../@core/services/catalog/tags/tags.service';
+import { tableNumbering } from '../../../../@core/utils';
 
 @Component({
     templateUrl: './list-tags.component.html',
@@ -13,9 +14,11 @@ import { TagsService } from '../../../../@core/services/catalog/tags/tags.servic
 export class ListTagsComponent implements OnInit, OnDestroy {
     listTags;
     tableColumns = {
-        id: {
+        index: {
             title: '№',
             type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listTags.pageNumber, cell.row.index),
         },
         name: {
             title: 'Название на Ru',

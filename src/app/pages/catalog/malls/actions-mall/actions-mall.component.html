@@ -1,7 +1,9 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <nb-card>
-            <nb-card-header>Создание партнера</nb-card-header>
+            <nb-card-header>{{
+                this.mallId ? 'Редактирование места' : 'Создание места'
+            }}</nb-card-header>
             <nb-card-body>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="form-group row">
@@ -27,7 +29,6 @@
                         </div>
                     </div>
 
-                    <img [src]="logoImg" alt="" width="200" class="center" />
                     <div class="form-group row">
                         <label
                             for="exampleInputPassword1"
@@ -48,6 +49,12 @@
                                     ? 'danger'
                                     : 'basic'
                             "
+                            />
+                            <img
+                                [src]="logoImg | useHttpImgSrc"
+                                alt=""
+                                width="150"
+                                class="center mt-3"
                             />
                         </div>
                     </div>
@@ -83,20 +90,20 @@
                         >
                         <div class="col-sm-9">
                             <!-- formControlName="workingHourStart" -->
+                            <!-- [nbTimepicker]="timepicker" -->
                             <input
                                 nbInput
                                 fullWidth
-                                [nbTimepicker]="timepicker"
+                                type="time"
+                                formControlName="workingHourStart"
                                 [status]="
                                 submitted && (form.get('workingHourStart')).errors?.['required']
                                     ? 'danger'
                                     : 'basic'
                             "
                             />
-                            <nb-timepicker
-                                (onSelectTime)="timeChange($event, 'start')"
-                                #timepicker
-                            ></nb-timepicker>
+                            <!-- (onSelectTime)="timeChange($event, 'start')" -->
+                            <nb-timepicker #timepicker></nb-timepicker>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -107,20 +114,20 @@
                         >
                         <div class="col-sm-9">
                             <!-- formControlName="workingHourEnd" -->
+                            <!-- [nbTimepicker]="timepickermy" -->
                             <input
                                 fullWidth
                                 nbInput
-                                [nbTimepicker]="timepickermy"
+                                type="time"
+                                formControlName="workingHourEnd"
                                 [status]="
                                 submitted && (form.get('workingHourEnd')).errors?.['required']
                                     ? 'danger'
                                     : 'basic'
                             "
                             />
-                            <nb-timepicker
-                                (onSelectTime)="timeChange($event, 'end')"
-                                #timepickermy
-                            ></nb-timepicker>
+                            <!-- (onSelectTime)="timeChange($event, 'end')" -->
+                            <nb-timepicker #timepickermy></nb-timepicker>
                         </div>
                     </div>
 
@@ -131,7 +138,7 @@
                             >Описание</label
                         >
                         <div class="col-sm-9">
-                            <input
+                            <textarea
                                 type="text"
                                 nbInput
                                 fullWidth
@@ -143,7 +150,7 @@
                                     ? 'danger'
                                     : 'basic'
                             "
-                            />
+                            ></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -234,18 +241,20 @@
                             class="label col-sm-3 col-form-label"
                             >Локация</label
                         >
-                        <div class="col-sm-9">
+                        <div *ngIf="mallId ? mallData : true" class="col-sm-9">
                             <ngx-custom-map
                                 (markLocationEvent)="markMap($event)"
-                                [baseLocation]="mallData && mallData.location"
+                                [baseLocation]="
+                                    mallId && mallData.location.coordinates
+                                "
                             ></ngx-custom-map>
                         </div>
                     </div>
                     <button
-                        class="center-button"
+                        class="d-flex mx-auto"
                         type="submit"
                         nbButton
-                        status="danger"
+                        status="primary"
                     >
                         Подтвердить
                     </button>

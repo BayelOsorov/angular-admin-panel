@@ -4,8 +4,8 @@
         [controlKy]="form.get('kg')"
         [controlUz]="form.get('uz')"
         [submitted]="submitted"
-        [label]="'Название тега'"
-        [placeholder]="'Введите населенного пункта'"
+        [label]="'Название населенного пункта'"
+        [placeholder]="'Введите название населенного пункта'"
     >
     </ngx-localization-inputs>
     <div class="form-group">
@@ -15,5 +15,7 @@
             <nb-option [value]="false">Нeт</nb-option>
         </nb-select>
     </div>
-    <button type="submit" nbButton status="danger">Подтвердить</button>
+    <button class="d-flex mx-auto" type="submit" nbButton status="primary">
+        Подтвердить
+    </button>
 </form>

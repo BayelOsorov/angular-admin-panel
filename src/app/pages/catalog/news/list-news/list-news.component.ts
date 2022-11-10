@@ -8,6 +8,7 @@ import { AvatarImgComponent } from '../../../../@core/components/avatar-img/avat
 import { UseHttpImageSourcePipe } from '../../../../@core/components/secured-image/secured-image.component';
 import { IListNews } from '../../../../@core/models/catalog/catalog';
 import { NewsService } from '../../../../@core/services/catalog/news/news.service';
+import { tableNumbering } from '../../../../@core/utils';
 @Component({
     templateUrl: './list-news.component.html',
     styleUrls: ['./list-news.component.scss'],
@@ -16,7 +17,12 @@ export class ListNewsComponent implements OnInit, OnDestroy {
     listNews: IListNews;
     src;
     tableColumns = {
-        id: { title: '№', type: 'number' },
+        index: {
+            title: '№',
+            type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listNews.pageNumber, cell.row.index),
+        },
         cover: {
             title: 'Обложка',
             type: 'custom',

@@ -9,7 +9,7 @@ export class MultipleSearchSelectComponent implements OnInit {
     @Output() searchEmit = new EventEmitter<string>();
     @Input() control: AbstractControl = new FormControl();
     @Input() type = 'multiple';
-
+    @Input() size = 'large';
     @Input() placeholder: string;
     @Input() data;
     @Input() submitted = false;

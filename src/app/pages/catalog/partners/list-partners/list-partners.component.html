@@ -15,6 +15,7 @@
 
     <nb-card-body>
         <ngx-custom-table
+            (changePageEvent)="getPartners($event)"
             (deleteItemEvent)="deletePartner($event)"
             (openModalEvent)="updatePartner($event)"
             (rowSelectEvent)="userRowSelect($event)"

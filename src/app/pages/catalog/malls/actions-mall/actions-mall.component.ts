@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import { IDetailMalls } from '../../../../@core/models/catalog/malls';
 import { LocalitiesService } from '../../../../@core/services/catalog/localities/localities.service';
 import { MallsService } from '../../../../@core/services/catalog/malls/malls.service';
 import { toBase64 } from '../../../../@core/utils/toBase64';
@@ -14,9 +15,10 @@ import { toBase64 } from '../../../../@core/utils/toBase64';
 export class ActionsMallComponent implements OnInit, OnDestroy {
     form: FormGroup;
     logoImg;
-    mallData;
+    mallData: IDetailMalls;
     submitted = false;
     mallId: number;
+    location;
     localities = [];
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -34,6 +36,7 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
             if (this.mallData) {
                 this.mallsService
                     .editMall(this.mallData.id, {
+                        ...this.form.value,
                         location: {
                             type: 'Point',
                             coordinates: this.form.value.location,
@@ -72,6 +75,7 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
                         this.form.patchValue({
                             logo: res,
                         });
+                        this.logoImg = base64;
                         return;
                     }
                 });
@@ -82,22 +86,21 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
         return String(num).padStart(2, '0');
     }
     timeChange(time, type) {
-        const date = new Date(time.time);
-        console.log(time.time);
-
-        const hoursAndMinutes =
-            this.padTo2Digits(date.getHours()) +
-            ':' +
-            this.padTo2Digits(date.getMinutes());
-        if (type === 'start') {
-            this.form.patchValue({
-                workingHourStart: hoursAndMinutes,
-            });
-            return;
-        }
-        this.form.patchValue({
-            workingHourEnd: hoursAndMinutes,
-        });
+        // const date = new Date(time.time);
+        // console.log(time.time);
+        // const hoursAndMinutes =
+        //     this.padTo2Digits(date.getHours()) +
+        //     ':' +
+        //     this.padTo2Digits(date.getMinutes());
+        // if (type === 'start') {
+        //     this.form.patchValue({
+        //         workingHourStart: hoursAndMinutes,
+        //     });
+        //     return;
+        // }
+        // this.form.patchValue({
+        //     workingHourEnd: hoursAndMinutes,
+        // });
     }
     getLocalities(name = '') {
         this.localitiesService.getListLocalities(1, name).subscribe((data) => {
@@ -137,7 +140,9 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
                         this.form.controls['name'].setValue(data.name);
                         this.form.controls['isActive'].setValue(data.isActive);
                         this.form.controls['logo'].setValue(data.logo);
-                        this.form.controls['location'].setValue(data.location);
+                        this.form.controls['location'].setValue(
+                            data.location.coordinates
+                        );
                         this.form.controls['workingHourEnd'].setValue(
                             data.workingHourEnd
                         );
@@ -154,6 +159,8 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
                         this.form.controls['localityId'].setValue(
                             data.localityId
                         );
+                        this.logoImg = data.logo;
+                        this.location = data.location.coordinates;
                     },
                 });
         }

@@ -11,6 +11,7 @@ import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/
 import { IListBrand } from '../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';
+import { tableNumbering } from '../../../@core/utils';
 
 @Component({
     templateUrl: './brands.component.html',
@@ -20,9 +21,11 @@ export class BrandsComponent implements OnInit, OnDestroy {
     listBrand: IListBrand;
     categoryList = [];
     tableColumns = {
-        id: {
+        index: {
             title: '№',
             type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listBrand.pageNumber, cell.row.index),
         },
         logo: {
             title: 'Лого',

@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { LocalityActionsModalComponent } from '../../../@core/components/catalog/locality/locality-actions-modal/locality-actions-modal.component';
 import { LocalitiesService } from '../../../@core/services/catalog/localities/localities.service';
+import { tableNumbering } from '../../../@core/utils';
 @Component({
     templateUrl: './localities.component.html',
     styleUrls: ['./localities.component.scss'],
@@ -12,12 +13,14 @@ import { LocalitiesService } from '../../../@core/services/catalog/localities/lo
 export class LocalitiesComponent implements OnInit, OnDestroy {
     listLocalities;
     tableColumns = {
-        id: {
+        index: {
             title: '№',
             type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listLocalities.pageNumber, cell.row.index),
         },
         name: {
-            title: 'Название',
+            title: 'Название на RU',
             type: 'string',
             valuePrepareFunction: (item) => item.ru,
         },
@@ -30,6 +33,11 @@ export class LocalitiesComponent implements OnInit, OnDestroy {
             title: 'Название на UZ',
             type: 'string',
             valuePrepareFunction: (cell, row) => row.name.uz,
+        },
+        isActive: {
+            title: 'Активен',
+            type: 'string',
+            valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
     };
     private destroy$: Subject<void> = new Subject<void>();
@@ -67,13 +75,13 @@ export class LocalitiesComponent implements OnInit, OnDestroy {
     }
     public openCreateModal() {
         this.openModal(false, LocalityActionsModalComponent, {
-            title: 'Добавление тега',
+            title: 'Добавление населенного пункта',
             context: {},
         });
     }
     public openEditModal(data) {
         this.openModal(false, LocalityActionsModalComponent, {
-            title: 'Редактирование тега',
+            title: 'Редактирование населенного пункта',
             context: { itemData: data },
         });
     }

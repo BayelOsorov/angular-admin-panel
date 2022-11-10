@@ -9,6 +9,7 @@
 
     <nb-card-body>
         <ngx-custom-table
+            (changePageEvent)="getProducts($event)"
             (deleteItemEvent)="deleteProduct($event)"
             (openModalEvent)="openEditModal($event)"
             [tableColumns]="tableColumns"

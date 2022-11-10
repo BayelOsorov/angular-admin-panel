@@ -9,6 +9,7 @@ import { CategoryActionsModalComponent } from '../../../@core/components/catalog
 import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListCategories } from '../../../@core/models/catalog/category';
 import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';
+import { tableNumbering } from '../../../@core/utils';
 
 @Component({
     templateUrl: './categories.component.html',
@@ -17,9 +18,11 @@ import { CategoriesService } from '../../../@core/services/catalog/categories/ca
 export class CategoriesComponent implements OnInit, OnDestroy {
     listCategory: IListCategories;
     tableColumns = {
-        id: {
+        index: {
             title: '№',
             type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listCategory.pageNumber, cell.row.index),
         },
         logo: {
             title: 'Лого',
@@ -28,14 +31,20 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         },
         name: {
             title: 'Название',
-            type: 'string',
+            type: 'html',
+            valuePrepareFunction: (cell, item) =>
+                this.domSanitizer.bypassSecurityTrustHtml(
+                    item.parentId
+                        ? item.parentId + ` - ` + item.name
+                        : item.name
+                ),
         },
         backgroundColor: {
             title: 'Цвет фона',
             type: 'html',
             valuePrepareFunction: (item) =>
                 this.domSanitizer.bypassSecurityTrustHtml(
-                    `<div class="row">&nbsp; <div class="colorSpan mx-auto" style='background-color: ${item};width:30px'></div></div>`
+                    `<div class="row" style='background-color: ${item}'>&nbsp; </div>`
                 ),
         },
         isActive: {

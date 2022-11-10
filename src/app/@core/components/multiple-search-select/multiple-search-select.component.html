@@ -7,7 +7,8 @@
     nzServerSearch
     nzShowSearch
     [compareWith]="compareFn"
-    nzSize="large"
+    [nzSize]="size"
+    [ngClass]="size === 'default' && 'small-input'"
     (nzOnSearch)="onSearch($event)"
     [formControl]="control"
     [nzNotFoundContent]="'Список пуст'"

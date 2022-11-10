@@ -7,7 +7,9 @@ import { takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../../@core/components/avatar-img/avatar-img.component';
 import { UseHttpImageSourcePipe } from '../../../../@core/components/secured-image/secured-image.component';
 import { IListMalls } from '../../../../@core/models/catalog/malls';
+import { LocalitiesService } from '../../../../@core/services/catalog/localities/localities.service';
 import { MallsService } from '../../../../@core/services/catalog/malls/malls.service';
+import { tableNumbering } from '../../../../@core/utils';
 
 @Component({
     templateUrl: './list-malls.component.html',
@@ -15,20 +17,38 @@ import { MallsService } from '../../../../@core/services/catalog/malls/malls.ser
 })
 export class ListMallsComponent implements OnInit, OnDestroy {
     listMalls: IListMalls;
+    localities = [];
     tableColumns = {
-        id: { title: '№', type: 'number' },
+        index: {
+            title: '№',
+            type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listMalls.pageNumber, cell.row.index),
+        },
         logo: {
             title: 'Лого',
             type: 'custom',
             renderComponent: AvatarImgComponent,
         },
         name: { title: 'Название', type: 'string' },
-        categoryId: { title: 'Категория', type: 'number' },
+        localityId: { title: 'Населенный пункт', type: 'string' },
+        workingHour: {
+            title: 'Режим работы',
+            type: 'text',
+            valuePrepareFunction: (cell, item) =>
+                item.workingHourStart + ' - ' + item.workingHourEnd,
+        },
+        isActive: {
+            title: 'Активен',
+            type: 'string',
+            valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
+        },
         order: { title: 'Порядок', type: 'string' },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private mallsService: MallsService,
+        private localitiesService: LocalitiesService,
         private toaster: ToastrService,
         private router: Router
     ) {}
@@ -37,6 +57,11 @@ export class ListMallsComponent implements OnInit, OnDestroy {
             .getListMalls(page, name)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listMalls = res));
+    }
+    getLocalities(name = '') {
+        this.localitiesService.getListLocalities(1, name).subscribe((data) => {
+            this.localities = data.items;
+        });
     }
     onSearch(event) {
         this.getMalls(1, event);

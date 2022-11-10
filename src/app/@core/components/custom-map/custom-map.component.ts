@@ -45,6 +45,11 @@ export class CustomMapComponent implements OnInit {
             this.baseLocation ? this.baseLocation : [42.867695, 74.610897],
             12
         );
+        if (this.baseLocation) {
+            this.marker = L.marker(this.baseLocation, this.markerIcon).addTo(
+                this.map
+            );
+        }
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution:
                 '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
