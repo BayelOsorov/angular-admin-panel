@@ -2,19 +2,23 @@
     <nb-card-header>
         <strong>Бренды</strong>
         <div class="d-flex justify-content-between mt-3">
-            <ngx-input-search
-                (searchEvent)="onSearch($event)"
-                [placeholder]="'Название бренда'"
-            >
-            </ngx-input-search>
-            <ngx-search-select
-                [size]="'default'"
-                (searchEmit)="getCategories($event)"
-                [isRequired]="false"
-                [submitted]="false"
-                [data]="categoryList"
-                [placeholder]="'Название категории'"
-            ></ngx-search-select>
+            <div class="d-flex">
+                <ngx-input-search
+                    class="mr-5"
+                    (searchEvent)="onSearch($event)"
+                    [placeholder]="'Название бренда'"
+                >
+                </ngx-input-search>
+                <ngx-search-select
+                    [size]="'default'"
+                    (searchEmit)="getCategories($event)"
+                    [isRequired]="false"
+                    [submitted]="false"
+                    [data]="categoryList"
+                    [placeholder]="'Название категории'"
+                ></ngx-search-select>
+            </div>
+
             <a routerLink="/catalog/brands/create">
                 <button nbButton status="primary">Добавить</button>
             </a>

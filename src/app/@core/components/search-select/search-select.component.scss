@@ -96,6 +96,11 @@
     background-color: nb-theme(input-danger-background-color);
     border-color: nb-theme(input-danger-border-color) !important;
 }
+::ng-deep .ant-select-item-empty {
+    color: nb-theme(select-outline-basic-text-color);
+    text-align: center;
+    font-size: 17px;
+}
 .small-input {
     width: 250px !important;
     // height: 40px !important;
@@ -105,7 +110,7 @@
     //     height: 45px !important;
     // }
     ::ng-deep .ant-select-selector {
-        height: 37.5px !important;
+        height: 39.5px !important;
         padding: 0.2rem 0rem 0.3rem 1.125rem;
     }
 }
