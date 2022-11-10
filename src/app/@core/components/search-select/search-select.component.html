@@ -1,15 +1,22 @@
+<!---->
 <nz-select
     ngDefaultControl
-    nzMode="default"
+    [nzMode]="mode"
     class="w-100"
-    [nzPlaceHolder]="placeholder"
     nzAllowClear
     nzServerSearch
     nzShowSearch
-    [compareWith]="compareFn"
-    nzSize="large"
     (nzOnSearch)="onSearch($event)"
+    [nzSize]="size"
+    [ngClass]="size === 'default' && 'small-input'"
+    [nzPlaceHolder]="placeholder"
+    [compareWith]="compareFn"
     [formControl]="control"
+    nzNotFoundContent="Ничего не найдено"
+    [nzStatus]="isRequired && submitted && control.errors?.['required']
+                                    ? 'error'
+                                    : ''
+                            "
 >
     <ng-container *ngIf="!isLoading">
         <nz-option

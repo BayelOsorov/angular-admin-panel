@@ -18,12 +18,14 @@ import { BrandsService } from '../../services/catalog/brands/brands.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit, AfterContentChecked {
-    @Output() deleteItemEvent = new EventEmitter<number>();
-    @Output() openModalEvent = new EventEmitter<number>();
-    @Output() rowSelectEvent = new EventEmitter<number>();
+    @Output() deleteItemEvent = new EventEmitter();
+    @Output() openModalEvent = new EventEmitter();
+    @Output() rowSelectEvent = new EventEmitter();
+    @Output() changePageEvent = new EventEmitter();
 
     @Input() tableColumns;
     @Input() tableData;
+    @Input() productName;
 
     settings = {};
     constructor(
@@ -48,7 +50,7 @@ export class TableComponent implements OnInit, AfterContentChecked {
                 edit: true,
                 add: false,
                 position: 'right',
-                columnTitle: '',
+                columnTitle: 'Опции',
             },
             pager: {
                 perPage: 20,
@@ -67,11 +69,9 @@ export class TableComponent implements OnInit, AfterContentChecked {
     onEdit(event) {
         this.openModalEvent.emit(event.data);
     }
-    // ngAfterContentInit() {
-    //     setTimeout(() => {
-    //         this.cd.detectChanges();
-    //     }, 0);
-    // }
+    changePage(page) {
+        this.changePageEvent.emit(page);
+    }
     ngAfterContentChecked() {
         setTimeout(() => {
             this.cd.detectChanges();

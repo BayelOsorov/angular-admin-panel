@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { environment } from '../../../../../../environments/environment';
 import { IDetailCategory } from '../../../../models/catalog/category';
 import { CategoriesService } from '../../../../services/catalog/categories/categories.service';
-import { blobToBase64, toBase64 } from '../../../../utils/toBase64';
+import { toBase64 } from '../../../../utils/toBase64';
 
 @Component({
     selector: 'ngx-category-actions-modal',
@@ -20,6 +20,7 @@ export class CategoryActionsModalComponent implements OnInit, OnDestroy {
     categoryList = [];
     isLoading = false;
     logoImg;
+    submitted = false;
     searchChange$ = new BehaviorSubject('');
     min: Date;
     private destroy$: Subject<void> = new Subject<void>();
@@ -38,10 +39,9 @@ export class CategoryActionsModalComponent implements OnInit, OnDestroy {
         this.form = this.fb.group({
             name: ['', Validators.required],
             logo: ['', Validators.required],
-            isActive: ['', Validators.required],
+            isActive: [true, Validators.required],
             order: ['', Validators.required],
             parentId: null,
-            workFromDate: ['', Validators.required],
             backgroundColor: ['', Validators.required],
         });
         this.getCategories();
@@ -51,9 +51,7 @@ export class CategoryActionsModalComponent implements OnInit, OnDestroy {
             this.form.controls['logo'].setValue(this.itemData.logo);
             this.form.controls['isActive'].setValue(this.itemData.isActive);
             this.form.controls['order'].setValue(this.itemData.order);
-            this.form.controls['workFromDate'].setValue(
-                this.itemData.workFromDate
-            );
+
             this.form.controls['parentId'].setValue(this.itemData.parentId);
             this.form.controls['backgroundColor'].setValue(
                 this.itemData.backgroundColor
@@ -74,6 +72,7 @@ export class CategoryActionsModalComponent implements OnInit, OnDestroy {
         this.logoImg = environment.catalogUrl + this.itemData.logo;
     }
     onFirstSubmit() {
+        this.submitted = true;
         if (this.form.valid) {
             if (this.itemData) {
                 this.categoryService

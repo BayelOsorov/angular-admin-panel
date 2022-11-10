@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ProductActionsModalComponent } from '../../../../@core/components/catalog/product/product-actions-modal/product-actions-modal.component';
 import { ProductsService } from '../../../../@core/services/catalog/products/products.service';
+import { tableNumbering } from '../../../../@core/utils';
 @Component({
     templateUrl: './list-products.component.html',
     styleUrls: ['./list-products.component.scss'],
@@ -12,13 +13,20 @@ import { ProductsService } from '../../../../@core/services/catalog/products/pro
 export class ListProductsComponent implements OnInit, OnDestroy {
     listProducts;
     tableColumns = {
-        id: {
+        index: {
             title: '№',
             type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listProducts.pageNumber, cell.row.index),
         },
         name: {
             title: 'Название',
             type: 'string',
+        },
+        isActive: {
+            title: 'Активен',
+            type: 'string',
+            valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
     };
     private destroy$: Subject<void> = new Subject<void>();
@@ -30,22 +38,25 @@ export class ListProductsComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.getProdgetListProducts();
+        this.getProducts();
     }
-    getProdgetListProducts(page = 1, name = '') {
+    getProducts(page = 1, name = '') {
         this.productService
             .getListProducts(page, name)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listProducts = res));
     }
     deleteProduct(id: number): void {
-        this.productService.deleteProduct(id).subscribe((res) => {
-            this.toaster.success('Успешно удалено!');
-            this.getProdgetListProducts();
-        });
+        this.productService
+            .deleteProduct(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getProducts();
+            });
     }
     onSearch(event) {
-        this.getProdgetListProducts(1, event);
+        this.getProducts(1, event);
     }
     ngOnDestroy() {
         this.destroy$.next();
@@ -71,8 +82,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
             })
             .onClose.subscribe(
                 (val) =>
-                    (val === 'create' || val === 'edit') &&
-                    this.getProdgetListProducts()
+                    (val === 'create' || val === 'edit') && this.getProducts()
             );
     }
 }

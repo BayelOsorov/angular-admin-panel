@@ -10,20 +10,30 @@
                     id="exampleInputEmail1"
                     placeholder="Название"
                     formControlName="name"
+                    [status]="
+                                submitted && (form.get('name')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
             </div>
         </div>
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="exampleInputPassword1" class="label">Заказ</label>
+                <label for="exampleInputPassword1" class="label">Порядок</label>
                 <input
                     type="number"
                     nbInput
                     fullWidth
                     id="exampleInputPassword1"
-                    placeholder="Заказ"
+                    placeholder="Порядок"
                     formControlName="order"
+                    [status]="
+                                submitted && (form.get('order')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
             </div>
         </div>
@@ -54,11 +64,16 @@
                     id="exampleInputEmail1"
                     placeholder="Цвет заднего фона"
                     formControlName="backgroundColor"
+                    [status]="
+                                submitted && (form.get('backgroundColor')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
             </div>
         </div>
 
-        <div class="col-sm-6">
+        <!-- <div class="col-sm-6">
             <div class="form-group">
                 <label for="exampleInputEmail1" class="label"
                     >Действует с</label
@@ -69,10 +84,15 @@
                     placeholder="Действует с"
                     [nbDatepicker]="formpicker"
                     formControlName="workFromDate"
+                       [status]="
+                                submitted && (form.get('order')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
                 <nb-datepicker [min]="min" #formpicker></nb-datepicker>
             </div>
-        </div>
+        </div> -->
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="exampleInputPassword1" class="label"
@@ -82,6 +102,8 @@
                 <ngx-search-select
                     (searchEmit)="getCategories($event)"
                     [control]="form.get('parentId')"
+                    [isRequired]="false"
+                    [submitted]="submitted"
                     [data]="categoryList"
                     [placeholder]="'Выберите категорию'"
                 ></ngx-search-select>
@@ -91,15 +113,19 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="exampleInputPassword1" class="label">Лого</label>
-                <!-- <input type="text" nbInput fullWidth formControlName="Logo" /> -->
-
                 <input
+                    nbInput
+                    fullWidth
                     id="exampleInputPassword1"
                     placeholder="Лого"
-                    class="form-control"
                     type="file"
                     (change)="onFileChange($event)"
                     id="formFile"
+                    [status]="
+                                submitted && (form.get('logo')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                 />
             </div>
         </div>
@@ -111,5 +137,7 @@
         />
     </div>
 
-    <button type="submit" nbButton status="danger">Подтвердить</button>
+    <button class="d-flex mx-auto" type="submit" nbButton status="primary">
+        Подтвердить
+    </button>
 </form>

@@ -1,26 +1,17 @@
-import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    OnDestroy,
-    OnInit,
-    ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
-import { AnyTxtRecord } from 'dns';
 import { ToastrService } from 'ngx-toastr';
-import { fromEvent, Subject, throwError } from 'rxjs';
-import { catchError, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-img.component';
 import { BrandActionsModalComponent } from '../../../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
-import { TableComponent } from '../../../@core/components/table/table.component';
+import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListBrand } from '../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../@core/services/catalog/brands/brands.service';
-import {
-    filter,
-    debounceTime,
-    distinctUntilChanged,
-    tap,
-} from 'rxjs/operators';
+import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';
+import { tableNumbering } from '../../../@core/utils';
 
 @Component({
     templateUrl: './brands.component.html',
@@ -28,10 +19,18 @@ import {
 })
 export class BrandsComponent implements OnInit, OnDestroy {
     listBrand: IListBrand;
+    categoryList = [];
     tableColumns = {
-        id: {
+        index: {
             title: '№',
             type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listBrand.pageNumber, cell.row.index),
+        },
+        logo: {
+            title: 'Лого',
+            type: 'custom',
+            renderComponent: AvatarImgComponent,
         },
         name: {
             title: 'Название',
@@ -42,7 +41,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
             type: 'number',
         },
         order: {
-            title: 'Заказ',
+            title: 'Порядок',
             type: 'string',
         },
     };
@@ -50,10 +49,11 @@ export class BrandsComponent implements OnInit, OnDestroy {
 
     constructor(
         private brandService: BrandsService,
+        private categoryService: CategoriesService,
+        private router: Router,
         private windowService: NbWindowService,
         private toaster: ToastrService
     ) {}
-
     ngOnInit(): void {
         this.getBrands();
     }
@@ -63,11 +63,22 @@ export class BrandsComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listBrand = res));
     }
+    getCategories(name = '') {
+        this.categoryService
+            .getListCategories(1, name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.categoryList = res.items;
+            });
+    }
     deleteBrand(id: number): void {
-        this.brandService.deleteBrand(id).subscribe((res) => {
-            this.toaster.success('Успешно удалено!');
-            this.getBrands();
-        });
+        this.brandService
+            .deleteBrand(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getBrands();
+            });
     }
     onSearch(event) {
         this.getBrands(1, event);
@@ -83,10 +94,11 @@ export class BrandsComponent implements OnInit, OnDestroy {
         });
     }
     public openEditModal(data) {
-        this.openModal(false, BrandActionsModalComponent, {
-            title: 'Редактирование бренда',
-            context: { brandData: data },
-        });
+        // this.openModal(false, BrandActionsModalComponent, {
+        //     title: 'Редактирование бренда',
+        //     context: { brandData: data },
+        // });
+        this.router.navigate([`catalog/brands/update/${data.id}`]);
     }
     public openModal(closeOnBackdropClick: boolean, component, props) {
         this.windowService

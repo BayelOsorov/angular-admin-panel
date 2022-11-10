@@ -13,13 +13,15 @@
     <div class="form-group">
         <label for="exampleInputPassword1" class="label">Картинка</label>
         <input
+            nbInput
+            fullWidth
             id="exampleInputPassword1"
             placeholder="Картинка"
-            class="form-control"
             type="file"
             (change)="onFileChange($event)"
             id="formFile"
         />
+        <img [src]="imgSrc | useHttpImgSrc" alt="" />
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1" class="label">Очередь</label>
@@ -32,5 +34,7 @@
             formControlName="sequence"
         />
     </div>
-    <button type="submit" nbButton status="danger">Подтвердить</button>
+    <button class="d-flex mx-auto" type="submit" nbButton status="primary">
+        Подтвердить
+    </button>
 </form>

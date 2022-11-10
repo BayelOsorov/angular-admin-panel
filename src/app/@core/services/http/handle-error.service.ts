@@ -8,9 +8,12 @@ export class HandleErrorService {
     constructor(private toaster: ToastrService) {}
     public handleError(err) {
         let errorMessage = '';
-        if (err.status === 0) {
+        if (err.status === 0 || err.status === 500) {
             errorMessage = 'Ошибка сервера';
             return this.toaster.error(errorMessage);
+        }
+        if (err.status === 404) {
+            return this.toaster.error(err.message);
         }
         if (err.error) {
             if (err && err.error.errors) {
@@ -20,7 +23,7 @@ export class HandleErrorService {
                         `\r\n ` + property + ': ' + err.error.errors[property];
                 }
             }
-            if (err && err.error) {
+            if (err && err.error && !err.error.errors) {
                 // eslint-disable-next-line guard-for-in
                 for (const property in err.error) {
                     errorMessage +=

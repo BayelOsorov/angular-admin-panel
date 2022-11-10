@@ -14,6 +14,7 @@ import { TagsService } from '../../../../services/catalog/tags/tags.service';
 export class TagActionsModalComponent implements OnInit, OnDestroy {
     form: FormGroup;
     itemData;
+    submitted = false;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private fb: FormBuilder,
@@ -36,6 +37,7 @@ export class TagActionsModalComponent implements OnInit, OnDestroy {
     }
 
     onFirstSubmit() {
+        this.submitted = true;
         if (this.form.valid) {
             if (this.itemData) {
                 this.tagsService

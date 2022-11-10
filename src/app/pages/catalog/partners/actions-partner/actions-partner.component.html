@@ -1,23 +1,47 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <nb-card>
-            <nb-card-header>Создание партнера</nb-card-header>
+            <nb-card-header
+                >{{
+                    this.partnerId
+                        ? 'Редактирование партнера'
+                        : 'Создание партнера'
+                }}
+            </nb-card-header>
             <nb-card-body>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="form-group row">
+                        <!-- {{
+                                form.get('name').invalid &&
+                                    (form.get('name').dirty ||
+                                        form.get('name').touched) &&
+                                    'text-danger'
+                            }} -->
                         <label
                             for="exampleInputEmail1"
                             class="label col-sm-3 col-form-label"
                             >Название</label
                         >
                         <div class="col-sm-9">
+                            <!-- [status]="
+                                    form.get('name').invalid &&
+                                    (form.get('name').dirty ||
+                                        form.get('name').touched)
+                                        ? 'danger'
+                                        : 'hint'
+                                " -->
                             <input
                                 type="text"
                                 nbInput
                                 fullWidth
                                 id="exampleInputEmail1"
-                                placeholder="Название"
+                                placeholder="Введите название"
                                 formControlName="name"
+                                [status]="
+                                submitted && (form.get('name')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                         </div>
                     </div>
@@ -32,6 +56,7 @@
                                 [controlRu]="form.get('shortDescRu')"
                                 [controlKy]="form.get('shortDescKg')"
                                 [controlUz]="form.get('shortDescUz')"
+                                [submitted]="submitted"
                                 [label]="'Короткое описание'"
                                 [placeholder]="'Введите короткое описание'"
                             >
@@ -49,6 +74,7 @@
                                 [controlRu]="form.get('descRu')"
                                 [controlKy]="form.get('descKg')"
                                 [controlUz]="form.get('descUz')"
+                                [submitted]="submitted"
                                 [label]="'Описание'"
                                 [placeholder]="'Введите описание'"
                             >
@@ -64,12 +90,18 @@
                         >
                         <div class="col-sm-9">
                             <input
+                                nbInput
+                                fullWidth
                                 id="exampleInputPassword1"
                                 placeholder="Лого"
-                                class="form-control"
                                 type="file"
                                 (change)="onFileChange($event, 'logo')"
                                 id="formFile"
+                                [status]="
+                                submitted && (form.get('logo')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
                             />
                         </div>
                     </div>
@@ -99,6 +131,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [submitted]="submitted"
                                 [control]="form.get('categoryId')"
                                 (searchEmit)="getCategories($event)"
                                 [data]="categories"
@@ -114,6 +147,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [submitted]="submitted"
                                 [control]="form.get('brandId')"
                                 (searchEmit)="getBrands($event)"
                                 [data]="brands"
@@ -129,10 +163,12 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
+                                [submitted]="submitted"
                                 [control]="form.get('productId')"
                                 (searchEmit)="getProducts($event)"
                                 [data]="products"
                                 [placeholder]="'Продукт'"
+                                [mode]="'multiple'"
                             ></ngx-search-select>
                         </div>
                     </div>
@@ -144,6 +180,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-multiple-search-select
+                                [submitted]="submitted"
                                 [control]="form.get('tags')"
                                 (searchEmit)="getTags($event)"
                                 [data]="tags"
@@ -156,7 +193,7 @@
                         class="center-button"
                         type="submit"
                         nbButton
-                        status="danger"
+                        status="primary"
                     >
                         Подтвердить
                     </button>

@@ -1,0 +1,265 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header>{{
+                this.mallId ? 'Редактирование места' : 'Создание места'
+            }}</nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Название</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Введите название"
+                                formControlName="name"
+                                [status]="
+                                submitted && (form.get('name')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Лого</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                nbInput
+                                fullWidth
+                                id="exampleInputPassword1"
+                                placeholder="Лого"
+                                type="file"
+                                (change)="onFileChange($event, 'logo')"
+                                id="formFile"
+                                [status]="
+                                submitted && (form.get('logo')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                            <img
+                                [src]="logoImg | useHttpImgSrc"
+                                alt=""
+                                width="150"
+                                class="center mt-3"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Адрес
+                        </label>
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Введите адрес"
+                                formControlName="address"
+                                [status]="
+                                submitted && (form.get('address')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Начало рабочего времени</label
+                        >
+                        <div class="col-sm-9">
+                            <!-- formControlName="workingHourStart" -->
+                            <!-- [nbTimepicker]="timepicker" -->
+                            <input
+                                nbInput
+                                fullWidth
+                                type="time"
+                                formControlName="workingHourStart"
+                                [status]="
+                                submitted && (form.get('workingHourStart')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                            <!-- (onSelectTime)="timeChange($event, 'start')" -->
+                            <nb-timepicker #timepicker></nb-timepicker>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Конец рабочего времени</label
+                        >
+                        <div class="col-sm-9">
+                            <!-- formControlName="workingHourEnd" -->
+                            <!-- [nbTimepicker]="timepickermy" -->
+                            <input
+                                fullWidth
+                                nbInput
+                                type="time"
+                                formControlName="workingHourEnd"
+                                [status]="
+                                submitted && (form.get('workingHourEnd')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                            <!-- (onSelectTime)="timeChange($event, 'end')" -->
+                            <nb-timepicker #timepickermy></nb-timepicker>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Описание</label
+                        >
+                        <div class="col-sm-9">
+                            <textarea
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Введите описание"
+                                formControlName="description"
+                                [status]="
+                                submitted && (form.get('description')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Порядок</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="number"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Введите порядок"
+                                formControlName="order"
+                                [status]="
+                                submitted && (form.get('order')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Тип</label
+                        >
+                        <div class="col-sm-9">
+                            <nb-select
+                                fullWidth
+                                formControlName="type"
+                                placeholder="Тип"
+                                [status]="
+                                submitted && (form.get('type')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            >
+                                <nb-option value="Mall"
+                                    >Торговый центр</nb-option
+                                >
+                                <nb-option value="Market">Базар</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Активен</label
+                        >
+                        <div class="col-sm-9">
+                            <nb-select
+                                fullWidth
+                                formControlName="isActive"
+                                placeholder="Активен"
+                            >
+                                <nb-option [value]="true">Да</nb-option>
+                                <nb-option [value]="false">Нeт</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Населенный пункт</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-multiple-search-select
+                                [isRequired]="false"
+                                [submitted]="submitted"
+                                [control]="form.get('localityId')"
+                                (searchEmit)="getLocalities($event)"
+                                [data]="localities"
+                                [placeholder]="'Введите населенный пункт'"
+                                [type]="'default'"
+                            ></ngx-multiple-search-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Локация</label
+                        >
+                        <div *ngIf="mallId ? mallData : true" class="col-sm-9">
+                            <ngx-custom-map
+                                (markLocationEvent)="markMap($event)"
+                                [baseLocation]="
+                                    mallId && mallData.location.coordinates
+                                "
+                            ></ngx-custom-map>
+                        </div>
+                    </div>
+                    <button
+                        class="d-flex mx-auto"
+                        type="submit"
+                        nbButton
+                        status="primary"
+                    >
+                        Подтвердить
+                    </button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="onFirstSubmit()">
+    <ngx-localization-inputs
+        [controlRu]="form.get('ru')"
+        [controlKy]="form.get('kg')"
+        [controlUz]="form.get('uz')"
+        [submitted]="submitted"
+        [label]="'Название населенного пункта'"
+        [placeholder]="'Введите название населенного пункта'"
+    >
+    </ngx-localization-inputs>
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="label">Активен</label>
+        <nb-select fullWidth formControlName="isActive" placeholder="Активен">
+            <nb-option [value]="true">Да</nb-option>
+            <nb-option [value]="false">Нeт</nb-option>
+        </nb-select>
+    </div>
+    <button class="d-flex mx-auto" type="submit" nbButton status="primary">
+        Подтвердить
+    </button>
+</form>

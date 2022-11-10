@@ -15,10 +15,12 @@
 
     <nb-card-body>
         <ngx-custom-table
+            (changePageEvent)="getCategories($event)"
             (deleteItemEvent)="deleteCategory($event)"
             (openModalEvent)="openEditModal($event)"
             [tableColumns]="tableColumns"
             [tableData]="listCategory"
+            [productName]="'ни одной категории'"
         >
         </ngx-custom-table> </nb-card-body
 ></nb-card>

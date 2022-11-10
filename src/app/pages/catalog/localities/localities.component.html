@@ -1,0 +1,26 @@
+<nb-card>
+    <nb-card-header>
+        <strong>Населенные пункты</strong>
+        <div class="d-flex justify-content-between mt-3">
+            <ngx-input-search
+                (searchEvent)="onSearch($event)"
+                [placeholder]="'Название населенного пункта'"
+            >
+            </ngx-input-search>
+            <button (click)="openCreateModal()" nbButton status="primary">
+                Добавить
+            </button>
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (deleteItemEvent)="deleteLocality($event)"
+            (openModalEvent)="openEditModal($event)"
+            (changePageEvent)="getLocalities($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listLocalities"
+            [productName]="'ни одного населенного пункта'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

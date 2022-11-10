@@ -15,10 +15,12 @@
 
     <nb-card-body>
         <ngx-custom-table
+            (changePageEvent)="getTags($event)"
             (deleteItemEvent)="deleteTag($event)"
             (openModalEvent)="openEditModal($event)"
             [tableColumns]="tableColumns"
             [tableData]="listTags"
+            [productName]="'ни однога тега'"
         >
         </ngx-custom-table> </nb-card-body
 ></nb-card>

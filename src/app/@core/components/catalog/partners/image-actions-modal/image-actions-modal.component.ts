@@ -33,8 +33,9 @@ export class ImageActionsModalComponent implements OnInit, OnDestroy {
 
         if (this.itemData) {
             this.form.controls['title'].setValue(this.itemData.title);
-            this.form.controls['image'].setValue(this.itemData.image);
+            this.form.controls['image'].setValue(this.itemData.imagePath);
             this.form.controls['sequence'].setValue(this.itemData.sequence);
+            this.imgSrc = this.itemData.imagePath;
         }
     }
     async onFileChange(event) {
@@ -49,7 +50,6 @@ export class ImageActionsModalComponent implements OnInit, OnDestroy {
     }
     onFirstSubmit() {
         if (this.form.valid) {
-            console.log('wfwefw');
             if (this.itemData) {
                 this.partnersService
                     .editPartnerImage(

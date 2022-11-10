@@ -1,21 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IListPartner } from '../../../../@core/models/catalog/partners';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
+import { tableNumbering } from '../../../../@core/utils';
 @Component({
     templateUrl: './list-partners.component.html',
     styleUrls: ['./list-partners.component.scss'],
 })
-export class ListPartnersComponent implements OnInit {
+export class ListPartnersComponent implements OnInit, OnDestroy {
     listPartner: IListPartner;
     tableColumns = {
-        id: { title: '№', type: 'number' },
+        index: {
+            title: '№',
+            type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listPartner.pageNumber, cell.row.index),
+        },
         name: { title: 'Название', type: 'string' },
         categoryId: { title: 'Категория', type: 'number' },
-        order: { title: 'Заказ', type: 'string' },
+        order: { title: 'Порядок', type: 'string' },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -36,9 +42,21 @@ export class ListPartnersComponent implements OnInit {
     userRowSelect(id) {
         this.router.navigate([`catalog/partners/detail/${id}`]);
     }
-    deletePartner(event) {}
+    deletePartner(id) {
+        this.partnersService
+            .deletePartner(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getPartners();
+            });
+    }
 
     ngOnInit(): void {
         this.getPartners();
+    }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TagActionsModalComponent } from '../../../../@core/components/catalog/tag/tag-actions-modal/tag-actions-modal.component';
 import { TagsService } from '../../../../@core/services/catalog/tags/tags.service';
+import { tableNumbering } from '../../../../@core/utils';
 
 @Component({
     templateUrl: './list-tags.component.html',
@@ -13,14 +14,26 @@ import { TagsService } from '../../../../@core/services/catalog/tags/tags.servic
 export class ListTagsComponent implements OnInit, OnDestroy {
     listTags;
     tableColumns = {
-        id: {
+        index: {
             title: '№',
             type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listTags.pageNumber, cell.row.index),
         },
         name: {
-            title: 'Название',
+            title: 'Название на Ru',
             type: 'string',
             valuePrepareFunction: (item) => item.ru,
+        },
+        'name.kg': {
+            title: 'Название на KG',
+            type: 'string',
+            valuePrepareFunction: (cell, row) => row.name.kg,
+        },
+        'name.uz': {
+            title: 'Название на UZ',
+            type: 'string',
+            valuePrepareFunction: (cell, row) => row.name.uz,
         },
     };
     private destroy$: Subject<void> = new Subject<void>();
@@ -41,10 +54,13 @@ export class ListTagsComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listTags = res));
     }
     deleteTag(id: number): void {
-        this.tagsService.deleteTag(id).subscribe((res) => {
-            this.toaster.success('Успешно удалено!');
-            this.getTags();
-        });
+        this.tagsService
+            .deleteTag(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getTags();
+            });
     }
     onSearch(event) {
         this.getTags(1, event);

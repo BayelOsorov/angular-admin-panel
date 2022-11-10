@@ -1,0 +1,49 @@
+<nb-card>
+    <nb-card-header>
+        <strong>Места</strong>
+        <div class="d-flex justify-content-between mt-3">
+            <div class="d-flex">
+                <ngx-input-search
+                    class="mr-5"
+                    (searchEvent)="onSearch($event)"
+                    [placeholder]="'Название торгового центра'"
+                >
+                </ngx-input-search>
+                <nb-select
+                    style="width: 200px"
+                    class="mr-5"
+                    size="small"
+                    fullWidth
+                    placeholder="Тип"
+                >
+                    <nb-option value="10">Торговый центр</nb-option>
+                    <nb-option value="20">Базар</nb-option>
+                </nb-select>
+                <ngx-multiple-search-select
+                    [size]="'default'"
+                    [isRequired]="false"
+                    (searchEmit)="getLocalities($event)"
+                    [data]="localities"
+                    [placeholder]="'Название населенного пункта'"
+                    [type]="'default'"
+                ></ngx-multiple-search-select>
+            </div>
+
+            <a routerLink="/catalog/malls/create">
+                <button nbButton status="primary">Добавить</button>
+            </a>
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getMalls($event)"
+            (deleteItemEvent)="deleteMall($event)"
+            (openModalEvent)="updateMall($event)"
+            (rowSelectEvent)="userRowSelect($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listMalls"
+            [productName]="'ни одного торгового центра'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

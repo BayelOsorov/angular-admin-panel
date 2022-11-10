@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import {
+    NbAlertModule,
     NbButtonModule,
     NbCardModule,
+    NbIconModule,
     NbInputModule,
     NbListModule,
     NbMenuModule,
     NbSelectModule,
     NbTabsetModule,
+    NbTimepickerModule,
     NbTreeGridModule,
+    NB_TIME_PICKER_CONFIG,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
@@ -30,11 +34,20 @@ import { ComponentsModule } from '../@core/components/components.module';
 import { ListTagsComponent } from './catalog/taggs/list-tags/list-tags.component';
 import { ListProductsComponent } from './catalog/products/list-products/list-products.component';
 import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail-partner.component';
+import { UseHttpImageSourcePipe } from '../@core/components/secured-image/secured-image.component';
+import { LocalitiesComponent } from './catalog/localities/localities.component';
+import { ListMallsComponent } from './catalog/malls/list-malls/list-malls.component';
+import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.component';
+import { ActionsBrandComponent } from './catalog/brands/actions-brand/actions-brand.component';
+import { ListNewsComponent } from './catalog/news/list-news/list-news.component';
+import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.component';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
     imports: [
         PagesRoutingModule,
         ThemeModule,
+        NbAlertModule,
         NbMenuModule,
         ReactiveFormsModule,
         FormsModule,
@@ -49,7 +62,10 @@ import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail
         NzSelectModule,
         NbSelectModule,
         NbTabsetModule,
+        NbTimepickerModule,
         ComponentsModule,
+        // NbIconModule,
+        // NbEvaIconsModule,
     ],
     declarations: [
         PagesComponent,
@@ -64,6 +80,19 @@ import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail
         ListTagsComponent,
         ListProductsComponent,
         DetailPartnerComponent,
+        LocalitiesComponent,
+        ListMallsComponent,
+        ActionsMallComponent,
+        ActionsBrandComponent,
+        ListNewsComponent,
+        ActionsNewsComponent,
+    ],
+    providers: [
+        {
+            provide: NB_TIME_PICKER_CONFIG,
+            useValue: {},
+        },
+        UseHttpImageSourcePipe,
     ],
 })
 export class PagesModule {}

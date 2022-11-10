@@ -13,6 +13,7 @@ import { ProductsService } from '../../../../services/catalog/products/products.
 export class ProductActionsModalComponent implements OnInit, OnDestroy {
     form: FormGroup;
     itemData;
+    submitted = false;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private fb: FormBuilder,
@@ -24,7 +25,7 @@ export class ProductActionsModalComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', Validators.required],
-            isActive: ['', Validators.required],
+            isActive: [true, Validators.required],
         });
         if (this.itemData) {
             this.form.controls['name'].setValue(this.itemData.name);
@@ -33,6 +34,7 @@ export class ProductActionsModalComponent implements OnInit, OnDestroy {
     }
 
     onFirstSubmit() {
+        this.submitted = true;
         if (this.form.valid) {
             if (this.itemData) {
                 this.productService

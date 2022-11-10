@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { IDetailPartner } from '../../../../@core/models/catalog/partners';
 import { BrandsService } from '../../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../../@core/services/catalog/categories/categories.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
@@ -16,9 +15,10 @@ import { toBase64 } from '../../../../@core/utils/toBase64';
     templateUrl: './actions-partner.component.html',
     styleUrls: ['./actions-partner.component.scss'],
 })
-export class ActionsPartnerComponent implements OnInit {
+export class ActionsPartnerComponent implements OnInit, OnDestroy {
     form: FormGroup;
     logoImg;
+    submitted = false;
     categories = [];
     brands = [];
     tags = [];
@@ -57,6 +57,7 @@ export class ActionsPartnerComponent implements OnInit {
     ) {}
 
     onSubmit() {
+        this.submitted = true;
         if (this.form.valid) {
             if (this.partnerData) {
                 this.partnersService
@@ -66,6 +67,11 @@ export class ActionsPartnerComponent implements OnInit {
                             ru: this.form.value.descRu,
                             kg: this.form.value.descKg,
                             uz: this.form.value.descUz,
+                        },
+                        shortDescription: {
+                            ru: this.form.value.shortDescRu,
+                            kg: this.form.value.shortDescKg,
+                            uz: this.form.value.shortDescUz,
                         },
                     })
                     .pipe(takeUntil(this.destroy$))
@@ -83,6 +89,11 @@ export class ActionsPartnerComponent implements OnInit {
                         ru: this.form.value.descRu,
                         kg: this.form.value.descKg,
                         uz: this.form.value.descUz,
+                    },
+                    shortDescription: {
+                        ru: this.form.value.shortDescRu,
+                        kg: this.form.value.shortDescKg,
+                        uz: this.form.value.shortDescUz,
                     },
                 })
                 .pipe(takeUntil(this.destroy$))
@@ -146,7 +157,7 @@ export class ActionsPartnerComponent implements OnInit {
         this.form = this.fb.group({
             name: ['', Validators.required],
             logo: ['', Validators.required],
-            isActive: ['', Validators.required],
+            isActive: [true, Validators.required],
             descRu: ['', Validators.required],
             descKg: ['', Validators.required],
             descUz: ['', Validators.required],
@@ -154,7 +165,7 @@ export class ActionsPartnerComponent implements OnInit {
             shortDescKg: ['', Validators.required],
             shortDescUz: ['', Validators.required],
             categoryId: ['', Validators.required],
-            productId: ['', Validators.required],
+            productId: [[], Validators.required],
             brandId: ['', Validators.required],
             tags: [[], Validators.required],
         });
@@ -167,7 +178,7 @@ export class ActionsPartnerComponent implements OnInit {
                 .pipe(
                     takeUntil(this.destroy$),
                     map((res) => {
-                        if (res.tags.length > 0) {
+                        if (res.tags && res.tags.length > 0) {
                             const newTags = res.tags.map((item) => item.id);
                             return { ...res, tags: newTags };
                         }
@@ -176,8 +187,6 @@ export class ActionsPartnerComponent implements OnInit {
                 )
                 .subscribe({
                     next: (data) => {
-                        console.log(data);
-
                         this.partnerData = data;
                         this.form.controls['name'].setValue(data.name);
                         this.form.controls['isActive'].setValue(data.isActive);
@@ -215,5 +224,9 @@ export class ActionsPartnerComponent implements OnInit {
         }
 
         this.getData();
+    }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="tableData">
+<ng-container *ngIf="tableData && tableData.items.length > 0">
     <ng2-smart-table
         [settings]="settings"
         [source]="tableData.items"
@@ -7,12 +7,17 @@
         (userRowSelect)="onRowSelect($event)"
     >
     </ng2-smart-table>
-    <nz-pagination
-        *ngIf="tableData.totalItemCount > 20"
-        class="custom-pagination header"
-        (nzPageIndexChange)="changePage($event)"
-        [nzPageIndex]="tableData.pageNumber"
-        [nzTotal]="tableData.totalItemCount"
-        [nzPageSize]="tableData.pageSize"
-    ></nz-pagination>
+    <div class="custom-pagination">
+        <nz-pagination
+            *ngIf="tableData.totalItemCount > 20"
+            class="mx-auto"
+            (nzPageIndexChange)="changePage($event)"
+            [nzPageIndex]="tableData.pageNumber"
+            [nzTotal]="tableData.totalItemCount"
+            [nzPageSize]="tableData.pageSize"
+        ></nz-pagination>
+    </div>
+</ng-container>
+<ng-container *ngIf="tableData && tableData.items.length === 0">
+    <h6 class="text text-center">Здесь пока нет {{ productName }}</h6>
 </ng-container>

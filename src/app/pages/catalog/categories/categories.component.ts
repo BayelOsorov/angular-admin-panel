@@ -1,11 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-img.component';
 import { CategoryActionsModalComponent } from '../../../@core/components/catalog/category/category-actions-modal/category-actions-modal.component';
+import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListCategories } from '../../../@core/models/catalog/category';
 import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';
+import { tableNumbering } from '../../../@core/utils';
 
 @Component({
     templateUrl: './categories.component.html',
@@ -14,16 +18,42 @@ import { CategoriesService } from '../../../@core/services/catalog/categories/ca
 export class CategoriesComponent implements OnInit, OnDestroy {
     listCategory: IListCategories;
     tableColumns = {
-        id: {
+        index: {
             title: '№',
             type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listCategory.pageNumber, cell.row.index),
+        },
+        logo: {
+            title: 'Лого',
+            type: 'custom',
+            renderComponent: AvatarImgComponent,
         },
         name: {
             title: 'Название',
+            type: 'html',
+            valuePrepareFunction: (cell, item) =>
+                this.domSanitizer.bypassSecurityTrustHtml(
+                    item.parentId
+                        ? item.parentId + ` - ` + item.name
+                        : item.name
+                ),
+        },
+        backgroundColor: {
+            title: 'Цвет фона',
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                this.domSanitizer.bypassSecurityTrustHtml(
+                    `<div class="row" style='background-color: ${item}'>&nbsp; </div>`
+                ),
+        },
+        isActive: {
+            title: 'Активен',
             type: 'string',
+            valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
         order: {
-            title: 'Заказ',
+            title: 'Порядок',
             type: 'string',
         },
     };
@@ -32,9 +62,9 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     constructor(
         private categoryService: CategoriesService,
         private windowService: NbWindowService,
-        private toaster: ToastrService
+        private toaster: ToastrService,
+        private domSanitizer: DomSanitizer
     ) {}
-
     ngOnInit(): void {
         this.getCategories();
     }
@@ -45,10 +75,13 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listCategory = res));
     }
     deleteCategory(id: number): void {
-        this.categoryService.deleteCategory(id).subscribe((res) => {
-            this.toaster.success('Успешно удалено!');
-            this.getCategories();
-        });
+        this.categoryService
+            .deleteCategory(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.getCategories();
+            });
     }
     onSearch(event) {
         this.getCategories(1, event);
