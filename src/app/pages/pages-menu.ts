@@ -35,35 +35,34 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 link: '/catalog/localities',
             },
             {
-                title: 'Бренды',
-                link: '/catalog/brands',
+                title: 'Места',
+                link: '/catalog/malls',
             },
             {
-                title: 'Партнеры',
-                link: '/catalog/partners',
+                title: 'Продукты',
+                link: '/catalog/products',
             },
             {
                 title: 'Категории',
                 link: '/catalog/categories',
             },
             {
-                title: 'Группы',
-                link: '/catalog/groups',
+                title: 'Партнеры',
+                link: '/catalog/partners',
             },
-
             {
-                title: 'Места',
-                link: '/catalog/malls',
+                title: 'Бренды',
+                link: '/catalog/brands',
             },
-
             {
                 title: 'Тэги',
                 link: '/catalog/tags',
             },
             {
-                title: 'Продукты',
-                link: '/catalog/products',
+                title: 'Группы',
+                link: '/catalog/groups',
             },
+
             {
                 title: 'Акции',
                 link: '/catalog/partner-proms',

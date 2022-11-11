@@ -21,7 +21,7 @@ export class ListTagsComponent implements OnInit, OnDestroy {
                 tableNumbering(this.listTags.pageNumber, cell.row.index),
         },
         name: {
-            title: 'Название на Ru',
+            title: 'Название на RU',
             type: 'string',
             valuePrepareFunction: (item) => item.ru,
         },
