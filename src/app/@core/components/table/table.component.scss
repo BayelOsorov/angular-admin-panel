@@ -40,3 +40,9 @@
     justify-content: center !important;
     align-items: center !important;
 }
+::ng-deep ng2-smart-table thead th {
+    text-align: center;
+}
+::ng-deep ng2-smart-table tbody > tr > td {
+    text-align: center;
+}

@@ -3,7 +3,9 @@
         <nb-card>
             <nb-card-header
                 >{{
-                    this.brandId ? 'Редактирование бренда' : 'Создание бренда'
+                    this.categoryId
+                        ? 'Редактирование категории'
+                        : 'Создание категории'
                 }}
             </nb-card-header>
             <nb-card-body>
@@ -31,34 +33,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label
-                            for="exampleInputPassword1"
-                            class="label col-sm-3 col-form-label"
-                            >Лого</label
-                        >
-                        <div class="col-sm-9">
-                            <input
-                                nbInput
-                                fullWidth
-                                placeholder="Лого"
-                                type="file"
-                                (change)="onFileChange($event)"
-                                id="formFile"
-                                [status]="
-                                submitted && (form.get('logo')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
-                        </div>
-                    </div>
-                    <img
-                        [src]="logoImg | useHttpImgSrc"
-                        alt=""
-                        width="200"
-                        class="center"
-                    />
                     <div class="form-group row">
                         <label
                             for="exampleInputPassword1"
@@ -92,11 +66,32 @@
                                 fullWidth
                                 formControlName="isActive"
                                 placeholder="Активен"
-                                required
                             >
                                 <nb-option [value]="true">Да</nb-option>
                                 <nb-option [value]="false">Нeт</nb-option>
                             </nb-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Цвет заднего фона</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="color"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Цвет заднего фона"
+                                formControlName="backgroundColor"
+                                [status]="
+                                submitted && (form.get('backgroundColor')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -107,15 +102,45 @@
                         >
                         <div class="col-sm-9">
                             <ngx-search-select
-                                [submitted]="submitted"
                                 (searchEmit)="getCategories($event)"
-                                [control]="form.get('categoryId')"
+                                [control]="form.get('parentId')"
+                                [isRequired]="false"
+                                [submitted]="submitted"
                                 [data]="categoryList"
                                 [placeholder]="'Выберите категорию'"
                             ></ngx-search-select>
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Лого</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                nbInput
+                                fullWidth
+                                id="exampleInputPassword1"
+                                placeholder="Лого"
+                                type="file"
+                                (change)="onFileChange($event)"
+                                id="formFile"
+                                [status]="
+                                submitted && (form.get('logo')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                            <img
+                                [src]="logoImg | useHttpImgSrc"
+                                alt=""
+                                width="200"
+                                class="center mt-3"
+                            />
+                        </div>
+                    </div>
                     <button
                         class="d-flex mx-auto"
                         type="submit"

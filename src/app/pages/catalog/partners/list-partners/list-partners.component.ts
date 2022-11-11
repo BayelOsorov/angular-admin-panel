@@ -29,9 +29,9 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         private router: Router
     ) {}
-    getPartners(page = 1) {
+    getPartners(page = 1, name = '') {
         this.partnersService
-            .getListPartners(page)
+            .getListPartners(page, name)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listPartner = res));
     }

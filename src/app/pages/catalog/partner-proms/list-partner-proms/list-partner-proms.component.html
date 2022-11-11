@@ -1,0 +1,26 @@
+<nb-card>
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Промо акции</strong>
+        <!-- <ngx-input-search
+                (searchEvent)="onSearch($event)"
+                [placeholder]="'Название новости'"
+            >
+            </ngx-input-search> -->
+
+        <a routerLink="/catalog/partner-proms/create">
+            <button nbButton status="primary">Добавить</button>
+        </a>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getPartnerProms($event)"
+            (deleteItemEvent)="deletePartnerProms($event)"
+            (openModalEvent)="updatePartnerProms($event)"
+            (rowSelectEvent)="userRowSelect($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listPartnerProms"
+            [productName]="'ни одной промо акции'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

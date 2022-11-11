@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import 'leaflet/dist/leaflet.css';
 import * as L from 'leaflet';
+import { AbstractControl, FormControl } from '@angular/forms';
 
 L.Icon.Default.mergeOptions({
     iconRetinaUrl:
@@ -24,6 +25,10 @@ L.Icon.Default.mergeOptions({
 })
 export class CustomMapComponent implements OnInit {
     @Output() markLocationEvent = new EventEmitter();
+    @Input() control: AbstractControl = new FormControl();
+
+    @Input() submitted = false;
+    @Input() isRequired = true;
     @Input() baseLocation: [number, number];
     map;
     marker = null;

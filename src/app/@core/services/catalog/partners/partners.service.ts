@@ -14,10 +14,10 @@ import { HttpOptions } from '../../../utils';
 export class PartnersService {
     constructor(private http: HttpClient) {}
 
-    getListPartners(page = 1) {
+    getListPartners(page = 1, name = '') {
         return this.http.get<IListPartner>(
             environment.catalogUrl +
-                `/Administration/api/v1/partners?page=${page}&pageSize=20`
+                `/Administration/api/v1/partners?name=${name}&page=${page}&pageSize=20`
         );
     }
     getListPartnersSearch(query = '') {

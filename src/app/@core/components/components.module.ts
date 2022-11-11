@@ -37,6 +37,8 @@ import { ImageActionsModalComponent } from './catalog/partners/image-actions-mod
 import { LocalityActionsModalComponent } from './catalog/locality/locality-actions-modal/locality-actions-modal.component';
 import { CustomMapComponent } from './custom-map/custom-map.component';
 import { AvatarImgComponent } from './avatar-img/avatar-img.component';
+import { EditorComponent } from './editor/editor.component';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 @NgModule({
     imports: [
@@ -54,6 +56,7 @@ import { AvatarImgComponent } from './avatar-img/avatar-img.component';
         NgMultiSelectDropDownModule,
         NbDatepickerModule,
         NzSelectModule,
+        CKEditorModule,
     ],
     declarations: [
         CreateStaffModalComponent,
@@ -73,6 +76,7 @@ import { AvatarImgComponent } from './avatar-img/avatar-img.component';
         LocalityActionsModalComponent,
         CustomMapComponent,
         AvatarImgComponent,
+        EditorComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -84,6 +88,7 @@ import { AvatarImgComponent } from './avatar-img/avatar-img.component';
         UseHttpImageSourcePipe,
         CustomMapComponent,
         AvatarImgComponent,
+        EditorComponent,
     ],
 })
 export class ComponentsModule {}
