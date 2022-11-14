@@ -4,13 +4,16 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IDetailBrand } from '../../../../@core/models/catalog/brand';
-import { IDetailProduct } from '../../../../@core/models/catalog/catalog';
+import {
+    IDetailProduct,
+    IDetailTag,
+} from '../../../../@core/models/catalog/catalog';
 import { IDetailCategory } from '../../../../@core/models/catalog/category';
 import { BrandsService } from '../../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../../@core/services/catalog/categories/categories.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
 import { ProductsService } from '../../../../@core/services/catalog/products/products.service';
-import { CategoriesComponent } from '../../categories/categories.component';
+import { TagsService } from '../../../../@core/services/catalog/tags/tags.service';
 
 @Component({
     templateUrl: './detail-partner.component.html',
@@ -22,6 +25,7 @@ export class DetailPartnerComponent implements OnInit, OnDestroy {
     category: Observable<IDetailCategory>;
     brand: Observable<IDetailBrand>;
     product: Observable<IDetailProduct>;
+    tags: Observable<IDetailTag>;
 
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -30,7 +34,8 @@ export class DetailPartnerComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private categoryService: CategoriesService,
         private brandService: BrandsService,
-        private productService: ProductsService
+        private productService: ProductsService,
+        private tagsService: TagsService
     ) {}
 
     getDetailPartner() {
