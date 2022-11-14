@@ -38,7 +38,7 @@ import { LocalityActionsModalComponent } from './catalog/locality/locality-actio
 import { CustomMapComponent } from './custom-map/custom-map.component';
 import { AvatarImgComponent } from './avatar-img/avatar-img.component';
 import { EditorComponent } from './editor/editor.component';
-import { CKEditorModule } from 'ng2-ckeditor';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
     imports: [

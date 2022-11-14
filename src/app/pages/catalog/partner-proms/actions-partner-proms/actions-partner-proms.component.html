@@ -3,7 +3,7 @@
         <nb-card>
             <nb-card-header
                 >{{
-                    this.partnerPromsId
+                    partnerPromsId
                         ? 'Редактирование промо-акции'
                         : 'Создание промо-акции'
                 }}
@@ -97,10 +97,7 @@
                                     : 'basic'
                             "
                             />
-                            <nb-datepicker
-                                [min]="min"
-                                #formpicker
-                            ></nb-datepicker>
+                            <nb-datepicker #formpicker></nb-datepicker>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -114,7 +111,7 @@
                                 fullWidth
                                 nbInput
                                 placeholder="Дата окончания"
-                                [nbDatepicker]="formpicker"
+                                [nbDatepicker]="formpickermy"
                                 formControlName="endDateTime"
                                 [status]="
                                 submitted && (form.get('endDateTime')).errors?.['required']
@@ -122,7 +119,7 @@
                                     : 'basic'
                             "
                             />
-                            <nb-datepicker #formpicker></nb-datepicker>
+                            <nb-datepicker #formpickermy></nb-datepicker>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -131,8 +128,16 @@
                             class="label col-sm-3 col-form-label"
                             >Контент</label
                         >
-                        <div class="col-sm-9">
-                            <ngx-editor></ngx-editor>
+                        <div
+                            class="col-sm-9"
+                            *ngIf="partnerPromsId ? partnerPromsData : true"
+                        >
+                            <ngx-editor
+                                (changeEvent)="changeContent($event)"
+                                [submitted]="submitted"
+                                [data]="partnerPromsData.hmtlBody"
+                                [control]="form.get('hmtlBody')"
+                            ></ngx-editor>
                         </div>
                     </div>
                     <button

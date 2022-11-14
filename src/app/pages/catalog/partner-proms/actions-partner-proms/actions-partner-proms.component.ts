@@ -19,7 +19,6 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
     partnerPromsData;
     submitted = false;
     partners = [];
-    min: Date;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private fb: FormBuilder,
@@ -29,9 +28,7 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         protected dateService: NbDateService<Date>
-    ) {
-        this.min = this.dateService.addDay(this.dateService.today(), +1);
-    }
+    ) {}
 
     onSubmit() {
         this.submitted = true;
@@ -40,9 +37,9 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                 this.partnerPromsService
                     .editPartnerProms(this.partnerPromsData.id, this.form.value)
                     .pipe(takeUntil(this.destroy$))
-                    .subscribe((res) => {
+                    .subscribe(() => {
                         this.toaster.success('Успешно отредактировано!');
-                        this.router.navigate([`catalog/partnerProms`]);
+                        this.router.navigate([`catalog/partner-proms`]);
                     });
                 return;
             }
@@ -50,9 +47,9 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
             this.partnerPromsService
                 .createPartnerProms(this.form.value)
                 .pipe(takeUntil(this.destroy$))
-                .subscribe((res) => {
+                .subscribe(() => {
                     this.toaster.success('Успешно создано!');
-                    this.router.navigate([`catalog/partnerProms`]);
+                    this.router.navigate([`catalog/partner-proms`]);
                 });
         }
     }
@@ -72,6 +69,11 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
             });
         }
     }
+    changeContent(data) {
+        this.form.patchValue({
+            hmtlBody: data,
+        });
+    }
     getPartners(name = '') {
         this.partnerService
             .getListPartners(1, name)
@@ -81,7 +83,7 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.form = this.fb.group({
             partnerId: ['', Validators.required],
-            cover: [true, Validators.required],
+            cover: ['', Validators.required],
             title: ['', Validators.required],
             hmtlBody: ['', Validators.required],
             startDateTime: ['', Validators.required],
@@ -98,6 +100,7 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                 .subscribe({
                     next: (data) => {
                         this.partnerPromsData = data;
+                        this.coverImg = data.cover;
                         this.form.controls['title'].setValue(data.title);
                         this.form.controls['cover'].setValue(data.cover);
 
@@ -111,8 +114,6 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                         this.form.controls['endDateTime'].setValue(
                             data.endDateTime
                         );
-
-                        this.coverImg = data.cover;
                     },
                 });
         }

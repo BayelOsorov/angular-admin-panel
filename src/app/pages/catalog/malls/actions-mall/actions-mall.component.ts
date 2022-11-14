@@ -82,26 +82,6 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
             });
         }
     }
-    padTo2Digits(num) {
-        return String(num).padStart(2, '0');
-    }
-    timeChange(time, type) {
-        // const date = new Date(time.time);
-        // console.log(time.time);
-        // const hoursAndMinutes =
-        //     this.padTo2Digits(date.getHours()) +
-        //     ':' +
-        //     this.padTo2Digits(date.getMinutes());
-        // if (type === 'start') {
-        //     this.form.patchValue({
-        //         workingHourStart: hoursAndMinutes,
-        //     });
-        //     return;
-        // }
-        // this.form.patchValue({
-        //     workingHourEnd: hoursAndMinutes,
-        // });
-    }
     getLocalities(name = '') {
         this.localitiesService.getListLocalities(1, name).subscribe((data) => {
             this.localities = data.items;
