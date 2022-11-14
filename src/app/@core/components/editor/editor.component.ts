@@ -27,7 +27,7 @@ export class EditorComponent implements OnInit {
     @Output() changeEvent = new EventEmitter();
     @Input() submitted = false;
     @Input() isRequired = true;
-    @Input() data;
+    @Input() data = '';
 
     @Input() control: AbstractControl = new FormControl();
 

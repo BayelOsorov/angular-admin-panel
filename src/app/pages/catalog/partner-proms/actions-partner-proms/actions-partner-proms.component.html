@@ -135,7 +135,7 @@
                             <ngx-editor
                                 (changeEvent)="changeContent($event)"
                                 [submitted]="submitted"
-                                [data]="partnerPromsData.hmtlBody"
+                                [data]="partnerPromsData?.hmtlBody"
                                 [control]="form.get('hmtlBody')"
                             ></ngx-editor>
                         </div>
