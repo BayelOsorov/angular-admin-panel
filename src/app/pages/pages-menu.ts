@@ -65,12 +65,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
 
             {
-                title: 'Акции',
+                title: 'Акции и Промо',
                 link: '/catalog/partner-proms',
             },
             {
                 title: 'Новости',
                 link: '/catalog/news',
+            },
+            {
+                title: 'Отзывы',
+                link: '/catalog/partner-feedbacks',
             },
         ],
     },

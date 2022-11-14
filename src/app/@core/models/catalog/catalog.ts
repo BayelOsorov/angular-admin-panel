@@ -103,3 +103,11 @@ export interface IDetailPartnerProms {
     startDateTime: '2022-11-11T04:14:44.261Z';
     endDateTime: '2022-11-11T04:14:44.261Z';
 }
+export interface IDetailTag {
+    id: 0;
+    name: {
+        ru: 'string';
+        kg: 'string';
+        uz: 'string';
+    };
+}

@@ -31,11 +31,6 @@ export class ListNewsComponent implements OnInit, OnDestroy {
             type: 'string',
             valuePrepareFunction: (item) => item.ru,
         },
-        text: {
-            title: 'Текст на RU',
-            type: 'string',
-            valuePrepareFunction: (item) => item.ru,
-        },
 
         shortText: {
             title: 'Короткий текст на RU',

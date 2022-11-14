@@ -2,28 +2,67 @@
     <nb-card-header></nb-card-header>
     <nb-card-body>
         <nb-card>
+            <div class="partner-info">
+                <div>
+                    <img
+                        class="logo"
+                        [src]="partner.logo | useHttpImgSrc"
+                        alt="logo"
+                    />
+                </div>
+                <div class="title">
+                    <strong>{{ partner?.name }}</strong>
+                </div>
+            </div>
             <nb-tabset>
                 <nb-tab tabTitle="Информация">
                     <div *ngIf="partner" class="d-flex">
-                        <div class="col-6 col-md-4">
-                            <nb-card class="list-card" size="small">
-                                <div class="grid-view">
-                                    <img
-                                        class="center-img"
-                                        [src]="partner.logo | useHttpImgSrc"
-                                        alt="logo"
-                                    />
-                                </div>
-                            </nb-card>
+                        <div class="col-6 col-md-4 buttons">
+                            <button
+                                class="d-block w-50"
+                                nbButton
+                                status="warning"
+                            >
+                                Редактировать
+                            </button>
+                            <button
+                                class="d-block mt-3 w-50"
+                                nbButton
+                                status="info"
+                            >
+                                Деактивировать
+                            </button>
+                            <button
+                                class="d-block mt-3 w-50"
+                                nbButton
+                                status="danger"
+                            >
+                                Удалить
+                            </button>
                         </div>
                         <div class="col-md-8">
                             <nb-card class="list-card">
                                 <div class="header">
+                                    <div class="partner-board">
+                                        <nb-alert class="" status="primary"
+                                            >10 избранное</nb-alert
+                                        >
+                                        <nb-alert class="" status="primary"
+                                            >50 отзывов</nb-alert
+                                        >
+                                        <nb-alert class="" status="primary"
+                                            >4.5 рейтинг</nb-alert
+                                        >
+                                    </div>
+                                </div>
+                                <div class="header">
                                     <div>
-                                        <p>Название</p>
+                                        <p>Короткое описание на RU</p>
                                     </div>
 
-                                    <div class="detail">Puma</div>
+                                    <div class="detail">
+                                        {{ partner.shortDescription.ru }}
+                                    </div>
                                 </div>
                                 <div class="header">
                                     <div>
@@ -34,9 +73,10 @@
                                         {{ partner.description.ru }}
                                     </div>
                                 </div>
+
                                 <div class="header">
                                     <div>
-                                        <p>Категория</p>
+                                        <p>Категории</p>
                                     </div>
 
                                     <div class="detail">
@@ -45,7 +85,7 @@
                                 </div>
                                 <div class="header">
                                     <div>
-                                        <p>Бренд</p>
+                                        <p>Бренды</p>
                                     </div>
 
                                     <div class="detail">
@@ -54,7 +94,19 @@
                                 </div>
                                 <div class="header">
                                     <div>
-                                        <p>Продукт</p>
+                                        <p>Теги</p>
+                                    </div>
+
+                                    <div
+                                        *ngFor="let tag of partner.tags"
+                                        class="detail"
+                                    >
+                                        {{ tag.name.ru }}
+                                    </div>
+                                </div>
+                                <div class="header">
+                                    <div>
+                                        <p>Продукты</p>
                                     </div>
 
                                     <div class="detail">
