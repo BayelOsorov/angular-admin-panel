@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDateService } from '@nebular/theme';
@@ -103,7 +103,6 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                         this.coverImg = data.cover;
                         this.form.controls['title'].setValue(data.title);
                         this.form.controls['cover'].setValue(data.cover);
-
                         this.form.controls['partnerId'].setValue(
                             data.partnerId
                         );

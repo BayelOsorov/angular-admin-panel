@@ -47,16 +47,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 link: '/catalog/categories',
             },
             {
-                title: 'Партнеры',
-                link: '/catalog/partners',
-            },
-            {
                 title: 'Бренды',
                 link: '/catalog/brands',
             },
+
             {
                 title: 'Тэги',
                 link: '/catalog/tags',
+            },
+            {
+                title: 'Партнеры',
+                link: '/catalog/partners',
             },
             {
                 title: 'Группы',

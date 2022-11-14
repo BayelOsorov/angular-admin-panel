@@ -1,6 +1,8 @@
 <div class="form-group">
     <label for="exampleInputEmail1" class="label">{{ label }} RU</label>
+
     <input
+        *ngIf="formControlType === 'input'"
         type="text"
         nbInput
         fullWidth
@@ -12,10 +14,25 @@
                                     : 'basic'
                             "
     />
+    <textarea
+        *ngIf="formControlType === 'textarea'"
+        type="text"
+        nbInput
+        fullWidth
+        id="exampleInputEmail1"
+        [placeholder]="placeholder + ' RU'"
+        [formControl]="controlRu"
+        [status]=" submitted && controlRu.errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+    ></textarea>
 </div>
+
 <div class="form-group">
     <label for="exampleInputEmail1" class="label">{{ label }} KG</label>
     <input
+        *ngIf="formControlType === 'input'"
         type="text"
         nbInput
         fullWidth
@@ -27,10 +44,24 @@
                                     : 'basic'
                             "
     />
+    <textarea
+        *ngIf="formControlType === 'textarea'"
+        type="text"
+        nbInput
+        fullWidth
+        id="exampleInputEmail1"
+        [placeholder]="placeholder + ' KG'"
+        [formControl]="controlKy"
+        [status]=" submitted && controlKy.errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+    ></textarea>
 </div>
 <div class="form-group">
     <label for="exampleInputEmail1" class="label">{{ label }} UZB</label>
     <input
+        *ngIf="formControlType === 'input'"
         type="text"
         nbInput
         fullWidth
@@ -42,4 +73,17 @@
                                     : 'basic'
                             "
     />
+    <textarea
+        *ngIf="formControlType === 'textarea'"
+        type="text"
+        nbInput
+        fullWidth
+        id="exampleInputEmail1"
+        [placeholder]="placeholder + ' UZB'"
+        [formControl]="controlUz"
+        [status]=" submitted && controlUz.errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+    ></textarea>
 </div>

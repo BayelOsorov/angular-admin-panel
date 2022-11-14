@@ -164,9 +164,9 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
             shortDescRu: ['', Validators.required],
             shortDescKg: ['', Validators.required],
             shortDescUz: ['', Validators.required],
-            categoryId: ['', Validators.required],
+            categoryId: [[], Validators.required],
             productId: [[], Validators.required],
-            brandId: ['', Validators.required],
+            brandId: [[], Validators.required],
             tags: [[], Validators.required],
         });
         this.route.params.subscribe((params) => {
