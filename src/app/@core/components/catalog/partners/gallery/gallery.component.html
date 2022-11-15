@@ -24,8 +24,33 @@
     </div>
 </div>
 
-<div class="gallery" *ngIf="images">
-    <ng-container *ngFor="let i of images.items">
+<div *ngIf="images">
+    <div class="col-sm-9">
+        <div class="gallery">
+            <ng-container *ngFor="let i of images.items">
+                <div class="gallery__item">
+                    <img [src]="i.imagePath" alt="" />
+                    <button
+                        class="btn edit-btn"
+                        (click)="openEditModal(i)"
+                        nbButton
+                        status="warning"
+                    >
+                        <i style="font-size: 30px" class="nb-edit"></i>
+                    </button>
+                    <button
+                        class="btn delete-btn"
+                        (click)="deleteImage(i.id)"
+                        nbButton
+                        status="danger"
+                    >
+                        <i style="font-size: 30px" class="nb-trash"></i>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+
+        <!-- <ng-container *ngFor="let i of images.items">
         <nb-card size="small" class="gallery__item">
             <div>
                 <img [src]="i.imagePath | useHttpImgSrc" alt="" />
@@ -54,14 +79,15 @@
                 </button>
             </nb-card-footer>
         </nb-card>
-    </ng-container>
+    </ng-container> -->
 
-    <nz-pagination
-        *ngIf="images.totalItemCount > 20"
-        class="custom-pagination header"
-        (nzPageIndexChange)="changePage($event)"
-        [nzPageIndex]="images.pageNumber"
-        [nzTotal]="images.totalItemCount"
-        [nzPageSize]="images.pageSize"
-    ></nz-pagination>
+        <nz-pagination
+            *ngIf="images.totalItemCount > 20"
+            class="custom-pagination header"
+            (nzPageIndexChange)="changePage($event)"
+            [nzPageIndex]="images.pageNumber"
+            [nzTotal]="images.totalItemCount"
+            [nzPageSize]="images.pageSize"
+        ></nz-pagination>
+    </div>
 </div>

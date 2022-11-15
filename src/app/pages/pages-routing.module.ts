@@ -21,6 +21,7 @@ import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.c
 import { ListPartnerPromsComponent } from './catalog/partner-proms/list-partner-proms/list-partner-proms.component';
 import { ActionsPartnerPromsComponent } from './catalog/partner-proms/actions-partner-proms/actions-partner-proms.component';
 import { ActionsCategoryComponent } from './catalog/categories/actions-category/actions-category.component';
+import { ActionsPartnerBranchesComponent } from './catalog/partners/branches/actions-partner-branches/actions-partner-branches.component';
 
 const routes: Routes = [
     {
@@ -52,6 +53,14 @@ const routes: Routes = [
             {
                 path: 'catalog/partners',
                 component: ListPartnersComponent,
+            },
+            {
+                path: 'catalog/partners/:partnerId/branches/create',
+                component: ActionsPartnerBranchesComponent,
+            },
+            {
+                path: 'catalog/partners/:partnerId/branches/update/:branchId',
+                component: ActionsPartnerBranchesComponent,
             },
 
             {

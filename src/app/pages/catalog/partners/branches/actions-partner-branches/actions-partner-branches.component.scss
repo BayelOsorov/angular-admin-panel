@@ -1,0 +1,16 @@
+@import '../../../../../@theme/styles/themes';
+::ng-deep .input-group-text {
+    color: nb-theme(select-outline-basic-text-color);
+
+    background-color: nb-theme(select-outline-basic-background-color);
+    border-color: nb-theme(select-outline-basic-border-color);
+    border-style: nb-theme(select-outline-border-style);
+    border-width: nb-theme(select-outline-border-width);
+    border-radius: nb-theme(select-rectangle-border-radius);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+::ng-deep .custom-input-mask {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}

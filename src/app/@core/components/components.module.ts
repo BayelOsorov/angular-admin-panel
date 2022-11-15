@@ -39,10 +39,13 @@ import { CustomMapComponent } from './custom-map/custom-map.component';
 import { AvatarImgComponent } from './avatar-img/avatar-img.component';
 import { EditorComponent } from './editor/editor.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
+import { BranchesComponent } from './catalog/partners/branches/branches.component';
+import { RouterModule } from '@angular/router';
+import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays.component';
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule,
         NbAlertModule,
         NbStepperModule,
         NbCardModule,
@@ -77,6 +80,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
         CustomMapComponent,
         AvatarImgComponent,
         EditorComponent,
+        BranchesComponent,
+        WeekdaysComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -89,6 +94,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
         CustomMapComponent,
         AvatarImgComponent,
         EditorComponent,
+        BranchesComponent,
+        WeekdaysComponent,
     ],
 })
 export class ComponentsModule {}
