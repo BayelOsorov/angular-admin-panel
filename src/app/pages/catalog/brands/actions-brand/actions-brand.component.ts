@@ -78,7 +78,6 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
         this.submitted = true;
 
         if (this.form.valid) {
-            console.log(this.form.value);
             if (this.brandData) {
                 this.brandService
                     .editBrand(this.brandData.id, this.form.value)

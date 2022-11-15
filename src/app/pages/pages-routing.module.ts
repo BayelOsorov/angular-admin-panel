@@ -18,6 +18,10 @@ import { BrandActionsModalComponent } from '../@core/components/catalog/brand/br
 import { ActionsBrandComponent } from './catalog/brands/actions-brand/actions-brand.component';
 import { ListNewsComponent } from './catalog/news/list-news/list-news.component';
 import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.component';
+import { ListPartnerPromsComponent } from './catalog/partner-proms/list-partner-proms/list-partner-proms.component';
+import { ActionsPartnerPromsComponent } from './catalog/partner-proms/actions-partner-proms/actions-partner-proms.component';
+import { ActionsCategoryComponent } from './catalog/categories/actions-category/actions-category.component';
+import { ActionsPartnerBranchesComponent } from './catalog/partners/branches/actions-partner-branches/actions-partner-branches.component';
 
 const routes: Routes = [
     {
@@ -50,6 +54,14 @@ const routes: Routes = [
                 path: 'catalog/partners',
                 component: ListPartnersComponent,
             },
+            {
+                path: 'catalog/partners/:partnerId/branches/create',
+                component: ActionsPartnerBranchesComponent,
+            },
+            {
+                path: 'catalog/partners/:partnerId/branches/update/:branchId',
+                component: ActionsPartnerBranchesComponent,
+            },
 
             {
                 path: 'catalog/partners/create',
@@ -66,6 +78,14 @@ const routes: Routes = [
             {
                 path: 'catalog/categories',
                 component: CategoriesComponent,
+            },
+            {
+                path: 'catalog/categories/create',
+                component: ActionsCategoryComponent,
+            },
+            {
+                path: 'catalog/categories/update/:id',
+                component: ActionsCategoryComponent,
             },
             {
                 path: 'catalog/tags',
@@ -107,6 +127,19 @@ const routes: Routes = [
             {
                 path: 'catalog/news/update/:id',
                 component: ActionsNewsComponent,
+            },
+
+            {
+                path: 'catalog/partner-proms',
+                component: ListPartnerPromsComponent,
+            },
+            {
+                path: 'catalog/partner-proms/create',
+                component: ActionsPartnerPromsComponent,
+            },
+            {
+                path: 'catalog/partner-proms/update/:id',
+                component: ActionsPartnerPromsComponent,
             },
             {
                 path: '',

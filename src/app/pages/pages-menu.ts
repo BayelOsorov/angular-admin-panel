@@ -35,25 +35,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 link: '/catalog/localities',
             },
             {
-                title: 'Бренды',
-                link: '/catalog/brands',
+                title: 'Места',
+                link: '/catalog/malls',
             },
             {
-                title: 'Партнеры',
-                link: '/catalog/partners',
+                title: 'Продукты',
+                link: '/catalog/products',
             },
             {
                 title: 'Категории',
                 link: '/catalog/categories',
             },
             {
-                title: 'Группы',
-                link: '/catalog/groups',
-            },
-
-            {
-                title: 'Места',
-                link: '/catalog/malls',
+                title: 'Бренды',
+                link: '/catalog/brands',
             },
 
             {
@@ -61,16 +56,25 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 link: '/catalog/tags',
             },
             {
-                title: 'Продукты',
-                link: '/catalog/products',
+                title: 'Партнеры',
+                link: '/catalog/partners',
             },
             {
-                title: 'Акции',
+                title: 'Группы',
+                link: '/catalog/groups',
+            },
+
+            {
+                title: 'Акции и Промо',
                 link: '/catalog/partner-proms',
             },
             {
                 title: 'Новости',
                 link: '/catalog/news',
+            },
+            {
+                title: 'Отзывы',
+                link: '/catalog/partner-feedbacks',
             },
         ],
     },

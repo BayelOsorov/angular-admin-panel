@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
@@ -44,7 +45,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             type: 'html',
             valuePrepareFunction: (item) =>
                 this.domSanitizer.bypassSecurityTrustHtml(
-                    `<div class="row" style='background-color: ${item}'>&nbsp; </div>`
+                    `<div class="row" style='background-color: ${item}; height:43px;'>&nbsp; </div>`
                 ),
         },
         isActive: {
@@ -63,7 +64,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         private categoryService: CategoriesService,
         private windowService: NbWindowService,
         private toaster: ToastrService,
-        private domSanitizer: DomSanitizer
+        private domSanitizer: DomSanitizer,
+        private router: Router
     ) {}
     ngOnInit(): void {
         this.getCategories();
@@ -97,10 +99,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         });
     }
     public openEditModal(data) {
-        this.openModal(false, CategoryActionsModalComponent, {
-            title: 'Редактирование категории',
-            context: { itemData: data },
-        });
+        this.router.navigate([`catalog/categories/update/${data.id}`]);
     }
     public openModal(closeOnBackdropClick: boolean, component, props) {
         this.windowService

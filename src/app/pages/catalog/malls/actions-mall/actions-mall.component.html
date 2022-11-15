@@ -243,6 +243,8 @@
                         >
                         <div *ngIf="mallId ? mallData : true" class="col-sm-9">
                             <ngx-custom-map
+                                [submitted]="submitted"
+                                [control]="form.get('location')"
                                 (markLocationEvent)="markMap($event)"
                                 [baseLocation]="
                                     mallId && mallData.location.coordinates

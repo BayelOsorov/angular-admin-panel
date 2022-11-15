@@ -2,66 +2,119 @@
     <nb-card-header></nb-card-header>
     <nb-card-body>
         <nb-card>
+            <div class="partner-info">
+                <div>
+                    <img
+                        class="logo"
+                        [src]="partner.logo | useHttpImgSrc"
+                        alt="logo"
+                    />
+                </div>
+                <div class="title">
+                    <strong>{{ partner?.name }}</strong>
+                </div>
+            </div>
             <nb-tabset>
                 <nb-tab tabTitle="Информация">
                     <div *ngIf="partner" class="d-flex">
-                        <div class="col-6 col-md-4">
-                            <nb-card class="list-card" size="small">
-                                <div class="grid-view">
-                                    <img
-                                        class="center-img"
-                                        [src]="partner.logo | useHttpImgSrc"
-                                        alt="logo"
-                                    />
-                                </div>
-                            </nb-card>
+                        <div class="col-6 col-md-4 buttons">
+                            <button
+                                class="d-block w-50"
+                                nbButton
+                                status="warning"
+                            >
+                                Редактировать
+                            </button>
+                            <button
+                                class="d-block mt-3 w-50"
+                                nbButton
+                                status="info"
+                            >
+                                Деактивировать
+                            </button>
+                            <button
+                                class="d-block mt-3 w-50"
+                                nbButton
+                                status="danger"
+                            >
+                                Удалить
+                            </button>
                         </div>
                         <div class="col-md-8">
-                            <nb-card class="list-card">
-                                <div class="header">
-                                    <div>
-                                        <p>Название</p>
-                                    </div>
-
-                                    <div class="detail">Puma</div>
+                            <!-- <nb-card class="list-card"> -->
+                            <div class="header">
+                                <div class="partner-board">
+                                    <nb-alert class="" status="primary"
+                                        >10 избранное</nb-alert
+                                    >
+                                    <nb-alert class="" status="primary"
+                                        >50 отзывов</nb-alert
+                                    >
+                                    <nb-alert class="" status="primary"
+                                        >4.5 рейтинг</nb-alert
+                                    >
                                 </div>
-                                <div class="header">
-                                    <div>
-                                        <p>Описание на RU</p>
-                                    </div>
-
-                                    <div class="detail">
-                                        {{ partner.description.ru }}
-                                    </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Короткое описание на RU</p>
                                 </div>
-                                <div class="header">
-                                    <div>
-                                        <p>Категория</p>
-                                    </div>
 
-                                    <div class="detail">
-                                        {{ (category | async)?.name }}
-                                    </div>
+                                <div class="detail">
+                                    {{ partner.shortDescription.ru }}
                                 </div>
-                                <div class="header">
-                                    <div>
-                                        <p>Бренд</p>
-                                    </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Описание на RU</p>
+                                </div>
 
-                                    <div class="detail">
-                                        {{ (brand | async)?.name }}
-                                    </div>
+                                <div class="detail">
+                                    {{ partner.description.ru }}
                                 </div>
-                                <div class="header">
-                                    <div>
-                                        <p>Продукт</p>
-                                    </div>
+                            </div>
 
-                                    <div class="detail">
-                                        {{ (product | async)?.name }}
-                                    </div>
+                            <div class="header">
+                                <div>
+                                    <p>Категории</p>
                                 </div>
-                            </nb-card>
+
+                                <div class="detail">
+                                    {{ (category | async)?.name }}
+                                </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Бренды</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{ (brand | async)?.name }}
+                                </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Теги</p>
+                                </div>
+
+                                <div class="detail">
+                                    <ng-container
+                                        *ngFor="let tag of partner.tags"
+                                    >
+                                        {{ tag.name.ru }},
+                                    </ng-container>
+                                </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Продукты</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{ (product | async)?.name }}
+                                </div>
+                            </div>
+                            <!-- </nb-card> -->
                         </div>
                     </div>
                 </nb-tab>
@@ -69,7 +122,9 @@
                     <ngx-gallery [partnerId]="partnerId"></ngx-gallery>
                 </nb-tab>
                 <nb-tab tabTitle="Филиалы">
-                    <span>Content #2</span>
+                    <ngx-partner-branches
+                        [partnerId]="partnerId"
+                    ></ngx-partner-branches>
                 </nb-tab>
                 <nb-tab tabTitle="Аккаунты">
                     <span>Content #3</span>

@@ -85,3 +85,29 @@ export interface IDetailNews {
     createDateTime: '2022-11-08T08:12:27.994Z';
     productId: 0;
 }
+export interface IListPartnerProms {
+    items: [IDetailPartnerProms];
+    pageCount: 0;
+    totalItemCount: 0;
+    pageNumber: 0;
+    pageSize: 0;
+    hasPreviousPage: true;
+    hasNextPage: true;
+}
+export interface IDetailPartnerProms {
+    id: 0;
+    partnerId: 0;
+    cover: 'string';
+    title: 'string';
+    hmtlBody: 'string';
+    startDateTime: '2022-11-11T04:14:44.261Z';
+    endDateTime: '2022-11-11T04:14:44.261Z';
+}
+export interface IDetailTag {
+    id: 0;
+    name: {
+        ru: 'string';
+        kg: 'string';
+        uz: 'string';
+    };
+}

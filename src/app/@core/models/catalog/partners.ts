@@ -53,3 +53,60 @@ export interface IListPartnerImages {
     hasPreviousPage: true;
     hasNextPage: true;
 }
+export interface IListPartnerBranches {
+    items: [IDetailPartnerBranch];
+    pageCount: 0;
+    totalItemCount: 0;
+    pageNumber: 0;
+    pageSize: 0;
+    hasPreviousPage: true;
+    hasNextPage: true;
+}
+
+export interface IDetailPartnerBranch {
+    id: 0;
+    name: 'string';
+    address: 'string';
+    location: {
+        type: 'string';
+        coordinates: [number, number];
+    };
+    phoneNumber: 'string';
+    email: 'string';
+    localityId: 0;
+    mallId: 0;
+    partnerId: 0;
+    workingSchedule: [
+        {
+            day: string;
+            workingHourStart: {
+                hour: 0;
+                minute: 0;
+                second: 0;
+                millisecond: 0;
+                ticks: 0;
+            };
+            workingHourEnd: {
+                hour: 0;
+                minute: 0;
+                second: 0;
+                millisecond: 0;
+                ticks: 0;
+            };
+            lunchHourStart: {
+                hour: 0;
+                minute: 0;
+                second: 0;
+                millisecond: 0;
+                ticks: 0;
+            };
+            lunchHourEnd: {
+                hour: 0;
+                minute: 0;
+                second: 0;
+                millisecond: 0;
+                ticks: 0;
+            };
+        }
+    ];
+}

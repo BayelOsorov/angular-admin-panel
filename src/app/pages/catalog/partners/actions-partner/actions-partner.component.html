@@ -53,6 +53,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-localization-inputs
+                                [formControlType]="'textarea'"
                                 [controlRu]="form.get('shortDescRu')"
                                 [controlKy]="form.get('shortDescKg')"
                                 [controlUz]="form.get('shortDescUz')"
@@ -71,6 +72,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-localization-inputs
+                                [formControlType]="'textarea'"
                                 [controlRu]="form.get('descRu')"
                                 [controlKy]="form.get('descKg')"
                                 [controlUz]="form.get('descUz')"
@@ -136,6 +138,7 @@
                                 (searchEmit)="getCategories($event)"
                                 [data]="categories"
                                 [placeholder]="'Категория'"
+                                [mode]="'multiple'"
                             ></ngx-search-select>
                         </div>
                     </div>
@@ -152,6 +155,7 @@
                                 (searchEmit)="getBrands($event)"
                                 [data]="brands"
                                 [placeholder]="'Бренд'"
+                                [mode]="'default'"
                             ></ngx-search-select>
                         </div>
                     </div>

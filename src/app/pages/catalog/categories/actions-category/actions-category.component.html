@@ -1,0 +1,156 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header
+                >{{
+                    this.categoryId
+                        ? 'Редактирование категории'
+                        : 'Создание категории'
+                }}
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="form" (ngSubmit)="onFirstSubmit()">
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Название</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Название"
+                                formControlName="name"
+                                [status]="
+                                submitted && (form.get('name')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Порядок</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="number"
+                                nbInput
+                                fullWidth
+                                id="exampleInputPassword1"
+                                placeholder="Порядок"
+                                formControlName="order"
+                                [status]="
+                                submitted && (form.get('order')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Активен</label
+                        >
+                        <div class="col-sm-9">
+                            <nb-select
+                                fullWidth
+                                formControlName="isActive"
+                                placeholder="Активен"
+                            >
+                                <nb-option [value]="true">Да</nb-option>
+                                <nb-option [value]="false">Нeт</nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Цвет заднего фона</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="color"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Цвет заднего фона"
+                                formControlName="backgroundColor"
+                                [status]="
+                                submitted && (form.get('backgroundColor')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Категория</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-search-select
+                                (searchEmit)="getCategories($event)"
+                                [control]="form.get('parentId')"
+                                [isRequired]="false"
+                                [submitted]="submitted"
+                                [data]="categoryList"
+                                [placeholder]="'Выберите категорию'"
+                            ></ngx-search-select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Лого</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                nbInput
+                                fullWidth
+                                id="exampleInputPassword1"
+                                placeholder="Лого"
+                                type="file"
+                                (change)="onFileChange($event)"
+                                id="formFile"
+                                [status]="
+                                submitted && (form.get('logo')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                            <img
+                                [src]="logoImg | useHttpImgSrc"
+                                alt=""
+                                width="200"
+                                class="center mt-3"
+                            />
+                        </div>
+                    </div>
+                    <button
+                        class="d-flex mx-auto"
+                        type="submit"
+                        nbButton
+                        status="primary"
+                    >
+                        Подтвердить
+                    </button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -1,3 +1,10 @@
+@import '../../../@theme/styles/themes';
 div {
     text-align: center;
+}
+.validation {
+    border-color: nb-theme(input-danger-border-color);
+    border-style: nb-theme(select-outline-border-style);
+    border-width: 2px;
+    border-radius: nb-theme(select-rectangle-border-radius);
 }

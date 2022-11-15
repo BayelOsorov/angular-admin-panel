@@ -10,12 +10,12 @@ export class SearchSelectComponent implements OnInit {
     @Output() searchEmit = new EventEmitter<string>();
     @Input() control: AbstractControl = new FormControl();
 
+    @Input() submitted = false;
+    @Input() isRequired = true;
     @Input() mode = 'default';
     @Input() size = 'large';
     @Input() placeholder: string;
     @Input() data;
-    @Input() submitted = false;
-    @Input() isRequired = true;
 
     isLoading = false;
 

@@ -1,1 +1,8 @@
-<div id="map" style="height: 50vh"></div>
+<div
+    id="map"
+    [ngClass]="isRequired && submitted && control.errors?.['required']
+                                    ? 'validation'
+                                    : ''
+                            "
+    style="height: 50vh"
+></div>

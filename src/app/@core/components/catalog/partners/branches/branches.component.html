@@ -1,0 +1,33 @@
+<div class="float-right">
+    <a [routerLink]="['/catalog/partners/' + partnerId + '/branches/create']">
+        <button nbButton status="primary">Добавить</button>
+    </a>
+</div>
+<div class="list-branches">
+    <div *ngFor="let branch of listBranches" class="branch-card">
+        <div class="first-block">
+            <strong>{{ branch.name }}</strong>
+            <p>{{ branch.address }}</p>
+            <div class="buttons">
+                <button
+                    class="btn edit-btn"
+                    (click)="editBranch(branch.id)"
+                    nbButton
+                    status="warning"
+                >
+                    <i style="font-size: 30px" class="nb-edit"></i>
+                </button>
+                <button
+                    class="btn delete-btn"
+                    (click)="deleteBranch(branch.id)"
+                    nbButton
+                    status="danger"
+                >
+                    <i style="font-size: 30px" class="nb-trash"></i>
+                </button>
+            </div>
+        </div>
+        <div class="icons"></div>
+        <div class="work-shedule"></div>
+    </div>
+</div>

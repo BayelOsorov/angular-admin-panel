@@ -21,25 +21,7 @@
                                 [controlKy]="form.get('titleKg')"
                                 [controlUz]="form.get('titleUz')"
                                 [label]="'Заголовок'"
-                                [placeholder]="'Введите Заголовок'"
-                            >
-                            </ngx-localization-inputs>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label
-                            for="exampleInputEmail1"
-                            class="label col-sm-3 col-form-label"
-                            >Текст</label
-                        >
-                        <div class="col-sm-9">
-                            <ngx-localization-inputs
-                                [submitted]="submitted"
-                                [controlRu]="form.get('textRu')"
-                                [controlKy]="form.get('textKg')"
-                                [controlUz]="form.get('textUz')"
-                                [label]="'Текст'"
-                                [placeholder]="'Введите текст'"
+                                [placeholder]="'Введите заголовок'"
                             >
                             </ngx-localization-inputs>
                         </div>
@@ -57,7 +39,26 @@
                                 [controlKy]="form.get('shortTextKg')"
                                 [controlUz]="form.get('shortTextUz')"
                                 [label]="'Короткий текст'"
-                                [placeholder]="'Введите Короткий текст'"
+                                [placeholder]="'Введите короткий текст'"
+                            >
+                            </ngx-localization-inputs>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Текст</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-localization-inputs
+                                [formControlType]="'textarea'"
+                                [submitted]="submitted"
+                                [controlRu]="form.get('textRu')"
+                                [controlKy]="form.get('textKg')"
+                                [controlUz]="form.get('textUz')"
+                                [label]="'Текст'"
+                                [placeholder]="'Введите текст'"
                             >
                             </ngx-localization-inputs>
                         </div>

@@ -146,3 +146,21 @@
         }
     }
 }
+.partner-info {
+    display: flex;
+    justify-content: start;
+    .logo {
+        width: 300px;
+    }
+    .title {
+        margin-left: 40px;
+        align-self: flex-end;
+    }
+}
+.buttons {
+    display: block;
+}
+.partner-board {
+    display: flex;
+    justify-content: space-between;
+}

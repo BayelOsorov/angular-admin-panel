@@ -1,0 +1,155 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header
+                >{{
+                    partnerPromsId
+                        ? 'Редактирование промо-акции'
+                        : 'Создание промо-акции'
+                }}
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Заголовок</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="exampleInputEmail1"
+                                placeholder="Введите заголовок"
+                                formControlName="title"
+                                [status]="
+                                submitted && (form.get('title')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Партнер</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-search-select
+                                [submitted]="submitted"
+                                [control]="form.get('partnerId')"
+                                (searchEmit)="getPartners($event)"
+                                [data]="partners"
+                                [placeholder]="'Партнер'"
+                            ></ngx-search-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Обложка</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                nbInput
+                                fullWidth
+                                id="exampleInputPassword1"
+                                placeholder="Обложка"
+                                type="file"
+                                (change)="onFileChange($event, 'cover')"
+                                id="formFile"
+                                [status]="
+                                submitted && (form.get('cover')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                            <img
+                                [src]="coverImg | useHttpImgSrc"
+                                alt=""
+                                width="200"
+                                class="center mt-3"
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Дата начала
+                        </label>
+                        <div class="col-sm-9">
+                            <input
+                                fullWidth
+                                nbInput
+                                placeholder="Дата начала"
+                                [nbDatepicker]="formpicker"
+                                formControlName="startDateTime"
+                                [status]="
+                                submitted && (form.get('startDateTime')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                            <nb-datepicker #formpicker></nb-datepicker>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Дата окончания
+                        </label>
+                        <div class="col-sm-9">
+                            <input
+                                fullWidth
+                                nbInput
+                                placeholder="Дата окончания"
+                                [nbDatepicker]="formpickermy"
+                                formControlName="endDateTime"
+                                [status]="
+                                submitted && (form.get('endDateTime')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                            <nb-datepicker #formpickermy></nb-datepicker>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Контент</label
+                        >
+                        <div
+                            class="col-sm-9"
+                            *ngIf="partnerPromsId ? partnerPromsData : true"
+                        >
+                            <ngx-editor
+                                (changeEvent)="changeContent($event)"
+                                [submitted]="submitted"
+                                [data]="partnerPromsData?.hmtlBody"
+                                [control]="form.get('hmtlBody')"
+                            ></ngx-editor>
+                        </div>
+                    </div>
+                    <button
+                        class="d-flex mx-auto"
+                        type="submit"
+                        nbButton
+                        status="primary"
+                    >
+                        Подтвердить
+                    </button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

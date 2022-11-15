@@ -1,11 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../../@core/components/avatar-img/avatar-img.component';
-import { UseHttpImageSourcePipe } from '../../../../@core/components/secured-image/secured-image.component';
 import { IListNews } from '../../../../@core/models/catalog/catalog';
 import { NewsService } from '../../../../@core/services/catalog/news/news.service';
 import { tableNumbering } from '../../../../@core/utils';
@@ -30,11 +28,6 @@ export class ListNewsComponent implements OnInit, OnDestroy {
         },
         title: {
             title: 'Заголовок на RU',
-            type: 'string',
-            valuePrepareFunction: (item) => item.ru,
-        },
-        text: {
-            title: 'Текст на RU',
             type: 'string',
             valuePrepareFunction: (item) => item.ru,
         },

@@ -37,10 +37,15 @@ import { ImageActionsModalComponent } from './catalog/partners/image-actions-mod
 import { LocalityActionsModalComponent } from './catalog/locality/locality-actions-modal/locality-actions-modal.component';
 import { CustomMapComponent } from './custom-map/custom-map.component';
 import { AvatarImgComponent } from './avatar-img/avatar-img.component';
-
+import { EditorComponent } from './editor/editor.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { BranchesComponent } from './catalog/partners/branches/branches.component';
+import { RouterModule } from '@angular/router';
+import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays.component';
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule,
         NbAlertModule,
         NbStepperModule,
         NbCardModule,
@@ -54,6 +59,7 @@ import { AvatarImgComponent } from './avatar-img/avatar-img.component';
         NgMultiSelectDropDownModule,
         NbDatepickerModule,
         NzSelectModule,
+        CKEditorModule,
     ],
     declarations: [
         CreateStaffModalComponent,
@@ -73,6 +79,9 @@ import { AvatarImgComponent } from './avatar-img/avatar-img.component';
         LocalityActionsModalComponent,
         CustomMapComponent,
         AvatarImgComponent,
+        EditorComponent,
+        BranchesComponent,
+        WeekdaysComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -84,6 +93,9 @@ import { AvatarImgComponent } from './avatar-img/avatar-img.component';
         UseHttpImageSourcePipe,
         CustomMapComponent,
         AvatarImgComponent,
+        EditorComponent,
+        BranchesComponent,
+        WeekdaysComponent,
     ],
 })
 export class ComponentsModule {}

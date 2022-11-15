@@ -3,10 +3,12 @@ import {
     NbAlertModule,
     NbButtonModule,
     NbCardModule,
+    NbDatepickerModule,
     NbIconModule,
     NbInputModule,
     NbListModule,
     NbMenuModule,
+    NbPopoverModule,
     NbSelectModule,
     NbTabsetModule,
     NbTimepickerModule,
@@ -42,6 +44,10 @@ import { ActionsBrandComponent } from './catalog/brands/actions-brand/actions-br
 import { ListNewsComponent } from './catalog/news/list-news/list-news.component';
 import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { ListPartnerPromsComponent } from './catalog/partner-proms/list-partner-proms/list-partner-proms.component';
+import { ActionsPartnerPromsComponent } from './catalog/partner-proms/actions-partner-proms/actions-partner-proms.component';
+import { ActionsCategoryComponent } from './catalog/categories/actions-category/actions-category.component';
+import { ActionsPartnerBranchesComponent } from './catalog/partners/branches/actions-partner-branches/actions-partner-branches.component';
 
 @NgModule({
     imports: [
@@ -64,6 +70,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
         NbTabsetModule,
         NbTimepickerModule,
         ComponentsModule,
+        NbDatepickerModule,
+        NbPopoverModule,
         // NbIconModule,
         // NbEvaIconsModule,
     ],
@@ -86,6 +94,10 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
         ActionsBrandComponent,
         ListNewsComponent,
         ActionsNewsComponent,
+        ListPartnerPromsComponent,
+        ActionsPartnerPromsComponent,
+        ActionsCategoryComponent,
+        ActionsPartnerBranchesComponent,
     ],
     providers: [
         {
