@@ -1,0 +1,50 @@
+@import '../../../../../@theme/styles/themes';
+
+.branch-card {
+    margin-top: 40px;
+    border-color: nb-theme(select-outline-basic-border-color);
+    border-style: nb-theme(select-outline-border-style);
+    border-width: nb-theme(select-outline-border-width);
+    border-radius: nb-theme(select-rectangle-border-radius);
+}
+.first-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    strong,
+    p {
+        padding-top: 10px;
+        text-align: center;
+    }
+    p {
+        border-left: nb-theme(select-outline-border-width)
+            nb-theme(select-outline-border-style)
+            nb-theme(select-outline-basic-border-color);
+    }
+    .btn {
+        width: 50px;
+        height: 50px;
+    }
+    .buttons {
+        margin-left: auto;
+        .edit-btn {
+            margin-right: 10px;
+        }
+    }
+}
+.list-branches {
+    padding-top: 70px;
+    width: 90%;
+    margin: 0 auto;
+}
+.work-shedule {
+    display: flex;
+    justify-content: space-evenly;
+    .shedule-item {
+        width: 100%;
+        padding-top: 10px;
+        text-align: center;
+        border-color: nb-theme(select-outline-basic-border-color);
+        border-style: nb-theme(select-outline-border-style);
+        border-width: nb-theme(select-outline-border-width);
+    }
+}

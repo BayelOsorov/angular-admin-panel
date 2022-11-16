@@ -29,7 +29,7 @@
         <div class="gallery">
             <ng-container *ngFor="let i of images.items">
                 <div class="gallery__item">
-                    <img [src]="i.imagePath" alt="" />
+                    <img [src]="i.imagePath | useHttpImgSrc" alt="" />
                     <button
                         class="btn edit-btn"
                         (click)="openEditModal(i)"

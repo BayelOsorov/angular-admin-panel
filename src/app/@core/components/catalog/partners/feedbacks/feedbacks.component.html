@@ -1,0 +1,16 @@
+<div class="list-feedbacks">
+    <div *ngFor="let item of listFeedbacks.items" class="feedback-item">
+        <div class="first-block">
+            <strong>Осмонов Талгар</strong>
+        </div>
+        <p>{{ item.comment }}</p>
+        <div class="date">
+            {{ item.createDateTime | date: 'dd.MM.yyy' }}
+        </div>
+    </div>
+
+    <ngx-pagination
+        (changePageEvent)="getFeedbacks($event)"
+        [data]="listFeedbacks"
+    ></ngx-pagination>
+</div>

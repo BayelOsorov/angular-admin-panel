@@ -139,7 +139,13 @@
 
                         <div class="col-sm-9">
                             <div class="d-flex">
-                                <span class="input-group-text" id="basic-addon1"
+                                <span
+                                    [ngClass]=" submitted && (form.get('phoneNumber')).errors?.['required']
+                                    ? 'validation'
+                                    : ''
+                            "
+                                    class="input-group-text"
+                                    id="basic-addon1"
                                     >+996</span
                                 >
 

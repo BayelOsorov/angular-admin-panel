@@ -5,6 +5,7 @@ import {
     IDetailPartner,
     IDetailPartnerBranch,
     IListPartner,
+    IListPartnerFeedbacks,
     IListPartnerImages,
 } from '../../../models/catalog/partners';
 import { HttpOptions } from '../../../utils';
@@ -14,7 +15,7 @@ import { HttpOptions } from '../../../utils';
 })
 export class PartnersService {
     constructor(private http: HttpClient) {}
-
+    //  ! Partners CRUD
     getListPartners(page = 1, name = '') {
         return this.http.get<IListPartner>(
             environment.catalogUrl +
@@ -83,6 +84,9 @@ export class PartnersService {
                 `/Administration/api/v1/partners/${partnerId}/images/${imgId}`
         );
     }
+
+    // ! Partner Branches
+
     getListPartnerBranches(partnerId) {
         return this.http.get(
             environment.catalogUrl +
@@ -113,6 +117,28 @@ export class PartnersService {
         return this.http.post(
             environment.catalogUrl +
                 `/Administration/api/v1/partners/${partnerId}/branches`,
+            data
+        );
+    }
+
+    // ! Partner Feedbacks
+
+    getPartnerFeedbacks(page = 1, partnerId: number, passedModeration = '') {
+        return this.http.get<IListPartnerFeedbacks>(
+            environment.catalogUrl +
+                `/Administration/api/v1/${partnerId}/feedbacks?passedModeration=${passedModeration}&page=${page}&pageSize=20`
+        );
+    }
+    deletePartnerFeedback(partnerId: number, feedbackId: number) {
+        return this.http.delete(
+            environment.catalogUrl +
+                `/Administration/api/v1/${partnerId}/feedbacks/${feedbackId}`
+        );
+    }
+    editPartnerFeedback(partnerId: number, feedbackId: number, data) {
+        return this.http.put(
+            environment.catalogUrl +
+                `/Administration/api/v1/${partnerId}/feedbacks/${feedbackId}/check`,
             data
         );
     }

@@ -42,6 +42,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { BranchesComponent } from './catalog/partners/branches/branches.component';
 import { RouterModule } from '@angular/router';
 import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays.component';
+import { FeedbacksComponent } from './catalog/partners/feedbacks/feedbacks.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 @NgModule({
     imports: [
         CommonModule,
@@ -58,6 +61,7 @@ import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays
         NbListModule,
         NgMultiSelectDropDownModule,
         NbDatepickerModule,
+        NzPaginationModule,
         NzSelectModule,
         CKEditorModule,
     ],
@@ -82,6 +86,8 @@ import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays
         EditorComponent,
         BranchesComponent,
         WeekdaysComponent,
+        FeedbacksComponent,
+        PaginationComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -96,6 +102,8 @@ import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays
         EditorComponent,
         BranchesComponent,
         WeekdaysComponent,
+        FeedbacksComponent,
+        PaginationComponent,
     ],
 })
 export class ComponentsModule {}

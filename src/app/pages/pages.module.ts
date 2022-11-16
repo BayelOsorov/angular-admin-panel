@@ -4,6 +4,7 @@ import {
     NbButtonModule,
     NbCardModule,
     NbDatepickerModule,
+    NbIconDefinition,
     NbIconModule,
     NbInputModule,
     NbListModule,
@@ -48,7 +49,14 @@ import { ListPartnerPromsComponent } from './catalog/partner-proms/list-partner-
 import { ActionsPartnerPromsComponent } from './catalog/partner-proms/actions-partner-proms/actions-partner-proms.component';
 import { ActionsCategoryComponent } from './catalog/categories/actions-category/actions-category.component';
 import { ActionsPartnerBranchesComponent } from './catalog/partners/branches/actions-partner-branches/actions-partner-branches.component';
-
+import * as AllIcons from '@ant-design/icons-angular/icons';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
+const antDesignIcons = AllIcons as unknown as {
+    [key: string]: NbIconDefinition;
+};
+const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
+    (key) => antDesignIcons[key]
+);
 @NgModule({
     imports: [
         PagesRoutingModule,
@@ -104,6 +112,7 @@ import { ActionsPartnerBranchesComponent } from './catalog/partners/branches/act
             provide: NB_TIME_PICKER_CONFIG,
             useValue: {},
         },
+        { provide: NZ_ICONS, useValue: icons },
         UseHttpImageSourcePipe,
     ],
 })

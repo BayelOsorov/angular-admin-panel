@@ -173,6 +173,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
     }
     handlePhone(num) {
         const txt = num.key;
+
         if ((txt.length === 12 || num.which === 32) && num.which !== 8) {
             num.preventDefault();
         }
@@ -226,7 +227,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
         this.form = this.fb.group({
             name: ['', Validators.required],
             address: ['', Validators.required],
-            phoneNumber: [''],
+            phoneNumber: ['', Validators.required],
             email: [''],
             location: ['', Validators.required],
 
@@ -284,7 +285,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                         this.form.controls['name'].setValue(data.name);
                         this.form.controls['mallId'].setValue(data.mallId);
                         this.form.controls['phoneNumber'].setValue(
-                            data.phoneNumber
+                            data.phoneNumber.replace('+996', '')
                         );
                         this.form.controls['location'].setValue(
                             data.location.coordinates

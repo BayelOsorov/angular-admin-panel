@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PartnersService } from '../../../../services/catalog/partners/partners.service';
@@ -15,14 +16,43 @@ export class BranchesComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private partnersService: PartnersService,
-        private router: Router
+        private router: Router,
+        private toaster: ToastrService
     ) {}
     editBranch(id) {
         this.router.navigate([
             `catalog/partners/${this.partnerId}/branches/update/${id}`,
         ]);
     }
-    deleteBranch(id) {}
+    deleteBranch(id) {
+        this.partnersService
+            .deletePartnerBranch(this.partnerId, id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                this.toaster.success('Успешно удалено!');
+                this.getBranches();
+            });
+    }
+    translateWeekdays(str) {
+        switch (str) {
+            case 'Monday':
+                return 'ПН';
+            case 'Sunday':
+                return 'ВС';
+            case 'Saturday':
+                return 'СБ';
+            case 'Friday':
+                return 'ПТ';
+            case 'Thursday':
+                return 'ЧТ';
+            case 'Wednesday':
+                return 'СР';
+            case 'Tuesday':
+                return 'ВТ';
+            default:
+                return str;
+        }
+    }
     getBranches() {
         this.partnersService
             .getListPartnerBranches(this.partnerId)
