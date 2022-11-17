@@ -36,7 +36,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             valuePrepareFunction: (cell, item) =>
                 this.domSanitizer.bypassSecurityTrustHtml(
                     item.parentId
-                        ? item.parentId + ` - ` + item.name
+                        ? item.parentName + ` - ` + item.name
                         : item.name
                 ),
         },

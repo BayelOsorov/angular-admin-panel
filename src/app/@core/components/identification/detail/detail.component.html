@@ -1,0 +1,52 @@
+<div class="detail-info" *ngIf="data">
+    <div class="status">
+        <strong>{{ data.createdAt | date: 'dd.MM.yyyy, mm:hh' }}</strong>
+        <nb-alert status="primary">Фотоидентификация</nb-alert>
+    </div>
+    <div class="detail-images">
+        <img [src]="data.passportFrontSideImageUrl | useHttpImgSrc" alt="" />
+        <img [src]="data.passportBackSideImageUrl | useHttpImgSrc" alt="" />
+        <img [src]="data.selfieWithPassportImageUrl | useHttpImgSrc" alt="" />
+    </div>
+    <div [@openClose]="toggle" class="data" *ngIf="personalData && toggle">
+        <img [src]="personalData.profilePhotoUrl | useHttpImgSrc" alt="" />
+        <table>
+            <tr>
+                <td>ПИН</td>
+                <td>{{ personalData.pin }}</td>
+            </tr>
+            <tr>
+                <td>Имя</td>
+                <td>{{ personalData.name }}</td>
+            </tr>
+            <tr>
+                <td>Фамилия</td>
+                <td>{{ personalData.surname }}</td>
+            </tr>
+            <tr>
+                <td>Отчество</td>
+                <td>{{ personalData.patronymic }}</td>
+            </tr>
+            <tr>
+                <td>Пол</td>
+                <td>{{ personalData.gender }}</td>
+            </tr>
+            <tr>
+                <td>Дата рождения</td>
+                <td>{{ personalData.birthDate | date: 'dd.MM.yyyy, h:mm' }}</td>
+            </tr>
+            <tr>
+                <td>Семейное положение</td>
+                <td>{{ personalData.maritalStatus }}</td>
+            </tr>
+        </table>
+    </div>
+    <button
+        class="mx-auto d-flex mt-4"
+        (click)="getDataToggle()"
+        nbButton
+        status="primary"
+    >
+        {{ !toggle ? 'Запросить паспортные данные' : 'Скрыть' }}
+    </button>
+</div>

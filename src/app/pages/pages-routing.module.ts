@@ -23,6 +23,7 @@ import { ActionsPartnerPromsComponent } from './catalog/partner-proms/actions-pa
 import { ActionsCategoryComponent } from './catalog/categories/actions-category/actions-category.component';
 import { ActionsPartnerBranchesComponent } from './catalog/partners/branches/actions-partner-branches/actions-partner-branches.component';
 import { IdentificationGetComponent } from './identification/operator/identification-get/identification-get.component';
+import { IdentificationDetailComponent } from './identification/operator/identification-detail/identification-detail.component';
 
 const routes: Routes = [
     {
@@ -147,6 +148,10 @@ const routes: Routes = [
             {
                 path: 'identification',
                 component: IdentificationGetComponent,
+            },
+            {
+                path: 'identification/detail/:id',
+                component: IdentificationDetailComponent,
             },
             {
                 path: '',

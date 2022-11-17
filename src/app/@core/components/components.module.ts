@@ -1,9 +1,4 @@
-import {
-    CUSTOM_ELEMENTS_SCHEMA,
-    forwardRef,
-    NgModule,
-    NO_ERRORS_SCHEMA,
-} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     NbAlertModule,
@@ -45,6 +40,7 @@ import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays
 import { FeedbacksComponent } from './catalog/partners/feedbacks/feedbacks.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { DetailComponent } from './identification/detail/detail.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -88,6 +84,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
         WeekdaysComponent,
         FeedbacksComponent,
         PaginationComponent,
+        DetailComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -104,6 +101,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
         WeekdaysComponent,
         FeedbacksComponent,
         PaginationComponent,
+        DetailComponent,
     ],
 })
 export class ComponentsModule {}

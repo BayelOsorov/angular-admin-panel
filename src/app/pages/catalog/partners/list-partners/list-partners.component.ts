@@ -20,8 +20,8 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
                 tableNumbering(this.listPartner.pageNumber, cell.row.index),
         },
         name: { title: 'Название', type: 'string' },
-        categoryId: { title: 'Категория', type: 'number' },
-        order: { title: 'Порядок', type: 'string' },
+        categoryName: { title: 'Категория', type: 'string' },
+        priductName: { title: 'Продукт', type: 'string' },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(

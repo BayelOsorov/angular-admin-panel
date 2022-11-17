@@ -11,6 +11,7 @@ import {
     NbMenuModule,
     NbPopoverModule,
     NbSelectModule,
+    NbSpinnerModule,
     NbTabsetModule,
     NbTimepickerModule,
     NbTreeGridModule,
@@ -52,6 +53,7 @@ import { ActionsPartnerBranchesComponent } from './catalog/partners/branches/act
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IdentificationGetComponent } from './identification/operator/identification-get/identification-get.component';
+import { IdentificationDetailComponent } from './identification/operator/identification-detail/identification-detail.component';
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
 };
@@ -72,6 +74,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         NbTreeGridModule,
         NbInputModule,
         NbButtonModule,
+        NbSpinnerModule,
         NzPaginationModule,
         NzPopoverModule,
         NzSelectModule,
@@ -108,6 +111,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ActionsCategoryComponent,
         ActionsPartnerBranchesComponent,
         IdentificationGetComponent,
+        IdentificationDetailComponent,
     ],
     providers: [
         {

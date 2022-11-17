@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,6 +19,11 @@ import { tableNumbering } from '../../../../@core/utils';
 export class ListMallsComponent implements OnInit, OnDestroy {
     listMalls: IListMalls;
     localities = [];
+    form = this.fb.group({
+        name: [''],
+        type: [''],
+        localityId: [''],
+    });
     tableColumns = {
         index: {
             title: '№',
@@ -50,11 +56,12 @@ export class ListMallsComponent implements OnInit, OnDestroy {
         private mallsService: MallsService,
         private localitiesService: LocalitiesService,
         private toaster: ToastrService,
-        private router: Router
+        private router: Router,
+        private fb: FormBuilder
     ) {}
-    getMalls(page = 1, name = '') {
+    getMalls(page = 1, filter = {}) {
         this.mallsService
-            .getListMalls(page, name)
+            .getListMalls(page, filter)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listMalls = res));
     }
@@ -63,9 +70,10 @@ export class ListMallsComponent implements OnInit, OnDestroy {
             this.localities = data.items;
         });
     }
-    onSearch(event) {
-        this.getMalls(1, event);
+    changeType(type) {
+        console.log(type);
     }
+
     updateMall(data) {
         this.router.navigate([`catalog/malls/update/${data.id}`]);
     }
@@ -83,6 +91,11 @@ export class ListMallsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.form.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.getMalls(1, data);
+            });
         this.getMalls();
     }
     ngOnDestroy() {

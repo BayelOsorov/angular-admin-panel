@@ -36,7 +36,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
             title: 'Название',
             type: 'string',
         },
-        categoryId: {
+        categoryName: {
             title: 'Категория',
             type: 'number',
         },

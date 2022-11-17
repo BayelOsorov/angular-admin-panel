@@ -27,6 +27,7 @@ import { HttpErrorInterceptor } from './@core/interceptors/error.interceptor';
     declarations: [AppComponent],
     imports: [
         BrowserModule,
+
         BrowserAnimationsModule,
         HttpClientModule,
         AppRoutingModule,

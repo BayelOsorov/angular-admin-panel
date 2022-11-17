@@ -1,10 +1,28 @@
 <nb-card>
-    <nb-card-header>Идентификация </nb-card-header>
+    <nb-card-header>Идентификация клиентов</nb-card-header>
     <nb-card-body class="d-flex justify-content-around">
-        <button (click)="photoIdentification()" nbButton status="primary">
+        <button
+            [nbSpinner]="photoIdentificationToggle"
+            [disabled]="photoIdentificationToggle"
+            (click)="photoIdentification()"
+            nbSpinnerStatus="info"
+            nbSpinnerSize="medium"
+            nbSpinnerMessage=""
+            nbButton
+            status="primary"
+        >
             Получить заявку на фотоидентификацию
         </button>
-        <button (click)="videoIdentification()" nbButton status="info">
+        <button
+            [nbSpinner]="videoIdentificationToggle"
+            [disabled]="videoIdentificationToggle"
+            (click)="videoIdentification()"
+            nbSpinnerStatus="info"
+            nbSpinnerSize="medium"
+            nbSpinnerMessage=""
+            nbButton
+            status="info"
+        >
             Получить заявку на видеоидентификацию
         </button>
     </nb-card-body>

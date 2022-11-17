@@ -8,6 +8,7 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 import {
     filter,
@@ -23,6 +24,7 @@ import {
 export class InputSearchComponent implements OnInit, AfterViewInit {
     @Output() searchEvent = new EventEmitter<number>();
     @ViewChild('input', { static: true }) input: ElementRef;
+    @Input() control: AbstractControl = new FormControl();
     @Input() placeholder: string;
     constructor() {}
 
