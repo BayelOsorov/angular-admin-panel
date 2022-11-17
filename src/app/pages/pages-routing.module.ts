@@ -22,6 +22,7 @@ import { ListPartnerPromsComponent } from './catalog/partner-proms/list-partner-
 import { ActionsPartnerPromsComponent } from './catalog/partner-proms/actions-partner-proms/actions-partner-proms.component';
 import { ActionsCategoryComponent } from './catalog/categories/actions-category/actions-category.component';
 import { ActionsPartnerBranchesComponent } from './catalog/partners/branches/actions-partner-branches/actions-partner-branches.component';
+import { IdentificationGetComponent } from './identification/operator/identification-get/identification-get.component';
 
 const routes: Routes = [
     {
@@ -99,7 +100,7 @@ const routes: Routes = [
                 path: 'catalog/localities',
                 component: LocalitiesComponent,
             },
-
+            // ! Malls
             {
                 path: 'catalog/malls',
                 component: ListMallsComponent,
@@ -116,6 +117,7 @@ const routes: Routes = [
                 path: 'catalog/malls/detail/:id',
                 component: DetailPartnerComponent,
             },
+            // ! News
             {
                 path: 'catalog/news',
                 component: ListNewsComponent,
@@ -128,7 +130,7 @@ const routes: Routes = [
                 path: 'catalog/news/update/:id',
                 component: ActionsNewsComponent,
             },
-
+            // ! Partner Proms
             {
                 path: 'catalog/partner-proms',
                 component: ListPartnerPromsComponent,
@@ -140,6 +142,11 @@ const routes: Routes = [
             {
                 path: 'catalog/partner-proms/update/:id',
                 component: ActionsPartnerPromsComponent,
+            },
+            // ! Identification
+            {
+                path: 'identification',
+                component: IdentificationGetComponent,
             },
             {
                 path: '',

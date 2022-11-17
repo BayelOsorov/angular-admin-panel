@@ -53,9 +53,9 @@ export class BranchesComponent implements OnInit, OnDestroy {
                 return str;
         }
     }
-    getBranches() {
+    getBranches(page = 1) {
         this.partnersService
-            .getListPartnerBranches(this.partnerId)
+            .getListPartnerBranches(page, this.partnerId)
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.listBranches = data;

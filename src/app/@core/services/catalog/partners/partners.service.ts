@@ -87,10 +87,10 @@ export class PartnersService {
 
     // ! Partner Branches
 
-    getListPartnerBranches(partnerId) {
+    getListPartnerBranches(page = 1, partnerId) {
         return this.http.get(
             environment.catalogUrl +
-                `/Administration/api/v1/partners/${partnerId}/branches`
+                `/Administration/api/v1/partners/${partnerId}/branches?page=${page}&pageSize=20`
         );
     }
     getDetailPartnerBranch(id: number, branchId) {

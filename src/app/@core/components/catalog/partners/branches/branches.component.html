@@ -9,7 +9,7 @@
         </a>
     </div>
     <div class="list-branches">
-        <div *ngFor="let branch of listBranches" class="branch-card">
+        <div *ngFor="let branch of listBranches.items" class="branch-card">
             <div class="first-block">
                 <strong>{{ branch.name }}</strong>
                 <p>{{ branch.address }}</p>
@@ -61,4 +61,8 @@
             </div>
         </div>
     </div>
+    <ngx-pagination
+        (changePageEvent)="getBranches($event)"
+        [data]="listBranches"
+    ></ngx-pagination>
 </div>
