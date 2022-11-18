@@ -1,0 +1,106 @@
+<form *ngIf="isNeedToEdit" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="need-to-edit">
+        <div class="col-md-4">
+            <p class="row show-grid">Лицевая сторона паспорта</p>
+            <p class="row show-grid">Оборотная сторона паспорта</p>
+            <p class="row show-grid">Селфи с паспортом</p>
+            <p class="row show-grid">ИНН</p>
+            <p class="row show-grid">Номер паспорта</p>
+            <p class="row show-grid">Адрес</p>
+        </div>
+        <div class="col-md-4 offset-md-1">
+            <nb-select
+                multiple
+                formControlName="PassportFrontSideImageId"
+                class="select"
+                fullWidth
+                placeholder="Выберите"
+            >
+                <nb-option
+                    value="пожалуйста, сфотографируйтесь с действующим паспортом."
+                    >пожалуйста, сфотографируйтесь с действующим
+                    паспортом.</nb-option
+                >
+
+                <nb-option value="пожалуйста, сфотографируйтесь без очков."
+                    >пожалуйста, сфотографируйтесь без очков.</nb-option
+                >
+                <nb-option
+                    value="пожалуйста, сфотографируйтесь с паспортом у лица без головного убора."
+                    >пожалуйста, сфотографируйтесь с паспортом у лица без
+                    головного убора.</nb-option
+                >
+            </nb-select>
+            <nb-select
+                multiple
+                formControlName="PassportBackSideImageId"
+                class="select"
+                fullWidth
+                placeholder="Выберите"
+            >
+                <nb-option
+                    value="Пожалуйста введите правильно passportBackSideImageId"
+                    >Пожалуйста введите правильно</nb-option
+                >
+            </nb-select>
+            <nb-select
+                multiple
+                formControlName="Pin"
+                class="select"
+                fullWidth
+                placeholder="Выберите"
+            >
+                <nb-option value="Пожалуйста введите правильно pin"
+                    >Пожалуйста введите правильно</nb-option
+                >
+            </nb-select>
+            <nb-select
+                multiple
+                formControlName="SelfieWithPassportImageId"
+                class="select"
+                fullWidth
+                placeholder="Выберите"
+            >
+                <nb-option
+                    value="Пожалуйста введите правильно selfieWithPassportImageId"
+                    >Пожалуйста введите правильно</nb-option
+                >
+            </nb-select>
+            <nb-select
+                multiple
+                formControlName="DocumentNumber"
+                class="select"
+                fullWidth
+                placeholder="Выберите"
+            >
+                <nb-option value="Пожалуйста введите правильно documentNumber"
+                    >Пожалуйста введите правильно</nb-option
+                >
+            </nb-select>
+            <nb-select
+                multiple
+                formControlName="Address"
+                class="select"
+                fullWidth
+                placeholder="Выберите"
+            >
+                <nb-option value="Пожалуйста введите правильно address"
+                    >Пожалуйста введите правильно</nb-option
+                >
+            </nb-select>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <button type="submit" class="" nbButton status="warning">
+                Отправить на редактирование
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button (click)="hide()" class="" nbButton status="info">
+                Скрыть
+            </button>
+        </div>
+    </div>
+</form>

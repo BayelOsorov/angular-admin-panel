@@ -3,13 +3,29 @@
         <strong>{{ data.createdAt | date: 'dd.MM.yyyy, mm:hh' }}</strong>
         <nb-alert status="primary">Фотоидентификация</nb-alert>
     </div>
-    <div class="detail-images">
-        <img [src]="data.passportFrontSideImageUrl | useHttpImgSrc" alt="" />
-        <img [src]="data.passportBackSideImageUrl | useHttpImgSrc" alt="" />
-        <img [src]="data.selfieWithPassportImageUrl | useHttpImgSrc" alt="" />
+    <div class="detail-images row">
+        <img
+            class="col-md-4"
+            [src]="data.passportFrontSideImageUrl | useHttpImgSrc"
+            alt=""
+        />
+        <img
+            class="col-md-4"
+            [src]="data.passportBackSideImageUrl | useHttpImgSrc"
+            alt=""
+        />
+        <img
+            class="col-md-4"
+            [src]="data.selfieWithPassportImageUrl | useHttpImgSrc"
+            alt=""
+        />
     </div>
     <div [@openClose]="toggle" class="data" *ngIf="personalData && toggle">
-        <img [src]="personalData.profilePhotoUrl | useHttpImgSrc" alt="" />
+        <img
+            class="col-md-4"
+            [src]="personalData.profilePhotoUrl | useHttpImgSrc"
+            alt=""
+        />
         <table>
             <tr>
                 <td>ПИН</td>
@@ -49,4 +65,15 @@
     >
         {{ !toggle ? 'Запросить паспортные данные' : 'Скрыть' }}
     </button>
+    <ngx-photo-idn-buttons
+        [isPhotoIdnNeedToEdit]="isNeedToEdit"
+        (editEvent)="editPhotoIdn()"
+    ></ngx-photo-idn-buttons>
+    <ngx-identification-need-to-edit
+        [data]="data"
+        (approveEvent)="approvePhotoIdn($event)"
+        (declineEvent)="declinePhotoIdn()"
+        [isNeedToEdit]="isNeedToEdit"
+        (hideEditEvent)="hideEdit($event)"
+    ></ngx-identification-need-to-edit>
 </div>

@@ -1,0 +1,17 @@
+<div *ngIf="!isPhotoIdnNeedToEdit" class="row mt-5">
+    <div class="col-md-4">
+        <button class="w-100" nbButton status="success" (click)="approveUser()">
+            Одобрить
+        </button>
+    </div>
+    <div class="col-md-4">
+        <button class="w-100" nbButton status="warning" (click)="editUser()">
+            Редактировать
+        </button>
+    </div>
+    <div class="col-md-4">
+        <button class="w-100" nbButton status="danger" (click)="declineUser()">
+            Отклонить
+        </button>
+    </div>
+</div>

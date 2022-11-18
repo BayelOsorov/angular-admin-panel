@@ -2,29 +2,24 @@
 .detail-info {
     width: 90%;
     margin: 0 auto;
+
     .status {
         height: 55px;
         display: flex;
         justify-content: space-between;
         align-items: baseline;
     }
-    .detail-images {
-        display: flex;
-        justify-content: space-between;
-        img {
-            width: calc(100% / 4);
-        }
-    }
+
     .data {
         margin: 0 auto;
         margin-top: 40px;
         display: flex;
         justify-content: space-between;
-        img {
-            width: 500px;
-            object-fit: contain;
-            height: 250px;
-        }
+        // img {
+        //     width: 500px;
+        //     object-fit: contain;
+        //     height: 250px;
+        // }
     }
     td,
     th {

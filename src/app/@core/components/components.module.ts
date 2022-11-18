@@ -41,6 +41,8 @@ import { FeedbacksComponent } from './catalog/partners/feedbacks/feedbacks.compo
 import { PaginationComponent } from './pagination/pagination.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { DetailComponent } from './identification/detail/detail.component';
+import { NeedToEditComponent } from './identification/need-to-edit/need-to-edit.component';
+import { PhotoIdnButtonsComponent } from './identification/photo-idn-buttons/photo-idn-buttons.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -85,6 +87,8 @@ import { DetailComponent } from './identification/detail/detail.component';
         FeedbacksComponent,
         PaginationComponent,
         DetailComponent,
+        NeedToEditComponent,
+        PhotoIdnButtonsComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -102,6 +106,8 @@ import { DetailComponent } from './identification/detail/detail.component';
         FeedbacksComponent,
         PaginationComponent,
         DetailComponent,
+        NeedToEditComponent,
+        PhotoIdnButtonsComponent,
     ],
 })
 export class ComponentsModule {}

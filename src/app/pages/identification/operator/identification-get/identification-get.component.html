@@ -1,9 +1,9 @@
 <nb-card>
     <nb-card-header>Идентификация клиентов</nb-card-header>
     <nb-card-body class="d-flex justify-content-around">
+        <!-- [disabled]="photoIdentificationToggle" -->
+        <!-- [nbSpinner]="photoIdentificationToggle" -->
         <button
-            [nbSpinner]="photoIdentificationToggle"
-            [disabled]="photoIdentificationToggle"
             (click)="photoIdentification()"
             nbSpinnerStatus="info"
             nbSpinnerSize="medium"
@@ -13,9 +13,9 @@
         >
             Получить заявку на фотоидентификацию
         </button>
+        <!-- [disabled]="videoIdentificationToggle" -->
+        <!-- [nbSpinner]="videoIdentificationToggle" -->
         <button
-            [nbSpinner]="videoIdentificationToggle"
-            [disabled]="videoIdentificationToggle"
             (click)="videoIdentification()"
             nbSpinnerStatus="info"
             nbSpinnerSize="medium"
