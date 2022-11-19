@@ -8,7 +8,6 @@ import { ViewCell } from 'ng2-smart-table';
         class="bg-info rounded-circle mx-auto d-flex"
         [src]="renderValue | useHttpImgSrc"
     />`,
-    styleUrls: ['./avatar-img.component.scss'],
 })
 export class AvatarImgComponent implements ViewCell, OnInit {
     @Input() value: string | number;

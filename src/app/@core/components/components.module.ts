@@ -43,6 +43,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { DetailComponent } from './identification/detail/detail.component';
 import { NeedToEditComponent } from './identification/need-to-edit/need-to-edit.component';
 import { PhotoIdnButtonsComponent } from './identification/photo-idn-buttons/photo-idn-buttons.component';
+import { LightboxImgComponent } from './lightbox-img/lightbox-img.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -89,6 +90,7 @@ import { PhotoIdnButtonsComponent } from './identification/photo-idn-buttons/pho
         DetailComponent,
         NeedToEditComponent,
         PhotoIdnButtonsComponent,
+        LightboxImgComponent,
     ],
     // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -108,6 +110,7 @@ import { PhotoIdnButtonsComponent } from './identification/photo-idn-buttons/pho
         DetailComponent,
         NeedToEditComponent,
         PhotoIdnButtonsComponent,
+        LightboxImgComponent,
     ],
 })
 export class ComponentsModule {}

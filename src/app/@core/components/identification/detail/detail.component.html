@@ -19,14 +19,21 @@
             [src]="data.selfieWithPassportImageUrl | useHttpImgSrc"
             alt=""
         />
+        <ngx-lightbox-img
+            [imgUrls]="[
+                data.passportFrontSideImageUrl,
+                data.passportBackSideImageUrl,
+                data.selfieWithPassportImageUrl
+            ]"
+        ></ngx-lightbox-img>
     </div>
-    <div [@openClose]="toggle" class="data" *ngIf="personalData && toggle">
+    <div [@openClose]="toggle" class="data row" *ngIf="personalData && toggle">
         <img
             class="col-md-4"
             [src]="personalData.profilePhotoUrl | useHttpImgSrc"
             alt=""
         />
-        <table>
+        <table class="col-md-6 ml-3">
             <tr>
                 <td>ПИН</td>
                 <td>{{ personalData.pin }}</td>
@@ -49,11 +56,36 @@
             </tr>
             <tr>
                 <td>Дата рождения</td>
-                <td>{{ personalData.birthDate | date: 'dd.MM.yyyy, h:mm' }}</td>
+                <td>{{ personalData.birthDate | date: 'dd.MM.yyyy' }}</td>
             </tr>
             <tr>
                 <td>Семейное положение</td>
                 <td>{{ personalData.maritalStatus }}</td>
+            </tr>
+            <tr>
+                <td>Адрес прописки</td>
+                <td>{{ personalData.residenceAddress }}</td>
+            </tr>
+            <tr>
+                <td>Номер паспорта</td>
+                <td>{{ personalData.documentNumber }}</td>
+            </tr>
+            <tr>
+                <td>Дата выдачи</td>
+                <td>{{ personalData.dateOfIssue | date: 'dd.MM.yyyy' }}</td>
+            </tr>
+
+            <tr>
+                <td>Кем выдан</td>
+                <td>{{ personalData.authority }}</td>
+            </tr>
+            <tr>
+                <td>Срок действия паспорта</td>
+                <td>{{ personalData.dateOfExpiry | date: 'dd.MM.yyyy' }}</td>
+            </tr>
+            <tr>
+                <td>Номер телефона</td>
+                <td></td>
             </tr>
         </table>
     </div>
@@ -66,13 +98,15 @@
         {{ !toggle ? 'Запросить паспортные данные' : 'Скрыть' }}
     </button>
     <ngx-photo-idn-buttons
+        [isInfoOpened]="toggle"
+        [data]="data"
         [isPhotoIdnNeedToEdit]="isNeedToEdit"
         (editEvent)="editPhotoIdn()"
+        (approveEvent)="approvePhotoIdn()"
+        (declineEvent)="declinePhotoIdn()"
     ></ngx-photo-idn-buttons>
     <ngx-identification-need-to-edit
         [data]="data"
-        (approveEvent)="approvePhotoIdn($event)"
-        (declineEvent)="declinePhotoIdn()"
         [isNeedToEdit]="isNeedToEdit"
         (hideEditEvent)="hideEdit($event)"
     ></ngx-identification-need-to-edit>

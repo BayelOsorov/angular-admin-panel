@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import {
     Component,
     OnInit,
@@ -8,7 +9,6 @@ import {
     OnDestroy,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -34,7 +34,7 @@ export class NeedToEditComponent implements OnInit, OnDestroy {
         private fb: FormBuilder,
         private identificationService: IdentificationService,
         private toastService: ToastrService,
-        private router: Router
+        private location: Location
     ) {}
     hide() {
         this.hideEditEvent.emit(false);
@@ -51,7 +51,7 @@ export class NeedToEditComponent implements OnInit, OnDestroy {
                     this.toastService.success(
                         'Вы успешно отправили на редактирование фотоидентификацию!'
                     );
-                    this.router.navigate(['..']);
+                    this.location.back();
                 });
         }
     }

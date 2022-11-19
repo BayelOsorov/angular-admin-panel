@@ -5,6 +5,7 @@ import {
     transition,
     trigger,
 } from '@angular/animations';
+import { Location } from '@angular/common';
 import {
     Component,
     OnInit,
@@ -41,19 +42,19 @@ export class DetailComponent implements OnInit, OnDestroy {
     @Input() personalData: IPersonalData;
     toggle = false;
     isNeedToEdit = false;
+
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private identificationService: IdentificationService,
         private toastService: ToastrService,
-        private router: Router
+        private router: Router,
+        private location: Location
     ) {}
     getDataToggle() {
         this.toggle = !this.toggle;
     }
-    approvePhotoIdn(data) {
-        console.log('dada');
-
+    approvePhotoIdn() {
         this.identificationService
             .approvePhotoIdentification(this.data.id)
             .pipe(takeUntil(this.destroy$))
@@ -61,7 +62,7 @@ export class DetailComponent implements OnInit, OnDestroy {
                 this.toastService.success(
                     'Вы успешно подтвердили фотоидентификацию!'
                 );
-                this.router.navigate(['..']);
+                this.location.back();
             });
     }
     declinePhotoIdn() {
@@ -72,18 +73,16 @@ export class DetailComponent implements OnInit, OnDestroy {
                 this.toastService.success(
                     'Вы успешно отклонили фотоидентификацию!'
                 );
-                this.router.navigate(['..']);
+                this.location.back();
             });
     }
     editPhotoIdn() {
         this.isNeedToEdit = true;
     }
-    hideEdit(data) {
-        this.isNeedToEdit = data;
+    hideEdit(bool) {
+        this.isNeedToEdit = bool;
     }
-    ngOnInit(): void {
-        console.log(this.data);
-    }
+    ngOnInit(): void {}
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();

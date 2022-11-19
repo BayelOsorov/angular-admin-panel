@@ -6,6 +6,7 @@ import {
     Output,
     Input,
 } from '@angular/core';
+import { IIdentificationDetail } from '../../../models/identification/identification';
 
 @Component({
     selector: 'ngx-photo-idn-buttons',
@@ -18,6 +19,9 @@ export class PhotoIdnButtonsComponent implements OnInit {
     @Output() editEvent = new EventEmitter();
     @Output() declineEvent = new EventEmitter();
     @Input() isPhotoIdnNeedToEdit: boolean;
+    @Input() isInfoOpened: boolean;
+    @Input() data: IIdentificationDetail;
+
     constructor() {}
     declineUser() {
         this.declineEvent.emit();

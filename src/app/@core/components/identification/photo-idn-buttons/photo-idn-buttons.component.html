@@ -1,17 +1,71 @@
-<div *ngIf="!isPhotoIdnNeedToEdit" class="row mt-5">
-    <div class="col-md-4">
-        <button class="w-100" nbButton status="success" (click)="approveUser()">
-            Одобрить
-        </button>
+<div *ngIf="!isPhotoIdnNeedToEdit && isInfoOpened" class="mt-5">
+    <div *ngIf="data.status === 'PhotoIdentificationProcess'" class="row">
+        <div class="col-md-4">
+            <button
+                class="w-100"
+                nbButton
+                status="success"
+                (click)="approveUser()"
+            >
+                Одобрить
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button
+                class="w-100"
+                nbButton
+                status="warning"
+                (click)="editUser()"
+            >
+                Редактировать
+            </button>
+        </div>
+        <div class="col-md-4">
+            <button
+                class="w-100"
+                nbButton
+                status="danger"
+                (click)="declineUser()"
+            >
+                Отклонить
+            </button>
+        </div>
     </div>
-    <div class="col-md-4">
-        <button class="w-100" nbButton status="warning" (click)="editUser()">
-            Редактировать
+    <ng-container *ngIf="data.status !== 'PhotoIdentificationProcess'">
+        <button class="w-50 mx-auto d-flex mb-5" nbButton status="primary">
+            Начать видеозвонок
         </button>
-    </div>
-    <div class="col-md-4">
-        <button class="w-100" nbButton status="danger" (click)="declineUser()">
-            Отклонить
-        </button>
-    </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button
+                    class="w-100"
+                    nbButton
+                    status="success"
+                    (click)="approveUser()"
+                >
+                    Одобрить
+                </button>
+            </div>
+            <div class="col-md-4">
+                <button
+                    class="w-100"
+                    nbButton
+                    status="warning"
+                    (click)="editUser()"
+                >
+                    Запросить повторно
+                </button>
+            </div>
+            <div class="col-md-4">
+                <button
+                    class="w-100"
+                    nbButton
+                    status="danger"
+                    (click)="declineUser()"
+                >
+                    Отклонить
+                </button>
+            </div>
+        </div>
+    </ng-container>
 </div>

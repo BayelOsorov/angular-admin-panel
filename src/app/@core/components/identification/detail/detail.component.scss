@@ -9,17 +9,18 @@
         justify-content: space-between;
         align-items: baseline;
     }
-
+    .detail-images {
+        img {
+            height: 250px;
+        }
+    }
     .data {
-        margin: 0 auto;
         margin-top: 40px;
-        display: flex;
-        justify-content: space-between;
-        // img {
-        //     width: 500px;
-        //     object-fit: contain;
-        //     height: 250px;
-        // }
+        // margin: 0 auto;
+        // display: flex;
+        img {
+            height: max-content;
+        }
     }
     td,
     th {
@@ -33,4 +34,6 @@
 }
 ::ng-deep nb-alert {
     padding: 5px 15px 5px 15px;
+}
+::ng-deep gallery-image {
 }
