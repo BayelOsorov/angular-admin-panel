@@ -1,3 +1,5 @@
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
+/* eslint-disable no-bitwise */
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export const GeneratePassword = (
     len = 12,

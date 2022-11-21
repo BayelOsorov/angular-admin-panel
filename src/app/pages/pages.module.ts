@@ -84,6 +84,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ComponentsModule,
         NbDatepickerModule,
         NbPopoverModule,
+
         // NbIconModule,
         // NbEvaIconsModule,
     ],

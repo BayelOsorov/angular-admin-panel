@@ -40,8 +40,7 @@
                             "src/app/@theme/styles/styles.scss",
                             "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
                             "node_modules/ng-zorro-antd/resizable/style/index.min.css",
-                            "node_modules/ngx-toastr/toastr.css",
-                            "./node_modules/ngx-lightbox/lightbox.css"
+                            "node_modules/ngx-toastr/toastr.css"
                         ],
                         "scripts": [
                             "node_modules/pace-js/pace.min.js",

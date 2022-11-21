@@ -1,3 +1,12 @@
-<!-- <button (click)="lightbox.open(2, 'lightbox', { panelClass: 'fullscreen' })">
-    Open Lightbox in fullscreen mode
-</button> -->
+<div class="image-container">
+    <img (click)="open = true" [src]="imgUrl | useHttpImgSrc" />
+</div>
+<div *ngIf="open" class="viewer-container">
+    <div class="viewer-content">
+        <a class="close-button" (click)="open = false">
+            <i style="font-size: 50px" class="nb-close"></i>
+        </a>
+
+        <img class="main-img" [src]="imgUrl | useHttpImgSrc" />
+    </div>
+</div>

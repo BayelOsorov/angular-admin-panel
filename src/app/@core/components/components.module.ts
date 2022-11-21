@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     NbAlertModule,
@@ -14,7 +14,6 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ChangePasswordModalComponent } from './staff/change-password-modal/change-password-modal.component';
 import { CreateStaffModalComponent } from './staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
@@ -44,6 +43,9 @@ import { DetailComponent } from './identification/detail/detail.component';
 import { NeedToEditComponent } from './identification/need-to-edit/need-to-edit.component';
 import { PhotoIdnButtonsComponent } from './identification/photo-idn-buttons/photo-idn-buttons.component';
 import { LightboxImgComponent } from './lightbox-img/lightbox-img.component';
+import { OpenviduComponent } from '../openvidu';
+import { UserVideoComponent } from '../openvidu/user-video.component';
+import { OpenViduVideoComponent } from '../openvidu/ov-video.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -58,7 +60,6 @@ import { LightboxImgComponent } from './lightbox-img/lightbox-img.component';
         NbInputModule,
         NbPopoverModule,
         NbListModule,
-        NgMultiSelectDropDownModule,
         NbDatepickerModule,
         NzPaginationModule,
         NzSelectModule,
@@ -91,8 +92,11 @@ import { LightboxImgComponent } from './lightbox-img/lightbox-img.component';
         NeedToEditComponent,
         PhotoIdnButtonsComponent,
         LightboxImgComponent,
+        OpenviduComponent,
+        UserVideoComponent,
+        OpenViduVideoComponent,
     ],
-    // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
         ConfirmDialogComponent,
         SearchSelectComponent,
@@ -111,6 +115,9 @@ import { LightboxImgComponent } from './lightbox-img/lightbox-img.component';
         NeedToEditComponent,
         PhotoIdnButtonsComponent,
         LightboxImgComponent,
+        OpenviduComponent,
+        UserVideoComponent,
+        OpenViduVideoComponent,
     ],
 })
 export class ComponentsModule {}

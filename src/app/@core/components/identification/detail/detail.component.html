@@ -4,27 +4,19 @@
         <nb-alert status="primary">Фотоидентификация</nb-alert>
     </div>
     <div class="detail-images row">
-        <img
-            class="col-md-4"
-            [src]="data.passportFrontSideImageUrl | useHttpImgSrc"
-            alt=""
-        />
-        <img
-            class="col-md-4"
-            [src]="data.passportBackSideImageUrl | useHttpImgSrc"
-            alt=""
-        />
-        <img
-            class="col-md-4"
-            [src]="data.selfieWithPassportImageUrl | useHttpImgSrc"
-            alt=""
-        />
         <ngx-lightbox-img
-            [imgUrls]="[
-                data.passportFrontSideImageUrl,
-                data.passportBackSideImageUrl,
-                data.selfieWithPassportImageUrl
-            ]"
+            class="col-md-4"
+            [imgUrl]="data.passportFrontSideImageUrl"
+        ></ngx-lightbox-img>
+
+        <ngx-lightbox-img
+            class="col-md-4"
+            [imgUrl]="data.passportBackSideImageUrl"
+        ></ngx-lightbox-img>
+
+        <ngx-lightbox-img
+            class="col-md-4"
+            [imgUrl]="data.selfieWithPassportImageUrl"
         ></ngx-lightbox-img>
     </div>
     <div [@openClose]="toggle" class="data row" *ngIf="personalData && toggle">
@@ -110,4 +102,5 @@
         [isNeedToEdit]="isNeedToEdit"
         (hideEditEvent)="hideEdit($event)"
     ></ngx-identification-need-to-edit>
+    <ngx-openvidu [data]="data"></ngx-openvidu>
 </div>
