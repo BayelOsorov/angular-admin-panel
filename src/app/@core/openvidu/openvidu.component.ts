@@ -17,6 +17,7 @@ import {
 } from 'openvidu-browser';
 import { environment } from '../../../environments/environment.prod';
 import { IIdentificationDetail } from '../models/identification/identification';
+import { IdentificationService } from '../services/identification/identification.service';
 import { generateGuid } from '../utils/toBase64';
 
 @Component({
@@ -42,7 +43,10 @@ export class OpenviduComponent implements OnInit, OnDestroy {
     // updated by click event in UserVideoComponent children
     mainStreamManager: StreamManager;
 
-    constructor(private httpClient: HttpClient) {
+    constructor(
+        private httpClient: HttpClient,
+        private identificationService: IdentificationService
+    ) {
         this.generateParticipantInfo();
     }
     ngOnInit(): void {}
@@ -94,13 +98,13 @@ export class OpenviduComponent implements OnInit, OnDestroy {
         // --- 4) Connect to the session with a valid user token ---
 
         // Get a token from the OpenVidu deployment
-        this.getToken().then((token) => {
+        this.createSession().subscribe((data) => {
             // First param is the token got from the OpenVidu deployment. Second param can be retrieved by every user on event
             // 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
-            console.log(token);
+            console.log(data);
 
             this.session
-                .connect(token, { clientData: this.myUserName })
+                .connect(data.token, { clientData: this.myUserName })
                 .then(() => {
                     // --- 5) Get your own camera stream ---
 
@@ -187,41 +191,9 @@ export class OpenviduComponent implements OnInit, OnDestroy {
      * more about the integration of OpenVidu in your application server.
      */
 
-    async getToken(): Promise<string> {
-        const res = await this.createSession(this.mySessionId);
-        console.log(res, 'res  ----------------');
-
-        return await this.createToken(res);
-    }
-
-    createSession(sessionId) {
-        return this.httpClient
-            .post(
-                this.APPLICATION_SERVER_URL +
-                    `/operator/api/v1/identification-requests/${this.data.id}/start-video-identification-call`,
-                { callId: generateGuid() },
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    responseType: 'text',
-                }
-            )
-            .toPromise();
-    }
-
-    createToken(res) {
-        return res.token;
-        // return this.httpClient
-        //     .post(
-        //         this.APPLICATION_SERVER_URL +
-        //             'api/sessions/' +
-        //             sessionId +
-        //             '/connections',
-        //         {},
-        //         {
-        //             headers: { 'Content-Type': 'application/json' },
-        //             responseType: 'text',
-        //         }
-        //     )
-        //     .toPromise();
+    createSession() {
+        return this.identificationService.connectVideo(this.data.id, {
+            callId: generateGuid(),
+        });
     }
 }

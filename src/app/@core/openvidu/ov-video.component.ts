@@ -11,6 +11,7 @@ import { StreamManager } from 'openvidu-browser';
     // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'ov-video',
     template: '<video #videoElement></video>',
+    styleUrls: ['./openvidu.component.scss'],
 })
 export class OpenViduVideoComponent implements AfterViewInit {
     @ViewChild('videoElement') elementRef: ElementRef;

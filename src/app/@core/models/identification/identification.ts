@@ -96,3 +96,33 @@ export interface IPersonalData {
     residenceAddress: 'string';
     profilePhotoUrl: 'string';
 }
+export interface IVideoIdentification {
+    id: string;
+    object: string;
+    type: string;
+    status: string;
+    sessionId: string;
+    createdAt: Date;
+    activeAt: string;
+    location: string;
+    ip: string;
+    platform: string;
+    token: string;
+    serverData: string;
+    clientData: string;
+    record: boolean;
+    role: string;
+    kurentoOptions: {
+        videoMaxRecvBandwidth: number;
+        videoMinRecvBandwidth: number;
+        videoMaxSendBandwidth: number;
+        videoMinSendBandwidth: number;
+        allowedFilters: [string, string];
+    };
+    rtspUri: string;
+    adaptativeBitrate: string;
+    onlyPlayWithSubscribers: string;
+    networkCache: string;
+    publishers: string;
+    subscribers: string;
+}

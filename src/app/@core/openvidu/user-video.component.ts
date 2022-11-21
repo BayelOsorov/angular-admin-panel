@@ -26,6 +26,7 @@ import { StreamManager } from 'openvidu-browser';
             }
         `,
     ],
+    styleUrls: ['./openvidu.component.scss'],
     template: ` <div>
         <ov-video [streamManager]="streamManager"></ov-video>
         <div>

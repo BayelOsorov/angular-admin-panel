@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import {
     IIdentificationDetail,
     IPersonalData,
+    IVideoIdentification,
 } from '../../models/identification/identification';
 
 @Injectable({
@@ -69,6 +70,13 @@ export class IdentificationService {
             environment.identificationUrl +
                 `/operator/api/v1/identification-requests/${id}/decline-video-identification`,
             { comment: 'approve' }
+        );
+    }
+    connectVideo(id, data) {
+        return this.http.post<IVideoIdentification>(
+            environment.identificationUrl +
+                `/operator/api/v1/identification-requests/${id}/start-video-identification-call`,
+            data
         );
     }
 }
