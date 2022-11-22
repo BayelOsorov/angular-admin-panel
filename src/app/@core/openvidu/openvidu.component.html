@@ -12,11 +12,15 @@
         <div class="videos">
             <!-- ! User Большой -->
             <div
-                *ngIf="mainStreamManager"
+                *ngFor="let sub of subscribers"
                 id=""
                 class="stream-container col-md-12 col-xs-12 main-video"
             >
-                <user-video [streamManager]="mainStreamManager"></user-video>
+                <user-video
+                    [streamManager]="sub"
+                    (click)="updateMainStreamManager(sub)"
+                ></user-video>
+                <!-- <user-video [streamManager]="mainStreamManager"></user-video> -->
             </div>
             <div id="video-container" class="col-md-6">
                 <!-- ! Operator -->
@@ -30,15 +34,15 @@
                         (click)="updateMainStreamManager(publisher)"
                     ></user-video>
                 </div>
-                <div
+                <!-- <div
                     *ngFor="let sub of subscribers"
-                    class="stream-container col-md-6 col-xs-6"
+                    class="stream-container streamcomponent col-md-6 col-xs-6"
                 >
                     <user-video
                         [streamManager]="sub"
                         (click)="updateMainStreamManager(sub)"
                     ></user-video>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

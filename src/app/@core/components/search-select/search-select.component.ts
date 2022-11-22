@@ -26,5 +26,7 @@ export class SearchSelectComponent implements OnInit {
         this.searchEmit.emit(event);
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.control.valueChanges.subscribe((data) => console.log(data));
+    }
 }

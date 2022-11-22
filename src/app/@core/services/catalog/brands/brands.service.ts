@@ -9,7 +9,7 @@ import { IDetailBrand, IListBrand } from '../../../models/catalog/brand';
 export class BrandsService {
     constructor(private http: HttpClient) {}
 
-    getListBrand(page = 1, filter) {
+    getListBrand(page = 1, filter = { name: '', categoryId: '' }) {
         return this.http.get<IListBrand>(
             environment.catalogUrl +
                 `/Administration/api/v1/brands/search?page=${page}&name=${filter.name}&categoryId=${filter.categoryId}&pageSize=20`

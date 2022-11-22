@@ -8,7 +8,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-img.component';
 import { BrandActionsModalComponent } from '../../../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
-import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListBrand } from '../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';
@@ -64,13 +63,13 @@ export class BrandsComponent implements OnInit, OnDestroy {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
+                console.log(data);
+
                 this.getBrands(1, data);
             });
         this.getBrands();
     }
     getBrands(page = 1, filter = { categoryId: '', name: '' }) {
-        console.log(page, name, filter);
-
         this.brandService
             .getListBrand(page, filter)
             .pipe(takeUntil(this.destroy$))

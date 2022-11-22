@@ -149,7 +149,7 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
     }
     getBrands(name = '') {
         this.brandService
-            .getListBrand(1, name)
+            .getListBrand(1, { name, categoryId: '' })
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.brands = res.items));
     }

@@ -26,13 +26,13 @@ export class PartnerPromsService {
     deletePartnerProms(id: number) {
         return this.http.delete(
             environment.catalogUrl +
-                `/Administration/api/v1/partner-proms/${id}`
+                `/Administration/api/v1/partner-proms?promoId=${id}`
         );
     }
     editPartnerProms(id: number, data) {
         return this.http.put(
             environment.catalogUrl +
-                `/Administration/api/v1/partner-proms/${id}`,
+                `/Administration/api/v1/partner-proms?promoId=${id}`,
             data
         );
     }
