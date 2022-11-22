@@ -43,9 +43,9 @@ import { DetailComponent } from './identification/detail/detail.component';
 import { NeedToEditComponent } from './identification/need-to-edit/need-to-edit.component';
 import { PhotoIdnButtonsComponent } from './identification/photo-idn-buttons/photo-idn-buttons.component';
 import { LightboxImgComponent } from './lightbox-img/lightbox-img.component';
-import { OpenviduComponent } from '../openvidu';
 import { UserVideoComponent } from '../openvidu/user-video.component';
 import { OpenViduVideoComponent } from '../openvidu/ov-video.component';
+import { OpenviduComponent } from '../openvidu';
 @NgModule({
     imports: [
         CommonModule,

@@ -24,8 +24,10 @@
     width: 100%;
 }
 .videos {
-    width: 100%;
+    width: 70%;
+    margin: 0 auto;
     height: 100%;
+    position: relative;
 }
 
 .subscribers {
@@ -93,8 +95,10 @@ video {
     float: left;
     cursor: pointer;
 }
-.streamcomponent div {
+.streamcomponent {
     position: absolute;
+    left: 0;
+    top: 70vh;
     background: #f8f8f8;
     padding-left: 5px;
     padding-right: 5px;

@@ -20,10 +20,7 @@ export class ListPartnerPromsComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(
-                    this.listPartnerProms.pageNumber,
-                    cell.row.index
-                ),
+                tableNumbering(this.listPartnerProms.page, cell.row.index),
         },
         cover: {
             title: 'Обложка',

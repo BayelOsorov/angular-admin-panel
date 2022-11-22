@@ -7,6 +7,7 @@
                     class="mr-5"
                     (searchEvent)="onSearch($event)"
                     [placeholder]="'Название бренда'"
+                    [control]="form.get('name')"
                 >
                 </ngx-input-search>
                 <ngx-search-select
@@ -15,6 +16,7 @@
                     [isRequired]="false"
                     [submitted]="false"
                     [data]="categoryList"
+                    [control]="form.get('categoryId')"
                     [placeholder]="'Название категории'"
                 ></ngx-search-select>
             </div>

@@ -23,7 +23,9 @@ import {
     IIdentificationDetail,
     IPersonalData,
 } from '../../../models/identification/identification';
+import { OpenviduComponent } from '../../../openvidu';
 import { IdentificationService } from '../../../services/identification/identification.service';
+import { translateMaritalStatus } from '../../../utils';
 
 @Component({
     selector: 'ngx-identification-detail',
@@ -40,6 +42,7 @@ import { IdentificationService } from '../../../services/identification/identifi
 export class DetailComponent implements OnInit, OnDestroy {
     @Input() data: IIdentificationDetail;
     @Input() personalData: IPersonalData;
+    @ViewChild('openvidu', { static: false }) openvidu: OpenviduComponent;
     toggle = false;
     isNeedToEdit = false;
 
@@ -76,11 +79,47 @@ export class DetailComponent implements OnInit, OnDestroy {
                 this.location.back();
             });
     }
+    approveVideoIdn() {
+        this.identificationService
+            .approveVideoIdentification(this.data.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                this.toastService.success(
+                    'Вы успешно подтвердили видеоидентификацию!'
+                );
+                this.location.back();
+            });
+    }
+    declineVideoIdn() {
+        this.identificationService
+            .declineVideoIdentification(this.data.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                this.toastService.success(
+                    'Вы успешно отклонили видеоидентификацию!'
+                );
+                this.location.back();
+            });
+    }
+    suspendVideoIdn() {
+        this.identificationService
+            .suspendVideoIdentification(this.data.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+                this.toastService.success(
+                    'Вы успешно повторно запросили видеоидентификацию!'
+                );
+                // this.location.back();
+            });
+    }
     editPhotoIdn() {
         this.isNeedToEdit = true;
     }
     hideEdit(bool) {
         this.isNeedToEdit = bool;
+    }
+    translate(str) {
+        return translateMaritalStatus(str);
     }
     ngOnInit(): void {}
     ngOnDestroy() {

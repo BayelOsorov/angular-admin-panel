@@ -23,7 +23,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listCategory.pageNumber, cell.row.index),
+                tableNumbering(this.listCategory.page, cell.row.index),
         },
         logo: {
             title: 'Лого',

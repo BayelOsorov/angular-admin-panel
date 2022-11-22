@@ -19,7 +19,7 @@ export class ListNewsComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listNews.pageNumber, cell.row.index),
+                tableNumbering(this.listNews.page, cell.row.index),
         },
         cover: {
             title: 'Обложка',

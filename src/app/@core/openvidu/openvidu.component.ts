@@ -2,10 +2,12 @@
 import { HttpClient } from '@angular/common/http';
 import {
     Component,
+    EventEmitter,
     HostListener,
     Input,
     OnDestroy,
     OnInit,
+    Output,
 } from '@angular/core';
 import {
     OpenVidu,
@@ -36,17 +38,15 @@ export class OpenviduComponent implements OnInit, OnDestroy {
     subscribers: StreamManager[] = []; // Remotes
 
     // Join form
-    mySessionId: string;
-    myUserName: string;
+    mySessionId = 'greg-gerge-4343-rge-66';
+    callId: string;
+    myUserName = 'Operator';
 
     // Main video of the page, will be 'publisher' or one of the 'subscribers',
     // updated by click event in UserVideoComponent children
     mainStreamManager: StreamManager;
 
-    constructor(
-        private httpClient: HttpClient,
-        private identificationService: IdentificationService
-    ) {
+    constructor(private identificationService: IdentificationService) {
         this.generateParticipantInfo();
     }
     ngOnInit(): void {}
@@ -63,20 +63,11 @@ export class OpenviduComponent implements OnInit, OnDestroy {
     }
 
     joinSession() {
-        // --- 1) Get an OpenVidu object ---
-
         this.OV = new OpenVidu();
-
-        // --- 2) Init a session ---
 
         this.session = this.OV.initSession();
 
-        // --- 3) Specify the actions when events take place in the session ---
-
-        // On every new Stream received...
         this.session.on('streamCreated', (event: StreamEvent) => {
-            // Subscribe to the Stream to receive it. Second parameter is undefined
-            // so OpenVidu doesn't create an HTML video by its own
             const subscriber: Subscriber = this.session.subscribe(
                 event.stream,
                 undefined
@@ -84,32 +75,20 @@ export class OpenviduComponent implements OnInit, OnDestroy {
             this.subscribers.push(subscriber);
         });
 
-        // On every Stream destroyed...
         this.session.on('streamDestroyed', (event: StreamEvent) => {
-            // Remove the stream from 'subscribers' array
             this.deleteSubscriber(event.stream.streamManager);
         });
 
-        // On every asynchronous exception...
         this.session.on('exception', (exception) => {
             console.warn(exception);
         });
 
-        // --- 4) Connect to the session with a valid user token ---
-
-        // Get a token from the OpenVidu deployment
         this.createSession().subscribe((data) => {
-            // First param is the token got from the OpenVidu deployment. Second param can be retrieved by every user on event
-            // 'streamCreated' (property Stream.connection.data), and will be appended to DOM as the user's nickname
             console.log(data);
 
             this.session
                 .connect(data.token, { clientData: this.myUserName })
                 .then(() => {
-                    // --- 5) Get your own camera stream ---
-
-                    // Init a publisher passing undefined as targetElement (we don't want OpenVidu to insert a video
-                    // element: we will manage it on our own) and with the desired properties
                     const publisher: Publisher = this.OV.initPublisher(
                         undefined,
                         {
@@ -124,11 +103,8 @@ export class OpenviduComponent implements OnInit, OnDestroy {
                         }
                     );
 
-                    // --- 6) Publish your stream ---
-
                     this.session.publish(publisher);
 
-                    // Set the main video in the page to display our webcam and store our Publisher
                     this.mainStreamManager = publisher;
                     this.publisher = publisher;
                 })
@@ -143,12 +119,10 @@ export class OpenviduComponent implements OnInit, OnDestroy {
     }
 
     leaveSession() {
-        // --- 7) Leave the session by calling 'disconnect' method over the Session object ---
-
         if (this.session) {
             this.session.disconnect();
+            this.stopSession();
         }
-
         // Empty all properties...
         this.subscribers = [];
         delete this.publisher;
@@ -158,9 +132,8 @@ export class OpenviduComponent implements OnInit, OnDestroy {
     }
 
     private generateParticipantInfo() {
-        // Random user nickname and sessionId
         this.mySessionId = 'SessionA';
-        this.myUserName = 'Participant' + Math.floor(Math.random() * 100);
+        this.myUserName = 'Operarot';
     }
 
     private deleteSubscriber(streamManager: StreamManager): void {
@@ -175,25 +148,18 @@ export class OpenviduComponent implements OnInit, OnDestroy {
         this.mainStreamManager = streamManager;
     }
 
-    /**
-     * --------------------------------------------
-     * GETTING A TOKEN FROM YOUR APPLICATION SERVER
-     * --------------------------------------------
-     * The methods below request the creation of a Session and a Token to
-     * your application server. This keeps your OpenVidu deployment secure.
-     *
-     * In this sample code, there is no user control at all. Anybody could
-     * access your application server endpoints! In a real production
-     * environment, your application server must identify the user to allow
-     * access to the endpoints.
-     *
-     * Visit https://docs.openvidu.io/en/stable/application-server to learn
-     * more about the integration of OpenVidu in your application server.
-     */
-
     createSession() {
+        this.callId = generateGuid();
+
         return this.identificationService.connectVideo(this.data.id, {
-            callId: generateGuid(),
+            callId: this.callId,
         });
+    }
+    stopSession() {
+        return this.identificationService
+            .stopVideo(this.data.id, {
+                callId: this.callId,
+            })
+            .toPromise();
     }
 }

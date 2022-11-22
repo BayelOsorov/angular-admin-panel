@@ -29,7 +29,7 @@ export class ListMallsComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listMalls.pageNumber, cell.row.index),
+                tableNumbering(this.listMalls.page, cell.row.index),
         },
         logo: {
             title: 'Лого',

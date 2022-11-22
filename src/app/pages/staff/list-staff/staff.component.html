@@ -17,7 +17,7 @@
         <nz-pagination
             class="custom-pagination"
             (nzPageIndexChange)="changePage($event)"
-            [nzPageIndex]="listStaff.pageNumber"
+            [nzPageIndex]="listStaff.page"
             [nzTotal]="listStaff.totalItemCount"
             [nzPageSize]="listStaff.pageSize"
         ></nz-pagination>

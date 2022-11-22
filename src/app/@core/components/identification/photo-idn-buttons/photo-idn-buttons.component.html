@@ -32,7 +32,12 @@
         </div>
     </div>
     <ng-container *ngIf="data.status !== 'PhotoIdentificationProcess'">
-        <button class="w-50 mx-auto d-flex mb-5" nbButton status="primary">
+        <button
+            (click)="startVideo()"
+            class="w-50 mx-auto d-flex mb-5"
+            nbButton
+            status="primary"
+        >
             Начать видеозвонок
         </button>
         <div class="row">

@@ -4,6 +4,7 @@ import { GeneratePassword } from './generatePassword';
 import { HttpOptions } from './const';
 import { tableNumbering } from './tableNumbering';
 import { onFileChange } from './onFileChange';
+import { translateMaritalStatus } from './helpers';
 
 export {
     LayoutService,
@@ -11,5 +12,6 @@ export {
     GeneratePassword,
     tableNumbering,
     onFileChange,
+    translateMaritalStatus,
     HttpOptions,
 };

@@ -85,7 +85,7 @@
             *ngIf="images.totalItemCount > 20"
             class="custom-pagination header"
             (nzPageIndexChange)="changePage($event)"
-            [nzPageIndex]="images.pageNumber"
+            [nzPageIndex]="images.page"
             [nzTotal]="images.totalItemCount"
             [nzPageSize]="images.pageSize"
         ></nz-pagination>

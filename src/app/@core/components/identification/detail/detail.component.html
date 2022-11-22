@@ -1,7 +1,11 @@
 <div class="detail-info" *ngIf="data">
     <div class="status">
-        <strong>{{ data.createdAt | date: 'dd.MM.yyyy, mm:hh' }}</strong>
-        <nb-alert status="primary">Фотоидентификация</nb-alert>
+        <strong>{{ data.createdAt | date: 'dd.MM.yyyy, hh:mm' }}</strong>
+        <nb-alert status="primary">{{
+            data.status === 'VideoIdentificationProcess'
+                ? 'Видеоидентификация'
+                : 'Фотоидентификация'
+        }}</nb-alert>
     </div>
     <div class="detail-images row">
         <ngx-lightbox-img
@@ -52,7 +56,9 @@
             </tr>
             <tr>
                 <td>Семейное положение</td>
-                <td>{{ personalData.maritalStatus }}</td>
+                <td>
+                    {{ translate(personalData.maritalStatus) }}
+                </td>
             </tr>
             <tr>
                 <td>Адрес прописки</td>
@@ -90,8 +96,20 @@
         {{ !toggle ? 'Запросить паспортные данные' : 'Скрыть' }}
     </button>
     <ngx-photo-idn-buttons
+        *ngIf="data.status === 'VideoIdentificationProcess'"
         [isInfoOpened]="toggle"
         [data]="data"
+        [openvidu]="openvidu"
+        [isPhotoIdnNeedToEdit]="isNeedToEdit"
+        (editEvent)="suspendVideoIdn()"
+        (approveEvent)="approveVideoIdn()"
+        (declineEvent)="declineVideoIdn()"
+    ></ngx-photo-idn-buttons>
+    <ngx-photo-idn-buttons
+        *ngIf="data.status !== 'VideoIdentificationProcess'"
+        [isInfoOpened]="toggle"
+        [data]="data"
+        [openvidu]="openvidu"
         [isPhotoIdnNeedToEdit]="isNeedToEdit"
         (editEvent)="editPhotoIdn()"
         (approveEvent)="approvePhotoIdn()"
@@ -102,5 +120,5 @@
         [isNeedToEdit]="isNeedToEdit"
         (hideEditEvent)="hideEdit($event)"
     ></ngx-identification-need-to-edit>
-    <ngx-openvidu [data]="data"></ngx-openvidu>
+    <ngx-openvidu #openvidu [data]="data"></ngx-openvidu>
 </div>

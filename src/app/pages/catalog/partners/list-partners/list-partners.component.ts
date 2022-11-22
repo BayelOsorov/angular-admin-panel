@@ -17,7 +17,7 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listPartner.pageNumber, cell.row.index),
+                tableNumbering(this.listPartner.page, cell.row.index),
         },
         name: { title: 'Название', type: 'string' },
         categoryName: { title: 'Категория', type: 'string' },

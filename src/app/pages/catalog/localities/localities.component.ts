@@ -17,7 +17,7 @@ export class LocalitiesComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listLocalities.pageNumber, cell.row.index),
+                tableNumbering(this.listLocalities.page, cell.row.index),
         },
         name: {
             title: 'Название на RU',

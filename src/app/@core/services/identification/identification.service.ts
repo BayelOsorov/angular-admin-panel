@@ -69,13 +69,27 @@ export class IdentificationService {
         return this.http.patch(
             environment.identificationUrl +
                 `/operator/api/v1/identification-requests/${id}/decline-video-identification`,
-            { comment: 'approve' }
+            { comment: 'dec;ine' }
+        );
+    }
+    suspendVideoIdentification(id) {
+        return this.http.patch(
+            environment.identificationUrl +
+                `/operator/api/v1/identification-requests/${id}/suspend-video-identification`,
+            { comment: 'suspend' }
         );
     }
     connectVideo(id, data) {
         return this.http.post<IVideoIdentification>(
             environment.identificationUrl +
                 `/operator/api/v1/identification-requests/${id}/start-video-identification-call`,
+            data
+        );
+    }
+    stopVideo(id, data) {
+        return this.http.post<IVideoIdentification>(
+            environment.identificationUrl +
+                `/operator/api/v1/identification-requests/${id}/stop-video-identification-call`,
             data
         );
     }

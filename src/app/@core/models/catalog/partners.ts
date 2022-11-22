@@ -32,7 +32,7 @@ export interface IListPartner {
     items: [IDetailPartner];
     pageCount: 0;
     totalItemCount: 0;
-    pageNumber: 0;
+    page: 0;
     pageSize: 0;
     hasPreviousPage: true;
     hasNextPage: true;
@@ -48,7 +48,7 @@ export interface IListPartnerImages {
     ];
     pageCount: 0;
     totalItemCount: 0;
-    pageNumber: 0;
+    page: 0;
     pageSize: 0;
     hasPreviousPage: true;
     hasNextPage: true;
@@ -57,7 +57,7 @@ export interface IListPartnerBranches {
     items: [IDetailPartnerBranch];
     pageCount: 0;
     totalItemCount: 0;
-    pageNumber: 0;
+    page: 0;
     pageSize: 0;
     hasPreviousPage: true;
     hasNextPage: true;
@@ -124,7 +124,7 @@ export interface IListPartnerFeedbacks {
     ];
     pageCount: 0;
     totalItemCount: 0;
-    pageNumber: 0;
+    page: 0;
     pageSize: 0;
     hasPreviousPage: true;
     hasNextPage: true;

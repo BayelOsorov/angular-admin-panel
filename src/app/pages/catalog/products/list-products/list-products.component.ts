@@ -17,7 +17,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listProducts.pageNumber, cell.row.index),
+                tableNumbering(this.listProducts.page, cell.row.index),
         },
         name: {
             title: 'Название',

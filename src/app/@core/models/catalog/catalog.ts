@@ -11,7 +11,7 @@ export interface IListTags {
     ];
     pageCount: 0;
     totalItemCount: 0;
-    pageNumber: 0;
+    page: 0;
     pageSize: 0;
     hasPreviousPage: true;
     hasNextPage: true;
@@ -26,7 +26,7 @@ export interface IListProducts {
     ];
     pageCount: 0;
     totalItemCount: 0;
-    pageNumber: 0;
+    page: 0;
     pageSize: 0;
     hasPreviousPage: true;
     hasNextPage: true;
@@ -49,7 +49,7 @@ export interface IListLocalities {
     items: [IDetailLocality];
     pageCount: 0;
     totalItemCount: 0;
-    pageNumber: 0;
+    page: 0;
     pageSize: 0;
     hasPreviousPage: true;
     hasNextPage: true;
@@ -58,7 +58,7 @@ export interface IListNews {
     items: [IDetailNews];
     pageCount: 0;
     totalItemCount: 0;
-    pageNumber: 0;
+    page: 0;
     pageSize: 0;
     hasPreviousPage: true;
     hasNextPage: true;
@@ -89,7 +89,7 @@ export interface IListPartnerProms {
     items: [IDetailPartnerProms];
     pageCount: 0;
     totalItemCount: 0;
-    pageNumber: 0;
+    page: 0;
     pageSize: 0;
     hasPreviousPage: true;
     hasNextPage: true;

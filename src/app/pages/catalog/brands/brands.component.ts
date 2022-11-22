@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
@@ -20,12 +21,16 @@ import { tableNumbering } from '../../../@core/utils';
 export class BrandsComponent implements OnInit, OnDestroy {
     listBrand: IListBrand;
     categoryList = [];
+    form = this.fb.group({
+        name: '',
+        categoryId: [''],
+    });
     tableColumns = {
         index: {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listBrand.pageNumber, cell.row.index),
+                tableNumbering(this.listBrand.page, cell.row.index),
         },
         logo: {
             title: 'Лого',
@@ -48,6 +53,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
+        private fb: FormBuilder,
         private brandService: BrandsService,
         private categoryService: CategoriesService,
         private router: Router,
@@ -55,11 +61,18 @@ export class BrandsComponent implements OnInit, OnDestroy {
         private toaster: ToastrService
     ) {}
     ngOnInit(): void {
+        this.form.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.getBrands(1, data);
+            });
         this.getBrands();
     }
-    getBrands(page = 1, name = '') {
+    getBrands(page = 1, filter = { categoryId: '', name: '' }) {
+        console.log(page, name, filter);
+
         this.brandService
-            .getListBrand(page, name)
+            .getListBrand(page, filter)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listBrand = res));
     }
@@ -75,7 +88,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
         this.brandService
             .deleteBrand(id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => {
+            .subscribe(() => {
                 this.toaster.success('Успешно удалено!');
                 this.getBrands();
             });

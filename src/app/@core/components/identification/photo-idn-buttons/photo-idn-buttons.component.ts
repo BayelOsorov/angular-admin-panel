@@ -20,6 +20,8 @@ export class PhotoIdnButtonsComponent implements OnInit {
     @Output() declineEvent = new EventEmitter();
     @Input() isPhotoIdnNeedToEdit: boolean;
     @Input() isInfoOpened: boolean;
+    @Input() openvidu;
+
     @Input() data: IIdentificationDetail;
 
     constructor() {}
@@ -31,6 +33,9 @@ export class PhotoIdnButtonsComponent implements OnInit {
     }
     editUser() {
         this.editEvent.emit();
+    }
+    startVideo() {
+        this.openvidu.joinSession();
     }
     ngOnInit(): void {}
 }
