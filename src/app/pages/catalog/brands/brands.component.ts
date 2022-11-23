@@ -35,7 +35,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
         },
         name: {
             title: 'Название',
-            type: 'string',
+            type: 'text',
         },
         categoryName: {
             title: 'Категория',
@@ -43,7 +43,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
         },
         order: {
             title: 'Порядок',
-            type: 'string',
+            type: 'text',
         },
     };
     private destroy$: Subject<void> = new Subject<void>();

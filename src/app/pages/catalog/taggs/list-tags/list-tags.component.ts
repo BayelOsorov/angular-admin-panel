@@ -22,17 +22,17 @@ export class ListTagsComponent implements OnInit, OnDestroy {
         },
         name: {
             title: 'Название на RU',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (item) => item.ru,
         },
         'name.kg': {
             title: 'Название на KG',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (cell, row) => row.name.kg,
         },
         'name.uz': {
             title: 'Название на UZ',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (cell, row) => row.name.uz,
         },
     };

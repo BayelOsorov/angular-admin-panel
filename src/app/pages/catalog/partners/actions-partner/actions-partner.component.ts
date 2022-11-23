@@ -25,24 +25,7 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
     products = [];
     partnerData;
     partnerId: number;
-    gallery = [
-        {
-            img: 'https://img2.akspic.ru/attachments/originals/4/4/7/8/3/138744-fenek-hishhnik-psovye-ryzhaya_lisica-morda-4928x3280.jpg',
-            id: 32,
-        },
-        {
-            img: 'https://img2.akspic.ru/attachments/originals/4/4/7/8/3/138744-fenek-hishhnik-psovye-ryzhaya_lisica-morda-4928x3280.jpg',
-            id: 322,
-        },
-        {
-            img: 'https://img2.akspic.ru/attachments/originals/4/4/7/8/3/138744-fenek-hishhnik-psovye-ryzhaya_lisica-morda-4928x3280.jpg',
-            id: 332,
-        },
-        {
-            img: 'https://img2.akspic.ru/attachments/originals/4/4/7/8/3/138744-fenek-hishhnik-psovye-ryzhaya_lisica-morda-4928x3280.jpg',
-            id: 302,
-        },
-    ];
+
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private fb: FormBuilder,
@@ -115,14 +98,11 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
                         });
                         return;
                     }
-                    this.gallery.push({ img: base64, id: Date.now() });
                 });
             });
         }
     }
-    deleteImage(imgId) {
-        this.gallery = this.gallery.filter((item) => item.id !== imgId);
-    }
+
     getData() {
         this.getProducts();
         this.getTags();
@@ -164,9 +144,9 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
             shortDescRu: ['', Validators.required],
             shortDescKg: ['', Validators.required],
             shortDescUz: ['', Validators.required],
-            categoryId: [[], Validators.required],
-            productId: [[], Validators.required],
-            brandId: [[], Validators.required],
+            categories: [[], Validators.required],
+            products: [[], Validators.required],
+            brands: [[], Validators.required],
             tags: [[], Validators.required],
         });
         this.route.params.subscribe((params) => {
@@ -191,14 +171,12 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
                         this.form.controls['name'].setValue(data.name);
                         this.form.controls['isActive'].setValue(data.isActive);
                         this.form.controls['logo'].setValue(data.logo);
-                        this.form.controls['categoryId'].setValue(
-                            data.categoryId
+                        this.form.controls['categories'].setValue(
+                            data.categories
                         );
-                        this.form.controls['brandId'].setValue(data.brandId);
+                        this.form.controls['brands'].setValue(data.brands);
 
-                        this.form.controls['productId'].setValue(
-                            data.productId
-                        );
+                        this.form.controls['products'].setValue(data.products);
                         this.form.controls['tags'].setValue(data.tags);
                         this.form.controls['descRu'].setValue(
                             data.description.ru

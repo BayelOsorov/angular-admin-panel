@@ -13,9 +13,9 @@ export interface IDetailPartner {
         ru: string;
         uz: string;
     };
-    categoryId: number;
-    productId: number;
-    brandId: number;
+    categories: [{ id: number; name: string }];
+    products: [{ id: number; name: string }];
+    brands: [{ id: number; name: string }];
     tags: [
         {
             id: 0;

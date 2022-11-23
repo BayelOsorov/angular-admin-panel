@@ -84,8 +84,6 @@ export class OpenviduComponent implements OnInit, OnDestroy {
         });
 
         this.createSession().subscribe((data) => {
-            console.log(data);
-
             this.session
                 .connect(data.token, { clientData: this.myUserName })
                 .then(() => {

@@ -50,12 +50,12 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         },
         isActive: {
             title: 'Активен',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
         order: {
             title: 'Порядок',
-            type: 'string',
+            type: 'text',
         },
     };
     private destroy$: Subject<void> = new Subject<void>();

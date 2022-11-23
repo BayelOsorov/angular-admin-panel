@@ -29,7 +29,12 @@ export class SearchSelectComponent implements OnInit, OnDestroy {
     isLoading = false;
     private destroy$: Subject<void> = new Subject<void>();
     constructor() {}
-    compareFn = (o1: any, o2: any) => (o1 && o2 ? o1 === o2 : o1 === o2);
+    compareFn = (o1: any, o2: any) =>
+        o1 && o2
+            ? typeof o1 === 'object'
+                ? o1.id === o2
+                : o1 === o2
+            : o1 === o2;
 
     onSearch(event) {
         this.searchEmit.emit(event);

@@ -21,11 +21,11 @@ export class ListProductsComponent implements OnInit, OnDestroy {
         },
         name: {
             title: 'Название',
-            type: 'string',
+            type: 'text',
         },
         isActive: {
             title: 'Активен',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
     };

@@ -8,10 +8,10 @@ import { IDetailStaff, IListStaff, IStaffRole } from '../../models/staff/staff';
 })
 export class StaffService {
     constructor(private http: HttpClient) {}
-    getListStaff(page = 1) {
+    getListStaff(page = 1, name = '') {
         return this.http.get<IListStaff>(
             environment.baseUrlOidc +
-                `/Administration/api/v1/Users/Search?&page=${page}&pageSize=20`
+                `/Administration/api/v1/Users/Search?name=${name}&page=${page}&pageSize=20`
         );
     }
     getDetailStaff(id: string) {

@@ -83,9 +83,12 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
         }
     }
     getLocalities(name = '') {
-        this.localitiesService.getListLocalities(1, name).subscribe((data) => {
-            this.localities = data.items;
-        });
+        this.localitiesService
+            .getListLocalities(1, name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.localities = data.items;
+            });
     }
     markMap(loc) {
         this.form.patchValue({
@@ -137,7 +140,7 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
                         );
                         this.form.controls['order'].setValue(data.order);
                         this.form.controls['localityId'].setValue(
-                            data.localityId
+                            data.locality
                         );
                         this.logoImg = data.logo;
                         this.location = data.location.coordinates;

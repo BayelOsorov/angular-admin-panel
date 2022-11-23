@@ -36,8 +36,12 @@ export class ListMallsComponent implements OnInit, OnDestroy {
             type: 'custom',
             renderComponent: AvatarImgComponent,
         },
-        name: { title: 'Название', type: 'string' },
-        localityId: { title: 'Населенный пункт', type: 'string' },
+        name: { title: 'Название', type: 'text' },
+        locality: {
+            title: 'Населенный пункт',
+            type: 'text',
+            valuePrepareFunction: (value) => (value ? value.name.ru : ''),
+        },
         workingHour: {
             title: 'Режим работы',
             type: 'text',
@@ -46,10 +50,10 @@ export class ListMallsComponent implements OnInit, OnDestroy {
         },
         isActive: {
             title: 'Активен',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
-        order: { title: 'Порядок', type: 'string' },
+        order: { title: 'Порядок', type: 'text' },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -77,9 +81,7 @@ export class ListMallsComponent implements OnInit, OnDestroy {
     updateMall(data) {
         this.router.navigate([`catalog/malls/update/${data.id}`]);
     }
-    userRowSelect(id) {
-        this.router.navigate([`catalog/malls/detail/${id}`]);
-    }
+
     deleteMall(id) {
         this.mallsService
             .deleteMall(id)

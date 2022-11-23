@@ -157,14 +157,20 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
         }
     }
     getLocalities(name = '') {
-        this.localitiesService.getListLocalities(1, name).subscribe((data) => {
-            this.localities = data.items;
-        });
+        this.localitiesService
+            .getListLocalities(1, name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.localities = data.items;
+            });
     }
     getMalls(name = '') {
-        this.mallsService.getListMalls(1, name).subscribe((data) => {
-            this.malls = data.items;
-        });
+        this.mallsService
+            .getListMalls(1, name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.malls = data.items;
+            });
     }
     markMap(loc) {
         this.form.patchValue({

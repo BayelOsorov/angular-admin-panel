@@ -29,17 +29,17 @@ export class ListPartnerPromsComponent implements OnInit, OnDestroy {
         },
         title: {
             title: 'Заголовок',
-            type: 'string',
+            type: 'text',
         },
         startDateTime: {
             title: 'Дата начала',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (item) => this.parseDate(item),
         },
 
         endDateTime: {
             title: 'Дата окончания',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (item) => this.parseDate(item),
         },
     };

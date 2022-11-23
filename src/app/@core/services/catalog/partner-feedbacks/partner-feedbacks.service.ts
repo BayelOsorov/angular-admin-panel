@@ -8,35 +8,29 @@ import { IListPartnerFeedbacks } from '../../../models/catalog/partners';
 })
 export class PartnerFeedbacksService {
     constructor(private http: HttpClient) {}
-    getListPartnerProms(page = 1, name = '') {
+    getListPartnerFeedbacks(page = 1, name = '') {
         return this.http.get<IListPartnerFeedbacks>(
             environment.catalogUrl +
                 `/Administration/api/v1/partner-proms?name=${name}&page=${page}&pageSize=20`
         );
     }
-    getDetailPartnerProms(id: number) {
-        // return this.http.get<IDetailPartnerProms>(
+    getDetailPartnerFeedback(id: number) {
+        // return this.http.get<IDetailPartnerFeedbacks>(
         //     environment.catalogUrl +
         //         `/Administration/api/v1/partner-proms/${id}`
         // );
     }
-    deletePartnerProms(id: number) {
+    deletePartnerFeedback(partnerId: number, feedbackId: number) {
         return this.http.delete(
             environment.catalogUrl +
-                `/Administration/api/v1/partner-proms?promoId=${id}`
+                `/Administration/api/v1/${partnerId}/feedbacks/${feedbackId}`
         );
     }
-    editPartnerProms(id: number, data) {
+    approvePartnerFeedback(partnerId: number, feedbackId) {
         return this.http.put(
             environment.catalogUrl +
-                `/Administration/api/v1/partner-proms?promoId=${id}`,
-            data
-        );
-    }
-    createPartnerProms(data) {
-        return this.http.post(
-            environment.catalogUrl + `/Administration/api/v1/partner-proms`,
-            data
+                `/Administration/api/v1/${partnerId}/feedbacks/${feedbackId}/check`,
+            { coment: 'approve' }
         );
     }
 }

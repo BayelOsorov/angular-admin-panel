@@ -80,7 +80,11 @@
                                 </div>
 
                                 <div class="detail">
-                                    {{ (category | async)?.name }}
+                                    <ng-container
+                                        *ngFor="let i of partner.categories"
+                                    >
+                                        {{ i.name }},
+                                    </ng-container>
                                 </div>
                             </div>
                             <div class="header">
@@ -89,7 +93,11 @@
                                 </div>
 
                                 <div class="detail">
-                                    {{ (brand | async)?.name }}
+                                    <ng-container
+                                        *ngFor="let i of partner.brands"
+                                    >
+                                        {{ i.name }},
+                                    </ng-container>
                                 </div>
                             </div>
                             <div class="header">
@@ -111,7 +119,11 @@
                                 </div>
 
                                 <div class="detail">
-                                    {{ (product | async)?.name }}
+                                    <ng-container
+                                        *ngFor="let i of partner.products"
+                                    >
+                                        {{ i.name }},
+                                    </ng-container>
                                 </div>
                             </div>
                             <!-- </nb-card> -->

@@ -6,6 +6,7 @@ import {
     trigger,
 } from '@angular/animations';
 import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import {
     Component,
     OnInit,
@@ -19,6 +20,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from '../../../../../environments/environment';
 import {
     IIdentificationDetail,
     IPersonalData,
@@ -52,7 +54,8 @@ export class DetailComponent implements OnInit, OnDestroy {
         private identificationService: IdentificationService,
         private toastService: ToastrService,
         private router: Router,
-        private location: Location
+        private location: Location,
+        private http: HttpClient
     ) {}
     getDataToggle() {
         this.toggle = !this.toggle;
@@ -121,7 +124,21 @@ export class DetailComponent implements OnInit, OnDestroy {
     translate(str) {
         return translateMaritalStatus(str);
     }
-    ngOnInit(): void {}
+    getVideo() {
+        // return this.http.get(
+        //     `https://stage.c2u.io:2002/operator/api/v1/video-call-files/6b7805c5-efbd-4065-9c2d-4a5616c73547`
+        // );
+        this.http
+            .get(
+                `https://stage.c2u.io:2002/operator/api/v1/video-call-files/6b7805c5-efbd-4065-9c2d-4a5616c73547`
+            )
+            .subscribe((data) => {
+                console.log(data);
+            });
+    }
+    ngOnInit(): void {
+        this.getVideo();
+    }
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();

@@ -18,7 +18,6 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ChangePasswordModalComponent } from './staff/change-password-modal/change-password-modal.component';
 import { CreateStaffModalComponent } from './staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { BrandActionsModalComponent } from './catalog/brand/brand-actions-modal/brand-actions-modal.component';
 import { CategoryActionsModalComponent } from './catalog/category/category-actions-modal/category-actions-modal.component';
 import { UseHttpImageSourcePipe } from './secured-image/secured-image.component';
 import { SearchSelectComponent } from './search-select/search-select.component';
@@ -70,7 +69,6 @@ import { OpenviduComponent } from '../openvidu';
         EditStaffComponent,
         ChangePasswordModalComponent,
         ConfirmDialogComponent,
-        BrandActionsModalComponent,
         CategoryActionsModalComponent,
         UseHttpImageSourcePipe,
         SearchSelectComponent,

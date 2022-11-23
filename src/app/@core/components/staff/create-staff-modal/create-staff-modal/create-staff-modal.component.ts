@@ -15,8 +15,8 @@ import { GeneratePassword } from '../../../../utils';
 export class CreateStaffModalComponent implements OnInit, OnDestroy {
     form: FormGroup;
     searchChange$ = new BehaviorSubject('');
-    optionList = [];
-    isLoading = false;
+    submitted = false;
+    roles = [];
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -25,7 +25,12 @@ export class CreateStaffModalComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         @Optional() private dialogRef: NbWindowRef<any>
     ) {}
-
+    getRoles(name) {
+        this.staffService
+            .getRolesStaff()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => (this.roles = data));
+    }
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', Validators.required],
@@ -33,18 +38,6 @@ export class CreateStaffModalComponent implements OnInit, OnDestroy {
             roles: [[], [Validators.required]],
             password: ['', Validators.required],
             passwordConfirmation: ['', Validators.required],
-        });
-        const getRoles = (name: string): Observable<any> =>
-            this.staffService.getRolesStaff().pipe(
-                catchError(() => of({ results: [] })),
-                map((res: any) => res)
-            );
-        const optionList$: Observable<string[]> = this.searchChange$
-            .asObservable()
-            .pipe(switchMap(getRoles));
-        optionList$.subscribe((data) => {
-            this.optionList = data;
-            this.isLoading = false;
         });
     }
     generatePassword() {
@@ -54,6 +47,7 @@ export class CreateStaffModalComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
+        this.submitted = true;
         if (this.form.valid) {
             const newRoles = this.form.value.roles.map((item) => item.id);
             this.staffService

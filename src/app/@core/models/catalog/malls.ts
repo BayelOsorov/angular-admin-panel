@@ -6,7 +6,7 @@ export interface IDetailMalls {
     order: 0;
     location: {
         coordinates: [];
-        type: 'string';
+        type: 'text';
     };
     workingHourStart: {
         hour: 0;
@@ -24,7 +24,7 @@ export interface IDetailMalls {
     };
     isActive: true;
     type: 'Mall';
-    localityId: 0;
+    locality: 0;
     logo: 'string';
 }
 export interface IListMalls {

@@ -54,6 +54,8 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { IdentificationGetComponent } from './identification/operator/identification-get/identification-get.component';
 import { IdentificationDetailComponent } from './identification/operator/identification-detail/identification-detail.component';
+import { PartnerFeedbacksComponent } from './catalog/partner-feedbacks/partner-feedbacks.component';
+import { PartnerFeedbacksDetailComponent } from './catalog/partner-feedbacks/detail/partner-feedbacks-detail.component';
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
 };
@@ -113,6 +115,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ActionsPartnerBranchesComponent,
         IdentificationGetComponent,
         IdentificationDetailComponent,
+        PartnerFeedbacksComponent,
+        PartnerFeedbacksDetailComponent,
     ],
     providers: [
         {

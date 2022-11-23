@@ -19,9 +19,19 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
             valuePrepareFunction: (value, row, cell) =>
                 tableNumbering(this.listPartner.page, cell.row.index),
         },
-        name: { title: 'Название', type: 'string' },
-        categoryName: { title: 'Категория', type: 'string' },
-        priductName: { title: 'Продукт', type: 'string' },
+        name: { title: 'Название', type: 'text' },
+        categories: {
+            title: 'Категория',
+            type: 'text',
+            valuePrepareFunction: (value) =>
+                value.length > 0 ? value.map((item) => item.name) : '',
+        },
+        products: {
+            title: 'Продукт',
+            type: 'text',
+            valuePrepareFunction: (value) =>
+                value.length > 0 ? value.map((item) => item.name) : '',
+        },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
