@@ -1,11 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+} from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'ngx-multiple-search-select',
     templateUrl: './multiple-search-select.component.html',
     styleUrls: ['./multiple-search-select.component.scss'],
 })
-export class MultipleSearchSelectComponent implements OnInit {
+export class MultipleSearchSelectComponent implements OnInit, OnDestroy {
     @Output() searchEmit = new EventEmitter<string>();
     @Input() control: AbstractControl = new FormControl();
     @Input() type = 'multiple';
@@ -16,6 +25,7 @@ export class MultipleSearchSelectComponent implements OnInit {
     @Input() isRequired = true;
     isLoading = false;
 
+    private destroy$: Subject<void> = new Subject<void>();
     constructor() {}
     compareFn = (o1: any, o2: any) =>
         o1 && o2
@@ -28,5 +38,17 @@ export class MultipleSearchSelectComponent implements OnInit {
         this.searchEmit.emit(event);
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.control.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                if (data === null) {
+                    this.control.setValue('');
+                }
+            });
+    }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
 }

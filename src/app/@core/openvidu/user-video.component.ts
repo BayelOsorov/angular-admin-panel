@@ -23,6 +23,7 @@ import { StreamManager } from 'openvidu-browser';
             }
             p {
                 margin: 0;
+                color: black;
             }
         `,
     ],

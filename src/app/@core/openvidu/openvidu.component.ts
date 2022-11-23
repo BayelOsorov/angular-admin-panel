@@ -133,7 +133,7 @@ export class OpenviduComponent implements OnInit, OnDestroy {
 
     private generateParticipantInfo() {
         this.mySessionId = 'SessionA';
-        this.myUserName = 'Operarot';
+        this.myUserName = 'Operator';
     }
 
     private deleteSubscriber(streamManager: StreamManager): void {

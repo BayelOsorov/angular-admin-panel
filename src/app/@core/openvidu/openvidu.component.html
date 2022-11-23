@@ -22,6 +22,14 @@
                 ></user-video>
                 <!-- <user-video [streamManager]="mainStreamManager"></user-video> -->
             </div>
+            <div *ngIf="subscribers.length === 0" class="balls-position">
+                <div class="balls">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+
             <div id="video-container" class="col-md-6">
                 <!-- ! Operator -->
 

@@ -1,27 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import {
-    IDetailPartnerProms,
-    IListPartnerProms,
-} from '../../../models/catalog/catalog';
+import { IListPartnerFeedbacks } from '../../../models/catalog/partners';
 
 @Injectable({
     providedIn: 'root',
 })
-export class PartnerPromsService {
+export class PartnerFeedbacksService {
     constructor(private http: HttpClient) {}
     getListPartnerProms(page = 1, name = '') {
-        return this.http.get<IListPartnerProms>(
+        return this.http.get<IListPartnerFeedbacks>(
             environment.catalogUrl +
                 `/Administration/api/v1/partner-proms?name=${name}&page=${page}&pageSize=20`
         );
     }
     getDetailPartnerProms(id: number) {
-        return this.http.get<IDetailPartnerProms>(
-            environment.catalogUrl +
-                `/Administration/api/v1/partner-proms/${id}`
-        );
+        // return this.http.get<IDetailPartnerProms>(
+        //     environment.catalogUrl +
+        //         `/Administration/api/v1/partner-proms/${id}`
+        // );
     }
     deletePartnerProms(id: number) {
         return this.http.delete(

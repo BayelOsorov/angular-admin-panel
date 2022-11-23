@@ -146,7 +146,11 @@ const routes: Routes = [
             },
             // ! Identification
             {
-                path: 'identification',
+                path: 'identification/photo',
+                component: IdentificationGetComponent,
+            },
+            {
+                path: 'identification/video',
                 component: IdentificationGetComponent,
             },
             {

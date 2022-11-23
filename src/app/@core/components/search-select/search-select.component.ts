@@ -1,12 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+} from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'ngx-search-select',
     templateUrl: './search-select.component.html',
     styleUrls: ['./search-select.component.scss'],
 })
-export class SearchSelectComponent implements OnInit {
+export class SearchSelectComponent implements OnInit, OnDestroy {
     @Output() searchEmit = new EventEmitter<string>();
     @Input() control: AbstractControl = new FormControl();
 
@@ -18,7 +27,7 @@ export class SearchSelectComponent implements OnInit {
     @Input() data;
 
     isLoading = false;
-
+    private destroy$: Subject<void> = new Subject<void>();
     constructor() {}
     compareFn = (o1: any, o2: any) => (o1 && o2 ? o1 === o2 : o1 === o2);
 
@@ -27,6 +36,16 @@ export class SearchSelectComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.control.valueChanges.subscribe((data) => console.log(data));
+        this.control.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                if (data === null) {
+                    this.control.setValue('');
+                }
+            });
+    }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

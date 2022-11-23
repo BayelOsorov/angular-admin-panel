@@ -45,7 +45,11 @@
     bottom: 40px;
     right: 12px;
 }
-
+.balls-position {
+    position: absolute;
+    bottom: 60%;
+    right: 40%;
+}
 .balls {
     width: 3.5em;
     display: flex;
@@ -59,7 +63,7 @@
     z-index: 100000;
     position: absolute;
     bottom: 40px;
-    left: 40%;
+    left: 50%;
     color: white;
 }
 

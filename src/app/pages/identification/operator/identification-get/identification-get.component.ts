@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,7 +17,7 @@ export class IdentificationGetComponent implements OnInit, OnDestroy {
 
     constructor(
         private identificationService: IdentificationService,
-        private router: Router,
+        public router: Router,
         private toaster: ToastrService
     ) {}
     photoIdentification() {

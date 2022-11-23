@@ -53,13 +53,15 @@ export class ListPartnerPromsComponent implements OnInit, OnDestroy {
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
     }
-    getPartnerProms(page = 1) {
+    getPartnerProms(page = 1, name = '') {
         this.partnerPromsService
-            .getListPartnerProms(page)
+            .getListPartnerProms(page, name)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listPartnerProms = res));
     }
-    onSearch(event) {}
+    onSearch(event) {
+        this.getPartnerProms(1, event);
+    }
     updatePartnerProms(data) {
         this.router.navigate([`catalog/partner-proms/update/${data.id}`]);
     }

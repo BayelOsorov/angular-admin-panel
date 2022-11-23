@@ -1,13 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-img.component';
-import { BrandActionsModalComponent } from '../../../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
 import { IListBrand } from '../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';
@@ -56,15 +53,12 @@ export class BrandsComponent implements OnInit, OnDestroy {
         private brandService: BrandsService,
         private categoryService: CategoriesService,
         private router: Router,
-        private windowService: NbWindowService,
         private toaster: ToastrService
     ) {}
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
-                console.log(data);
-
                 this.getBrands(1, data);
             });
         this.getBrands();
@@ -92,35 +86,13 @@ export class BrandsComponent implements OnInit, OnDestroy {
                 this.getBrands();
             });
     }
-    onSearch(event) {
-        this.getBrands(1, event);
-    }
+
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
     }
-    public openCreateModal() {
-        this.openModal(false, BrandActionsModalComponent, {
-            title: 'Добавление бренда',
-            context: {},
-        });
-    }
-    public openEditModal(data) {
-        // this.openModal(false, BrandActionsModalComponent, {
-        //     title: 'Редактирование бренда',
-        //     context: { brandData: data },
-        // });
+
+    public editBrand(data) {
         this.router.navigate([`catalog/brands/update/${data.id}`]);
-    }
-    public openModal(closeOnBackdropClick: boolean, component, props) {
-        this.windowService
-            .open(component, {
-                closeOnBackdropClick,
-                ...props,
-            })
-            .onClose.subscribe(
-                (val) =>
-                    (val === 'create' || val === 'edit') && this.getBrands()
-            );
     }
 }
