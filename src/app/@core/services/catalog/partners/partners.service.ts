@@ -22,12 +22,7 @@ export class PartnersService {
                 `/Administration/api/v1/partners?name=${name}&page=${page}&pageSize=20`
         );
     }
-    getListPartnersSearch(query = '') {
-        return this.http.get(
-            environment.catalogUrl +
-                `/Administration/api/v1/partners/search?query=${query}`
-        );
-    }
+
     getDetailPartner(id: number) {
         return this.http.get<IDetailPartner>(
             environment.catalogUrl + `/Administration/api/v1/partners/${id}`
@@ -121,24 +116,31 @@ export class PartnersService {
         );
     }
 
-    // ! Partner Feedbacks
-
-    getPartnerFeedbacks(page = 1, partnerId: number, passedModeration = '') {
-        return this.http.get<IListPartnerFeedbacks>(
+    // ! Partner Messengers
+    getListPartnerMessengers(partnerId) {
+        return this.http.get<[]>(
             environment.catalogUrl +
-                `/Administration/api/v1/${partnerId}/feedbacks?passedModeration=${passedModeration}&page=${page}&pageSize=20`
+                `/Administration/api/v1/partners/${partnerId}/messengers`
         );
     }
-    deletePartnerFeedback(partnerId: number, feedbackId: number) {
+
+    deletePartnerMessenger(partnerId: number, id: number) {
         return this.http.delete(
             environment.catalogUrl +
-                `/Administration/api/v1/${partnerId}/feedbacks/${feedbackId}`
+                `/Administration/api/v1/partners/${partnerId}/messengers/${id}`
         );
     }
-    editPartnerFeedback(partnerId: number, feedbackId: number, data) {
+    editPartnerMessenger(partnerId, id: number, data) {
         return this.http.put(
             environment.catalogUrl +
-                `/Administration/api/v1/${partnerId}/feedbacks/${feedbackId}/check`,
+                `/Administration/api/v1/partners/${partnerId}/messengers/${id}`,
+            data
+        );
+    }
+    createPartnerMessenger(partnerId, data) {
+        return this.http.post(
+            environment.catalogUrl +
+                `/Administration/api/v1/partners/${partnerId}/messengers`,
             data
         );
     }

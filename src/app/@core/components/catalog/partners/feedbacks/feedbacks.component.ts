@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { PartnerFeedbacksService } from '../../../../services/catalog/partner-feedbacks/partner-feedbacks.service';
 import { PartnersService } from '../../../../services/catalog/partners/partners.service';
 @Component({
     selector: 'ngx-feedbacks',
@@ -20,7 +21,7 @@ export class FeedbacksComponent implements OnInit, OnDestroy {
     listFeedbacks;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
-        private partnersService: PartnersService,
+        private partnersFeedbacksService: PartnerFeedbacksService,
         private router: Router
     ) {}
     editBranch(id) {
@@ -30,8 +31,11 @@ export class FeedbacksComponent implements OnInit, OnDestroy {
     }
 
     getFeedbacks(page = 1) {
-        this.partnersService
-            .getPartnerFeedbacks(page, this.partnerId)
+        this.partnersFeedbacksService
+            .getListPartnerFeedbacks(page, {
+                partnerId: this.partnerId,
+                passedModeration: true,
+            })
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.listFeedbacks = data;

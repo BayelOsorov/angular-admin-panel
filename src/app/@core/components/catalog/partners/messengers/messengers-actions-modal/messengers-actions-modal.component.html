@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="label">Тип</label>
+        <nb-select fullWidth formControlName="type" placeholder="Тип">
+            <nb-option value="instagram">Instagram</nb-option>
+            <nb-option value="whatsapp">WhatsApp</nb-option>
+            <nb-option value="website">Website</nb-option>
+            <nb-option value="vkontakte">ВКонтакте</nb-option>
+            <nb-option value="tiktok">TikTok</nb-option>
+            <nb-option value="telegram">Telegram</nb-option>
+            <nb-option value="youtube">YouTube</nb-option>
+            <nb-option value="facebook">Facebook</nb-option>
+        </nb-select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="label">Название</label>
+        <ngx-validation-input
+            [submitted]="submitted"
+            [control]="form.get('name')"
+            placeholder="Введите название"
+        >
+        </ngx-validation-input>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="label">Ссылка</label>
+        <ngx-validation-input
+            [submitted]="submitted"
+            [control]="form.get('link')"
+            placeholder="Вставьте ссылку"
+        >
+        </ngx-validation-input>
+    </div>
+
+    <button class="d-flex mx-auto" type="submit" nbButton status="primary">
+        Подтвердить
+    </button>
+</form>

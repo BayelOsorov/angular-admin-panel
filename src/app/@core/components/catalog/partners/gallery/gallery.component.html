@@ -26,7 +26,7 @@
 
 <div *ngIf="images">
     <div class="col-sm-9">
-        <div class="gallery">
+        <div class="gallery" *ngIf="images && images.items.length > 0">
             <ng-container *ngFor="let i of images.items">
                 <div class="gallery__item">
                     <img [src]="i.imagePath | useHttpImgSrc" alt="" />

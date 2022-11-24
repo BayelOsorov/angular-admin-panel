@@ -8,7 +8,10 @@
             <button nbButton status="primary">Добавить</button>
         </a>
     </div>
-    <div class="list-branches">
+    <div
+        class="list-branches"
+        *ngIf="listBranches && listBranches.items.length > 0"
+    >
         <div *ngFor="let branch of listBranches.items" class="branch-card">
             <div class="first-block">
                 <strong>{{ branch.name }}</strong>

@@ -1,0 +1,16 @@
+<div class="">
+    <div class="float-right">
+        <button (click)="openCreateModal()" nbButton status="primary">
+            Добавить
+        </button>
+    </div>
+    <ngx-custom-table
+        (changePageEvent)="getMessengers()"
+        (deleteItemEvent)="deleteMessenger($event)"
+        (openModalEvent)="openEditModal($event)"
+        [tableColumns]="tableColumns"
+        [tableData]="messengers"
+        [productName]="'ни одного продукта'"
+    >
+    </ngx-custom-table>
+</div>

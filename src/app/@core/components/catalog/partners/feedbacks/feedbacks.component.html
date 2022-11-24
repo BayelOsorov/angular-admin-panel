@@ -1,4 +1,7 @@
-<div class="list-feedbacks">
+<div
+    class="list-feedbacks"
+    *ngIf="listFeedbacks && listFeedbacks.items.length > 0"
+>
     <div *ngFor="let item of listFeedbacks.items" class="feedback-item">
         <div class="first-block">
             <strong>Осмонов Талгар</strong>

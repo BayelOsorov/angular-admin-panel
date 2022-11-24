@@ -1,6 +1,6 @@
 <nb-card>
     <nb-card-header></nb-card-header>
-    <nb-card-body>
+    <nb-card-body *ngIf="partner">
         <nb-card>
             <div class="partner-info">
                 <div>
@@ -141,8 +141,10 @@
                 <nb-tab tabTitle="Отзывы">
                     <ngx-feedbacks [partnerId]="partnerId"></ngx-feedbacks>
                 </nb-tab>
-                <nb-tab tabTitle="Аккаунты">
-                    <span>Content #3</span>
+                <nb-tab tabTitle="Соцсети">
+                    <ngx-partner-messengers
+                        [partnerId]="partnerId"
+                    ></ngx-partner-messengers>
                 </nb-tab>
             </nb-tabset>
         </nb-card>

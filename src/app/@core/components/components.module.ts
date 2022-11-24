@@ -46,6 +46,8 @@ import { OpenViduVideoComponent } from '../openvidu/ov-video.component';
 import { OpenviduComponent } from '../openvidu';
 import { ImgInputComponent } from './img-input/img-input.component';
 import { ValidationInputComponent } from './validation-input/validation-input.component';
+import { MessengersComponent } from './catalog/partners/messengers/messengers.component';
+import { MessengersActionsModalComponent } from './catalog/partners/messengers/messengers-actions-modal/messengers-actions-modal.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -95,6 +97,8 @@ import { ValidationInputComponent } from './validation-input/validation-input.co
         OpenViduVideoComponent,
         ImgInputComponent,
         ValidationInputComponent,
+        MessengersComponent,
+        MessengersActionsModalComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -120,6 +124,7 @@ import { ValidationInputComponent } from './validation-input/validation-input.co
         OpenViduVideoComponent,
         ImgInputComponent,
         ValidationInputComponent,
+        MessengersComponent,
     ],
 })
 export class ComponentsModule {}
