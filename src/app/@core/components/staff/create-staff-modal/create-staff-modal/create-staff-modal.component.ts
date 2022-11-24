@@ -33,8 +33,8 @@ export class CreateStaffModalComponent implements OnInit, OnDestroy {
     }
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
-            userName: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
+            username: ['', [Validators.required, Validators.maxLength(256)]],
             roles: [[], [Validators.required]],
             password: ['', Validators.required],
             passwordConfirmation: ['', Validators.required],

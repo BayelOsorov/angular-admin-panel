@@ -9,7 +9,6 @@ import { CategoriesService } from '../../../../@core/services/catalog/categories
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
 import { ProductsService } from '../../../../@core/services/catalog/products/products.service';
 import { TagsService } from '../../../../@core/services/catalog/tags/tags.service';
-import { toBase64 } from '../../../../@core/utils/toBase64';
 
 @Component({
     templateUrl: './actions-partner.component.html',
@@ -119,15 +118,15 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
     }
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
             logo: ['', Validators.required],
             isActive: [true, Validators.required],
-            descRu: ['', Validators.required],
-            descKg: ['', Validators.required],
-            descUz: ['', Validators.required],
-            shortDescRu: ['', Validators.required],
-            shortDescKg: ['', Validators.required],
-            shortDescUz: ['', Validators.required],
+            descRu: ['', [Validators.required, Validators.maxLength(4096)]],
+            descKg: ['', [Validators.required, Validators.maxLength(4096)]],
+            descUz: ['', [Validators.required, Validators.maxLength(4096)]],
+            shortDescRu: ['', [Validators.required, Validators.maxLength(256)]],
+            shortDescKg: ['', [Validators.required, Validators.maxLength(256)]],
+            shortDescUz: ['', [Validators.required, Validators.maxLength(256)]],
             categories: [[], Validators.required],
             products: [[], Validators.required],
             brands: [[], Validators.required],

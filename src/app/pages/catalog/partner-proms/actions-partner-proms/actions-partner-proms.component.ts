@@ -68,7 +68,7 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
         this.form = this.fb.group({
             partnerId: ['', Validators.required],
             cover: ['', Validators.required],
-            title: ['', Validators.required],
+            title: ['', [Validators.required, Validators.maxLength(256)]],
             hmtlBody: ['', Validators.required],
             startDateTime: ['', Validators.required],
             endDateTime: ['', Validators.required],

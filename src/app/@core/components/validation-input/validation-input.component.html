@@ -1,0 +1,30 @@
+<ng-container *ngIf="type === 'input'">
+    <input
+        type="text"
+        nbInput
+        fullWidth
+        id="exampleInputEmail1"
+        [placeholder]="placeholder"
+        [formControl]="control"
+        [status]="submitted && control.errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'"
+    />
+</ng-container>
+<ng-container *ngIf="type === 'textarea'">
+    <textarea
+        type="text"
+        nbInput
+        fullWidth
+        id="exampleInputEmail1"
+        [placeholder]="placeholder"
+        [formControl]="control"
+        [status]="submitted && control.errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'"
+    ></textarea>
+</ng-container>
+<p class="validation-input" *ngIf="control.errors?.['maxlength']">
+    Максимальное количество символов
+    {{ control.errors?.maxlength.requiredLength }}
+</p>

@@ -17,19 +17,12 @@
                             >Название</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
-                                placeholder="Название"
-                                formControlName="name"
-                                [status]="
-                                submitted && (form.get('name')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('name')"
+                                placeholder="Введите название"
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
 

@@ -45,6 +45,7 @@ import { UserVideoComponent } from '../openvidu/user-video.component';
 import { OpenViduVideoComponent } from '../openvidu/ov-video.component';
 import { OpenviduComponent } from '../openvidu';
 import { ImgInputComponent } from './img-input/img-input.component';
+import { ValidationInputComponent } from './validation-input/validation-input.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -93,6 +94,7 @@ import { ImgInputComponent } from './img-input/img-input.component';
         UserVideoComponent,
         OpenViduVideoComponent,
         ImgInputComponent,
+        ValidationInputComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -117,6 +119,7 @@ import { ImgInputComponent } from './img-input/img-input.component';
         UserVideoComponent,
         OpenViduVideoComponent,
         ImgInputComponent,
+        ValidationInputComponent,
     ],
 })
 export class ComponentsModule {}

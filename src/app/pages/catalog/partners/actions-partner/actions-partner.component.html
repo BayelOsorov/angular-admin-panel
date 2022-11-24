@@ -11,38 +11,18 @@
             <nb-card-body>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="form-group row">
-                        <!-- {{
-                                form.get('name').invalid &&
-                                    (form.get('name').dirty ||
-                                        form.get('name').touched) &&
-                                    'text-danger'
-                            }} -->
                         <label
                             for="exampleInputEmail1"
                             class="label col-sm-3 col-form-label"
                             >Название</label
                         >
                         <div class="col-sm-9">
-                            <!-- [status]="
-                                    form.get('name').invalid &&
-                                    (form.get('name').dirty ||
-                                        form.get('name').touched)
-                                        ? 'danger'
-                                        : 'hint'
-                                " -->
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('name')"
                                 placeholder="Введите название"
-                                formControlName="name"
-                                [status]="
-                                submitted && (form.get('name')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
                     <div class="form-group row">

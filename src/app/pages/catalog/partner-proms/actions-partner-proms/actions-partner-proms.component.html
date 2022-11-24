@@ -17,19 +17,12 @@
                             >Заголовок</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('title')"
                                 placeholder="Введите заголовок"
-                                formControlName="title"
-                                [status]="
-                                submitted && (form.get('title')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
 

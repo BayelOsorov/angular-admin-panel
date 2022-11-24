@@ -231,8 +231,8 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
     }
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
-            address: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
+            address: ['', [Validators.required, Validators.maxLength(256)]],
             phoneNumber: ['', Validators.required],
             email: [''],
             location: ['', Validators.required],

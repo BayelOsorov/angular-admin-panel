@@ -1,95 +1,55 @@
 <div class="form-group">
     <label for="exampleInputEmail1" class="label">{{ label }} RU</label>
-
-    <input
+    <ngx-validation-input
         *ngIf="formControlType === 'input'"
-        type="text"
-        nbInput
-        fullWidth
-        id="exampleInputEmail1"
-        maxlength="250"
+        [submitted]="submitted"
+        [control]="controlRu"
         [placeholder]="placeholder + ' RU'"
-        [formControl]="controlRu"
-        [status]="submitted && controlRu.errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-    />
-    <textarea
+    >
+    </ngx-validation-input>
+    <ngx-validation-input
         *ngIf="formControlType === 'textarea'"
-        type="text"
-        nbInput
-        fullWidth
-        maxlength="250"
-        id="exampleInputEmail1"
+        [submitted]="submitted"
+        [control]="controlRu"
         [placeholder]="placeholder + ' RU'"
-        [formControl]="controlRu"
-        [status]="submitted && controlRu.errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-    ></textarea>
+        type="textarea"
+    >
+    </ngx-validation-input>
 </div>
 
 <div class="form-group">
     <label for="exampleInputEmail1" class="label">{{ label }} KG</label>
-    <input
+    <ngx-validation-input
         *ngIf="formControlType === 'input'"
-        type="text"
-        nbInput
-        fullWidth
-        maxlength="250"
-        id="exampleInputEmail1"
-        [placeholder]="placeholder + ' KG'"
-        [formControl]="controlKy"
-        [status]="submitted && controlKy.errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-    />
-    <textarea
+        [submitted]="submitted"
+        [control]="controlKy"
+        [placeholder]="placeholder + ' RU'"
+    >
+    </ngx-validation-input>
+    <ngx-validation-input
         *ngIf="formControlType === 'textarea'"
-        type="text"
-        nbInput
-        fullWidth
-        maxlength="250"
-        id="exampleInputEmail1"
-        [placeholder]="placeholder + ' KG'"
-        [formControl]="controlKy"
-        [status]="submitted && controlKy.errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-    ></textarea>
+        [submitted]="submitted"
+        [control]="controlKy"
+        [placeholder]="placeholder + ' RU'"
+        type="textarea"
+    >
+    </ngx-validation-input>
 </div>
 <div class="form-group">
     <label for="exampleInputEmail1" class="label">{{ label }} UZB</label>
-    <input
+    <ngx-validation-input
         *ngIf="formControlType === 'input'"
-        type="text"
-        nbInput
-        fullWidth
-        maxlength="250"
-        id="exampleInputEmail1"
-        [placeholder]="placeholder + ' UZB'"
-        [formControl]="controlUz"
-        [status]="submitted && controlUz.errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-    />
-    <textarea
+        [submitted]="submitted"
+        [control]="controlUz"
+        [placeholder]="placeholder + ' RU'"
+    >
+    </ngx-validation-input>
+    <ngx-validation-input
         *ngIf="formControlType === 'textarea'"
-        type="text"
-        nbInput
-        fullWidth
-        maxlength="250"
-        id="exampleInputEmail1"
-        [placeholder]="placeholder + ' UZB'"
-        [formControl]="controlUz"
-        [status]="submitted && controlUz.errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-    ></textarea>
+        [submitted]="submitted"
+        [control]="controlUz"
+        [placeholder]="placeholder + ' RU'"
+        type="textarea"
+    >
+    </ngx-validation-input>
 </div>

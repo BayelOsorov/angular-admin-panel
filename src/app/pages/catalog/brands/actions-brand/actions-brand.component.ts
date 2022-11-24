@@ -38,7 +38,7 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
     compareFn = (o1: any, o2: any) => (o1 && o2 ? o1 === o2 : o1 === o2);
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
             logo: ['', Validators.required],
             isActive: [true, Validators.required],
             order: ['', Validators.required],

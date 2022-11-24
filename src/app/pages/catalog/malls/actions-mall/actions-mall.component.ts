@@ -3,11 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { IDetailMalls } from '../../../../@core/models/catalog/malls';
 import { LocalitiesService } from '../../../../@core/services/catalog/localities/localities.service';
 import { MallsService } from '../../../../@core/services/catalog/malls/malls.service';
-import { toBase64 } from '../../../../@core/utils/toBase64';
 @Component({
     templateUrl: './actions-mall.component.html',
     styleUrls: ['./actions-mall.component.scss'],
@@ -81,11 +80,14 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
     }
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
             logo: ['', Validators.required],
             isActive: [true, Validators.required],
-            address: ['', Validators.required],
-            description: ['', Validators.required],
+            address: ['', [Validators.required, Validators.maxLength(256)]],
+            description: [
+                '',
+                [Validators.required, Validators.maxLength(4096)],
+            ],
             order: ['', Validators.required],
             location: ['', Validators.required],
             workingHourStart: ['', Validators.required],
@@ -97,6 +99,8 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
             this.mallId = params['id'];
         });
         this.getLocalities();
+        console.log(this.form.get('name'));
+
         if (this.mallId) {
             this.mallsService
                 .getDetailMall(this.mallId)
