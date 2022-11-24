@@ -137,7 +137,7 @@ export class DetailComponent implements OnInit, OnDestroy {
             });
     }
     ngOnInit(): void {
-        this.getVideo();
+        // this.getVideo();
     }
     ngOnDestroy() {
         this.destroy$.next();
