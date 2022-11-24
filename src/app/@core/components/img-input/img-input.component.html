@@ -1,0 +1,19 @@
+<input
+    nbInput
+    fullWidth
+    id="exampleInputPassword1"
+    type="file"
+    (change)="onFileChange($event)"
+    id="formFile"
+    [status]="
+                                submitted && control.errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+/>
+<img
+    [src]="imgSrc && !changed ? (imgSrc | useHttpImgSrc) : blobImg"
+    alt=""
+    width="150"
+    class="center mt-3"
+/>

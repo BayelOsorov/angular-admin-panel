@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { IDetailBrand } from '../../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../../@core/services/catalog/categories/categories.service';
-import { blobToBase64, toBase64 } from '../../../../@core/utils/toBase64';
+import { toBase64 } from '../../../../@core/utils/toBase64';
 @Component({
     templateUrl: './actions-brand.component.html',
     styleUrls: ['./actions-brand.component.scss'],
@@ -100,16 +100,7 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    async onFileChange(event) {
-        if (event.target.files.length > 0) {
-            const file = event.target.files[0];
-            const logo = await toBase64(file);
-            this.logoImg = `data:image/jpeg;base64,${logo}`;
-            this.form.patchValue({
-                logo,
-            });
-        }
-    }
+
     onSearch(value: string): void {
         this.getCategories(value);
     }

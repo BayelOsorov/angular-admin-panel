@@ -79,7 +79,7 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
             });
     }
 
-    onFirstSubmit() {
+    onSubmit() {
         this.submitted = true;
         if (this.form.valid) {
             if (this.itemData) {
@@ -102,16 +102,7 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    async onFileChange(event) {
-        if (event.target.files.length > 0) {
-            const file = event.target.files[0];
-            const logo = await toBase64(file);
-            this.logoImg = `data:image/jpeg;base64,${logo}`;
-            this.form.patchValue({
-                logo,
-            });
-        }
-    }
+
     onSearch(value: string): void {
         this.getCategories(value);
     }

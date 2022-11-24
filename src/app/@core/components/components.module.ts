@@ -18,7 +18,6 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ChangePasswordModalComponent } from './staff/change-password-modal/change-password-modal.component';
 import { CreateStaffModalComponent } from './staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { CategoryActionsModalComponent } from './catalog/category/category-actions-modal/category-actions-modal.component';
 import { UseHttpImageSourcePipe } from './secured-image/secured-image.component';
 import { SearchSelectComponent } from './search-select/search-select.component';
 import { LocalizationInputsComponent } from './localization-inputs/localization-inputs.component';
@@ -45,6 +44,7 @@ import { LightboxImgComponent } from './lightbox-img/lightbox-img.component';
 import { UserVideoComponent } from '../openvidu/user-video.component';
 import { OpenViduVideoComponent } from '../openvidu/ov-video.component';
 import { OpenviduComponent } from '../openvidu';
+import { ImgInputComponent } from './img-input/img-input.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -69,7 +69,6 @@ import { OpenviduComponent } from '../openvidu';
         EditStaffComponent,
         ChangePasswordModalComponent,
         ConfirmDialogComponent,
-        CategoryActionsModalComponent,
         UseHttpImageSourcePipe,
         SearchSelectComponent,
         LocalizationInputsComponent,
@@ -93,6 +92,7 @@ import { OpenviduComponent } from '../openvidu';
         OpenviduComponent,
         UserVideoComponent,
         OpenViduVideoComponent,
+        ImgInputComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -116,6 +116,7 @@ import { OpenviduComponent } from '../openvidu';
         OpenviduComponent,
         UserVideoComponent,
         OpenViduVideoComponent,
+        ImgInputComponent,
     ],
 })
 export class ComponentsModule {}

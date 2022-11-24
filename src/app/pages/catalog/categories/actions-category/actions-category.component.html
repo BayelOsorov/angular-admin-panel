@@ -9,7 +9,7 @@
                 }}
             </nb-card-header>
             <nb-card-body>
-                <form [formGroup]="form" (ngSubmit)="onFirstSubmit()">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="form-group row">
                         <label
                             for="exampleInputEmail1"
@@ -119,26 +119,11 @@
                             >Лого</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                nbInput
-                                fullWidth
-                                id="exampleInputPassword1"
-                                placeholder="Лого"
-                                type="file"
-                                (change)="onFileChange($event)"
-                                id="formFile"
-                                [status]="
-                                submitted && (form.get('logo')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
-                            <img
-                                [src]="logoImg | useHttpImgSrc"
-                                alt=""
-                                width="200"
-                                class="center mt-3"
-                            />
+                            <ngx-img-input
+                                [control]="form.get('logo')"
+                                [submitted]="submitted"
+                                [imgSrc]="form.get('logo').value"
+                            ></ngx-img-input>
                         </div>
                     </div>
                     <button

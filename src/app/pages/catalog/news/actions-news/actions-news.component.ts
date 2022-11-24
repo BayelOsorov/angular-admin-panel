@@ -85,22 +85,6 @@ export class ActionsNewsComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    onFileChange(event, type) {
-        if (event.target.files.length > 0) {
-            Object.values(event.target.files).forEach((item) => {
-                toBase64(item).then((res) => {
-                    const base64 = `data:image/jpeg;base64,${res}`;
-                    if (type === 'cover') {
-                        this.form.patchValue({
-                            cover: res,
-                        });
-                        this.coverImg = base64;
-                        return;
-                    }
-                });
-            });
-        }
-    }
     getProducts(name = '') {
         this.productService
             .getListProducts(1, name)

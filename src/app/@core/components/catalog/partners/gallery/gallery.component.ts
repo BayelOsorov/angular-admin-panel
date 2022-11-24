@@ -23,18 +23,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
         private windowService: NbWindowService,
         private toaster: ToastrService
     ) {}
-    onFileChange(event) {
-        if (event.target.files.length > 0) {
-            // console.log(event.target.files);
-            Object.values(event.target.files).forEach((item) => {
-                toBase64(item).then((res) => {
-                    const base64 = `data:image/jpeg;base64,${res}`;
-                    this.images.push({ img: base64, id: Date.now() });
-                    // this.gallery.push({ img: base64, id: Date.now() });
-                });
-            });
-        }
-    }
+
     deleteImage(imgId) {
         // this.gallery = this.gallery.filter((item) => item.id !== imgId);
         this.partnersService

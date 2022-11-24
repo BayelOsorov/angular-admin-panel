@@ -17,7 +17,7 @@
         <ngx-custom-table
             (changePageEvent)="getCategories($event)"
             (deleteItemEvent)="deleteCategory($event)"
-            (openModalEvent)="openEditModal($event)"
+            (openModalEvent)="openEdit($event)"
             [tableColumns]="tableColumns"
             [tableData]="listCategory"
             [productName]="'ни одной категории'"

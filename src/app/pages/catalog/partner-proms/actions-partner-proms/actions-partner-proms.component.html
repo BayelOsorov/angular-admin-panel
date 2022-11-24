@@ -56,26 +56,11 @@
                             >Обложка</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                nbInput
-                                fullWidth
-                                id="exampleInputPassword1"
-                                placeholder="Обложка"
-                                type="file"
-                                (change)="onFileChange($event, 'cover')"
-                                id="formFile"
-                                [status]="
-                                submitted && (form.get('cover')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
-                            <img
-                                [src]="coverImg | useHttpImgSrc"
-                                alt=""
-                                width="200"
-                                class="center mt-3"
-                            />
+                            <ngx-img-input
+                                [control]="form.get('cover')"
+                                [submitted]="submitted"
+                                [imgSrc]="form.get('cover').value"
+                            ></ngx-img-input>
                         </div>
                     </div>
                     <div class="form-group row">

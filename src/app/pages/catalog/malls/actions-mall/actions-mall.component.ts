@@ -65,23 +65,7 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    onFileChange(event, type) {
-        if (event.target.files.length > 0) {
-            // console.log(event.target.files);
-            Object.values(event.target.files).forEach((item) => {
-                toBase64(item).then((res) => {
-                    const base64 = `data:image/jpeg;base64,${res}`;
-                    if (type === 'logo') {
-                        this.form.patchValue({
-                            logo: res,
-                        });
-                        this.logoImg = base64;
-                        return;
-                    }
-                });
-            });
-        }
-    }
+
     getLocalities(name = '') {
         this.localitiesService
             .getListLocalities(1, name)
