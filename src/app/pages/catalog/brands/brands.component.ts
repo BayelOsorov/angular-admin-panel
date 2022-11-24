@@ -92,7 +92,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    public editBrand(data) {
+    editBrand(data) {
         this.router.navigate([`catalog/brands/update/${data.id}`]);
     }
 }

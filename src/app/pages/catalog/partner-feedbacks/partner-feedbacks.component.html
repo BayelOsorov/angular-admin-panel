@@ -1,1 +1,46 @@
-<p>partner-feedbacks works!</p>
+<nb-card>
+    <nb-card-header>
+        <strong>Отзывы</strong>
+        <div class="d-flex justify-content-between mt-3">
+            <div [formGroup]="form" class="d-flex">
+                <ngx-input-search class="mr-5" [control]="form.get('name')">
+                </ngx-input-search>
+                <nb-select
+                    style="width: 200px"
+                    class="mr-5"
+                    size="small"
+                    fullWidth
+                    placeholder="Статус"
+                    formControlName="passedModeration"
+                >
+                    <nb-option value="">Все</nb-option>
+                    <nb-option [value]="true">Торговый центр</nb-option>
+                    <nb-option [value]="false">Базар</nb-option>
+                </nb-select>
+                <ngx-search-select
+                    [control]="form.get('partnerId')"
+                    [size]="'default'"
+                    [isRequired]="false"
+                    (searchEmit)="getPartners($event)"
+                    [data]="partners"
+                    [placeholder]="'Название партнера'"
+                ></ngx-search-select>
+            </div>
+
+            <a routerLink="/catalog/malls/create">
+                <button nbButton status="primary">Добавить</button>
+            </a>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getPartnerFeedbacks($event)"
+            (deleteItemEvent)="deletePartnerFeedback($event)"
+            (openModalEvent)="updatePartnerFeedback($event)"
+            (rowSelectEvent)="userRowSelect($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listPartnerFeedbacks"
+            [productName]="'ни одного отзыва'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>
