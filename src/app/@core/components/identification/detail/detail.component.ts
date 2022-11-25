@@ -62,13 +62,18 @@ export class DetailComponent implements OnInit, OnDestroy {
     }
     approvePhotoIdn() {
         this.identificationService
-            .approvePhotoIdentification(this.data.id)
+            .approvePhotoIdentification('this.data.id')
             .pipe(takeUntil(this.destroy$))
-            .subscribe(() => {
-                this.toastService.success(
-                    'Вы успешно подтвердили фотоидентификацию!'
-                );
-                this.location.back();
+            .subscribe({
+                next: () => {
+                    this.toastService.success(
+                        'Вы успешно подтвердили фотоидентификацию!'
+                    );
+                    this.location.back();
+                },
+                error: (err) => {
+                    console.log(err, 'errerre errwfbwe ewb ewgf uwefwe few ');
+                },
             });
     }
     declinePhotoIdn() {

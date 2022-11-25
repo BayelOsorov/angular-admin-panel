@@ -4,13 +4,15 @@
             Добавить
         </button>
     </div>
-    <ngx-custom-table
-        (changePageEvent)="getMessengers()"
-        (deleteItemEvent)="deleteMessenger($event)"
-        (openModalEvent)="openEditModal($event)"
-        [tableColumns]="tableColumns"
-        [tableData]="messengers"
-        [productName]="'ни одного продукта'"
-    >
-    </ngx-custom-table>
+    <div class="messengers">
+        <ngx-custom-table
+            (changePageEvent)="getMessengers()"
+            (deleteItemEvent)="deleteMessenger($event)"
+            (openModalEvent)="openEditModal($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="messengers"
+            [productName]="'ни одной соцсети'"
+        >
+        </ngx-custom-table>
+    </div>
 </div>

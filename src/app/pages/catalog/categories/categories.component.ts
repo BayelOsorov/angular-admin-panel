@@ -37,14 +37,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
                         : item.name
                 ),
         },
-        backgroundColor: {
-            title: 'Цвет фона',
-            type: 'html',
-            valuePrepareFunction: (item) =>
-                this.domSanitizer.bypassSecurityTrustHtml(
-                    `<div class="row" style='background-color: ${item}; height:43px;'>&nbsp; </div>`
-                ),
-        },
+
         isActive: {
             title: 'Активен',
             type: 'text',

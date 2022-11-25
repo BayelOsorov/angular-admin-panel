@@ -44,7 +44,6 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
             isActive: [true, Validators.required],
             order: ['', Validators.required],
             parentId: null,
-            backgroundColor: ['', Validators.required],
         });
         this.getCategories();
         this.route.params.subscribe((params) => {
@@ -64,9 +63,6 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
                     this.form.controls['order'].setValue(data.order);
 
                     this.form.controls['parentId'].setValue(data.parentId);
-                    this.form.controls['backgroundColor'].setValue(
-                        data.backgroundColor
-                    );
                 });
         }
     }

@@ -7,4 +7,6 @@ const translateMaritalStatus = (str: string) => {
             return 'Неизвестно';
     }
 };
-export { translateMaritalStatus };
+const truncateText = (text: string, size: number = 40) =>
+    text.length > size ? text.slice(0, size - 1) + '...' : text;
+export { translateMaritalStatus, truncateText };

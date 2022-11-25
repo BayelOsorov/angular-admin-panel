@@ -112,16 +112,7 @@ export interface IDetailPartnerBranch {
 }
 
 export interface IListPartnerFeedbacks {
-    items: [
-        {
-            id: 0;
-            comment: 'string';
-            rate: 0;
-            clientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6';
-            partnerId: 0;
-            createDateTime: '2022-11-16T08:18:22.795Z';
-        }
-    ];
+    items: [IPartnerFeedback];
     pageCount: 0;
     totalItemCount: 0;
     page: 0;
@@ -129,23 +120,15 @@ export interface IListPartnerFeedbacks {
     hasPreviousPage: true;
     hasNextPage: true;
 }
-export interface IPartnerFeedbacks {
-    page: 0;
-    pageCount: 0;
-    pageSize: 0;
-    totalItemCount: 0;
-    items: [
-        {
-            id: 0;
-            comment: 'string';
-            rate: 0;
-            clientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6';
-            partnerId: 0;
-            createDateTime: '2022-11-23T08:33:12.459Z';
-            isMyFeedback: true;
-        }
-    ];
-    hasPreviousPage: true;
-    hasNextPage: true;
+export interface IPartnerFeedback {
+    id: 0;
+    comment: 'string';
+    rate: 0;
+    clientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+    partner: {
+        id: 0;
+        name: 'string';
+    };
+    createDateTime: '2022-11-25T05:19:58.091Z';
 }
 // export interface IPartnerDetailFeedback

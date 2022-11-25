@@ -48,6 +48,8 @@ import { ImgInputComponent } from './img-input/img-input.component';
 import { ValidationInputComponent } from './validation-input/validation-input.component';
 import { MessengersComponent } from './catalog/partners/messengers/messengers.component';
 import { MessengersActionsModalComponent } from './catalog/partners/messengers/messengers-actions-modal/messengers-actions-modal.component';
+import { TableComponent } from './table/table.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 @NgModule({
     imports: [
         CommonModule,
@@ -56,6 +58,7 @@ import { MessengersActionsModalComponent } from './catalog/partners/messengers/m
         NbStepperModule,
         NbCardModule,
         ReactiveFormsModule,
+        Ng2SmartTableModule,
         FormsModule,
         NbButtonModule,
         NbSelectModule,
@@ -99,6 +102,7 @@ import { MessengersActionsModalComponent } from './catalog/partners/messengers/m
         ValidationInputComponent,
         MessengersComponent,
         MessengersActionsModalComponent,
+        TableComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -125,6 +129,7 @@ import { MessengersActionsModalComponent } from './catalog/partners/messengers/m
         ImgInputComponent,
         ValidationInputComponent,
         MessengersComponent,
+        TableComponent,
     ],
 })
 export class ComponentsModule {}

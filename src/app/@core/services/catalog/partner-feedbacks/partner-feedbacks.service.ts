@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environments/environment';
-import { IListPartnerFeedbacks } from '../../../models/catalog/partners';
+import {
+    IListPartnerFeedbacks,
+    IPartnerFeedback,
+} from '../../../models/catalog/partners';
 
 @Injectable({
     providedIn: 'root',
@@ -9,29 +12,27 @@ import { IListPartnerFeedbacks } from '../../../models/catalog/partners';
 export class PartnerFeedbacksService {
     constructor(private http: HttpClient) {}
     getListPartnerFeedbacks(page = 1, filter) {
-        const { name = '', passedModeration = '', partnerId = '' } = filter;
+        const { passedModeration = '', partnerId = '' } = filter;
         return this.http.get<IListPartnerFeedbacks>(
             environment.catalogUrl +
-                `/Administration/api/v1/feedbacks?partnerId=${partnerId}&passedModeration=${passedModeration}
-&name=${name}&page=${page}&pageSize=20`
+                `/Administration/api/v1/feedbacks?partnerId=${partnerId}&passedModeration=${passedModeration}&page=${page}&pageSize=20`
         );
     }
     getDetailPartnerFeedback(id: number) {
-        // return this.http.get<IDetailPartnerFeedbacks>(
-        //     environment.catalogUrl +
-        //         `/Administration/api/v1/partner-proms/${id}`
-        // );
+        return this.http.get<IPartnerFeedback>(
+            environment.catalogUrl + `/Administration/api/v1/feedbacks/${id}`
+        );
     }
-    deletePartnerFeedback(partnerId: number, feedbackId: number) {
+    deletePartnerFeedback(partnerId, feedbackId: number) {
         return this.http.delete(
             environment.catalogUrl +
-                `/Administration/api/v1/${partnerId}/feedbacks/${feedbackId}`
+                `/Administration/api/v1/feedbacks/${feedbackId}?partnerId=${partnerId}`
         );
     }
     approvePartnerFeedback(partnerId: number, feedbackId) {
         return this.http.put(
             environment.catalogUrl +
-                `/Administration/api/v1/${partnerId}/feedbacks/${feedbackId}/check`,
+                `/Administration/api/v1/feedbacks/${feedbackId}/check?partnerId=${partnerId}`,
             { coment: 'approve' }
         );
     }

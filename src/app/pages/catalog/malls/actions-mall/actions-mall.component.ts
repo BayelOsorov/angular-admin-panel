@@ -99,7 +99,6 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
             this.mallId = params['id'];
         });
         this.getLocalities();
-        console.log(this.form.get('name'));
 
         if (this.mallId) {
             this.mallsService

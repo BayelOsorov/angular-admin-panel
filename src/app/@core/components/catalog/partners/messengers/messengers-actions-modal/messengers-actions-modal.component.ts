@@ -44,7 +44,7 @@ export class MessengersActionsModalComponent implements OnInit, OnDestroy {
             if (this.itemData) {
                 this.partnersService
                     .editPartnerMessenger(
-                        this.partnerId,
+                        this.itemData.partnerId,
                         this.itemData.id,
                         this.form.value
                     )

@@ -9,7 +9,7 @@ import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-
 import { IListPartnerFeedbacks } from '../../../@core/models/catalog/partners';
 import { PartnerFeedbacksService } from '../../../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
 import { PartnersService } from '../../../@core/services/catalog/partners/partners.service';
-import { tableNumbering } from '../../../@core/utils';
+import { tableNumbering, truncateText } from '../../../@core/utils';
 @Component({
     templateUrl: './partner-feedbacks.component.html',
     styleUrls: ['./partner-feedbacks.component.scss'],
@@ -18,7 +18,6 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
     listPartnerFeedbacks: IListPartnerFeedbacks;
     partners;
     form = this.fb.group({
-        name: [''],
         passedModeration: [''],
         partnerId: [''],
     });
@@ -29,25 +28,23 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
             valuePrepareFunction: (value, row, cell) =>
                 tableNumbering(this.listPartnerFeedbacks.page, cell.row.index),
         },
-        cover: {
-            title: 'Обложка',
-            type: 'custom',
-            renderComponent: AvatarImgComponent,
+        comment: {
+            title: 'Текст',
+            type: 'html',
+
+            valuePrepareFunction: (item) =>
+                `<div title='${item}'>${truncateText(item)}</div>`,
         },
-        title: {
-            title: 'Заголовок',
-            type: 'text',
-        },
-        startDateTime: {
-            title: 'Дата начала',
+        createDateTime: {
+            title: 'Дата',
             type: 'text',
             valuePrepareFunction: (item) => this.parseDate(item),
         },
 
-        endDateTime: {
-            title: 'Дата окончания',
+        partner: {
+            title: 'Партнер',
             type: 'text',
-            valuePrepareFunction: (item) => this.parseDate(item),
+            valuePrepareFunction: (item) => item.name,
         },
     };
 
@@ -73,14 +70,14 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
         this.getPartnerFeedbacks(1, event);
     }
     updatePartnerFeedback(data) {
-        this.router.navigate([`catalog/partner-proms/update/${data.id}`]);
+        this.router.navigate([`catalog/partner-feedbacks/detail/${data.id}`]);
     }
     userRowSelect(id) {
-        // this.router.navigate([`catalog/partner-proms/detail/${id}`]);
+        this.router.navigate([`catalog/partner-feedbacks/detail/${id}`]);
     }
-    deletePartnerFeedback(data) {
+    deletePartnerFeedback(id) {
         this.partnerFeedbacksService
-            .deletePartnerFeedback(data.partnerId, data.id)
+            .deletePartnerFeedback(1, id)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.toaster.success('Успешно удалено!');
@@ -100,8 +97,6 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
-                console.log(data);
-
                 this.getPartnerFeedbacks(1, data);
             });
     }

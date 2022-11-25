@@ -22,12 +22,10 @@ import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { StaffComponent } from './staff/list-staff/staff.component';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DetailStaffComponent } from './staff/detail-staff/detail-staff.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { BrandsComponent } from './catalog/brands/brands.component';
-import { TableComponent } from '../@core/components/table/table.component';
 import { InputSearchComponent } from '../@core/components/input-search/input-search.component';
 import { ListPartnersComponent } from './catalog/partners/list-partners/list-partners.component';
 import { ActionsPartnerComponent } from './catalog/partners/actions-partner/actions-partner.component';
@@ -45,7 +43,6 @@ import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.
 import { ActionsBrandComponent } from './catalog/brands/actions-brand/actions-brand.component';
 import { ListNewsComponent } from './catalog/news/list-news/list-news.component';
 import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.component';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { ListPartnerPromsComponent } from './catalog/partner-proms/list-partner-proms/list-partner-proms.component';
 import { ActionsPartnerPromsComponent } from './catalog/partner-proms/actions-partner-proms/actions-partner-proms.component';
 import { ActionsCategoryComponent } from './catalog/categories/actions-category/actions-category.component';
@@ -70,7 +67,6 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         NbMenuModule,
         ReactiveFormsModule,
         FormsModule,
-        Ng2SmartTableModule,
         NbCardModule,
         NbListModule,
         NbTreeGridModule,
@@ -95,7 +91,6 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         StaffComponent,
         DetailStaffComponent,
         BrandsComponent,
-        TableComponent,
         InputSearchComponent,
         ListPartnersComponent,
         ActionsPartnerComponent,

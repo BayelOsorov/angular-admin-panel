@@ -9,7 +9,7 @@
     </div>
     <div class="detail-images row">
         <ngx-lightbox-img
-            class="col-md-4"
+            class="col-md-4 first"
             [imgUrl]="data.passportFrontSideImageUrl"
         ></ngx-lightbox-img>
 
@@ -25,7 +25,7 @@
     </div>
     <div [@openClose]="toggle" class="data row" *ngIf="personalData && toggle">
         <img
-            class="col-md-4"
+            class="col-6 col-sm-3"
             [src]="personalData.profilePhotoUrl | useHttpImgSrc"
             alt=""
         />
@@ -65,8 +65,14 @@
                 <td>{{ personalData.residenceAddress }}</td>
             </tr>
             <tr>
-                <td>Номер паспорта</td>
-                <td>{{ personalData.documentNumber }}</td>
+                <td>Паспорт</td>
+                <td>
+                    {{
+                        personalData.passportType +
+                            ' ' +
+                            personalData.documentNumber
+                    }}
+                </td>
             </tr>
             <tr>
                 <td>Дата выдачи</td>
@@ -80,10 +86,6 @@
             <tr>
                 <td>Срок действия паспорта</td>
                 <td>{{ personalData.dateOfExpiry | date: 'dd.MM.yyyy' }}</td>
-            </tr>
-            <tr>
-                <td>Номер телефона</td>
-                <td></td>
             </tr>
         </table>
     </div>

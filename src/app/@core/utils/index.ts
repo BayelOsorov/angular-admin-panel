@@ -3,7 +3,7 @@ import { StateService } from './state.service';
 import { GeneratePassword } from './generatePassword';
 import { HttpOptions } from './const';
 import { tableNumbering } from './tableNumbering';
-import { translateMaritalStatus } from './helpers';
+import { translateMaritalStatus, truncateText } from './helpers';
 
 export {
     LayoutService,
@@ -11,5 +11,6 @@ export {
     GeneratePassword,
     tableNumbering,
     translateMaritalStatus,
+    truncateText,
     HttpOptions,
 };
