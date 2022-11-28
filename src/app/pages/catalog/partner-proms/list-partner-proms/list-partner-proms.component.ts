@@ -51,7 +51,7 @@ export class ListPartnerPromsComponent implements OnInit, OnDestroy {
         private router: Router
     ) {}
     parseDate(date) {
-        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+        return this.datePipe.transform(date, 'dd.MM.yyyy');
     }
     getPartnerProms(page = 1, name = '') {
         this.partnerPromsService

@@ -22,6 +22,7 @@
                                 class="d-block w-50"
                                 nbButton
                                 status="warning"
+                                (click)="updatePartner()"
                             >
                                 Редактировать
                             </button>
@@ -36,23 +37,63 @@
                                 class="d-block mt-3 w-50"
                                 nbButton
                                 status="danger"
+                                (click)="deletePartner()"
                             >
                                 Удалить
                             </button>
                         </div>
                         <div class="col-md-8">
-                            <!-- <nb-card class="list-card"> -->
-                            <div class="header">
-                                <div class="partner-board">
-                                    <nb-alert class="" status="primary"
-                                        >10 избранное</nb-alert
-                                    >
-                                    <nb-alert class="" status="primary"
-                                        >50 отзывов</nb-alert
-                                    >
-                                    <nb-alert class="" status="primary"
-                                        >4.5 рейтинг</nb-alert
-                                    >
+                            <div class="partner-board row">
+                                <div class="partner-card col-md-4">
+                                    <div class="card__border container">
+                                        <div class="card__inner">
+                                            <div class="card__icon">
+                                                <i
+                                                    style="font-size: 30px"
+                                                    class="nb-trash"
+                                                ></i>
+                                            </div>
+                                            <div class="card__text">
+                                                <p>Избранное</p>
+                                                <strong>10</strong>
+                                            </div>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+                                <div class="partner-card col-md-4">
+                                    <div class="card__border container">
+                                        <div class="card__inner">
+                                            <div class="card__icon">
+                                                <i
+                                                    style="font-size: 30px"
+                                                    class="nb-trash"
+                                                ></i>
+                                            </div>
+                                            <div class="card__text">
+                                                <p>Отзывы</p>
+                                                <strong>50</strong>
+                                            </div>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+                                <div class="partner-card col-md-4">
+                                    <div class="card__border container">
+                                        <div class="card__inner">
+                                            <div class="card__icon">
+                                                <i
+                                                    style="font-size: 30px"
+                                                    class="nb-trash"
+                                                ></i>
+                                            </div>
+                                            <div class="card__text">
+                                                <p>Рейтинг</p>
+                                                <strong>4.5</strong>
+                                            </div>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="header">

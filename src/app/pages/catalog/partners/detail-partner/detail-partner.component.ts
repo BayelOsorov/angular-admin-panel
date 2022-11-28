@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -26,7 +26,8 @@ export class DetailPartnerComponent implements OnInit, OnDestroy {
     constructor(
         private toaster: ToastrService,
         private partnersService: PartnersService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {}
 
     getDetailPartner() {
@@ -35,6 +36,18 @@ export class DetailPartnerComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.partner = data;
+            });
+    }
+    updatePartner() {
+        this.router.navigate([`catalog/partners/update/${this.partner.id}`]);
+    }
+    deletePartner() {
+        this.partnersService
+            .deletePartner(this.partner.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.router.navigate([`catalog/partners`]);
             });
     }
     ngOnInit(): void {

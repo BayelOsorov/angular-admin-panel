@@ -43,6 +43,7 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
             logo: ['', Validators.required],
             isActive: [true, Validators.required],
             order: ['', Validators.required],
+            backgroundColor: ['#FFFFFF'],
             parentId: null,
         });
         this.getCategories();
