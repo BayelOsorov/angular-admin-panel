@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PartnerPromsService } from '../../../../@core/services/catalog/partner-proms/partner-proms.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
-import { toBase64 } from '../../../../@core/utils/toBase64';
 @Component({
     templateUrl: './actions-partner-proms.component.html',
     styleUrls: ['./actions-partner-proms.component.scss'],
@@ -47,11 +46,17 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
             this.partnerPromsService
                 .createPartnerProms(this.form.value)
                 .pipe(takeUntil(this.destroy$))
-                .subscribe(() => {
+                .subscribe((data) => {
+                    console.log(this.form.value.startDateTime, '-- ', data);
+
                     this.toaster.success('Успешно создано!');
                     this.router.navigate([`catalog/partner-proms`]);
                 });
         }
+    }
+    dateChange(d, type) {
+        d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
+        this.form.controls[type].patchValue(d.toISOString());
     }
     changeContent(data) {
         this.form.patchValue({

@@ -26,6 +26,7 @@ import {
     IPersonalData,
 } from '../../../models/identification/identification';
 import { OpenviduComponent } from '../../../openvidu';
+import { HandleErrorService } from '../../../services/http/handle-error.service';
 import { IdentificationService } from '../../../services/identification/identification.service';
 import { translateMaritalStatus } from '../../../utils';
 
@@ -47,7 +48,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     @ViewChild('openvidu', { static: false }) openvidu: OpenviduComponent;
     toggle = false;
     isNeedToEdit = false;
-
+    error = '';
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -55,14 +56,15 @@ export class DetailComponent implements OnInit, OnDestroy {
         private toastService: ToastrService,
         private router: Router,
         private location: Location,
-        private http: HttpClient
+        private http: HttpClient,
+        private errorService: HandleErrorService
     ) {}
     getDataToggle() {
         this.toggle = !this.toggle;
     }
     approvePhotoIdn() {
         this.identificationService
-            .approvePhotoIdentification('this.data.id')
+            .approvePhotoIdentification(this.data.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {
@@ -72,7 +74,7 @@ export class DetailComponent implements OnInit, OnDestroy {
                     this.location.back();
                 },
                 error: (err) => {
-                    console.log(err, 'errerre errwfbwe ewb ewgf uwefwe few ');
+                    this.error = this.errorService.identificationErrors(err);
                 },
             });
     }
@@ -80,44 +82,64 @@ export class DetailComponent implements OnInit, OnDestroy {
         this.identificationService
             .declinePhotoIdentification(this.data.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe(() => {
-                this.toastService.success(
-                    'Вы успешно отклонили фотоидентификацию!'
-                );
-                this.location.back();
+            .subscribe({
+                next: () => {
+                    this.toastService.success(
+                        'Вы успешно отклонили фотоидентификацию!'
+                    );
+                    this.location.back();
+                },
+                error: (err) => {
+                    this.error = this.errorService.identificationErrors(err);
+                },
             });
     }
     approveVideoIdn() {
         this.identificationService
             .approveVideoIdentification(this.data.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe(() => {
-                this.toastService.success(
-                    'Вы успешно подтвердили видеоидентификацию!'
-                );
-                this.location.back();
+            .subscribe({
+                next: () => {
+                    this.toastService.success(
+                        'Вы успешно подтвердили видеоидентификацию!'
+                    );
+                    this.location.back();
+                },
+                error: (err) => {
+                    this.error = this.errorService.identificationErrors(err);
+                },
             });
     }
     declineVideoIdn() {
         this.identificationService
             .declineVideoIdentification(this.data.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe(() => {
-                this.toastService.success(
-                    'Вы успешно отклонили видеоидентификацию!'
-                );
-                this.location.back();
+            .subscribe({
+                next: () => {
+                    this.toastService.success(
+                        'Вы успешно отклонили видеоидентификацию!'
+                    );
+                    this.location.back();
+                },
+                error: (err) => {
+                    this.error = this.errorService.identificationErrors(err);
+                },
             });
     }
     suspendVideoIdn() {
         this.identificationService
             .suspendVideoIdentification(this.data.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe(() => {
-                this.toastService.success(
-                    'Вы успешно повторно запросили видеоидентификацию!'
-                );
-                // this.location.back();
+            .subscribe({
+                next: () => {
+                    this.toastService.success(
+                        'Вы успешно повторно запросили видеоидентификацию!'
+                    );
+                    this.location.back();
+                },
+                error: (err) => {
+                    this.error = this.errorService.identificationErrors(err);
+                },
             });
     }
     editPhotoIdn() {
@@ -128,6 +150,10 @@ export class DetailComponent implements OnInit, OnDestroy {
     }
     translate(str) {
         return translateMaritalStatus(str);
+    }
+    closeAlert() {
+        this.error = '';
+        console.log(this.error);
     }
     getVideo() {
         // return this.http.get(

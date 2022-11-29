@@ -141,9 +141,28 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
                 .pipe(
                     takeUntil(this.destroy$),
                     map((res) => {
-                        if (res.tags && res.tags.length > 0) {
+                        if (
+                            res.tags.length > 0 &&
+                            res.products.length > 0 &&
+                            res.brands.length > 0 &&
+                            res.categories.length > 0
+                        ) {
                             const newTags = res.tags.map((item) => item.id);
-                            return { ...res, tags: newTags };
+                            const newProducts = res.products.map(
+                                (item) => item.id
+                            );
+                            const newBrands = res.brands.map((item) => item.id);
+                            const newCategories = res.categories.map(
+                                (item) => item.id
+                            );
+
+                            return {
+                                ...res,
+                                tags: newTags,
+                                products: newProducts,
+                                brands: newBrands,
+                                categories: newCategories,
+                            };
                         }
                         return res;
                     })

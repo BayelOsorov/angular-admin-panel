@@ -1,3 +1,13 @@
+<nb-alert *ngIf="error" class="sticky-alert slideInDown" status="danger"
+    ><div class="my-alert">
+        <div class="alert-text">
+            <i class="nb-info"></i>
+            <p>{{ error }}</p>
+        </div>
+
+        <button ghost nbButton (click)="closeAlert()">X</button>
+    </div>
+</nb-alert>
 <div class="detail-info" *ngIf="data">
     <div class="status">
         <strong>{{ data.createdAt | date: 'dd.MM.yyyy, hh:mm' }}</strong>

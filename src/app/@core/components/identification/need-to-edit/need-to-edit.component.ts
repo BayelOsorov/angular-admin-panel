@@ -41,7 +41,6 @@ export class NeedToEditComponent implements OnInit, OnDestroy {
     }
     onSubmit() {
         if (this.form.valid) {
-            console.log(this.form.value);
             this.identificationService
                 .needToEditPhotoIdentification(this.data.id, {
                     editRequiredProperties: this.form.value,

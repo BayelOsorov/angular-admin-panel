@@ -19,10 +19,6 @@ import { AuthConfigModule } from './auth/auth-config.module';
 import { ComponentsModule } from './@core/components/components.module';
 import { DemoNgZorroAntdModule } from './@core/utils/ng-zorro-antd.module';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpInterceptorService } from './@core/services/http/http.service';
-import { BaseUrlInterceptor } from './@core/interceptors/base-url.interceptor';
-import { HttpErrorInterceptor } from './@core/interceptors/error.interceptor';
-
 @NgModule({
     declarations: [AppComponent],
     imports: [

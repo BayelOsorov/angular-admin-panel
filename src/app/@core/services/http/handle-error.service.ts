@@ -35,4 +35,14 @@ export class HandleErrorService {
         }
         this.toaster.error(errorMessage);
     }
+    public identificationErrors(err) {
+        let message = '';
+        if (err.status === 404) {
+            message = 'Данные для данного ИНН не найдены :(';
+        }
+        if (err.error) {
+            message = err.error.title;
+        }
+        return message;
+    }
 }

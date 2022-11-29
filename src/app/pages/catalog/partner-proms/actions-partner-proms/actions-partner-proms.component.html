@@ -75,7 +75,12 @@
                                     : 'basic'
                             "
                             />
-                            <nb-datepicker #formpicker></nb-datepicker>
+                            <nb-datepicker
+                                (dateChange)="
+                                    dateChange($event, 'startDateTime')
+                                "
+                                #formpicker
+                            ></nb-datepicker>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -90,14 +95,16 @@
                                 nbInput
                                 placeholder="Дата окончания"
                                 [nbDatepicker]="formpickermy"
-                                formControlName="endDateTime"
                                 [status]="
                                 submitted && (form.get('endDateTime')).errors?.['required']
                                     ? 'danger'
                                     : 'basic'
                             "
                             />
-                            <nb-datepicker #formpickermy></nb-datepicker>
+                            <nb-datepicker
+                                (dateChange)="dateChange($event, 'endDateTime')"
+                                #formpickermy
+                            ></nb-datepicker>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -47,15 +47,17 @@
                                 <div class="partner-card col-md-4">
                                     <div class="card__border container">
                                         <div class="card__inner">
-                                            <div class="card__icon">
+                                            <div class="card__icon favorite">
                                                 <i
-                                                    style="font-size: 30px"
-                                                    class="nb-trash"
+                                                    style="font-size: 38px"
+                                                    class="nb-star"
                                                 ></i>
                                             </div>
                                             <div class="card__text">
                                                 <p>Избранное</p>
-                                                <strong>10</strong>
+                                                <strong class="float-right"
+                                                    >10</strong
+                                                >
                                             </div>
                                         </div>
                                         <div class="line"></div>
@@ -64,15 +66,17 @@
                                 <div class="partner-card col-md-4">
                                     <div class="card__border container">
                                         <div class="card__inner">
-                                            <div class="card__icon">
+                                            <div class="card__icon feedback">
                                                 <i
-                                                    style="font-size: 30px"
-                                                    class="nb-trash"
+                                                    style="font-size: 38px"
+                                                    class="nb-person"
                                                 ></i>
                                             </div>
                                             <div class="card__text">
                                                 <p>Отзывы</p>
-                                                <strong>50</strong>
+                                                <strong class="float-right"
+                                                    >50</strong
+                                                >
                                             </div>
                                         </div>
                                         <div class="line"></div>
@@ -81,15 +85,17 @@
                                 <div class="partner-card col-md-4">
                                     <div class="card__border container">
                                         <div class="card__inner">
-                                            <div class="card__icon">
+                                            <div class="card__icon rate">
                                                 <i
-                                                    style="font-size: 30px"
-                                                    class="nb-trash"
+                                                    style="font-size: 38px"
+                                                    class="nb-bar-chart"
                                                 ></i>
                                             </div>
                                             <div class="card__text">
                                                 <p>Рейтинг</p>
-                                                <strong>4.5</strong>
+                                                <strong class="float-right"
+                                                    >4.5</strong
+                                                >
                                             </div>
                                         </div>
                                         <div class="line"></div>
@@ -124,7 +130,7 @@
                                     <ng-container
                                         *ngFor="let i of partner.categories"
                                     >
-                                        {{ i.name }},
+                                        {{ i.name }}
                                     </ng-container>
                                 </div>
                             </div>
@@ -137,7 +143,7 @@
                                     <ng-container
                                         *ngFor="let i of partner.brands"
                                     >
-                                        {{ i.name }},
+                                        {{ i.name }}
                                     </ng-container>
                                 </div>
                             </div>
@@ -150,7 +156,7 @@
                                     <ng-container
                                         *ngFor="let tag of partner.tags"
                                     >
-                                        {{ tag.name.ru }},
+                                        {{ tag.name.ru }}
                                     </ng-container>
                                 </div>
                             </div>
@@ -163,7 +169,7 @@
                                     <ng-container
                                         *ngFor="let i of partner.products"
                                     >
-                                        {{ i.name }},
+                                        {{ i.name }}
                                     </ng-container>
                                 </div>
                             </div>

@@ -1,5 +1,8 @@
 @import '../../../../@theme/styles/themes';
 .detail-info {
+    ::ng-deep nb-alert {
+        padding: 5px 15px 5px 15px;
+    }
     width: 90%;
     margin: 0 auto;
 
@@ -28,6 +31,60 @@
         padding: 15px 40px;
     }
 }
-::ng-deep nb-alert {
-    padding: 5px 15px 5px 15px;
+.sticky-alert {
+    position: fixed;
+    right: 2.7vw;
+    left: 19vw;
+    top: 110px;
+    z-index: 100;
+}
+
+.my-alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+        margin-bottom: 0;
+    }
+    button {
+        color: #fff;
+    }
+    i {
+        font-size: 30px;
+        padding-right: 20px;
+    }
+    .alert-text {
+        display: flex;
+        align-items: center;
+    }
+}
+.slideInDown {
+    -webkit-animation-name: slideInDown;
+    animation-name: slideInDown;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@-webkit-keyframes slideInDown {
+    0% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        visibility: visible;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+@keyframes slideInDown {
+    0% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        visibility: visible;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
 }
