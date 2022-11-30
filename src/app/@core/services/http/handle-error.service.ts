@@ -13,6 +13,9 @@ export class HandleErrorService {
             return this.toaster.error(errorMessage);
         }
         if (err.status === 404) {
+            if (err.error) {
+                return this.toaster.error(err.error.title);
+            }
             return this.toaster.error(err.message);
         }
         if (err.error) {

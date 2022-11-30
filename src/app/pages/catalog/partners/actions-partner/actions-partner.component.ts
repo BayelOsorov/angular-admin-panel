@@ -124,9 +124,18 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
             descRu: ['', [Validators.required, Validators.maxLength(4096)]],
             descKg: ['', [Validators.required, Validators.maxLength(4096)]],
             descUz: ['', [Validators.required, Validators.maxLength(4096)]],
-            shortDescRu: ['', [Validators.required, Validators.maxLength(256)]],
-            shortDescKg: ['', [Validators.required, Validators.maxLength(256)]],
-            shortDescUz: ['', [Validators.required, Validators.maxLength(256)]],
+            shortDescRu: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            shortDescKg: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            shortDescUz: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
             categories: [[], Validators.required],
             products: [[], Validators.required],
             brands: [[], Validators.required],

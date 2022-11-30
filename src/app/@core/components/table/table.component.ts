@@ -56,12 +56,14 @@ export class TableComponent implements OnInit, AfterContentChecked {
                 perPage: 20,
                 display: true,
             },
-            noDataMessage: 'Список пуст!',
+            // noDataMessage: 'Список пуст!',
             columns: this.tableColumns,
         };
     }
     onDelete(event) {
-        this.deleteItemEvent.emit(event.data.id);
+        this.deleteItemEvent.emit(
+            this.productName === 'ни одного отзыва' ? event.data : event.data.id
+        );
     }
     onRowSelect(event) {
         this.rowSelectEvent.emit(event.data.id);

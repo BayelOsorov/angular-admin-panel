@@ -75,9 +75,9 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
     userRowSelect(id) {
         this.router.navigate([`catalog/partner-feedbacks/detail/${id}`]);
     }
-    deletePartnerFeedback(id) {
+    deletePartnerFeedback(data) {
         this.partnerFeedbacksService
-            .deletePartnerFeedback(1, id)
+            .deletePartnerFeedback(data.partner.id, data.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.toaster.success('Успешно удалено!');
