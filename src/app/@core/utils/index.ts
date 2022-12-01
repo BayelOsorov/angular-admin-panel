@@ -1,7 +1,7 @@
 import { LayoutService } from './layout.service';
 import { StateService } from './state.service';
 import { GeneratePassword } from './generatePassword';
-import { HttpOptions } from './const';
+import { HttpOptions, IdentificationAnswers } from './const';
 import { tableNumbering } from './tableNumbering';
 import { translateMaritalStatus, truncateText } from './helpers';
 
@@ -12,5 +12,6 @@ export {
     tableNumbering,
     translateMaritalStatus,
     truncateText,
+    IdentificationAnswers,
     HttpOptions,
 };

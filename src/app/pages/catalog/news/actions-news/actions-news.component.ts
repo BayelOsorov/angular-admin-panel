@@ -98,9 +98,18 @@ export class ActionsNewsComponent implements OnInit, OnDestroy {
             titleRu: ['', [Validators.required, Validators.maxLength(256)]],
             titleKg: ['', [Validators.required, Validators.maxLength(256)]],
             titleUz: ['', [Validators.required, Validators.maxLength(256)]],
-            shortTextRu: ['', [Validators.required, Validators.maxLength(256)]],
-            shortTextKg: ['', [Validators.required, Validators.maxLength(256)]],
-            shortTextUz: ['', [Validators.required, Validators.maxLength(256)]],
+            shortTextRu: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            shortTextKg: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            shortTextUz: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
             textRu: ['', [Validators.required, Validators.maxLength(4096)]],
             textKg: ['', [Validators.required, Validators.maxLength(4096)]],
             textUz: ['', [Validators.required, Validators.maxLength(4096)]],

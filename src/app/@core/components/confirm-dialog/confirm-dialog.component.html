@@ -1,13 +1,35 @@
 <ng-template #form>
-    <div class="p-2">
+    <div *ngIf="visible" class="p-2">
         <div class="d-flex">
-            <button size="small" nbButton status="success" type="submit" ghost>
+            <button
+                (click)="approve()"
+                size="small"
+                nbButton
+                status="success"
+                type="click"
+                ghost
+            >
                 Подтвердить
             </button>
-            <button size="small" nbButton status="danger" type="submit" ghost>
+            <button
+                (click)="decline()"
+                size="small"
+                nbButton
+                status="danger"
+                type="click"
+                ghost
+            >
                 Отменить
             </button>
         </div>
     </div>
 </ng-template>
-<button nbButton status="warning" [nbPopover]="form">With form</button>
+<button
+    class="w-100"
+    nbButton
+    (click)="onClick()"
+    [status]="status"
+    [nbPopover]="form"
+>
+    {{ title }}
+</button>

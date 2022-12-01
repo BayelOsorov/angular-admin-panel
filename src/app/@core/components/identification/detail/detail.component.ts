@@ -16,6 +16,7 @@ import {
     ChangeDetectorRef,
     OnDestroy,
 } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
@@ -28,8 +29,7 @@ import {
 import { OpenviduComponent } from '../../../openvidu';
 import { HandleErrorService } from '../../../services/http/handle-error.service';
 import { IdentificationService } from '../../../services/identification/identification.service';
-import { translateMaritalStatus } from '../../../utils';
-
+import { IdentificationAnswers, translateMaritalStatus } from '../../../utils';
 @Component({
     selector: 'ngx-identification-detail',
     templateUrl: './detail.component.html',
@@ -49,6 +49,8 @@ export class DetailComponent implements OnInit, OnDestroy {
     toggle = false;
     isNeedToEdit = false;
     error = '';
+    identificationAnswers = IdentificationAnswers;
+    form: FormGroup;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -57,7 +59,8 @@ export class DetailComponent implements OnInit, OnDestroy {
         private router: Router,
         private location: Location,
         private http: HttpClient,
-        private errorService: HandleErrorService
+        private errorService: HandleErrorService,
+        private fb: FormBuilder
     ) {}
     getDataToggle() {
         this.toggle = !this.toggle;
@@ -143,7 +146,31 @@ export class DetailComponent implements OnInit, OnDestroy {
             });
     }
     editPhotoIdn() {
-        this.isNeedToEdit = true;
+        if (this.form.valid) {
+            if (
+                Object.values(this.form.value).find(
+                    (item: []) => item.length > 0
+                )
+            ) {
+                this.identificationService
+                    .needToEditPhotoIdentification(this.data.id, {
+                        editRequiredProperties: this.form.value,
+                    })
+                    .pipe(takeUntil(this.destroy$))
+                    .subscribe({
+                        next: () => {
+                            this.toastService.success(
+                                'Вы успешно отправили на редактирование фотоидентификацию!'
+                            );
+                            this.location.back();
+                        },
+                        error: (err) => {
+                            this.error =
+                                this.errorService.identificationErrors(err);
+                        },
+                    });
+            }
+        }
     }
     hideEdit(bool) {
         this.isNeedToEdit = bool;
@@ -153,22 +180,17 @@ export class DetailComponent implements OnInit, OnDestroy {
     }
     closeAlert() {
         this.error = '';
-        console.log(this.error);
     }
-    getVideo() {
-        // return this.http.get(
-        //     `https://stage.c2u.io:2002/operator/api/v1/video-call-files/6b7805c5-efbd-4065-9c2d-4a5616c73547`
-        // );
-        this.http
-            .get(
-                `https://stage.c2u.io:2002/operator/api/v1/video-call-files/6b7805c5-efbd-4065-9c2d-4a5616c73547`
-            )
-            .subscribe((data) => {
-                console.log(data);
-            });
-    }
+
     ngOnInit(): void {
-        // this.getVideo();
+        this.form = this.fb.group({
+            PassportFrontSideImageId: [[]],
+            PassportBackSideImageId: [[]],
+            Address: [[]],
+            Pin: [[]],
+            SelfieWithPassportImageId: [[]],
+            DocumentNumber: [[]],
+        });
     }
     ngOnDestroy() {
         this.destroy$.next();

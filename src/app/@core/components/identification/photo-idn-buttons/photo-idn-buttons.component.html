@@ -1,34 +1,28 @@
 <div *ngIf="!isPhotoIdnNeedToEdit && isInfoOpened" class="mt-5">
     <div *ngIf="data.status === 'PhotoIdentificationProcess'" class="row">
         <div class="col-md-4">
-            <button
-                class="w-100"
-                nbButton
+            <ngx-confirm-buttons
+                (approveEvent)="approveUser()"
                 status="success"
-                (click)="approveUser()"
+                title="Одобрить"
             >
-                Одобрить
-            </button>
+            </ngx-confirm-buttons>
         </div>
         <div class="col-md-4">
-            <button
-                class="w-100"
-                nbButton
+            <ngx-confirm-buttons
+                (approveEvent)="editUser()"
                 status="warning"
-                (click)="editUser()"
+                title="Редактировать"
             >
-                Редактировать
-            </button>
+            </ngx-confirm-buttons>
         </div>
         <div class="col-md-4">
-            <button
-                class="w-100"
-                nbButton
+            <ngx-confirm-buttons
+                (approveEvent)="declineUser()"
                 status="danger"
-                (click)="declineUser()"
+                title="Отклонить"
             >
-                Отклонить
-            </button>
+            </ngx-confirm-buttons>
         </div>
     </div>
     <ng-container *ngIf="data.status !== 'PhotoIdentificationProcess'">
@@ -42,34 +36,28 @@
         </button>
         <div class="row">
             <div class="col-md-4">
-                <button
-                    class="w-100"
-                    nbButton
+                <ngx-confirm-buttons
+                    (approveEvent)="approveUser()"
                     status="success"
-                    (click)="approveUser()"
+                    title="Одобрить"
                 >
-                    Одобрить
-                </button>
+                </ngx-confirm-buttons>
             </div>
             <div class="col-md-4">
-                <button
-                    class="w-100"
-                    nbButton
+                <ngx-confirm-buttons
+                    (approveEvent)="editUser()"
                     status="warning"
-                    (click)="editUser()"
+                    title="Запросить повторно"
                 >
-                    Запросить повторно
-                </button>
+                </ngx-confirm-buttons>
             </div>
             <div class="col-md-4">
-                <button
-                    class="w-100"
-                    nbButton
+                <ngx-confirm-buttons
+                    (approveEvent)="declineUser()"
                     status="danger"
-                    (click)="declineUser()"
+                    title="Отклонить"
                 >
-                    Отклонить
-                </button>
+                </ngx-confirm-buttons>
             </div>
         </div>
     </ng-container>
