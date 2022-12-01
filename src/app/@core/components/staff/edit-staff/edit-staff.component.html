@@ -1,4 +1,4 @@
-<form *ngIf="staffDetail" [formGroup]="form" (ngSubmit)="onFirstSubmit()">
+<form *ngIf="staffDetail" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="exampleInputEmail1" class="label">Ф.И.О</label>
         <input
@@ -23,30 +23,15 @@
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1" class="label">Роли</label>
-
-        <nz-select
-            ngDefaultControl
-            formControlName="roles"
-            nzMode="multiple"
-            nzPlaceHolder="Выберите роль"
-            nzAllowClear
-            nzServerSearch
-            [(ngModel)]="staffDetail.roles"
-            [compareWith]="compareFn"
-            nzSize="large"
-        >
-            <ng-container *ngIf="!isLoading">
-                <nz-option
-                    *ngFor="let o of optionList"
-                    [nzValue]="o"
-                    [nzLabel]="o.title"
-                ></nz-option>
-            </ng-container>
-            <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
-                <span nz-icon nzType="loading" class="loading-icon"></span>
-                Загрузка...
-            </nz-option>
-        </nz-select>
+        <ngx-search-select
+            (searchEmit)="getRoles($event)"
+            [control]="form.get('roles')"
+            [isRequired]="true"
+            [submitted]="submitted"
+            [data]="roles"
+            mode="multiple"
+            [placeholder]="'Выберите роли'"
+        ></ngx-search-select>
     </div>
     <button class="d-flex mx-auto" type="submit" nbButton status="primary">
         Редактировать

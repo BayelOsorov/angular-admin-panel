@@ -41,7 +41,7 @@ export class StaffComponent implements OnInit, OnDestroy {
     constructor(
         private staffService: StaffService,
         private router: Router,
-        private windowService: NbWindowService,
+        public windowService: NbWindowService,
         private toaster: ToastrService
     ) {}
 
@@ -85,7 +85,7 @@ export class StaffComponent implements OnInit, OnDestroy {
             context: {},
         });
     }
-    protected openModal(closeOnBackdropClick: boolean, component, props) {
+    openModal(closeOnBackdropClick: boolean, component, props) {
         this.windowService
             .open(component, {
                 closeOnBackdropClick,

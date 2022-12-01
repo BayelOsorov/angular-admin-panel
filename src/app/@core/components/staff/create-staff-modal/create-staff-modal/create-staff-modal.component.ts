@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbWindowRef } from '@nebular/theme';
 
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { StaffService } from '../../../../services/staff/staff.service';
 import { GeneratePassword } from '../../../../utils';
@@ -14,7 +14,6 @@ import { GeneratePassword } from '../../../../utils';
 })
 export class CreateStaffModalComponent implements OnInit, OnDestroy {
     form: FormGroup;
-    searchChange$ = new BehaviorSubject('');
     submitted = false;
     roles = [];
     private destroy$: Subject<void> = new Subject<void>();
@@ -34,7 +33,7 @@ export class CreateStaffModalComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', [Validators.required, Validators.maxLength(256)]],
-            username: ['', [Validators.required, Validators.maxLength(256)]],
+            userName: ['', [Validators.required, Validators.maxLength(256)]],
             roles: [[], [Validators.required]],
             password: ['', Validators.required],
             passwordConfirmation: ['', Validators.required],
