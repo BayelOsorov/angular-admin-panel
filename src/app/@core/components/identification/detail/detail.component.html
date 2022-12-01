@@ -11,7 +11,7 @@
 <div class="detail-info" *ngIf="data">
     <div class="status">
         <strong>{{ data.createdAt | date: 'dd.MM.yyyy, hh:mm' }}</strong>
-        <strong>{{ data.phoneNumber }}</strong>
+        <strong>+{{ data.phoneNumber }}</strong>
         <nb-alert status="primary">{{
             data.status === 'VideoIdentificationProcess'
                 ? 'Видео-идентификация '
@@ -196,20 +196,16 @@
     </div>
     <ngx-photo-idn-buttons
         *ngIf="data.status === 'VideoIdentificationProcess'"
-        [isInfoOpened]="toggle"
         [data]="data"
         [openvidu]="openvidu"
-        [isPhotoIdnNeedToEdit]="isNeedToEdit"
         (editEvent)="suspendVideoIdn()"
         (approveEvent)="approveVideoIdn()"
         (declineEvent)="declineVideoIdn()"
     ></ngx-photo-idn-buttons>
     <ngx-photo-idn-buttons
         *ngIf="data.status === 'PhotoIdentificationProcess'"
-        [isInfoOpened]="true"
         [data]="data"
         [openvidu]="openvidu"
-        [isPhotoIdnNeedToEdit]="isNeedToEdit"
         (editEvent)="editPhotoIdn()"
         (approveEvent)="approvePhotoIdn()"
         (declineEvent)="declinePhotoIdn()"

@@ -33,12 +33,12 @@
     .detail-block {
         ::ng-deep nb-alert {
             padding: 5px 50px 5px 50px;
+            margin-top: 5.5%;
         }
         i {
             font-size: 50px;
         }
         .danger-alert {
-            margin-top: 45px;
             text-align: center;
             p {
                 font-size: 20px;

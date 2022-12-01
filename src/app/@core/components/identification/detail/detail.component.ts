@@ -169,7 +169,9 @@ export class DetailComponent implements OnInit, OnDestroy {
                                 this.errorService.identificationErrors(err);
                         },
                     });
+                return;
             }
+            this.error = 'Выберите что нужно отредактировать';
         }
     }
     hideEdit(bool) {
