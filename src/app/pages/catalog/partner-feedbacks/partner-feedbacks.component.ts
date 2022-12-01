@@ -46,6 +46,11 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
             type: 'text',
             valuePrepareFunction: (item) => item.name,
         },
+        passedModeration: {
+            title: 'Статус',
+            type: 'text',
+            valuePrepareFunction: (item) => (item ? 'Одобренный' : 'Ожидание'),
+        },
     };
 
     private destroy$: Subject<void> = new Subject<void>();
