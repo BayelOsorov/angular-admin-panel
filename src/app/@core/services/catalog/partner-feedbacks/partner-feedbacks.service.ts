@@ -12,7 +12,7 @@ import {
 export class PartnerFeedbacksService {
     constructor(private http: HttpClient) {}
     getListPartnerFeedbacks(page = 1, filter) {
-        const { passedModeration = '', partnerId = '' } = filter;
+        const { passedModeration = false, partnerId = '' } = filter;
         return this.http.get<IListPartnerFeedbacks>(
             environment.catalogUrl +
                 `/Administration/api/v1/feedbacks?partnerId=${partnerId}&passedModeration=${passedModeration}&page=${page}&pageSize=20`

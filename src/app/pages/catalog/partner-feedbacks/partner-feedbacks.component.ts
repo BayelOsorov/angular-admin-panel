@@ -18,7 +18,7 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
     listPartnerFeedbacks: IListPartnerFeedbacks;
     partners;
     form = this.fb.group({
-        passedModeration: [''],
+        passedModeration: [false],
         partnerId: [''],
     });
     tableColumns = {
