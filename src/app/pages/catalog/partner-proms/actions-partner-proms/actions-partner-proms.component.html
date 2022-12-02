@@ -64,23 +64,19 @@
                         </label>
                         <div class="col-sm-9">
                             <input
+                                formControlName="startDateTime"
                                 fullWidth
                                 nbInput
                                 placeholder="Дата начала"
                                 [nbDatepicker]="formpicker"
-                                formControlName="startDateTime"
                                 [status]="
                                 submitted && (form.get('startDateTime')).errors?.['required']
                                     ? 'danger'
                                     : 'basic'
                             "
                             />
-                            <nb-datepicker
-                                (dateChange)="
-                                    dateChange($event, 'startDateTime')
-                                "
-                                #formpicker
-                            ></nb-datepicker>
+                            <!-- format="dd/MM/yyyy" -->
+                            <nb-datepicker #formpicker></nb-datepicker>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -91,9 +87,9 @@
                         </label>
                         <div class="col-sm-9">
                             <input
+                                formControlName="endDateTime"
                                 fullWidth
                                 nbInput
-                                formControlName="endDateTime"
                                 placeholder="Дата окончания"
                                 [nbDatepicker]="formpickermy"
                                 [status]="
@@ -102,10 +98,8 @@
                                     : 'basic'
                             "
                             />
-                            <nb-datepicker
-                                (dateChange)="dateChange($event, 'endDateTime')"
-                                #formpickermy
-                            ></nb-datepicker>
+
+                            <nb-datepicker #formpickermy></nb-datepicker>
                         </div>
                     </div>
                     <div class="form-group row">

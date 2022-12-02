@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import {
     NbAlertModule,
     NbButtonModule,
@@ -53,12 +53,17 @@ import { IdentificationGetComponent } from './identification/operator/identifica
 import { IdentificationDetailComponent } from './identification/operator/identification-detail/identification-detail.component';
 import { PartnerFeedbacksComponent } from './catalog/partner-feedbacks/partner-feedbacks.component';
 import { PartnerFeedbacksDetailComponent } from './catalog/partner-feedbacks/detail/partner-feedbacks-detail.component';
+import { NbMomentDateModule } from '@nebular/moment';
+import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { registerLocaleData } from '@angular/common';
+import ky from '@angular/common/locales/ky';
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
 };
 const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
     (key) => antDesignIcons[key]
 );
+registerLocaleData(ky, 'ky-kg');
 @NgModule({
     imports: [
         PagesRoutingModule,
@@ -82,7 +87,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ComponentsModule,
         NbDatepickerModule,
         NbPopoverModule,
-
+        NbDateFnsDateModule.forRoot({ format: 'dd/MM/yyyy' }),
         // NbIconModule,
         // NbEvaIconsModule,
     ],
@@ -119,6 +124,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
             useValue: {},
         },
         { provide: NZ_ICONS, useValue: icons },
+
         UseHttpImageSourcePipe,
     ],
 })

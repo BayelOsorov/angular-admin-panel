@@ -31,10 +31,17 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         this.submitted = true;
+
         if (this.form.valid) {
+            const { startDateTime, endDateTime } = this.form.value;
+            const newData = {
+                ...this.form.value,
+                startDateTime: this.dateService.addDay(startDateTime, 1),
+                endDateTime: this.dateService.addDay(endDateTime, 1),
+            };
             if (this.partnerPromsData) {
                 this.partnerPromsService
-                    .editPartnerProms(this.partnerPromsData.id, this.form.value)
+                    .editPartnerProms(this.partnerPromsData.id, newData)
                     .pipe(takeUntil(this.destroy$))
                     .subscribe(() => {
                         this.toaster.success('Успешно отредактировано!');
@@ -44,20 +51,15 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
             }
 
             this.partnerPromsService
-                .createPartnerProms(this.form.value)
+                .createPartnerProms(newData)
                 .pipe(takeUntil(this.destroy$))
-                .subscribe((data) => {
-                    console.log(this.form.value.startDateTime, '-- ', data);
-
+                .subscribe(() => {
                     this.toaster.success('Успешно создано!');
                     this.router.navigate([`catalog/partner-proms`]);
                 });
         }
     }
-    dateChange(d, type) {
-        d.setMinutes(d.getMinutes() + d.getTimezoneOffset());
-        this.form.controls[type].patchValue(d.toISOString());
-    }
+
     changeContent(data) {
         this.form.patchValue({
             hmtlBody: data,
@@ -97,10 +99,10 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                         );
                         this.form.controls['hmtlBody'].setValue(data.hmtlBody);
                         this.form.controls['startDateTime'].setValue(
-                            data.startDateTime
+                            new Date(data.startDateTime)
                         );
                         this.form.controls['endDateTime'].setValue(
-                            data.endDateTime
+                            new Date(data.endDateTime)
                         );
                     },
                 });
