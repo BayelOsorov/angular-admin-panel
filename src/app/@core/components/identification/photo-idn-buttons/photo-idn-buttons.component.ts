@@ -21,7 +21,6 @@ export class PhotoIdnButtonsComponent implements OnInit {
     @Input() openvidu;
 
     @Input() data: IIdentificationDetail;
-    isVideoButtonClicked = false;
     constructor() {}
     declineUser() {
         this.declineEvent.emit();
@@ -33,7 +32,6 @@ export class PhotoIdnButtonsComponent implements OnInit {
         this.editEvent.emit();
     }
     startVideo() {
-        this.isVideoButtonClicked = true;
         this.openvidu.joinSession();
     }
     ngOnInit(): void {}

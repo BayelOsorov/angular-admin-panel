@@ -53,17 +53,13 @@ import { IdentificationGetComponent } from './identification/operator/identifica
 import { IdentificationDetailComponent } from './identification/operator/identification-detail/identification-detail.component';
 import { PartnerFeedbacksComponent } from './catalog/partner-feedbacks/partner-feedbacks.component';
 import { PartnerFeedbacksDetailComponent } from './catalog/partner-feedbacks/detail/partner-feedbacks-detail.component';
-import { NbMomentDateModule } from '@nebular/moment';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
-import { registerLocaleData } from '@angular/common';
-import ky from '@angular/common/locales/ky';
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
 };
 const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
     (key) => antDesignIcons[key]
 );
-registerLocaleData(ky, 'ky-kg');
 @NgModule({
     imports: [
         PagesRoutingModule,

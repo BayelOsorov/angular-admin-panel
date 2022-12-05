@@ -10,6 +10,7 @@ import {
     NbPopoverModule,
     NbSelectModule,
     NbStepperModule,
+    NbTimepickerModule,
 } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

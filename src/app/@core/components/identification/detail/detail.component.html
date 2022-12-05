@@ -10,7 +10,7 @@
 </nb-alert>
 <div class="detail-info" *ngIf="data">
     <div class="status">
-        <strong>{{ data.createdAt | date: 'dd.MM.yyyy, hh:mm' }}</strong>
+        <strong>{{ data.createdAt | date : 'dd.MM.yyyy, hh:mm' }}</strong>
         <strong>+{{ data.phoneNumber }}</strong>
         <nb-alert status="primary">{{
             data.status === 'VideoIdentificationProcess'
@@ -33,7 +33,7 @@
                 </p>
                 <ngx-identification-need-to-edit
                     [data]="identificationAnswers.documentNumber"
-                    [control]="form.get('Pin')"
+                    [control]="form.get('DocumentNumber')"
                     placeholder="Введите"
                 >
                 </ngx-identification-need-to-edit>
@@ -94,14 +94,16 @@
                     <tr>
                         <td>Дата рождения</td>
                         <td>
-                            {{ personalData.birthDate | date: 'dd.MM.yyyy' }}
+                            {{ personalData.birthDate | date : 'dd.MM.yyyy' }}
                         </td>
                     </tr>
 
                     <tr>
                         <td>Срок действия паспорта</td>
                         <td>
-                            {{ personalData.dateOfExpiry | date: 'dd.MM.yyyy' }}
+                            {{
+                                personalData.dateOfExpiry | date : 'dd.MM.yyyy'
+                            }}
                         </td>
                     </tr>
                 </table>
@@ -143,7 +145,7 @@
                     <tr>
                         <td>Дата выдачи</td>
                         <td>
-                            {{ personalData.dateOfIssue | date: 'dd.MM.yyyy' }}
+                            {{ personalData.dateOfIssue | date : 'dd.MM.yyyy' }}
                         </td>
                     </tr>
                     <tr>

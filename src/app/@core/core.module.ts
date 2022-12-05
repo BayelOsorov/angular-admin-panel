@@ -105,17 +105,8 @@ export const NB_CORE_PROVIDERS = [
 
 @NgModule({
     imports: [CommonModule],
-    exports: [
-        NbAuthModule,
-        // OpenviduComponent,
-        // UserVideoComponent,
-        // OpenViduVideoComponent,
-    ],
-    declarations: [
-        // OpenviduComponent,
-        // UserVideoComponent,
-        // OpenViduVideoComponent,
-    ],
+    exports: [NbAuthModule],
+    declarations: [],
 })
 export class CoreModule {
     constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

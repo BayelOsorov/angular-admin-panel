@@ -37,6 +37,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         this.submitted = true;
+
         if (this.form.valid) {
             const {
                 workingHourStart_1,
