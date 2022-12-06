@@ -26,7 +26,6 @@ export class EditStaffComponent implements OnInit, OnDestroy {
         @Optional() private dialogRef: NbWindowRef<any>
     ) {}
 
-    compareFn = (o1: any, o2: any) => (o1 && o2 ? o1.id === o2.id : o1 === o2);
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', Validators.required],
@@ -49,14 +48,8 @@ export class EditStaffComponent implements OnInit, OnDestroy {
     }
     onSubmit() {
         if (this.form.valid) {
-            const newRoles = this.form.value.roles.map((item) =>
-                typeof item === 'object' ? item.id : item
-            );
             this.staffService
-                .editStaff(this.staffDetail.id, {
-                    ...this.form.value,
-                    roles: newRoles,
-                })
+                .editStaff(this.staffDetail.id, this.form.value)
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(() => {
                     this.toaster.success('Успешно отредактировано!');

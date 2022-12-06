@@ -73,11 +73,7 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
                 this.localities = data.items;
             });
     }
-    markMap(loc) {
-        this.form.patchValue({
-            location: loc,
-        });
-    }
+
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', [Validators.required, Validators.maxLength(256)]],

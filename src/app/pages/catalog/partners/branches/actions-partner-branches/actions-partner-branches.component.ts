@@ -173,11 +173,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                 this.malls = data.items;
             });
     }
-    markMap(loc) {
-        this.form.patchValue({
-            location: loc,
-        });
-    }
+
     handlePhone(num) {
         const txt = num.key;
 

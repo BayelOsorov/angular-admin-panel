@@ -48,9 +48,8 @@ export class CreateStaffModalComponent implements OnInit, OnDestroy {
     onSubmit() {
         this.submitted = true;
         if (this.form.valid) {
-            const newRoles = this.form.value.roles.map((item) => item.id);
             this.staffService
-                .createStaff({ ...this.form.value, roles: newRoles })
+                .createStaff({ ...this.form.value })
                 .pipe(takeUntil(this.destroy$))
                 .subscribe((data) => {
                     this.toaster.success('Успешно создано!');

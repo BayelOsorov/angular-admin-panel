@@ -45,6 +45,13 @@ export class MultipleSearchSelectComponent implements OnInit, OnDestroy {
                 if (data === null) {
                     this.control.setValue('');
                 }
+
+                if (
+                    Array.isArray(data) &&
+                    data.some((item) => typeof item === 'object')
+                ) {
+                    this.control.setValue(data.map((item) => item.id));
+                }
             });
     }
     ngOnDestroy() {

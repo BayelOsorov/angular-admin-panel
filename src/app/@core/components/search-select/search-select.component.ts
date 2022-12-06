@@ -43,7 +43,18 @@ export class SearchSelectComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.control.valueChanges
             .pipe(takeUntil(this.destroy$))
-            .subscribe((data) => data === null && this.control.patchValue(''));
+            .subscribe((data) => {
+                if (data === null) {
+                    this.control.patchValue('');
+                }
+
+                if (
+                    Array.isArray(data) &&
+                    data.some((item) => typeof item === 'object')
+                ) {
+                    this.control.setValue(data.map((item) => item.id));
+                }
+            });
     }
     ngOnDestroy() {
         this.destroy$.next();

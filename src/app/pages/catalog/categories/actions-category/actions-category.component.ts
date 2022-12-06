@@ -36,7 +36,6 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
         this.min = this.dateService.addDay(this.dateService.today(), +1);
     }
 
-    compareFn = (o1: any, o2: any) => (o1 && o2 ? o1 === o2 : o1 === o2);
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', [Validators.required, Validators.maxLength(256)]],

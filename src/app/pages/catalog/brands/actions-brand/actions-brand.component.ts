@@ -35,7 +35,6 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
         @Optional() private dialogRef: NbWindowRef<any>
     ) {}
 
-    compareFn = (o1: any, o2: any) => (o1 && o2 ? o1 === o2 : o1 === o2);
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', [Validators.required, Validators.maxLength(256)]],

@@ -25,7 +25,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
     ) {}
 
     deleteImage(imgId) {
-        // this.gallery = this.gallery.filter((item) => item.id !== imgId);
         this.partnersService
             .deletePartnerImage(this.partnerId, imgId)
             .pipe(takeUntil(this.destroy$))
