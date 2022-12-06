@@ -5,13 +5,13 @@
     class="w-100"
     nzAllowClear
     nzServerSearch
+    [formControl]="control"
     nzShowSearch
     (nzOnSearch)="onSearch($event)"
     [nzSize]="size"
     [ngClass]="size === 'default' && 'small-input'"
     [nzPlaceHolder]="placeholder"
     [compareWith]="compareFn"
-    [formControl]="control"
     nzNotFoundContent="Ничего не найдено"
     [nzStatus]="isRequired && submitted && control.errors?.['required']
                                     ? 'error'
@@ -19,6 +19,7 @@
                             "
 >
     <ng-container *ngIf="!isLoading">
+        <nz-option *ngIf="!isRequired" nzValue="" nzLabel="Все"></nz-option>
         <nz-option
             *ngFor="let o of data"
             [nzValue]="o.id"

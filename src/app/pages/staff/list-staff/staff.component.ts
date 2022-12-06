@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { CreateStaffModalComponent } from '../../../@core/components/staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 import { IListStaff } from '../../../@core/models/staff/staff';
 import { StaffService } from '../../../@core/services/staff/staff.service';
+import { tableNumbering } from '../../../@core/utils';
 @Component({
     templateUrl: './staff.component.html',
     styleUrls: ['./staff.component.scss'],
@@ -14,55 +15,33 @@ export class StaffComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     listStaff: IListStaff;
     visible: boolean;
+    tableColumns = {
+        index: {
+            title: '№',
+            type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(this.listStaff.pageNumber, cell.row.index),
+        },
 
-    settings = {
-        mode: 'external',
-        hideSubHeader: false,
-        delete: {
-            deleteButtonContent: `<i class="nb-trash"></i>`,
-            confirmDelete: false,
+        name: {
+            title: 'ФИО',
+            type: 'html',
         },
-        add: {
-            addButtonContent: '<i class="nb-plus"></i>',
-            createButtonContent: '<i class="nb-checkmark"></i>',
-            cancelButtonContent: '<i class="nb-close"></i>',
-            confirmCreate: true,
+
+        userName: {
+            title: 'Логин',
+            type: 'text',
         },
-        actions: {
-            delete: true,
-            edit: false,
-            add: false,
-            position: 'right',
-            columnTitle: '',
-        },
-        pager: {
-            perPage: 20,
-            display: true,
-        },
-        columns: {
-            name: {
-                title: 'ФИО',
-                type: 'string',
-                editable: false,
-            },
-            userName: {
-                title: 'Логин',
-                type: 'string',
-            },
-            roles: {
-                title: 'Роль',
-                type: 'text',
-                // width: '10%',
-                filter: false,
-                valuePrepareFunction: (item) => this.getRoles(item),
-            },
+        roles: {
+            title: 'Роль',
+            type: 'text',
+            valuePrepareFunction: (value) => this.getRoles(value),
         },
     };
-
     constructor(
         private staffService: StaffService,
         private router: Router,
-        private windowService: NbWindowService,
+        public windowService: NbWindowService,
         private toaster: ToastrService
     ) {}
 
@@ -73,25 +52,32 @@ export class StaffComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
-    getListStaff(page = 1) {
-        this.subscription = this.staffService.getListStaff(page).subscribe({
-            next: (data) => (this.listStaff = data),
-        });
+    getListStaff(page = 1, name = '') {
+        this.subscription = this.staffService
+            .getListStaff(page, name)
+            .subscribe({
+                next: (data) => (this.listStaff = data),
+            });
     }
-
-    onDeleteConfirm(event): void {
-        this.staffService.deleteStaff(event.data.id).subscribe({
-            next: (data) => {
+    onSearch(name) {
+        this.getListStaff(1, name);
+    }
+    onDelete(data): void {
+        this.staffService.deleteStaff(data.id).subscribe({
+            next: () => {
                 this.toaster.success('Успешно удалено!');
                 this.getListStaff(1);
             },
         });
     }
-    onUserRowSelect(event): void {
-        this.router.navigate([`staff-detail/${event.data.id}`]);
+    openEdit(data) {
+        this.router.navigate([`staff-detail/${data.id}`]);
     }
+
     getRoles(item) {
-        return item.length > 1 ? item.map((elem) => elem.title) : item[0].title;
+        return item.length > 1
+            ? item.map((elem) => ' ' + elem.title)
+            : item[0].title;
     }
     openCreateModal() {
         this.openModal(false, CreateStaffModalComponent, {
@@ -99,11 +85,7 @@ export class StaffComponent implements OnInit, OnDestroy {
             context: {},
         });
     }
-    changePage(e) {
-        this.getListStaff(e);
-    }
-
-    protected openModal(closeOnBackdropClick: boolean, component, props) {
+    openModal(closeOnBackdropClick: boolean, component, props) {
         this.windowService
             .open(component, {
                 closeOnBackdropClick,

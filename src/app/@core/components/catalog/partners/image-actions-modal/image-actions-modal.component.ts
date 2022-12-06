@@ -38,16 +38,7 @@ export class ImageActionsModalComponent implements OnInit, OnDestroy {
             this.imgSrc = this.itemData.imagePath;
         }
     }
-    async onFileChange(event) {
-        if (event.target.files.length > 0) {
-            const file = event.target.files[0];
-            const img = await toBase64(file);
-            this.imgSrc = `data:image/jpeg;base64,${img}`;
-            this.form.patchValue({
-                image: img,
-            });
-        }
-    }
+
     onFirstSubmit() {
         if (this.form.valid) {
             if (this.itemData) {

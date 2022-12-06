@@ -13,6 +13,9 @@ export class HandleErrorService {
             return this.toaster.error(errorMessage);
         }
         if (err.status === 404) {
+            if (err.error) {
+                return this.toaster.error(err.error.title);
+            }
             return this.toaster.error(err.message);
         }
         if (err.error) {
@@ -34,5 +37,15 @@ export class HandleErrorService {
             errorMessage = 'Ошибка сервера';
         }
         this.toaster.error(errorMessage);
+    }
+    public identificationErrors(err) {
+        let message = '';
+        if (err.status === 404) {
+            message = 'Данные для данного ИНН не найдены :(';
+        }
+        if (err.error) {
+            message = err.error.title;
+        }
+        return message;
     }
 }

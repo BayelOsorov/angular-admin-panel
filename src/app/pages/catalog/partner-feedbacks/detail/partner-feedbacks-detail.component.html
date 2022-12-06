@@ -1,0 +1,74 @@
+<nb-card class="container">
+    <div class="feedbacks mx-auto mt-3" *ngIf="feedbackData">
+        <div class="">
+            <div class="header">
+                <div>
+                    <p>Дата</p>
+                </div>
+
+                <div class="detail">
+                    {{ parseDate(feedbackData.createDateTime) }}
+                </div>
+            </div>
+            <div class="header">
+                <div>
+                    <p>Партнер</p>
+                </div>
+
+                <div class="detail">{{ feedbackData.partner.name }}</div>
+            </div>
+            <div class="header">
+                <div>
+                    <p>Рейтинг</p>
+                </div>
+
+                <div class="detail">{{ feedbackData.rate }}</div>
+            </div>
+            <div class="header">
+                <div>
+                    <p>Коммент</p>
+                </div>
+
+                <div class="detail">{{ feedbackData.comment }}</div>
+            </div>
+            <div class="header">
+                <div>
+                    <p>Статус</p>
+                </div>
+
+                <div class="detail">
+                    {{
+                        feedbackData.passedModeration
+                            ? 'Одобренный'
+                            : 'Ожидание'
+                    }}
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!feedbackData.passedModeration" class="mt-5 mb-3">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <button
+                        class="w-100"
+                        nbButton
+                        status="success"
+                        (click)="approveFeedback()"
+                    >
+                        Одобрить
+                    </button>
+                </div>
+
+                <div class="col-md-4">
+                    <button
+                        class="w-100"
+                        nbButton
+                        status="danger"
+                        (click)="deleteFeedback()"
+                    >
+                        Удалить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nb-card>

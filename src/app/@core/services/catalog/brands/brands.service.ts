@@ -1,10 +1,7 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'leaflet';
-import { finalize, tap } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
 import { IDetailBrand, IListBrand } from '../../../models/catalog/brand';
-import { blobToBase64, toBase64 } from '../../../utils/toBase64';
 
 @Injectable({
     providedIn: 'root',
@@ -12,10 +9,10 @@ import { blobToBase64, toBase64 } from '../../../utils/toBase64';
 export class BrandsService {
     constructor(private http: HttpClient) {}
 
-    getListBrand(page = 1, name = '') {
+    getListBrand(page = 1, filter = { name: '', categoryId: '' }) {
         return this.http.get<IListBrand>(
             environment.catalogUrl +
-                `/Administration/api/v1/brands/search?page=${page}&name=${name}&pageSize=20`
+                `/Administration/api/v1/brands/search?page=${page}&name=${filter.name}&categoryId=${filter.categoryId}&pageSize=20`
         );
     }
     getDetailBrand(id: number) {

@@ -6,7 +6,7 @@ import {
     PipeTransform,
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import {
     distinctUntilChanged,
     filter,
@@ -14,6 +14,7 @@ import {
     switchMap,
     tap,
 } from 'rxjs/operators';
+import { Url } from 'url';
 
 @Pipe({
     name: 'useHttpImgSrc',
@@ -33,6 +34,12 @@ export class UseHttpImageSourcePipe implements PipeTransform, OnDestroy {
         this.setUpSubscription();
     }
 
+    transformObs(imagePath: string) {
+        // we emit a new value
+        this.transformValue.next(imagePath);
+
+        return of(this.latestValue);
+    }
     transform(imagePath: string) {
         // we emit a new value
         this.transformValue.next(imagePath);

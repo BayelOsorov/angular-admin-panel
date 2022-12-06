@@ -17,19 +17,12 @@
                             >Заголовок</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('title')"
                                 placeholder="Введите заголовок"
-                                formControlName="title"
-                                [status]="
-                                submitted && (form.get('title')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
 
@@ -56,26 +49,11 @@
                             >Обложка</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                nbInput
-                                fullWidth
-                                id="exampleInputPassword1"
-                                placeholder="Обложка"
-                                type="file"
-                                (change)="onFileChange($event, 'cover')"
-                                id="formFile"
-                                [status]="
-                                submitted && (form.get('cover')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
-                            <img
-                                [src]="coverImg | useHttpImgSrc"
-                                alt=""
-                                width="200"
-                                class="center mt-3"
-                            />
+                            <ngx-img-input
+                                [control]="form.get('cover')"
+                                [submitted]="submitted"
+                                [imgSrc]="form.get('cover').value"
+                            ></ngx-img-input>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -86,17 +64,18 @@
                         </label>
                         <div class="col-sm-9">
                             <input
+                                formControlName="startDateTime"
                                 fullWidth
                                 nbInput
                                 placeholder="Дата начала"
                                 [nbDatepicker]="formpicker"
-                                formControlName="startDateTime"
                                 [status]="
                                 submitted && (form.get('startDateTime')).errors?.['required']
                                     ? 'danger'
                                     : 'basic'
                             "
                             />
+                            <!-- format="dd/MM/yyyy" -->
                             <nb-datepicker #formpicker></nb-datepicker>
                         </div>
                     </div>
@@ -108,17 +87,18 @@
                         </label>
                         <div class="col-sm-9">
                             <input
+                                formControlName="endDateTime"
                                 fullWidth
                                 nbInput
                                 placeholder="Дата окончания"
                                 [nbDatepicker]="formpickermy"
-                                formControlName="endDateTime"
                                 [status]="
                                 submitted && (form.get('endDateTime')).errors?.['required']
                                     ? 'danger'
                                     : 'basic'
                             "
                             />
+
                             <nb-datepicker #formpickermy></nb-datepicker>
                         </div>
                     </div>

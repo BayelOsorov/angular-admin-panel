@@ -8,10 +8,13 @@ import { IDetailMalls, IListMalls } from '../../../models/catalog/malls';
 })
 export class MallsService {
     constructor(private http: HttpClient) {}
-    getListMalls(page = 1, name = '') {
+    getListMalls(page = 1, filter) {
+        const { localityId = '', type = '', name = '' } = filter;
         return this.http.get<IListMalls>(
             environment.catalogUrl +
-                `/Administration/api/v1/malls/search?page=${page}&name=${name}&pageSize=20`
+                `/Administration/api/v1/malls/search?page=${page}&type=${type}&localityId=${
+                    localityId ? localityId : ''
+                }&name=${name}&pageSize=20`
         );
     }
     getDetailMall(id: number) {

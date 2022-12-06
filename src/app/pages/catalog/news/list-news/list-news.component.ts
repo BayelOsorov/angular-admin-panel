@@ -19,7 +19,7 @@ export class ListNewsComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listNews.pageNumber, cell.row.index),
+                tableNumbering(this.listNews.page, cell.row.index),
         },
         cover: {
             title: 'Обложка',
@@ -28,18 +28,18 @@ export class ListNewsComponent implements OnInit, OnDestroy {
         },
         title: {
             title: 'Заголовок на RU',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (item) => item.ru,
         },
 
         shortText: {
             title: 'Короткий текст на RU',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (item) => item.ru,
         },
         isActive: {
             title: 'Активен',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
     };

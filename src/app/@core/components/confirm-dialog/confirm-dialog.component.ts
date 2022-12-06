@@ -1,21 +1,37 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    Output,
+    Input,
+    EventEmitter,
+} from '@angular/core';
 
 @Component({
-    selector: 'ngx-confirm-dialog',
+    selector: 'ngx-confirm-buttons',
     templateUrl: './confirm-dialog.component.html',
     styleUrls: ['./confirm-dialog.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmDialogComponent implements OnInit {
+    @Output() approveEvent = new EventEmitter();
+    @Input() status = 'primary';
+    @Input() title = 'подтвердите';
+
     visible: boolean;
+
     constructor() {}
 
     ngOnInit(): void {}
-    clickMe(): void {
+
+    onClick(): void {
+        this.visible = true;
+    }
+    approve() {
+        this.approveEvent.emit('');
         this.visible = false;
     }
-
-    change(value: boolean): void {
-        console.log(value);
+    decline() {
+        this.visible = false;
     }
 }

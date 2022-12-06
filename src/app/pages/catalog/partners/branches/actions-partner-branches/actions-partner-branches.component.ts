@@ -37,6 +37,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         this.submitted = true;
+
         if (this.form.valid) {
             const {
                 workingHourStart_1,
@@ -157,22 +158,25 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
         }
     }
     getLocalities(name = '') {
-        this.localitiesService.getListLocalities(1, name).subscribe((data) => {
-            this.localities = data.items;
-        });
+        this.localitiesService
+            .getListLocalities(1, name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.localities = data.items;
+            });
     }
     getMalls(name = '') {
-        this.mallsService.getListMalls(1, name).subscribe((data) => {
-            this.malls = data.items;
-        });
+        this.mallsService
+            .getListMalls(1, name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.malls = data.items;
+            });
     }
-    markMap(loc) {
-        this.form.patchValue({
-            location: loc,
-        });
-    }
+
     handlePhone(num) {
         const txt = num.key;
+
         if ((txt.length === 12 || num.which === 32) && num.which !== 8) {
             num.preventDefault();
         }
@@ -224,9 +228,9 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
     }
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
-            address: ['', Validators.required],
-            phoneNumber: [''],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
+            address: ['', [Validators.required, Validators.maxLength(256)]],
+            phoneNumber: ['', Validators.required],
             email: [''],
             location: ['', Validators.required],
 
@@ -284,7 +288,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                         this.form.controls['name'].setValue(data.name);
                         this.form.controls['mallId'].setValue(data.mallId);
                         this.form.controls['phoneNumber'].setValue(
-                            data.phoneNumber
+                            data.phoneNumber.replace('+996', '')
                         );
                         this.form.controls['location'].setValue(
                             data.location.coordinates

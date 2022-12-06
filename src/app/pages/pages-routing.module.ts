@@ -14,7 +14,6 @@ import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail
 import { LocalitiesComponent } from './catalog/localities/localities.component';
 import { ListMallsComponent } from './catalog/malls/list-malls/list-malls.component';
 import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.component';
-import { BrandActionsModalComponent } from '../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
 import { ActionsBrandComponent } from './catalog/brands/actions-brand/actions-brand.component';
 import { ListNewsComponent } from './catalog/news/list-news/list-news.component';
 import { ActionsNewsComponent } from './catalog/news/actions-news/actions-news.component';
@@ -22,6 +21,11 @@ import { ListPartnerPromsComponent } from './catalog/partner-proms/list-partner-
 import { ActionsPartnerPromsComponent } from './catalog/partner-proms/actions-partner-proms/actions-partner-proms.component';
 import { ActionsCategoryComponent } from './catalog/categories/actions-category/actions-category.component';
 import { ActionsPartnerBranchesComponent } from './catalog/partners/branches/actions-partner-branches/actions-partner-branches.component';
+import { IdentificationGetComponent } from './identification/operator/identification-get/identification-get.component';
+import { IdentificationDetailComponent } from './identification/operator/identification-detail/identification-detail.component';
+import { PartnerFeedbacksService } from '../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
+import { PartnerFeedbacksComponent } from './catalog/partner-feedbacks/partner-feedbacks.component';
+import { PartnerFeedbacksDetailComponent } from './catalog/partner-feedbacks/detail/partner-feedbacks-detail.component';
 
 const routes: Routes = [
     {
@@ -99,7 +103,7 @@ const routes: Routes = [
                 path: 'catalog/localities',
                 component: LocalitiesComponent,
             },
-
+            // ! Malls
             {
                 path: 'catalog/malls',
                 component: ListMallsComponent,
@@ -116,6 +120,7 @@ const routes: Routes = [
                 path: 'catalog/malls/detail/:id',
                 component: DetailPartnerComponent,
             },
+            // ! News
             {
                 path: 'catalog/news',
                 component: ListNewsComponent,
@@ -128,7 +133,7 @@ const routes: Routes = [
                 path: 'catalog/news/update/:id',
                 component: ActionsNewsComponent,
             },
-
+            // ! Partner Proms
             {
                 path: 'catalog/partner-proms',
                 component: ListPartnerPromsComponent,
@@ -140,6 +145,28 @@ const routes: Routes = [
             {
                 path: 'catalog/partner-proms/update/:id',
                 component: ActionsPartnerPromsComponent,
+            },
+            // ! Partner Feedbacks
+            {
+                path: 'catalog/partner-feedbacks',
+                component: PartnerFeedbacksComponent,
+            },
+            {
+                path: 'catalog/partner-feedbacks/detail/:id',
+                component: PartnerFeedbacksDetailComponent,
+            },
+            // ! Identification
+            {
+                path: 'identification/photo',
+                component: IdentificationGetComponent,
+            },
+            {
+                path: 'identification/video',
+                component: IdentificationGetComponent,
+            },
+            {
+                path: 'identification/detail/:id',
+                component: IdentificationDetailComponent,
             },
             {
                 path: '',

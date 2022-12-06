@@ -14,7 +14,7 @@ export class PartnerPromsService {
     getListPartnerProms(page = 1, name = '') {
         return this.http.get<IListPartnerProms>(
             environment.catalogUrl +
-                `/Administration/api/v1/partner-proms?page=${page}&pageSize=20`
+                `/Administration/api/v1/partner-proms?name=${name}&page=${page}&pageSize=20`
         );
     }
     getDetailPartnerProms(id: number) {
@@ -26,13 +26,13 @@ export class PartnerPromsService {
     deletePartnerProms(id: number) {
         return this.http.delete(
             environment.catalogUrl +
-                `/Administration/api/v1/partner-proms/${id}`
+                `/Administration/api/v1/partner-proms?promoId=${id}`
         );
     }
     editPartnerProms(id: number, data) {
         return this.http.put(
             environment.catalogUrl +
-                `/Administration/api/v1/partner-proms/${id}`,
+                `/Administration/api/v1/partner-proms?promoId=${id}`,
             data
         );
     }

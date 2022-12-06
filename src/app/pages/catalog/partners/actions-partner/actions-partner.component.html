@@ -11,38 +11,18 @@
             <nb-card-body>
                 <form [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="form-group row">
-                        <!-- {{
-                                form.get('name').invalid &&
-                                    (form.get('name').dirty ||
-                                        form.get('name').touched) &&
-                                    'text-danger'
-                            }} -->
                         <label
                             for="exampleInputEmail1"
                             class="label col-sm-3 col-form-label"
                             >Название</label
                         >
                         <div class="col-sm-9">
-                            <!-- [status]="
-                                    form.get('name').invalid &&
-                                    (form.get('name').dirty ||
-                                        form.get('name').touched)
-                                        ? 'danger'
-                                        : 'hint'
-                                " -->
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('name')"
                                 placeholder="Введите название"
-                                formControlName="name"
-                                [status]="
-                                submitted && (form.get('name')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -91,20 +71,11 @@
                             >Лого</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                nbInput
-                                fullWidth
-                                id="exampleInputPassword1"
-                                placeholder="Лого"
-                                type="file"
-                                (change)="onFileChange($event, 'logo')"
-                                id="formFile"
-                                [status]="
-                                submitted && (form.get('logo')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            <ngx-img-input
+                                [control]="form.get('logo')"
+                                [submitted]="submitted"
+                                [imgSrc]="form.get('logo').value"
+                            ></ngx-img-input>
                         </div>
                     </div>
 
@@ -134,7 +105,7 @@
                         <div class="col-sm-9">
                             <ngx-search-select
                                 [submitted]="submitted"
-                                [control]="form.get('categoryId')"
+                                [control]="form.get('categories')"
                                 (searchEmit)="getCategories($event)"
                                 [data]="categories"
                                 [placeholder]="'Категория'"
@@ -151,11 +122,11 @@
                         <div class="col-sm-9">
                             <ngx-search-select
                                 [submitted]="submitted"
-                                [control]="form.get('brandId')"
+                                [control]="form.get('brands')"
                                 (searchEmit)="getBrands($event)"
                                 [data]="brands"
                                 [placeholder]="'Бренд'"
-                                [mode]="'default'"
+                                [mode]="'multiple'"
                             ></ngx-search-select>
                         </div>
                     </div>
@@ -168,7 +139,7 @@
                         <div class="col-sm-9">
                             <ngx-search-select
                                 [submitted]="submitted"
-                                [control]="form.get('productId')"
+                                [control]="form.get('products')"
                                 (searchEmit)="getProducts($event)"
                                 [data]="products"
                                 [placeholder]="'Продукт'"

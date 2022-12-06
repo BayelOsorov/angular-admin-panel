@@ -13,19 +13,12 @@
                             >Название</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('name')"
                                 placeholder="Введите название"
-                                formControlName="name"
-                                [status]="
-                                submitted && (form.get('name')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
 
@@ -36,26 +29,11 @@
                             >Лого</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                nbInput
-                                fullWidth
-                                id="exampleInputPassword1"
-                                placeholder="Лого"
-                                type="file"
-                                (change)="onFileChange($event, 'logo')"
-                                id="formFile"
-                                [status]="
-                                submitted && (form.get('logo')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
-                            <img
-                                [src]="logoImg | useHttpImgSrc"
-                                alt=""
-                                width="150"
-                                class="center mt-3"
-                            />
+                            <ngx-img-input
+                                [control]="form.get('logo')"
+                                [submitted]="submitted"
+                                [imgSrc]="form.get('logo').value"
+                            ></ngx-img-input>
                         </div>
                     </div>
 
@@ -66,19 +44,12 @@
                             >Адрес
                         </label>
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('address')"
                                 placeholder="Введите адрес"
-                                formControlName="address"
-                                [status]="
-                                submitted && (form.get('address')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
 
@@ -89,8 +60,6 @@
                             >Начало рабочего времени</label
                         >
                         <div class="col-sm-9">
-                            <!-- formControlName="workingHourStart" -->
-                            <!-- [nbTimepicker]="timepicker" -->
                             <input
                                 nbInput
                                 fullWidth
@@ -102,7 +71,6 @@
                                     : 'basic'
                             "
                             />
-                            <!-- (onSelectTime)="timeChange($event, 'start')" -->
                             <nb-timepicker #timepicker></nb-timepicker>
                         </div>
                     </div>
@@ -113,8 +81,6 @@
                             >Конец рабочего времени</label
                         >
                         <div class="col-sm-9">
-                            <!-- formControlName="workingHourEnd" -->
-                            <!-- [nbTimepicker]="timepickermy" -->
                             <input
                                 fullWidth
                                 nbInput
@@ -126,7 +92,6 @@
                                     : 'basic'
                             "
                             />
-                            <!-- (onSelectTime)="timeChange($event, 'end')" -->
                             <nb-timepicker #timepickermy></nb-timepicker>
                         </div>
                     </div>
@@ -138,19 +103,13 @@
                             >Описание</label
                         >
                         <div class="col-sm-9">
-                            <textarea
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('description')"
                                 placeholder="Введите описание"
-                                formControlName="description"
-                                [status]="
-                                submitted && (form.get('description')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            ></textarea>
+                                type="textarea"
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -225,7 +184,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-multiple-search-select
-                                [isRequired]="false"
+                                [isRequired]="true"
                                 [submitted]="submitted"
                                 [control]="form.get('localityId')"
                                 (searchEmit)="getLocalities($event)"
@@ -245,7 +204,6 @@
                             <ngx-custom-map
                                 [submitted]="submitted"
                                 [control]="form.get('location')"
-                                (markLocationEvent)="markMap($event)"
                                 [baseLocation]="
                                     mallId && mallData.location.coordinates
                                 "

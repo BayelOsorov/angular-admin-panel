@@ -36,15 +36,14 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
         this.min = this.dateService.addDay(this.dateService.today(), +1);
     }
 
-    compareFn = (o1: any, o2: any) => (o1 && o2 ? o1 === o2 : o1 === o2);
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
             logo: ['', Validators.required],
             isActive: [true, Validators.required],
             order: ['', Validators.required],
+            backgroundColor: ['#FFFFFF'],
             parentId: null,
-            backgroundColor: ['', Validators.required],
         });
         this.getCategories();
         this.route.params.subscribe((params) => {
@@ -64,9 +63,6 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
                     this.form.controls['order'].setValue(data.order);
 
                     this.form.controls['parentId'].setValue(data.parentId);
-                    this.form.controls['backgroundColor'].setValue(
-                        data.backgroundColor
-                    );
                 });
         }
     }
@@ -79,7 +75,7 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
             });
     }
 
-    onFirstSubmit() {
+    onSubmit() {
         this.submitted = true;
         if (this.form.valid) {
             if (this.itemData) {
@@ -102,16 +98,7 @@ export class ActionsCategoryComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    async onFileChange(event) {
-        if (event.target.files.length > 0) {
-            const file = event.target.files[0];
-            const logo = await toBase64(file);
-            this.logoImg = `data:image/jpeg;base64,${logo}`;
-            this.form.patchValue({
-                logo,
-            });
-        }
-    }
+
     onSearch(value: string): void {
         this.getCategories(value);
     }

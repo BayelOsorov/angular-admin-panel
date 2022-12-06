@@ -15,19 +15,12 @@
                             >Название</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
-                                placeholder="Название"
-                                formControlName="name"
-                                [status]="
-                                submitted && (form.get('name')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('name')"
+                                placeholder="Введите название"
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
 
@@ -38,26 +31,12 @@
                             >Лого</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                nbInput
-                                fullWidth
-                                placeholder="Лого"
-                                type="file"
-                                (change)="onFileChange($event)"
-                                id="formFile"
-                                [status]="
-                                submitted && (form.get('logo')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            <ngx-img-input
+                                [control]="form.get('logo')"
+                                [submitted]="submitted"
+                                [imgSrc]="form.get('logo').value"
+                            ></ngx-img-input>
                         </div>
-                        <img
-                            [src]="logoImg | useHttpImgSrc"
-                            alt=""
-                            width="200"
-                            class="center"
-                        />
                     </div>
 
                     <div class="form-group row">

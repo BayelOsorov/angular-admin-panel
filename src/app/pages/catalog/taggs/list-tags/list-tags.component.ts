@@ -18,21 +18,21 @@ export class ListTagsComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listTags.pageNumber, cell.row.index),
+                tableNumbering(this.listTags.page, cell.row.index),
         },
         name: {
             title: 'Название на RU',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (item) => item.ru,
         },
         'name.kg': {
             title: 'Название на KG',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (cell, row) => row.name.kg,
         },
         'name.uz': {
             title: 'Название на UZ',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (cell, row) => row.name.uz,
         },
     };

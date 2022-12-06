@@ -1,0 +1,9 @@
+<div *ngIf="data && data.totalItemCount > 20" class="custom-pagination">
+    <nz-pagination
+        class="mx-auto"
+        (nzPageIndexChange)="changePage($event)"
+        [nzPageIndex]="data.page"
+        [nzTotal]="data.totalItemCount"
+        [nzPageSize]="data.pageSize"
+    ></nz-pagination>
+</div>

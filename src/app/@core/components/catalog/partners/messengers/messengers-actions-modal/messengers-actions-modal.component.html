@@ -1,0 +1,41 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="exampleInputPassword1" class="label">Тип</label>
+        <nb-select fullWidth formControlName="type" placeholder="Тип">
+            <nb-option value="Instagram">Instagram</nb-option>
+            <nb-option value="Twitter">Twitter</nb-option>
+            <nb-option value="Pinterest">Pinterest</nb-option>
+            <nb-option value="Tiktok">TikTok</nb-option>
+            <nb-option value="VK">ВКонтакте</nb-option>
+            <nb-option value="Odnoklassniki">Одноклассники</nb-option>
+            <nb-option value="WhatsApp">WhatsApp</nb-option>
+            <nb-option value="Messenger">Messenger</nb-option>
+            <nb-option value="Telegram">Telegram</nb-option>
+            <nb-option value="YouTube">YouTube</nb-option>
+            <nb-option value="Website">Website</nb-option>
+            <nb-option value="Facebook">Facebook</nb-option>
+        </nb-select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="label">Название</label>
+        <ngx-validation-input
+            [submitted]="submitted"
+            [control]="form.get('name')"
+            placeholder="Введите название"
+        >
+        </ngx-validation-input>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="label">Ссылка</label>
+        <ngx-validation-input
+            [submitted]="submitted"
+            [control]="form.get('link')"
+            placeholder="Вставьте ссылку"
+        >
+        </ngx-validation-input>
+    </div>
+
+    <button class="d-flex mx-auto" type="submit" nbButton status="primary">
+        Подтвердить
+    </button>
+</form>

@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../../@core/components/avatar-img/avatar-img.component';
 import { IListPartnerProms } from '../../../../@core/models/catalog/catalog';
 import { PartnerPromsService } from '../../../../@core/services/catalog/partner-proms/partner-proms.service';
@@ -20,10 +20,7 @@ export class ListPartnerPromsComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(
-                    this.listPartnerProms.pageNumber,
-                    cell.row.index
-                ),
+                tableNumbering(this.listPartnerProms.page, cell.row.index),
         },
         cover: {
             title: 'Обложка',
@@ -32,17 +29,17 @@ export class ListPartnerPromsComponent implements OnInit, OnDestroy {
         },
         title: {
             title: 'Заголовок',
-            type: 'string',
+            type: 'text',
         },
         startDateTime: {
             title: 'Дата начала',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (item) => this.parseDate(item),
         },
 
         endDateTime: {
             title: 'Дата окончания',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (item) => this.parseDate(item),
         },
     };
@@ -54,15 +51,17 @@ export class ListPartnerPromsComponent implements OnInit, OnDestroy {
         private router: Router
     ) {}
     parseDate(date) {
-        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+        return this.datePipe.transform(date, 'dd.MM.yyyy');
     }
-    getPartnerProms(page = 1) {
+    getPartnerProms(page = 1, name = '') {
         this.partnerPromsService
-            .getListPartnerProms(page)
+            .getListPartnerProms(page, name)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listPartnerProms = res));
     }
-    onSearch(event) {}
+    onSearch(event) {
+        this.getPartnerProms(1, event);
+    }
     updatePartnerProms(data) {
         this.router.navigate([`catalog/partner-proms/update/${data.id}`]);
     }

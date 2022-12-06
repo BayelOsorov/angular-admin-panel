@@ -24,9 +24,9 @@ export class LocalityActionsModalComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.form = this.fb.group({
-            ru: ['', Validators.required],
-            uz: ['', Validators.required],
-            kg: ['', Validators.required],
+            ru: ['', [Validators.required, Validators.maxLength(256)]],
+            uz: ['', [Validators.required, Validators.maxLength(256)]],
+            kg: ['', [Validators.required, Validators.maxLength(256)]],
             isActive: [true, Validators.required],
         });
         if (this.itemData) {

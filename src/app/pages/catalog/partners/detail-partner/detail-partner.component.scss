@@ -1,35 +1,6 @@
 @import '../../../../@theme/styles/themes';
 
 @include nb-install-component() {
-    .font-row {
-        &:first-child {
-            margin-bottom: 2rem;
-        }
-
-        .header {
-            align-items: baseline;
-        }
-
-        p {
-            margin: 0;
-        }
-    }
-
-    .headings-card {
-        h1 {
-            margin: 0;
-        }
-
-        .header {
-            padding-bottom: 0.675rem;
-            margin-bottom: 0.675rem;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-    }
-
     .header {
         display: flex;
         flex-wrap: wrap;
@@ -39,7 +10,6 @@
         border-bottom: 1px solid nb-theme(divider-color);
         padding-left: 25px;
         margin-left: 10px;
-
         margin-right: 10px;
 
         p {
@@ -84,38 +54,6 @@
         }
     }
 
-    .colors {
-        display: flex;
-        flex-direction: column;
-
-        .item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.25rem;
-            &:last-child {
-                margin-bottom: 0;
-            }
-        }
-
-        .color {
-            width: 86px;
-            height: 60px;
-            border-top-right-radius: 1rem;
-            border-bottom-left-radius: 1rem;
-            @include nb-ltr(margin-right, 1rem);
-            @include nb-rtl(margin-left, 1rem);
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            margin-bottom: 0.25rem;
-        }
-    }
-
     .text-link {
         color: nb-theme(link-text-color);
     }
@@ -148,9 +86,9 @@
 }
 .partner-info {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     .logo {
-        width: 300px;
+        width: 200px;
     }
     .title {
         margin-left: 40px;
@@ -163,4 +101,77 @@
 .partner-board {
     display: flex;
     justify-content: space-between;
+}
+.partner-card {
+    .line {
+        border-top: nb-theme(card-border-width) nb-theme(card-border-style)
+            nb-theme(card-border-color);
+        margin: 10px auto 6px auto;
+    }
+    .card__border {
+        border: nb-theme(card-border-width) nb-theme(card-border-style)
+            nb-theme(card-border-color);
+        border-radius: nb-theme(card-border-radius);
+    }
+    .card__inner {
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-between;
+
+        .card__icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center !important;
+
+            background-color: nb-theme(button-filled-info-background-color);
+        }
+        .favorite {
+            background-image: linear-gradient(
+                to top,
+                #051937,
+                #004d7a,
+                #008793,
+                #00bf72,
+                #a8eb12
+            );
+        }
+        .feedback {
+            background-image: linear-gradient(
+                to right top,
+                #d16ba5,
+                #c777b9,
+                #ba83ca,
+                #aa8fd8,
+                #9a9ae1,
+                #8aa7ec,
+                #79b3f4,
+                #69bff8,
+                #52cffe,
+                #41dfff,
+                #46eefa,
+                #5ffbf1
+            );
+        }
+        .rate {
+            background-image: linear-gradient(
+                to right top,
+                #9a1b4b,
+                #c74137,
+                #dc760b,
+                #d4b100,
+                #a8eb12
+            );
+        }
+        .card__text {
+            p {
+                margin-bottom: 0;
+            }
+            strong {
+                margin: 0px 0px 0px auto;
+            }
+        }
+    }
 }

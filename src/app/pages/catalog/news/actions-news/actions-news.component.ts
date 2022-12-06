@@ -85,22 +85,6 @@ export class ActionsNewsComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    onFileChange(event, type) {
-        if (event.target.files.length > 0) {
-            Object.values(event.target.files).forEach((item) => {
-                toBase64(item).then((res) => {
-                    const base64 = `data:image/jpeg;base64,${res}`;
-                    if (type === 'cover') {
-                        this.form.patchValue({
-                            cover: res,
-                        });
-                        this.coverImg = base64;
-                        return;
-                    }
-                });
-            });
-        }
-    }
     getProducts(name = '') {
         this.productService
             .getListProducts(1, name)
@@ -111,15 +95,24 @@ export class ActionsNewsComponent implements OnInit, OnDestroy {
         this.form = this.fb.group({
             cover: ['', Validators.required],
             isActive: [true, Validators.required],
-            titleRu: ['', Validators.required],
-            titleKg: ['', Validators.required],
-            titleUz: ['', Validators.required],
-            shortTextRu: ['', Validators.required],
-            shortTextKg: ['', Validators.required],
-            shortTextUz: ['', Validators.required],
-            textRu: ['', Validators.required],
-            textKg: ['', Validators.required],
-            textUz: ['', Validators.required],
+            titleRu: ['', [Validators.required, Validators.maxLength(256)]],
+            titleKg: ['', [Validators.required, Validators.maxLength(256)]],
+            titleUz: ['', [Validators.required, Validators.maxLength(256)]],
+            shortTextRu: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            shortTextKg: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            shortTextUz: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            textRu: ['', [Validators.required, Validators.maxLength(4096)]],
+            textKg: ['', [Validators.required, Validators.maxLength(4096)]],
+            textUz: ['', [Validators.required, Validators.maxLength(4096)]],
             productId: ['', Validators.required],
         });
         this.route.params.subscribe((params) => {

@@ -9,7 +9,6 @@ import { CategoriesService } from '../../../../@core/services/catalog/categories
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
 import { ProductsService } from '../../../../@core/services/catalog/products/products.service';
 import { TagsService } from '../../../../@core/services/catalog/tags/tags.service';
-import { toBase64 } from '../../../../@core/utils/toBase64';
 
 @Component({
     templateUrl: './actions-partner.component.html',
@@ -25,24 +24,7 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
     products = [];
     partnerData;
     partnerId: number;
-    gallery = [
-        {
-            img: 'https://img2.akspic.ru/attachments/originals/4/4/7/8/3/138744-fenek-hishhnik-psovye-ryzhaya_lisica-morda-4928x3280.jpg',
-            id: 32,
-        },
-        {
-            img: 'https://img2.akspic.ru/attachments/originals/4/4/7/8/3/138744-fenek-hishhnik-psovye-ryzhaya_lisica-morda-4928x3280.jpg',
-            id: 322,
-        },
-        {
-            img: 'https://img2.akspic.ru/attachments/originals/4/4/7/8/3/138744-fenek-hishhnik-psovye-ryzhaya_lisica-morda-4928x3280.jpg',
-            id: 332,
-        },
-        {
-            img: 'https://img2.akspic.ru/attachments/originals/4/4/7/8/3/138744-fenek-hishhnik-psovye-ryzhaya_lisica-morda-4928x3280.jpg',
-            id: 302,
-        },
-    ];
+
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private fb: FormBuilder,
@@ -103,26 +85,7 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    onFileChange(event, type) {
-        if (event.target.files.length > 0) {
-            // console.log(event.target.files);
-            Object.values(event.target.files).forEach((item) => {
-                toBase64(item).then((res) => {
-                    const base64 = `data:image/jpeg;base64,${res}`;
-                    if (type === 'logo') {
-                        this.form.patchValue({
-                            logo: res,
-                        });
-                        return;
-                    }
-                    this.gallery.push({ img: base64, id: Date.now() });
-                });
-            });
-        }
-    }
-    deleteImage(imgId) {
-        this.gallery = this.gallery.filter((item) => item.id !== imgId);
-    }
+
     getData() {
         this.getProducts();
         this.getTags();
@@ -149,24 +112,33 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
     }
     getBrands(name = '') {
         this.brandService
-            .getListBrand(1, name)
+            .getListBrand(1, { name, categoryId: '' })
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.brands = res.items));
     }
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
             logo: ['', Validators.required],
             isActive: [true, Validators.required],
-            descRu: ['', Validators.required],
-            descKg: ['', Validators.required],
-            descUz: ['', Validators.required],
-            shortDescRu: ['', Validators.required],
-            shortDescKg: ['', Validators.required],
-            shortDescUz: ['', Validators.required],
-            categoryId: [[], Validators.required],
-            productId: [[], Validators.required],
-            brandId: [[], Validators.required],
+            descRu: ['', [Validators.required, Validators.maxLength(4096)]],
+            descKg: ['', [Validators.required, Validators.maxLength(4096)]],
+            descUz: ['', [Validators.required, Validators.maxLength(4096)]],
+            shortDescRu: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            shortDescKg: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            shortDescUz: [
+                '',
+                [Validators.required, Validators.maxLength(1024)],
+            ],
+            categories: [[], Validators.required],
+            products: [[], Validators.required],
+            brands: [[], Validators.required],
             tags: [[], Validators.required],
         });
         this.route.params.subscribe((params) => {
@@ -175,30 +147,19 @@ export class ActionsPartnerComponent implements OnInit, OnDestroy {
         if (this.partnerId) {
             this.partnersService
                 .getDetailPartner(this.partnerId)
-                .pipe(
-                    takeUntil(this.destroy$),
-                    map((res) => {
-                        if (res.tags && res.tags.length > 0) {
-                            const newTags = res.tags.map((item) => item.id);
-                            return { ...res, tags: newTags };
-                        }
-                        return res;
-                    })
-                )
+                .pipe(takeUntil(this.destroy$))
                 .subscribe({
                     next: (data) => {
                         this.partnerData = data;
                         this.form.controls['name'].setValue(data.name);
                         this.form.controls['isActive'].setValue(data.isActive);
                         this.form.controls['logo'].setValue(data.logo);
-                        this.form.controls['categoryId'].setValue(
-                            data.categoryId
+                        this.form.controls['categories'].setValue(
+                            data.categories
                         );
-                        this.form.controls['brandId'].setValue(data.brandId);
+                        this.form.controls['brands'].setValue(data.brands);
 
-                        this.form.controls['productId'].setValue(
-                            data.productId
-                        );
+                        this.form.controls['products'].setValue(data.products);
                         this.form.controls['tags'].setValue(data.tags);
                         this.form.controls['descRu'].setValue(
                             data.description.ru

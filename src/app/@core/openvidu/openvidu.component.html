@@ -1,0 +1,57 @@
+<div *ngIf="session" id="main-container" class="container-openvidu">
+    <div id="session">
+        <div id="session-header">
+            <input
+                class="btn btn-large btn-danger"
+                type="button"
+                id="buttonLeaveSession"
+                (click)="leaveSession()"
+                value="Завершить звонок"
+            />
+        </div>
+        <div class="videos">
+            <!-- ! User Большой -->
+            <div
+                *ngFor="let sub of subscribers"
+                id=""
+                class="stream-container col-md-12 col-xs-12 main-video"
+            >
+                <user-video
+                    [streamManager]="sub"
+                    (click)="updateMainStreamManager(sub)"
+                ></user-video>
+                <!-- <user-video [streamManager]="mainStreamManager"></user-video> -->
+            </div>
+            <div *ngIf="subscribers.length === 0" class="balls-position">
+                <div class="balls">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+
+            <div id="video-container" class="col-md-6">
+                <!-- ! Operator -->
+
+                <div
+                    *ngIf="publisher"
+                    class="stream-container streamcomponent col-md-6 col-xs-6"
+                >
+                    <user-video
+                        [streamManager]="publisher"
+                        (click)="updateMainStreamManager(publisher)"
+                    ></user-video>
+                </div>
+                <!-- <div
+                    *ngFor="let sub of subscribers"
+                    class="stream-container streamcomponent col-md-6 col-xs-6"
+                >
+                    <user-video
+                        [streamManager]="sub"
+                        (click)="updateMainStreamManager(sub)"
+                    ></user-video>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

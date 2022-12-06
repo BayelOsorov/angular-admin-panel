@@ -1,9 +1,4 @@
-import {
-    CUSTOM_ELEMENTS_SCHEMA,
-    forwardRef,
-    NgModule,
-    NO_ERRORS_SCHEMA,
-} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     NbAlertModule,
@@ -15,17 +10,15 @@ import {
     NbPopoverModule,
     NbSelectModule,
     NbStepperModule,
+    NbTimepickerModule,
 } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { EditStaffComponent } from './staff/edit-staff/edit-staff.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ChangePasswordModalComponent } from './staff/change-password-modal/change-password-modal.component';
 import { CreateStaffModalComponent } from './staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-import { BrandActionsModalComponent } from './catalog/brand/brand-actions-modal/brand-actions-modal.component';
-import { CategoryActionsModalComponent } from './catalog/category/category-actions-modal/category-actions-modal.component';
 import { UseHttpImageSourcePipe } from './secured-image/secured-image.component';
 import { SearchSelectComponent } from './search-select/search-select.component';
 import { LocalizationInputsComponent } from './localization-inputs/localization-inputs.component';
@@ -42,6 +35,22 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { BranchesComponent } from './catalog/partners/branches/branches.component';
 import { RouterModule } from '@angular/router';
 import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays.component';
+import { FeedbacksComponent } from './catalog/partners/feedbacks/feedbacks.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { DetailComponent } from './identification/detail/detail.component';
+import { NeedToEditComponent } from './identification/need-to-edit/need-to-edit.component';
+import { PhotoIdnButtonsComponent } from './identification/photo-idn-buttons/photo-idn-buttons.component';
+import { LightboxImgComponent } from './lightbox-img/lightbox-img.component';
+import { UserVideoComponent } from '../openvidu/user-video.component';
+import { OpenViduVideoComponent } from '../openvidu/ov-video.component';
+import { OpenviduComponent } from '../openvidu';
+import { ImgInputComponent } from './img-input/img-input.component';
+import { ValidationInputComponent } from './validation-input/validation-input.component';
+import { MessengersComponent } from './catalog/partners/messengers/messengers.component';
+import { MessengersActionsModalComponent } from './catalog/partners/messengers/messengers-actions-modal/messengers-actions-modal.component';
+import { TableComponent } from './table/table.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 @NgModule({
     imports: [
         CommonModule,
@@ -50,14 +59,15 @@ import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays
         NbStepperModule,
         NbCardModule,
         ReactiveFormsModule,
+        Ng2SmartTableModule,
         FormsModule,
         NbButtonModule,
         NbSelectModule,
         NbInputModule,
         NbPopoverModule,
         NbListModule,
-        NgMultiSelectDropDownModule,
         NbDatepickerModule,
+        NzPaginationModule,
         NzSelectModule,
         CKEditorModule,
     ],
@@ -66,8 +76,6 @@ import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays
         EditStaffComponent,
         ChangePasswordModalComponent,
         ConfirmDialogComponent,
-        BrandActionsModalComponent,
-        CategoryActionsModalComponent,
         UseHttpImageSourcePipe,
         SearchSelectComponent,
         LocalizationInputsComponent,
@@ -82,8 +90,22 @@ import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays
         EditorComponent,
         BranchesComponent,
         WeekdaysComponent,
+        FeedbacksComponent,
+        PaginationComponent,
+        DetailComponent,
+        NeedToEditComponent,
+        PhotoIdnButtonsComponent,
+        LightboxImgComponent,
+        OpenviduComponent,
+        UserVideoComponent,
+        OpenViduVideoComponent,
+        ImgInputComponent,
+        ValidationInputComponent,
+        MessengersComponent,
+        MessengersActionsModalComponent,
+        TableComponent,
     ],
-    // schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
         ConfirmDialogComponent,
         SearchSelectComponent,
@@ -96,6 +118,19 @@ import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays
         EditorComponent,
         BranchesComponent,
         WeekdaysComponent,
+        FeedbacksComponent,
+        PaginationComponent,
+        DetailComponent,
+        NeedToEditComponent,
+        PhotoIdnButtonsComponent,
+        LightboxImgComponent,
+        OpenviduComponent,
+        UserVideoComponent,
+        OpenViduVideoComponent,
+        ImgInputComponent,
+        ValidationInputComponent,
+        MessengersComponent,
+        TableComponent,
     ],
 })
 export class ComponentsModule {}

@@ -3,11 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { IDetailMalls } from '../../../../@core/models/catalog/malls';
 import { LocalitiesService } from '../../../../@core/services/catalog/localities/localities.service';
 import { MallsService } from '../../../../@core/services/catalog/malls/malls.service';
-import { toBase64 } from '../../../../@core/utils/toBase64';
 @Component({
     templateUrl: './actions-mall.component.html',
     styleUrls: ['./actions-mall.component.scss'],
@@ -65,40 +64,26 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    onFileChange(event, type) {
-        if (event.target.files.length > 0) {
-            // console.log(event.target.files);
-            Object.values(event.target.files).forEach((item) => {
-                toBase64(item).then((res) => {
-                    const base64 = `data:image/jpeg;base64,${res}`;
-                    if (type === 'logo') {
-                        this.form.patchValue({
-                            logo: res,
-                        });
-                        this.logoImg = base64;
-                        return;
-                    }
-                });
-            });
-        }
-    }
+
     getLocalities(name = '') {
-        this.localitiesService.getListLocalities(1, name).subscribe((data) => {
-            this.localities = data.items;
-        });
+        this.localitiesService
+            .getListLocalities(1, name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.localities = data.items;
+            });
     }
-    markMap(loc) {
-        this.form.patchValue({
-            location: loc,
-        });
-    }
+
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
             logo: ['', Validators.required],
             isActive: [true, Validators.required],
-            address: ['', Validators.required],
-            description: ['', Validators.required],
+            address: ['', [Validators.required, Validators.maxLength(256)]],
+            description: [
+                '',
+                [Validators.required, Validators.maxLength(4096)],
+            ],
             order: ['', Validators.required],
             location: ['', Validators.required],
             workingHourStart: ['', Validators.required],
@@ -110,6 +95,7 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
             this.mallId = params['id'];
         });
         this.getLocalities();
+
         if (this.mallId) {
             this.mallsService
                 .getDetailMall(this.mallId)
@@ -137,7 +123,7 @@ export class ActionsMallComponent implements OnInit, OnDestroy {
                         );
                         this.form.controls['order'].setValue(data.order);
                         this.form.controls['localityId'].setValue(
-                            data.localityId
+                            data.locality
                         );
                         this.logoImg = data.logo;
                         this.location = data.location.coordinates;

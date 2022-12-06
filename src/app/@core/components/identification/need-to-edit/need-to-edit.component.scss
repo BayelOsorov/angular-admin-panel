@@ -1,0 +1,18 @@
+@import '../../../../@theme/styles/themes';
+
+.need-to-edit {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    .select {
+        margin-top: 18.75px;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+.show-grid {
+    background-color: nb-theme(background-basic-color-2);
+    padding: 0.62rem 1rem;
+    border-radius: 0.25rem;
+}

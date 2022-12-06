@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PartnerPromsService } from '../../../../@core/services/catalog/partner-proms/partner-proms.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
-import { toBase64 } from '../../../../@core/utils/toBase64';
 @Component({
     templateUrl: './actions-partner-proms.component.html',
     styleUrls: ['./actions-partner-proms.component.scss'],
@@ -32,10 +31,17 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         this.submitted = true;
+
         if (this.form.valid) {
+            const { startDateTime, endDateTime } = this.form.value;
+            const newData = {
+                ...this.form.value,
+                startDateTime: this.dateService.addDay(startDateTime, 1),
+                endDateTime: this.dateService.addDay(endDateTime, 1),
+            };
             if (this.partnerPromsData) {
                 this.partnerPromsService
-                    .editPartnerProms(this.partnerPromsData.id, this.form.value)
+                    .editPartnerProms(this.partnerPromsData.id, newData)
                     .pipe(takeUntil(this.destroy$))
                     .subscribe(() => {
                         this.toaster.success('Успешно отредактировано!');
@@ -45,7 +51,7 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
             }
 
             this.partnerPromsService
-                .createPartnerProms(this.form.value)
+                .createPartnerProms(newData)
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(() => {
                     this.toaster.success('Успешно создано!');
@@ -53,22 +59,7 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    onFileChange(event, type) {
-        if (event.target.files.length > 0) {
-            Object.values(event.target.files).forEach((item) => {
-                toBase64(item).then((res) => {
-                    const base64 = `data:image/jpeg;base64,${res}`;
-                    if (type === 'cover') {
-                        this.form.patchValue({
-                            cover: res,
-                        });
-                        this.coverImg = base64;
-                        return;
-                    }
-                });
-            });
-        }
-    }
+
     changeContent(data) {
         this.form.patchValue({
             hmtlBody: data,
@@ -84,7 +75,7 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
         this.form = this.fb.group({
             partnerId: ['', Validators.required],
             cover: ['', Validators.required],
-            title: ['', Validators.required],
+            title: ['', [Validators.required, Validators.maxLength(256)]],
             hmtlBody: ['', Validators.required],
             startDateTime: ['', Validators.required],
             endDateTime: ['', Validators.required],
@@ -108,10 +99,10 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                         );
                         this.form.controls['hmtlBody'].setValue(data.hmtlBody);
                         this.form.controls['startDateTime'].setValue(
-                            data.startDateTime
+                            new Date(data.startDateTime)
                         );
                         this.form.controls['endDateTime'].setValue(
-                            data.endDateTime
+                            new Date(data.endDateTime)
                         );
                     },
                 });

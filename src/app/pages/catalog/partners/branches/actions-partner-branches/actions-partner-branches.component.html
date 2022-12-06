@@ -13,19 +13,12 @@
                             >Название</label
                         >
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('name')"
                                 placeholder="Введите название"
-                                formControlName="name"
-                                [status]="
-                                submitted && (form.get('name')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
 
@@ -36,19 +29,12 @@
                             >Адрес
                         </label>
                         <div class="col-sm-9">
-                            <input
-                                type="text"
-                                nbInput
-                                fullWidth
-                                id="exampleInputEmail1"
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('address')"
                                 placeholder="Введите адрес"
-                                formControlName="address"
-                                [status]="
-                                submitted && (form.get('address')).errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                            "
-                            />
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
 
@@ -139,7 +125,13 @@
 
                         <div class="col-sm-9">
                             <div class="d-flex">
-                                <span class="input-group-text" id="basic-addon1"
+                                <span
+                                    [ngClass]=" submitted && (form.get('phoneNumber')).errors?.['required']
+                                    ? 'validation'
+                                    : ''
+                            "
+                                    class="input-group-text"
+                                    id="basic-addon1"
                                     >+996</span
                                 >
 
@@ -234,7 +226,6 @@
                             <ngx-custom-map
                                 [submitted]="submitted"
                                 [control]="form.get('location')"
-                                (markLocationEvent)="markMap($event)"
                                 [baseLocation]="
                                     branchId && branchData.location.coordinates
                                 "

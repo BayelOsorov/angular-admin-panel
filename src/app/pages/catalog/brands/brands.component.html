@@ -5,8 +5,8 @@
             <div class="d-flex">
                 <ngx-input-search
                     class="mr-5"
-                    (searchEvent)="onSearch($event)"
                     [placeholder]="'Название бренда'"
+                    [control]="form.get('name')"
                 >
                 </ngx-input-search>
                 <ngx-search-select
@@ -15,6 +15,7 @@
                     [isRequired]="false"
                     [submitted]="false"
                     [data]="categoryList"
+                    [control]="form.get('categoryId')"
                     [placeholder]="'Название категории'"
                 ></ngx-search-select>
             </div>
@@ -28,7 +29,7 @@
     <nb-card-body>
         <ngx-custom-table
             (deleteItemEvent)="deleteBrand($event)"
-            (openModalEvent)="openEditModal($event)"
+            (openModalEvent)="editBrand($event)"
             (changePageEvent)="getBrands($event)"
             [tableColumns]="tableColumns"
             [tableData]="listBrand"

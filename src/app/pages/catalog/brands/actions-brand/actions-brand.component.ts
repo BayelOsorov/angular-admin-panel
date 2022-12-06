@@ -8,7 +8,6 @@ import { takeUntil } from 'rxjs/operators';
 import { IDetailBrand } from '../../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../../@core/services/catalog/categories/categories.service';
-import { blobToBase64, toBase64 } from '../../../../@core/utils/toBase64';
 @Component({
     templateUrl: './actions-brand.component.html',
     styleUrls: ['./actions-brand.component.scss'],
@@ -19,9 +18,7 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
     brandId: number;
     submitted = false;
     categoryList = [];
-    isLoading = false;
     logoImg;
-    searchChange$ = new BehaviorSubject('');
 
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -35,10 +32,9 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
         @Optional() private dialogRef: NbWindowRef<any>
     ) {}
 
-    compareFn = (o1: any, o2: any) => (o1 && o2 ? o1 === o2 : o1 === o2);
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(256)]],
             logo: ['', Validators.required],
             isActive: [true, Validators.required],
             order: ['', Validators.required],
@@ -63,7 +59,6 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
                     this.logoImg = data.logo;
                 });
         }
-        console.log(this.logoImg);
     }
     getCategories(name = '') {
         this.categoryService
@@ -100,16 +95,7 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
                 });
         }
     }
-    async onFileChange(event) {
-        if (event.target.files.length > 0) {
-            const file = event.target.files[0];
-            const logo = await toBase64(file);
-            this.logoImg = `data:image/jpeg;base64,${logo}`;
-            this.form.patchValue({
-                logo,
-            });
-        }
-    }
+
     onSearch(value: string): void {
         this.getCategories(value);
     }

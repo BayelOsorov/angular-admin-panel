@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,20 +19,29 @@ import { tableNumbering } from '../../../../@core/utils';
 export class ListMallsComponent implements OnInit, OnDestroy {
     listMalls: IListMalls;
     localities = [];
+    form = this.fb.group({
+        name: [''],
+        type: [''],
+        localityId: [''],
+    });
     tableColumns = {
         index: {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listMalls.pageNumber, cell.row.index),
+                tableNumbering(this.listMalls.page, cell.row.index),
         },
         logo: {
             title: 'Лого',
             type: 'custom',
             renderComponent: AvatarImgComponent,
         },
-        name: { title: 'Название', type: 'string' },
-        localityId: { title: 'Населенный пункт', type: 'string' },
+        name: { title: 'Название', type: 'text' },
+        locality: {
+            title: 'Населенный пункт',
+            type: 'text',
+            valuePrepareFunction: (value) => (value ? value.name.ru : ''),
+        },
         workingHour: {
             title: 'Режим работы',
             type: 'text',
@@ -40,21 +50,22 @@ export class ListMallsComponent implements OnInit, OnDestroy {
         },
         isActive: {
             title: 'Активен',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
-        order: { title: 'Порядок', type: 'string' },
+        order: { title: 'Порядок', type: 'text' },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private mallsService: MallsService,
         private localitiesService: LocalitiesService,
         private toaster: ToastrService,
-        private router: Router
+        private router: Router,
+        private fb: FormBuilder
     ) {}
-    getMalls(page = 1, name = '') {
+    getMalls(page = 1, filter = {}) {
         this.mallsService
-            .getListMalls(page, name)
+            .getListMalls(page, filter)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listMalls = res));
     }
@@ -63,15 +74,14 @@ export class ListMallsComponent implements OnInit, OnDestroy {
             this.localities = data.items;
         });
     }
-    onSearch(event) {
-        this.getMalls(1, event);
+    changeType(type) {
+        console.log(type);
     }
+
     updateMall(data) {
         this.router.navigate([`catalog/malls/update/${data.id}`]);
     }
-    userRowSelect(id) {
-        this.router.navigate([`catalog/malls/detail/${id}`]);
-    }
+
     deleteMall(id) {
         this.mallsService
             .deleteMall(id)
@@ -83,6 +93,11 @@ export class ListMallsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.form.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.getMalls(1, data);
+            });
         this.getMalls();
     }
     ngOnDestroy() {

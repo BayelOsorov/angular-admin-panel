@@ -16,6 +16,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './services/http/http.service';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import { HttpErrorInterceptor } from './interceptors/error.interceptor';
+import { OpenviduComponent } from './openvidu/openvidu.component';
+import { UserVideoComponent } from './openvidu/user-video.component';
+import { OpenViduVideoComponent } from './openvidu/ov-video.component';
 
 const socialLinks = [
     {

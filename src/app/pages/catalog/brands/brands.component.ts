@@ -1,13 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-img.component';
-import { BrandActionsModalComponent } from '../../../@core/components/catalog/brand/brand-actions-modal/brand-actions-modal.component';
-import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListBrand } from '../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';
@@ -20,12 +17,16 @@ import { tableNumbering } from '../../../@core/utils';
 export class BrandsComponent implements OnInit, OnDestroy {
     listBrand: IListBrand;
     categoryList = [];
+    form = this.fb.group({
+        name: '',
+        categoryId: [''],
+    });
     tableColumns = {
         index: {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listBrand.pageNumber, cell.row.index),
+                tableNumbering(this.listBrand.page, cell.row.index),
         },
         logo: {
             title: 'Лого',
@@ -34,32 +35,37 @@ export class BrandsComponent implements OnInit, OnDestroy {
         },
         name: {
             title: 'Название',
-            type: 'string',
+            type: 'text',
         },
-        categoryId: {
+        categoryName: {
             title: 'Категория',
             type: 'number',
         },
         order: {
             title: 'Порядок',
-            type: 'string',
+            type: 'text',
         },
     };
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
+        private fb: FormBuilder,
         private brandService: BrandsService,
         private categoryService: CategoriesService,
         private router: Router,
-        private windowService: NbWindowService,
         private toaster: ToastrService
     ) {}
     ngOnInit(): void {
+        this.form.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.getBrands(1, data);
+            });
         this.getBrands();
     }
-    getBrands(page = 1, name = '') {
+    getBrands(page = 1, filter = { categoryId: '', name: '' }) {
         this.brandService
-            .getListBrand(page, name)
+            .getListBrand(page, filter)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listBrand = res));
     }
@@ -75,40 +81,18 @@ export class BrandsComponent implements OnInit, OnDestroy {
         this.brandService
             .deleteBrand(id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => {
+            .subscribe(() => {
                 this.toaster.success('Успешно удалено!');
                 this.getBrands();
             });
     }
-    onSearch(event) {
-        this.getBrands(1, event);
-    }
+
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
     }
-    public openCreateModal() {
-        this.openModal(false, BrandActionsModalComponent, {
-            title: 'Добавление бренда',
-            context: {},
-        });
-    }
-    public openEditModal(data) {
-        // this.openModal(false, BrandActionsModalComponent, {
-        //     title: 'Редактирование бренда',
-        //     context: { brandData: data },
-        // });
+
+    editBrand(data) {
         this.router.navigate([`catalog/brands/update/${data.id}`]);
-    }
-    public openModal(closeOnBackdropClick: boolean, component, props) {
-        this.windowService
-            .open(component, {
-                closeOnBackdropClick,
-                ...props,
-            })
-            .onClose.subscribe(
-                (val) =>
-                    (val === 'create' || val === 'edit') && this.getBrands()
-            );
     }
 }

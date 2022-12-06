@@ -26,10 +26,10 @@
 
 <div *ngIf="images">
     <div class="col-sm-9">
-        <div class="gallery">
+        <div class="gallery" *ngIf="images && images.items.length > 0">
             <ng-container *ngFor="let i of images.items">
                 <div class="gallery__item">
-                    <img [src]="i.imagePath" alt="" />
+                    <img [src]="i.imagePath | useHttpImgSrc" alt="" />
                     <button
                         class="btn edit-btn"
                         (click)="openEditModal(i)"
@@ -85,7 +85,7 @@
             *ngIf="images.totalItemCount > 20"
             class="custom-pagination header"
             (nzPageIndexChange)="changePage($event)"
-            [nzPageIndex]="images.pageNumber"
+            [nzPageIndex]="images.page"
             [nzTotal]="images.totalItemCount"
             [nzPageSize]="images.pageSize"
         ></nz-pagination>

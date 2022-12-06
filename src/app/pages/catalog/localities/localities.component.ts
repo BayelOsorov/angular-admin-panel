@@ -17,26 +17,26 @@ export class LocalitiesComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listLocalities.pageNumber, cell.row.index),
+                tableNumbering(this.listLocalities.page, cell.row.index),
         },
         name: {
             title: 'Название на RU',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (item) => item.ru,
         },
         'name.kg': {
             title: 'Название на KG',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (cell, row) => row.name.kg,
         },
         'name.uz': {
             title: 'Название на UZ',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (cell, row) => row.name.uz,
         },
         isActive: {
             title: 'Активен',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
     };

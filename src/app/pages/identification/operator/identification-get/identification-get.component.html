@@ -1,0 +1,32 @@
+<nb-card>
+    <ng-container *ngIf="router.url.endsWith('photo')">
+        <nb-card-header>Идентификация по фотографии</nb-card-header>
+        <nb-card-body class="d-flex justify-content-center">
+            <button
+                (click)="photoIdentification()"
+                nbSpinnerStatus="info"
+                nbSpinnerSize="medium"
+                nbSpinnerMessage=""
+                nbButton
+                status="primary"
+            >
+                Получить заявку на фотоидентификацию
+            </button>
+        </nb-card-body>
+    </ng-container>
+    <ng-container *ngIf="router.url.endsWith('video')">
+        <nb-card-header>Идентификация по видео</nb-card-header>
+        <nb-card-body class="d-flex justify-content-center">
+            <button
+                (click)="videoIdentification()"
+                nbSpinnerStatus="info"
+                nbSpinnerSize="medium"
+                nbSpinnerMessage=""
+                nbButton
+                status="info"
+            >
+                Получить заявку на видеоидентификацию
+            </button>
+        </nb-card-body>
+    </ng-container>
+</nb-card>

@@ -17,6 +17,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
     //     group: true,
     // },
     {
+        title: 'Идентификация',
+        icon: 'list',
+        children: [
+            {
+                title: 'Идентификация по фотографии',
+                link: '/identification/photo',
+            },
+            {
+                title: 'Идентификация по видео',
+                link: '/identification/video',
+            },
+        ],
+    },
+    {
         title: 'Сотрудники',
         icon: 'people',
         children: [

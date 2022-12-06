@@ -65,10 +65,8 @@ export class CustomMapComponent implements OnInit {
                 this.map.removeLayer(this.marker);
             }
             this.marker = L.marker(e.latlng, this.markerIcon).addTo(this.map);
-            this.markLocationEvent.emit([e.latlng.lat, e.latlng.lng]);
-            // L.marker([e.latlng.lat, e.latlng.lng], this.markerIcon).addTo(
-            //     this.map
-            // ); // add the marker onclick
+            // this.markLocationEvent.emit([e.latlng.lat, e.latlng.lng]);
+            this.control.setValue([e.latlng.lat, e.latlng.lng]);
         });
     }
 }

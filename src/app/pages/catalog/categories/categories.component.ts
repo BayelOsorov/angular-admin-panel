@@ -1,13 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-img.component';
-import { CategoryActionsModalComponent } from '../../../@core/components/catalog/category/category-actions-modal/category-actions-modal.component';
-import { UseHttpImageSourcePipe } from '../../../@core/components/secured-image/secured-image.component';
 import { IListCategories } from '../../../@core/models/catalog/category';
 import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';
 import { tableNumbering } from '../../../@core/utils';
@@ -23,7 +20,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listCategory.pageNumber, cell.row.index),
+                tableNumbering(this.listCategory.page, cell.row.index),
         },
         logo: {
             title: 'Лого',
@@ -36,33 +33,25 @@ export class CategoriesComponent implements OnInit, OnDestroy {
             valuePrepareFunction: (cell, item) =>
                 this.domSanitizer.bypassSecurityTrustHtml(
                     item.parentId
-                        ? item.parentId + ` - ` + item.name
+                        ? item.parentName + ` - ` + item.name
                         : item.name
                 ),
         },
-        backgroundColor: {
-            title: 'Цвет фона',
-            type: 'html',
-            valuePrepareFunction: (item) =>
-                this.domSanitizer.bypassSecurityTrustHtml(
-                    `<div class="row" style='background-color: ${item}; height:43px;'>&nbsp; </div>`
-                ),
-        },
+
         isActive: {
             title: 'Активен',
-            type: 'string',
+            type: 'text',
             valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
         },
         order: {
             title: 'Порядок',
-            type: 'string',
+            type: 'text',
         },
     };
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private categoryService: CategoriesService,
-        private windowService: NbWindowService,
         private toaster: ToastrService,
         private domSanitizer: DomSanitizer,
         private router: Router
@@ -92,24 +81,8 @@ export class CategoriesComponent implements OnInit, OnDestroy {
         this.destroy$.next();
         this.destroy$.complete();
     }
-    public openCreateModal() {
-        this.openModal(false, CategoryActionsModalComponent, {
-            title: 'Добавление категории',
-            context: {},
-        });
-    }
-    public openEditModal(data) {
+
+    openEdit(data) {
         this.router.navigate([`catalog/categories/update/${data.id}`]);
-    }
-    public openModal(closeOnBackdropClick: boolean, component, props) {
-        this.windowService
-            .open(component, {
-                closeOnBackdropClick,
-                ...props,
-            })
-            .onClose.subscribe(
-                (val) =>
-                    (val === 'create' || val === 'edit') && this.getCategories()
-            );
     }
 }

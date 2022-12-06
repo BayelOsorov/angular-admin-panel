@@ -5,6 +5,7 @@ import {
     IDetailPartner,
     IDetailPartnerBranch,
     IListPartner,
+    IListPartnerFeedbacks,
     IListPartnerImages,
 } from '../../../models/catalog/partners';
 import { HttpOptions } from '../../../utils';
@@ -14,19 +15,14 @@ import { HttpOptions } from '../../../utils';
 })
 export class PartnersService {
     constructor(private http: HttpClient) {}
-
+    //  ! Partners CRUD
     getListPartners(page = 1, name = '') {
         return this.http.get<IListPartner>(
             environment.catalogUrl +
                 `/Administration/api/v1/partners?name=${name}&page=${page}&pageSize=20`
         );
     }
-    getListPartnersSearch(query = '') {
-        return this.http.get(
-            environment.catalogUrl +
-                `/Administration/api/v1/partners/search?query=${query}`
-        );
-    }
+
     getDetailPartner(id: number) {
         return this.http.get<IDetailPartner>(
             environment.catalogUrl + `/Administration/api/v1/partners/${id}`
@@ -83,10 +79,13 @@ export class PartnersService {
                 `/Administration/api/v1/partners/${partnerId}/images/${imgId}`
         );
     }
-    getListPartnerBranches(partnerId) {
+
+    // ! Partner Branches
+
+    getListPartnerBranches(page = 1, partnerId) {
         return this.http.get(
             environment.catalogUrl +
-                `/Administration/api/v1/partners/${partnerId}/branches`
+                `/Administration/api/v1/partners/${partnerId}/branches?page=${page}&pageSize=20`
         );
     }
     getDetailPartnerBranch(id: number, branchId) {
@@ -113,6 +112,35 @@ export class PartnersService {
         return this.http.post(
             environment.catalogUrl +
                 `/Administration/api/v1/partners/${partnerId}/branches`,
+            data
+        );
+    }
+
+    // ! Partner Messengers
+    getListPartnerMessengers(partnerId) {
+        return this.http.get<[]>(
+            environment.catalogUrl +
+                `/Administration/api/v1/partners/${partnerId}/messengers`
+        );
+    }
+
+    deletePartnerMessenger(partnerId: number, id: number) {
+        return this.http.delete(
+            environment.catalogUrl +
+                `/Administration/api/v1/partners/${partnerId}/messengers/${id}`
+        );
+    }
+    editPartnerMessenger(partnerId, id: number, data) {
+        return this.http.put(
+            environment.catalogUrl +
+                `/Administration/api/v1/partners/${partnerId}/messengers/${id}`,
+            data
+        );
+    }
+    createPartnerMessenger(partnerId, data) {
+        return this.http.post(
+            environment.catalogUrl +
+                `/Administration/api/v1/partners/${partnerId}/messengers`,
             data
         );
     }

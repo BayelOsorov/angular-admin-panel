@@ -7,7 +7,7 @@ import {
     HttpResponse,
     HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { HandleErrorService } from '../services/http/handle-error.service';
 import { environment } from '../../../environments/environment';
 @Injectable()
@@ -34,6 +34,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                     console.log(err);
 
                     this.error.handleError(err);
+                    observer.error(err);
                 }
             );
         });

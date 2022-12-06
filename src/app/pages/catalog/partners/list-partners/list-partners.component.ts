@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AvatarImgComponent } from '../../../../@core/components/avatar-img/avatar-img.component';
 import { IListPartner } from '../../../../@core/models/catalog/partners';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
 import { tableNumbering } from '../../../../@core/utils';
@@ -17,11 +18,26 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listPartner.pageNumber, cell.row.index),
+                tableNumbering(this.listPartner.page, cell.row.index),
         },
-        name: { title: 'Название', type: 'string' },
-        categoryId: { title: 'Категория', type: 'number' },
-        order: { title: 'Порядок', type: 'string' },
+        logo: {
+            title: 'Лого',
+            type: 'custom',
+            renderComponent: AvatarImgComponent,
+        },
+        name: { title: 'Название', type: 'text' },
+        categories: {
+            title: 'Категория',
+            type: 'text',
+            valuePrepareFunction: (value) =>
+                value.length > 0 ? value.map((item) => item.name) : '',
+        },
+        products: {
+            title: 'Продукт',
+            type: 'text',
+            valuePrepareFunction: (value) =>
+                value.length > 0 ? value.map((item) => item.name) : '',
+        },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(

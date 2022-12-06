@@ -1,0 +1,64 @@
+<div class="mt-5">
+    <div *ngIf="data.status === 'PhotoIdentificationProcess'" class="row">
+        <div class="col-md-4">
+            <ngx-confirm-buttons
+                (approveEvent)="approveUser()"
+                status="success"
+                title="Одобрить"
+            >
+            </ngx-confirm-buttons>
+        </div>
+        <div class="col-md-4">
+            <ngx-confirm-buttons
+                (approveEvent)="editUser()"
+                status="warning"
+                title="Редактировать"
+            >
+            </ngx-confirm-buttons>
+        </div>
+        <div class="col-md-4">
+            <ngx-confirm-buttons
+                (approveEvent)="declineUser()"
+                status="danger"
+                title="Отклонить"
+            >
+            </ngx-confirm-buttons>
+        </div>
+    </div>
+    <ng-container *ngIf="data.status === 'VideoIdentificationProcess'">
+        <button
+            (click)="startVideo()"
+            class="w-50 mx-auto d-flex mb-5"
+            nbButton
+            status="primary"
+        >
+            Начать видеозвонок
+        </button>
+        <div class="row">
+            <div class="col-md-4">
+                <ngx-confirm-buttons
+                    (approveEvent)="approveUser()"
+                    status="success"
+                    title="Одобрить"
+                >
+                </ngx-confirm-buttons>
+            </div>
+            <div class="col-md-4">
+                <ngx-confirm-buttons
+                    (approveEvent)="editUser()"
+                    status="warning"
+                    title="Запросить повторно"
+                >
+                </ngx-confirm-buttons>
+            </div>
+            <div class="col-md-4">
+                <ngx-confirm-buttons
+                    (approveEvent)="declineUser()"
+                    status="danger"
+                    title="Отклонить"
+                >
+                </ngx-confirm-buttons>
+            </div>
+        </div>
+    </ng-container>
+</div>

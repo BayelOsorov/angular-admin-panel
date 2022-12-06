@@ -1,17 +1,14 @@
 <nb-card>
-    <nb-card-header class="d-flex justify-content-between">
+    <nb-card-header>
         <strong>Акции и Промо</strong>
-        <!-- <ngx-input-search
-                (searchEvent)="onSearch($event)"
-                [placeholder]="'Название новости'"
-            >
-            </ngx-input-search> -->
-
-        <a routerLink="/catalog/partner-proms/create">
-            <button nbButton status="primary">Добавить</button>
-        </a>
+        <div class="d-flex justify-content-between mt-3">
+            <ngx-input-search (searchEvent)="onSearch($event)">
+            </ngx-input-search>
+            <a routerLink="/catalog/partner-proms/create">
+                <button nbButton status="primary">Добавить</button>
+            </a>
+        </div>
     </nb-card-header>
-
     <nb-card-body>
         <ngx-custom-table
             (changePageEvent)="getPartnerProms($event)"
