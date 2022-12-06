@@ -45,9 +45,8 @@ export class SearchSelectComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 if (data === null) {
-                    this.control.patchValue('');
+                    this.control.setValue('');
                 }
-
                 if (
                     Array.isArray(data) &&
                     data.some((item) => typeof item === 'object')

@@ -18,6 +18,7 @@
                             "
 >
     <ng-container *ngIf="!isLoading">
+        <nz-option *ngIf="!isRequired" nzValue="" nzLabel="Все"></nz-option>
         <nz-option
             *ngFor="let o of data"
             [nzValue]="o.id"

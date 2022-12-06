@@ -8,7 +8,6 @@ import { takeUntil } from 'rxjs/operators';
 import { IDetailBrand } from '../../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../../@core/services/catalog/categories/categories.service';
-import { toBase64 } from '../../../../@core/utils/toBase64';
 @Component({
     templateUrl: './actions-brand.component.html',
     styleUrls: ['./actions-brand.component.scss'],
@@ -19,9 +18,7 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
     brandId: number;
     submitted = false;
     categoryList = [];
-    isLoading = false;
     logoImg;
-    searchChange$ = new BehaviorSubject('');
 
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -62,7 +59,6 @@ export class ActionsBrandComponent implements OnInit, OnDestroy {
                     this.logoImg = data.logo;
                 });
         }
-        console.log(this.logoImg);
     }
     getCategories(name = '') {
         this.categoryService

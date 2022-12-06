@@ -96,12 +96,17 @@
 ::ng-deep .ant-select-clear {
     color: nb-theme(select-outline-basic-text-color);
     background-color: transparent !important;
+    right: 3%;
+    top: 43%;
+    width: 20px;
     &:hover {
         color: nb-theme(select-outline-basic-text-color);
     }
 }
 ::ng-deep
-    .ant-select-status-error.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input)
+    .ant-select-status-error.ant-select:not(.ant-select-disabled):not(
+        .ant-select-customize-input
+    )
     .ant-select-selector {
     background-color: nb-theme(input-danger-background-color);
     border-color: nb-theme(input-danger-border-color) !important;
