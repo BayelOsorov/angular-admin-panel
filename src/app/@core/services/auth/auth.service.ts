@@ -34,6 +34,7 @@ export class AuthService {
             );
         return isAuth;
     }
+
     login() {
         this.oidcSecurityService.authorize();
     }

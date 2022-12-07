@@ -113,7 +113,6 @@
                             *ngIf="partnerPromsId ? partnerPromsData : true"
                         >
                             <ngx-editor
-                                (changeEvent)="changeContent($event)"
                                 [submitted]="submitted"
                                 [data]="partnerPromsData?.hmtlBody"
                                 [control]="form.get('hmtlBody')"

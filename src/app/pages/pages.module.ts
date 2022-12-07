@@ -54,6 +54,9 @@ import { IdentificationDetailComponent } from './identification/operator/identif
 import { PartnerFeedbacksComponent } from './catalog/partner-feedbacks/partner-feedbacks.component';
 import { PartnerFeedbacksDetailComponent } from './catalog/partner-feedbacks/detail/partner-feedbacks-detail.component';
 import { NbDateFnsDateModule } from '@nebular/date-fns';
+import { GetCreditApplicationsComponent } from './credit-applications/credit-specialist/get-credit-applications/get-credit-applications.component';
+import { CreditApplicationDetailComponent } from './credit-applications/credit-specialist/detail/detail.component';
+
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
 };
@@ -113,6 +116,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         IdentificationDetailComponent,
         PartnerFeedbacksComponent,
         PartnerFeedbacksDetailComponent,
+        GetCreditApplicationsComponent,
+        CreditApplicationDetailComponent,
     ],
     providers: [
         {

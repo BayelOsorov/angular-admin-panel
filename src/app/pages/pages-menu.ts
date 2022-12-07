@@ -31,6 +31,33 @@ export const MENU_ITEMS: NbMenuItem[] = [
         ],
     },
     {
+        title: 'Заявки на кредит',
+        icon: 'credit-card-outline',
+        link: '/credit-application',
+        children: [
+            {
+                title: '0-0-3',
+                link: '/credit-application/0-0-3',
+            },
+            // {
+            //     title: '0-0-6',
+            //     link: '/credit-application/0-0-6',
+            // },
+            // {
+            //     title: '0-0-6',
+            //     link: '/credit-application/0-0-6',
+            // },
+            // {
+            //     title: '0-0-12',
+            //     link: '/credit-application/0-0-12',
+            // },
+            {
+                title: 'Топливная карта',
+                link: '/credit-application/fuel',
+            },
+        ],
+    },
+    {
         title: 'Сотрудники',
         icon: 'people',
         children: [
@@ -43,6 +70,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     {
         title: 'Партнеры',
         icon: 'edit-2-outline',
+        link: '/catalog',
         children: [
             {
                 title: 'Населенные пункты',

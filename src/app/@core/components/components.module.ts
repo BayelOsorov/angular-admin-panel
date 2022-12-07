@@ -51,6 +51,21 @@ import { MessengersComponent } from './catalog/partners/messengers/messengers.co
 import { MessengersActionsModalComponent } from './catalog/partners/messengers/messengers-actions-modal/messengers-actions-modal.component';
 import { TableComponent } from './table/table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { FusionChartComponent } from './fusion-chart/fusion-chart.component';
+import { FusionChartsModule } from 'angular-fusioncharts';
+
+// Load FusionCharts
+import * as FusionCharts from 'fusioncharts';
+
+// Load Widgets
+import * as Widgets from 'fusioncharts/fusioncharts.widgets';
+
+// Load FusionTheme Theme
+import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+
+// Add dependencies to FusionChartsModule
+FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
+
 @NgModule({
     imports: [
         CommonModule,
@@ -70,6 +85,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
         NzPaginationModule,
         NzSelectModule,
         CKEditorModule,
+        FusionChartsModule,
     ],
     declarations: [
         CreateStaffModalComponent,
@@ -104,6 +120,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
         MessengersComponent,
         MessengersActionsModalComponent,
         TableComponent,
+        FusionChartComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -131,6 +148,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
         ValidationInputComponent,
         MessengersComponent,
         TableComponent,
+        FusionChartComponent,
     ],
 })
 export class ComponentsModule {}

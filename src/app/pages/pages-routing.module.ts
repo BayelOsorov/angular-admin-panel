@@ -26,6 +26,9 @@ import { IdentificationDetailComponent } from './identification/operator/identif
 import { PartnerFeedbacksService } from '../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
 import { PartnerFeedbacksComponent } from './catalog/partner-feedbacks/partner-feedbacks.component';
 import { PartnerFeedbacksDetailComponent } from './catalog/partner-feedbacks/detail/partner-feedbacks-detail.component';
+import { PermissionsGuard } from '../@core/guards/permissions/permissions.guard';
+import { GetCreditApplicationsComponent } from './credit-applications/credit-specialist/get-credit-applications/get-credit-applications.component';
+import { CreditApplicationDetailComponent } from './credit-applications/credit-specialist/detail/detail.component';
 
 const routes: Routes = [
     {
@@ -43,118 +46,126 @@ const routes: Routes = [
             },
             // ! catalog
             {
-                path: 'catalog/brands',
-                component: BrandsComponent,
-            },
-            {
-                path: 'catalog/brands/create',
-                component: ActionsBrandComponent,
-            },
-            {
-                path: 'catalog/brands/update/:id',
-                component: ActionsBrandComponent,
-            },
-            {
-                path: 'catalog/partners',
-                component: ListPartnersComponent,
-            },
-            {
-                path: 'catalog/partners/:partnerId/branches/create',
-                component: ActionsPartnerBranchesComponent,
-            },
-            {
-                path: 'catalog/partners/:partnerId/branches/update/:branchId',
-                component: ActionsPartnerBranchesComponent,
+                path: 'catalog',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin', 'underrater'] },
+                children: [
+                    {
+                        path: 'brands',
+                        component: BrandsComponent,
+                    },
+                    {
+                        path: 'brands/create',
+                        component: ActionsBrandComponent,
+                    },
+                    {
+                        path: 'brands/update/:id',
+                        component: ActionsBrandComponent,
+                    },
+                    {
+                        path: 'partners',
+                        component: ListPartnersComponent,
+                    },
+                    {
+                        path: 'partners/:partnerId/branches/create',
+                        component: ActionsPartnerBranchesComponent,
+                    },
+                    {
+                        path: 'partners/:partnerId/branches/update/:branchId',
+                        component: ActionsPartnerBranchesComponent,
+                    },
+
+                    {
+                        path: 'partners/create',
+                        component: ActionsPartnerComponent,
+                    },
+                    {
+                        path: 'partners/update/:id',
+                        component: ActionsPartnerComponent,
+                    },
+                    {
+                        path: 'partners/detail/:id',
+                        component: DetailPartnerComponent,
+                    },
+                    {
+                        path: 'categories',
+                        component: CategoriesComponent,
+                    },
+                    {
+                        path: 'categories/create',
+                        component: ActionsCategoryComponent,
+                    },
+                    {
+                        path: 'categories/update/:id',
+                        component: ActionsCategoryComponent,
+                    },
+                    {
+                        path: 'tags',
+                        component: ListTagsComponent,
+                    },
+                    {
+                        path: 'products',
+                        component: ListProductsComponent,
+                    },
+                    {
+                        path: 'localities',
+                        component: LocalitiesComponent,
+                    },
+                    // ! Malls
+                    {
+                        path: 'malls',
+                        component: ListMallsComponent,
+                    },
+                    {
+                        path: 'malls/create',
+                        component: ActionsMallComponent,
+                    },
+                    {
+                        path: 'malls/update/:id',
+                        component: ActionsMallComponent,
+                    },
+                    {
+                        path: 'malls/detail/:id',
+                        component: DetailPartnerComponent,
+                    },
+                    // ! News
+                    {
+                        path: 'news',
+                        component: ListNewsComponent,
+                    },
+                    {
+                        path: 'news/create',
+                        component: ActionsNewsComponent,
+                    },
+                    {
+                        path: 'news/update/:id',
+                        component: ActionsNewsComponent,
+                    },
+                    // ! Partner Proms
+                    {
+                        path: 'partner-proms',
+                        component: ListPartnerPromsComponent,
+                    },
+                    {
+                        path: 'partner-proms/create',
+                        component: ActionsPartnerPromsComponent,
+                    },
+                    {
+                        path: 'partner-proms/update/:id',
+                        component: ActionsPartnerPromsComponent,
+                    },
+                    // ! Partner Feedbacks
+                    {
+                        path: 'partner-feedbacks',
+                        component: PartnerFeedbacksComponent,
+                    },
+                    {
+                        path: 'partner-feedbacks/detail/:id',
+                        component: PartnerFeedbacksDetailComponent,
+                    },
+                ],
             },
 
-            {
-                path: 'catalog/partners/create',
-                component: ActionsPartnerComponent,
-            },
-            {
-                path: 'catalog/partners/update/:id',
-                component: ActionsPartnerComponent,
-            },
-            {
-                path: 'catalog/partners/detail/:id',
-                component: DetailPartnerComponent,
-            },
-            {
-                path: 'catalog/categories',
-                component: CategoriesComponent,
-            },
-            {
-                path: 'catalog/categories/create',
-                component: ActionsCategoryComponent,
-            },
-            {
-                path: 'catalog/categories/update/:id',
-                component: ActionsCategoryComponent,
-            },
-            {
-                path: 'catalog/tags',
-                component: ListTagsComponent,
-            },
-            {
-                path: 'catalog/products',
-                component: ListProductsComponent,
-            },
-            {
-                path: 'catalog/localities',
-                component: LocalitiesComponent,
-            },
-            // ! Malls
-            {
-                path: 'catalog/malls',
-                component: ListMallsComponent,
-            },
-            {
-                path: 'catalog/malls/create',
-                component: ActionsMallComponent,
-            },
-            {
-                path: 'catalog/malls/update/:id',
-                component: ActionsMallComponent,
-            },
-            {
-                path: 'catalog/malls/detail/:id',
-                component: DetailPartnerComponent,
-            },
-            // ! News
-            {
-                path: 'catalog/news',
-                component: ListNewsComponent,
-            },
-            {
-                path: 'catalog/news/create',
-                component: ActionsNewsComponent,
-            },
-            {
-                path: 'catalog/news/update/:id',
-                component: ActionsNewsComponent,
-            },
-            // ! Partner Proms
-            {
-                path: 'catalog/partner-proms',
-                component: ListPartnerPromsComponent,
-            },
-            {
-                path: 'catalog/partner-proms/create',
-                component: ActionsPartnerPromsComponent,
-            },
-            {
-                path: 'catalog/partner-proms/update/:id',
-                component: ActionsPartnerPromsComponent,
-            },
-            // ! Partner Feedbacks
-            {
-                path: 'catalog/partner-feedbacks',
-                component: PartnerFeedbacksComponent,
-            },
-            {
-                path: 'catalog/partner-feedbacks/detail/:id',
-                component: PartnerFeedbacksDetailComponent,
-            },
             // ! Identification
             {
                 path: 'identification/photo',
@@ -167,6 +178,25 @@ const routes: Routes = [
             {
                 path: 'identification/detail/:id',
                 component: IdentificationDetailComponent,
+            },
+            {
+                path: 'credit-application',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin', 'credit-specialist'] },
+                children: [
+                    {
+                        path: '0-0-3',
+                        component: GetCreditApplicationsComponent,
+                    },
+                    {
+                        path: '0-0-3/detail/:id',
+                        component: CreditApplicationDetailComponent,
+                    },
+                    {
+                        path: 'fuel',
+                        component: GetCreditApplicationsComponent,
+                    },
+                ],
             },
             {
                 path: '',

@@ -36,7 +36,8 @@ export class EditorComponent implements OnInit {
 
     public onChange({ editor }: ChangeEvent) {
         const data = editor.getData();
-        this.changeEvent.emit(data);
+        this.control.setValue(data);
+        // this.changeEvent.emit(data);
     }
     ngOnInit(): void {}
 }

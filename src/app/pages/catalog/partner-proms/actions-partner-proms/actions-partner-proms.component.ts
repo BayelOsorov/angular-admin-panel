@@ -60,11 +60,6 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
         }
     }
 
-    changeContent(data) {
-        this.form.patchValue({
-            hmtlBody: data,
-        });
-    }
     getPartners(name = '') {
         this.partnerService
             .getListPartners(1, name)

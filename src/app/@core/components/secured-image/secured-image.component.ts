@@ -6,7 +6,7 @@ import {
     PipeTransform,
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, of, Subscription } from 'rxjs';
 import {
     distinctUntilChanged,
     filter,
@@ -14,7 +14,6 @@ import {
     switchMap,
     tap,
 } from 'rxjs/operators';
-import { Url } from 'url';
 
 @Pipe({
     name: 'useHttpImgSrc',
