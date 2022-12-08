@@ -1,16 +1,19 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+    NbAccordionModule,
     NbAlertModule,
     NbButtonModule,
     NbCardModule,
     NbDatepickerModule,
+    NbIconModule,
     NbInputModule,
     NbListModule,
     NbPopoverModule,
     NbSelectModule,
     NbStepperModule,
     NbTimepickerModule,
+    NbTreeGridModule,
 } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -63,6 +66,12 @@ import * as Widgets from 'fusioncharts/fusioncharts.widgets';
 
 // Load FusionTheme Theme
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { CreditApplicationMoreInfoComponent } from './credit-application/more-info/more-info.component';
+import {
+    FsIconComponent,
+    KibComponent,
+} from './credit-application/kib/kib.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -86,7 +95,11 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         NzPaginationModule,
         NzSelectModule,
         CKEditorModule,
+        NbTreeGridModule,
         FusionChartsModule,
+        NbAccordionModule,
+        NbIconModule,
+        NbEvaIconsModule,
     ],
     declarations: [
         CreateStaffModalComponent,
@@ -123,6 +136,9 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         TableComponent,
         FusionChartComponent,
         CreditApplicationDetailInfoComponent,
+        CreditApplicationMoreInfoComponent,
+        KibComponent,
+        FsIconComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -152,6 +168,9 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         TableComponent,
         FusionChartComponent,
         CreditApplicationDetailInfoComponent,
+        CreditApplicationMoreInfoComponent,
+        KibComponent,
+        FsIconComponent,
     ],
 })
 export class ComponentsModule {}

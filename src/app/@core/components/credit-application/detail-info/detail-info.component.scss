@@ -1,0 +1,19 @@
+.detail-info {
+    p {
+        margin-bottom: 0;
+    }
+    .status {
+        nb-alert {
+            padding: 5px 25px 5px 25px;
+        }
+        // height: 55px;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+    .alerts {
+        p {
+            width: 80%;
+        }
+    }
+}
