@@ -53,6 +53,7 @@ import { TableComponent } from './table/table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FusionChartComponent } from './fusion-chart/fusion-chart.component';
 import { FusionChartsModule } from 'angular-fusioncharts';
+import { CreditApplicationDetailInfoComponent } from './credit-application/detail-info/detail-info.component';
 
 // Load FusionCharts
 import * as FusionCharts from 'fusioncharts';
@@ -121,6 +122,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         MessengersActionsModalComponent,
         TableComponent,
         FusionChartComponent,
+        CreditApplicationDetailInfoComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -149,6 +151,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         MessengersComponent,
         TableComponent,
         FusionChartComponent,
+        CreditApplicationDetailInfoComponent,
     ],
 })
 export class ComponentsModule {}

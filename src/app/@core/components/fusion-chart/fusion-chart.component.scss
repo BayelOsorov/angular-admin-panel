@@ -1,9 +1,5 @@
-.highcharts-data-labels {
-    display: none !important;
-}
-.highcharts-solidgauge-series {
-}
-.chart-load-app {
-    width: 100%;
-    height: 400px;
+@import '../../../@theme/styles/themes';
+
+::ng-deep rect[fill] {
+    fill: nb-theme(background-basic-color-1);
 }

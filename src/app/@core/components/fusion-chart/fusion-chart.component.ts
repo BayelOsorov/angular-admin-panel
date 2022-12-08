@@ -14,7 +14,7 @@ export class FusionChartComponent implements OnInit {
             showValue: '1',
             theme: 'fusion',
             showToolTip: '0',
-            bgColor: '#222b45',
+            // bgColor: '#222b45',
         },
 
         colorRange: {
