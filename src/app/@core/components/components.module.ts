@@ -72,6 +72,13 @@ import {
     FsIconComponent,
     KibComponent,
 } from './credit-application/kib/kib.component';
+import { SocFondComponent } from './credit-application/soc-fond/soc-fond.component';
+import { IdentificationFilesComponent } from './identification/identification-files/identification-files.component';
+import { PassportDataComponent } from './credit-application/passport-data/passport-data.component';
+import { AdditionalInfoComponent } from './credit-application/additional-info/additional-info.component';
+import { UpdateAmountComponent } from './credit-application/update-amount/update-amount.component';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { DemoNgZorroAntdModule } from '../utils/ng-zorro-antd.module';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -99,6 +106,8 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         FusionChartsModule,
         NbAccordionModule,
         NbIconModule,
+        NzSliderModule,
+        DemoNgZorroAntdModule,
         NbEvaIconsModule,
     ],
     declarations: [
@@ -139,6 +148,11 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         CreditApplicationMoreInfoComponent,
         KibComponent,
         FsIconComponent,
+        SocFondComponent,
+        IdentificationFilesComponent,
+        PassportDataComponent,
+        AdditionalInfoComponent,
+        UpdateAmountComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -171,6 +185,11 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         CreditApplicationMoreInfoComponent,
         KibComponent,
         FsIconComponent,
+        SocFondComponent,
+        IdentificationFilesComponent,
+        PassportDataComponent,
+        AdditionalInfoComponent,
+        UpdateAmountComponent,
     ],
 })
 export class ComponentsModule {}

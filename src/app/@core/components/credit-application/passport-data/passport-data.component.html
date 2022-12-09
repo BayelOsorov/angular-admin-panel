@@ -1,0 +1,72 @@
+<nb-accordion multi>
+    <nb-accordion-item>
+        <nb-accordion-item-header class="justify-content-center">
+            Пасспортные данные
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+            <table class="w-100">
+                <tr>
+                    <td>ПИН</td>
+                    <td>{{ personalData.pin }}</td>
+                </tr>
+                <tr>
+                    <td>Имя</td>
+                    <td>{{ personalData.name }}</td>
+                </tr>
+                <tr>
+                    <td>Фамилия</td>
+                    <td>{{ personalData.surname }}</td>
+                </tr>
+                <tr>
+                    <td>Отчество</td>
+                    <td>{{ personalData.patronymic }}</td>
+                </tr>
+                <tr>
+                    <td>Пол</td>
+                    <td>{{ personalData.gender }}</td>
+                </tr>
+                <tr>
+                    <td>Дата рождения</td>
+                    <td>{{ personalData.birthDate | date : 'dd.MM.yyyy' }}</td>
+                </tr>
+                <tr>
+                    <td>Семейное положение</td>
+                    <td>
+                        {{ personalData.maritalStatus }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Адрес прописки</td>
+                    <td>{{ personalData.residenceAddress }}</td>
+                </tr>
+                <tr>
+                    <td>Паспорт</td>
+                    <td>
+                        {{
+                            personalData.passportType +
+                                ' ' +
+                                personalData.documentNumber
+                        }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Дата выдачи</td>
+                    <td>
+                        {{ personalData.dateOfIssue | date : 'dd.MM.yyyy' }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Кем выдан</td>
+                    <td>{{ personalData.authority }}</td>
+                </tr>
+                <tr>
+                    <td>Срок действия паспорта</td>
+                    <td>
+                        {{ personalData.dateOfExpiry | date : 'dd.MM.yyyy' }}
+                    </td>
+                </tr>
+            </table>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>
