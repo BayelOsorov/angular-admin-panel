@@ -1,0 +1,21 @@
+<div class="comments">
+    <div class="send-message w-100">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <textarea
+                fullWidth
+                formControlName="comment"
+                placeholder="Введите сообщение..."
+                nbInput
+                rows="2"
+            ></textarea>
+            <button
+                class="d-flex mx-auto"
+                type="submit"
+                nbButton
+                status="primary"
+            >
+                Отправить
+            </button>
+        </form>
+    </div>
+</div>

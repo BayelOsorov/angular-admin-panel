@@ -9,15 +9,17 @@ import { NzMarks } from 'ng-zorro-antd/slider';
 })
 export class UpdateAmountComponent implements OnInit {
     marks: NzMarks = {
-        1: '5000',
-        26: '26°C',
-        37: '37°C',
-        1000: {
-            style: {
-                color: '#f50',
-            },
-            label: '<strong>100°C</strong>',
-        },
+        5000: '5000',
+        6000: '6000',
+        7000: '7000',
+        8000: '8000',
+        9000: '9000',
+        10000: '10000',
+        11000: '11000',
+        12000: '12000',
+        13000: '13000',
+        14000: '14000',
+        15000: '15000',
     };
     constructor() {}
 

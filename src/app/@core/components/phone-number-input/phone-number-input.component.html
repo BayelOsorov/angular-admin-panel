@@ -1,0 +1,29 @@
+<div class="d-flex">
+    <span
+        [ngClass]=" submitted && control.errors?.['required']
+                                    ? 'validation'
+                                    : ''
+                            "
+        class="input-group-text"
+        id="basic-addon1"
+        >+996</span
+    >
+
+    <input
+        aria-describedby="basic-addon1"
+        class="custom-input-mask"
+        type="tel"
+        fullWidth
+        nbInput
+        maxlength="12"
+        id="exampleInputEmail1"
+        placeholder="555 55 55 55"
+        (keydown)="handlePhone($event)"
+        [formControl]="control"
+        [status]="
+                    isRequired && submitted && control.errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                                    "
+    />
+</div>

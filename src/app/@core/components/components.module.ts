@@ -79,6 +79,8 @@ import { AdditionalInfoComponent } from './credit-application/additional-info/ad
 import { UpdateAmountComponent } from './credit-application/update-amount/update-amount.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { DemoNgZorroAntdModule } from '../utils/ng-zorro-antd.module';
+import { CommentsComponent } from './credit-application/comments/comments.component';
+import { PhoneNumberInputComponent } from './phone-number-input/phone-number-input.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -153,6 +155,8 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         PassportDataComponent,
         AdditionalInfoComponent,
         UpdateAmountComponent,
+        CommentsComponent,
+        PhoneNumberInputComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -190,6 +194,8 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         PassportDataComponent,
         AdditionalInfoComponent,
         UpdateAmountComponent,
+        CommentsComponent,
+        PhoneNumberInputComponent,
     ],
 })
 export class ComponentsModule {}

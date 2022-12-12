@@ -56,6 +56,8 @@ import { PartnerFeedbacksDetailComponent } from './catalog/partner-feedbacks/det
 import { NbDateFnsDateModule } from '@nebular/date-fns';
 import { GetCreditApplicationsComponent } from './credit-applications/credit-specialist/get-credit-applications/get-credit-applications.component';
 import { CreditApplicationDetailComponent } from './credit-applications/credit-specialist/detail/detail.component';
+import { ListContragentsComponent } from './catalog/contragents/list-contragents/list-contragents.component';
+import { ActionsLegalContractorComponent } from './catalog/contragents/actions-Iegal-contractors/actions-legal-contractors.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -119,6 +121,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         PartnerFeedbacksDetailComponent,
         GetCreditApplicationsComponent,
         CreditApplicationDetailComponent,
+        ListContragentsComponent,
+        ActionsLegalContractorComponent,
     ],
     providers: [
         {
@@ -129,5 +133,6 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
 
         UseHttpImageSourcePipe,
     ],
+    exports: [ListContragentsComponent],
 })
 export class PagesModule {}

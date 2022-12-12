@@ -29,6 +29,8 @@ import { PartnerFeedbacksDetailComponent } from './catalog/partner-feedbacks/det
 import { PermissionsGuard } from '../@core/guards/permissions/permissions.guard';
 import { GetCreditApplicationsComponent } from './credit-applications/credit-specialist/get-credit-applications/get-credit-applications.component';
 import { CreditApplicationDetailComponent } from './credit-applications/credit-specialist/detail/detail.component';
+import { ListContragentsComponent } from './catalog/contragents/list-contragents/list-contragents.component';
+import { ActionsLegalContractorComponent } from './catalog/contragents/actions-Iegal-contractors/actions-legal-contractors.component';
 
 const routes: Routes = [
     {
@@ -50,6 +52,21 @@ const routes: Routes = [
                 canActivate: [PermissionsGuard],
                 data: { roles: ['admin', 'underrater'] },
                 children: [
+                    // ! Contragents
+                    {
+                        path: 'contragents',
+                        children: [
+                            {
+                                path: 'list',
+                                component: ListContragentsComponent,
+                            },
+                            {
+                                path: 'legal-contractors/create',
+                                component: ActionsLegalContractorComponent,
+                            },
+                        ],
+                    },
+                    // ! Brands
                     {
                         path: 'brands',
                         component: BrandsComponent,

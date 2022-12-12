@@ -1,0 +1,7 @@
+@import '../../../../@theme/styles/themes';
+::ng-deep .ant-slider-mark-text {
+    color: nb-theme(card-text-color);
+}
+::ng-deep .ant-slider-track {
+    background-color: nb-theme(alert-info-background-color);
+}
