@@ -10,14 +10,15 @@
     >
 
     <input
+        #input
         aria-describedby="basic-addon1"
         class="custom-input-mask"
         type="tel"
         fullWidth
         nbInput
         maxlength="12"
-        (input)="onChange($event.target.value)"
-        [value]="value"
+        (ngModelChange)="onChange($event)"
+        [(ngModel)]="value"
         id="exampleInputEmail1"
         placeholder="555 55 55 55"
         (keydown)="handlePhone($event)"

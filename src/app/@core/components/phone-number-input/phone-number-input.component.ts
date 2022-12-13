@@ -3,6 +3,9 @@ import {
     OnInit,
     ChangeDetectionStrategy,
     Input,
+    ViewChild,
+    ElementRef,
+    AfterViewInit,
 } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
@@ -16,6 +19,7 @@ export class PhoneNumberInputComponent implements OnInit {
     @Input() control: AbstractControl = new FormControl();
     @Input() submitted = false;
     @Input() isRequired = true;
+    @ViewChild('input') input: ElementRef;
     value = '';
     constructor() {}
     handlePhone(num) {
@@ -46,8 +50,9 @@ export class PhoneNumberInputComponent implements OnInit {
         this.control.valueChanges.subscribe((val: string) => {
             if (val.includes('+996') && !this.value) {
                 this.value = val.replace('+996', '');
+                this.input.nativeElement.focus();
+                this.input.nativeElement.blur();
             }
-            console.log(this.value);
         });
     }
 }
