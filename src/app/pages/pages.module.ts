@@ -88,7 +88,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ComponentsModule,
         NbDatepickerModule,
         NbPopoverModule,
-        NbDateFnsDateModule,
+        NbDateFnsDateModule.forRoot({ format: 'dd.MM.yyyy' }),
         NbTreeGridModule,
         // NbIconModule,
         // NbEvaIconsModule,

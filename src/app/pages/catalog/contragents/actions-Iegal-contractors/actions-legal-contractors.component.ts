@@ -11,11 +11,12 @@ import { LegalContractorsService } from '../../../../@core/services/contragents/
 })
 export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
     form: FormGroup;
-    nameImg;
-    newsId;
-    newsData;
+    legalContractorId;
+    legalContractorData;
     submitted = false;
-    products = [];
+    beneficiaries = [];
+    legalBeneficiary = 'legalBeneficiary';
+    individualBeneficiary = 'individualBeneficiary';
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private fb: FormBuilder,
@@ -27,11 +28,19 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         this.submitted = true;
+        console.log(this.form);
+
         if (this.form.valid) {
-            if (this.newsData) {
+            const newBeneficiares = this.beneficiaries.map((item) => ({
+                [item.type]: {
+                    ...item.form.value,
+                },
+            }));
+            if (this.legalContractorData) {
                 this.legalContractorsService
-                    .editLegalContractor(this.newsData.id, {
+                    .editLegalContractor(this.legalContractorData.id, {
                         ...this.form.value,
+                        beneficiaries: newBeneficiares,
                     })
                     .pipe(takeUntil(this.destroy$))
                     .subscribe((res) => {
@@ -44,6 +53,7 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
             this.legalContractorsService
                 .createLegalContractor({
                     ...this.form.value,
+                    beneficiaries: newBeneficiares,
                 })
                 .pipe(takeUntil(this.destroy$))
                 .subscribe((res) => {
@@ -52,7 +62,67 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
                 });
         }
     }
+    addIPBeneficiares() {
+        const ipForm = this.fb.group({
+            surname: ['', Validators.required],
+            name: ['', Validators.required],
+            fatherName: ['', Validators.required],
+            birthday: ['', Validators.required],
+            birthplace: ['', Validators.required],
+            nationality: ['', Validators.required],
+            gender: ['', Validators.required],
+            citizenship: ['', Validators.required],
+            familyStatus: ['', Validators.required],
+            passportNo: ['', Validators.required],
+            dateOfIssue: ['', Validators.required],
+            dateOfExpiration: ['', Validators.required],
+            authority: ['', Validators.required],
+            pin: ['', Validators.required],
+            phoneNumber: ['', Validators.required],
+            bankAccount: ['', Validators.required],
+            position: ['', Validators.required],
+            appointmentDate: ['', Validators.required],
+            releaseDate: ['', Validators.required],
+            type: ['', Validators.required],
+        });
 
+        this.beneficiaries.push({
+            form: ipForm,
+            id: Date.now(),
+            type: this.individualBeneficiary,
+        });
+    }
+    addLegalBeneficiares() {
+        const legalForm = this.fb.group({
+            name: ['', Validators.required],
+            tin: ['', Validators.required],
+            okpo: ['', [Validators.required, Validators.maxLength(256)]],
+            legalAddress: [
+                '',
+                [Validators.required, Validators.maxLength(256)],
+            ],
+            actualAddress: [
+                '',
+                [Validators.required, Validators.maxLength(256)],
+            ],
+            foundingDate: ['', [Validators.required]],
+            manager: ['', [Validators.required, Validators.maxLength(256)]],
+            type: ['', Validators.required],
+        });
+        this.beneficiaries.push({
+            form: legalForm,
+            id: Date.now(),
+            type: this.legalBeneficiary,
+        });
+    }
+    onSelect(val) {
+        console.log(val);
+    }
+    deleteBeneficary(id) {
+        this.beneficiaries = this.beneficiaries.filter(
+            (item) => item.id !== id
+        );
+    }
     ngOnInit(): void {
         this.form = this.fb.group({
             name: ['', Validators.required],
@@ -71,21 +141,18 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
             managerId: ['', [Validators.required, Validators.maxLength(256)]],
             phone: ['', [Validators.required, Validators.maxLength(256)]],
             bic: ['', [Validators.required, Validators.maxLength(256)]],
-            beneficiaries: [
-                '',
-                [Validators.required, Validators.maxLength(256)],
-            ],
+            beneficiaries: [[]],
         });
         this.route.params.subscribe((params) => {
-            this.newsId = params['id'];
+            this.legalContractorId = params['id'];
         });
-        if (this.newsId) {
+        if (this.legalContractorId) {
             this.legalContractorsService
-                .getDetailLegalContractor(this.newsId)
+                .getDetailLegalContractor(this.legalContractorId)
                 .pipe(takeUntil(this.destroy$))
                 .subscribe({
                     next: (data) => {
-                        this.newsData = data;
+                        this.legalContractorData = data;
                         this.form.controls['tin'].setValue(data.tin);
                         this.form.controls['name'].setValue(data.name);
 

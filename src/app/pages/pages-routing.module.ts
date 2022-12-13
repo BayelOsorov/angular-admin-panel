@@ -46,26 +46,25 @@ const routes: Routes = [
                 path: 'staff-detail/:id',
                 component: DetailStaffComponent,
             },
-            // ! catalog
+            // ! Contragents
+            {
+                path: 'contragents',
+                children: [
+                    {
+                        path: 'list',
+                        component: ListContragentsComponent,
+                    },
+                    {
+                        path: 'legal-contractors/create',
+                        component: ActionsLegalContractorComponent,
+                    },
+                ],
+            },
             {
                 path: 'catalog',
                 canActivate: [PermissionsGuard],
                 data: { roles: ['admin', 'underrater'] },
                 children: [
-                    // ! Contragents
-                    {
-                        path: 'contragents',
-                        children: [
-                            {
-                                path: 'list',
-                                component: ListContragentsComponent,
-                            },
-                            {
-                                path: 'legal-contractors/create',
-                                component: ActionsLegalContractorComponent,
-                            },
-                        ],
-                    },
                     // ! Brands
                     {
                         path: 'brands',

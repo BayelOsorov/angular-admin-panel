@@ -16,14 +16,17 @@
         fullWidth
         nbInput
         maxlength="12"
+        (input)="onChange($event.target.value)"
+        [value]="value"
         id="exampleInputEmail1"
         placeholder="555 55 55 55"
         (keydown)="handlePhone($event)"
-        [formControl]="control"
         [status]="
-                    isRequired && submitted && control.errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'
-                                    "
+        isRequired && submitted && control.errors?.['required']
+        ? 'danger'
+        : 'basic'
+        "
     />
 </div>
+
+<!-- [formControl]="control" -->

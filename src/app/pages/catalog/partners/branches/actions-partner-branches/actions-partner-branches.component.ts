@@ -72,9 +72,6 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                 phoneNumber,
             } = this.form.value;
             const data = {
-                phoneNumber: phoneNumber
-                    ? '+996' + phoneNumber.replaceAll(' ', '')
-                    : null,
                 location: {
                     type: 'Point',
                     coordinates: location,
@@ -173,25 +170,6 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                 this.malls = data.items;
             });
     }
-
-    handlePhone(num) {
-        const txt = num.key;
-
-        if ((txt.length === 12 || num.which === 32) && num.which !== 8) {
-            num.preventDefault();
-        }
-
-        if (
-            (this.form.controls.phoneNumber.value.length === 3 ||
-                this.form.controls.phoneNumber.value.length === 6 ||
-                this.form.controls.phoneNumber.value.length === 9) &&
-            num.which !== 8
-        ) {
-            this.form.patchValue({
-                phoneNumber: this.form.controls.phoneNumber.value + ' ',
-            });
-        }
-    }
     setTimes() {
         const {
             workingHourStart_1,
@@ -288,7 +266,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                         this.form.controls['name'].setValue(data.name);
                         this.form.controls['mallId'].setValue(data.mallId);
                         this.form.controls['phoneNumber'].setValue(
-                            data.phoneNumber.replace('+996', '')
+                            data.phoneNumber
                         );
                         this.form.controls['location'].setValue(
                             data.location.coordinates

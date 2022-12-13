@@ -68,14 +68,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         ],
     },
     {
+        title: 'Партнеры',
+        icon: 'keypad',
+        children: [
+            {
+                title: 'Партнеры',
+                link: '/contragents/list',
+            },
+        ],
+    },
+    {
         title: 'Каталог партнера',
         icon: 'edit-2-outline',
         link: '/catalog',
         children: [
-            {
-                title: 'Контрагенты',
-                link: '/catalog/contragents/list',
-            },
             {
                 title: 'Населенные пункты',
                 link: '/catalog/localities',

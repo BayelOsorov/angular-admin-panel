@@ -16,10 +16,10 @@ export class PhoneNumberInputComponent implements OnInit {
     @Input() control: AbstractControl = new FormControl();
     @Input() submitted = false;
     @Input() isRequired = true;
+    value = '';
     constructor() {}
     handlePhone(num) {
         const txt = num.key;
-
         if ((txt.length === 12 || num.which === 32) && num.which !== 8) {
             num.preventDefault();
         }
@@ -30,10 +30,24 @@ export class PhoneNumberInputComponent implements OnInit {
                 this.control.value.length === 9) &&
             num.which !== 8
         ) {
-            console.log();
-
-            this.control.patchValue(this.control.value + ' ');
+            this.value = this.control.value + ' ';
         }
     }
-    ngOnInit(): void {}
+    onChange(val) {
+        this.value = val;
+        this.control.setValue(val);
+        if (this.control.value.length === 12) {
+            this.control.patchValue(
+                '+996' + this.control.value.replaceAll(' ', '')
+            );
+        }
+    }
+    ngOnInit(): void {
+        this.control.valueChanges.subscribe((val: string) => {
+            if (val.includes('+996') && !this.value) {
+                this.value = val.replace('+996', '');
+            }
+            console.log(this.value);
+        });
+    }
 }
