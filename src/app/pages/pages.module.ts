@@ -26,7 +26,6 @@ import { DetailStaffComponent } from './staff/detail-staff/detail-staff.componen
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { BrandsComponent } from './catalog/brands/brands.component';
-import { InputSearchComponent } from '../@core/components/input-search/input-search.component';
 import { ListPartnersComponent } from './catalog/partners/list-partners/list-partners.component';
 import { ActionsPartnerComponent } from './catalog/partners/actions-partner/actions-partner.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -36,7 +35,6 @@ import { ComponentsModule } from '../@core/components/components.module';
 import { ListTagsComponent } from './catalog/taggs/list-tags/list-tags.component';
 import { ListProductsComponent } from './catalog/products/list-products/list-products.component';
 import { DetailPartnerComponent } from './catalog/partners/detail-partner/detail-partner.component';
-import { UseHttpImageSourcePipe } from '../@core/components/secured-image/secured-image.component';
 import { LocalitiesComponent } from './catalog/localities/localities.component';
 import { ListMallsComponent } from './catalog/malls/list-malls/list-malls.component';
 import { ActionsMallComponent } from './catalog/malls/actions-mall/actions-mall.component';
@@ -57,7 +55,10 @@ import { NbDateFnsDateModule } from '@nebular/date-fns';
 import { GetCreditApplicationsComponent } from './credit-applications/credit-specialist/get-credit-applications/get-credit-applications.component';
 import { CreditApplicationDetailComponent } from './credit-applications/credit-specialist/detail/detail.component';
 import { ListContragentsComponent } from './catalog/contragents/list-contragents/list-contragents.component';
-import { ActionsLegalContractorComponent } from './catalog/contragents/actions-Iegal-contractors/actions-legal-contractors.component';
+import { ActionsLegalContractorComponent } from './catalog/contragents/legal-contractor/actions-Iegal-contractors/actions-legal-contractors.component';
+import { LegalContractorDetailComponent } from './catalog/contragents/legal-contractor/legal-contractor-detail/legal-contractor-detail.component';
+import { UseHttpImageSourcePipe } from '../@core/components/shared/secured-image/secured-image.component';
+import { InputSearchComponent } from '../@core/components/shared/input-search/input-search.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -88,7 +89,11 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ComponentsModule,
         NbDatepickerModule,
         NbPopoverModule,
-        NbDateFnsDateModule.forRoot({ format: 'dd.MM.yyyy' }),
+        NbDateFnsDateModule.forRoot({
+            format: 'dd.MM.yyyy',
+            parseOptions: { awareOfUnicodeTokens: false },
+            formatOptions: { awareOfUnicodeTokens: false },
+        }),
         NbTreeGridModule,
         // NbIconModule,
         // NbEvaIconsModule,
@@ -123,6 +128,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         CreditApplicationDetailComponent,
         ListContragentsComponent,
         ActionsLegalContractorComponent,
+        LegalContractorDetailComponent,
     ],
     providers: [
         {
@@ -133,6 +139,6 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
 
         UseHttpImageSourcePipe,
     ],
-    exports: [ListContragentsComponent],
+    exports: [],
 })
 export class PagesModule {}

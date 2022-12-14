@@ -9,3 +9,14 @@ export interface IDetailLegalContractor {
     bic: string;
     phone: string;
 }
+export interface IDetailLegalContractorEmployee {
+    id: number;
+    name: string;
+    userId: string;
+    position: string;
+}
+export interface IDetailLegalContractorBeneficiary {
+    id: number;
+    name: string;
+    type: string;
+}

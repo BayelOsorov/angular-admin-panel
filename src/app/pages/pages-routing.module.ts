@@ -30,7 +30,8 @@ import { PermissionsGuard } from '../@core/guards/permissions/permissions.guard'
 import { GetCreditApplicationsComponent } from './credit-applications/credit-specialist/get-credit-applications/get-credit-applications.component';
 import { CreditApplicationDetailComponent } from './credit-applications/credit-specialist/detail/detail.component';
 import { ListContragentsComponent } from './catalog/contragents/list-contragents/list-contragents.component';
-import { ActionsLegalContractorComponent } from './catalog/contragents/actions-Iegal-contractors/actions-legal-contractors.component';
+import { ActionsLegalContractorComponent } from './catalog/contragents/legal-contractor/actions-Iegal-contractors/actions-legal-contractors.component';
+import { LegalContractorDetailComponent } from './catalog/contragents/legal-contractor/legal-contractor-detail/legal-contractor-detail.component';
 
 const routes: Routes = [
     {
@@ -55,8 +56,17 @@ const routes: Routes = [
                         component: ListContragentsComponent,
                     },
                     {
-                        path: 'legal-contractors/create',
-                        component: ActionsLegalContractorComponent,
+                        path: 'legal-contractors',
+                        children: [
+                            {
+                                path: 'create',
+                                component: ActionsLegalContractorComponent,
+                            },
+                            {
+                                path: 'detail/:id',
+                                component: LegalContractorDetailComponent,
+                            },
+                        ],
                     },
                 ],
             },

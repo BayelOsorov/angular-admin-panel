@@ -1,0 +1,10 @@
+@import '../../../../@theme/styles/themes';
+::ng-deep ng2-smart-table thead th {
+    text-align: center;
+}
+::ng-deep ng2-smart-table tbody > tr > td {
+    text-align: center;
+}
+.text {
+    color: nb-theme(text-basic-color);
+}
