@@ -85,6 +85,9 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
 import { ContragentsDetailComponent } from './contragents/contragents-detail/contragents-detail.component';
 import { BeneficiaresComponent } from './contragents/beneficiares/beneficiares.component';
 import { EmployeesComponent } from './contragents/employees/employees.component';
+import { BeneficiaresActionsComponent } from './contragents/beneficiares/beneficiares-actions-modal/beneficiares-actions.component';
+import { LegalContractorBeneficiaryActionsComponent } from './contragents/beneficiares/legal-contractor-beneficiary-actions/legal-contractor-beneficiary-actions.component';
+import { LegalContragentActionsModalComponent } from './contragents/employees/legal-contragent-actions-modal/legal-contragent-actions-modal.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -165,6 +168,9 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         ContragentsDetailComponent,
         BeneficiaresComponent,
         EmployeesComponent,
+        BeneficiaresActionsComponent,
+        LegalContractorBeneficiaryActionsComponent,
+        LegalContragentActionsModalComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -207,6 +213,9 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         PhoneNumberInputComponent,
         BeneficiaresComponent,
         EmployeesComponent,
+        BeneficiaresActionsComponent,
+        LegalContractorBeneficiaryActionsComponent,
+        LegalContragentActionsModalComponent,
     ],
 })
 export class ComponentsModule {}

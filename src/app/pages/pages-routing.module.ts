@@ -32,6 +32,7 @@ import { CreditApplicationDetailComponent } from './credit-applications/credit-s
 import { ListContragentsComponent } from './catalog/contragents/list-contragents/list-contragents.component';
 import { ActionsLegalContractorComponent } from './catalog/contragents/legal-contractor/actions-Iegal-contractors/actions-legal-contractors.component';
 import { LegalContractorDetailComponent } from './catalog/contragents/legal-contractor/legal-contractor-detail/legal-contractor-detail.component';
+import { ActionsBeneficiaryLegalContractorComponent } from './catalog/contragents/legal-contractor/actions-beneficiary-legal-contractor/actions-beneficiary-legal-contractor.component';
 
 const routes: Routes = [
     {
@@ -65,6 +66,16 @@ const routes: Routes = [
                             {
                                 path: 'detail/:id',
                                 component: LegalContractorDetailComponent,
+                            },
+                            {
+                                path: 'detail/:id/beneficiaries/create',
+                                component:
+                                    ActionsBeneficiaryLegalContractorComponent,
+                            },
+                            {
+                                path: 'detail/:id/beneficiaries/update/:itemId',
+                                component:
+                                    ActionsBeneficiaryLegalContractorComponent,
                             },
                         ],
                     },

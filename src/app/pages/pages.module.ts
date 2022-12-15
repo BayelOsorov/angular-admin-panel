@@ -59,6 +59,7 @@ import { ActionsLegalContractorComponent } from './catalog/contragents/legal-con
 import { LegalContractorDetailComponent } from './catalog/contragents/legal-contractor/legal-contractor-detail/legal-contractor-detail.component';
 import { UseHttpImageSourcePipe } from '../@core/components/shared/secured-image/secured-image.component';
 import { InputSearchComponent } from '../@core/components/shared/input-search/input-search.component';
+import { ActionsBeneficiaryLegalContractorComponent } from './catalog/contragents/legal-contractor/actions-beneficiary-legal-contractor/actions-beneficiary-legal-contractor.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -129,6 +130,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ListContragentsComponent,
         ActionsLegalContractorComponent,
         LegalContractorDetailComponent,
+        ActionsBeneficiaryLegalContractorComponent,
     ],
     providers: [
         {

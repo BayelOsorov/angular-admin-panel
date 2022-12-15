@@ -184,10 +184,23 @@
                     </div>
                 </nb-tab>
                 <nb-tab tabTitle="Бенефицары"
-                    ><ngx-beneficiares></ngx-beneficiares>
+                    ><ngx-beneficiares
+                        (deleteEvent)="deleteBeneficiary($event)"
+                        (createEvent)="createBeneficiary()"
+                        (editEvent)="editBeneficiary($event)"
+                        (getData)="getBeneficiaries()"
+                        [data]="beneficiaries"
+                    ></ngx-beneficiares>
                 </nb-tab>
                 <nb-tab tabTitle="Сотрудники">
-                    <ngx-employees> </ngx-employees
+                    <ngx-employees
+                        (deleteEvent)="deleteEmployee($event)"
+                        (createEvent)="openCreateModal()"
+                        (editEvent)="openEditModal($event)"
+                        (getData)="getEmployees()"
+                        [data]="employees"
+                    >
+                    </ngx-employees
                 ></nb-tab>
             </nb-tabset>
         </nb-card>

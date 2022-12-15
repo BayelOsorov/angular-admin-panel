@@ -38,7 +38,7 @@ export class LegalContractorsService {
     }
     // ! Employee
     getLegalContractorEmployeesList(id: number) {
-        return this.http.get(
+        return this.http.get<[]>(
             environment.contragentUrl +
                 `/admin/api/v1/legal-contractors/${id}/employees`
         );
@@ -72,7 +72,7 @@ export class LegalContractorsService {
     }
     // ! Beneficares
     getLegalContractorBeneficiariesList(id: number) {
-        return this.http.get(
+        return this.http.get<[]>(
             environment.contragentUrl +
                 `/admin/api/v1/legal-contractors/${id}/beneficiaries`
         );

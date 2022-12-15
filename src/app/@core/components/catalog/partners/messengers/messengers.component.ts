@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PartnersService } from '../../../../services/catalog/partners/partners.service';
-import { tableNumbering } from '../../../../utils';
 import { MessengersActionsModalComponent } from './messengers-actions-modal/messengers-actions-modal.component';
 
 @Component({
