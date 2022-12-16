@@ -1,12 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { NewsService } from '../../../../@core/services/catalog/news/news.service';
 import { ProductsService } from '../../../../@core/services/catalog/products/products.service';
-import { toBase64 } from '../../../../@core/utils/toBase64';
 @Component({
     templateUrl: './actions-news.component.html',
     styleUrls: ['./actions-news.component.scss'],

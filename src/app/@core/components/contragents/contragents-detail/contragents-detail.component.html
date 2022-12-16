@@ -1,0 +1,208 @@
+<nb-card>
+    <nb-card-header></nb-card-header>
+    <nb-card-body *ngIf="data">
+        <nb-card>
+            <nb-tabset>
+                <nb-tab tabTitle="Информация">
+                    <div class="d-flex">
+                        <div class="col-6 col-md-4 buttons">
+                            <button
+                                class="d-block w-50"
+                                nbButton
+                                status="warning"
+                                (click)="updatePartner()"
+                            >
+                                Редактировать
+                            </button>
+
+                            <button
+                                class="d-block mt-3 w-50"
+                                nbButton
+                                status="danger"
+                                (click)="deletePartner()"
+                            >
+                                Удалить
+                            </button>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="partner-board row">
+                                <div class="partner-card col-md-4">
+                                    <div class="card__border container">
+                                        <div class="card__inner">
+                                            <div class="card__icon favorite">
+                                                <i
+                                                    style="font-size: 38px"
+                                                    class="nb-star"
+                                                ></i>
+                                            </div>
+                                            <div class="card__text">
+                                                <p>Избранное</p>
+                                                <strong class="float-right"
+                                                    >10</strong
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+                                <div class="partner-card col-md-4">
+                                    <div class="card__border container">
+                                        <div class="card__inner">
+                                            <div class="card__icon feedback">
+                                                <i
+                                                    style="font-size: 38px"
+                                                    class="nb-person"
+                                                ></i>
+                                            </div>
+                                            <div class="card__text">
+                                                <p>Отзывы</p>
+                                                <strong class="float-right"
+                                                    >50</strong
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+                                <div class="partner-card col-md-4">
+                                    <div class="card__border container">
+                                        <div class="card__inner">
+                                            <div class="card__icon rate">
+                                                <i
+                                                    style="font-size: 38px"
+                                                    class="nb-bar-chart"
+                                                ></i>
+                                            </div>
+                                            <div class="card__text">
+                                                <p>Рейтинг</p>
+                                                <strong class="float-right"
+                                                    >4.5</strong
+                                                >
+                                            </div>
+                                        </div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Название</p>
+                                </div>
+
+                                <div class="detail">{{ data.name }}</div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>ИИН организации</p>
+                                </div>
+
+                                <div class="detail">{{ data.tin }}</div>
+                            </div>
+
+                            <div class="header">
+                                <div>
+                                    <p>ОКПО</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{ data.okpo }}
+                                </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Регистрационный адрес</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{ data.registrationAddress }}
+                                </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Актуальный адрес</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{ data.actualAddress }}
+                                </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Дата основания</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{ data.foundingDate }}
+                                </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>БИК</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{ data.bic }}
+                                </div>
+                            </div>
+                            <div class="header">
+                                <div>
+                                    <p>Номер телефона</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{ data.phone }}
+                                </div>
+                            </div>
+                            <!-- <div class="header">
+                                <div>
+                                    <p>Ф.И.О руководителя</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{data.}}
+                                </div>
+                            </div>
+                             <div class="header">
+                                <div>
+                                    <p>Идентификатор владельца</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{data.}}
+                                </div>
+                            </div>
+                         <div class="header">
+                                <div>
+                                    <p>Тип бенефицара</p>
+                                </div>
+
+                                <div class="detail">
+                                    {{data.}}
+                                </div>
+                            </div>
+                        --></div>
+                    </div>
+                </nb-tab>
+                <nb-tab tabTitle="Бенефицары"
+                    ><ngx-beneficiares
+                        (deleteEvent)="deleteBeneficiary($event)"
+                        (createEvent)="createBeneficiary()"
+                        (editEvent)="editBeneficiary($event)"
+                        (getData)="getBeneficiaries()"
+                        [data]="beneficiaries"
+                    ></ngx-beneficiares>
+                </nb-tab>
+                <nb-tab tabTitle="Сотрудники">
+                    <ngx-employees
+                        (deleteEvent)="deleteEmployee($event)"
+                        (createEvent)="openCreateModal()"
+                        (editEvent)="openEditModal($event)"
+                        (getData)="getEmployees()"
+                        [data]="employees"
+                    >
+                    </ngx-employees
+                ></nb-tab>
+            </nb-tabset>
+        </nb-card>
+    </nb-card-body>
+</nb-card>

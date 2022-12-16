@@ -1,0 +1,559 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header> </nb-card-header>
+            <nb-card-body>
+                <div class="form-group row">
+                    <label
+                        for="exampleInputEmail1"
+                        class="label col-sm-3 col-form-label"
+                    >
+                        Тип бенефицара
+                    </label>
+                    <div class="col-sm-9">
+                        <nb-select
+                            [selected]="type"
+                            fullWidth
+                            (selectedChange)="onSelect($event)"
+                            placeholder="Тип бенефицара"
+                        >
+                            <nb-option value="legalBeneficiary">ОсОО</nb-option>
+                            <nb-option value="individualBeneficiary"
+                                >Ип</nb-option
+                            >
+                        </nb-select>
+                    </div>
+                </div>
+                <form *ngIf="type" [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <ng-container *ngIf="type === 'individualBeneficiary'">
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Фамилия</label
+                            >
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('surname')"
+                                    placeholder="Введите фамилию"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Имя
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('name')"
+                                    placeholder="Введите имя"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Отчество
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('fatherName')"
+                                    placeholder="Введите отчество"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Место рождения
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('birthplace')"
+                                    placeholder="Введите место рождения"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Национальность
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('nationality')"
+                                    placeholder="Введите национальность"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >Гражданство
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('citizenship')"
+                                    placeholder="Введите гражданство"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                № паспорта
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('passportNo')"
+                                    placeholder="Введите № паспорта"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Орган власти
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('authority')"
+                                    placeholder="Введите орган власти"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                ПИН
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('pin')"
+                                    placeholder="Введите ПИН"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Банковский счет
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('bankAccount')"
+                                    placeholder="Введите банковский счет"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Должность
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('position')"
+                                    placeholder="Введите должность"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Пол
+                            </label>
+                            <div class="col-sm-9">
+                                <nb-select
+                                    fullWidth
+                                    formControlName="gender"
+                                    placeholder="Пол"
+                                >
+                                    <nb-option value="true">Да</nb-option>
+                                    <nb-option value="false">Нeт</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Семейное положение
+                            </label>
+                            <div class="col-sm-9">
+                                <nb-select
+                                    fullWidth
+                                    formControlName="familyStatus"
+                                    placeholder="Семейное положение"
+                                >
+                                    <nb-option value="true">Да</nb-option>
+                                    <nb-option value="false">Нeт</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Тип
+                            </label>
+                            <div class="col-sm-9">
+                                <nb-select
+                                    fullWidth
+                                    formControlName="type"
+                                    placeholder="Тип"
+                                >
+                                    <nb-option value="true">Да</nb-option>
+                                    <nb-option value="false">Нeт</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >Номер телефона
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-phone-number-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('phoneNumber')"
+                                    [isRequired]="true"
+                                    placeholder="Введите номер телефона"
+                                >
+                                </ngx-phone-number-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Дата рождения
+                            </label>
+                            <div class="col-sm-9">
+                                <input
+                                    formControlName="birthday"
+                                    fullWidth
+                                    type="date"
+                                    format="dd.MM.yyyy"
+                                    nbInput
+                                    placeholder="Дата рождения"
+                                    [status]="
+                                submitted && (form.get('birthday')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Дата выпуска
+                            </label>
+                            <div class="col-sm-9">
+                                <input
+                                    formControlName="dateOfIssue"
+                                    fullWidth
+                                    nbInput
+                                    type="date"
+                                    format="dd.MM.yyyy"
+                                    placeholder="Дата выпуска"
+                                    [status]="
+                                submitted && (form.get('dateOfIssue')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >Дата истечения срока действия
+                            </label>
+                            <div class="col-sm-9">
+                                <input
+                                    formControlName="dateOfExpiration"
+                                    fullWidth
+                                    type="date"
+                                    format="dd.MM.yyyy"
+                                    nbInput
+                                    placeholder="Дата истечения срока действия"
+                                    [status]="
+                                submitted && (form.get('dateOfIssue')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >Назначенная дата
+                            </label>
+                            <div class="col-sm-9">
+                                <input
+                                    formControlName="appointmentDate"
+                                    fullWidth
+                                    nbInput
+                                    type="date"
+                                    format="dd.MM.yyyy"
+                                    placeholder="Назначенная дата"
+                                    [status]="
+                                submitted && (form.get('appointmentDate')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Дата выхода
+                            </label>
+                            <div class="col-sm-9">
+                                <input
+                                    formControlName="releaseDate"
+                                    fullWidth
+                                    nbInput
+                                    type="date"
+                                    format="dd.MM.yyyy"
+                                    placeholder="Дата выхода"
+                                    [status]="
+                                submitted && (form.get('releaseDate')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                                />
+                            </div>
+                        </div>
+                        <!-- <div class="form-group row">
+                                    <label
+                                        for="exampleInputEmail1"
+                                        class="label col-sm-3 col-form-label"
+                                    >
+                                        </label
+                                    >
+                                    <div class="col-sm-9">
+                                        <ngx-validation-input
+                                            [submitted]="submitted"
+                                            [control]="form.get('')"
+                                            placeholder="Введите "
+                                        >
+                                        </ngx-validation-input>
+                                    </div>
+                                </div> -->
+                    </ng-container>
+                    <ng-container *ngIf="type === 'legalBeneficiary'">
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >Название</label
+                            >
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('name')"
+                                    placeholder="Введите название"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >ИИН организации</label
+                            >
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('tin')"
+                                    placeholder="Введите ИИН организации"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >ОКПО</label
+                            >
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('okpo')"
+                                    placeholder="Введите ОКПО"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >Регистрационный адрес</label
+                            >
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('legalAddress')"
+                                    placeholder="Введите регистрационный адрес"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >Актуальный адрес
+                            </label>
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('actualAddress')"
+                                    placeholder="Введите актуальный адрес
+"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Дата основания
+                            </label>
+                            <div class="col-sm-9">
+                                <input
+                                    formControlName="foundingDate"
+                                    fullWidth
+                                    nbInput
+                                    placeholder="Дата основания"
+                                    type="date"
+                                    format="dd.MM.yyyy"
+                                    [status]="
+                                submitted && (form.get('foundingDate')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                                >Ф.И.О руководителя</label
+                            >
+                            <div class="col-sm-9">
+                                <ngx-validation-input
+                                    [submitted]="submitted"
+                                    [control]="form.get('manager')"
+                                    placeholder="Введите Ф.И.О руководителя"
+                                >
+                                </ngx-validation-input>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                for="exampleInputEmail1"
+                                class="label col-sm-3 col-form-label"
+                            >
+                                Тип
+                            </label>
+                            <div class="col-sm-9">
+                                <nb-select
+                                    fullWidth
+                                    formControlName="type"
+                                    placeholder="Тип"
+                                >
+                                    <nb-option value="legalBeneficiary"
+                                        >Да</nb-option
+                                    >
+                                    <nb-option value="individualBeneficiary"
+                                        >Нeт</nb-option
+                                    >
+                                </nb-select>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <button
+                        class="d-flex mx-auto"
+                        type="submit"
+                        nbButton
+                        status="primary"
+                    >
+                        Подтвердить
+                    </button>
+                </form>
+            </nb-card-body></nb-card
+        >
+    </div>
+</div>

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AvatarImgComponent } from '../../../../@core/components/avatar-img/avatar-img.component';
+import { AvatarImgComponent } from '../../../../@core/components/shared/avatar-img/avatar-img.component';
 import { IListPartner } from '../../../../@core/models/catalog/partners';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
 import { tableNumbering } from '../../../../@core/utils';

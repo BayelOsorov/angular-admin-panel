@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AvatarImgComponent } from '../../../@core/components/avatar-img/avatar-img.component';
+import { AvatarImgComponent } from '../../../@core/components/shared/avatar-img/avatar-img.component';
 import { IListBrand } from '../../../@core/models/catalog/brand';
 import { BrandsService } from '../../../@core/services/catalog/brands/brands.service';
 import { CategoriesService } from '../../../@core/services/catalog/categories/categories.service';

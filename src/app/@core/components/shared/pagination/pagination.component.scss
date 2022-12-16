@@ -1,0 +1,40 @@
+@import '../../../../@theme/styles/themes';
+
+.custom-pagination {
+    margin: 20px auto 0 auto;
+    display: flex;
+}
+
+::ng-deep .ng2-smart-sort-link {
+    color: nb-theme(text-basic-color) !important;
+}
+::ng-deep .ant-pagination-item,
+::ng-deep .ant-pagination-next .ant-pagination-item-link,
+::ng-deep .ant-pagination-prev .ant-pagination-item-link {
+    width: 50px;
+    color: nb-theme(text-basic-color);
+    background-color: nb-theme(card-background-color);
+    border-color: nb-theme(select-outline-basic-border-color);
+    border-style: nb-theme(select-outline-border-style);
+    border-width: nb-theme(select-outline-border-width);
+    border-radius: nb-theme(select-rectangle-border-radius);
+}
+::ng-deep .ant-pagination-item-active {
+    background-color: #36f;
+    color: #fff;
+}
+::ng-deep .ant-pagination-disabled .ant-pagination-item-link,
+::ng-deep .ant-pagination-disabled:focus-visible,
+::ng-deep .ant-pagination-disabled:hover {
+    cursor: not-allowed;
+    color: nb-theme(select-outline-basic-placeholder-text-color);
+    &:hover {
+        color: nb-theme(select-outline-basic-placeholder-text-color);
+        border-color: nb-theme(select-outline-basic-border-color);
+    }
+}
+::ng-deep .ant-pagination-item-link {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}

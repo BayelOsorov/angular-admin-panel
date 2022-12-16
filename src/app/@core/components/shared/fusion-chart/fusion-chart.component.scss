@@ -1,0 +1,5 @@
+@import '../../../../@theme/styles/themes';
+
+::ng-deep rect[fill] {
+    fill: nb-theme(background-basic-color-1);
+}

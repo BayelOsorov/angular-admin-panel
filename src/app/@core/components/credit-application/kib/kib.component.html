@@ -1,0 +1,38 @@
+<nb-accordion multi>
+    <nb-accordion-item>
+        <nb-accordion-item-header class="justify-content-around">
+            <strong>Локальный КИБ 0-0-3</strong>
+            <strong>Лимит: 15000</strong>
+            <strong>Использовано: 6000</strong>
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+            <table [nbTreeGrid]="data" equalColumnsWidth>
+                <tr
+                    nbTreeGridRow
+                    *nbTreeGridRowDef="let row; columns: allColumns"
+                ></tr>
+
+                <ng-container [nbTreeGridColumnDef]="customColumn">
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row">
+                        <nb-tree-grid-row-toggle
+                            [expanded]="row.expanded"
+                            *ngIf="row.data.kind === 'dir'"
+                        >
+                        </nb-tree-grid-row-toggle>
+
+                        {{ row.data.name }}
+                    </td>
+                </ng-container>
+
+                <ng-container
+                    *ngFor="let column of defaultColumns"
+                    [nbTreeGridColumnDef]="column"
+                >
+                    <td nbTreeGridCell *nbTreeGridCellDef="let row">
+                        {{ row.data[column] }}
+                    </td>
+                </ng-container>
+            </table>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>

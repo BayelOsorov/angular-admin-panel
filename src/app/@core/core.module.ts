@@ -43,7 +43,7 @@ const DATA_SERVICES = [];
 export class NbSimpleRoleProvider extends NbRoleProvider {
     getRole() {
         // here you could provide any role based on any auth flow
-        return observableOf('');
+        return observableOf('admin,user');
     }
 }
 

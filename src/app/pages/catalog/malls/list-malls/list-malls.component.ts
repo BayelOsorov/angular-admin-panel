@@ -1,12 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AvatarImgComponent } from '../../../../@core/components/avatar-img/avatar-img.component';
-import { UseHttpImageSourcePipe } from '../../../../@core/components/secured-image/secured-image.component';
+import { AvatarImgComponent } from '../../../../@core/components/shared/avatar-img/avatar-img.component';
 import { IListMalls } from '../../../../@core/models/catalog/malls';
 import { LocalitiesService } from '../../../../@core/services/catalog/localities/localities.service';
 import { MallsService } from '../../../../@core/services/catalog/malls/malls.service';

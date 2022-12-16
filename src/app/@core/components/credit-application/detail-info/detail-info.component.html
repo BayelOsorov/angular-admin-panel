@@ -1,0 +1,60 @@
+<div class="detail-info">
+    <div class="status">
+        <div class="name">
+            <strong>{{ data.fio }}</strong>
+            <p class="mt-2">
+                {{ data.createdAt | date : 'dd.MM.yyyy, hh:mm' }}
+            </p>
+        </div>
+        <nb-alert status="primary">Одобрено </nb-alert>
+    </div>
+    <div class="chart d-flex mt-3">
+        <nb-card class="col-md-8">
+            <nb-alert class="row justify-content-center" status="success"
+                ><div class="col-md-8">Высокий уровеь доверия</div>
+                <div class="col-md-4">800</div></nb-alert
+            >
+            <ngx-fusion-chart></ngx-fusion-chart>
+            <nb-alert class="row justify-content-center mb-0" status="success"
+                ><div class="col-md-8">Локальный киб</div>
+                <div class="col-md-4">просрочек не обнаружено</div></nb-alert
+            >
+            <nb-alert class="row justify-content-center mb-0" status="info"
+                ><div class="col-md-8">Кредитный отчет</div>
+                <div class="col-md-4">
+                    <a href=""
+                        >скачать<nb-icon
+                            pack="eva"
+                            icon="cloud-download-outline"
+                        ></nb-icon
+                    ></a></div
+            ></nb-alert>
+        </nb-card>
+        <div class="alerts col-md-4">
+            <nb-alert status="success">
+                <div class="d-flex justify-content-around align-items-center">
+                    <i style="font-size: 35px" class="nb-checkmark-circle"></i>
+                    <p>Не значится в списке террориствов</p>
+                </div>
+            </nb-alert>
+            <nb-alert status="success">
+                <div class="d-flex justify-content-around align-items-center">
+                    <i style="font-size: 35px" class="nb-checkmark-circle"></i>
+                    <p>Задолженности по налогам и страховым взносам нет</p>
+                </div>
+            </nb-alert>
+            <nb-alert status="info">
+                <div class="d-flex justify-content-around align-items-center">
+                    <i style="font-size: 25px" class="nb-info"></i>
+                    <p>Подключен продукт 0-0-3</p>
+                </div>
+            </nb-alert>
+            <nb-alert status="danger">
+                <div class="d-flex justify-content-around align-items-center">
+                    <i style="font-size: 35px" class="nb-alert"></i>
+                    <p>Сумма всех кредитов превышает лимит</p>
+                </div>
+            </nb-alert>
+        </div>
+    </div>
+</div>
