@@ -1,0 +1,21 @@
+<nb-card>
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Категории</strong>
+
+        <button (click)="openCreateModal()" nbButton status="primary">
+            Добавить
+        </button>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getCategories($event)"
+            (deleteItemEvent)="deleteCategory($event)"
+            (openModalEvent)="openEditModal($event)"
+            (rowSelectEvent)="rowSelect($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listCategory"
+            [productName]="'ни одной категории'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

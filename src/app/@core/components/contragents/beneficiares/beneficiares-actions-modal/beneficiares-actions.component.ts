@@ -1,11 +1,11 @@
+/* eslint-disable brace-style */
 import {
-    AfterContentInit,
-    AfterViewChecked,
-    AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
@@ -23,7 +23,7 @@ import { takeUntil } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BeneficiaresActionsComponent
-    implements OnInit, AfterContentInit, OnDestroy
+    implements OnInit, OnChanges, OnDestroy
 {
     @Output() editEvent = new EventEmitter();
     @Output() createEvent = new EventEmitter();
@@ -67,13 +67,13 @@ export class BeneficiaresActionsComponent
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private fb: FormBuilder,
+        private cd: ChangeDetectorRef,
         private toaster: ToastrService,
         @Optional() private dialogRef: NbWindowRef<any>
     ) {}
     ngOnInit(): void {}
 
-    ngAfterContentInit(): void {
-        console.log(this.contractorData);
+    ngOnChanges(): void {
         if (this.contractorData) {
             this.type = this.contractorData.type;
             if (this.type === 'individualBeneficiary') {
@@ -164,6 +164,8 @@ export class BeneficiaresActionsComponent
         }
     }
     onSubmit() {
+        console.log(this.form);
+
         if (this.form.valid) {
             if (this.contractorData) {
                 this.editEvent.emit({

@@ -33,6 +33,11 @@ import { ListContragentsComponent } from './catalog/contragents/list-contragents
 import { ActionsLegalContractorComponent } from './catalog/contragents/legal-contractor/actions-Iegal-contractors/actions-legal-contractors.component';
 import { LegalContractorDetailComponent } from './catalog/contragents/legal-contractor/legal-contractor-detail/legal-contractor-detail.component';
 import { ActionsBeneficiaryLegalContractorComponent } from './catalog/contragents/legal-contractor/actions-beneficiary-legal-contractor/actions-beneficiary-legal-contractor.component';
+import { SupporCenterCategoriesListComponent } from './support-center/categories/list-categories/suppor-center-categories-list/suppor-center-categories-list.component';
+import { SupportCenterProductsListComponent } from './support-center/products/list-products/support-center-products-list/support-center-products-list.component';
+import { SupportCenterCategoryDetailComponent } from './support-center/categories/detail-category/support-center-category-detail/support-center-category-detail.component';
+import { SupportCenterAnswersActionsComponent } from './support-center/answers-actions/support-center-answers-actions/support-center-answers-actions.component';
+import { SupportCenterProductDetailComponent } from './support-center/products/detail-product/support-center-product-detail/support-center-product-detail.component';
 
 const routes: Routes = [
     {
@@ -48,6 +53,62 @@ const routes: Routes = [
                 path: 'staff-detail/:id',
                 component: DetailStaffComponent,
             },
+            // ! Support Center
+
+            {
+                path: 'support-center',
+                children: [
+                    {
+                        path: 'categories',
+                        children: [
+                            {
+                                path: 'list',
+                                component: SupporCenterCategoriesListComponent,
+                            },
+                            {
+                                path: 'detail/:id',
+                                component: SupportCenterCategoryDetailComponent,
+                            },
+                        ],
+                    },
+                    {
+                        path: 'products',
+                        children: [
+                            {
+                                path: 'list',
+                                component: SupportCenterProductsListComponent,
+                            },
+                            {
+                                path: 'detail/:id',
+                                component: SupportCenterProductDetailComponent,
+                            },
+                        ],
+                    },
+                    {
+                        path: 'answers',
+                        children: [
+                            {
+                                path: 'create/categoryId/:categoryId/productId/:productId',
+                                component: SupportCenterAnswersActionsComponent,
+                            },
+                            {
+                                path: 'update/:answerId',
+                                component: SupportCenterAnswersActionsComponent,
+                            },
+                        ],
+                    },
+
+                    {
+                        path: 'products',
+                        children: [
+                            {
+                                path: 'list',
+                                component: SupportCenterProductsListComponent,
+                            },
+                        ],
+                    },
+                ],
+            },
             // ! Contragents
             {
                 path: 'contragents',
@@ -61,6 +122,10 @@ const routes: Routes = [
                         children: [
                             {
                                 path: 'create',
+                                component: ActionsLegalContractorComponent,
+                            },
+                            {
+                                path: 'update/:id',
                                 component: ActionsLegalContractorComponent,
                             },
                             {

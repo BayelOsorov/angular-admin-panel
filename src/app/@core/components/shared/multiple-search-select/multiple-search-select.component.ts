@@ -31,7 +31,7 @@ export class MultipleSearchSelectComponent implements OnInit, OnDestroy {
         o1 && o2
             ? typeof o1 === 'object'
                 ? o1.id === o2
-                : o1 === o2
+                : +o1 === +o2
             : o1 === o2;
 
     onSearch(event) {

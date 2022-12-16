@@ -1,0 +1,49 @@
+<nb-card>
+    <nb-card-header>
+        <strong *ngIf="categoryData"
+            >Категория: {{ categoryData.name.ru }}</strong
+        >
+        <div class="d-flex justify-content-between mt-3">
+            <div class="d-flex">
+                <ngx-input-search
+                    class="mr-5"
+                    [placeholder]="''"
+                    [control]="form.get('text')"
+                >
+                </ngx-input-search>
+                <ngx-multiple-search-select
+                    [size]="'default'"
+                    (searchEmit)="getProducts($event)"
+                    [isRequired]="false"
+                    [submitted]="false"
+                    [data]="productList"
+                    type="default"
+                    [control]="form.get('productId')"
+                    [placeholder]="'Название продукта'"
+                ></ngx-multiple-search-select>
+            </div>
+
+            <a
+                [routerLink]="[
+                    '/support-center/answers/create/categoryId/' +
+                        categoryId +
+                        '/productId/' +
+                        null
+                ]"
+            >
+                <button nbButton status="primary">Добавить ответ</button>
+            </a>
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getAnswers($event)"
+            (deleteItemEvent)="deleteAnswer($event)"
+            (openModalEvent)="updateAnswer($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listAnswers"
+            [productName]="'ни одного ответа'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

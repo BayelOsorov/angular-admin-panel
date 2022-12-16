@@ -1,0 +1,119 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header
+                >{{
+                    this.answerId ? 'Редактирование ответа' : 'Создание ответа'
+                }}
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Заголовок</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-localization-inputs
+                                [submitted]="submitted"
+                                [controlRu]="form.get('titleRu')"
+                                [controlKy]="form.get('titleKg')"
+                                [controlUz]="form.get('titleUz')"
+                                [label]="'Заголовок'"
+                                [placeholder]="'Введите заголовок'"
+                            >
+                            </ngx-localization-inputs>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Ответ</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-localization-inputs
+                                [submitted]="submitted"
+                                [controlRu]="form.get('bodyRu')"
+                                [controlKy]="form.get('bodyKg')"
+                                [controlUz]="form.get('bodyUz')"
+                                [label]="'Ответ'"
+                                [placeholder]="'Введите ответ'"
+                            >
+                            </ngx-localization-inputs>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Порядок</label
+                        >
+                        <div class="col-sm-9">
+                            <input
+                                type="number"
+                                nbInput
+                                fullWidth
+                                id="exampleInputPassword1"
+                                placeholder="Порядок"
+                                formControlName="order"
+                                [status]="
+                                submitted && (form.get('order')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Категория</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-multiple-search-select
+                                (searchEmit)="getCategories($event)"
+                                [control]="form.get('categoryId')"
+                                type="default"
+                                [isRequired]="true"
+                                [submitted]="submitted"
+                                [data]="categoryList"
+                                [placeholder]="'Выберите категорию'"
+                            ></ngx-multiple-search-select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputPassword1"
+                            class="label col-sm-3 col-form-label"
+                            >Продукт</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-multiple-search-select
+                                (searchEmit)="getProducts()"
+                                type="default"
+                                [control]="form.get('productId')"
+                                [isRequired]="false"
+                                [submitted]="submitted"
+                                [data]="productList"
+                                [placeholder]="'Выберите продукт'"
+                            ></ngx-multiple-search-select>
+                        </div>
+                    </div>
+
+                    <button
+                        class="d-flex mx-auto"
+                        type="submit"
+                        nbButton
+                        status="primary"
+                    >
+                        Подтвердить
+                    </button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

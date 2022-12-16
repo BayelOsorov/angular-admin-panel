@@ -15,6 +15,7 @@ import { LegalContractorsService } from '../../../services/contragents/legal-con
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
     selector: 'ngx-contragents-detail',
     templateUrl: './contragents-detail.component.html',
@@ -31,6 +32,7 @@ export class ContragentsDetailComponent implements OnInit, OnDestroy {
     constructor(
         private windowService: NbWindowService,
         private toaster: ToastrService,
+        private location: Location,
         private legalContractorsService: LegalContractorsService,
         private router: Router
     ) {}
@@ -118,6 +120,20 @@ export class ContragentsDetailComponent implements OnInit, OnDestroy {
         this.router.navigate([
             `contragents/legal-contractors/detail/${this.contractorId}/beneficiaries/create`,
         ]);
+    }
+    updateContragent() {
+        this.router.navigate([
+            `contragents/legal-contractors/update/${this.contractorId}`,
+        ]);
+    }
+    deleteContragent() {
+        this.legalContractorsService
+            .deleteLegalContractor(this.contractorId)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toaster.success('Успешно удалено!');
+                this.location.back();
+            });
     }
     ngOnInit(): void {
         this.getEmployees();

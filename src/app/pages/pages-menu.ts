@@ -130,6 +130,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
         ],
     },
+    {
+        title: 'Центр поддержки',
+        icon: 'phone',
+
+        children: [
+            {
+                title: 'Категории',
+                link: '/support-center/categories/list',
+            },
+            {
+                title: 'Продукты',
+                link: '/support-center/products/list',
+            },
+        ],
+    },
     // {
     //     title: 'UI Features',
     //     icon: 'keypad-outline',

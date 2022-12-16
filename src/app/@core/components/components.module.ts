@@ -88,6 +88,7 @@ import { EmployeesComponent } from './contragents/employees/employees.component'
 import { BeneficiaresActionsComponent } from './contragents/beneficiares/beneficiares-actions-modal/beneficiares-actions.component';
 import { LegalContractorBeneficiaryActionsComponent } from './contragents/beneficiares/legal-contractor-beneficiary-actions/legal-contractor-beneficiary-actions.component';
 import { LegalContragentActionsModalComponent } from './contragents/employees/legal-contragent-actions-modal/legal-contragent-actions-modal.component';
+import { SupportCenterActionsModalComponent } from './support-center/actions-modal/actions-modal.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -171,6 +172,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         BeneficiaresActionsComponent,
         LegalContractorBeneficiaryActionsComponent,
         LegalContragentActionsModalComponent,
+        SupportCenterActionsModalComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -216,6 +218,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         BeneficiaresActionsComponent,
         LegalContractorBeneficiaryActionsComponent,
         LegalContragentActionsModalComponent,
+        SupportCenterActionsModalComponent,
     ],
 })
 export class ComponentsModule {}

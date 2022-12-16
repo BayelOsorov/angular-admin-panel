@@ -1,4 +1,9 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import {
+    CUSTOM_ELEMENTS_SCHEMA,
+    LOCALE_ID,
+    NgModule,
+    NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import {
     NbAlertModule,
     NbButtonModule,
@@ -60,6 +65,11 @@ import { LegalContractorDetailComponent } from './catalog/contragents/legal-cont
 import { UseHttpImageSourcePipe } from '../@core/components/shared/secured-image/secured-image.component';
 import { InputSearchComponent } from '../@core/components/shared/input-search/input-search.component';
 import { ActionsBeneficiaryLegalContractorComponent } from './catalog/contragents/legal-contractor/actions-beneficiary-legal-contractor/actions-beneficiary-legal-contractor.component';
+import { SupporCenterCategoriesListComponent } from './support-center/categories/list-categories/suppor-center-categories-list/suppor-center-categories-list.component';
+import { SupportCenterProductsListComponent } from './support-center/products/list-products/support-center-products-list/support-center-products-list.component';
+import { SupportCenterCategoryDetailComponent } from './support-center/categories/detail-category/support-center-category-detail/support-center-category-detail.component';
+import { SupportCenterAnswersActionsComponent } from './support-center/answers-actions/support-center-answers-actions/support-center-answers-actions.component';
+import { SupportCenterProductDetailComponent } from './support-center/products/detail-product/support-center-product-detail/support-center-product-detail.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -131,6 +141,11 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ActionsLegalContractorComponent,
         LegalContractorDetailComponent,
         ActionsBeneficiaryLegalContractorComponent,
+        SupporCenterCategoriesListComponent,
+        SupportCenterProductsListComponent,
+        SupportCenterCategoryDetailComponent,
+        SupportCenterAnswersActionsComponent,
+        SupportCenterProductDetailComponent,
     ],
     providers: [
         {

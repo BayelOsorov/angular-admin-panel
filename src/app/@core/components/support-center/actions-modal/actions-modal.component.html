@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ngx-localization-inputs
+        [controlRu]="form.get('ru')"
+        [controlKy]="form.get('kg')"
+        [controlUz]="form.get('uz')"
+        [submitted]="submitted"
+        [label]="'Название ' + placeholder"
+        [placeholder]="'Введите название ' + placeholder"
+    >
+    </ngx-localization-inputs>
+
+    <button class="d-flex mx-auto" type="submit" nbButton status="primary">
+        Подтвердить
+    </button>
+</form>

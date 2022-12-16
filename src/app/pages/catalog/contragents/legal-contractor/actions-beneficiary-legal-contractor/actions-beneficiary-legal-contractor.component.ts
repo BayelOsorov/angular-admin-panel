@@ -25,7 +25,7 @@ export class ActionsBeneficiaryLegalContractorComponent implements OnInit {
         this.legalContractorsService
             .editLegalContractorBeneficiary(
                 data.contractorId,
-                data.beneficiary,
+                data.beneficiaryId,
                 data.data
             )
             .pipe(takeUntil(this.destroy$))

@@ -15,4 +15,5 @@ export const environment = {
     catalogUrl: 'https://stage.c2u.io:28001',
     identificationUrl: 'https://stage.c2u.io:2002',
     contragentUrl: 'https://stage.c2u.io:17001',
+    supportCenterUrl: 'https://stage.c2u.io:29001',
 };

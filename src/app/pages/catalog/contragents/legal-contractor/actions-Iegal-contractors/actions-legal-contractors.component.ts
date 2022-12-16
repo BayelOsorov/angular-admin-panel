@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,7 +25,8 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         private legalContractorsService: LegalContractorsService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private location: Location
     ) {}
 
     onSubmit() {
@@ -32,25 +34,24 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
         console.log(this.form);
 
         if (this.form.valid) {
+            if (this.legalContractorData) {
+                this.legalContractorsService
+                    .editLegalContractor(
+                        this.legalContractorData.id,
+                        this.form.value
+                    )
+                    .pipe(takeUntil(this.destroy$))
+                    .subscribe((res) => {
+                        this.toaster.success('Успешно отредактировано!');
+                        this.location.back();
+                    });
+                return;
+            }
             const newBeneficiares = this.beneficiaries.map((item) => ({
                 [item.type]: {
                     ...item.form.value,
                 },
             }));
-            if (this.legalContractorData) {
-                this.legalContractorsService
-                    .editLegalContractor(this.legalContractorData.id, {
-                        ...this.form.value,
-                        beneficiaries: newBeneficiares,
-                    })
-                    .pipe(takeUntil(this.destroy$))
-                    .subscribe((res) => {
-                        this.toaster.success('Успешно отредактировано!');
-                        this.router.navigate([`catalog/news`]);
-                    });
-                return;
-            }
-
             this.legalContractorsService
                 .createLegalContractor({
                     ...this.form.value,
@@ -59,7 +60,7 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe((res) => {
                     this.toaster.success('Успешно создано!');
-                    this.router.navigate([`catalog/news`]);
+                    this.location.back();
                 });
         }
     }
@@ -138,10 +139,22 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
                 [Validators.required, Validators.maxLength(256)],
             ],
             foundingDate: [new Date(), [Validators.required]],
-            manager: ['', [Validators.required, Validators.maxLength(256)]],
-            managerId: ['', [Validators.required, Validators.maxLength(256)]],
             phone: ['', [Validators.required, Validators.maxLength(256)]],
             bic: ['', [Validators.required, Validators.maxLength(256)]],
+            manager: [
+                '',
+                this.legalContractorId && [
+                    Validators.required,
+                    Validators.maxLength(256),
+                ],
+            ],
+            managerId: [
+                '',
+                this.legalContractorId && [
+                    Validators.required,
+                    Validators.maxLength(256),
+                ],
+            ],
             beneficiaries: [[]],
         });
         this.route.params.subscribe((params) => {

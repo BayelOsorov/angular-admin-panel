@@ -20,16 +20,6 @@ export class BrandsService {
             environment.catalogUrl + `/Administration/api/v1/brands/${id}`
         );
     }
-    getBrandLogoImg(id: number, imgId) {
-        const httpOptions: object = {
-            responseType: 'blob',
-        };
-        return this.http.get(
-            environment.catalogUrl +
-                `/Administration/api/v1/brands/${id}/logo/${imgId}`,
-            httpOptions
-        );
-    }
     deleteBrand(id: number) {
         return this.http.delete(
             environment.catalogUrl + `/Administration/api/v1/brands/${id}`

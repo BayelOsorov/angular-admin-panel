@@ -1,0 +1,21 @@
+<nb-card>
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Продукты</strong>
+
+        <button (click)="openCreateModal()" nbButton status="primary">
+            Добавить
+        </button>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getProducts($event)"
+            (deleteItemEvent)="deleteProduct($event)"
+            (openModalEvent)="openEditModal($event)"
+            (rowSelectEvent)="rowSelect($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listProducts"
+            [productName]="'ни одного продукта'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>
