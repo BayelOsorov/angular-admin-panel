@@ -1,4 +1,18 @@
 <nb-card class="container">
     <ngx-credit-application-detail-info></ngx-credit-application-detail-info>
-    <ngx-credit-application-more-info></ngx-credit-application-more-info>
+    <ngx-credit-application-more-info
+        [data]="loanApplicationData"
+    ></ngx-credit-application-more-info>
+    <ngx-update-amount
+        (changeAmountEvent)="changeAmount($event)"
+        [data]="loanApplicationData"
+    ></ngx-update-amount>
+    <ngx-comments
+        (sendCommentEvent)="sendComment($event)"
+        class="detail-block"
+    ></ngx-comments>
+    <ngx-credit-application-buttons
+        (declineEvent)="declineCredit()"
+        (approveEvent)="approveCredit()"
+    ></ngx-credit-application-buttons>
 </nb-card>

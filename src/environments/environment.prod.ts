@@ -11,6 +11,7 @@ export const environment = {
     identificationUrl: 'https://stage.c2u.io:2002',
     contragentUrl: 'https://stage.c2u.io:17001',
     supportCenterUrl: 'https://stage.c2u.io:29001',
+    creditApplicationUrl: 'https://stage.c2u.io:2003',
     // baseUrl: 'https://cash2u.io:2001',
     // baseUrlOidc: 'https://cash2u.io:2021',
     // catalogUrl: 'https://cash2u.io:28001',

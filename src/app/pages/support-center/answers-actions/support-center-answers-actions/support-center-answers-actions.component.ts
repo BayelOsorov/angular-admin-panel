@@ -33,13 +33,13 @@ export class SupportCenterAnswersActionsComponent implements OnInit {
 
     ngOnInit(): void {
         this.form = this.fb.group({
-            titleRu: ['', [Validators.required, Validators.maxLength(256)]],
-            titleKg: ['', [Validators.required, Validators.maxLength(256)]],
-            titleUz: ['', [Validators.required, Validators.maxLength(256)]],
+            titleRu: ['', [Validators.required, Validators.maxLength(2048)]],
+            titleKg: ['', [Validators.required, Validators.maxLength(2048)]],
+            titleUz: ['', [Validators.required, Validators.maxLength(2048)]],
 
-            bodyRu: ['', [Validators.required, Validators.maxLength(256)]],
-            bodyKg: ['', [Validators.required, Validators.maxLength(256)]],
-            bodyUz: ['', [Validators.required, Validators.maxLength(256)]],
+            bodyRu: ['', [Validators.required, Validators.maxLength(2048)]],
+            bodyKg: ['', [Validators.required, Validators.maxLength(2048)]],
+            bodyUz: ['', [Validators.required, Validators.maxLength(2048)]],
             categoryId: ['', [Validators.required]],
             productId: [''],
             order: ['', Validators.required],
