@@ -1,4 +1,4 @@
-<div class="">
+<div class="" *ngIf="data">
     <nb-accordion multi>
         <nb-accordion-item>
             <nb-accordion-item-header class="justify-content-center">
@@ -25,7 +25,13 @@
     </nb-accordion>
     <ngx-kib class="detail-block"></ngx-kib>
     <ngx-soc-fond class="detail-block"></ngx-soc-fond>
-    <ngx-identification-files class="detail-block"></ngx-identification-files>
+    <ngx-identification-files
+        [data]="data"
+        class="detail-block"
+    ></ngx-identification-files>
     <ngx-passport-data class="detail-block"> </ngx-passport-data>
-    <ngx-additional-info class="detail-block"></ngx-additional-info>
+    <ngx-additional-info
+        [data]="data"
+        class="detail-block"
+    ></ngx-additional-info>
 </div>

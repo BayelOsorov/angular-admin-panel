@@ -1,5 +1,5 @@
 <div class="image-container">
-    <img class="w-100" (click)="open = true" [src]="imgUrl | useHttpImgSrc" />
+    <img width="80%" (click)="open = true" [src]="imgUrl | useHttpImgSrc" />
 </div>
 <div *ngIf="open" class="viewer-container">
     <div class="viewer-content">

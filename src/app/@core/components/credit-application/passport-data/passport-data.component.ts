@@ -24,7 +24,7 @@ export class PassportDataComponent implements OnInit {
         residenceLocation: 'Bishkek',
         residenceAddress: 'пр.Чуй 198',
         profilePhotoUrl:
-            'https://stage.c2u.io:2002/operator/api/v1/personal-data/profile-photo?Pin=05855858585858&DocumentNumber=5522885&DocumentType=ID',
+            'https://stage.c2u.io:2002/operator/api/v1/user-files/7a27975b-5bdc-44d8-a77f-153998c2ea2e',
     };
     constructor() {}
 

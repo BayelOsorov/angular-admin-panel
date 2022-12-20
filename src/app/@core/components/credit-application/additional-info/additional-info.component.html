@@ -4,30 +4,57 @@
             Место работы
         </nb-accordion-item-header>
         <nb-accordion-item-body>
-            <table class="w-100">
+            <table *ngIf="work.$type === 'entrepreneurship'" class="w-100">
                 <tr>
                     <td>Тип</td>
-                    <td></td>
+                    <td>{{ getWorkType() }}</td>
                 </tr>
                 <tr>
-                    <td>Наименование организации</td>
-                    <td></td>
+                    <td>Вид деятельности</td>
+                    <td>{{ getActivityType() }}</td>
                 </tr>
                 <tr>
-                    <td>Должность</td>
-                    <td></td>
+                    <td>Описание деятельности</td>
+                    <td>{{ work.description }}</td>
                 </tr>
                 <tr>
                     <td>Стаж работы</td>
-                    <td></td>
+                    <td>{{ getWorkExp() }}</td>
                 </tr>
                 <tr>
                     <td>Ежемесячный доход</td>
-                    <td></td>
+                    <td>{{ work.income }}</td>
                 </tr>
                 <tr>
                     <td>Адрес</td>
-                    <td></td>
+                    <td>{{ work.workAddress }}</td>
+                </tr>
+            </table>
+            <table *ngIf="work.$type === 'employment'" class="w-100">
+                <tr>
+                    <td>Тип</td>
+                    <td>{{ getWorkType() }}</td>
+                </tr>
+
+                <tr>
+                    <td>Наименование организации</td>
+                    <td>{{ work.description }}</td>
+                </tr>
+                <tr>
+                    <td>Должность</td>
+                    <td>{{ work.description }}</td>
+                </tr>
+                <tr>
+                    <td>Стаж работы</td>
+                    <td>{{ getWorkExp() }}</td>
+                </tr>
+                <tr>
+                    <td>Ежемесячный доход</td>
+                    <td>{{ work.income }}</td>
+                </tr>
+                <tr>
+                    <td>Адрес</td>
+                    <td>{{ work.workAddress }}</td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -84,12 +111,8 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <tr>
-                    <td>Описание работы</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Сайма телеком</td>
-                    <td></td>
+                    <td>Работа</td>
+                    <td>Ежемесячный доход</td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -103,11 +126,15 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <tr>
-                    <td>Описание работы</td>
+                    <td>ФИО</td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Сайма телеком</td>
+                    <td>Работа</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Доход супруги</td>
                     <td></td>
                 </tr>
             </table>
@@ -147,15 +174,9 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <thead>
-                    <tr>
-                        <th>Тип</th>
-                        <th>Адрес</th>
-                    </tr>
-                </thead>
                 <tr>
-                    <td>Автомобиль</td>
-                    <td>Хонда</td>
+                    <td>Тип</td>
+                    <td>Адрес</td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -169,15 +190,25 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <thead>
-                    <tr>
-                        <th>Тип</th>
-                        <th>Адрес</th>
-                    </tr>
-                </thead>
                 <tr>
-                    <td>Автомобиль</td>
-                    <td>Хонда</td>
+                    <td>Пол</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Возраст</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Место регистрации по паспорту</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Место фактического проживания</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -191,9 +222,29 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <tr>
-                    <td>Автомобиль</td>
-                    <td>Хонда</td>
-                    <td>Хонда</td>
+                    <td>Количество дней просрочки</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Количество раз просрочки</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Новый/Повторный клиент</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Количество полученных кредитов</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Количество параллельных кредитов</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -208,9 +259,24 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <tr>
-                    <td>Автомобиль</td>
-                    <td>Хонда</td>
-                    <td>Хонда</td>
+                    <td>Должность</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Ежемесячный доход</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Стаж работы</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Доп. доход</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -225,9 +291,32 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <tr>
-                    <td>Автомобиль</td>
-                    <td>Хонда</td>
-                    <td>Хонда</td>
+                    <td>Семейное положение</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Иждивенцы</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        Срок проживание - Срок проживания по фактическому адресу
+                        (мес)
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Наличие недвижимого имущества</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Наличие движимого имущества</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -242,8 +331,24 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <tr>
-                    <td>Автомобиль</td>
-                    <td>Хонда</td>
+                    <td>Раздел идентификация</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Раздел кредитная история</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Раздел платежеспособность</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Раздел персональная информация</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Итого</td>
+                    <td></td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -258,8 +363,45 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <tr>
-                    <td>Автомобиль</td>
-                    <td>Хонда</td>
+                    <td>Сумма кредита</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Срок кредита (мес)</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Ежемесячный взнос</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Совокупные ежемес. доход</td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Взносы по параллельным кредитам</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Семейные расходы</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Расходы на иждивенцев</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ЧП после всех расходов</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Соотношение взноса к ЧП</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Расчет максимального лимита</td>
+                    <td></td>
                 </tr>
             </table>
         </nb-accordion-item-body>

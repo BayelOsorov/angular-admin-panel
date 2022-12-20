@@ -12,7 +12,7 @@ import { SupportCenterService } from '../../../../@core/services/support-center/
     templateUrl: './support-center-answers-actions.component.html',
     styleUrls: ['./support-center-answers-actions.component.scss'],
 })
-export class SupportCenterAnswersActionsComponent implements OnInit {
+export class SupportCenterAnswersActionsComponent implements OnInit, OnDestroy {
     form: FormGroup;
     itemData: IDetailSupportCenterAnswer;
     categoryList = [];
@@ -41,12 +41,12 @@ export class SupportCenterAnswersActionsComponent implements OnInit {
             bodyKg: ['', [Validators.required, Validators.maxLength(2048)]],
             bodyUz: ['', [Validators.required, Validators.maxLength(2048)]],
             categoryId: ['', [Validators.required]],
-            productId: [''],
+            productId: [],
             order: ['', Validators.required],
         });
         this.getCategories();
         this.getProducts();
-        this.route.params.subscribe((params) => {
+        this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
             this.categoryId = params['categoryId'];
             this.productId = params['productId'];
             this.answerId = params['answerId'];
@@ -54,7 +54,7 @@ export class SupportCenterAnswersActionsComponent implements OnInit {
                 Number.isInteger(+this.categoryId) ? this.categoryId : null
             );
             this.form.controls['productId'].setValue(
-                Number.isInteger(+this.productId) ? this.productId : null
+                Number.isInteger(+this.productId) ? [this.productId] : null
             );
         });
 
@@ -108,6 +108,11 @@ export class SupportCenterAnswersActionsComponent implements OnInit {
                     uz: this.form.value.bodyKg,
                     kg: this.form.value.bodyUz,
                 },
+
+                productId:
+                    this.form.value.productId.length > 0
+                        ? this.form.value.productId
+                        : null,
             };
             if (this.itemData) {
                 this.supportService

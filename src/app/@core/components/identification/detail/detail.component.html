@@ -23,6 +23,7 @@
             <div class="first col-md-6">
                 <p class="mx-auto">{{ data.pin }}</p>
                 <ngx-identification-need-to-edit
+                    *ngIf="data.status === 'PhotoIdentificationProcess'"
                     [data]="identificationAnswers.pin"
                     [control]="form.get('Pin')"
                     placeholder="Введите"
@@ -32,6 +33,7 @@
                     {{ data.documentType + ' ' + data.documentNumber }}
                 </p>
                 <ngx-identification-need-to-edit
+                    *ngIf="data.status === 'PhotoIdentificationProcess'"
                     [data]="identificationAnswers.documentNumber"
                     [control]="form.get('DocumentNumber')"
                     placeholder="Введите"
@@ -67,6 +69,7 @@
                     [imgUrl]="data.passportFrontSideImageUrl"
                 ></ngx-lightbox-img>
                 <ngx-identification-need-to-edit
+                    *ngIf="data.status === 'PhotoIdentificationProcess'"
                     [data]="identificationAnswers.passportFrontSideImage"
                     [control]="form.get('PassportFrontSideImageId')"
                     placeholder="Введите"
@@ -115,6 +118,7 @@
                     [imgUrl]="data.passportBackSideImageUrl"
                 ></ngx-lightbox-img>
                 <ngx-identification-need-to-edit
+                    *ngIf="data.status === 'PhotoIdentificationProcess'"
                     [data]="identificationAnswers.passportBackSideImage"
                     [control]="form.get('PassportBackSideImageId')"
                     placeholder="Введите"
@@ -168,6 +172,7 @@
                     [imgUrl]="data.selfieWithPassportImageUrl"
                 ></ngx-lightbox-img>
                 <ngx-identification-need-to-edit
+                    *ngIf="data.status === 'PhotoIdentificationProcess'"
                     [data]="identificationAnswers.selfieWithPassportImage"
                     [control]="form.get('SelfieWithPassportImageId')"
                     placeholder="Введите"
@@ -183,6 +188,7 @@
                     }}
                 </p>
                 <ngx-identification-need-to-edit
+                    *ngIf="data.status === 'PhotoIdentificationProcess'"
                     [data]="identificationAnswers.address"
                     [control]="form.get('Address')"
                     placeholder="Введите"

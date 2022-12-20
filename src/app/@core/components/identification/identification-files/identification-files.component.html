@@ -1,4 +1,4 @@
-<nb-accordion multi>
+<nb-accordion multi *ngIf="data">
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Идентификация клиента
@@ -8,27 +8,27 @@
                 <ngx-lightbox-img
                     class="col-6 col-sm-3"
                     [imgUrl]="
-                        'https://stage.c2u.io:2002/operator/api/v1/user-files/d4aaf0f6-53be-4384-b858-c25eadfda008'
+                        'https://stage.c2u.io:2002/operator/api/v1/user-files/7a27975b-5bdc-44d8-a77f-153998c2ea2e'
                     "
                 ></ngx-lightbox-img>
 
                 <ngx-lightbox-img
                     class="col-6 col-sm-3"
                     [imgUrl]="
-                        'https://stage.c2u.io:2002/operator/api/v1/user-files/d4aaf0f6-53be-4384-b858-c25eadfda008'
+                        'https://stage.c2u.io:2002/operator/api/v1/user-files/7a27975b-5bdc-44d8-a77f-153998c2ea2e'
                     "
                 ></ngx-lightbox-img>
 
                 <ngx-lightbox-img
                     class="col-6 col-sm-3"
                     [imgUrl]="
-                        'https://stage.c2u.io:2002/operator/api/v1/user-files/d4aaf0f6-53be-4384-b858-c25eadfda008'
+                        'https://stage.c2u.io:2002/operator/api/v1/user-files/7a27975b-5bdc-44d8-a77f-153998c2ea2e'
                     "
                 ></ngx-lightbox-img>
                 <ngx-lightbox-img
                     class="col-6 col-sm-3"
                     [imgUrl]="
-                        'https://stage.c2u.io:2002/operator/api/v1/user-files/d4aaf0f6-53be-4384-b858-c25eadfda008'
+                        'https://stage.c2u.io:2002/operator/api/v1/user-files/7a27975b-5bdc-44d8-a77f-153998c2ea2e'
                     "
                 ></ngx-lightbox-img>
             </div>
@@ -65,30 +65,9 @@
         <nb-accordion-item-body>
             <div class="detail-images row">
                 <ngx-lightbox-img
+                    *ngFor="let i of data.customerData.occupation.documents"
+                    [imgUrl]="i"
                     class="col-6 col-sm-3"
-                    [imgUrl]="
-                        'https://stage.c2u.io:2002/operator/api/v1/user-files/d4aaf0f6-53be-4384-b858-c25eadfda008'
-                    "
-                ></ngx-lightbox-img>
-
-                <ngx-lightbox-img
-                    class="col-6 col-sm-3"
-                    [imgUrl]="
-                        'https://stage.c2u.io:2002/operator/api/v1/user-files/d4aaf0f6-53be-4384-b858-c25eadfda008'
-                    "
-                ></ngx-lightbox-img>
-
-                <ngx-lightbox-img
-                    class="col-6 col-sm-3"
-                    [imgUrl]="
-                        'https://stage.c2u.io:2002/operator/api/v1/user-files/d4aaf0f6-53be-4384-b858-c25eadfda008'
-                    "
-                ></ngx-lightbox-img>
-                <ngx-lightbox-img
-                    class="col-6 col-sm-3"
-                    [imgUrl]="
-                        'https://stage.c2u.io:2002/operator/api/v1/user-files/d4aaf0f6-53be-4384-b858-c25eadfda008'
-                    "
                 ></ngx-lightbox-img>
             </div>
         </nb-accordion-item-body>

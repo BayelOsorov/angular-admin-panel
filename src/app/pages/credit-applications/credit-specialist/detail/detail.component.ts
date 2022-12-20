@@ -36,7 +36,7 @@ export class CreditApplicationDetailComponent implements OnInit {
             .subscribe({
                 next: (data) => {
                     this.loanApplicationData = data;
-                    console.log(data);
+                    console.log(data.customerData);
 
                     this.getScoring(data.id);
                     this.getDebtorInfoReport(data.id);
@@ -109,8 +109,8 @@ export class CreditApplicationDetailComponent implements OnInit {
             .getCreditApplicationKib(this.loanApplicationData.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: (data) => {
-                    console.log(data);
+                next: (data1) => {
+                    console.log(data1);
                 },
             });
     }

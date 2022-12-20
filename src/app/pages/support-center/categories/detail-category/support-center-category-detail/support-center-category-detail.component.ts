@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional } from '@angular/core';
+import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { tableNumbering, truncateText } from '../../../../../@core/utils';
     templateUrl: './support-center-category-detail.component.html',
     styleUrls: ['./support-center-category-detail.component.scss'],
 })
-export class SupportCenterCategoryDetailComponent implements OnInit {
+export class SupportCenterCategoryDetailComponent implements OnInit, OnDestroy {
     listAnswers: IListSupportCenterAnswers;
     categoryId: number;
     categoryData: IDetailSupportCenterCategoriesAndProducts;
