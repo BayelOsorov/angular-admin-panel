@@ -62,8 +62,8 @@ export class StaffComponent implements OnInit, OnDestroy {
     onSearch(name) {
         this.getListStaff(1, name);
     }
-    onDelete(data): void {
-        this.staffService.deleteStaff(data.id).subscribe({
+    onDelete(id): void {
+        this.staffService.deleteStaff(id).subscribe({
             next: () => {
                 this.toaster.success('Успешно удалено!');
                 this.getListStaff(1);

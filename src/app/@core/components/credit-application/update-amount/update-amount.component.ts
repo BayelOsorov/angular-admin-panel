@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    Input,
+    OnChanges,
+    Output,
+    EventEmitter,
+} from '@angular/core';
 import { NzMarks } from 'ng-zorro-antd/slider';
 
 @Component({
@@ -7,7 +15,11 @@ import { NzMarks } from 'ng-zorro-antd/slider';
     styleUrls: ['./update-amount.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UpdateAmountComponent implements OnInit {
+export class UpdateAmountComponent implements OnInit, OnChanges {
+    @Output() changeAmountEvent = new EventEmitter();
+    @Input() data;
+    btnDisabled = false;
+    requestingAmount;
     marks: NzMarks = {
         5000: '5000',
         6000: '6000',
@@ -22,6 +34,18 @@ export class UpdateAmountComponent implements OnInit {
         15000: '15000',
     };
     constructor() {}
-
+    onChange(val) {
+        this.btnDisabled = false;
+        this.requestingAmount = val;
+    }
+    updateAmount() {
+        this.btnDisabled = true;
+        this.changeAmountEvent.emit(this.requestingAmount);
+    }
+    ngOnChanges(): void {
+        if (this.data) {
+            this.requestingAmount = this.data.requestingAmount;
+        }
+    }
     ngOnInit(): void {}
 }

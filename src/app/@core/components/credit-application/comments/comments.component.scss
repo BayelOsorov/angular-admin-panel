@@ -1,7 +1,56 @@
+@import '../../../../@theme/styles/themes';
+
 .comments {
     display: block;
+    width: 100%;
+    height: auto;
+
     .send-message {
         display: block;
         margin: 0 auto;
+    }
+
+    .my-message {
+        width: 100%;
+        display: flex;
+        height: auto;
+        flex-direction: row-reverse;
+        margin-bottom: 10px;
+        overflow-x: hidden;
+        .content {
+            max-width: 50%;
+            height: auto;
+            display: grid;
+            grid-template-rows: auto auto auto;
+            row-gap: 5px;
+        }
+
+        .text {
+            color: nb-theme(button-filled-primary-text-color);
+
+            width: 100%;
+            border-radius: 10px 10px 0px 10px;
+            background: nb-theme(alert-info-background-color);
+            padding: 15px;
+            word-break: break-all;
+        }
+    }
+    .message {
+        display: flex;
+        .content {
+            max-width: 50%;
+            height: auto;
+            display: grid;
+            grid-template-rows: auto auto auto;
+            row-gap: 5px;
+        }
+        .text {
+            color: nb-theme(button-filled-primary-text-color);
+            width: 100%;
+            border-radius: 10px 10px 10px 0px;
+            background: nb-theme(alert-info-background-color);
+            padding: 15px;
+            word-break: break-all;
+        }
     }
 }

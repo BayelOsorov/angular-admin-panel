@@ -1,6 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    EventEmitter,
+    Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 @Component({
     selector: 'ngx-comments',
     templateUrl: './comments.component.html',
@@ -8,15 +13,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentsComponent implements OnInit {
+    @Output() sendCommentEvent = new EventEmitter();
     form: FormGroup;
     constructor(private fb: FormBuilder) {}
     onSubmit() {
         if (this.form.valid) {
+            this.sendCommentEvent.emit(this.form.value);
         }
     }
     ngOnInit(): void {
         this.form = this.fb.group({
-            comment: ['', [Validators.required, Validators.maxLength(5046)]],
+            text: ['', [Validators.required, Validators.maxLength(5046)]],
         });
     }
 }

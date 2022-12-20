@@ -248,7 +248,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
             lunchHourEnd_7: [''],
 
             localityId: ['', Validators.required],
-            mallId: [''],
+            mallId: [null],
         });
         this.route.params.subscribe((params) => {
             this.branchId = params['branchId'];

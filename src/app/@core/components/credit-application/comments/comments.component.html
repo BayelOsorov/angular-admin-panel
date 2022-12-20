@@ -1,9 +1,41 @@
-<div class="comments">
-    <div class="send-message w-100">
+<div class="comments mt-5">
+    <div class="messages">
+        <!--  -->
+        <div class="message">
+            <div class="content">
+                <div class="content__header">
+                    <span>Админ</span>
+                </div>
+                <div class="text">
+                    <span>
+                        Provided code looks fine and would be easier to trace
+                        the issue if you can provide stackblitz demo.</span
+                    >
+                </div>
+                <div class="date">20.04.2022</div>
+            </div>
+        </div>
+        <!--  -->
+        <div class="my-message">
+            <div class="content">
+                <div class="content__header">
+                    <span>Вы</span>
+                </div>
+                <div class="text">
+                    <span
+                        >Provided code looks fine and would be easier to trace
+                        the issue if you can provide stackblitz demo.</span
+                    >
+                </div>
+                <div class="date">20.12.2023</div>
+            </div>
+        </div>
+    </div>
+    <div class="send-message w-100 mt-5">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <textarea
                 fullWidth
-                formControlName="comment"
+                formControlName="text"
                 placeholder="Введите сообщение..."
                 nbInput
                 rows="2"

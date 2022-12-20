@@ -89,6 +89,7 @@ import { BeneficiaresActionsComponent } from './contragents/beneficiares/benefic
 import { LegalContractorBeneficiaryActionsComponent } from './contragents/beneficiares/legal-contractor-beneficiary-actions/legal-contractor-beneficiary-actions.component';
 import { LegalContragentActionsModalComponent } from './contragents/employees/legal-contragent-actions-modal/legal-contragent-actions-modal.component';
 import { SupportCenterActionsModalComponent } from './support-center/actions-modal/actions-modal.component';
+import { CreditApplicationButtonsComponent } from './credit-application/buttons/buttons.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -173,6 +174,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         LegalContractorBeneficiaryActionsComponent,
         LegalContragentActionsModalComponent,
         SupportCenterActionsModalComponent,
+        CreditApplicationButtonsComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     exports: [
@@ -219,6 +221,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         LegalContractorBeneficiaryActionsComponent,
         LegalContragentActionsModalComponent,
         SupportCenterActionsModalComponent,
+        CreditApplicationButtonsComponent,
     ],
 })
 export class ComponentsModule {}
