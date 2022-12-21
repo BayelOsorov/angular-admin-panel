@@ -38,11 +38,11 @@
 
                 <tr>
                     <td>Наименование организации</td>
-                    <td>{{ work.description }}</td>
+                    <td>{{ work.company }}</td>
                 </tr>
                 <tr>
                     <td>Должность</td>
-                    <td>{{ work.description }}</td>
+                    <td>{{ getWorkPosition() }}</td>
                 </tr>
                 <tr>
                     <td>Стаж работы</td>
@@ -68,7 +68,7 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <tr>
-                    <td> </td>
+                    <td></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -114,6 +114,12 @@
                     <td>Работа</td>
                     <td>Ежемесячный доход</td>
                 </tr>
+                <ng-container *ngFor="let i of objectValues(additionalIncomes)">
+                    <tr>
+                        <td>{{ i.work }}</td>
+                        <td>{{ i.value }}</td>
+                    </tr>
+                </ng-container>
             </table>
         </nb-accordion-item-body>
     </nb-accordion-item>
@@ -127,15 +133,28 @@
             <table class="w-100">
                 <tr>
                     <td>ФИО</td>
-                    <td></td>
+                    <td>
+                        {{
+                            spouseData.surname +
+                                ' ' +
+                                spouseData.name +
+                                ' ' +
+                                spouseData.patronymic
+                        }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Номер телефона</td>
+                    <td>{{ spouseData?.phoneNumber }}</td>
                 </tr>
                 <tr>
                     <td>Работа</td>
-                    <td></td>
+                    <td>Ежемесячный доход</td>
                 </tr>
-                <tr>
-                    <td>Доход супруги</td>
-                    <td></td>
+
+                <tr *ngFor="let i of spouseData.incomes">
+                    <td>{{ i.work }}</td>
+                    <td>{{ i.value }}</td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -148,21 +167,20 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <thead>
-                    <tr>
-                        <th>Тип</th>
-                        <th>Марка</th>
-                        <th>Модель</th>
-                        <th>Год выпуска</th>
-                    </tr>
-                </thead>
                 <tr>
-                    <td>Автомобиль</td>
-                    <td>Хонда</td>
-                    <td>Цивик</td>
-
-                    <td>2002</td>
+                    <td>Тип</td>
+                    <td>Марка</td>
+                    <td>Модель</td>
+                    <td>Год выпуска</td>
                 </tr>
+                <ng-container *ngFor="let i of objectValues(personalEstates)">
+                    <tr>
+                        <td>{{ getPersonalEstateType(i.type) }}</td>
+                        <td>{{ i.brand }}</td>
+                        <td>{{ i.model }}</td>
+                        <td>{{ i.manufactureYear }}</td>
+                    </tr>
+                </ng-container>
             </table>
         </nb-accordion-item-body>
     </nb-accordion-item>
@@ -178,6 +196,13 @@
                     <td>Тип</td>
                     <td>Адрес</td>
                 </tr>
+
+                <ng-container *ngFor="let i of objectValues(realEstates)">
+                    <tr>
+                        <td>{{ getRealEstateType(i.type) }}</td>
+                        <td>{{ i.address }}</td>
+                    </tr>
+                </ng-container>
             </table>
         </nb-accordion-item-body>
     </nb-accordion-item>
@@ -293,12 +318,12 @@
                 <tr>
                     <td>Семейное положение</td>
                     <td></td>
-                    <td></td>
+                    <td>{{ getMaritalStatus() }}</td>
                 </tr>
                 <tr>
                     <td>Иждивенцы</td>
                     <td></td>
-                    <td></td>
+                    <td>{{ getDependtsCount() }}</td>
                 </tr>
                 <tr>
                     <td>
@@ -306,7 +331,7 @@
                         (мес)
                     </td>
                     <td></td>
-                    <td></td>
+                    <td>{{ getActualResidenceLoc() }}</td>
                 </tr>
                 <tr>
                     <td>Наличие недвижимого имущества</td>

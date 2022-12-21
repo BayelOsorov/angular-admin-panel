@@ -9,7 +9,7 @@
         [ngModel]="requestingAmount"
     ></nz-slider>
     <button
-        [disabled]="btnDisabled"
+        [disabled]="btnDisabled || requestingAmount === data?.requestingAmount"
         (click)="updateAmount()"
         class="d-flex mx-auto"
         nbButton

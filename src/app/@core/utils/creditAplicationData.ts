@@ -87,6 +87,18 @@ const maritalStatus = [
     { value: 'Widow', text: 'Вдова' },
     { value: 'Divorced ', text: 'В разводе' },
 ];
+const realEstateItemsEnum = [
+    { value: 'Apartment', text: 'Квартира' },
+    { value: 'House', text: 'Дом' },
+    { value: 'LandPlot', text: 'Земельный участок' },
+    { value: 'Other', text: 'Другое' },
+];
+const personalEstateItemsEnum = [
+    { value: 'Car', text: 'Автомобиль' },
+    { value: 'Motorcycle', text: 'Мотоцикл' },
+    { value: 'Other', text: 'Другое' },
+];
+
 export {
     Position,
     entrepreneurTypeEnum,
@@ -98,4 +110,6 @@ export {
     dependentsCount,
     placeOfWorkType,
     maritalStatus,
+    realEstateItemsEnum,
+    personalEstateItemsEnum,
 };

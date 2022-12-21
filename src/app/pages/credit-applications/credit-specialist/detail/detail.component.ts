@@ -37,7 +37,7 @@ export class CreditApplicationDetailComponent implements OnInit {
                 next: (data) => {
                     this.loanApplicationData = data;
                     console.log(data.customerData);
-
+                    this.requestingAmount = data.requestingAmount;
                     this.getScoring(data.id);
                     this.getDebtorInfoReport(data.id);
                 },

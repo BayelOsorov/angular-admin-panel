@@ -15,6 +15,8 @@ import {
     dependentsCount,
     maritalStatus,
     placeOfWorkType,
+    realEstateItemsEnum,
+    personalEstateItemsEnum,
 } from './creditAplicationData';
 
 export {
@@ -34,6 +36,8 @@ export {
     locationMonth,
     dependentsCount,
     maritalStatus,
+    realEstateItemsEnum,
     IdentificationAnswers,
+    personalEstateItemsEnum,
     HttpOptions,
 };
