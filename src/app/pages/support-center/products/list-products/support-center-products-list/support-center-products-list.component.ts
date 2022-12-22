@@ -28,12 +28,6 @@ export class SupportCenterProductsListComponent implements OnInit, OnDestroy {
             type: 'text',
             valuePrepareFunction: (item) => item.ru,
         },
-
-        answers: {
-            title: 'Кол-во ответов',
-            type: 'text',
-            valuePrepareFunction: (item) => item.length,
-        },
     };
     private destroy$: Subject<void> = new Subject<void>();
 

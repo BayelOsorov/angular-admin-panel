@@ -60,50 +60,12 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-<!-- <nb-accordion multi class='mt-4'>
-    <nb-accordion-item>
-        <nb-accordion-item-header class="justify-content-center">
 
-        </nb-accordion-item-header>
-        <nb-accordion-item-body>
-            <table class="w-100">
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td> </td>
-                    <td></td>
-                </tr>
-            </table>
-        </nb-accordion-item-body>
-    </nb-accordion-item>
-</nb-accordion> -->
-<nb-accordion multi class="mt-4">
+<nb-accordion
+    *ngIf="objectValues(additionalIncomes).length > 0"
+    multi
+    class="mt-4"
+>
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Дополнительный доход
@@ -124,7 +86,7 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-<nb-accordion multi class="mt-4">
+<nb-accordion *ngIf="spouseData" multi class="mt-4">
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Дополнительный доход супруга ("и")
@@ -160,7 +122,11 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-<nb-accordion multi class="mt-4">
+<nb-accordion
+    *ngIf="objectValues(personalEstates).length > 0"
+    multi
+    class="mt-4"
+>
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Движимое имущество
@@ -185,7 +151,7 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-<nb-accordion multi class="mt-4">
+<nb-accordion *ngIf="objectValues(realEstates).length > 0" multi class="mt-4">
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Недвижимое имущество

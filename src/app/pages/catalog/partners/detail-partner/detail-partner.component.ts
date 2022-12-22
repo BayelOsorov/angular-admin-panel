@@ -9,6 +9,8 @@ import {
     IDetailTag,
 } from '../../../../@core/models/catalog/catalog';
 import { IDetailCategory } from '../../../../@core/models/catalog/category';
+import { IListPartnerFeedbacks } from '../../../../@core/models/catalog/partners';
+import { PartnerFeedbacksService } from '../../../../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
 @Component({
     templateUrl: './detail-partner.component.html',
@@ -17,15 +19,13 @@ import { PartnersService } from '../../../../@core/services/catalog/partners/par
 export class DetailPartnerComponent implements OnInit, OnDestroy {
     partner;
     partnerId: number;
-    category: Observable<IDetailCategory>;
-    brand: Observable<IDetailBrand>;
-    product: Observable<IDetailProduct>;
-    tags: Observable<IDetailTag>;
+    feedbacks: IListPartnerFeedbacks;
 
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private toaster: ToastrService,
         private partnersService: PartnersService,
+        private partnersFeedbacksService: PartnerFeedbacksService,
         private route: ActivatedRoute,
         private router: Router
     ) {}
@@ -36,6 +36,17 @@ export class DetailPartnerComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.partner = data;
+            });
+    }
+    getFeedbacks() {
+        this.partnersFeedbacksService
+            .getListPartnerFeedbacks(1, {
+                partnerId: this.partnerId,
+                passedModeration: true,
+            })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.feedbacks = data;
             });
     }
     updatePartner() {
@@ -55,6 +66,7 @@ export class DetailPartnerComponent implements OnInit, OnDestroy {
             this.partnerId = params['id'];
         });
         this.getDetailPartner();
+        this.getFeedbacks();
     }
     ngOnDestroy() {
         this.destroy$.next();

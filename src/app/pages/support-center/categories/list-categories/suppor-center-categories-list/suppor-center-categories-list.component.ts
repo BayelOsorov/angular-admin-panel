@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { SupportCenterActionsModalComponent } from '../../../../../@core/components/support-center/actions-modal/actions-modal.component';
 import { IListSupportCenterCategoriesAndProducts } from '../../../../../@core/models/support-center/support-center';
 import { SupportCenterService } from '../../../../../@core/services/support-center/support-center.service';
-import { tableNumbering } from '../../../../../@core/utils';
+import { tableNumbering, truncateText } from '../../../../../@core/utils';
 @Component({
     templateUrl: './suppor-center-categories-list.component.html',
     styleUrls: ['./suppor-center-categories-list.component.scss'],
@@ -25,14 +25,9 @@ export class SupporCenterCategoriesListComponent implements OnInit, OnDestroy {
 
         name: {
             title: 'Название на RU',
-            type: 'text',
-            valuePrepareFunction: (item) => item.ru,
-        },
-
-        answers: {
-            title: 'Кол-во ответов',
-            type: 'text',
-            valuePrepareFunction: (item) => item.length,
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                `<div title='${item.ru}'>${truncateText(item.ru)}</div>`,
         },
     };
     private destroy$: Subject<void> = new Subject<void>();

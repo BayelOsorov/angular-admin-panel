@@ -12,6 +12,8 @@
     .first-block {
         margin-top: 10px;
         margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
     }
     .date {
         float: right;

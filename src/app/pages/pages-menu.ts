@@ -111,10 +111,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
                 title: 'Партнеры',
                 link: '/catalog/partners',
             },
-            {
-                title: 'Группы',
-                link: '/catalog/groups',
-            },
+            // {
+            //     title: 'Группы',
+            //     link: '/catalog/groups',
+            // },
 
             {
                 title: 'Акции и Промо',

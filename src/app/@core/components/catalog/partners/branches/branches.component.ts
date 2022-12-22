@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { PartnerFeedbacksService } from '../../../../services/catalog/partner-feedbacks/partner-feedbacks.service';
 import { PartnersService } from '../../../../services/catalog/partners/partners.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class BranchesComponent implements OnInit, OnDestroy {
     constructor(
         private partnersService: PartnersService,
         private router: Router,
-        private toaster: ToastrService
+        private toaster: ToastrService,
+        private partnersFeedbacksService: PartnerFeedbacksService
     ) {}
     editBranch(id) {
         this.router.navigate([
@@ -61,6 +63,7 @@ export class BranchesComponent implements OnInit, OnDestroy {
                 this.listBranches = data;
             });
     }
+
     ngOnInit(): void {
         this.getBranches();
     }

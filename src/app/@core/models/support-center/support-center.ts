@@ -21,7 +21,7 @@ export interface IDetailSupportCenterAnswer {
     };
     order: number;
     categoryId: number;
-    productId: number;
+    products: [number];
 }
 export interface IListSupportCenterCategoriesAndProducts {
     page: number;
@@ -46,5 +46,5 @@ export interface IDetailSupportCenterCategoriesAndProducts {
     };
     order: number;
     categoryId: number;
-    productId: number;
+    productId: [number];
 }

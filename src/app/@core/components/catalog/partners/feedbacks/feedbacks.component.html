@@ -1,19 +1,22 @@
-<div
-    class="list-feedbacks"
-    *ngIf="listFeedbacks && listFeedbacks.items.length > 0"
->
-    <div *ngFor="let item of listFeedbacks.items" class="feedback-item">
-        <div class="first-block">
-            <strong>Осмонов Талгар</strong>
+<div>
+    <div
+        class="list-feedbacks"
+        *ngIf="listFeedbacks && listFeedbacks.items.length > 0"
+    >
+        <div *ngFor="let item of listFeedbacks.items" class="feedback-item">
+            <div class="first-block">
+                <strong>Осмонов Талгар</strong>
+                <div>Рейтинг: {{ item.rate }}</div>
+            </div>
+            <p>{{ item.comment }}</p>
+            <div class="date">
+                {{ item.createDateTime | date : 'dd.MM.yyy' }}
+            </div>
         </div>
-        <p>{{ item.comment }}</p>
-        <div class="date">
-            {{ item.createDateTime | date: 'dd.MM.yyy' }}
-        </div>
-    </div>
 
-    <ngx-pagination
-        (changePageEvent)="getFeedbacks($event)"
-        [data]="listFeedbacks"
-    ></ngx-pagination>
+        <ngx-pagination
+            (changePageEvent)="getFeedbacks($event)"
+            [data]="listFeedbacks"
+        ></ngx-pagination>
+    </div>
 </div>

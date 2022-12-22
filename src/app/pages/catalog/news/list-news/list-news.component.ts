@@ -6,7 +6,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../../@core/components/shared/avatar-img/avatar-img.component';
 import { IListNews } from '../../../../@core/models/catalog/catalog';
 import { NewsService } from '../../../../@core/services/catalog/news/news.service';
-import { tableNumbering } from '../../../../@core/utils';
+import { tableNumbering, truncateText } from '../../../../@core/utils';
 @Component({
     templateUrl: './list-news.component.html',
     styleUrls: ['./list-news.component.scss'],
@@ -28,14 +28,16 @@ export class ListNewsComponent implements OnInit, OnDestroy {
         },
         title: {
             title: 'Заголовок на RU',
-            type: 'text',
-            valuePrepareFunction: (item) => item.ru,
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                `<div title='${item.ru}'>${truncateText(item.ru)}</div>`,
         },
 
         shortText: {
             title: 'Короткий текст на RU',
-            type: 'text',
-            valuePrepareFunction: (item) => item.ru,
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                `<div title='${item.ru}'>${truncateText(item.ru)}</div>`,
         },
         isActive: {
             title: 'Активен',

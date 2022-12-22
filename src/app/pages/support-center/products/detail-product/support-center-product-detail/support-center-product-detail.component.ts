@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional } from '@angular/core';
+import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { tableNumbering, truncateText } from '../../../../../@core/utils';
     templateUrl: './support-center-product-detail.component.html',
     styleUrls: ['./support-center-product-detail.component.scss'],
 })
-export class SupportCenterProductDetailComponent implements OnInit {
+export class SupportCenterProductDetailComponent implements OnInit, OnDestroy {
     listAnswers: IListSupportCenterAnswers;
     productId: number;
     productData: IDetailSupportCenterCategoriesAndProducts;
@@ -37,13 +37,15 @@ export class SupportCenterProductDetailComponent implements OnInit {
 
         title: {
             title: 'Заголовок на RU',
-            type: 'text',
-            valuePrepareFunction: (item) => truncateText(item.ru),
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                `<div title='${item.ru}'>${truncateText(item.ru)}</div>`,
         },
         body: {
             title: 'Ответ на RU',
-            type: 'text',
-            valuePrepareFunction: (item) => truncateText(item.ru),
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                `<div title='${item.ru}'>${truncateText(item.ru)}</div>`,
         },
     };
     private destroy$: Subject<void> = new Subject<void>();

@@ -37,13 +37,15 @@ export class SupportCenterCategoryDetailComponent implements OnInit, OnDestroy {
 
         title: {
             title: 'Заголовок на RU',
-            type: 'text',
-            valuePrepareFunction: (item) => truncateText(item.ru),
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                `<div title='${item.ru}'>${truncateText(item.ru)}</div>`,
         },
         body: {
             title: 'Ответ на RU',
-            type: 'text',
-            valuePrepareFunction: (item) => truncateText(item.ru),
+            type: 'html',
+            valuePrepareFunction: (item) =>
+                `<div title='${item.ru}'>${truncateText(item.ru)}</div>`,
         },
     };
     private destroy$: Subject<void> = new Subject<void>();

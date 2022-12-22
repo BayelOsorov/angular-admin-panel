@@ -30,7 +30,6 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
         comment: {
             title: 'Текст',
             type: 'html',
-
             valuePrepareFunction: (item) =>
                 `<div title='${item}'>${truncateText(item)}</div>`,
         },

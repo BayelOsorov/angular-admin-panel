@@ -16,7 +16,7 @@ import { IdentificationService } from '../../../../@core/services/identification
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
 })
-export class CreditApplicationDetailComponent implements OnInit {
+export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     loanApplicationData: ICreditApplicationDetail;
     scoringData: IScoringCreditApplication;
     personalData: IPersonalData;
@@ -118,5 +118,9 @@ export class CreditApplicationDetailComponent implements OnInit {
     }
     ngOnInit(): void {
         this.loanApplication();
+    }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

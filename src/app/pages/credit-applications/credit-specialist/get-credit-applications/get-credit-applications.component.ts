@@ -8,7 +8,8 @@ import { CreditApplicationService } from '../../../../@core/services/credit-appl
     templateUrl: './get-credit-applications.component.html',
     styleUrls: ['./get-credit-applications.component.scss'],
 })
-export class GetCreditApplicationsComponent implements OnInit {
+export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
+    applications;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         public router: Router,
@@ -33,25 +34,20 @@ export class GetCreditApplicationsComponent implements OnInit {
             });
     }
     fuelApplication() {}
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    applications = {
-        '0-0-3': this.loanApplication,
-        fuel: this.fuelApplication,
-    };
-    getCreditSpecialistAcctount() {
+
+    getCreditSpecialistAccount() {
         this.creditApplication
             .getCreditSpecialistAccount()
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: (data) => {},
-                error(err) {
-                    if (err.status === 403) {
-                        this.createCreditSpecialistAcctount();
-                    }
-                },
+            .toPromise()
+            .then((res) => console.log(res))
+            .catch((e) => {
+                if (e.status === 403) {
+                    this.createCreditSpecialistAccount();
+                }
             });
     }
-    createCreditSpecialistAcctount() {
+
+    createCreditSpecialistAccount() {
         this.creditApplication
             .createCreditSpecialistAccount()
             .pipe(takeUntil(this.destroy$))
@@ -67,6 +63,14 @@ export class GetCreditApplicationsComponent implements OnInit {
         this.loanApplication();
     }
     ngOnInit(): void {
-        this.getCreditSpecialistAcctount();
+        this.applications = {
+            '0-0-3': this.loanApplication,
+            fuel: this.fuelApplication,
+        };
+        this.getCreditSpecialistAccount();
+    }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

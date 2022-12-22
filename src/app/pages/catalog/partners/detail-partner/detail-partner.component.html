@@ -47,9 +47,9 @@
                                 <div class="partner-card col-md-4">
                                     <div class="card__border container">
                                         <div class="card__inner">
-                                            <div class="card__icon favorite">
+                                            <div class="card__icon">
                                                 <i
-                                                    style="font-size: 38px"
+                                                    style="font-size: 45px"
                                                     class="nb-star"
                                                 ></i>
                                             </div>
@@ -60,45 +60,45 @@
                                                 >
                                             </div>
                                         </div>
-                                        <div class="line"></div>
+                                        <!-- <div class="line"></div> -->
                                     </div>
                                 </div>
                                 <div class="partner-card col-md-4">
                                     <div class="card__border container">
                                         <div class="card__inner">
-                                            <div class="card__icon feedback">
+                                            <div class="card__icon">
                                                 <i
-                                                    style="font-size: 38px"
+                                                    style="font-size: 45px"
                                                     class="nb-person"
                                                 ></i>
                                             </div>
                                             <div class="card__text">
                                                 <p>Отзывы</p>
-                                                <strong class="float-right"
-                                                    >50</strong
-                                                >
+                                                <strong class="float-right">{{
+                                                    feedbacks?.totalItemCount
+                                                }}</strong>
                                             </div>
                                         </div>
-                                        <div class="line"></div>
+                                        <!-- <div class="line"></div> -->
                                     </div>
                                 </div>
                                 <div class="partner-card col-md-4">
                                     <div class="card__border container">
                                         <div class="card__inner">
-                                            <div class="card__icon rate">
+                                            <div class="card__icon">
                                                 <i
-                                                    style="font-size: 38px"
+                                                    style="font-size: 45px"
                                                     class="nb-bar-chart"
                                                 ></i>
                                             </div>
                                             <div class="card__text">
                                                 <p>Рейтинг</p>
-                                                <strong class="float-right"
-                                                    >4.5</strong
-                                                >
+                                                <strong class="float-right">
+                                                    {{ partner.rating }}
+                                                </strong>
                                             </div>
                                         </div>
-                                        <div class="line"></div>
+                                        <!-- <div class="line"></div> -->
                                     </div>
                                 </div>
                             </div>

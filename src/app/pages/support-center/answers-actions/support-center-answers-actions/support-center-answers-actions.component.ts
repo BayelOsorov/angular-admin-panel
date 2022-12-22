@@ -41,7 +41,7 @@ export class SupportCenterAnswersActionsComponent implements OnInit, OnDestroy {
             bodyKg: ['', [Validators.required, Validators.maxLength(2048)]],
             bodyUz: ['', [Validators.required, Validators.maxLength(2048)]],
             categoryId: ['', [Validators.required]],
-            productId: [],
+            products: [],
             order: ['', Validators.required],
         });
         this.getCategories();
@@ -53,7 +53,7 @@ export class SupportCenterAnswersActionsComponent implements OnInit, OnDestroy {
             this.form.controls['categoryId'].setValue(
                 Number.isInteger(+this.categoryId) ? this.categoryId : null
             );
-            this.form.controls['productId'].setValue(
+            this.form.controls['products'].setValue(
                 Number.isInteger(+this.productId) ? [this.productId] : null
             );
         });
@@ -73,7 +73,7 @@ export class SupportCenterAnswersActionsComponent implements OnInit, OnDestroy {
                     this.form.controls['bodyUz'].setValue(data.body.uz);
                     this.form.controls['order'].setValue(data.order);
                     this.form.controls['categoryId'].setValue(data.categoryId);
-                    this.form.controls['productId'].setValue(data.productId);
+                    this.form.controls['products'].setValue(data.products);
                 });
         }
     }
@@ -109,10 +109,10 @@ export class SupportCenterAnswersActionsComponent implements OnInit, OnDestroy {
                     kg: this.form.value.bodyUz,
                 },
 
-                productId:
-                    this.form.value.productId.length > 0
-                        ? this.form.value.productId
-                        : null,
+                products:
+                    this.form.value.products.length > 0
+                        ? this.form.value.products
+                        : [],
             };
             if (this.itemData) {
                 this.supportService
