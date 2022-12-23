@@ -33,13 +33,13 @@ const entrepreneurTypeEnum = [
 const residenceLocationEnum = [
     { value: 'Bishkek', text: 'Бишкек' },
     { value: 'Osh', text: 'Ош' },
-    { value: 'BatkenRegion', text: 'Баткенская обл.' },
-    { value: 'JalalAbadRegion', text: 'Джалал-Абадская обл.' },
-    { value: 'NarynRegion', text: 'Нарынская обл.' },
-    { value: 'OshRegion', text: 'Ошская обл.' },
-    { value: 'TalasRegion', text: 'Таласская обл.' },
-    { value: 'ChuyRegion', text: 'Чуйская обл.' },
-    { value: 'IssykKulRegion', text: 'Иссык-Кульская обл.' },
+    { value: 'Batken', text: 'Баткенская обл.' },
+    { value: 'JalalAbad', text: 'Джалал-Абадская обл.' },
+    { value: 'Naryn', text: 'Нарынская обл.' },
+    { value: 'Osh', text: 'Ошская обл.' },
+    { value: 'Talas', text: 'Таласская обл.' },
+    { value: 'Chuy', text: 'Чуйская обл.' },
+    { value: 'IssykKyl', text: 'Иссык-Кульская обл.' },
 ];
 
 const genderEnum = [

@@ -11,20 +11,28 @@ import {
 import { IPersonalData } from '../../../../@core/models/identification/identification';
 import { CreditApplicationService } from '../../../../@core/services/credit-application/credit-application.service';
 import { IdentificationService } from '../../../../@core/services/identification/identification.service';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
 })
 export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     loanApplicationData: ICreditApplicationDetail;
-    scoringData: IScoringCreditApplication;
+    dataScoring: IScoringCreditApplication;
     personalData: IPersonalData;
     requestingAmount: number;
+    customerData;
+    occupation;
+    additionalIncomes;
+    spouseData;
+    spouseDataIncomes;
+    realEstates;
+    personalEstates;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         public router: Router,
         private toaster: ToastrService,
+        private fb: FormBuilder,
         private location: Location,
         private creditApplicationsService: CreditApplicationService,
         private identificationService: IdentificationService
@@ -36,8 +44,6 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data) => {
                     this.loanApplicationData = data;
-
-                    console.log(data.customerData);
                     this.requestingAmount = data.requestingAmount;
 
                     this.getScoring(data.id);
@@ -51,7 +57,8 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
-                    this.scoringData = data;
+                    this.dataScoring = data;
+                    console.log(data);
                 },
             });
     }
@@ -118,6 +125,48 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     }
     ngOnInit(): void {
         this.loanApplication();
+        this.customerData = this.fb.group({
+            DurationOfActualResidenceLocation: [[]],
+            ActualResidenceLocation: [[]],
+            DependentsCount: [[]],
+            EducationDegree: [[]],
+            MaritalStatus: [[]],
+        });
+        this.occupation = this.fb.group({
+            Income: [[]],
+            WorkAddress: [[]],
+            WorkExperience: [[]],
+            Position: [[]],
+            Type: [[]],
+            Description: [[]],
+            CertificateNumber: [[]],
+        });
+        this.additionalIncomes = this.fb.group({
+            Work: [[]],
+            Value: [[]],
+        });
+        this.spouseData = this.fb.group({
+            Name: [[]],
+            Surname: [[]],
+            Patronymic: [[]],
+            PhoneNumber: [[]],
+        });
+        this.spouseDataIncomes = this.fb.group({
+            Work: [[]],
+            Value: [[]],
+        });
+        this.realEstates = this.fb.group({
+            Type: [[]],
+            Address: [[]],
+        });
+        this.personalEstates = this.fb.group({
+            Brand: [[]],
+            Type: [[]],
+
+            Model: [[]],
+            ManufactureYear: this.fb.group({ Type: [[]] }),
+        });
+        console.log(this.personalEstates);
     }
     ngOnDestroy() {
         this.destroy$.next();

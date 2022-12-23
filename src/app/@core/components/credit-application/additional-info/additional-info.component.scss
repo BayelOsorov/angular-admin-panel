@@ -7,3 +7,6 @@ td {
 td {
     width: 100vw;
 }
+::ng-deep .custom-badge {
+    position: unset !important;
+}

@@ -14,6 +14,7 @@ import { ICreditApplicationDetail } from '../../../models/credit-application/cre
 })
 export class CreditApplicationMoreInfoComponent implements OnInit {
     @Input() data: ICreditApplicationDetail;
+    @Input() dataScoring;
     constructor() {}
 
     ngOnInit(): void {}

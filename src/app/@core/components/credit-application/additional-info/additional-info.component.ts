@@ -26,13 +26,17 @@ import {
 })
 export class AdditionalInfoComponent implements OnInit {
     @Input() data;
+    @Input() dataScoring;
+    Math: any;
     objectValues = Object.values;
     work;
     additionalIncomes;
     realEstates;
     personalEstates;
     spouseData;
-    constructor() {}
+    constructor() {
+        this.Math = Math;
+    }
 
     getWorkType() {
         return placeOfWorkType.find(
@@ -57,21 +61,28 @@ export class AdditionalInfoComponent implements OnInit {
     getPersonalEstateType(type) {
         return personalEstateItemsEnum.find((e) => e.value === type).text;
     }
-    getMaritalStatus() {
-        return maritalStatus.find(
-            (item) => item.value === this.data.customerData.maritalStatus
-        )?.text;
+    getMaritalStatus(status) {
+        return maritalStatus.find((item) => item.value === status)?.text;
     }
-    getDependtsCount() {
-        return dependentsCount.find(
-            (item) => item.value === this.data.customerData.dependentsCount
+    getDependtsCount(count) {
+        return dependentsCount.find((item) => item.value === count).text;
+    }
+    getActualResidenceLoc(loc) {
+        return locationMonth.find((item) => item.value === loc).text;
+    }
+    getGender() {
+        return genderEnum.find(
+            (e) => e.value === this.dataScoring?.identificationScore.genderValue
         ).text;
     }
-    getActualResidenceLoc() {
-        return locationMonth.find(
+    getResidenceLoc(loc) {
+        return residenceLocationEnum.find((e) => e.value === loc)?.text;
+    }
+    getClientHistoryType() {
+        return clientHistoryTypeValue.find(
             (item) =>
                 item.value ===
-                this.data.customerData.durationOfActualResidenceLocation
+                this.dataScoring.creditHistoryScore.clientHistoryTypeValue
         ).text;
     }
 

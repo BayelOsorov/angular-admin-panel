@@ -37,14 +37,18 @@ export class EditStaffComponent implements OnInit, OnDestroy {
         if (this.staffDetail) {
             this.form.controls['name'].setValue(this.staffDetail.name);
             this.form.controls['userName'].setValue(this.staffDetail.userName);
-            this.form.controls['roles'].setValue(this.staffDetail.roles);
+            this.form.controls['roles'].setValue(
+                this.staffDetail.roles.map((item) => item.id)
+            );
         }
     }
     getRoles() {
         this.staffService
             .getRolesStaff()
             .pipe(takeUntil(this.destroy$))
-            .subscribe((data) => (this.roles = data));
+            .subscribe((data) => {
+                this.roles = data;
+            });
     }
     onSubmit() {
         if (this.form.valid) {

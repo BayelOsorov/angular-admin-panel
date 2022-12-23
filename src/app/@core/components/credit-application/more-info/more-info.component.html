@@ -32,7 +32,9 @@
     <ngx-passport-data class="detail-block"> </ngx-passport-data>
 
     <ngx-additional-info
+        *ngIf="data && dataScoring"
         [data]="data"
+        [dataScoring]="dataScoring"
         class="detail-block"
     ></ngx-additional-info>
 </div>

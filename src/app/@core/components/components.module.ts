@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import {
     NbAccordionModule,
     NbAlertModule,
+    NbBadgeModule,
     NbButtonModule,
     NbCardModule,
     NbDatepickerModule,
@@ -94,6 +95,7 @@ import { LegalContractorBeneficiaryActionsComponent } from './contragents/benefi
 import { LegalContragentActionsModalComponent } from './contragents/employees/legal-contragent-actions-modal/legal-contragent-actions-modal.component';
 import { SupportCenterActionsModalComponent } from './support-center/actions-modal/actions-modal.component';
 import { CreditApplicationButtonsComponent } from './credit-application/buttons/buttons.component';
+import { CreditApplicationNeedToEditComponent } from './credit-application/need-to-edit/credit-application-need-to-edit/credit-application-need-to-edit.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -125,6 +127,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         NzSliderModule,
         DemoNgZorroAntdModule,
         NbEvaIconsModule,
+        NbBadgeModule,
     ],
     declarations: [
         CreateStaffModalComponent,
@@ -179,6 +182,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         LegalContragentActionsModalComponent,
         SupportCenterActionsModalComponent,
         CreditApplicationButtonsComponent,
+        CreditApplicationNeedToEditComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -226,6 +230,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         LegalContragentActionsModalComponent,
         SupportCenterActionsModalComponent,
         CreditApplicationButtonsComponent,
+        CreditApplicationNeedToEditComponent,
     ],
 })
 export class ComponentsModule {}

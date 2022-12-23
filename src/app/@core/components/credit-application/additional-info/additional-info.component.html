@@ -173,8 +173,10 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-
-<nb-accordion multi class="mt-4">
+<div class="mt-4 mb-2">
+    <strong>Скоринг карта</strong>
+</div>
+<nb-accordion multi>
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Идентификация
@@ -183,23 +185,75 @@
             <table class="w-100">
                 <tr>
                     <td>Пол</td>
-                    <td></td>
-                    <td></td>
+
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="dataScoring.identificationScore.gender"
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>{{ getGender() }}</td>
                 </tr>
                 <tr>
                     <td>Возраст</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="dataScoring.identificationScore.age"
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>{{ dataScoring.identificationScore.ageValue }}</td>
                 </tr>
                 <tr>
                     <td>Место регистрации по паспорту</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.identificationScore.residenceRegion
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{
+                            getResidenceLoc(
+                                dataScoring.identificationScore
+                                    .residenceRegionValue
+                            )
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Место фактического проживания</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.identificationScore
+                                    .actualResidenceRegion
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{
+                            getResidenceLoc(
+                                dataScoring.identificationScore
+                                    .actualResidenceRegionValue
+                            )
+                        }}
+                    </td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -214,28 +268,98 @@
             <table class="w-100">
                 <tr>
                     <td>Количество дней просрочки</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.creditHistoryScore
+                                    .numberOfDaysOverdue
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{
+                            dataScoring.creditHistoryScore
+                                .numberOfDaysOverdueValue
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Количество раз просрочки</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.creditHistoryScore.numberOfDelays
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{ dataScoring.creditHistoryScore.numberOfDelaysValue }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Новый/Повторный клиент</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.creditHistoryScore.clientHistoryType
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>{{ getClientHistoryType() }}</td>
                 </tr>
                 <tr>
                     <td>Количество полученных кредитов</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.creditHistoryScore
+                                    .numberOfReceivedLoans
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{
+                            dataScoring.creditHistoryScore
+                                .numberOfReceivedLoansValue
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Количество параллельных кредитов</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.creditHistoryScore
+                                    .numberOfParallelLoans
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{
+                            dataScoring.creditHistoryScore
+                                .numberOfParallelLoansValue
+                        }}
+                    </td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -251,22 +375,54 @@
             <table class="w-100">
                 <tr>
                     <td>Должность</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]=""
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Ежемесячный доход</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]=""
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Стаж работы</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]=""
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Доп. доход</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]=""
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                     <td></td>
                 </tr>
             </table>
@@ -283,31 +439,130 @@
             <table class="w-100">
                 <tr>
                     <td>Семейное положение</td>
-                    <td></td>
-                    <td>{{ getMaritalStatus() }}</td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.personalInformationScore
+                                    .maritalStatus
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{
+                            getMaritalStatus(
+                                dataScoring.personalInformationScore
+                                    .maritalStatusValue
+                            )
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Иждивенцы</td>
-                    <td></td>
-                    <td>{{ getDependtsCount() }}</td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.personalInformationScore
+                                    .dependentsCount
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{
+                            getDependtsCount(
+                                dataScoring.personalInformationScore
+                                    .dependentsCountValue
+                            )
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         Срок проживание - Срок проживания по фактическому адресу
                         (мес)
                     </td>
-                    <td></td>
-                    <td>{{ getActualResidenceLoc() }}</td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.personalInformationScore
+                                    .durationOfResidenceAtTheActualLocation
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{
+                            getActualResidenceLoc(
+                                dataScoring.personalInformationScore
+                                    .durationOfResidenceAtTheActualLocationValue
+                            )
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Наличие недвижимого имущества</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.personalInformationScore
+                                    .realEstateAvailability
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        <a
+                            *ngIf="
+                                dataScoring.personalInformationScore
+                                    .realEstateAvailabilitiesValue &&
+                                dataScoring.personalInformationScore
+                                    .realEstateAvailabilitiesValue.length !== 0
+                            "
+                            href="#RealEstateItems"
+                            >Смотреть</a
+                        >
+                    </td>
                 </tr>
                 <tr>
                     <td>Наличие движимого имущества</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.personalInformationScore
+                                    .personalEstateAvailability
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        <a
+                            *ngIf="
+                                dataScoring.personalInformationScore
+                                    .personalEstateAvailabilitiesValue &&
+                                dataScoring.personalInformationScore
+                                    .personalEstateAvailabilitiesValue
+                                    .length !== 0
+                            "
+                            href="#PersonalEstateItems"
+                            >Смотреть</a
+                        >
+                    </td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -323,23 +578,68 @@
             <table class="w-100">
                 <tr>
                     <td>Раздел идентификация</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="dataScoring.identificationScore.score"
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Раздел кредитная история</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="dataScoring.creditHistoryScore.score"
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Раздел платежеспособность</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="dataScoring.solvencyScore.score"
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Раздел персональная информация</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="dataScoring.personalInformationScore.score"
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Итого</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.personalInformationScore.score +
+                                dataScoring.solvencyScore.score +
+                                dataScoring.creditHistoryScore.score +
+                                dataScoring.identificationScore.score
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
             </table>
         </nb-accordion-item-body>
@@ -355,44 +655,172 @@
             <table class="w-100">
                 <tr>
                     <td>Сумма кредита</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                Math.round(
+                                    dataScoring.loanCircumstances
+                                        .requestingAmount * 100
+                                ) / 100
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Срок кредита (мес)</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                Math.round(
+                                    dataScoring.loanCircumstances
+                                        .requestedMonths * 100
+                                ) / 100
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Ежемесячный взнос</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                Math.round(
+                                    dataScoring.loanCircumstances
+                                        .monthlyInstallment * 100
+                                ) / 100
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Совокупные ежемес. доход</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                Math.round(
+                                    dataScoring.loanCircumstances.income * 100
+                                ) / 100
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
 
                 <tr>
                     <td>Взносы по параллельным кредитам</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                Math.round(
+                                    dataScoring.loanCircumstances
+                                        .parallelLoansMonthlyInstallment * 100
+                                ) / 100
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Семейные расходы</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                Math.round(
+                                    dataScoring.loanCircumstances.expenses * 100
+                                ) / 100
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Расходы на иждивенцев</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                Math.round(
+                                    dataScoring.loanCircumstances
+                                        .expensesForDependents * 100
+                                ) / 100
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>ЧП после всех расходов</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                Math.round(
+                                    dataScoring.loanCircumstances
+                                        .incomeAfterExpenses * 100
+                                ) / 100
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Соотношение взноса к ЧП</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                (Math.round(
+                                    dataScoring.loanCircumstances
+                                        .monthlyInstallmentToIncomeRatio * 100
+                                ) /
+                                    100) *
+                                    100 +
+                                '%'
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
                 <tr>
                     <td>Расчет максимального лимита</td>
-                    <td></td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                Math.round(dataScoring.maximumLimit * 100) / 100
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
                 </tr>
             </table>
         </nb-accordion-item-body>
