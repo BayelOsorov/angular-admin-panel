@@ -4,6 +4,14 @@
         [data]="loanApplicationData"
         [dataScoring]="dataScoring"
     ></ngx-credit-application-more-info>
+    <ngx-additional-info
+        *ngIf="loanApplicationData && dataScoring"
+        [data]="loanApplicationData"
+        [dataScoring]="dataScoring"
+        [form]="customerData"
+        (needToEditUserEvent)="needToEditUser()"
+        class="detail-block mt-4"
+    ></ngx-additional-info>
     <ngx-update-amount
         (changeAmountEvent)="changeAmount($event)"
         [data]="loanApplicationData"

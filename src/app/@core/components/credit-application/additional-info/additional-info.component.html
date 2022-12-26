@@ -11,7 +11,7 @@
                 </tr>
                 <tr>
                     <td>Вид деятельности</td>
-                    <td>{{ getActivityType() }}</td>
+                    <td>{{ getActivityType(work.type) }}</td>
                 </tr>
                 <tr>
                     <td>Описание деятельности</td>
@@ -19,7 +19,7 @@
                 </tr>
                 <tr>
                     <td>Стаж работы</td>
-                    <td>{{ getWorkExp() }}</td>
+                    <td>{{ getWorkExp(work.workExperience) }}</td>
                 </tr>
                 <tr>
                     <td>Ежемесячный доход</td>
@@ -42,11 +42,11 @@
                 </tr>
                 <tr>
                     <td>Должность</td>
-                    <td>{{ getWorkPosition() }}</td>
+                    <td>{{ getWorkPosition(work.position) }}</td>
                 </tr>
                 <tr>
                     <td>Стаж работы</td>
-                    <td>{{ getWorkExp() }}</td>
+                    <td>{{ getWorkExp(work.workExperience) }}</td>
                 </tr>
                 <tr>
                     <td>Ежемесячный доход</td>
@@ -57,10 +57,39 @@
                     <td>{{ work.workAddress }}</td>
                 </tr>
             </table>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('Occupation.Type')"
+                [title]="'Тип'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('Occupation.Description')"
+                [title]="'Описание деятельности'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('Occupation.WorkExperience')"
+                [title]="'Стаж работы'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('Occupation.Income')"
+                [title]="'Ежемесячный доход'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('Occupation.WorkAddress')"
+                [title]="'Адрес'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('Occupation.Position')"
+                [title]="'Должность'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-
 <nb-accordion
     *ngIf="objectValues(additionalIncomes).length > 0"
     multi
@@ -76,16 +105,32 @@
                     <td>Работа</td>
                     <td>Ежемесячный доход</td>
                 </tr>
-                <ng-container *ngFor="let i of objectValues(additionalIncomes)">
+                <ng-container
+                    *ngFor="
+                        let i of objectValues(additionalIncomes);
+                        let idx = index
+                    "
+                >
                     <tr>
                         <td>{{ i.work }}</td>
                         <td>{{ i.value }}</td>
                     </tr>
+                    <th colspan="2">
+                        <ngx-credit-application-need-to-edit
+                            [control]="
+                                form.get('AdditionalIncomes').controls[idx]
+                                    .controls.Value.controls.Work
+                            "
+                            [title]="i.work"
+                            [placeholder]="'Введите'"
+                        ></ngx-credit-application-need-to-edit>
+                    </th>
                 </ng-container>
             </table>
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
+
 <nb-accordion *ngIf="spouseData" multi class="mt-4">
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
@@ -109,19 +154,48 @@
                     <td>Номер телефона</td>
                     <td>{{ spouseData?.phoneNumber }}</td>
                 </tr>
+            </table>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('SpouseData.Surname')"
+                [title]="'ФИО'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('SpouseData.PhoneNumber')"
+                [title]="'Номер телефона'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <table class="w-100">
                 <tr>
                     <td>Работа</td>
                     <td>Ежемесячный доход</td>
                 </tr>
-
-                <tr *ngFor="let i of spouseData.incomes">
-                    <td>{{ i.work }}</td>
-                    <td>{{ i.value }}</td>
-                </tr>
+                <ng-container
+                    *ngFor="
+                        let i of objectValues(spouseData.incomes);
+                        let idx = index
+                    "
+                >
+                    <tr>
+                        <td>{{ i.work }}</td>
+                        <td>{{ i.value }}</td>
+                    </tr>
+                    <th colspan="2">
+                        <ngx-credit-application-need-to-edit
+                            [control]="
+                                form.get('SpouseData.Incomes').controls[idx]
+                                    .controls.Value.controls.Work
+                            "
+                            [title]="'Работа'"
+                            [placeholder]="'Введите'"
+                        ></ngx-credit-application-need-to-edit>
+                    </th>
+                </ng-container>
             </table>
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
+
 <nb-accordion
     *ngIf="objectValues(personalEstates).length > 0"
     multi
@@ -139,13 +213,28 @@
                     <td>Модель</td>
                     <td>Год выпуска</td>
                 </tr>
-                <ng-container *ngFor="let i of objectValues(personalEstates)">
+                <ng-container
+                    *ngFor="
+                        let i of objectValues(personalEstates);
+                        let idx = index
+                    "
+                >
                     <tr>
                         <td>{{ getPersonalEstateType(i.type) }}</td>
                         <td>{{ i.brand }}</td>
                         <td>{{ i.model }}</td>
                         <td>{{ i.manufactureYear }}</td>
                     </tr>
+                    <th colspan="4">
+                        <ngx-credit-application-need-to-edit
+                            [control]="
+                                form.get('PersonalEstates').controls[idx]
+                                    .controls.Value.controls.Model
+                            "
+                            [title]="getPersonalEstateType(i.type)"
+                            [placeholder]="'Введите'"
+                        ></ngx-credit-application-need-to-edit>
+                    </th>
                 </ng-container>
             </table>
         </nb-accordion-item-body>
@@ -163,16 +252,42 @@
                     <td>Адрес</td>
                 </tr>
 
-                <ng-container *ngFor="let i of objectValues(realEstates)">
+                <ng-container
+                    *ngFor="let i of objectValues(realEstates); let idx = index"
+                >
                     <tr>
                         <td>{{ getRealEstateType(i.type) }}</td>
                         <td>{{ i.address }}</td>
                     </tr>
+                    <th colspan="2">
+                        <ngx-credit-application-need-to-edit
+                            [control]="
+                                form.get('RealEstates').controls[idx].controls
+                                    .Value.controls.Address
+                            "
+                            [title]="getRealEstateType(i.type)"
+                            [placeholder]="'Введите'"
+                        ></ngx-credit-application-need-to-edit>
+                    </th>
                 </ng-container>
             </table>
+            <ng-container
+                *ngFor="let i of objectValues(realEstates); let idx = index"
+            >
+            </ng-container>
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
+<div class="">
+    <button
+        class="d-flex mx-auto"
+        nbButton
+        status="warning"
+        (click)="needToEditUserEvent.emit()"
+    >
+        Редактировать
+    </button>
+</div>
 <div class="mt-4 mb-2">
     <strong>Скоринг карта</strong>
 </div>
@@ -366,7 +481,11 @@
     </nb-accordion-item>
 </nb-accordion>
 
-<nb-accordion multi class="mt-4">
+<nb-accordion
+    *ngIf="dataScoring.solvencyScore.employeePosition"
+    multi
+    class="mt-4"
+>
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Платежеспособность
@@ -378,52 +497,88 @@
                     <td>
                         <nb-badge
                             class="custom-badge"
-                            [text]=""
+                            [text]="dataScoring.solvencyScore.employeePosition"
                             status="warning"
                             position="default"
                         >
                         </nb-badge>
                     </td>
-                    <td></td>
+                    <td>
+                        {{
+                            getWorkPosition(
+                                dataScoring.solvencyScore.employeePositionValue
+                            )
+                        }}
+                    </td>
+                </tr>
+                <tr *ngIf="dataScoring.solvencyScore.entrepreneurshipType">
+                    <td>Вид деятельности</td>
+                    <td>
+                        <nb-badge
+                            class="custom-badge"
+                            [text]="
+                                dataScoring.solvencyScore.entrepreneurshipType
+                            "
+                            status="warning"
+                            position="default"
+                        >
+                        </nb-badge>
+                    </td>
+                    <td>
+                        {{
+                            getActivityType(
+                                dataScoring.solvencyScore
+                                    .entrepreneurshipTypeValue
+                            )
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Ежемесячный доход</td>
                     <td>
                         <nb-badge
                             class="custom-badge"
-                            [text]=""
+                            [text]="dataScoring.solvencyScore.income"
                             status="warning"
                             position="default"
                         >
                         </nb-badge>
                     </td>
-                    <td></td>
+                    <td>{{ dataScoring.solvencyScore.incomeValue }}</td>
                 </tr>
                 <tr>
                     <td>Стаж работы</td>
                     <td>
                         <nb-badge
                             class="custom-badge"
-                            [text]=""
+                            [text]="dataScoring.solvencyScore.workExperience"
                             status="warning"
                             position="default"
                         >
                         </nb-badge>
                     </td>
-                    <td></td>
+                    <td>
+                        {{
+                            getWorkExp(
+                                dataScoring.solvencyScore.workExperienceValue
+                            )
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Доп. доход</td>
                     <td>
                         <nb-badge
                             class="custom-badge"
-                            [text]=""
+                            [text]="dataScoring.solvencyScore.additionalIncome"
                             status="warning"
                             position="default"
                         >
                         </nb-badge>
                     </td>
-                    <td></td>
+                    <td>
+                        {{ dataScoring.solvencyScore.additionalIncomeValue }}
+                    </td>
                 </tr>
             </table>
         </nb-accordion-item-body>

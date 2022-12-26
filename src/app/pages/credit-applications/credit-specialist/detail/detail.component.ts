@@ -11,7 +11,15 @@ import {
 import { IPersonalData } from '../../../../@core/models/identification/identification';
 import { CreditApplicationService } from '../../../../@core/services/credit-application/credit-application.service';
 import { IdentificationService } from '../../../../@core/services/identification/identification.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+    AbstractControl,
+    Form,
+    FormArray,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 @Component({
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
@@ -21,14 +29,10 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     dataScoring: IScoringCreditApplication;
     personalData: IPersonalData;
     requestingAmount: number;
-    customerData;
-    occupation;
-    additionalIncomes;
-    spouseData;
-    spouseDataIncomes;
-    realEstates;
-    personalEstates;
+    customerData: FormGroup;
+
     private destroy$: Subject<void> = new Subject<void>();
+
     constructor(
         public router: Router,
         private toaster: ToastrService,
@@ -48,6 +52,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
 
                     this.getScoring(data.id);
                     this.getDebtorInfoReport(data.id);
+                    this.generateControls();
                 },
             });
     }
@@ -123,6 +128,83 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
+
+    needToEditUser() {
+        console.log(this.customerData.value);
+    }
+    generateControls() {
+        if (this.loanApplicationData.customerData.additionalIncomes) {
+            this.customerData.addControl(
+                'AdditionalIncomes',
+                this.fb.group(
+                    Object.values(
+                        this.loanApplicationData.customerData.additionalIncomes
+                    ).map((item) =>
+                        this.fb.group({
+                            Value: this.fb.group({
+                                Work: [[]],
+                                Value: [[]],
+                            }),
+                        })
+                    )
+                )
+            );
+        }
+        if (this.loanApplicationData.customerData.spouseData) {
+            (this.customerData.get('SpouseData') as FormGroup).addControl(
+                'Incomes',
+                this.fb.group(
+                    Object.values(
+                        this.loanApplicationData.customerData.spouseData.incomes
+                    ).map(() =>
+                        this.fb.group({
+                            Value: this.fb.group({
+                                Work: [[]],
+                                Value: [[]],
+                            }),
+                        })
+                    )
+                )
+            );
+        }
+        if (this.loanApplicationData.customerData.realEstates) {
+            this.customerData.addControl(
+                'RealEstates',
+                this.fb.group(
+                    Object.values(
+                        this.loanApplicationData.customerData.realEstates
+                    ).map((item) =>
+                        this.fb.group({
+                            Value: this.fb.group({
+                                Type: [[]],
+                                Address: [[]],
+                            }),
+                        })
+                    )
+                )
+            );
+        }
+        if (this.loanApplicationData.customerData.personalEstates) {
+            this.customerData.addControl(
+                'PersonalEstates',
+                this.fb.group(
+                    Object.values(
+                        this.loanApplicationData.customerData.realEstates
+                    ).map((item) =>
+                        this.fb.group({
+                            Value: this.fb.group({
+                                Brand: [[]],
+                                Type: [[]],
+                                Model: [[]],
+                                ManufactureYear: [[]],
+                            }),
+                        })
+                    )
+                )
+            );
+        }
+        console.log(this.customerData);
+    }
     ngOnInit(): void {
         this.loanApplication();
         this.customerData = this.fb.group({
@@ -131,42 +213,46 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             DependentsCount: [[]],
             EducationDegree: [[]],
             MaritalStatus: [[]],
+            Occupation: this.fb.group({
+                Income: [[]],
+                WorkAddress: [[]],
+                WorkExperience: [[]],
+                Position: [[]],
+                Type: [[]],
+                Description: [[]],
+                Company: [[]],
+            }),
+            SpouseData: this.fb.group({
+                Name: [[]],
+                Surname: [[]],
+                Patronymic: [[]],
+                PhoneNumber: [[]],
+            }),
+            // AdditionalIncomes: this.fb.group([
+            //     this.fb.group({
+            //         Value: this.fb.group({
+            //             Work: [[]],
+            //             Value: [[]],
+            //         }),
+            //     }),
+            //     this.fb.group({
+            //         Value: this.fb.group({
+            //             Work: [[]],
+            //             Value: [[]],
+            //         }),
+            //     }),
+            // ]),
+            // RealEstates: this.fb.group({
+            //     Type: [[]],
+            //     Address: [[]],
+            // }),
+            //  PersonalEstates: this.fb.group({
+            //     Brand: [[]],
+            //     Type: [[]],
+            //     Model: [[]],
+            //     ManufactureYear: [[]],
+            // }),
         });
-        this.occupation = this.fb.group({
-            Income: [[]],
-            WorkAddress: [[]],
-            WorkExperience: [[]],
-            Position: [[]],
-            Type: [[]],
-            Description: [[]],
-            CertificateNumber: [[]],
-        });
-        this.additionalIncomes = this.fb.group({
-            Work: [[]],
-            Value: [[]],
-        });
-        this.spouseData = this.fb.group({
-            Name: [[]],
-            Surname: [[]],
-            Patronymic: [[]],
-            PhoneNumber: [[]],
-        });
-        this.spouseDataIncomes = this.fb.group({
-            Work: [[]],
-            Value: [[]],
-        });
-        this.realEstates = this.fb.group({
-            Type: [[]],
-            Address: [[]],
-        });
-        this.personalEstates = this.fb.group({
-            Brand: [[]],
-            Type: [[]],
-
-            Model: [[]],
-            ManufactureYear: this.fb.group({ Type: [[]] }),
-        });
-        console.log(this.personalEstates);
     }
     ngOnDestroy() {
         this.destroy$.next();

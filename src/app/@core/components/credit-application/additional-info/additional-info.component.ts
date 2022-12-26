@@ -3,6 +3,8 @@ import {
     OnInit,
     ChangeDetectionStrategy,
     Input,
+    EventEmitter,
+    Output,
 } from '@angular/core';
 import {
     Position,
@@ -25,8 +27,11 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdditionalInfoComponent implements OnInit {
+    @Output() needToEditUserEvent = new EventEmitter();
     @Input() data;
     @Input() dataScoring;
+    @Input() form;
+
     Math: any;
     objectValues = Object.values;
     work;
@@ -43,17 +48,14 @@ export class AdditionalInfoComponent implements OnInit {
             (item) => item.value.toLowerCase() === this.work.$type.toLowerCase()
         )?.text;
     }
-    getWorkExp() {
-        return workExperience.find(
-            (item) => item.value === this.work.workExperience
-        ).text;
+    getWorkExp(type) {
+        return workExperience.find((item) => item.value === type).text;
     }
-    getWorkPosition() {
-        return Position.find((item) => item.value === this.work.position)?.text;
+    getWorkPosition(type) {
+        return Position.find((item) => item.value === type)?.text;
     }
-    getActivityType() {
-        return entrepreneurTypeEnum.find((e) => e.value === this.work.type)
-            .text;
+    getActivityType(type) {
+        return entrepreneurTypeEnum.find((e) => e.value === type).text;
     }
     getRealEstateType(type) {
         return realEstateItemsEnum.find((e) => e.value === type).text;
@@ -94,5 +96,6 @@ export class AdditionalInfoComponent implements OnInit {
             this.personalEstates = this.data.customerData.personalEstates;
             this.spouseData = this.data.customerData.spouseData;
         }
+        console.log(this.form.get('SpouseData.Incomes'));
     }
 }

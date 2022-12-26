@@ -22,6 +22,8 @@ export class CreditApplicationNeedToEditComponent implements OnInit, OnDestroy {
 
     @Input() submitted = false;
     @Input() isRequired = true;
+    @Input() title: string;
+
     @Input() mode = 'default';
     @Input() size = 'large';
     @Input() placeholder: string;
