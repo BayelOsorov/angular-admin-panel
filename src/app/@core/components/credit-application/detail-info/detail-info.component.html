@@ -1,12 +1,14 @@
 <div class="detail-info">
     <div class="status">
         <div class="name">
-            <strong>{{ data.fio }}</strong>
+            <strong>{{ personalInfo.fio }}</strong>
             <p class="mt-2">
                 {{ data.createdAt | date : 'dd.MM.yyyy, hh:mm' }}
             </p>
         </div>
-        <nb-alert status="primary">Одобрено </nb-alert>
+        <nb-alert [status]="getStatus().status"
+            >{{ getStatus().title }}
+        </nb-alert>
     </div>
     <div class="chart d-flex mt-3">
         <nb-card class="col-md-8">
@@ -14,7 +16,7 @@
                 ><div class="col-md-8">Высокий уровеь доверия</div>
                 <div class="col-md-4">800</div></nb-alert
             >
-            <ngx-fusion-chart></ngx-fusion-chart>
+            <ngx-fusion-chart [score]="dataScoring.score"></ngx-fusion-chart>
             <nb-alert class="row justify-content-center mb-0" status="success"
                 ><div class="col-md-8">Локальный киб</div>
                 <div class="col-md-4">просрочек не обнаружено</div></nb-alert

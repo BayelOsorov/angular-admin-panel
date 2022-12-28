@@ -131,6 +131,19 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
 
     needToEditUser() {
         console.log(this.customerData.value);
+        this.creditApplicationsService
+            .needToEditCreditApplication(this.loanApplicationData.id, {
+                editRequiredProperties: this.customerData.value,
+            })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.toaster.success(
+                        'Вы успешно отправили на редактирование заявку на кредит!'
+                    );
+                    this.location.back();
+                },
+            });
     }
     generateControls() {
         if (this.loanApplicationData.customerData.additionalIncomes) {

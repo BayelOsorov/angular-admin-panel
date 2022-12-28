@@ -42,7 +42,24 @@ export class AdditionalInfoComponent implements OnInit {
     constructor() {
         this.Math = Math;
     }
+    scrollToElement($element): void {
+        console.log($element);
+        $element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest',
+        });
+    }
 
+    scrollTo(element: any): void {
+        console.log(document.getElementById(element) as HTMLElement, element);
+
+        (document.getElementById(element) as HTMLElement).scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'start',
+        });
+    }
     getWorkType() {
         return placeOfWorkType.find(
             (item) => item.value.toLowerCase() === this.work.$type.toLowerCase()

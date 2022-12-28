@@ -199,6 +199,7 @@
 <nb-accordion
     *ngIf="objectValues(personalEstates).length > 0"
     multi
+    id="RealEstateItems"
     class="mt-4"
 >
     <nb-accordion-item>
@@ -240,7 +241,12 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-<nb-accordion *ngIf="objectValues(realEstates).length > 0" multi class="mt-4">
+<nb-accordion
+    *ngIf="objectValues(realEstates).length > 0"
+    multi
+    class="mt-4"
+    id="PersonalEstateItems"
+>
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Недвижимое имущество
@@ -278,15 +284,14 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-<div class="">
-    <button
-        class="d-flex mx-auto"
-        nbButton
+<div class="mt-5 row">
+    <ngx-confirm-buttons
+        (approveEvent)="needToEditUserEvent.emit()"
         status="warning"
-        (click)="needToEditUserEvent.emit()"
+        title="Редактировать"
+        class="d-flex mx-auto col-md-4"
     >
-        Редактировать
-    </button>
+    </ngx-confirm-buttons>
 </div>
 <div class="mt-4 mb-2">
     <strong>Скоринг карта</strong>
@@ -686,7 +691,7 @@
                                 dataScoring.personalInformationScore
                                     .realEstateAvailabilitiesValue.length !== 0
                             "
-                            href="#RealEstateItems"
+                            (click)="scrollTo('PersonalEstateItems')"
                             >Смотреть</a
                         >
                     </td>
@@ -714,7 +719,7 @@
                                     .personalEstateAvailabilitiesValue
                                     .length !== 0
                             "
-                            href="#PersonalEstateItems"
+                            (click)="scrollTo('RealEstateItems')"
                             >Смотреть</a
                         >
                     </td>

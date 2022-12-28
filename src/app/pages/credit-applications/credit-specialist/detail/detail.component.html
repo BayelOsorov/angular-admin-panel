@@ -1,6 +1,11 @@
 <nb-card class="container">
-    <ngx-credit-application-detail-info></ngx-credit-application-detail-info>
+    <ngx-credit-application-detail-info
+        *ngIf="loanApplicationData && dataScoring"
+        [data]="loanApplicationData"
+        [dataScoring]="dataScoring"
+    ></ngx-credit-application-detail-info>
     <ngx-credit-application-more-info
+        *ngIf="loanApplicationData && dataScoring"
         [data]="loanApplicationData"
         [dataScoring]="dataScoring"
     ></ngx-credit-application-more-info>

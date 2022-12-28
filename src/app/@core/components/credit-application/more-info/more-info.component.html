@@ -1,24 +1,17 @@
 <div class="" *ngIf="data">
-    <nb-accordion multi>
+    <nb-accordion multi class="danger-accordion">
         <nb-accordion-item>
             <nb-accordion-item-header class="justify-content-center">
                 Требуется особое внимание
             </nb-accordion-item-header>
             <nb-accordion-item-body>
-                <div class="d-flex justify-content-around">
-                    <p>Срок проживания по фактическому адресу проживания</p>
-                    <p>6 мес. и менее</p>
-                    <p>10</p>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <p>Срок проживания по фактическому адресу проживания</p>
-                    <p>6 мес. и менее</p>
-                    <p>10</p>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <p>Срок проживания по фактическому адресу проживания</p>
-                    <p>6 мес. и менее</p>
-                    <p>10</p>
+                <div
+                    *ngFor="let i of dataScoring.creditHistoryScore.stopFactors"
+                    class="d-flex justify-content-around"
+                >
+                    <p>{{ i.name }}</p>
+                    <p>{{ i.description }}</p>
+                    <p>{{ i.weight }}</p>
                 </div>
             </nb-accordion-item-body>
         </nb-accordion-item>

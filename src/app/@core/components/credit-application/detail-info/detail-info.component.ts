@@ -1,4 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    Input,
+} from '@angular/core';
+import { ICreditApplicationDetail } from '../../../models/credit-application/credit-application';
 
 @Component({
     selector: 'ngx-credit-application-detail-info',
@@ -7,7 +13,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreditApplicationDetailInfoComponent implements OnInit {
-    data = {
+    @Input() data: ICreditApplicationDetail;
+    @Input() dataScoring;
+    personalInfo = {
         id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
         fio: 'Surname Name Patronymic',
         createdAt: '2022-12-08T03:53:54.122Z',
@@ -90,6 +98,15 @@ export class CreditApplicationDetailInfoComponent implements OnInit {
         ],
     };
     constructor() {}
+    getStatus() {
+        switch (this.data.status) {
+            case 'InProcess':
+                return { status: 'primary', title: 'Ожидание' };
+                break;
 
+            default:
+                break;
+        }
+    }
     ngOnInit(): void {}
 }

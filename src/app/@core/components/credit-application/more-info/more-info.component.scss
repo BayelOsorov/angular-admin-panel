@@ -1,4 +1,11 @@
+@import '../../../../@theme/styles/themes';
+
 .detail-block {
     padding-top: 30px;
     display: block;
+}
+.danger-accordion {
+    ::ng-deep nb-accordion-item {
+        background-color: nb-theme(alert-danger-background-color) !important;
+    }
 }
