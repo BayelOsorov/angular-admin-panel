@@ -75,6 +75,7 @@
                         >
                         <div class="col-sm-9">
                             <ngx-multiple-search-select
+                                isSearch="true"
                                 (searchEmit)="getCategories($event)"
                                 [control]="form.get('categoryId')"
                                 type="default"

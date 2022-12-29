@@ -22,23 +22,17 @@ export class PermissionsGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        // const userData = this.authService.getUserData();
-        //     if (userData.profile.role instanceof Array) {
-        // const isAdmin = userData.profile.role.find((item) => item === 'admin')
-        //     return _nav.map((item) =>
-        //       item.items.filter((item) =>
-        //         item.role.includes(isAdmin ? isAdmin : userData.profile.role[0]),
-        //       ),
-        //     )
-        //   }
-        //   return _nav
-        //     .map((item) =>
-        //       item.items.filter((item) => item.role.includes(userData && userData.profile.role)),
-        //     )
-        //     .filter((item) => item.length > 0)
-        // }
-        // route.data.roles.filter((role) => accessLevel(role, userData.role));
-
-        return true;
+        const userData = this.authService.getUserData();
+        if (userData) {
+            // console.log(
+            //     route.data.roles.map((role) => {
+            //         const bool = accessLevel(role, userData.role);
+            //         console.log(bool);
+            //     })
+            // );
+            console.log('sdfsdfsd');
+            return accessLevel(route.data.roles, userData.role);
+        }
+        return false;
     }
 }

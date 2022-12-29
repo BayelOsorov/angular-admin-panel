@@ -23,6 +23,7 @@ export class MultipleSearchSelectComponent implements OnInit, OnDestroy {
     @Input() data;
     @Input() submitted = false;
     @Input() isRequired = true;
+    @Input() isSearch = false;
     isLoading = false;
 
     private destroy$: Subject<void> = new Subject<void>();

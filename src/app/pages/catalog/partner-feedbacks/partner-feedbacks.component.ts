@@ -47,7 +47,7 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
         passedModeration: {
             title: 'Статус',
             type: 'text',
-            valuePrepareFunction: (item) => (item ? 'Одобренный' : 'Ожидание'),
+            valuePrepareFunction: (bool) => (bool ? 'Одобренный' : 'Ожидание'),
         },
     };
 

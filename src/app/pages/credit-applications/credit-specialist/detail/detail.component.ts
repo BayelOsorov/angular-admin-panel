@@ -124,7 +124,8 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data1) => {
-                    console.log(data1);
+                    const blob = window.URL.createObjectURL(data1);
+                    console.log(blob);
                 },
             });
     }

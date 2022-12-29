@@ -5,6 +5,7 @@ import {
     ICreditApplicationDetail,
     IScoringCreditApplication,
 } from '../../models/credit-application/credit-application';
+import { HttpOptions } from '../../utils';
 
 @Injectable({
     providedIn: 'root',
@@ -63,7 +64,8 @@ export class CreditApplicationService {
     getCreditApplicationKib(id) {
         return this.http.get(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ocl-requests/${id}/debtor-information-report`
+                `/operator/api/v1/ocl-requests/${id}/debtor-information-report`,
+            HttpOptions
         );
     }
     getCreditSpecialistAccount() {

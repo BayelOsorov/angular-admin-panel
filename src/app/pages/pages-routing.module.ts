@@ -48,16 +48,22 @@ const routes: Routes = [
             // ! staff
             {
                 path: 'staff',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin'] },
                 component: StaffComponent,
             },
             {
                 path: 'staff-detail/:id',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin'] },
                 component: DetailStaffComponent,
             },
             // ! Support Center
 
             {
                 path: 'support-center',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin', 'underrater'] },
                 children: [
                     {
                         path: 'categories',
@@ -113,6 +119,8 @@ const routes: Routes = [
             // ! Contragents
             {
                 path: 'contragents',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin', 'underrater'] },
                 children: [
                     {
                         path: 'list',
@@ -272,21 +280,29 @@ const routes: Routes = [
             // ! Identification
             {
                 path: 'identification/photo',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin', 'operator'] },
                 component: IdentificationGetComponent,
             },
             {
                 path: 'identification/video',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin', 'operator'] },
                 component: IdentificationGetComponent,
             },
             {
                 path: 'identification/detail/:id',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin', 'operator'] },
                 component: IdentificationDetailComponent,
             },
             // ! Credit Application
             {
                 path: 'credit-application',
                 canActivate: [PermissionsGuard],
-                data: { roles: ['admin', 'credit-specialist'] },
+                data: {
+                    roles: ['admin', 'credit_specialist'],
+                },
                 children: [
                     {
                         path: '0-0-3',
