@@ -26,4 +26,11 @@ const accessLevel = (arg1, arg2) => {
     }
     return !!result;
 };
-export { translateMaritalStatus, truncateText, accessLevel };
+const truncateDecimals = (number, digits = 2) => {
+    const multiplier = Math.pow(10, digits);
+    const adjustedNum = number * multiplier;
+    const truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'floor'](adjustedNum);
+
+    return truncatedNum / multiplier;
+};
+export { translateMaritalStatus, truncateText, accessLevel, truncateDecimals };

@@ -1,0 +1,23 @@
+<nb-accordion multi *ngIf="blackList && blackList.length > 0">
+    <nb-accordion-item>
+        <nb-accordion-item-header class="justify-content-center">
+            В списке экстремистов
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+            <table class="w-100">
+                <tr>
+                    <td>ФИО</td>
+                    <td>День рождения</td>
+                    <td>Cходство</td>
+                </tr>
+                <tr *ngFor="let i of blackList">
+                    <td>{{ i.blackListPerson.fullname }}</td>
+                    <td>
+                        {{ i.blackListPerson.birthDate | date : 'dd.MM.yyyy' }}
+                    </td>
+                    <td>{{ truncateDecimals(i.similarity) }}</td>
+                </tr>
+            </table>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>

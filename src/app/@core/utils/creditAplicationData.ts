@@ -46,7 +46,13 @@ const genderEnum = [
     { value: 'Male', text: 'Мужчина' },
     { value: 'Female', text: 'Женщина' },
 ];
-
+const EducationEnum = [
+    { value: 'Higher', text: 'Высшее' },
+    { value: 'UncompletedHigher', text: 'Высшее неоконченное' },
+    { value: 'SeveralHigher', text: 'Несколько высших' },
+    { value: 'Secondary', text: 'Среднее' },
+    { value: 'SpecializedSecondary', text: 'Среднее-специальное' },
+];
 const workExperience = [
     { value: 'OneOrLess', text: 'Один или менее' },
     { value: 'TwoOrThree', text: 'Два или три' },
@@ -111,5 +117,6 @@ export {
     placeOfWorkType,
     maritalStatus,
     realEstateItemsEnum,
+    EducationEnum,
     personalEstateItemsEnum,
 };

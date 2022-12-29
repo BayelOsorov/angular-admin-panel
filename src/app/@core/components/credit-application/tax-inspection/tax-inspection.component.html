@@ -1,0 +1,85 @@
+<nb-accordion multi *ngIf="taxPayer && socialFundBalance">
+    <nb-accordion-item>
+        <nb-accordion-item-header class="justify-content-center">
+            ГНС
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+            <div
+                class=""
+                *ngIf="
+                    socialFundBalance.farms &&
+                    objectValues(socialFundBalance.farms).length > 0
+                "
+            >
+                <p class="text-center pt-2">Состояние задолженности по КФ</p>
+                <table class="w-100">
+                    <ng-container
+                        *ngFor="let i of objectValues(socialFundBalance.farms)"
+                    >
+                        <tr>
+                            <td>balance_gnpf</td>
+                            <td>{{ truncateDecimals(i.balanceGnpf) }}</td>
+                        </tr>
+                        <tr>
+                            <td>balance_penalties</td>
+                            <td>{{ truncateDecimals(i.balancePenalties) }}</td>
+                        </tr>
+                        <tr>
+                            <td>balance_pf</td>
+                            <td>{{ truncateDecimals(i.balancePf) }}</td>
+                        </tr>
+                        <tr>
+                            <td>dept</td>
+                            <td>{{ truncateDecimals(i.dept) }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>name</td>
+                            <td>{{ i.name }}</td>
+                        </tr>
+                    </ng-container>
+                </table>
+            </div>
+            <div
+                class=""
+                *ngIf="
+                    socialFundBalance.paysheets &&
+                    objectValues(socialFundBalance.paysheets).length > 0
+                "
+            >
+                <p class="text-center pt-2">
+                    Состояние задолженности по отчетам РВ
+                </p>
+                <table class="w-100">
+                    <ng-container
+                        *ngFor="
+                            let i of objectValues(socialFundBalance.paysheets)
+                        "
+                    >
+                        <tr>
+                            <td>balance_gnpf</td>
+                            <td>{{ truncateDecimals(i.balanceGnpf) }}</td>
+                        </tr>
+                        <tr>
+                            <td>balance_penalties</td>
+                            <td>{{ truncateDecimals(i.balancePenalties) }}</td>
+                        </tr>
+                        <tr>
+                            <td>balance_pf</td>
+                            <td>{{ truncateDecimals(i.balancePf) }}</td>
+                        </tr>
+                        <tr>
+                            <td>dept</td>
+                            <td>{{ i.dept }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>name</td>
+                            <td>{{ i.name }}</td>
+                        </tr>
+                    </ng-container>
+                </table>
+            </div>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>

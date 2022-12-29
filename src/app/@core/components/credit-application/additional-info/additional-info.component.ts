@@ -19,6 +19,7 @@ import {
     placeOfWorkType,
     realEstateItemsEnum,
     personalEstateItemsEnum,
+    EducationEnum,
 } from '../../../utils';
 @Component({
     selector: 'ngx-additional-info',
@@ -67,6 +68,9 @@ export class AdditionalInfoComponent implements OnInit {
     }
     getWorkExp(type) {
         return workExperience.find((item) => item.value === type).text;
+    }
+    getEducationType(type) {
+        return EducationEnum.find((item) => item.value === type).text;
     }
     getWorkPosition(type) {
         return Position.find((item) => item.value === type)?.text;

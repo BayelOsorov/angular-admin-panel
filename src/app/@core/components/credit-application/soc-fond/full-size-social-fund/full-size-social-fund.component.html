@@ -1,0 +1,34 @@
+<nb-card *ngIf="socialFund">
+    <nb-card-header> Социальный фонд </nb-card-header>
+    <div class="p-2">
+        <table class="w-100" *ngIf="socialFund.operationResult">
+            <tr>
+                <td>Наименование работодателя</td>
+                <td>ИНН работодателя</td>
+                <td>Номер СФ работодателя</td>
+                <td>Дата начала работы в отчетном периоде</td>
+                <td>Дата завершение работы в отчетном периоде</td>
+                <td>Заработная плата или доход</td>
+            </tr>
+            <ng-container
+                *ngIf="
+                    socialFund &&
+                    socialFund.workPeriodInfo.workPeriods &&
+                    socialFund.workPeriodInfo.workPeriods.length !== 0
+                "
+            >
+                <tr *ngFor="let i of socialFund.workPeriodInfo.workPeriods">
+                    <td>{{ i.payer }}</td>
+                    <td>{{ i.inn }}</td>
+                    <td>{{ i.piN_LSS }}</td>
+                    <td>{{ i.dateBegin }}</td>
+                    <td>{{ i.dateEnd }}</td>
+                    <td>{{ i.salary }}</td>
+                </tr>
+            </ng-container>
+        </table>
+        <p class="text-center" *ngIf="!socialFund.operationResult">
+            Сообщение соц фонда: {{ socialFund.message }}
+        </p>
+    </div>
+</nb-card>

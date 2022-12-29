@@ -3,7 +3,11 @@ import { StateService } from './state.service';
 import { GeneratePassword } from './generatePassword';
 import { HttpOptions, IdentificationAnswers } from './const';
 import { tableNumbering } from './tableNumbering';
-import { translateMaritalStatus, truncateText } from './helpers';
+import {
+    translateMaritalStatus,
+    truncateDecimals,
+    truncateText,
+} from './helpers';
 import {
     Position,
     entrepreneurTypeEnum,
@@ -17,6 +21,7 @@ import {
     placeOfWorkType,
     realEstateItemsEnum,
     personalEstateItemsEnum,
+    EducationEnum,
 } from './creditAplicationData';
 
 export {
@@ -25,6 +30,7 @@ export {
     GeneratePassword,
     tableNumbering,
     translateMaritalStatus,
+    truncateDecimals,
     truncateText,
     Position,
     placeOfWorkType,
@@ -40,4 +46,5 @@ export {
     IdentificationAnswers,
     personalEstateItemsEnum,
     HttpOptions,
+    EducationEnum,
 };

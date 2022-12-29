@@ -38,6 +38,7 @@ import { SupportCenterProductsListComponent } from './support-center/products/li
 import { SupportCenterCategoryDetailComponent } from './support-center/categories/detail-category/support-center-category-detail/support-center-category-detail.component';
 import { SupportCenterAnswersActionsComponent } from './support-center/answers-actions/support-center-answers-actions/support-center-answers-actions.component';
 import { SupportCenterProductDetailComponent } from './support-center/products/detail-product/support-center-product-detail/support-center-product-detail.component';
+import { FullSizeSocialFundComponent } from '../@core/components/credit-application/soc-fond/full-size-social-fund/full-size-social-fund.component';
 
 const routes: Routes = [
     {
@@ -281,6 +282,7 @@ const routes: Routes = [
                 path: 'identification/detail/:id',
                 component: IdentificationDetailComponent,
             },
+            // ! Credit Application
             {
                 path: 'credit-application',
                 canActivate: [PermissionsGuard],
@@ -297,6 +299,10 @@ const routes: Routes = [
                     {
                         path: 'fuel',
                         component: GetCreditApplicationsComponent,
+                    },
+                    {
+                        path: 'social-fund/:pin',
+                        component: FullSizeSocialFundComponent,
                     },
                 ],
             },

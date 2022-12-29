@@ -1,6 +1,4 @@
-// .custom-table {
-//     height: 300px;
-// }
+@import '../../../../@theme/styles/themes';
 tr,
 td {
     border: 1px solid #000;
@@ -9,4 +7,8 @@ td {
 }
 td {
     width: 100vw;
+}
+
+::ng-deep .ant-result-title {
+    color: nb-theme(text-basic-color);
 }

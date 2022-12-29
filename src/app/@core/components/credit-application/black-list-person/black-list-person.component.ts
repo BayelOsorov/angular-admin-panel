@@ -2,32 +2,37 @@ import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
+import { truncateDecimals } from '../../../utils';
 
 @Component({
-    selector: 'ngx-soc-fond',
-    templateUrl: './soc-fond.component.html',
-    styleUrls: ['./soc-fond.component.scss'],
+    selector: 'ngx-black-list-person',
+    templateUrl: './black-list-person.component.html',
+    styleUrls: ['./black-list-person.component.scss'],
 })
-export class SocFondComponent implements OnInit, OnDestroy {
-    @Input() pin = '20040405032203';
-    socialFund;
+export class BlackListPersonComponent implements OnInit, OnDestroy {
+    @Input() fullname = 'Генри Сехудо';
+    Math = Math;
+    blackList;
+    truncateDecimals;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private applicationRequestsService: ApplicationRequestsService
     ) {}
-    getSocialFund() {
+    getBlackListPerson() {
         this.applicationRequestsService
-            .getSocialFund(this.pin)
+            .getBlackListPerson(this.fullname)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
-                    this.socialFund = data;
+                    this.blackList = data;
                 },
             });
     }
+
     ngOnInit(): void {
-        this.getSocialFund();
+        this.getBlackListPerson();
+        this.truncateDecimals = truncateDecimals;
     }
     ngOnDestroy() {
         this.destroy$.next();

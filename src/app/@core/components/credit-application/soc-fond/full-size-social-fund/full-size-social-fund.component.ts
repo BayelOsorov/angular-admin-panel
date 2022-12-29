@@ -1,20 +1,22 @@
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
+import { ActivatedRoute } from '@angular/router';
+import { ApplicationRequestsService } from '../../../../services/credit-application/credit.service';
 
 @Component({
-    selector: 'ngx-soc-fond',
-    templateUrl: './soc-fond.component.html',
-    styleUrls: ['./soc-fond.component.scss'],
+    selector: 'ngx-full-size-social-fund',
+    templateUrl: './full-size-social-fund.component.html',
+    styleUrls: ['./full-size-social-fund.component.scss'],
 })
-export class SocFondComponent implements OnInit, OnDestroy {
-    @Input() pin = '20040405032203';
+export class FullSizeSocialFundComponent implements OnInit, OnDestroy {
+    pin: string;
     socialFund;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
-        private applicationRequestsService: ApplicationRequestsService
+        private applicationRequestsService: ApplicationRequestsService,
+        private route: ActivatedRoute
     ) {}
     getSocialFund() {
         this.applicationRequestsService
@@ -27,7 +29,10 @@ export class SocFondComponent implements OnInit, OnDestroy {
             });
     }
     ngOnInit(): void {
-        this.getSocialFund();
+        this.route.params.subscribe((params) => {
+            this.pin = params['pin'];
+            this.getSocialFund();
+        });
     }
     ngOnDestroy() {
         this.destroy$.next();

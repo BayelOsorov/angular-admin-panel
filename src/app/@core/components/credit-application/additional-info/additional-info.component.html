@@ -1,6 +1,74 @@
 <nb-accordion multi>
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
+            Общая информация
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+            <table class="w-100">
+                <tr>
+                    <td>Образование</td>
+                    <td>
+                        {{
+                            getEducationType(data.customerData.educationDegree)
+                        }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Семейное положение</td>
+                    <td>
+                        {{ getMaritalStatus(data.customerData.maritalStatus) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Иждивенцы</td>
+                    <td>
+                        {{
+                            getDependtsCount(data.customerData.dependentsCount)
+                        }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Срок проживание - Срок проживания по фактическому адресу
+                        (мес)
+                    </td>
+                    <td>
+                        {{
+                            getActualResidenceLoc(
+                                data.customerData
+                                    .durationOfActualResidenceLocation
+                            )
+                        }}
+                    </td>
+                </tr>
+            </table>
+
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('EducationDegree')"
+                [title]="'Образование'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('MaritalStatus')"
+                [title]="'Семейное положение'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('DependentsCount')"
+                [title]="'Иждивенцы'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form.get('ActualResidenceLocation')"
+                [title]="'Срок проживания по фактическому адресу'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>
+<nb-accordion multi class="mt-4">
+    <nb-accordion-item>
+        <nb-accordion-item-header class="justify-content-center">
             Место работы
         </nb-accordion-item-header>
         <nb-accordion-item-body>

@@ -96,6 +96,10 @@ import { LegalContragentActionsModalComponent } from './contragents/employees/le
 import { SupportCenterActionsModalComponent } from './support-center/actions-modal/actions-modal.component';
 import { CreditApplicationButtonsComponent } from './credit-application/buttons/buttons.component';
 import { CreditApplicationNeedToEditComponent } from './credit-application/need-to-edit/credit-application-need-to-edit/credit-application-need-to-edit.component';
+import { FullSizeSocialFundComponent } from './credit-application/soc-fond/full-size-social-fund/full-size-social-fund.component';
+import { TaxInspectionComponent } from './credit-application/tax-inspection/tax-inspection.component';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { BlackListPersonComponent } from './credit-application/black-list-person/black-list-person.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -128,6 +132,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         DemoNgZorroAntdModule,
         NbEvaIconsModule,
         NbBadgeModule,
+        NzResultModule,
     ],
     declarations: [
         CreateStaffModalComponent,
@@ -183,6 +188,9 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         SupportCenterActionsModalComponent,
         CreditApplicationButtonsComponent,
         CreditApplicationNeedToEditComponent,
+        FullSizeSocialFundComponent,
+        TaxInspectionComponent,
+        BlackListPersonComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -231,6 +239,9 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         SupportCenterActionsModalComponent,
         CreditApplicationButtonsComponent,
         CreditApplicationNeedToEditComponent,
+        FullSizeSocialFundComponent,
+        TaxInspectionComponent,
+        BlackListPersonComponent,
     ],
 })
 export class ComponentsModule {}

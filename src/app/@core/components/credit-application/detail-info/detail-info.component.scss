@@ -16,4 +16,14 @@
             width: 80%;
         }
     }
+    .custom-alert {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .dowload-icon {
+        display: block;
+        margin-top: 5px;
+        margin-left: 5px;
+    }
 }

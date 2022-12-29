@@ -17,4 +17,7 @@ export const environment = {
     contragentUrl: 'https://stage.c2u.io:17001',
     supportCenterUrl: 'https://stage.c2u.io:29001',
     creditApplicationUrl: 'https://stage.c2u.io:2003',
+    socialFundUrl: 'https://stage.c2u.io:2012',
+    blackListPersonUrl: 'https://stage.c2u.io:2010',
+    taxInspectionUrl: 'https://stage.c2u.io:1703',
 };

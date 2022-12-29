@@ -1,20 +1,19 @@
-import {
-    Component,
-    OnInit,
-    ChangeDetectionStrategy,
-    Input,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, Input } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ICreditApplicationDetail } from '../../../models/credit-application/credit-application';
+import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
 
 @Component({
     selector: 'ngx-credit-application-detail-info',
     templateUrl: './detail-info.component.html',
     styleUrls: ['./detail-info.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreditApplicationDetailInfoComponent implements OnInit {
+export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
     @Input() data: ICreditApplicationDetail;
     @Input() dataScoring;
+    blackListPerson;
+    taxPayer;
     personalInfo = {
         id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
         fio: 'Surname Name Patronymic',
@@ -34,7 +33,7 @@ export class CreditApplicationDetailInfoComponent implements OnInit {
             id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
             fullname: 'string',
         },
-        pin: 'string',
+        pin: '20609197400435',
         documentType: 'AN',
         documentNumber: 'string',
         address: {
@@ -97,7 +96,10 @@ export class CreditApplicationDetailInfoComponent implements OnInit {
             },
         ],
     };
-    constructor() {}
+    private destroy$: Subject<void> = new Subject<void>();
+    constructor(
+        private applicationRequestsService: ApplicationRequestsService
+    ) {}
     getStatus() {
         switch (this.data.status) {
             case 'InProcess':
@@ -108,5 +110,32 @@ export class CreditApplicationDetailInfoComponent implements OnInit {
                 break;
         }
     }
-    ngOnInit(): void {}
+    getBlackListPerson() {
+        this.applicationRequestsService
+            .getBlackListPerson('Генри Сехудо')
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.blackListPerson = data;
+                },
+            });
+    }
+    getTaxInspectionTaxPayer() {
+        this.applicationRequestsService
+            .getTaxInspectionTaxPayer(this.personalInfo.pin)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.taxPayer = data;
+                },
+            });
+    }
+
+    ngOnInit(): void {
+        this.getBlackListPerson();
+    }
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
 }

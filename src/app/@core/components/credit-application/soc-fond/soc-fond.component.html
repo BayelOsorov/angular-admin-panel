@@ -1,4 +1,4 @@
-<nb-accordion multi>
+<nb-accordion multi *ngIf="socialFund">
     <nb-accordion-item>
         <nb-accordion-item-header class="row">
             <div class="col-md-4"></div>
@@ -6,32 +6,40 @@
 
             <a
                 class="pr-5 col-md-4 text-right"
-                href="http://"
-                target="_blank"
-                rel="noopener noreferrer"
+                [routerLink]="['/credit-application/social-fund/' + pin]"
                 >все</a
             >
         </nb-accordion-item-header>
         <nb-accordion-item-body>
-            <table class="table-bordered w-100 custom-table">
-                <tbody>
-                    <tr>
-                        <th>2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+            <table class="w-100" *ngIf="socialFund.operationResult">
+                <tr>
+                    <td>Наименование работодателя</td>
+                    <td>ИНН работодателя</td>
+                    <td>Номер СФ работодателя</td>
+                    <td>Дата начала работы в отчетном периоде</td>
+                    <td>Дата завершение работы в отчетном периоде</td>
+                    <td>Заработная плата или доход</td>
+                </tr>
+                <ng-container
+                    *ngIf="
+                        socialFund &&
+                        socialFund.workPeriodInfo.workPeriods &&
+                        socialFund.workPeriodInfo.workPeriods.length !== 0
+                    "
+                >
+                    <tr *ngFor="let i of socialFund.workPeriodInfo.workPeriods">
+                        <td>{{ i.payer }}</td>
+                        <td>{{ i.inn }}</td>
+                        <td>{{ i.piN_LSS }}</td>
+                        <td>{{ i.dateBegin }}</td>
+                        <td>{{ i.dateEnd }}</td>
+                        <td>{{ i.salary }}</td>
                     </tr>
-                    <tr>
-                        <th>3</th>
-                        <td>Larry the Bird</td>
-                        <td>@twitter</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                </tbody>
+                </ng-container>
             </table>
+            <p class="text-center" *ngIf="!socialFund.operationResult">
+                Сообщение соц фонда: {{ socialFund.message }}
+            </p>
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
