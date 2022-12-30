@@ -30,7 +30,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     personalData: IPersonalData;
     requestingAmount: number;
     customerData: FormGroup;
-
+    test;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -118,20 +118,34 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 next: () => {},
             });
     }
-    getDebtorInfoReport(data) {
+    getDebtorInfoReport(id) {
         this.creditApplicationsService
-            .getCreditApplicationKib(this.loanApplicationData.id)
+            .getCreditApplicationBureauInfoReport(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: (data1) => {
-                    const blob = window.URL.createObjectURL(data1);
-                    console.log(blob);
+                next: (doc) => {
+                    console.log(doc);
+
+                    // const blob = window.URL.createObjectURL(data1);
+                    // console.log(blob);
                 },
             });
     }
 
+    convert(obj) {
+        return Object.keys(obj).map((key) => ({
+            name: key,
+            value: obj[key],
+            type: 'foo',
+        }));
+    }
     needToEditUser() {
-        console.log(this.customerData.value);
+        Object.values(this.customerData.value).map((item) => {
+            if (typeof item === 'object') {
+                // Object.entries(this.customerData.value);
+                console.log(Object.entries(item));
+            }
+        });
         this.creditApplicationsService
             .needToEditCreditApplication(this.loanApplicationData.id, {
                 editRequiredProperties: this.customerData.value,
@@ -227,6 +241,10 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             DependentsCount: [[]],
             EducationDegree: [[]],
             MaritalStatus: [[]],
+            'CustomerData.Occupation.Income': [[]],
+            // сделать по каждую так CustomerData.Occupation.Income а в динамичный полях  Object.values(
+            //    CustomerData.SpouseData.Incomes[0]
+            // ) CustomerData.SpouseData.Incomes
             Occupation: this.fb.group({
                 Income: [[]],
                 WorkAddress: [[]],

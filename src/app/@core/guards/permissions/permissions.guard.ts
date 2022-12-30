@@ -24,13 +24,6 @@ export class PermissionsGuard implements CanActivate {
         | UrlTree {
         const userData = this.authService.getUserData();
         if (userData) {
-            // console.log(
-            //     route.data.roles.map((role) => {
-            //         const bool = accessLevel(role, userData.role);
-            //         console.log(bool);
-            //     })
-            // );
-            console.log('sdfsdfsd');
             return accessLevel(route.data.roles, userData.role);
         }
         return false;

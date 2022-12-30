@@ -63,7 +63,7 @@ const routes: Routes = [
             {
                 path: 'support-center',
                 canActivate: [PermissionsGuard],
-                data: { roles: ['admin', 'underrater'] },
+                data: { roles: ['admin', 'manager', 'underwriter'] },
                 children: [
                     {
                         path: 'categories',
@@ -120,7 +120,7 @@ const routes: Routes = [
             {
                 path: 'contragents',
                 canActivate: [PermissionsGuard],
-                data: { roles: ['admin', 'underrater'] },
+                data: { roles: ['admin', 'manager', 'underwriter'] },
                 children: [
                     {
                         path: 'list',
@@ -158,7 +158,7 @@ const routes: Routes = [
             {
                 path: 'catalog',
                 canActivate: [PermissionsGuard],
-                data: { roles: ['admin', 'underrater'] },
+                data: { roles: ['admin', 'manager', 'underwriter'] },
                 children: [
                     // ! Brands
                     {

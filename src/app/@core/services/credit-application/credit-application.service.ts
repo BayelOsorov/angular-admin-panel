@@ -42,7 +42,7 @@ export class CreditApplicationService {
         );
     }
     needToEditCreditApplication(id, data) {
-        return this.http.post(
+        return this.http.patch(
             environment.creditApplicationUrl +
                 `/operator/api/v1/ocl-requests/${id}/require-edit`,
             data
@@ -61,10 +61,10 @@ export class CreditApplicationService {
                 `/operator/api/v1/ocl-requests/${id}/scoring`
         );
     }
-    getCreditApplicationKib(id) {
+    getCreditApplicationBureauInfoReport(id) {
         return this.http.get(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ocl-requests/${id}/debtor-information-report`,
+                `/operator/api/v1/credit-bureau-information-reports/${id}`,
             HttpOptions
         );
     }

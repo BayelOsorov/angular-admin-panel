@@ -117,6 +117,7 @@ export class AdditionalInfoComponent implements OnInit {
             this.personalEstates = this.data.customerData.personalEstates;
             this.spouseData = this.data.customerData.spouseData;
         }
-        console.log(this.form.get('SpouseData.Incomes'));
+
+        console.log(this.form.controls['CustomerData.Occupation.Income']);
     }
 }

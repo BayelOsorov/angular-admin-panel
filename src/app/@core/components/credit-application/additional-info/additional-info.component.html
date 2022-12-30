@@ -126,6 +126,11 @@
                 </tr>
             </table>
             <ngx-credit-application-need-to-edit
+                [control]="form.controls['CustomerData.Occupation.Income']"
+                [title]="'Тип'"
+                [placeholder]="'Введите CustomerData.Occupation.Income'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
                 [control]="form.get('Occupation.Type')"
                 [title]="'Тип'"
                 [placeholder]="'Введите'"
