@@ -1,23 +1,5 @@
-import { Location } from '@angular/common';
-import {
-    Component,
-    OnInit,
-    Input,
-    Output,
-    EventEmitter,
-    OnDestroy,
-} from '@angular/core';
-import {
-    AbstractControl,
-    FormBuilder,
-    FormControl,
-    FormGroup,
-} from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { IIdentificationDetail } from '../../../models/identification/identification';
-import { IdentificationService } from '../../../services/identification/identification.service';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { AbstractControl, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'ngx-identification-need-to-edit',

@@ -132,102 +132,70 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             });
     }
 
-    convert(obj) {
-        return Object.keys(obj).map((key) => ({
-            name: key,
-            value: obj[key],
-            type: 'foo',
-        }));
-    }
     needToEditUser() {
-        Object.values(this.customerData.value).map((item) => {
-            if (typeof item === 'object') {
-                // Object.entries(this.customerData.value);
-                console.log(Object.entries(item));
-            }
-        });
-        this.creditApplicationsService
-            .needToEditCreditApplication(this.loanApplicationData.id, {
-                editRequiredProperties: this.customerData.value,
-            })
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: (data) => {
-                    this.toaster.success(
-                        'Вы успешно отправили на редактирование заявку на кредит!'
-                    );
-                    this.location.back();
-                },
-            });
+        // const newCustomerData = Object.values(this.customerData.value).map(
+        //     (item: Array<any>) =>
+        //         item[0] === '' && item.length > 0 ? [] : item
+        // );
+        const newCustomerData = Object.keys(this.customerData.value).map(
+            (item) => item
+        );
+        console.log(newCustomerData);
+
+        // this.creditApplicationsService
+        //     .needToEditCreditApplication(this.loanApplicationData.id, {
+        //         editRequiredProperties: this.customerData.value,
+        //     })
+        //     .pipe(takeUntil(this.destroy$))
+        //     .subscribe({
+        //         next: (data) => {
+        //             this.toaster.success(
+        //                 'Вы успешно отправили на редактирование заявку на кредит!'
+        //             );
+        //             this.location.back();
+        //         },
+        //     });
     }
     generateControls() {
         if (this.loanApplicationData.customerData.additionalIncomes) {
-            this.customerData.addControl(
-                'AdditionalIncomes',
-                this.fb.group(
-                    Object.values(
-                        this.loanApplicationData.customerData.additionalIncomes
-                    ).map((item) =>
-                        this.fb.group({
-                            Value: this.fb.group({
-                                Work: [[]],
-                                Value: [[]],
-                            }),
-                        })
-                    )
+            Object.values(
+                this.loanApplicationData.customerData.additionalIncomes
+            ).map((item, i) =>
+                this.customerData.addControl(
+                    `CustomerData.AdditionalIncomes[${i}].Value.Work`,
+
+                    new FormControl([])
                 )
             );
         }
         if (this.loanApplicationData.customerData.spouseData) {
-            (this.customerData.get('SpouseData') as FormGroup).addControl(
-                'Incomes',
-                this.fb.group(
-                    Object.values(
-                        this.loanApplicationData.customerData.spouseData.incomes
-                    ).map(() =>
-                        this.fb.group({
-                            Value: this.fb.group({
-                                Work: [[]],
-                                Value: [[]],
-                            }),
-                        })
-                    )
+            Object.values(
+                this.loanApplicationData.customerData.spouseData.incomes
+            ).map((item, i) =>
+                this.customerData.addControl(
+                    `CustomerData.SpouseData.Incomes[${i}].Value.Work`,
+
+                    new FormControl([])
                 )
             );
         }
         if (this.loanApplicationData.customerData.realEstates) {
-            this.customerData.addControl(
-                'RealEstates',
-                this.fb.group(
-                    Object.values(
-                        this.loanApplicationData.customerData.realEstates
-                    ).map((item) =>
-                        this.fb.group({
-                            Value: this.fb.group({
-                                Type: [[]],
-                                Address: [[]],
-                            }),
-                        })
-                    )
+            Object.values(
+                this.loanApplicationData.customerData.realEstates
+            ).map((item, i) =>
+                this.customerData.addControl(
+                    `CustomerData.RealEstates[${i}].Value.Address`,
+                    new FormControl([])
                 )
             );
         }
         if (this.loanApplicationData.customerData.personalEstates) {
-            this.customerData.addControl(
-                'PersonalEstates',
-                this.fb.group(
-                    Object.values(
-                        this.loanApplicationData.customerData.realEstates
-                    ).map((item) =>
-                        this.fb.group({
-                            Value: this.fb.group({
-                                Brand: [[]],
-                                Type: [[]],
-                                Model: [[]],
-                                ManufactureYear: [[]],
-                            }),
-                        })
-                    )
+            Object.values(
+                this.loanApplicationData.customerData.realEstates
+            ).map((item, i) =>
+                this.customerData.addControl(
+                    `CustomerData.PersonalEstates[${i}].Value.Model`,
+                    new FormControl([])
                 )
             );
         }
@@ -236,54 +204,21 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.loanApplication();
         this.customerData = this.fb.group({
-            DurationOfActualResidenceLocation: [[]],
-            ActualResidenceLocation: [[]],
-            DependentsCount: [[]],
-            EducationDegree: [[]],
-            MaritalStatus: [[]],
+            'CustomerData.DurationOfActualResidenceLocation': [[]],
+            'CustomerData.DependentsCount': [[]],
+            'CustomerData.EducationDegree': [[]],
+            'CustomerData.MaritalStatus': [[]],
+            // Occupation
             'CustomerData.Occupation.Income': [[]],
-            // сделать по каждую так CustomerData.Occupation.Income а в динамичный полях  Object.values(
-            //    CustomerData.SpouseData.Incomes[0]
-            // ) CustomerData.SpouseData.Incomes
-            Occupation: this.fb.group({
-                Income: [[]],
-                WorkAddress: [[]],
-                WorkExperience: [[]],
-                Position: [[]],
-                Type: [[]],
-                Description: [[]],
-                Company: [[]],
-            }),
-            SpouseData: this.fb.group({
-                Name: [[]],
-                Surname: [[]],
-                Patronymic: [[]],
-                PhoneNumber: [[]],
-            }),
-            // AdditionalIncomes: this.fb.group([
-            //     this.fb.group({
-            //         Value: this.fb.group({
-            //             Work: [[]],
-            //             Value: [[]],
-            //         }),
-            //     }),
-            //     this.fb.group({
-            //         Value: this.fb.group({
-            //             Work: [[]],
-            //             Value: [[]],
-            //         }),
-            //     }),
-            // ]),
-            // RealEstates: this.fb.group({
-            //     Type: [[]],
-            //     Address: [[]],
-            // }),
-            //  PersonalEstates: this.fb.group({
-            //     Brand: [[]],
-            //     Type: [[]],
-            //     Model: [[]],
-            //     ManufactureYear: [[]],
-            // }),
+            'CustomerData.Occupation.WorkAddress': [[]],
+            'CustomerData.Occupation.WorkExperience': [[]],
+            'CustomerData.Occupation.Position': [[]],
+            'CustomerData.Occupation.Type': [[]],
+            'CustomerData.Occupation.Description': [[]],
+            'CustomerData.Occupation.Company': [[]],
+            // SpouseData
+            'CustomerData.SpouseData.Surname': [[]],
+            'CustomerData.SpouseData.PhoneNumber': [[]],
         });
     }
     ngOnDestroy() {
@@ -291,3 +226,28 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 }
+
+// AdditionalIncomes: this.fb.group([
+//     this.fb.group({
+//         Value: this.fb.group({
+//             Work: [[]],
+//             Value: [[]],
+//         }),
+//     }),
+//     this.fb.group({
+//         Value: this.fb.group({
+//             Work: [[]],
+//             Value: [[]],
+//         }),
+//     }),
+// ]),
+// RealEstates: this.fb.group({
+//     Type: [[]],
+//     Address: [[]],
+// }),
+//  PersonalEstates: this.fb.group({
+//     Brand: [[]],
+//     Type: [[]],
+//     Model: [[]],
+//     ManufactureYear: [[]],
+// }),

@@ -117,7 +117,41 @@ export class AdditionalInfoComponent implements OnInit {
             this.personalEstates = this.data.customerData.personalEstates;
             this.spouseData = this.data.customerData.spouseData;
         }
-
-        console.log(this.form.controls['CustomerData.Occupation.Income']);
     }
 }
+//CustomerData.DurationOfActualResidenceLocation
+//CustomerData.ActualResidenceLocation
+//CustomerData.DependentsCount
+//CustomerData.EducationDegree
+//CustomerData.Occupation
+//CustomerData.Occupation.Income
+//CustomerData.Occupation.WorkAddress
+//CustomerData.Occupation.WorkExperience
+//CustomerData.Occupation.Company
+//CustomerData.Occupation.Position
+//CustomerData.Occupation.Type
+//CustomerData.Occupation.Description
+//CustomerData.Occupation.CertificateNumber
+//CustomerData.AdditionalIncomes[[0-9]*].Value.Work
+//CustomerData.AdditionalIncomes[[0-9]*].Value.Value
+//CustomerData.MaritalStatus
+//CustomerData.SpouseData
+//CustomerData.SpouseData.Name
+//CustomerData.SpouseData.Surname
+//CustomerData.SpouseData.Patronymic
+//CustomerData.SpouseData.PhoneNumber
+
+//CustomerData.SpouseData.Incomes[[0-9]*].Value.Work
+
+//CustomerData.SpouseData.Incomes[[0-9]*].Value.Value
+
+//CustomerData.RealEstates[[0-9]*].Value.Type
+//CustomerData.RealEstates[[0-9]*].Value.Address
+
+//CustomerData.PersonalEstates[[0-9]*].Value.Type
+
+//CustomerData.PersonalEstates[[0-9]*].Value.Brand
+
+//CustomerData.PersonalEstates[[0-9]*].Value.Model
+
+//CustomerData.PersonalEstates[[0-9]*].Value.ManufactureYear

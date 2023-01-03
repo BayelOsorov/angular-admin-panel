@@ -44,22 +44,25 @@
             </table>
 
             <ngx-credit-application-need-to-edit
-                [control]="form.get('EducationDegree')"
+                [control]="form.get(['CustomerData.EducationDegree'])"
                 [title]="'Образование'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get('MaritalStatus')"
+                [control]="form.get(['CustomerData.MaritalStatus'])"
                 [title]="'Семейное положение'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get('DependentsCount')"
+                [control]="form.get(['CustomerData.DependentsCount'])"
                 [title]="'Иждивенцы'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
+
             <ngx-credit-application-need-to-edit
-                [control]="form.get('ActualResidenceLocation')"
+                [control]="
+                    form.get(['CustomerData.DurationOfActualResidenceLocation'])
+                "
                 [title]="'Срок проживания по фактическому адресу'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
@@ -72,92 +75,106 @@
             Место работы
         </nb-accordion-item-header>
         <nb-accordion-item-body>
-            <table *ngIf="work.$type === 'entrepreneurship'" class="w-100">
-                <tr>
-                    <td>Тип</td>
-                    <td>{{ getWorkType() }}</td>
-                </tr>
-                <tr>
-                    <td>Вид деятельности</td>
-                    <td>{{ getActivityType(work.type) }}</td>
-                </tr>
-                <tr>
-                    <td>Описание деятельности</td>
-                    <td>{{ work.description }}</td>
-                </tr>
-                <tr>
-                    <td>Стаж работы</td>
-                    <td>{{ getWorkExp(work.workExperience) }}</td>
-                </tr>
-                <tr>
-                    <td>Ежемесячный доход</td>
-                    <td>{{ work.income }}</td>
-                </tr>
-                <tr>
-                    <td>Адрес</td>
-                    <td>{{ work.workAddress }}</td>
-                </tr>
-            </table>
-            <table *ngIf="work.$type === 'employment'" class="w-100">
-                <tr>
-                    <td>Тип</td>
-                    <td>{{ getWorkType() }}</td>
-                </tr>
+            <ng-container *ngIf="work.$type === 'entrepreneurship'">
+                <table class="w-100">
+                    <tr>
+                        <td>Тип</td>
+                        <td>{{ getWorkType() }}</td>
+                    </tr>
+                    <tr>
+                        <td>Вид деятельности</td>
+                        <td>{{ getActivityType(work.type) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Описание деятельности</td>
+                        <td>{{ work.description }}</td>
+                    </tr>
+                    <tr>
+                        <td>Стаж работы</td>
+                        <td>{{ getWorkExp(work.workExperience) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ежемесячный доход</td>
+                        <td>{{ work.income }}</td>
+                    </tr>
+                    <tr>
+                        <td>Адрес</td>
+                        <td>{{ work.workAddress }}</td>
+                    </tr>
+                </table>
+                <ngx-credit-application-need-to-edit
+                    [control]="
+                        form.get(['CustomerData.Occupation.Description'])
+                    "
+                    [title]="'Описание деятельности'"
+                    [placeholder]="'Введите'"
+                ></ngx-credit-application-need-to-edit>
+                <ngx-credit-application-need-to-edit
+                    [control]="form.get(['CustomerData.Occupation.Type'])"
+                    [title]="'Тип ИП'"
+                    [placeholder]="'Введите'"
+                ></ngx-credit-application-need-to-edit>
+            </ng-container>
 
-                <tr>
-                    <td>Наименование организации</td>
-                    <td>{{ work.company }}</td>
-                </tr>
-                <tr>
-                    <td>Должность</td>
-                    <td>{{ getWorkPosition(work.position) }}</td>
-                </tr>
-                <tr>
-                    <td>Стаж работы</td>
-                    <td>{{ getWorkExp(work.workExperience) }}</td>
-                </tr>
-                <tr>
-                    <td>Ежемесячный доход</td>
-                    <td>{{ work.income }}</td>
-                </tr>
-                <tr>
-                    <td>Адрес</td>
-                    <td>{{ work.workAddress }}</td>
-                </tr>
-            </table>
+            <ng-container *ngIf="work.$type === 'employment'">
+                <table class="w-100">
+                    <tr>
+                        <td>Тип</td>
+                        <td>{{ getWorkType() }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Наименование организации</td>
+                        <td>{{ work.company }}</td>
+                    </tr>
+                    <tr>
+                        <td>Должность</td>
+                        <td>{{ getWorkPosition(work.position) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Стаж работы</td>
+                        <td>{{ getWorkExp(work.workExperience) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Ежемесячный доход</td>
+                        <td>{{ work.income }}</td>
+                    </tr>
+                    <tr>
+                        <td>Адрес</td>
+                        <td>{{ work.workAddress }}</td>
+                    </tr>
+                </table>
+                <ngx-credit-application-need-to-edit
+                    [control]="form.get(['CustomerData.Occupation.Position'])"
+                    [title]="'Должность'"
+                    [placeholder]="'Введите'"
+                ></ngx-credit-application-need-to-edit>
+                <ngx-credit-application-need-to-edit
+                    [control]="form.get(['CustomerData.Occupation.Company'])"
+                    [title]="'Название компании'"
+                    [placeholder]="'Введите'"
+                ></ngx-credit-application-need-to-edit>
+            </ng-container>
+
             <ngx-credit-application-need-to-edit
-                [control]="form.controls['CustomerData.Occupation.Income']"
-                [title]="'Тип'"
-                [placeholder]="'Введите CustomerData.Occupation.Income'"
-            ></ngx-credit-application-need-to-edit>
-            <ngx-credit-application-need-to-edit
-                [control]="form.get('Occupation.Type')"
-                [title]="'Тип'"
+                [control]="form.get(['CustomerData.Occupation.Type'])"
+                [title]="'Тип занятости'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
+
             <ngx-credit-application-need-to-edit
-                [control]="form.get('Occupation.Description')"
-                [title]="'Описание деятельности'"
-                [placeholder]="'Введите'"
-            ></ngx-credit-application-need-to-edit>
-            <ngx-credit-application-need-to-edit
-                [control]="form.get('Occupation.WorkExperience')"
+                [control]="form.get(['CustomerData.Occupation.WorkExperience'])"
                 [title]="'Стаж работы'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get('Occupation.Income')"
+                [control]="form.get(['CustomerData.Occupation.Income'])"
                 [title]="'Ежемесячный доход'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get('Occupation.WorkAddress')"
+                [control]="form.get(['CustomerData.Occupation.WorkAddress'])"
                 [title]="'Адрес'"
-                [placeholder]="'Введите'"
-            ></ngx-credit-application-need-to-edit>
-            <ngx-credit-application-need-to-edit
-                [control]="form.get('Occupation.Position')"
-                [title]="'Должность'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
         </nb-accordion-item-body>
@@ -191,8 +208,11 @@
                     <th colspan="2">
                         <ngx-credit-application-need-to-edit
                             [control]="
-                                form.get('AdditionalIncomes').controls[idx]
-                                    .controls.Value.controls.Work
+                                form.get([
+                                    'CustomerData.AdditionalIncomes[' +
+                                        idx +
+                                        '].Value.Work'
+                                ])
                             "
                             [title]="i.work"
                             [placeholder]="'Введите'"
@@ -229,12 +249,12 @@
                 </tr>
             </table>
             <ngx-credit-application-need-to-edit
-                [control]="form.get('SpouseData.Surname')"
+                [control]="form.get(['CustomerData.SpouseData.Surname'])"
                 [title]="'ФИО'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get('SpouseData.PhoneNumber')"
+                [control]="form.get(['CustomerData.SpouseData.PhoneNumber'])"
                 [title]="'Номер телефона'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
@@ -256,8 +276,11 @@
                     <th colspan="2">
                         <ngx-credit-application-need-to-edit
                             [control]="
-                                form.get('SpouseData.Incomes').controls[idx]
-                                    .controls.Value.controls.Work
+                                form.get([
+                                    'CustomerData.SpouseData.Incomes[' +
+                                        idx +
+                                        '].Value.Work'
+                                ])
                             "
                             [title]="'Работа'"
                             [placeholder]="'Введите'"
@@ -302,8 +325,11 @@
                     <th colspan="4">
                         <ngx-credit-application-need-to-edit
                             [control]="
-                                form.get('PersonalEstates').controls[idx]
-                                    .controls.Value.controls.Model
+                                form.get([
+                                    'CustomerData.PersonalEstates[' +
+                                        idx +
+                                        '].Value.Model'
+                                ])
                             "
                             [title]="getPersonalEstateType(i.type)"
                             [placeholder]="'Введите'"
@@ -341,8 +367,11 @@
                     <th colspan="2">
                         <ngx-credit-application-need-to-edit
                             [control]="
-                                form.get('RealEstates').controls[idx].controls
-                                    .Value.controls.Address
+                                form.get([
+                                    'CustomerData.RealEstates[' +
+                                        idx +
+                                        '].Value.Address'
+                                ])
                             "
                             [title]="getRealEstateType(i.type)"
                             [placeholder]="'Введите'"
@@ -718,7 +747,7 @@
                 </tr>
                 <tr>
                     <td>
-                        Срок проживание - Срок проживания по фактическому адресу
+                        Срок проживания - Срок проживания по фактическому адресу
                         (мес)
                     </td>
                     <td>

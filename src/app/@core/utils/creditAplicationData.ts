@@ -91,7 +91,7 @@ const maritalStatus = [
     { value: 'Married', text: 'Женатый' },
     { value: 'CivilMarriage', text: 'Гражданский брак' },
     { value: 'Widow', text: 'Вдова' },
-    { value: 'Divorced ', text: 'В разводе' },
+    { value: 'Divorced', text: 'В разводе' },
 ];
 const realEstateItemsEnum = [
     { value: 'Apartment', text: 'Квартира' },
