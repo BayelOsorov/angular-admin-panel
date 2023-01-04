@@ -164,8 +164,6 @@ export class BeneficiaresActionsComponent
         }
     }
     onSubmit() {
-        console.log(this.form);
-
         if (this.form.valid) {
             if (this.contractorData) {
                 this.editEvent.emit({

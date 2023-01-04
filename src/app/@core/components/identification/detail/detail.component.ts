@@ -29,7 +29,11 @@ import {
 import { OpenviduComponent } from '../../../openvidu';
 import { HandleErrorService } from '../../../services/http/handle-error.service';
 import { IdentificationService } from '../../../services/identification/identification.service';
-import { IdentificationAnswers, translateMaritalStatus } from '../../../utils';
+import {
+    cleanEmptyKeyInObj,
+    IdentificationAnswers,
+    translateMaritalStatus,
+} from '../../../utils';
 @Component({
     selector: 'ngx-identification-detail',
     templateUrl: './detail.component.html',
@@ -154,7 +158,9 @@ export class DetailComponent implements OnInit, OnDestroy {
             ) {
                 this.identificationService
                     .needToEditPhotoIdentification(this.data.id, {
-                        editRequiredProperties: this.form.value,
+                        editRequiredProperties: cleanEmptyKeyInObj(
+                            this.form.value
+                        ),
                     })
                     .pipe(takeUntil(this.destroy$))
                     .subscribe({

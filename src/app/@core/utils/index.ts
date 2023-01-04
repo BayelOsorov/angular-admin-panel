@@ -7,6 +7,7 @@ import {
     translateMaritalStatus,
     truncateDecimals,
     truncateText,
+    cleanEmptyKeyInObj,
 } from './helpers';
 import {
     Position,
@@ -47,4 +48,5 @@ export {
     personalEstateItemsEnum,
     HttpOptions,
     EducationEnum,
+    cleanEmptyKeyInObj,
 };

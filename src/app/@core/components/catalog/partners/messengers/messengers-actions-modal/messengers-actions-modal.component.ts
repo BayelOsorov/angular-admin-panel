@@ -38,7 +38,6 @@ export class MessengersActionsModalComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         this.submitted = true;
-        console.log(this.form);
 
         if (this.form.valid) {
             if (this.itemData) {

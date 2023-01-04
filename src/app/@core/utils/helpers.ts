@@ -33,4 +33,24 @@ const truncateDecimals = (number, digits = 2) => {
 
     return truncatedNum / multiplier;
 };
-export { translateMaritalStatus, truncateText, accessLevel, truncateDecimals };
+const cleanEmptyKeyInObj = (obj) => {
+    // eslint-disable-next-line guard-for-in
+    for (const propName in obj) {
+        if (
+            obj[propName] === null ||
+            obj[propName] === undefined ||
+            (Array.isArray(obj[propName]) &&
+                (obj[propName].includes('') || obj[propName].length === 0))
+        ) {
+            delete obj[propName];
+        }
+    }
+    return obj;
+};
+export {
+    translateMaritalStatus,
+    truncateText,
+    accessLevel,
+    truncateDecimals,
+    cleanEmptyKeyInObj,
+};

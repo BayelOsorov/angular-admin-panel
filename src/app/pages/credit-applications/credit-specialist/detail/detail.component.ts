@@ -20,6 +20,7 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
+import { cleanEmptyKeyInObj } from '../../../../@core/utils';
 @Component({
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
@@ -133,28 +134,21 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     }
 
     needToEditUser() {
-        // const newCustomerData = Object.values(this.customerData.value).map(
-        //     (item: Array<any>) =>
-        //         item[0] === '' && item.length > 0 ? [] : item
-        // );
-        const newCustomerData = Object.keys(this.customerData.value).map(
-            (item) => item
-        );
-        console.log(newCustomerData);
-
-        // this.creditApplicationsService
-        //     .needToEditCreditApplication(this.loanApplicationData.id, {
-        //         editRequiredProperties: this.customerData.value,
-        //     })
-        //     .pipe(takeUntil(this.destroy$))
-        //     .subscribe({
-        //         next: (data) => {
-        //             this.toaster.success(
-        //                 'Вы успешно отправили на редактирование заявку на кредит!'
-        //             );
-        //             this.location.back();
-        //         },
-        //     });
+        this.creditApplicationsService
+            .needToEditCreditApplication(this.loanApplicationData.id, {
+                editRequiredProperties: cleanEmptyKeyInObj(
+                    this.customerData.value
+                ),
+            })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.toaster.success(
+                        'Вы успешно отправили на редактирование заявку на кредит!'
+                    );
+                    this.location.back();
+                },
+            });
     }
     generateControls() {
         if (this.loanApplicationData.customerData.additionalIncomes) {
@@ -191,7 +185,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
         }
         if (this.loanApplicationData.customerData.personalEstates) {
             Object.values(
-                this.loanApplicationData.customerData.realEstates
+                this.loanApplicationData.customerData.personalEstates
             ).map((item, i) =>
                 this.customerData.addControl(
                     `CustomerData.PersonalEstates[${i}].Value.Model`,
@@ -199,7 +193,6 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 )
             );
         }
-        console.log(this.customerData);
     }
     ngOnInit(): void {
         this.loanApplication();
