@@ -39,6 +39,8 @@ import { SupportCenterCategoryDetailComponent } from './support-center/categorie
 import { SupportCenterAnswersActionsComponent } from './support-center/answers-actions/support-center-answers-actions/support-center-answers-actions.component';
 import { SupportCenterProductDetailComponent } from './support-center/products/detail-product/support-center-product-detail/support-center-product-detail.component';
 import { FullSizeSocialFundComponent } from '../@core/components/credit-application/soc-fond/full-size-social-fund/full-size-social-fund.component';
+import { PartnerIdentificationComponent } from './catalog/partner-identification/list/partner-identification.component';
+import { PartnerIdentificationDetailComponent } from './catalog/partner-identification/detail/detail.component';
 
 const routes: Routes = [
     {
@@ -160,6 +162,20 @@ const routes: Routes = [
                 canActivate: [PermissionsGuard],
                 data: { roles: ['admin', 'manager', 'underwriter'] },
                 children: [
+                    // ! Partner Identification
+                    {
+                        path: 'partner-identification',
+                        children: [
+                            {
+                                path: '',
+                                component: PartnerIdentificationComponent,
+                            },
+                            {
+                                path: 'detail/:id',
+                                component: PartnerIdentificationDetailComponent,
+                            },
+                        ],
+                    },
                     // ! Brands
                     {
                         path: 'brands',

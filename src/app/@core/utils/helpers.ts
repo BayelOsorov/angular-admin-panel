@@ -47,10 +47,24 @@ const cleanEmptyKeyInObj = (obj) => {
     }
     return obj;
 };
+const trEngToRusOwnerST = (value) => {
+    switch (value) {
+        case 'Other':
+            return 'ЧП';
+        case 'OsOO':
+            return 'ОсОО';
+        case 'IndividualEntrepreneur':
+            return 'ИП';
+        default:
+            return value;
+    }
+};
+
 export {
     translateMaritalStatus,
     truncateText,
     accessLevel,
     truncateDecimals,
     cleanEmptyKeyInObj,
+    trEngToRusOwnerST,
 };

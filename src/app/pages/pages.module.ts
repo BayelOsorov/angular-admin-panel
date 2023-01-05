@@ -70,6 +70,8 @@ import { SupportCenterProductsListComponent } from './support-center/products/li
 import { SupportCenterCategoryDetailComponent } from './support-center/categories/detail-category/support-center-category-detail/support-center-category-detail.component';
 import { SupportCenterAnswersActionsComponent } from './support-center/answers-actions/support-center-answers-actions/support-center-answers-actions.component';
 import { SupportCenterProductDetailComponent } from './support-center/products/detail-product/support-center-product-detail/support-center-product-detail.component';
+import { PartnerIdentificationComponent } from './catalog/partner-identification/list/partner-identification.component';
+import { PartnerIdentificationDetailComponent } from './catalog/partner-identification/detail/detail.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -146,6 +148,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         SupportCenterCategoryDetailComponent,
         SupportCenterAnswersActionsComponent,
         SupportCenterProductDetailComponent,
+        PartnerIdentificationComponent,
+        PartnerIdentificationDetailComponent,
     ],
     providers: [
         {

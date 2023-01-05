@@ -100,6 +100,7 @@ import { FullSizeSocialFundComponent } from './credit-application/soc-fond/full-
 import { TaxInspectionComponent } from './credit-application/tax-inspection/tax-inspection.component';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { BlackListPersonComponent } from './credit-application/black-list-person/black-list-person.component';
+import { StatusBadgeComponent } from './shared/status-badge/status-badge.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -191,6 +192,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         FullSizeSocialFundComponent,
         TaxInspectionComponent,
         BlackListPersonComponent,
+        StatusBadgeComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -242,6 +244,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         FullSizeSocialFundComponent,
         TaxInspectionComponent,
         BlackListPersonComponent,
+        StatusBadgeComponent,
     ],
 })
 export class ComponentsModule {}

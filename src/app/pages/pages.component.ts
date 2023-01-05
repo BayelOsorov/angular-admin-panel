@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { accessLevel } from '../@core/utils/helpers';
 
-import { MENU_ITEMS } from './pages-menu';
+// import { MENU_ITEMS } from './pages-menu';
 
 @Component({
     selector: 'ngx-pages',
@@ -142,6 +142,10 @@ export class PagesComponent {
                 {
                     title: 'Отзывы',
                     link: '/catalog/partner-feedbacks',
+                },
+                {
+                    title: 'Идентификация партнеров',
+                    link: '/catalog/partner-identification',
                 },
             ],
         },

@@ -67,3 +67,13 @@ export const IdentificationAnswers = {
         },
     ],
 };
+export const statusIdentificate = [
+    { id: 'Pending', text: 'Ожидание' },
+    { id: 'Created', text: 'Ожидание' },
+    { id: 'Approved', text: 'Одобренный' },
+    { id: 'Declined', text: 'Отклоненный' },
+    { id: 'NeedToEdit', text: 'Нужно отредактировать' },
+    { id: 'PhotosApproved', text: 'Подтверждение фото' },
+    { id: 'Canceled', text: 'Отменено' },
+    { id: 'VideoIdentificationRequested', text: 'Готов к видео' },
+];

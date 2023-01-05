@@ -1,0 +1,310 @@
+<nb-card class="container">
+    <div class="partner-identidication mx-auto mt-3" *ngIf="partner">
+        <div class="">
+            <nb-card>
+                <nb-card-header>Общая информация</nb-card-header>
+                <nb-card-body>
+                    <div class="header">
+                        <div>
+                            <p>Название</p>
+                        </div>
+
+                        <div class="detail">{{ partner.shopName }}</div>
+                    </div>
+                    <div class="header">
+                        <div>
+                            <p>Описание</p>
+                        </div>
+
+                        <div class="detail">{{ partner.description }}</div>
+                    </div>
+
+                    <div class="header">
+                        <div>
+                            <p>Тип собственности</p>
+                        </div>
+
+                        <div class="detail">
+                            {{ translateOwnerShipType(partner.ownershipType) }}
+                        </div>
+                    </div>
+
+                    <div class="header">
+                        <div>
+                            <p>Категория</p>
+                        </div>
+
+                        <div class="detail">
+                            {{ partner.partnerCategoryName }}
+                        </div>
+                    </div>
+
+                    <div class="header">
+                        <div>
+                            <p>Ф.И.О менеджера</p>
+                        </div>
+
+                        <div class="detail">
+                            {{ partner.saleManagerFullName }}
+                        </div>
+                    </div>
+
+                    <div class="header">
+                        <div>
+                            <p>Отправитель</p>
+                        </div>
+
+                        <div class="detail">f323</div>
+                    </div>
+
+                    <div class="header">
+                        <div>
+                            <p>Номер рабочего телефона</p>
+                        </div>
+
+                        <div class="detail">
+                            {{ partner.businessPhoneNumber }}
+                        </div>
+                    </div>
+                    <div class="header">
+                        <div>
+                            <p>Номер телефона владельца</p>
+                        </div>
+
+                        <div class="detail">{{ partner.ownerPhoneNumber }}</div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+
+            <nb-card>
+                <nb-card-header>Юридическая информация</nb-card-header>
+                <nb-card-body>
+                    <div class="header">
+                        <div>
+                            <p>ИНН</p>
+                        </div>
+
+                        <div class="detail">{{ partner.inn }}</div>
+                    </div>
+                    <div class="header">
+                        <div>
+                            <p>ОКПО</p>
+                        </div>
+
+                        <div class="detail">{{ partner.okpo }}</div>
+                    </div>
+                    <div class="header">
+                        <div>
+                            <p>Актуальный адрес</p>
+                        </div>
+
+                        <div class="detail">{{ partner.currentAddress }}</div>
+                    </div>
+                    <div class="header">
+                        <div>
+                            <p>Зарегестрированный адрес</p>
+                        </div>
+
+                        <div class="detail">
+                            {{ partner.registeredAddress }}
+                        </div>
+                    </div>
+                    <div class="header">
+                        <div>
+                            <p>Ф.И.О руководителя</p>
+                        </div>
+
+                        <div class="detail">{{ partner.managerPosition }}</div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+
+            <nb-card>
+                <nb-card-header>Реквизиты</nb-card-header>
+                <nb-card-body>
+                    <div class="header">
+                        <div>
+                            <p>Тип реквизита</p>
+                        </div>
+
+                        <div class="detail">
+                            {{ translateRequisiteType(partner.requisiteType) }}
+                        </div>
+                    </div>
+                    <ng-container
+                        *ngIf="
+                            partner.requisiteType === 'Bank' ||
+                            partner.requisiteType === 10
+                        "
+                    >
+                        <div class="header">
+                            <div>
+                                <p>Название Банка</p>
+                            </div>
+
+                            <div class="detail">
+                                {{ partner.requisite?.bank_name }}
+                            </div>
+                        </div>
+                        <div class="header">
+                            <div>
+                                <p>БИК</p>
+                            </div>
+
+                            <div class="detail">
+                                {{ partner.requisite?.bic }}
+                            </div>
+                        </div>
+                        <div class="header">
+                            <div>
+                                <p>Банковский счет</p>
+                            </div>
+
+                            <div class="detail">
+                                {{ partner.requisite?.bank_account }}
+                            </div>
+                        </div>
+                        <div class="header">
+                            <div>
+                                <p>Номер карты</p>
+                            </div>
+
+                            <div class="detail">
+                                {{ partner.requisite?.card_number }}
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="partner.requisiteType !== 'Bank'">
+                        <div class="header">
+                            <div>
+                                <p>Название Банка</p>
+                            </div>
+
+                            <div class="detail">
+                                {{ partner.requisite?.bank_name }}
+                            </div>
+                        </div>
+                        <div class="header">
+                            <div>
+                                <p>Ф.И.О владельца кошелька</p>
+                            </div>
+
+                            <div class="detail">
+                                {{ partner.requisite?.full_name }}
+                            </div>
+                        </div>
+                        <div class="header">
+                            <div>
+                                <p>Номер телефона</p>
+                            </div>
+
+                            <div class="detail">
+                                {{ partner.requisite?.phone_number }}
+                            </div>
+                        </div>
+                    </ng-container>
+                </nb-card-body>
+            </nb-card>
+
+            <nb-card>
+                <nb-card-header>Контакты</nb-card-header>
+                <nb-card-body>
+                    <div class="header">
+                        <div>
+                            <p>Сайт</p>
+                        </div>
+
+                        <div class="detail">
+                            <a
+                                href="{{ partner.site }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {{ partner.site }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header">
+                        <div>
+                            <p>Instagram</p>
+                        </div>
+
+                        <div class="detail">
+                            <a
+                                href="{{ partner.instagram }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {{ partner.instagram }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header">
+                        <div>
+                            <p>Facebook</p>
+                        </div>
+
+                        <div class="detail">
+                            <a
+                                href="{{ partner.facebook }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {{ partner.facebook }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header">
+                        <div>
+                            <p>Email</p>
+                        </div>
+
+                        <div class="detail">
+                            {{ partner.email }}
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+            <nb-card>
+                <nb-card-header>Филиалы</nb-card-header>
+                <nb-card-body>
+                    <ngx-custom-table
+                        [actions]="false"
+                        [tableColumns]="tableColumns"
+                        [tableData]="branches"
+                        [productName]="'ни одного филиала'"
+                    >
+                    </ngx-custom-table>
+                    <ngx-custom-map
+                        [locations]="partner.branches"
+                    ></ngx-custom-map>
+                </nb-card-body>
+            </nb-card>
+        </div>
+        <div class="mt-5 mb-3">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <button
+                        class="w-100"
+                        nbButton
+                        status="success"
+                        (click)="approvePartner()"
+                    >
+                        Одобрить
+                    </button>
+                </div>
+
+                <div class="col-md-4">
+                    <button
+                        class="w-100"
+                        nbButton
+                        status="danger"
+                        (click)="declinePartner()"
+                    >
+                        Удалить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nb-card>

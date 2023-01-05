@@ -1,8 +1,8 @@
 export interface IDetailPartner {
-    id: 0;
+    id: number;
     name: string;
     logo: string;
-    isActive: true;
+    isActive: boolean;
     description: {
         kg: string;
         ru: string;
@@ -18,7 +18,7 @@ export interface IDetailPartner {
     brands: [{ id: number; name: string }];
     tags: [
         {
-            id: 0;
+            id: number;
             name: {
                 kg: string;
                 ru: string;
@@ -30,41 +30,41 @@ export interface IDetailPartner {
 }
 export interface IListPartner {
     items: [IDetailPartner];
-    pageCount: 0;
-    totalItemCount: 0;
-    page: 0;
-    pageSize: 0;
-    hasPreviousPage: true;
-    hasNextPage: true;
+    pageCount: number;
+    totalItemCount: number;
+    page: number;
+    pageSize: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
 }
 export interface IListPartnerImages {
     items: [
         {
-            id: '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+            id: string;
             imagePath: string;
             title: string;
-            sequence: 0;
+            sequence: number;
         }
     ];
-    pageCount: 0;
-    totalItemCount: 0;
-    page: 0;
-    pageSize: 0;
-    hasPreviousPage: true;
-    hasNextPage: true;
+    pageCount: number;
+    totalItemCount: number;
+    page: number;
+    pageSize: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
 }
 export interface IListPartnerBranches {
     items: [IDetailPartnerBranch];
-    pageCount: 0;
-    totalItemCount: 0;
-    page: 0;
-    pageSize: 0;
-    hasPreviousPage: true;
-    hasNextPage: true;
+    pageCount: number;
+    totalItemCount: number;
+    page: number;
+    pageSize: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
 }
 
 export interface IDetailPartnerBranch {
-    id: 0;
+    id: number;
     name: string;
     address: string;
     location: {
@@ -73,39 +73,39 @@ export interface IDetailPartnerBranch {
     };
     phoneNumber: string;
     email: string;
-    localityId: 0;
-    mallId: 0;
-    partnerId: 0;
+    localityId: number;
+    mallId: number;
+    partnerId: number;
     workingSchedule: [
         {
             day: string;
             workingHourStart: {
-                hour: 0;
-                minute: 0;
-                second: 0;
-                millisecond: 0;
-                ticks: 0;
+                hour: number;
+                minute: number;
+                second: number;
+                millisecond: number;
+                ticks: number;
             };
             workingHourEnd: {
-                hour: 0;
-                minute: 0;
-                second: 0;
-                millisecond: 0;
-                ticks: 0;
+                hour: number;
+                minute: number;
+                second: number;
+                millisecond: number;
+                ticks: number;
             };
             lunchHourStart: {
-                hour: 0;
-                minute: 0;
-                second: 0;
-                millisecond: 0;
-                ticks: 0;
+                hour: number;
+                minute: number;
+                second: number;
+                millisecond: number;
+                ticks: number;
             };
             lunchHourEnd: {
-                hour: 0;
-                minute: 0;
-                second: 0;
-                millisecond: 0;
-                ticks: 0;
+                hour: number;
+                minute: number;
+                second: number;
+                millisecond: number;
+                ticks: number;
             };
         }
     ];
@@ -113,22 +113,109 @@ export interface IDetailPartnerBranch {
 
 export interface IListPartnerFeedbacks {
     items: [IPartnerFeedback];
-    pageCount: 0;
-    totalItemCount: 0;
-    page: 0;
-    pageSize: 0;
-    hasPreviousPage: true;
-    hasNextPage: true;
+    pageCount: number;
+    totalItemCount: number;
+    page: number;
+    pageSize: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
 }
 export interface IPartnerFeedback {
-    id: 0;
-    comment: 'string';
-    rate: 0;
-    clientId: '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+    id: number;
+    comment: string;
+    rate: number;
+    clientId: string;
     partner: {
-        id: 0;
-        name: 'string';
+        id: number;
+        name: string;
     };
-    createDateTime: '2022-11-25T05:19:58.091Z';
+    createDateTime: Date;
 }
-// export interface IPartnerDetailFeedback
+export interface IPartnerIdentificationDetail {
+    id: number;
+    clientId: string;
+    clientPhoneNumber: string;
+    shopName: string;
+    ownershipType: number;
+    inn: string;
+    registeredAddress: string;
+    currentAddress: string;
+    managerPosition: string;
+    managerFullname: string;
+    description: string;
+    partnerCategoryId: number;
+    partnerCategoryName: string;
+    ownerPhoneNumber: string;
+    businessPhoneNumber: string;
+    requisiteType: number;
+    requisite: {
+        additionalProp1: string;
+        additionalProp2: string;
+        additionalProp3: string;
+    };
+    documentFrontPhoto: string;
+    documentInnerPhoto: string;
+    bankName: string;
+    bic: string;
+    bankAccount: string;
+    saleManagerFullName: string;
+    okpo: string;
+    image1: string;
+    image2: string;
+    companyLogo: string;
+    site: string;
+    instagram: string;
+    facebook: string;
+    email: string;
+    comment: string;
+    isPublicOfferRead: boolean;
+    createdAt: Date;
+    status: number;
+    branches: [
+        {
+            id: number;
+            name: string;
+            localityId: string;
+            localityName: {
+                id: number;
+                localizations: [
+                    {
+                        id: number;
+                        cultureCode: string;
+                        value: string;
+                    }
+                ];
+            };
+            mallName: string;
+            mallId: number;
+            address: string;
+            workingHourStart: {
+                hour: number;
+                minute: number;
+                second: number;
+                millisecond: number;
+                ticks: number;
+            };
+            workingHourEnd: {
+                hour: number;
+                minute: number;
+                second: number;
+                millisecond: number;
+                ticks: number;
+            };
+            location: {
+                type: string;
+                coordinates: [number];
+            };
+        }
+    ];
+}
+export interface IPartnerIdentificationList {
+    items: [IPartnerIdentificationDetail];
+    pageCount: number;
+    totalItemCount: number;
+    pageNumber: number;
+    pageSize: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+}

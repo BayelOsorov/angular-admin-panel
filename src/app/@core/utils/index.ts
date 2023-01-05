@@ -8,6 +8,7 @@ import {
     truncateDecimals,
     truncateText,
     cleanEmptyKeyInObj,
+    trEngToRusOwnerST,
 } from './helpers';
 import {
     Position,
@@ -33,6 +34,8 @@ export {
     translateMaritalStatus,
     truncateDecimals,
     truncateText,
+    trEngToRusOwnerST,
+    cleanEmptyKeyInObj,
     Position,
     placeOfWorkType,
     entrepreneurTypeEnum,
@@ -48,5 +51,4 @@ export {
     personalEstateItemsEnum,
     HttpOptions,
     EducationEnum,
-    cleanEmptyKeyInObj,
 };

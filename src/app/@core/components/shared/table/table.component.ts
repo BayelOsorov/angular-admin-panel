@@ -26,6 +26,8 @@ export class TableComponent implements OnInit, AfterContentChecked {
     @Input() tableColumns;
     @Input() tableData;
     @Input() productName;
+    @Input() delete = true;
+    @Input() actions = true;
 
     settings = {};
     constructor(
@@ -45,13 +47,16 @@ export class TableComponent implements OnInit, AfterContentChecked {
             edit: {
                 editButtonContent: '<i class="nb-edit"></i>',
             },
-            actions: {
-                delete: true,
-                edit: true,
-                add: false,
-                position: 'right',
-                columnTitle: 'Опции',
-            },
+
+            actions: this.actions
+                ? {
+                      delete: this.delete,
+                      edit: true,
+                      add: false,
+                      position: 'right',
+                      columnTitle: 'Опции',
+                  }
+                : false,
             pager: {
                 perPage: 20,
                 display: true,
