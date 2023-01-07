@@ -6,6 +6,7 @@ import {
     Input,
     EventEmitter,
 } from '@angular/core';
+import { AbstractControl, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'ngx-confirm-buttons',
@@ -15,8 +16,10 @@ import {
 })
 export class ConfirmDialogComponent implements OnInit {
     @Output() approveEvent = new EventEmitter();
+    @Input() control: AbstractControl = new FormControl();
     @Input() status = 'primary';
     @Input() title = 'подтвердите';
+    @Input() textareaInclude = false;
 
     visible: boolean;
 

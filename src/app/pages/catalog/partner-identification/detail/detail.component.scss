@@ -2,6 +2,14 @@
 
 .partner-identidication {
     width: 95%;
+    .info-block {
+        nb-card {
+            margin-bottom: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: 0;
+        }
+    }
 }
 
 @include nb-install-component() {

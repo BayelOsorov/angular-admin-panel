@@ -46,12 +46,20 @@ export interface ICreditApplicationDetail {
             surname: string;
             patronymic: string;
             phoneNumber: string;
-            incomes: [
-                {
+            incomes: {
+                additionalProp1: {
                     work: string;
                     value: number;
-                }
-            ];
+                };
+                additionalProp2: {
+                    work: string;
+                    value: number;
+                };
+                additionalProp3: {
+                    work: string;
+                    value: number;
+                };
+            };
         };
         realEstates: {
             additionalProp1: {
@@ -124,12 +132,20 @@ export interface ICreditApplicationDetail {
                 surname: string;
                 patronymic: string;
                 phoneNumber: string;
-                incomes: [
-                    {
+                incomes: {
+                    additionalProp1: {
                         work: string;
                         value: number;
-                    }
-                ];
+                    };
+                    additionalProp2: {
+                        work: string;
+                        value: number;
+                    };
+                    additionalProp3: {
+                        work: string;
+                        value: number;
+                    };
+                };
             };
             realEstates: {
                 additionalProp1: {

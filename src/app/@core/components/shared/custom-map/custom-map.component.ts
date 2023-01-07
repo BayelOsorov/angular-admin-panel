@@ -34,6 +34,7 @@ export class CustomMapComponent implements OnInit {
     map;
     marker = null;
     markerIcon = {
+        message: 'Hi There',
         icon: L.icon({
             iconSize: [25, 41],
             iconAnchor: [10, 41],
@@ -66,11 +67,13 @@ export class CustomMapComponent implements OnInit {
                         item.location.coordinates,
                         this.markerIcon
                     ).addTo(this.map);
+                    this.marker.bindPopup(`<div>${item.name}</div>`);
                 } else if (item.mall) {
                     this.marker = L.marker(
                         item.mall.location.coordinates,
                         this.markerIcon
                     ).addTo(this.map);
+                    this.marker.bindPopup(`<div>${item.name}</div>`);
                 }
             });
         }

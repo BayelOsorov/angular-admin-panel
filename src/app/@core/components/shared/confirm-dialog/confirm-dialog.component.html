@@ -1,6 +1,19 @@
 <ng-template #form>
-    <div *ngIf="visible" class="p-2">
-        <div class="d-flex">
+    <div *ngIf="visible" [class]="textareaInclude ? 'big-confirm p-2' : 'p-2'">
+        <ng-container *ngIf="textareaInclude">
+            <label for="inputLastName" class="label"
+                >Напишите своё предложение партнеру</label
+            >
+            <textarea
+                fullWidth
+                [formControl]="control"
+                placeholder="Написать ..."
+                nbInput
+                rows="2"
+            ></textarea>
+        </ng-container>
+
+        <div class="d-flex justify-content-between">
             <button
                 (click)="approve()"
                 size="small"

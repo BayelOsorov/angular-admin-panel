@@ -32,6 +32,7 @@ import { IdentificationService } from '../../../services/identification/identifi
 import {
     cleanEmptyKeyInObj,
     IdentificationAnswers,
+    maritalStatus,
     translateMaritalStatus,
 } from '../../../utils';
 @Component({
@@ -183,8 +184,8 @@ export class DetailComponent implements OnInit, OnDestroy {
     hideEdit(bool) {
         this.isNeedToEdit = bool;
     }
-    translate(str) {
-        return translateMaritalStatus(str);
+    getMaritalStatus(status) {
+        return maritalStatus.find((item) => item.value === status)?.text;
     }
     closeAlert() {
         this.error = '';

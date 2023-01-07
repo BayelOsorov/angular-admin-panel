@@ -26,22 +26,22 @@ export class PartnerIdentificationService {
         );
     }
 
-    approvePartnerIdentification(id) {
-        return this.http.patch(
+    approvePartnerIdentification(id, data) {
+        return this.http.put(
             environment.baseUrl +
                 `/Administration/api/v1/partner-applications/${id}/approve`,
-            { comment: 'approve' }
+            data
         );
     }
     declinePartnerIdentification(id) {
-        return this.http.patch(
+        return this.http.put(
             environment.baseUrl +
                 `/Administration/api/v1/partner-applications/${id}/decline`,
             { comment: 'decline' }
         );
     }
     needToEditPartnerIdentification(id, data) {
-        return this.http.post(
+        return this.http.put(
             environment.baseUrl +
                 `/Administration/api/v1/partner-applications/${id}/need-to-edit`,
             data

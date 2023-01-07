@@ -1,11 +1,14 @@
 import { DatePipe, Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { environment } from '../../../../../environments/environment';
 import { IPartnerIdentificationDetail } from '../../../../@core/models/catalog/partners';
 import { PartnerIdentificationService } from '../../../../@core/services/catalog/partner-identification/partner-identification.service';
+import { OldBackendService } from '../../../../@core/services/old-backend/old-backend.service';
 import { trEngToRusOwnerST } from '../../../../@core/utils';
 @Component({
     templateUrl: './detail.component.html',
@@ -15,6 +18,8 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
     partner: IPartnerIdentificationDetail;
     partnerId: number;
     branches;
+    passportImages = [];
+    form;
     tableColumns = {
         index: {
             title: '№',
@@ -50,6 +55,8 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private partnerIdentificationService: PartnerIdentificationService,
+        private backendApiService: OldBackendService,
+        private fb: FormBuilder,
         private datePipe: DatePipe,
         private toaster: ToastrService,
         private location: Location,
@@ -72,12 +79,16 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
                 return val;
         }
     };
+    getLogo(url) {
+        return environment.baseUrl + url;
+    }
     getDetailPartner() {
         this.partnerIdentificationService
             .getPartnerIdentificationDetail(this.partnerId)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.partner = res;
+                this.getUserPassportImages(res.clientId);
                 this.branches = {
                     items: res.branches,
                     pageCount: 1,
@@ -89,9 +100,20 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
                 };
             });
     }
+    getUserPassportImages(userId) {
+        this.backendApiService
+            .getUserRelatedFiles(userId)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.passportImages = [
+                    data.passport0ImageUrl,
+                    data.passport1ImageUrl,
+                ];
+            });
+    }
     approvePartner() {
         this.partnerIdentificationService
-            .approvePartnerIdentification(this.partnerId)
+            .approvePartnerIdentification(this.partnerId, this.form.value)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.toaster.success('Успешно сделали предложение!');
@@ -109,7 +131,7 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
     }
     needToEditPartner() {
         this.partnerIdentificationService
-            .approvePartnerIdentification(this.partnerId)
+            .needToEditPartnerIdentification(this.partnerId, this.form.value)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.toaster.success('Успешно отправили на редактирование!');
@@ -121,6 +143,9 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
             this.partnerId = params['id'];
         });
         this.getDetailPartner();
+        this.form = this.fb.group({
+            comment: [''],
+        });
     }
     ngOnDestroy() {
         this.destroy$.next();

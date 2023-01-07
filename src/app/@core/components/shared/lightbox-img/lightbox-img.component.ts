@@ -4,6 +4,9 @@ import {
     ChangeDetectionStrategy,
     Input,
 } from '@angular/core';
+import { Http2ServerRequest } from 'http2';
+import { OldBackendService } from '../../../services/old-backend/old-backend.service';
+import { toBase64 } from '../../../utils/toBase64';
 import { UseHttpImageSourcePipe } from '../secured-image/secured-image.component';
 @Component({
     selector: 'ngx-lightbox-img',
@@ -17,8 +20,16 @@ export class LightboxImgComponent implements OnInit {
     open;
     close;
     viewerOpen = false;
-
-    constructor() {}
+    constructor(private backendService: OldBackendService) {}
+    openImage() {
+        this.open = true;
+        this.backendService
+            .getBlob(this.imgUrl)
+            .toPromise()
+            .then((res) => {
+                console.log(res);
+            });
+    }
 
     ngOnInit(): void {}
 }

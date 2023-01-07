@@ -1,3 +1,5 @@
+import { Url } from 'url';
+
 export interface IDetailPartner {
     id: number;
     name: string;
@@ -218,4 +220,11 @@ export interface IPartnerIdentificationList {
     pageSize: number;
     hasPreviousPage: boolean;
     hasNextPage: boolean;
+}
+export interface IUserRelatedFiles {
+    passport0ImageUrl: Url;
+    passport1ImageUrl: Url;
+    passport3ImageUrl: Url;
+    profilePhotoUrl: Url;
+    videoIdentificationFilesUrls: [Url];
 }

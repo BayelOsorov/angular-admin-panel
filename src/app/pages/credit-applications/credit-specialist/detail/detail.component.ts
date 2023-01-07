@@ -21,6 +21,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { cleanEmptyKeyInObj } from '../../../../@core/utils';
+import { ApplicationRequestsService } from '../../../../@core/services/credit-application/credit.service';
 @Component({
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
@@ -40,6 +41,8 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
         private fb: FormBuilder,
         private location: Location,
         private creditApplicationsService: CreditApplicationService,
+        private creditService: ApplicationRequestsService,
+
         private identificationService: IdentificationService
     ) {}
     loanApplication() {
@@ -50,7 +53,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 next: (data) => {
                     this.loanApplicationData = data;
                     this.requestingAmount = data.requestingAmount;
-
+                    // this.getCreditLine(data.userId);
                     this.getScoring(data.id);
                     this.getDebtorInfoReport(data.id);
                     this.generateControls();
@@ -103,6 +106,16 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                         'Вы успешно отклонили заявку на кредит!'
                     );
                     this.location.back();
+                },
+            });
+    }
+    getCreditLine(id) {
+        this.creditService
+            .getCustomerCreditLines(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    console.log(data);
                 },
             });
     }
@@ -219,28 +232,3 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 }
-
-// AdditionalIncomes: this.fb.group([
-//     this.fb.group({
-//         Value: this.fb.group({
-//             Work: [[]],
-//             Value: [[]],
-//         }),
-//     }),
-//     this.fb.group({
-//         Value: this.fb.group({
-//             Work: [[]],
-//             Value: [[]],
-//         }),
-//     }),
-// ]),
-// RealEstates: this.fb.group({
-//     Type: [[]],
-//     Address: [[]],
-// }),
-//  PersonalEstates: this.fb.group({
-//     Brand: [[]],
-//     Type: [[]],
-//     Model: [[]],
-//     ManufactureYear: [[]],
-// }),

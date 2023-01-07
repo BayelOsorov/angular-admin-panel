@@ -43,4 +43,15 @@ export class ApplicationRequestsService {
                 `/Administration/api/v1/tax-inspection/social-fund-balance?pin=${pin}`
         );
     }
+    getCustomerData(id) {
+        return this.http.get(
+            environment.localCreditBureauUrl + `/admin/api/v1/customers/${id}`
+        );
+    }
+    getCustomerCreditLines(id) {
+        return this.http.get(
+            environment.localCreditBureauUrl +
+                `/admin/api/v1/customers/${id}/credit-lines`
+        );
+    }
 }

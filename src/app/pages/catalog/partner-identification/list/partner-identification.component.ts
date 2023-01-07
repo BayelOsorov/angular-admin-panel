@@ -40,6 +40,7 @@ export class PartnerIdentificationComponent implements OnInit, OnDestroy {
                           href='tel:${item}'
                           rel="noopener noreferrer"
                           target="_blank"
+                          class='color-a'
                         >
                           +${item}
                         </a>`,
