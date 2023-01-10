@@ -20,5 +20,5 @@ export const environment = {
     socialFundUrl: 'https://stage.c2u.io:2012',
     blackListPersonUrl: 'https://stage.c2u.io:2010',
     taxInspectionUrl: 'https://stage.c2u.io:1703',
-    localCreditBureauUrl: 'https://stage.c2u.io:8090/',
+    localCreditBureauUrl: 'https://stage.c2u.io:8090',
 };

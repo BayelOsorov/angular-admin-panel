@@ -31,6 +31,7 @@ import { HandleErrorService } from '../../../services/http/handle-error.service'
 import { IdentificationService } from '../../../services/identification/identification.service';
 import {
     cleanEmptyKeyInObj,
+    genderEnum,
     IdentificationAnswers,
     maritalStatus,
     translateMaritalStatus,
@@ -69,6 +70,9 @@ export class DetailComponent implements OnInit, OnDestroy {
     ) {}
     getDataToggle() {
         this.toggle = !this.toggle;
+    }
+    getGender(val) {
+        return genderEnum.find((e) => e.value === val).text;
     }
     approvePhotoIdn() {
         this.identificationService

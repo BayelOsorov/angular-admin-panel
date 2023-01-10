@@ -102,6 +102,31 @@
                         <td>{{ work.workAddress }}</td>
                     </tr>
                 </table>
+                <nb-accordion
+                    *ngIf="data.customerData.occupation.documents.length > 0"
+                    multi
+                    class="mt-4 d-block mb-4"
+                >
+                    <nb-accordion-item>
+                        <nb-accordion-item-header
+                            class="justify-content-center"
+                        >
+                            Фото документов
+                        </nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            <div class="detail-images row">
+                                <ngx-lightbox-img
+                                    *ngFor="
+                                        let i of data.customerData.occupation
+                                            .documents
+                                    "
+                                    [imgUrl]="i"
+                                    class="col-6 col-sm-3"
+                                ></ngx-lightbox-img>
+                            </div>
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+                </nb-accordion>
                 <ngx-credit-application-need-to-edit
                     [control]="
                         form.get(['CustomerData.Occupation.Description'])
@@ -144,6 +169,31 @@
                         <td>{{ work.workAddress }}</td>
                     </tr>
                 </table>
+                <nb-accordion
+                    *ngIf="data.customerData.occupation.documents.length > 0"
+                    multi
+                    class="mt-4 d-block mb-4"
+                >
+                    <nb-accordion-item>
+                        <nb-accordion-item-header
+                            class="justify-content-center"
+                        >
+                            Фото документов
+                        </nb-accordion-item-header>
+                        <nb-accordion-item-body>
+                            <div class="detail-images row">
+                                <ngx-lightbox-img
+                                    *ngFor="
+                                        let i of data.customerData.occupation
+                                            .documents
+                                    "
+                                    [imgUrl]="i"
+                                    class="col-6 col-sm-3"
+                                ></ngx-lightbox-img>
+                            </div>
+                        </nb-accordion-item-body>
+                    </nb-accordion-item>
+                </nb-accordion>
                 <ngx-credit-application-need-to-edit
                     [control]="form.get(['CustomerData.Occupation.Position'])"
                     [title]="'Должность'"

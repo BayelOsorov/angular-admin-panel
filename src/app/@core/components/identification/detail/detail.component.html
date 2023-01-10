@@ -90,10 +90,7 @@
                         <td>Отчество</td>
                         <td>{{ personalData.patronymic }}</td>
                     </tr>
-                    <tr>
-                        <td>Пол</td>
-                        <td>{{ personalData.gender }}</td>
-                    </tr>
+
                     <tr>
                         <td>Дата рождения</td>
                         <td>
@@ -155,7 +152,7 @@
                     </tr>
                     <tr>
                         <td>Пол</td>
-                        <td>{{ personalData.gender }}</td>
+                        <td>{{ getGender(personalData.gender) }}</td>
                     </tr>
 
                     <tr>

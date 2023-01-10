@@ -53,7 +53,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 next: (data) => {
                     this.loanApplicationData = data;
                     this.requestingAmount = data.requestingAmount;
-                    // this.getCreditLine(data.userId);
+                    this.getCreditLine(data.customerId);
                     this.getScoring(data.id);
                     this.getDebtorInfoReport(data.id);
                     this.generateControls();
