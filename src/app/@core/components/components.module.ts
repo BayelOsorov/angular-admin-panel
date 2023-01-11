@@ -101,6 +101,7 @@ import { TaxInspectionComponent } from './credit-application/tax-inspection/tax-
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { BlackListPersonComponent } from './credit-application/black-list-person/black-list-person.component';
 import { StatusBadgeComponent } from './shared/status-badge/status-badge.component';
+import { NbMomentDateModule } from '@nebular/moment';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -134,6 +135,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         NbEvaIconsModule,
         NbBadgeModule,
         NzResultModule,
+        NbMomentDateModule,
     ],
     declarations: [
         CreateStaffModalComponent,

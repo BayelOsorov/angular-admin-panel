@@ -117,6 +117,5 @@ export class AdditionalInfoComponent implements OnInit {
             this.personalEstates = this.data.customerData.personalEstates;
             this.spouseData = this.data.customerData.spouseData;
         }
-        console.log(this.data.customerData.occupation.documents.length > 0);
     }
 }

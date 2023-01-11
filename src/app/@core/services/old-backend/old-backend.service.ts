@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { IListCategories } from '../../models/catalog/category';
@@ -23,6 +23,11 @@ export class OldBackendService {
         );
     }
     getBlob(url) {
-        return this.http.get(url, HttpOptions);
+        const headers = new HttpHeaders({
+            'Content-Type': 'blob',
+        });
+        return this.http.get<Blob>(url, {
+            headers,
+        });
     }
 }

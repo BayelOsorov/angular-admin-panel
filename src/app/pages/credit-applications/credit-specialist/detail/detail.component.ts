@@ -30,6 +30,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     loanApplicationData: ICreditApplicationDetail;
     dataScoring: IScoringCreditApplication;
     personalData: IPersonalData;
+    kibData;
     requestingAmount: number;
     customerData: FormGroup;
     test;
@@ -67,7 +68,6 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data) => {
                     this.dataScoring = data;
-                    console.log(data);
                 },
             });
     }
@@ -111,11 +111,12 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     }
     getCreditLine(id) {
         this.creditService
-            .getCustomerCreditLines(id)
+            .getCustomerCreditLines('2ea78f5f-886e-4caf-9cbd-6073b0f68e71')
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
                     console.log(data);
+                    this.kibData = data;
                 },
             });
     }

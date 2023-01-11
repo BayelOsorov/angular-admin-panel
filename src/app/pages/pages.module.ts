@@ -156,6 +156,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
             provide: NB_TIME_PICKER_CONFIG,
             useValue: {},
         },
+
         { provide: NZ_ICONS, useValue: icons },
 
         UseHttpImageSourcePipe,

@@ -1,36 +1,133 @@
-<nb-accordion multi>
-    <nb-accordion-item>
-        <nb-accordion-item-header class="justify-content-center">
-            <strong>Локальный КИБ </strong>
-        </nb-accordion-item-header>
-        <nb-accordion-item-body>
-            <nb-accordion-item>
-                <nb-accordion-item-header class="justify-content-around">
-                    <strong>0-0-3</strong>
-                    <strong>Лимит: 15000</strong>
-                    <strong>Использовано: 6000</strong>
-                </nb-accordion-item-header>
-                <nb-accordion-item-body>
-                    <nb-accordion-item>
-                        <nb-accordion-item-header
-                            class="justify-content-around"
+<div class="kib" *ngIf="data">
+    <nb-accordion multi>
+        <nb-accordion-item>
+            <nb-accordion-item-header class="justify-content-center">
+                <strong>Локальный КИБ </strong>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <nb-accordion-item *ngFor="let item of data">
+                    <nb-accordion-item-header class="accordion-header row">
+                        <strong class="col-md-4">{{ item.productCode }}</strong>
+                        <strong class="col-md-4"
+                            >Лимит: {{ item.limit }}</strong
                         >
-                            <strong>1 платеж</strong>
-                            <strong>1.12.2021</strong>
-                            <strong>1000</strong>
-                        </nb-accordion-item-header>
-                        <nb-accordion-item-body>
-                            <table class="w-100">
-                                <tr>
-                                    <td>ПИН</td>
-                                    <td>fdsd</td>
-                                    <td>fdsd</td>
-                                </tr>
-                            </table>
-                        </nb-accordion-item-body>
-                    </nb-accordion-item>
-                </nb-accordion-item-body>
-            </nb-accordion-item>
-        </nb-accordion-item-body>
-    </nb-accordion-item>
-</nb-accordion>
+                        <strong class="col-md-4"
+                            >Использовано:
+                            {{ getUsedMoney(item.activeContracts) }}</strong
+                        >
+                    </nb-accordion-item-header>
+                    <nb-accordion-item-body>
+                        <nb-accordion-item
+                            *ngFor="
+                                let contract of item.activeContracts;
+                                let idx = index
+                            "
+                        >
+                            <nb-accordion-item-header
+                                class="accordion-header row"
+                            >
+                                <strong class="col-md-4"
+                                    >{{ contract.contractorName }}
+                                </strong>
+                                <strong
+                                    title="Дата создания"
+                                    class="col-md-4"
+                                    >{{
+                                        contract.createdAt | date : 'dd.MM.yyyy'
+                                    }}</strong
+                                >
+                                <strong title="Сумма" class="col-md-4"
+                                    >{{ contract.amount }}
+                                </strong>
+                            </nb-accordion-item-header>
+                            <nb-accordion-item-body>
+                                <ng-container
+                                    *ngFor="
+                                        let repDate of contract.repaymentDates;
+                                        let idx = index
+                                    "
+                                >
+                                    <nb-accordion-item
+                                        [ngClass]="
+                                            getOverdueDays(repDate)
+                                                ? 'danger-header accordion-header row'
+                                                : 'accordion-header row'
+                                        "
+                                    >
+                                        <nb-accordion-item-header>
+                                            <strong
+                                                title="Сумма"
+                                                class="col-md-4"
+                                                >{{ idx + 1 }}-й платеж</strong
+                                            >
+                                            <strong
+                                                title="Дата погашения"
+                                                class="col-md-4"
+                                                >{{
+                                                    repDate.date
+                                                        | date : 'dd.MM.yyyy'
+                                                }}</strong
+                                            >
+
+                                            <ng-container
+                                                *ngIf="!getOverdueDays(repDate)"
+                                            >
+                                                <strong
+                                                    title="Сумма"
+                                                    class="col-md-4"
+                                                    >{{ repDate.amount }}
+                                                </strong>
+                                            </ng-container>
+                                            <ng-container
+                                                *ngIf="getOverdueDays(repDate)"
+                                            >
+                                                <strong class="col-md-4 delay"
+                                                    >{{ repDate.amount }}
+                                                    <strong
+                                                        title="Количество дней просрочки"
+                                                        >{{
+                                                            getOverdueDays(
+                                                                repDate
+                                                            )
+                                                        }}</strong
+                                                    >
+                                                </strong>
+                                            </ng-container>
+                                        </nb-accordion-item-header>
+                                        <nb-accordion-item-body>
+                                            <table class="w-100 text-center">
+                                                <tr
+                                                    *ngFor="
+                                                        let repayment of repDate.repayments
+                                                    "
+                                                    class="row justify-content-between"
+                                                >
+                                                    <td
+                                                        title="Дата"
+                                                        class="col-md-4"
+                                                    >
+                                                        {{
+                                                            repayment.createdAt
+                                                                | date
+                                                                    : 'dd.MM.yyyy'
+                                                        }}
+                                                    </td>
+                                                    <td
+                                                        title="Сумма"
+                                                        class="col-md-4"
+                                                    >
+                                                        {{ repayment.amount }}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </nb-accordion-item-body>
+                                    </nb-accordion-item>
+                                </ng-container>
+                            </nb-accordion-item-body>
+                        </nb-accordion-item>
+                    </nb-accordion-item-body>
+                </nb-accordion-item>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>

@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ICreditApplicationDetail } from '../../../models/credit-application/credit-application';
+import { AuthService } from '../../../services/auth/auth.service';
 import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
+import { OldBackendService } from '../../../services/old-backend/old-backend.service';
 
 @Component({
     selector: 'ngx-credit-application-detail-info',
@@ -98,7 +100,9 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
-        private applicationRequestsService: ApplicationRequestsService
+        private applicationRequestsService: ApplicationRequestsService,
+        private api: OldBackendService,
+        private authService: AuthService
     ) {}
     getStatus() {
         switch (this.data.status) {
@@ -130,7 +134,21 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
                 },
             });
     }
-
+    dowloadCredit() {
+        fetch(this.data.debtorInformationReportUrl, {
+            headers: {
+                Authorization: 'Bearer ' + this.authService.getAccessToken(),
+                responseType: 'blob',
+            },
+        })
+            .then((res) => res.blob())
+            .then((myBlob) => {
+                const pdf = window.URL.createObjectURL(myBlob);
+                console.log(pdf);
+                window.open(pdf);
+            });
+        // window.open(this.data.debtorInformationReportUrl, '_blank');
+    }
     ngOnInit(): void {
         this.getBlackListPerson();
     }
