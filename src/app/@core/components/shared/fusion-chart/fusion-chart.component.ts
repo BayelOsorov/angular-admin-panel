@@ -21,7 +21,7 @@ export class FusionChartComponent implements OnInit {
         this.dataSource = {
             chart: {
                 lowerLimit: '0',
-                upperLimit: '600',
+                upperLimit: '800',
                 showValue: '1',
                 theme: 'fusion',
                 showToolTip: '0',
@@ -37,12 +37,12 @@ export class FusionChartComponent implements OnInit {
                     },
                     {
                         minValue: '200',
-                        maxValue: '400',
+                        maxValue: '600',
                         code: '#FFC533',
                     },
                     {
-                        minValue: '400',
-                        maxValue: '600',
+                        minValue: '600',
+                        maxValue: '800',
                         code: '#62B58F',
                     },
                 ],

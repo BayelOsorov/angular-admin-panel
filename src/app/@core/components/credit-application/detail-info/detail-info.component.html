@@ -11,19 +11,36 @@
         </nb-alert>
     </div>
     <div class="chart d-flex mt-3">
-        <nb-card class="col-md-8">
-            <nb-alert class="row justify-content-center" status="success"
-                ><div class="col-md-8">Высокий уровеь доверия</div>
-                <div class="col-md-4">800</div></nb-alert
+        <nb-card class="col-md-8" *ngIf="trustLevel">
+            <nb-alert
+                class="row justify-content-center"
+                [status]="trustLevel.status"
             >
+                <div class="col-md-8">{{ trustLevel.text }}</div>
+                <div class="col-md-4">{{ dataScoring.score }}</div>
+            </nb-alert>
             <ngx-fusion-chart [score]="dataScoring.score"></ngx-fusion-chart>
 
-            <nb-alert class="row mb-0" status="success">
+            <nb-alert
+                class="row mb-0"
+                *ngIf="repaymentDays?.repaymentDelayDays === 0"
+                status="success"
+            >
                 <div class="custom-alert">
-                    <div class="col-md-8">Локальный киб</div>
+                    <div class="col-md-8">Локальный КИБ</div>
                     <div class="col-md-4 text-right">
                         просрочек не обнаружено
                     </div>
+                </div></nb-alert
+            >
+            <nb-alert
+                class="row mb-0"
+                *ngIf="repaymentDays?.repaymentDelayDays > 0"
+                status="danger"
+            >
+                <div class="custom-alert">
+                    <div class="col-md-8">Локальный КИБ</div>
+                    <div class="col-md-4 text-right">обнаружена просрочка</div>
                 </div></nb-alert
             >
             <nb-alert class="row mb-0" status="info">
@@ -47,13 +64,13 @@
             <nb-alert *ngIf="blackListPerson?.length === 0" status="success">
                 <div class="d-flex justify-content-around align-items-center">
                     <i style="font-size: 35px" class="nb-checkmark-circle"></i>
-                    <p>Не значится в списке террориствов</p>
+                    <p>Не значится в списке террористов</p>
                 </div>
             </nb-alert>
             <nb-alert *ngIf="blackListPerson?.length > 0" status="danger">
                 <div class="d-flex justify-content-around align-items-center">
                     <i style="font-size: 35px" class="nb-alert"></i>
-                    <p>Значится в списке террориствов</p>
+                    <p>Значится в списке террористов</p>
                 </div>
             </nb-alert>
             <nb-alert *ngIf="taxPayer?.debt" status="success">
@@ -70,10 +87,10 @@
                     </p>
                 </div>
             </nb-alert>
-            <nb-alert status="info">
+            <nb-alert status="info" *ngFor="let product of kibData">
                 <div class="d-flex justify-content-around align-items-center">
                     <i style="font-size: 25px" class="nb-info"></i>
-                    <p>Подключен продукт 0-0-3</p>
+                    <p>Подключен продукт {{ product.productCode }}</p>
                 </div>
             </nb-alert>
             <nb-alert status="danger">

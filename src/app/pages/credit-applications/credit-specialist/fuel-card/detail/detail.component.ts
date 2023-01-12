@@ -7,10 +7,10 @@ import { takeUntil } from 'rxjs/operators';
 import {
     ICreditApplicationDetail,
     IScoringCreditApplication,
-} from '../../../../@core/models/credit-application/credit-application';
-import { IPersonalData } from '../../../../@core/models/identification/identification';
-import { CreditApplicationService } from '../../../../@core/services/credit-application/credit-application.service';
-import { IdentificationService } from '../../../../@core/services/identification/identification.service';
+} from '../../../../../@core/models/credit-application/credit-application';
+import { IPersonalData } from '../../../../../@core/models/identification/identification';
+import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
+import { IdentificationService } from '../../../../../@core/services/identification/identification.service';
 import {
     AbstractControl,
     Form,
@@ -20,13 +20,14 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
-import { cleanEmptyKeyInObj } from '../../../../@core/utils';
-import { ApplicationRequestsService } from '../../../../@core/services/credit-application/credit.service';
+import { cleanEmptyKeyInObj } from '../../../../../@core/utils';
+import { ApplicationRequestsService } from '../../../../../@core/services/credit-application/credit.service';
+import { FuelCardApplicationService } from '../../../../../@core/services/credit-application/fuel-card.service';
 @Component({
     templateUrl: './detail.component.html',
     styleUrls: ['./detail.component.scss'],
 })
-export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
+export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
     loanApplicationData: ICreditApplicationDetail;
     dataScoring: IScoringCreditApplication;
     personalData: IPersonalData;
@@ -42,13 +43,15 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
         private fb: FormBuilder,
         private location: Location,
         private creditApplicationsService: CreditApplicationService,
+        private fuelCardApplicationsService: FuelCardApplicationService,
+
         private creditService: ApplicationRequestsService,
 
         private identificationService: IdentificationService
     ) {}
     loanApplication() {
-        this.creditApplicationsService
-            .getCreditApplicationDetail()
+        this.fuelCardApplicationsService
+            .getFuelCardApplicationDetail()
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
@@ -56,14 +59,13 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                     this.requestingAmount = data.requestingAmount;
                     this.getCreditLine(data.customerId);
                     this.getScoring(data.id);
-                    this.getDebtorInfoReport(data.id);
                     this.generateControls();
                 },
             });
     }
     getScoring(id) {
-        this.creditApplicationsService
-            .getCreditApplicationScoring(id)
+        this.fuelCardApplicationsService
+            .getFuelCardApplicationScoring(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
@@ -82,8 +84,8 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             });
     }
     approveCredit() {
-        this.creditApplicationsService
-            .approveCreditApplication(this.loanApplicationData.id, {
+        this.fuelCardApplicationsService
+            .approveFuelCardApplication(this.loanApplicationData.id, {
                 approvedAmount: this.requestingAmount,
             })
             .pipe(takeUntil(this.destroy$))
@@ -97,8 +99,8 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             });
     }
     declineCredit() {
-        this.creditApplicationsService
-            .declineCreditApplication(this.loanApplicationData.id)
+        this.fuelCardApplicationsService
+            .declineFuelCardApplication(this.loanApplicationData.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
@@ -124,8 +126,8 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
         this.requestingAmount = val;
     }
     sendComment(data) {
-        this.creditApplicationsService
-            .sendCommentCreditApplication(this.loanApplicationData.id, {
+        this.fuelCardApplicationsService
+            .sendCommentFuelCardApplication(this.loanApplicationData.id, {
                 data,
             })
             .pipe(takeUntil(this.destroy$))
@@ -133,23 +135,10 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 next: () => {},
             });
     }
-    getDebtorInfoReport(id) {
-        this.creditApplicationsService
-            .getCreditApplicationBureauInfoReport(id)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: (doc) => {
-                    console.log(doc);
-
-                    // const blob = window.URL.createObjectURL(data1);
-                    // console.log(blob);
-                },
-            });
-    }
 
     needToEditUser() {
-        this.creditApplicationsService
-            .needToEditCreditApplication(this.loanApplicationData.id, {
+        this.fuelCardApplicationsService
+            .needToEditFuelCardApplication(this.loanApplicationData.id, {
                 editRequiredProperties: cleanEmptyKeyInObj(
                     this.customerData.value
                 ),

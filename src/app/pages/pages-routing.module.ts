@@ -28,7 +28,7 @@ import { PartnerFeedbacksComponent } from './catalog/partner-feedbacks/partner-f
 import { PartnerFeedbacksDetailComponent } from './catalog/partner-feedbacks/detail/partner-feedbacks-detail.component';
 import { PermissionsGuard } from '../@core/guards/permissions/permissions.guard';
 import { GetCreditApplicationsComponent } from './credit-applications/credit-specialist/get-credit-applications/get-credit-applications.component';
-import { CreditApplicationDetailComponent } from './credit-applications/credit-specialist/detail/detail.component';
+import { CreditApplicationDetailComponent } from './credit-applications/credit-specialist/0-0-3/detail/detail.component';
 import { ListContragentsComponent } from './catalog/contragents/list-contragents/list-contragents.component';
 import { ActionsLegalContractorComponent } from './catalog/contragents/legal-contractor/actions-Iegal-contractors/actions-legal-contractors.component';
 import { LegalContractorDetailComponent } from './catalog/contragents/legal-contractor/legal-contractor-detail/legal-contractor-detail.component';
@@ -41,6 +41,9 @@ import { SupportCenterProductDetailComponent } from './support-center/products/d
 import { FullSizeSocialFundComponent } from '../@core/components/credit-application/soc-fond/full-size-social-fund/full-size-social-fund.component';
 import { PartnerIdentificationComponent } from './catalog/partner-identification/list/partner-identification.component';
 import { PartnerIdentificationDetailComponent } from './catalog/partner-identification/detail/detail.component';
+import { FuelCardApplicationDetailComponent } from './credit-applications/credit-specialist/fuel-card/detail/detail.component';
+import { CreditApplicationListComponent } from './credit-applications/admin/credit-application-list/credit-application-list.component';
+import { CreditApplicationContainerComponent } from './credit-applications/credit-application-container/credit-application-container.component';
 
 const routes: Routes = [
     {
@@ -322,15 +325,33 @@ const routes: Routes = [
                 children: [
                     {
                         path: '0-0-3',
-                        component: GetCreditApplicationsComponent,
+                        children: [
+                            {
+                                path: '',
+                                component: CreditApplicationContainerComponent,
+                            },
+                            // {
+                            //     path: 'list',
+                            //     component: CreditApplicationListComponent,
+                            // },
+                            {
+                                path: 'detail/:id',
+                                component: CreditApplicationDetailComponent,
+                            },
+                        ],
                     },
                     {
-                        path: '0-0-3/detail/:id',
-                        component: CreditApplicationDetailComponent,
-                    },
-                    {
-                        path: 'fuel',
-                        component: GetCreditApplicationsComponent,
+                        path: 'fuel-card',
+                        children: [
+                            {
+                                path: '',
+                                component: GetCreditApplicationsComponent,
+                            },
+                            {
+                                path: 'detail/:id',
+                                component: FuelCardApplicationDetailComponent,
+                            },
+                        ],
                     },
                     {
                         path: 'social-fund/:pin',

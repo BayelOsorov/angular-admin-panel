@@ -5,6 +5,7 @@ import { ICreditApplicationDetail } from '../../../models/credit-application/cre
 import { AuthService } from '../../../services/auth/auth.service';
 import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
 import { OldBackendService } from '../../../services/old-backend/old-backend.service';
+import { downloadFile } from '../../../utils';
 
 @Component({
     selector: 'ngx-credit-application-detail-info',
@@ -14,8 +15,13 @@ import { OldBackendService } from '../../../services/old-backend/old-backend.ser
 export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
     @Input() data: ICreditApplicationDetail;
     @Input() dataScoring;
+    @Input() kibData;
+
     blackListPerson;
     taxPayer;
+    creditReportUrl;
+    trustLevel;
+    repaymentDays;
     personalInfo = {
         id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
         fio: 'Surname Name Patronymic',
@@ -104,6 +110,27 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
         private api: OldBackendService,
         private authService: AuthService
     ) {}
+    getTrustLevel() {
+        const score = this.dataScoring.score;
+        if (score <= 200) {
+            this.trustLevel = {
+                status: 'danger',
+                text: 'Низкий уровень доверия',
+            };
+        }
+        if (score > 200 && score < 600) {
+            this.trustLevel = {
+                status: 'warning',
+                text: 'Средний уровень доверия',
+            };
+        }
+        if (score >= 600) {
+            this.trustLevel = {
+                status: 'success',
+                text: 'Высокий уровень доверия',
+            };
+        }
+    }
     getStatus() {
         switch (this.data.status) {
             case 'InProcess':
@@ -134,7 +161,18 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
                 },
             });
     }
-    dowloadCredit() {
+    getCustomerRepDelays() {
+        this.applicationRequestsService
+            .getCustomerRepaymentDelays('2ea78f5f-886e-4caf-9cbd-6073b0f68e71')
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.repaymentDays = data;
+                },
+            });
+    }
+
+    getCreditReport() {
         fetch(this.data.debtorInformationReportUrl, {
             headers: {
                 Authorization: 'Bearer ' + this.authService.getAccessToken(),
@@ -143,14 +181,21 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
         })
             .then((res) => res.blob())
             .then((myBlob) => {
-                const pdf = window.URL.createObjectURL(myBlob);
-                console.log(pdf);
-                window.open(pdf);
+                this.creditReportUrl = window.URL.createObjectURL(myBlob);
             });
+    }
+    dowloadCredit() {
+        downloadFile(
+            this.creditReportUrl,
+            `Кредитный-Отчет:${this.personalInfo.fio}`
+        );
         // window.open(this.data.debtorInformationReportUrl, '_blank');
     }
     ngOnInit(): void {
+        this.getCustomerRepDelays();
+        this.getTrustLevel();
         this.getBlackListPerson();
+        this.getCreditReport();
     }
     ngOnDestroy() {
         this.destroy$.next();

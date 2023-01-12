@@ -54,4 +54,9 @@ export class ApplicationRequestsService {
                 `/admin/api/v1/customers/${id}/credit-lines`
         );
     }
+    getCustomerRepaymentDelays(id) {
+        return this.http.get(
+            environment.localCreditBureauUrl + `/admin/api/v1/customers/${id}`
+        );
+    }
 }

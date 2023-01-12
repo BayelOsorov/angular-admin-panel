@@ -9,6 +9,7 @@ import {
     truncateText,
     cleanEmptyKeyInObj,
     trEngToRusOwnerST,
+    downloadFile,
 } from './helpers';
 import {
     Position,
@@ -36,6 +37,7 @@ export {
     truncateText,
     trEngToRusOwnerST,
     cleanEmptyKeyInObj,
+    downloadFile,
     Position,
     placeOfWorkType,
     entrepreneurTypeEnum,

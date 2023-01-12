@@ -64,7 +64,7 @@ export class PagesComponent {
                 // },
                 {
                     title: 'Топливная карта',
-                    link: '/credit-application/fuel',
+                    link: '/credit-application/fuel-card',
                 },
             ],
         },
@@ -87,6 +87,10 @@ export class PagesComponent {
                 {
                     title: 'Партнеры',
                     link: '/contragents/list',
+                },
+                {
+                    title: 'Идентификация партнеров',
+                    link: '/catalog/partner-identification',
                 },
             ],
         },
@@ -142,10 +146,6 @@ export class PagesComponent {
                 {
                     title: 'Отзывы',
                     link: '/catalog/partner-feedbacks',
-                },
-                {
-                    title: 'Идентификация партнеров',
-                    link: '/catalog/partner-identification',
                 },
             ],
         },
