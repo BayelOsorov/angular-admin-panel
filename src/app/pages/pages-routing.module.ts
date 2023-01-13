@@ -330,10 +330,14 @@ const routes: Routes = [
                                 path: '',
                                 component: CreditApplicationContainerComponent,
                             },
-                            // {
-                            //     path: 'list',
-                            //     component: CreditApplicationListComponent,
-                            // },
+                            {
+                                path: 'get',
+                                component: GetCreditApplicationsComponent,
+                            },
+                            {
+                                path: 'list',
+                                component: CreditApplicationListComponent,
+                            },
                             {
                                 path: 'detail/:id',
                                 component: CreditApplicationDetailComponent,
@@ -345,7 +349,15 @@ const routes: Routes = [
                         children: [
                             {
                                 path: '',
+                                component: CreditApplicationContainerComponent,
+                            },
+                            {
+                                path: 'get',
                                 component: GetCreditApplicationsComponent,
+                            },
+                            {
+                                path: 'list',
+                                component: CreditApplicationListComponent,
                             },
                             {
                                 path: 'detail/:id',

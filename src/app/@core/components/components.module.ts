@@ -102,6 +102,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { BlackListPersonComponent } from './credit-application/black-list-person/black-list-person.component';
 import { StatusBadgeComponent } from './shared/status-badge/status-badge.component';
 import { NbMomentDateModule } from '@nebular/moment';
+import { ListApplicationsComponent } from './credit-application/list-applications/list-applications.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -195,6 +196,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         TaxInspectionComponent,
         BlackListPersonComponent,
         StatusBadgeComponent,
+        ListApplicationsComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -247,6 +249,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         TaxInspectionComponent,
         BlackListPersonComponent,
         StatusBadgeComponent,
+        ListApplicationsComponent,
     ],
 })
 export class ComponentsModule {}

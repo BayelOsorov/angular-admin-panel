@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import {
     ICreditApplicationDetail,
+    ICreditApplicationList,
     IScoringCreditApplication,
 } from '../../models/credit-application/credit-application';
 import { HttpOptions } from '../../utils';
@@ -19,7 +20,12 @@ export class CreditApplicationService {
                 `/operator/api/v1/ocl-requests/next-ocl-request`
         );
     }
-
+    getListCreditApplication(page, filter) {
+        return this.http.get<ICreditApplicationList>(
+            environment.creditApplicationUrl +
+                `/admin/api/v1/ocl-requests/search?pageNumber=${page}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
+        );
+    }
     getCreditApplicationDetail() {
         return this.http.get<ICreditApplicationDetail>(
             environment.creditApplicationUrl +

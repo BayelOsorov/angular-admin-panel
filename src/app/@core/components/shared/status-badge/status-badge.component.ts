@@ -31,6 +31,14 @@ export class StatusBadgeComponent implements ViewCell, OnInit {
                 return 'secondary';
             case 'VideoIdentificationRequested':
                 return 'primary';
+            case 'InProcess':
+                return 'primary';
+            case 'EditRequired':
+                return 'warning';
+            case 'Timeout':
+                return 'secondary';
+            case 'Requested':
+                return 'primary';
             default:
                 return 'primary';
         }

@@ -2,7 +2,7 @@
     <nz-pagination
         class="mx-auto"
         (nzPageIndexChange)="changePage($event)"
-        [nzPageIndex]="data.page"
+        [nzPageIndex]="data.page ? data.page : data.pageNumber"
         [nzTotal]="data.totalItemCount"
         [nzPageSize]="data.pageSize"
     ></nz-pagination>

@@ -1,3 +1,12 @@
+export interface ICreditApplicationList {
+    items: [ICreditApplicationDetail];
+    pageCount: number;
+    totalItemCount: number;
+    pageNumber: number;
+    pageSize: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+}
 export interface ICreditApplicationDetail {
     id: string;
     createdAt: Date;
@@ -235,7 +244,7 @@ export interface IScoringCreditApplication {
         actualResidenceLocation: number;
     };
     personalInformationScore: {
-        rejected: true;
+        rejected: boolean;
         stopFactors: [
             {
                 name: string;
@@ -264,7 +273,7 @@ export interface IScoringCreditApplication {
         personalEstateAvailability: number;
     };
     solvencyScore: {
-        rejected: true;
+        rejected: boolean;
         stopFactors: [
             {
                 name: string;
@@ -293,7 +302,7 @@ export interface IScoringCreditApplication {
         additionalIncome: number;
     };
     creditHistoryScore: {
-        rejected: true;
+        rejected: boolean;
         stopFactors: [
             {
                 name: string;
@@ -330,8 +339,8 @@ export interface IScoringCreditApplication {
         expenses: number;
         expensesForDependents: number;
     };
-    rejected: true;
-    stopFactorRejection: true;
+    rejected: boolean;
+    stopFactorRejection: boolean;
     stopFactorSum: number;
     percentage: number;
     score: number;

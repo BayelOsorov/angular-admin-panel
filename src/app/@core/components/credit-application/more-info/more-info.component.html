@@ -1,5 +1,9 @@
-<div class="" *ngIf="data">
-    <nb-accordion multi class="danger-accordion">
+<div class="">
+    <nb-accordion
+        *ngIf="dataScoring.creditHistoryScore.stopFactors.length > 0"
+        multi
+        class="danger-accordion"
+    >
         <nb-accordion-item>
             <nb-accordion-item-header class="justify-content-center">
                 Требуется особое внимание

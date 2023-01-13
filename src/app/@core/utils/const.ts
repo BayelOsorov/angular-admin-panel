@@ -76,4 +76,8 @@ export const statusIdentificate = [
     { id: 'PhotosApproved', text: 'Подтверждение фото' },
     { id: 'Canceled', text: 'Отменено' },
     { id: 'VideoIdentificationRequested', text: 'Готов к видео' },
+    { id: 'Requested', text: 'Ожидание' },
+    { id: 'InProcess', text: 'В процессе' },
+    { id: 'EditRequired', text: 'Нужно отредактировать' },
+    { id: 'Timeout', text: 'Время и стекло' },
 ];
