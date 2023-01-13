@@ -73,8 +73,12 @@ import { SupportCenterProductDetailComponent } from './support-center/products/d
 import { PartnerIdentificationComponent } from './catalog/partner-identification/list/partner-identification.component';
 import { PartnerIdentificationDetailComponent } from './catalog/partner-identification/detail/detail.component';
 import { FuelCardApplicationDetailComponent } from './credit-applications/credit-specialist/fuel-card/detail/detail.component';
-import { CreditApplicationListComponent } from './credit-applications/admin/credit-application-list/credit-application-list.component';
+import { CreditApplicationListComponent } from './credit-applications/admin/0-0-3/credit-application-list/credit-application-list.component';
 import { CreditApplicationContainerComponent } from './credit-applications/credit-application-container/credit-application-container.component';
+import { DetailCreditApplicationComponent } from './credit-applications/admin/0-0-3/detail-credit-application/detail-credit-application.component';
+import { ListFuelCardApplicationsComponent } from './credit-applications/admin/fuel-card/list-fuel-card-applications/list-fuel-card-applications.component';
+import { DetailFuelCardApplicationComponent } from './credit-applications/admin/fuel-card/detail-fuel-card-application/detail-fuel-card-application.component';
+import { DetailIncreaseLimitApplicationComponent } from './credit-applications/credit-specialist/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -156,6 +160,10 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         FuelCardApplicationDetailComponent,
         CreditApplicationListComponent,
         CreditApplicationContainerComponent,
+        DetailCreditApplicationComponent,
+        ListFuelCardApplicationsComponent,
+        DetailFuelCardApplicationComponent,
+        DetailIncreaseLimitApplicationComponent,
     ],
     providers: [
         {
