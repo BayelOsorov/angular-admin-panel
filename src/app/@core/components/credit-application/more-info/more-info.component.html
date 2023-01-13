@@ -25,8 +25,9 @@
     <ngx-black-list-person class="detail-block"></ngx-black-list-person>
     <ngx-tax-inspection class="detail-block"></ngx-tax-inspection>
     <ngx-identification-files
-        [data]="data"
+        [data]="customerData"
         class="detail-block"
     ></ngx-identification-files>
-    <ngx-passport-data class="detail-block"> </ngx-passport-data>
+    <ngx-passport-data [data]="customerData" class="detail-block">
+    </ngx-passport-data>
 </div>

@@ -42,8 +42,12 @@ import { FullSizeSocialFundComponent } from '../@core/components/credit-applicat
 import { PartnerIdentificationComponent } from './catalog/partner-identification/list/partner-identification.component';
 import { PartnerIdentificationDetailComponent } from './catalog/partner-identification/detail/detail.component';
 import { FuelCardApplicationDetailComponent } from './credit-applications/credit-specialist/fuel-card/detail/detail.component';
-import { CreditApplicationListComponent } from './credit-applications/admin/credit-application-list/credit-application-list.component';
+import { CreditApplicationListComponent } from './credit-applications/admin/0-0-3/credit-application-list/credit-application-list.component';
 import { CreditApplicationContainerComponent } from './credit-applications/credit-application-container/credit-application-container.component';
+import { DetailCreditApplicationComponent } from './credit-applications/admin/0-0-3/detail-credit-application/detail-credit-application.component';
+import { ListFuelCardApplicationsComponent } from './credit-applications/admin/fuel-card/list-fuel-card-applications/list-fuel-card-applications.component';
+import { DetailFuelCardApplicationComponent } from './credit-applications/admin/fuel-card/detail-fuel-card-application/detail-fuel-card-application.component';
+import { DetailIncreaseLimitApplicationComponent } from './credit-applications/credit-specialist/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
 
 const routes: Routes = [
     {
@@ -320,7 +324,11 @@ const routes: Routes = [
                 path: 'credit-application',
                 canActivate: [PermissionsGuard],
                 data: {
-                    roles: ['admin', 'credit_specialist'],
+                    roles: [
+                        'admin',
+                        'credit_specialist',
+                        'credit_specialist_admin',
+                    ],
                 },
                 children: [
                     {
@@ -335,12 +343,16 @@ const routes: Routes = [
                                 component: GetCreditApplicationsComponent,
                             },
                             {
+                                path: 'get/detail/:id',
+                                component: CreditApplicationDetailComponent,
+                            },
+                            {
                                 path: 'list',
                                 component: CreditApplicationListComponent,
                             },
                             {
-                                path: 'detail/:id',
-                                component: CreditApplicationDetailComponent,
+                                path: 'list/detail/:id',
+                                component: DetailCreditApplicationComponent,
                             },
                         ],
                     },
@@ -356,13 +368,43 @@ const routes: Routes = [
                                 component: GetCreditApplicationsComponent,
                             },
                             {
-                                path: 'list',
-                                component: CreditApplicationListComponent,
-                            },
-                            {
-                                path: 'detail/:id',
+                                path: 'get/detail/:id',
                                 component: FuelCardApplicationDetailComponent,
                             },
+                            {
+                                path: 'list',
+                                component: ListFuelCardApplicationsComponent,
+                            },
+                            {
+                                path: 'list/detail/:id',
+                                component: DetailFuelCardApplicationComponent,
+                            },
+                        ],
+                    },
+                    {
+                        path: 'increase-limit',
+                        children: [
+                            {
+                                path: '',
+                                component: CreditApplicationContainerComponent,
+                            },
+                            {
+                                path: 'get',
+                                component: GetCreditApplicationsComponent,
+                            },
+                            {
+                                path: 'get/detail/:id',
+                                component:
+                                    DetailIncreaseLimitApplicationComponent,
+                            },
+                            // {
+                            //     path: 'list',
+                            //     component: ListFuelCardApplicationsComponent,
+                            // },
+                            // {
+                            //     path: 'list/detail/:id',
+                            //     component: DetailFuelCardApplicationComponent,
+                            // },
                         ],
                     },
                     {

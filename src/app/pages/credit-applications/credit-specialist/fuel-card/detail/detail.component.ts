@@ -34,7 +34,8 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
     kibData;
     requestingAmount: number;
     customerData: FormGroup;
-    test;
+    customerInfo;
+    requestingAmountData;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -60,6 +61,8 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
                     this.getCreditLine(data.customerId);
                     this.getScoring(data.id);
                     this.generateControls();
+                    this.getCustomerData(data.customerId);
+                    this.getRequestingAmount();
                 },
             });
     }
@@ -73,16 +76,17 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
-    getPersonalData(id) {
-        this.identificationService
-            .getUserPersonalData(id)
+    getCustomerData(id) {
+        this.creditService
+            .getCustomerData(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
-                    this.personalData = data;
+                    this.customerInfo = data;
                 },
             });
     }
+
     approveCredit() {
         this.fuelCardApplicationsService
             .approveFuelCardApplication(this.loanApplicationData.id, {
@@ -152,6 +156,14 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
                     this.location.back();
                 },
             });
+    }
+    getRequestingAmount() {
+        this.requestingAmountData = {
+            min: 1000,
+            max: this.loanApplicationData.requestingAmount,
+            requestingAmount: this.loanApplicationData.requestingAmount,
+            status: this.loanApplicationData.status,
+        };
     }
     generateControls() {
         if (this.loanApplicationData.customerData.additionalIncomes) {

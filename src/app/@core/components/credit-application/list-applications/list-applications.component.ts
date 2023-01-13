@@ -28,7 +28,9 @@ export class ListApplicationsComponent implements OnInit, OnDestroy {
         private router: Router,
         private fb: FormBuilder
     ) {}
-
+    onRowSelect(id) {
+        this.router.navigate([this.router.url + '/detail/' + id]);
+    }
     ngOnInit(): void {}
     ngOnDestroy() {
         this.destroy$.next();

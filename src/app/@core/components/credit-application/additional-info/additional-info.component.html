@@ -44,24 +44,26 @@
             </table>
 
             <ngx-credit-application-need-to-edit
-                [control]="form.get(['CustomerData.EducationDegree'])"
+                [control]="form?.get(['CustomerData.EducationDegree'])"
                 [title]="'Образование'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get(['CustomerData.MaritalStatus'])"
+                [control]="form?.get(['CustomerData.MaritalStatus'])"
                 [title]="'Семейное положение'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get(['CustomerData.DependentsCount'])"
+                [control]="form?.get(['CustomerData.DependentsCount'])"
                 [title]="'Иждивенцы'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
 
             <ngx-credit-application-need-to-edit
                 [control]="
-                    form.get(['CustomerData.DurationOfActualResidenceLocation'])
+                    form?.get([
+                        'CustomerData.DurationOfActualResidenceLocation'
+                    ])
                 "
                 [title]="'Срок проживания по фактическому адресу'"
                 [placeholder]="'Введите'"
@@ -129,13 +131,13 @@
                 </nb-accordion>
                 <ngx-credit-application-need-to-edit
                     [control]="
-                        form.get(['CustomerData.Occupation.Description'])
+                        form?.get(['CustomerData.Occupation.Description'])
                     "
                     [title]="'Описание деятельности'"
                     [placeholder]="'Введите'"
                 ></ngx-credit-application-need-to-edit>
                 <ngx-credit-application-need-to-edit
-                    [control]="form.get(['CustomerData.Occupation.Type'])"
+                    [control]="form?.get(['CustomerData.Occupation.Type'])"
                     [title]="'Тип ИП'"
                     [placeholder]="'Введите'"
                 ></ngx-credit-application-need-to-edit>
@@ -195,29 +197,31 @@
                     </nb-accordion-item>
                 </nb-accordion>
                 <ngx-credit-application-need-to-edit
-                    [control]="form.get(['CustomerData.Occupation.Position'])"
+                    [control]="form?.get(['CustomerData.Occupation.Position'])"
                     [title]="'Должность'"
                     [placeholder]="'Введите'"
                 ></ngx-credit-application-need-to-edit>
                 <ngx-credit-application-need-to-edit
-                    [control]="form.get(['CustomerData.Occupation.Company'])"
+                    [control]="form?.get(['CustomerData.Occupation.Company'])"
                     [title]="'Название компании'"
                     [placeholder]="'Введите'"
                 ></ngx-credit-application-need-to-edit>
             </ng-container>
 
             <ngx-credit-application-need-to-edit
-                [control]="form.get(['CustomerData.Occupation.WorkExperience'])"
+                [control]="
+                    form?.get(['CustomerData.Occupation.WorkExperience'])
+                "
                 [title]="'Стаж работы'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get(['CustomerData.Occupation.Income'])"
+                [control]="form?.get(['CustomerData.Occupation.Income'])"
                 [title]="'Ежемесячный доход'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get(['CustomerData.Occupation.WorkAddress'])"
+                [control]="form?.get(['CustomerData.Occupation.WorkAddress'])"
                 [title]="'Адрес'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
@@ -252,7 +256,7 @@
                     <th colspan="2">
                         <ngx-credit-application-need-to-edit
                             [control]="
-                                form.get([
+                                form?.get([
                                     'CustomerData.AdditionalIncomes[' +
                                         idx +
                                         '].Value.Work'
@@ -293,12 +297,12 @@
                 </tr>
             </table>
             <ngx-credit-application-need-to-edit
-                [control]="form.get(['CustomerData.SpouseData.Surname'])"
+                [control]="form?.get(['CustomerData.SpouseData.Surname'])"
                 [title]="'ФИО'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
             <ngx-credit-application-need-to-edit
-                [control]="form.get(['CustomerData.SpouseData.PhoneNumber'])"
+                [control]="form?.get(['CustomerData.SpouseData.PhoneNumber'])"
                 [title]="'Номер телефона'"
                 [placeholder]="'Введите'"
             ></ngx-credit-application-need-to-edit>
@@ -320,7 +324,7 @@
                     <th colspan="2">
                         <ngx-credit-application-need-to-edit
                             [control]="
-                                form.get([
+                                form?.get([
                                     'CustomerData.SpouseData.Incomes[' +
                                         idx +
                                         '].Value.Work'
@@ -369,7 +373,7 @@
                     <th colspan="4">
                         <ngx-credit-application-need-to-edit
                             [control]="
-                                form.get([
+                                form?.get([
                                     'CustomerData.PersonalEstates[' +
                                         idx +
                                         '].Value.Model'
@@ -411,7 +415,7 @@
                     <th colspan="2">
                         <ngx-credit-application-need-to-edit
                             [control]="
-                                form.get([
+                                form?.get([
                                     'CustomerData.RealEstates[' +
                                         idx +
                                         '].Value.Address'
@@ -430,7 +434,7 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-<div class="mt-5 row">
+<div class="mt-5 row" *ngIf="form">
     <ngx-confirm-buttons
         (approveEvent)="needToEditUserEvent.emit()"
         status="warning"

@@ -11,66 +11,66 @@ import { HttpOptions } from '../../utils';
 @Injectable({
     providedIn: 'root',
 })
-export class CreditApplicationService {
+export class IncreaseLimitApplicationService {
     constructor(private http: HttpClient) {}
 
     getCreditApplication() {
         return this.http.get<ICreditApplicationDetail>(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ocl-requests/next-ocl-request`
+                `/operator/api/v1/ucl-requests/next-ocl-request`
         );
     }
     getListCreditApplication(page, filter) {
         return this.http.get<ICreditApplicationList>(
             environment.creditApplicationUrl +
-                `/admin/api/v1/ocl-requests/search?pageNumber=${page}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
+                `/admin/api/v1/ucl-requests/search?pageNumber=${page}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
         );
     }
     getCreditApplicationDetailAdmin(id) {
         return this.http.get<ICreditApplicationDetail>(
             environment.creditApplicationUrl +
-                `/admin/api/v1/ocl-requests/${id}/details`
+                `/admin/api/v1/ucl-requests/${id}/details`
         );
     }
     getCreditApplicationDetail() {
         return this.http.get<ICreditApplicationDetail>(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ocl-requests/in-process`
+                `/operator/api/v1/ucl-requests/in-process`
         );
     }
 
     approveCreditApplication(id, data) {
         return this.http.patch(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ocl-requests/${id}/approve`,
+                `/operator/api/v1/ucl-requests/${id}/approve`,
             data
         );
     }
     declineCreditApplication(id) {
         return this.http.patch(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ocl-requests/${id}/decline`,
+                `/operator/api/v1/ucl-requests/${id}/decline`,
             { comment: 'decline' }
         );
     }
     needToEditCreditApplication(id, data) {
         return this.http.patch(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ocl-requests/${id}/require-edit`,
+                `/operator/api/v1/ucl-requests/${id}/require-edit`,
             data
         );
     }
     sendCommentCreditApplication(id, data) {
         return this.http.post(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ocl-requests/${id}/comments`,
+                `/operator/api/v1/ucl-requests/${id}/comments`,
             data
         );
     }
     getCreditApplicationScoring(id) {
         return this.http.get<IScoringCreditApplication>(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ocl-requests/${id}/scoring`
+                `/operator/api/v1/ucl-requests/${id}/scoring`
         );
     }
     getCreditApplicationBureauInfoReport(id) {

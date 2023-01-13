@@ -1,4 +1,4 @@
-<nb-accordion multi>
+<nb-accordion multi *ngIf="data">
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Пасспортные данные
@@ -7,63 +7,90 @@
             <table class="w-100">
                 <tr>
                     <td>ПИН</td>
-                    <td>{{ personalData.pin }}</td>
+                    <td>{{ data.identificationInformation.pin }}</td>
                 </tr>
                 <tr>
                     <td>Имя</td>
-                    <td>{{ personalData.name }}</td>
+                    <td>{{ data.identificationInformation.name }}</td>
                 </tr>
                 <tr>
                     <td>Фамилия</td>
-                    <td>{{ personalData.surname }}</td>
+                    <td>{{ data.identificationInformation.surname }}</td>
                 </tr>
                 <tr>
                     <td>Отчество</td>
-                    <td>{{ personalData.patronymic }}</td>
+                    <td>{{ data.identificationInformation.patronymic }}</td>
                 </tr>
                 <tr>
                     <td>Пол</td>
-                    <td>{{ personalData.gender }}</td>
+                    <td>{{ data.identificationInformation.gender }}</td>
                 </tr>
                 <tr>
                     <td>Дата рождения</td>
-                    <td>{{ personalData.birthDate | date : 'dd.MM.yyyy' }}</td>
+                    <td>
+                        {{
+                            data.identificationInformation.birthDate
+                                | date : 'dd.MM.yyyy'
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Семейное положение</td>
                     <td>
-                        {{ personalData.maritalStatus }}
+                        {{
+                            getMaritalStatus(
+                                data.identificationInformation.maritalStatus
+                            )
+                        }}
                     </td>
                 </tr>
                 <tr>
                     <td>Адрес прописки</td>
-                    <td>{{ personalData.residenceAddress }}</td>
+                    <td>
+                        {{
+                            data.identificationInformation.residenceAddress
+                                .region +
+                                ',' +
+                                data.identificationInformation.residenceAddress
+                                    .address
+                        }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Паспорт</td>
                     <td>
                         {{
-                            personalData.passportType +
+                            data.identificationInformation.passport
+                                .documentType +
                                 ' ' +
-                                personalData.documentNumber
+                                data.identificationInformation.passport
+                                    .documentNumber
                         }}
                     </td>
                 </tr>
                 <tr>
                     <td>Дата выдачи</td>
                     <td>
-                        {{ personalData.dateOfIssue | date : 'dd.MM.yyyy' }}
+                        {{
+                            data.identificationInformation.passport.dateOfIssue
+                                | date : 'dd.MM.yyyy'
+                        }}
                     </td>
                 </tr>
 
                 <tr>
                     <td>Кем выдан</td>
-                    <td>{{ personalData.authority }}</td>
+                    <td>
+                        {{ data.identificationInformation.passport.authority }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Срок действия паспорта</td>
                     <td>
-                        {{ personalData.dateOfExpiry | date : 'dd.MM.yyyy' }}
+                        {{
+                            data.identificationInformation.passport.dateOfExpiry
+                                | date : 'dd.MM.yyyy'
+                        }}
                     </td>
                 </tr>
             </table>

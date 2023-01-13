@@ -15,11 +15,14 @@ import {
 import { IPersonalData } from '../../../../../@core/models/identification/identification';
 import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
 import { IdentificationService } from '../../../../../@core/services/identification/identification.service';
+import { IncreaseLimitApplicationService } from '../../../../../@core/services/credit-application/increase-limit.service';
 @Component({
-    templateUrl: './detail.component.html',
-    styleUrls: ['./detail.component.scss'],
+    templateUrl: './detail-increase-limit-application.component.html',
+    styleUrls: ['./detail-increase-limit-application.component.scss'],
 })
-export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
+export class DetailIncreaseLimitApplicationComponent
+    implements OnInit, OnDestroy
+{
     loanApplicationData: ICreditApplicationDetail;
     dataScoring: IScoringCreditApplication;
     personalData: IPersonalData;
@@ -35,13 +38,13 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         private fb: FormBuilder,
         private location: Location,
-        private creditApplicationsService: CreditApplicationService,
+        private increaseLimitApplicationsService: IncreaseLimitApplicationService,
         private creditService: ApplicationRequestsService,
 
         private identificationService: IdentificationService
     ) {}
     loanApplication() {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .getCreditApplicationDetail()
             .pipe(takeUntil(this.destroy$))
             .subscribe({
@@ -57,7 +60,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             });
     }
     getScoring(id) {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .getCreditApplicationScoring(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
@@ -87,7 +90,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             });
     }
     approveCredit() {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .approveCreditApplication(this.loanApplicationData.id, {
                 approvedAmount: this.requestingAmount,
             })
@@ -102,7 +105,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             });
     }
     declineCredit() {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .declineCreditApplication(this.loanApplicationData.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
@@ -130,7 +133,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
         this.requestingAmount = val;
     }
     sendComment(data) {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .sendCommentCreditApplication(this.loanApplicationData.id, {
                 data,
             })
@@ -141,7 +144,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
     }
 
     needToEditUser() {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .needToEditCreditApplication(this.loanApplicationData.id, {
                 editRequiredProperties: cleanEmptyKeyInObj(
                     this.customerData.value

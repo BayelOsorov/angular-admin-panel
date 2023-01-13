@@ -1,33 +1,52 @@
 <nb-card>
     <nb-card-header>
-        <strong>Места</strong>
-        <div class="d-flex justify-content-between mt-3">
-            <div [formGroup]="filterForm" class="d-flex">
-                <ngx-input-search
-                    class="mr-5"
-                    placeholder="Поиск по названию"
-                    [control]="filterForm.get('name')"
+        <div
+            [formGroup]="filterForm"
+            class="d-flex justify-content-evenly mt-3"
+        >
+            <input
+                class="w-50 mr-5"
+                formControlName="from"
+                fullWidth
+                onfocus="(this.type='date')"
+                type="text"
+                format="dd.MM.yyyy"
+                nbInput
+                placeholder="Дата с"
+            />
+            <input
+                onfocus="(this.type='date')"
+                type="text"
+                placeholder="Дата по"
+                class="w-50 mr-5"
+                formControlName="to"
+                fullWidth
+                format="dd.MM.yyyy"
+                nbInput
+            />
+            <nb-select
+                class="w-50"
+                fullWidth
+                placeholder="Тип"
+                formControlName="status"
+            >
+                <nb-option value="">Все</nb-option>
+                <nb-option value="Requested">Ожидание</nb-option>
+                <nb-option value="InProcess">В процессе</nb-option>
+                <nb-option value="Approved">Одобренный</nb-option>
+                <nb-option value="Declined">Отклоненный</nb-option>
+                <nb-option value="EditRequired"
+                    >Нужно отредактировать</nb-option
                 >
-                </ngx-input-search>
-                <nb-select
-                    style="width: 200px"
-                    class="mr-5"
-                    size="small"
-                    fullWidth
-                    placeholder="Тип"
-                    formControlName="type"
-                >
-                    <nb-option value="">Все</nb-option>
-                    <nb-option value="10">Торговый центр</nb-option>
-                    <nb-option value="20">Базар</nb-option>
-                </nb-select>
-            </div>
+                <nb-option value="Timeout">Время и стекло</nb-option>
+            </nb-select>
         </div>
     </nb-card-header>
 
     <nb-card-body>
         <ngx-custom-table
             (changePageEvent)="getApplicationsEvent.emit($event)"
+            (rowSelectEvent)="onRowSelect($event)"
             [tableColumns]="tableColumns"
             [tableData]="listApplications"
             [productName]="'ни одной заявки'"

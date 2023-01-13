@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import {
     ICreditApplicationDetail,
+    ICreditApplicationList,
     IScoringCreditApplication,
 } from '../../models/credit-application/credit-application';
 
@@ -24,7 +25,17 @@ export class FuelCardApplicationService {
             environment.fuelCardUrl + `/operator/api/v1/ocl-requests/in-process`
         );
     }
-
+    getListFuelCardApplication(page, filter) {
+        return this.http.get<ICreditApplicationList>(
+            environment.fuelCardUrl +
+                `/admin/api/v1/ocl-requests/search?pageNumber=${page}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
+        );
+    }
+    getFuelCardApplicationDetailAdmin(id) {
+        return this.http.get<ICreditApplicationDetail>(
+            environment.fuelCardUrl + `/admin/api/v1/ocl-requests/${id}/details`
+        );
+    }
     approveFuelCardApplication(id, data) {
         return this.http.patch(
             environment.fuelCardUrl +

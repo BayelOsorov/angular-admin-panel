@@ -1,28 +1,4 @@
-<!-- <nb-select
-    multiple
-    [formControl]="control"
-    class="select mb-2 mt-3"
-    fullWidth
-    placeholder="Выберите"
->
-    <nb-option *ngFor="let item of data" [value]="item.value">{{
-        item.label
-    }}</nb-option>
-</nb-select>
-
-<textarea
-    type="text"
-    nbInput
-    fullWidth
-    id="exampleInputEmail1"
-    [value]="control.value"
-    [placeholder]="placeholder"
-    (input)="onChange($event.target.value)"
-    [status]="submitted && control.errors?.['required']
-                                    ? 'danger'
-                                    : 'basic'"
-></textarea> -->
-<div class="need-to-edit">
+<div class="need-to-edit" *ngIf="control">
     <div class="col-md-4">
         <p class="row show-grid">{{ title }}</p>
     </div>

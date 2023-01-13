@@ -83,6 +83,7 @@ const downloadFile = (fileURL, fileName) => {
         (window.URL || window.webkitURL).revokeObjectURL(save.href);
     }
 };
+
 export {
     translateMaritalStatus,
     truncateText,

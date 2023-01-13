@@ -14,6 +14,7 @@ export interface ICreditApplicationDetail {
     customerId: string;
     customerCreatedAt: Date;
     requestingAmount: number;
+    approvedAmount?: number;
     repaymentDay: number;
     currentProcessor: {
         id: string;

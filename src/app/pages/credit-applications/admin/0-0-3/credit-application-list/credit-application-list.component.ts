@@ -12,9 +12,9 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { StatusBadgeComponent } from '../../../../@core/components/shared/status-badge/status-badge.component';
-import { CreditApplicationService } from '../../../../@core/services/credit-application/credit-application.service';
-import { tableNumbering } from '../../../../@core/utils';
+import { StatusBadgeComponent } from '../../../../../@core/components/shared/status-badge/status-badge.component';
+import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
+import { tableNumbering } from '../../../../../@core/utils';
 @Component({
     templateUrl: './credit-application-list.component.html',
     styleUrls: ['./credit-application-list.component.scss'],
@@ -25,7 +25,7 @@ export class CreditApplicationListComponent implements OnInit, OnDestroy {
     form = this.fb.group({
         from: [''],
         to: [''],
-        status: [''],
+        status: ['Requested'],
         page: [1],
     });
     tableColumns = {
@@ -81,7 +81,9 @@ export class CreditApplicationListComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listApplications = res));
     }
-
+    goToDetail() {
+        console.log('sdsds');
+    }
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))

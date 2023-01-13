@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CreditApplicationService } from '../../../../@core/services/credit-application/credit-application.service';
 import { FuelCardApplicationService } from '../../../../@core/services/credit-application/fuel-card.service';
+import { IncreaseLimitApplicationService } from '../../../../@core/services/credit-application/increase-limit.service';
 @Component({
     templateUrl: './get-credit-applications.component.html',
     styleUrls: ['./get-credit-applications.component.scss'],
@@ -17,6 +18,8 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
         public router: Router,
         public toaster: ToastrService,
         public creditApplication: CreditApplicationService,
+        public increaseLimitApplicationService: IncreaseLimitApplicationService,
+
         public fuelCardApplication: FuelCardApplicationService
     ) {}
     loanApplication() {
@@ -31,7 +34,24 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
                         );
                     }
                     this.router.navigate([
-                        `credit-application/0-0-3/detail/${data.id}`,
+                        `credit-application/0-0-3/get/detail/${data.id}`,
+                    ]);
+                },
+            });
+    }
+    increaseLimitApplication() {
+        this.increaseLimitApplicationService
+            .getCreditApplication()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    if (!data) {
+                        return this.toaster.warning(
+                            'На данный момент нет заякок!'
+                        );
+                    }
+                    this.router.navigate([
+                        `credit-application/increase-limit/get/detail/${data.id}`,
                     ]);
                 },
             });
@@ -48,7 +68,7 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
                         );
                     }
                     this.router.navigate([
-                        `credit-application/fuel-card/detail/${data.id}`,
+                        `credit-application/fuel-card/get/detail/${data.id}`,
                     ]);
                 },
             });
@@ -109,6 +129,9 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
         if (this.endUrl === 'fuel-card') {
             this.fuelApplication();
         }
+        if (this.endUrl === 'increase-limit') {
+            this.increaseLimitApplication();
+        }
     }
     ngOnInit(): void {
         this.applications = {
@@ -121,6 +144,9 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
         }
         if (this.endUrl === 'fuel-card') {
             this.getFuelCardCreditSpecialistAccount();
+        }
+        if (this.endUrl === 'increase-limit') {
+            this.getCreditSpecialistAccount();
         }
     }
     ngOnDestroy() {

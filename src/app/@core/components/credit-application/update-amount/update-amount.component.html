@@ -1,14 +1,16 @@
-<div class="mt-5">
+<div class="mt-5" *ngIf="data">
     <nz-slider
         nzDots
+        [nzDisabled]="data.status !== 'InProcess'"
         [nzMarks]="marks"
         [nzStep]="1000"
-        nzMin="5000"
-        nzMax="15000"
+        [nzMin]="data.min"
+        [nzMax]="data.max"
         (ngModelChange)="onChange($event)"
         [ngModel]="requestingAmount"
     ></nz-slider>
     <button
+        *ngIf="data.status === 'InProcess'"
         [disabled]="btnDisabled || requestingAmount === data?.requestingAmount"
         (click)="updateAmount()"
         class="d-flex mx-auto"

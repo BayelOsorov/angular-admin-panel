@@ -43,11 +43,7 @@ export class ApplicationRequestsService {
                 `/Administration/api/v1/tax-inspection/social-fund-balance?pin=${pin}`
         );
     }
-    getCustomerData(id) {
-        return this.http.get(
-            environment.localCreditBureauUrl + `/admin/api/v1/customers/${id}`
-        );
-    }
+
     getCustomerCreditLines(id) {
         return this.http.get(
             environment.localCreditBureauUrl +
@@ -57,6 +53,11 @@ export class ApplicationRequestsService {
     getCustomerRepaymentDelays(id) {
         return this.http.get(
             environment.localCreditBureauUrl + `/admin/api/v1/customers/${id}`
+        );
+    }
+    getCustomerData(id) {
+        return this.http.get(
+            environment.customerDataUrl + `/admin/api/v1/customers/${id}`
         );
     }
 }

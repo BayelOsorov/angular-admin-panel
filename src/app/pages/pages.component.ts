@@ -44,11 +44,19 @@ export class PagesComponent {
             title: 'Заявки на кредит',
             icon: 'credit-card-outline',
             link: '/credit-application',
-            hidden: this.getRole(['admin', 'credit_specialist']),
+            hidden: this.getRole([
+                'admin',
+                'credit_specialist',
+                'credit_specialist_admin',
+            ]),
             children: [
                 {
                     title: '0-0-3',
                     link: '/credit-application/0-0-3',
+                },
+                {
+                    title: 'Увеличение лимита',
+                    link: '/credit-application/increase-limit',
                 },
                 // {
                 //     title: '0-0-6',

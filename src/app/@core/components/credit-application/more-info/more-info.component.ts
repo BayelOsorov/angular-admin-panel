@@ -16,6 +16,7 @@ export class CreditApplicationMoreInfoComponent implements OnInit {
     @Input() data: ICreditApplicationDetail;
     @Input() dataScoring;
     @Input() kibData;
+    @Input() customerData;
 
     constructor() {}
 

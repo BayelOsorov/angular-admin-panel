@@ -18,9 +18,13 @@ export class CreditApplicationContainerComponent implements OnInit {
         const urlEnd = this.router.url.split('/')[2];
 
         const isAdmin = Array.isArray(userData.role)
-            ? userData.role.find((item) => item === 'admin')
-            : userData.role.includes('admin');
+            ? userData.role.find(
+                  (item) =>
+                      item === 'admin' || item === 'credit_specialist_admin'
+              )
+            : userData.role.includes('credit_specialist_admin' || 'admin');
 
+        console.log(userData.role.includes('admin'));
         if (isAdmin) {
             this.router.navigate([`credit-application/${urlEnd}/list`]);
 

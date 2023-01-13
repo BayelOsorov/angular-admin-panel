@@ -3,12 +3,14 @@
         *ngIf="loanApplicationData && dataScoring"
         [data]="loanApplicationData"
         [dataScoring]="dataScoring"
+        [customerData]="customerInfo"
     ></ngx-credit-application-detail-info>
     <ngx-credit-application-more-info
         *ngIf="loanApplicationData && dataScoring"
         [data]="loanApplicationData"
         [dataScoring]="dataScoring"
         [kibData]="kibData"
+        [customerData]="customerInfo"
     ></ngx-credit-application-more-info>
     <ngx-additional-info
         *ngIf="loanApplicationData && dataScoring"
@@ -20,7 +22,7 @@
     ></ngx-additional-info>
     <ngx-update-amount
         (changeAmountEvent)="changeAmount($event)"
-        [data]="loanApplicationData"
+        [data]="requestingAmountData"
     ></ngx-update-amount>
     <ngx-comments
         (sendCommentEvent)="sendComment($event)"
