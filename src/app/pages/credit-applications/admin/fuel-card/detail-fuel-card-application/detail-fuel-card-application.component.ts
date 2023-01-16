@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +18,9 @@ import { FuelCardApplicationService } from '../../../../../@core/services/credit
     templateUrl: './detail-fuel-card-application.component.html',
     styleUrls: ['./detail-fuel-card-application.component.scss'],
 })
-export class DetailFuelCardApplicationComponent implements OnInit, OnDestroy {
+export class DetailFuelCardApplicationAdminComponent
+    implements OnInit, OnDestroy
+{
     loanApplicationData: ICreditApplicationDetail;
     dataScoring: IScoringCreditApplication;
     personalData: IPersonalData;
@@ -96,7 +99,7 @@ export class DetailFuelCardApplicationComponent implements OnInit, OnDestroy {
             requestingAmount: this.loanApplicationData.approvedAmount
                 ? this.loanApplicationData.approvedAmount
                 : this.loanApplicationData.requestingAmount,
-            status: this.loanApplicationData.status,
+            isAdmin: true,
         };
     }
     ngOnInit(): void {

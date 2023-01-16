@@ -13,11 +13,12 @@ import {
 import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
 import { ApplicationRequestsService } from '../../../../../@core/services/credit-application/credit.service';
 import { IdentificationService } from '../../../../../@core/services/identification/identification.service';
+import { IncreaseLimitApplicationService } from '../../../../../@core/services/credit-application/increase-limit.service';
 @Component({
-    templateUrl: './detail-credit-application.component.html',
-    styleUrls: ['./detail-credit-application.component.scss'],
+    templateUrl: './detail-increase-limit-application.component.html',
+    styleUrls: ['./detail-increase-limit-application.component.scss'],
 })
-export class DetailCreditApplicationAdminComponent
+export class DetailIncreaseLimitApplicationAdminComponent
     implements OnInit, OnDestroy
 {
     loanApplicationData: ICreditApplicationDetail;
@@ -32,13 +33,13 @@ export class DetailCreditApplicationAdminComponent
         public router: Router,
         private route: ActivatedRoute,
         private location: Location,
-        private creditApplicationsService: CreditApplicationService,
+        private increaseLimitApplicationsService: IncreaseLimitApplicationService,
         private creditService: ApplicationRequestsService,
 
         private identificationService: IdentificationService
     ) {}
     loanApplication(id) {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .getCreditApplicationDetailAdmin(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
@@ -47,12 +48,11 @@ export class DetailCreditApplicationAdminComponent
                     this.getCreditLine(data.customerId);
                     this.getScoring(data.id);
                     this.getCustomerData(data.customerId);
-                    this.getRequestingAmount();
                 },
             });
     }
     getScoring(id) {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .getCreditApplicationScoring(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
@@ -77,14 +77,27 @@ export class DetailCreditApplicationAdminComponent
             .getCustomerCreditLines('2ea78f5f-886e-4caf-9cbd-6073b0f68e71')
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: (data) => {
+                next: (data: [any]) => {
                     this.kibData = data;
+                    data.map((item) => {
+                        if (item.productCode === 'Charmander') {
+                            this.requestingAmountData = {
+                                max: this.loanApplicationData.requestingAmount,
+                                requestingAmount: this.loanApplicationData
+                                    .approvedAmount
+                                    ? this.loanApplicationData.approvedAmount
+                                    : this.loanApplicationData.requestingAmount,
+                                isAdmin: true,
+                                min: item.limit,
+                            };
+                        }
+                    });
                 },
             });
     }
 
     sendComment(data) {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .sendCommentCreditApplication(this.loanApplicationData.id, {
                 data,
             })
@@ -93,17 +106,7 @@ export class DetailCreditApplicationAdminComponent
                 next: () => {},
             });
     }
-    getRequestingAmount() {
-        this.requestingAmountData = {
-            min: 5000,
-            //  approvedAmount сколько ему одобрили, нужно при статусе - Approved
-            max: this.loanApplicationData.requestingAmount,
-            requestingAmount: this.loanApplicationData.approvedAmount
-                ? this.loanApplicationData.approvedAmount
-                : this.loanApplicationData.requestingAmount,
-            isAdmin: true,
-        };
-    }
+
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
             this.loanApplication(params['id']);

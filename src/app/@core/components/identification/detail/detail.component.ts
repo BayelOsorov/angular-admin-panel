@@ -34,6 +34,7 @@ import {
     genderEnum,
     IdentificationAnswers,
     maritalStatus,
+    residenceLocationEnum,
     translateMaritalStatus,
 } from '../../../utils';
 @Component({
@@ -190,6 +191,9 @@ export class DetailComponent implements OnInit, OnDestroy {
     }
     getMaritalStatus(status) {
         return maritalStatus.find((item) => item.value === status)?.text;
+    }
+    getResidenceLoc(loc) {
+        return residenceLocationEnum.find((e) => e.value === loc)?.text;
     }
     closeAlert() {
         this.error = '';

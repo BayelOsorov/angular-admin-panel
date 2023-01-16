@@ -1,0 +1,28 @@
+<nb-card class="container">
+    <ngx-credit-application-detail-info
+        *ngIf="loanApplicationData && dataScoring"
+        [data]="loanApplicationData"
+        [dataScoring]="dataScoring"
+        [kibData]="kibData"
+        [repaymentDays]="repDays"
+        [customerData]="customerData"
+    ></ngx-credit-application-detail-info>
+    <ngx-credit-application-more-info
+        *ngIf="loanApplicationData && dataScoring"
+        [data]="loanApplicationData"
+        [dataScoring]="dataScoring"
+        [kibData]="kibData"
+        [customerData]="customerData"
+    ></ngx-credit-application-more-info>
+    <ngx-additional-info
+        *ngIf="loanApplicationData && dataScoring"
+        [data]="loanApplicationData"
+        [dataScoring]="dataScoring"
+        class="detail-block mt-4"
+    ></ngx-additional-info>
+    <ngx-update-amount [data]="requestingAmountData"></ngx-update-amount>
+    <ngx-comments
+        (sendCommentEvent)="sendComment($event)"
+        class="detail-block"
+    ></ngx-comments>
+</nb-card>

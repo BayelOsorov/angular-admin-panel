@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 import { DatePipe } from '@angular/common';
 import {
     Component,
@@ -14,12 +15,15 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { StatusBadgeComponent } from '../../../../../@core/components/shared/status-badge/status-badge.component';
 import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
+import { IncreaseLimitApplicationService } from '../../../../../@core/services/credit-application/increase-limit.service';
 import { tableNumbering } from '../../../../../@core/utils';
 @Component({
-    templateUrl: './credit-application-list.component.html',
-    styleUrls: ['./credit-application-list.component.scss'],
+    templateUrl: './list-increase-limit-applications.component.html',
+    styleUrls: ['./list-increase-limit-applications.component.scss'],
 })
-export class CreditApplicationListAdminComponent implements OnInit, OnDestroy {
+export class ListIncreaseLimitApplicationsAdminComponent
+    implements OnInit, OnDestroy
+{
     listApplications;
     localities = [];
     form = this.fb.group({
@@ -66,7 +70,7 @@ export class CreditApplicationListAdminComponent implements OnInit, OnDestroy {
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
-        private creditApplicationsService: CreditApplicationService,
+        private increaseLimitApplicationsService: IncreaseLimitApplicationService,
         private toaster: ToastrService,
         private router: Router,
         private fb: FormBuilder,
@@ -76,7 +80,7 @@ export class CreditApplicationListAdminComponent implements OnInit, OnDestroy {
         return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
     }
     getListApplications(page = 1) {
-        this.creditApplicationsService
+        this.increaseLimitApplicationsService
             .getListCreditApplication(page, this.form.value)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listApplications = res));

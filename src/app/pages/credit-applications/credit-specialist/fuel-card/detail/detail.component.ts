@@ -162,7 +162,7 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
             min: 1000,
             max: this.loanApplicationData.requestingAmount,
             requestingAmount: this.loanApplicationData.requestingAmount,
-            status: this.loanApplicationData.status,
+            isAdmin: false,
         };
     }
     generateControls() {

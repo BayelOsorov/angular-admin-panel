@@ -42,12 +42,14 @@ import { FullSizeSocialFundComponent } from '../@core/components/credit-applicat
 import { PartnerIdentificationComponent } from './catalog/partner-identification/list/partner-identification.component';
 import { PartnerIdentificationDetailComponent } from './catalog/partner-identification/detail/detail.component';
 import { FuelCardApplicationDetailComponent } from './credit-applications/credit-specialist/fuel-card/detail/detail.component';
-import { CreditApplicationListComponent } from './credit-applications/admin/0-0-3/credit-application-list/credit-application-list.component';
+import { CreditApplicationListAdminComponent } from './credit-applications/admin/0-0-3/credit-application-list/credit-application-list.component';
 import { CreditApplicationContainerComponent } from './credit-applications/credit-application-container/credit-application-container.component';
-import { DetailCreditApplicationComponent } from './credit-applications/admin/0-0-3/detail-credit-application/detail-credit-application.component';
-import { ListFuelCardApplicationsComponent } from './credit-applications/admin/fuel-card/list-fuel-card-applications/list-fuel-card-applications.component';
-import { DetailFuelCardApplicationComponent } from './credit-applications/admin/fuel-card/detail-fuel-card-application/detail-fuel-card-application.component';
+import { DetailCreditApplicationAdminComponent } from './credit-applications/admin/0-0-3/detail-credit-application/detail-credit-application.component';
+import { ListFuelCardApplicationsAdminComponent } from './credit-applications/admin/fuel-card/list-fuel-card-applications/list-fuel-card-applications.component';
+import { DetailFuelCardApplicationAdminComponent } from './credit-applications/admin/fuel-card/detail-fuel-card-application/detail-fuel-card-application.component';
 import { DetailIncreaseLimitApplicationComponent } from './credit-applications/credit-specialist/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
+import { ListIncreaseLimitApplicationsAdminComponent } from './credit-applications/admin/increase-limit/list-increase-limit-applications/list-increase-limit-applications.component';
+import { DetailIncreaseLimitApplicationAdminComponent } from './credit-applications/admin/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
 
 const routes: Routes = [
     {
@@ -348,11 +350,12 @@ const routes: Routes = [
                             },
                             {
                                 path: 'list',
-                                component: CreditApplicationListComponent,
+                                component: CreditApplicationListAdminComponent,
                             },
                             {
                                 path: 'list/detail/:id',
-                                component: DetailCreditApplicationComponent,
+                                component:
+                                    DetailCreditApplicationAdminComponent,
                             },
                         ],
                     },
@@ -373,11 +376,13 @@ const routes: Routes = [
                             },
                             {
                                 path: 'list',
-                                component: ListFuelCardApplicationsComponent,
+                                component:
+                                    ListFuelCardApplicationsAdminComponent,
                             },
                             {
                                 path: 'list/detail/:id',
-                                component: DetailFuelCardApplicationComponent,
+                                component:
+                                    DetailFuelCardApplicationAdminComponent,
                             },
                         ],
                     },
@@ -397,14 +402,16 @@ const routes: Routes = [
                                 component:
                                     DetailIncreaseLimitApplicationComponent,
                             },
-                            // {
-                            //     path: 'list',
-                            //     component: ListFuelCardApplicationsComponent,
-                            // },
-                            // {
-                            //     path: 'list/detail/:id',
-                            //     component: DetailFuelCardApplicationComponent,
-                            // },
+                            {
+                                path: 'list',
+                                component:
+                                    ListIncreaseLimitApplicationsAdminComponent,
+                            },
+                            {
+                                path: 'list/detail/:id',
+                                component:
+                                    DetailIncreaseLimitApplicationAdminComponent,
+                            },
                         ],
                     },
                     {

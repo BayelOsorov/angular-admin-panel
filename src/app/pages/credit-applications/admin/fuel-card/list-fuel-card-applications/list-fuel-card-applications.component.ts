@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 import { DatePipe } from '@angular/common';
 import {
     Component,
@@ -20,7 +21,9 @@ import { tableNumbering } from '../../../../../@core/utils';
     templateUrl: './list-fuel-card-applications.component.html',
     styleUrls: ['./list-fuel-card-applications.component.scss'],
 })
-export class ListFuelCardApplicationsComponent implements OnInit, OnDestroy {
+export class ListFuelCardApplicationsAdminComponent
+    implements OnInit, OnDestroy
+{
     listApplications;
     localities = [];
     form = this.fb.group({

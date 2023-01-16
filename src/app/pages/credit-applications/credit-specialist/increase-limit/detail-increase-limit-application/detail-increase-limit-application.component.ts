@@ -1,3 +1,4 @@
+/* eslint-disable brace-style */
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -55,7 +56,6 @@ export class DetailIncreaseLimitApplicationComponent
                     this.getScoring(data.id);
                     this.generateControls();
                     this.getCustomerData(data.customerId);
-                    this.getRequestingAmount();
                 },
             });
     }
@@ -122,9 +122,19 @@ export class DetailIncreaseLimitApplicationComponent
             .getCustomerCreditLines('2ea78f5f-886e-4caf-9cbd-6073b0f68e71')
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: (data) => {
-                    console.log(data);
+                next: (data: [any]) => {
                     this.kibData = data;
+                    data.map((item) => {
+                        if (item.productCode === 'Charmander') {
+                            this.requestingAmountData = {
+                                max: this.loanApplicationData.requestingAmount,
+                                requestingAmount:
+                                    this.loanApplicationData.requestingAmount,
+                                isAdmin: false,
+                                min: item.limit,
+                            };
+                        }
+                    });
                 },
             });
     }
@@ -160,14 +170,7 @@ export class DetailIncreaseLimitApplicationComponent
                 },
             });
     }
-    getRequestingAmount() {
-        this.requestingAmountData = {
-            min: 5000,
-            max: this.loanApplicationData.requestingAmount,
-            requestingAmount: this.loanApplicationData.requestingAmount,
-            status: this.loanApplicationData.status,
-        };
-    }
+
     generateControls() {
         if (this.loanApplicationData.customerData.additionalIncomes) {
             Object.values(

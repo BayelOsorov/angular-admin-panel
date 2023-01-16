@@ -24,7 +24,6 @@ export class CreditApplicationContainerComponent implements OnInit {
               )
             : userData.role.includes('credit_specialist_admin' || 'admin');
 
-        console.log(userData.role.includes('admin'));
         if (isAdmin) {
             this.router.navigate([`credit-application/${urlEnd}/list`]);
 
