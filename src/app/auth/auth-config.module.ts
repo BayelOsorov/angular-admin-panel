@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
                 clientId: 'admin_idp_client',
                 scope: 'openid profile roles offline_access IdentityServerApi', // 'openid profile ' + your scopes
                 responseType: 'code',
-                silentRenew: true,
+                silentRenew: false,
                 useRefreshToken: true,
                 // logLevel: LogLevel.Debug,
             },
