@@ -80,6 +80,7 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
             .toPromise()
             .then((res) => console.log(res))
             .catch((e) => {
+                console.log(e, ' fuel card');
                 if (e.status === 403) {
                     this.createCreditSpecialistAccount();
                 }
@@ -103,6 +104,8 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
             .toPromise()
             .then((res) => console.log(res))
             .catch((e) => {
+                console.log(e, ' fuel card');
+
                 if (e.status === 403) {
                     this.createFuelCardCreditSpecialistAccount();
                 }
