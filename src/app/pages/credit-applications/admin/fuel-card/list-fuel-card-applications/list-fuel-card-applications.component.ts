@@ -1,20 +1,12 @@
 /* eslint-disable brace-style */
 import { DatePipe } from '@angular/common';
-import {
-    Component,
-    OnDestroy,
-    OnInit,
-    Input,
-    Output,
-    EventEmitter,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { StatusBadgeComponent } from '../../../../../@core/components/shared/status-badge/status-badge.component';
-import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
 import { FuelCardApplicationService } from '../../../../../@core/services/credit-application/fuel-card.service';
 import { tableNumbering } from '../../../../../@core/utils';
 @Component({

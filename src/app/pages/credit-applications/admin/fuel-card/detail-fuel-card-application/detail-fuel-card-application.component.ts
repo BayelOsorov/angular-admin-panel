@@ -10,9 +10,7 @@ import {
     ICreditApplicationDetail,
     IScoringCreditApplication,
 } from '../../../../../@core/models/credit-application/credit-application';
-import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
 import { ApplicationRequestsService } from '../../../../../@core/services/credit-application/credit.service';
-import { IdentificationService } from '../../../../../@core/services/identification/identification.service';
 import { FuelCardApplicationService } from '../../../../../@core/services/credit-application/fuel-card.service';
 @Component({
     templateUrl: './detail-fuel-card-application.component.html',

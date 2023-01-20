@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbWindowRef, NbWindowService } from '@nebular/theme';

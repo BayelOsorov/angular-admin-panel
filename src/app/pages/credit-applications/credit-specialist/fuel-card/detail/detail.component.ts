@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,15 +11,7 @@ import {
 import { IPersonalData } from '../../../../../@core/models/identification/identification';
 import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
 import { IdentificationService } from '../../../../../@core/services/identification/identification.service';
-import {
-    AbstractControl,
-    Form,
-    FormArray,
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { cleanEmptyKeyInObj } from '../../../../../@core/utils';
 import { ApplicationRequestsService } from '../../../../../@core/services/credit-application/credit.service';
 import { FuelCardApplicationService } from '../../../../../@core/services/credit-application/fuel-card.service';

@@ -14,7 +14,7 @@ import {
     IScoringCreditApplication,
 } from '../../../../../@core/models/credit-application/credit-application';
 import { IPersonalData } from '../../../../../@core/models/identification/identification';
-import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
+
 import { IdentificationService } from '../../../../../@core/services/identification/identification.service';
 import { IncreaseLimitApplicationService } from '../../../../../@core/services/credit-application/increase-limit.service';
 @Component({
