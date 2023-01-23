@@ -81,6 +81,8 @@ import { DetailFuelCardApplicationAdminComponent } from './credit-applications/a
 import { DetailIncreaseLimitApplicationComponent } from './credit-applications/credit-specialist/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
 import { ListIncreaseLimitApplicationsAdminComponent } from './credit-applications/admin/increase-limit/list-increase-limit-applications/list-increase-limit-applications.component';
 import { DetailIncreaseLimitApplicationAdminComponent } from './credit-applications/admin/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
+import { ListSalespeopleComponent } from './staff/salespeople/list-salespeople/list-salespeople.component';
+import { DetailSalespeopleComponent } from './staff/salespeople/detail-salespeople/detail-salespeople.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -168,6 +170,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         DetailIncreaseLimitApplicationComponent,
         ListIncreaseLimitApplicationsAdminComponent,
         DetailIncreaseLimitApplicationAdminComponent,
+        ListSalespeopleComponent,
+        DetailSalespeopleComponent,
     ],
     providers: [
         {

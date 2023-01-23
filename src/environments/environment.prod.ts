@@ -18,6 +18,7 @@ export const environment = {
     localCreditBureauUrl: 'https://stage.c2u.io:8090',
     fuelCardUrl: 'https://stage.c2u.io:8030',
     customerDataUrl: 'https://stage.c2u.io:1111',
+    salespeopleUrl: 'https://stage.c2u.io:3001',
 
     // baseUrl: 'https://cash2u.io:2001',
     // baseUrlOidc: 'https://cash2u.io:2021',

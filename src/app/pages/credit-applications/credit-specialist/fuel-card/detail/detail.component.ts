@@ -79,6 +79,40 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
             });
     }
 
+    getCreditLine(id) {
+        this.creditService
+            .getCustomerCreditLines(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    console.log(data);
+                    this.kibData = data;
+                },
+            });
+    }
+    changeAmount(val) {
+        this.requestingAmount = val;
+    }
+    sendComment(data) {
+        this.fuelCardApplicationsService
+            .sendCommentFuelCardApplication(this.loanApplicationData.id, {
+                data,
+            })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: () => {},
+            });
+    }
+
+    getRequestingAmount() {
+        this.requestingAmountData = {
+            min: 1000,
+            max: this.loanApplicationData.requestingAmount,
+            requestingAmount: this.loanApplicationData.requestingAmount,
+            isAdmin: false,
+        };
+    }
+
     approveCredit() {
         this.fuelCardApplicationsService
             .approveFuelCardApplication(this.loanApplicationData.id, {
@@ -107,31 +141,6 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
-    getCreditLine(id) {
-        this.creditService
-            .getCustomerCreditLines('2ea78f5f-886e-4caf-9cbd-6073b0f68e71')
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: (data) => {
-                    console.log(data);
-                    this.kibData = data;
-                },
-            });
-    }
-    changeAmount(val) {
-        this.requestingAmount = val;
-    }
-    sendComment(data) {
-        this.fuelCardApplicationsService
-            .sendCommentFuelCardApplication(this.loanApplicationData.id, {
-                data,
-            })
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: () => {},
-            });
-    }
-
     needToEditUser() {
         this.fuelCardApplicationsService
             .needToEditFuelCardApplication(this.loanApplicationData.id, {
@@ -148,14 +157,6 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
                     this.location.back();
                 },
             });
-    }
-    getRequestingAmount() {
-        this.requestingAmountData = {
-            min: 1000,
-            max: this.loanApplicationData.requestingAmount,
-            requestingAmount: this.loanApplicationData.requestingAmount,
-            isAdmin: false,
-        };
     }
     generateControls() {
         if (this.loanApplicationData.customerData.additionalIncomes) {

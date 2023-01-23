@@ -73,7 +73,7 @@ export class DetailIncreaseLimitApplicationAdminComponent
     }
     getCreditLine(id) {
         this.creditService
-            .getCustomerCreditLines('2ea78f5f-886e-4caf-9cbd-6073b0f68e71')
+            .getCustomerCreditLines(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data: [any]) => {

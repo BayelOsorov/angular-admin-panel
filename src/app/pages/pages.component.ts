@@ -85,6 +85,10 @@ export class PagesComponent {
                     title: 'Список сотрудников',
                     link: '/staff',
                 },
+                {
+                    title: 'Продажисты',
+                    link: '/salespeople',
+                },
             ],
         },
         {

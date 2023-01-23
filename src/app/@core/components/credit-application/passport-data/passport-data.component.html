@@ -23,7 +23,9 @@
                 </tr>
                 <tr>
                     <td>Пол</td>
-                    <td>{{ data.identificationInformation.gender }}</td>
+                    <td>
+                        {{ getGender(data.identificationInformation.gender) }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Дата рождения</td>
@@ -48,8 +50,10 @@
                     <td>Адрес прописки</td>
                     <td>
                         {{
-                            data.identificationInformation.residenceAddress
-                                .region +
+                            getResidenceLoc(
+                                data.identificationInformation.residenceAddress
+                                    .region
+                            ) +
                                 ',' +
                                 data.identificationInformation.residenceAddress
                                     .address

@@ -10,7 +10,14 @@ import {
     ICreditApplicationDetail,
     IScoringCreditApplication,
 } from '../../../../../@core/models/credit-application/credit-application';
+import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
 import { ApplicationRequestsService } from '../../../../../@core/services/credit-application/credit.service';
+import { IdentificationService } from '../../../../../@core/services/identification/identification.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { cleanEmptyKeyInObj } from '../../../../../@core/utils';
+import { ToastrService } from 'ngx-toastr';
+import { accessLevel } from '../../../../../@core/utils/helpers';
+import { AuthService } from '../../../../../@core/services/auth/auth.service';
 import { FuelCardApplicationService } from '../../../../../@core/services/credit-application/fuel-card.service';
 @Component({
     templateUrl: './detail-fuel-card-application.component.html',
@@ -25,6 +32,10 @@ export class DetailFuelCardApplicationAdminComponent
     kibData;
     customerData;
     requestingAmountData;
+    requestingAmount;
+    customerDataForm: FormGroup;
+    userData;
+    hasCreditSpecialistRole: boolean;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -32,7 +43,10 @@ export class DetailFuelCardApplicationAdminComponent
         private route: ActivatedRoute,
         private location: Location,
         private fuelCardApplicationsService: FuelCardApplicationService,
-        private creditService: ApplicationRequestsService
+        private creditService: ApplicationRequestsService,
+        private authService: AuthService,
+        private toaster: ToastrService,
+        private fb: FormBuilder
     ) {}
     loanApplication(id) {
         this.fuelCardApplicationsService
@@ -44,6 +58,7 @@ export class DetailFuelCardApplicationAdminComponent
                     this.getCreditLine(data.customerId);
                     this.getScoring(data.id);
                     this.getCustomerData(data.customerId);
+                    this.checkCreditSpecilist(data);
                     this.getRequestingAmount();
                 },
             });
@@ -71,7 +86,7 @@ export class DetailFuelCardApplicationAdminComponent
     }
     getCreditLine(id) {
         this.creditService
-            .getCustomerCreditLines('2ea78f5f-886e-4caf-9cbd-6073b0f68e71')
+            .getCustomerCreditLines(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
@@ -97,13 +112,158 @@ export class DetailFuelCardApplicationAdminComponent
             requestingAmount: this.loanApplicationData.approvedAmount
                 ? this.loanApplicationData.approvedAmount
                 : this.loanApplicationData.requestingAmount,
-            isAdmin: true,
+            isAdmin: this.hasCreditSpecialistRole,
         };
+    }
+    checkCreditSpecilist(data) {
+        if (
+            accessLevel(this.userData.role, 'credit_specialist') &&
+            (data.status === 'InProcess' || data.status === 'Requested')
+        ) {
+            this.getFuelCardCreditSpecialistAccount();
+            this.generateControls();
+            this.hasCreditSpecialistRole = true;
+        }
+    }
+    changeAmount(val) {
+        this.requestingAmount = val;
+    }
+
+    approveCredit() {
+        this.fuelCardApplicationsService
+            .approveFuelCardApplication(this.loanApplicationData.id, {
+                approvedAmount: this.requestingAmount,
+            })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.toaster.success(
+                        'Вы успешно подтвердили заявку на кредит!'
+                    );
+                    this.location.back();
+                },
+            });
+    }
+    declineCredit() {
+        this.fuelCardApplicationsService
+            .declineFuelCardApplication(this.loanApplicationData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.toaster.success(
+                        'Вы успешно отклонили заявку на кредит!'
+                    );
+                    this.location.back();
+                },
+            });
+    }
+    needToEditUser() {
+        this.fuelCardApplicationsService
+            .needToEditFuelCardApplication(this.loanApplicationData.id, {
+                editRequiredProperties: cleanEmptyKeyInObj(
+                    this.customerData.value
+                ),
+            })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.toaster.success(
+                        'Вы успешно отправили на редактирование заявку на кредит!'
+                    );
+                    this.location.back();
+                },
+            });
+    }
+    generateControls() {
+        this.customerDataForm = this.fb.group({
+            'CustomerData.DurationOfActualResidenceLocation': [[]],
+            'CustomerData.DependentsCount': [[]],
+            'CustomerData.EducationDegree': [[]],
+            'CustomerData.MaritalStatus': [[]],
+            // Occupation
+            'CustomerData.Occupation.Income': [[]],
+            'CustomerData.Occupation.WorkAddress': [[]],
+            'CustomerData.Occupation.WorkExperience': [[]],
+            'CustomerData.Occupation.Position': [[]],
+            'CustomerData.Occupation.Type': [[]],
+            'CustomerData.Occupation.Description': [[]],
+            'CustomerData.Occupation.Company': [[]],
+            // SpouseData
+            'CustomerData.SpouseData.Surname': [[]],
+            'CustomerData.SpouseData.PhoneNumber': [[]],
+        });
+        if (this.loanApplicationData.customerData.additionalIncomes) {
+            Object.values(
+                this.loanApplicationData.customerData.additionalIncomes
+            ).map((item, i) =>
+                this.customerDataForm.addControl(
+                    `CustomerData.AdditionalIncomes[${i}].Value.Work`,
+
+                    new FormControl([])
+                )
+            );
+        }
+        if (this.loanApplicationData.customerData.spouseData) {
+            Object.values(
+                this.loanApplicationData.customerData.spouseData.incomes
+            ).map((item, i) =>
+                this.customerDataForm.addControl(
+                    `CustomerData.SpouseData.Incomes[${i}].Value.Work`,
+
+                    new FormControl([])
+                )
+            );
+        }
+        if (this.loanApplicationData.customerData.realEstates) {
+            Object.values(
+                this.loanApplicationData.customerData.realEstates
+            ).map((item, i) =>
+                this.customerDataForm.addControl(
+                    `CustomerData.RealEstates[${i}].Value.Address`,
+                    new FormControl([])
+                )
+            );
+        }
+        if (this.loanApplicationData.customerData.personalEstates) {
+            Object.values(
+                this.loanApplicationData.customerData.personalEstates
+            ).map((item, i) =>
+                this.customerDataForm.addControl(
+                    `CustomerData.PersonalEstates[${i}].Value.Model`,
+                    new FormControl([])
+                )
+            );
+        }
+    }
+    getFuelCardCreditSpecialistAccount() {
+        this.fuelCardApplicationsService
+            .getFuelCardSpecialistAccount()
+            .toPromise()
+            .then((res) => console.log(res))
+            .catch((e) => {
+                console.log(e, ' fuel card');
+
+                if (e.status === 0) {
+                    this.createFuelCardCreditSpecialistAccount();
+                }
+            });
+    }
+
+    createFuelCardCreditSpecialistAccount() {
+        this.fuelCardApplicationsService
+            .createFuelCardSpecialistAccount()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    console.log(data);
+                },
+            });
     }
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
             this.loanApplication(params['id']);
         });
+        this.userData = this.authService.getUserData();
     }
     ngOnDestroy() {
         this.destroy$.next();

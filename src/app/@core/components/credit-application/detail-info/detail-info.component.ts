@@ -95,7 +95,7 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
     }
     getCustomerRepDelays() {
         this.applicationRequestsService
-            .getCustomerRepaymentDelays('2ea78f5f-886e-4caf-9cbd-6073b0f68e71')
+            .getCustomerRepaymentDelays(this.data.customerId)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {

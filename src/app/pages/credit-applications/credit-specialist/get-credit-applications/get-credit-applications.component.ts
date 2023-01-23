@@ -106,7 +106,7 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
             .catch((e) => {
                 console.log(e, ' fuel card');
 
-                if (e.status === 403) {
+                if (e.status === 0) {
                     this.createFuelCardCreditSpecialistAccount();
                 }
             });

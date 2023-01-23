@@ -86,6 +86,33 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
+
+    getCreditLine(id) {
+        this.creditService
+            .getCustomerCreditLines(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    console.log(data);
+                    this.kibData = data;
+                },
+            });
+    }
+
+    changeAmount(val) {
+        this.requestingAmount = val;
+    }
+
+    sendComment(data) {
+        this.creditApplicationsService
+            .sendCommentCreditApplication(this.loanApplicationData.id, {
+                data,
+            })
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: () => {},
+            });
+    }
     approveCredit() {
         this.creditApplicationsService
             .approveCreditApplication(this.loanApplicationData.id, {
@@ -114,32 +141,6 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
-    getCreditLine(id) {
-        this.creditService
-            .getCustomerCreditLines('2ea78f5f-886e-4caf-9cbd-6073b0f68e71')
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: (data) => {
-                    console.log(data);
-                    this.kibData = data;
-                },
-            });
-    }
-
-    changeAmount(val) {
-        this.requestingAmount = val;
-    }
-    sendComment(data) {
-        this.creditApplicationsService
-            .sendCommentCreditApplication(this.loanApplicationData.id, {
-                data,
-            })
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: () => {},
-            });
-    }
-
     needToEditUser() {
         this.creditApplicationsService
             .needToEditCreditApplication(this.loanApplicationData.id, {
