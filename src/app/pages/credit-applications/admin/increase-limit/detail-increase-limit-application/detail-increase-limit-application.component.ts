@@ -26,6 +26,7 @@ export class DetailIncreaseLimitApplicationAdminComponent
     kibData;
     customerData;
     requestingAmountData;
+    requestingAmount;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -97,15 +98,15 @@ export class DetailIncreaseLimitApplicationAdminComponent
 
     sendComment(data) {
         this.increaseLimitApplicationsService
-            .sendCommentCreditApplication(this.loanApplicationData.id, {
-                data,
-            })
+            .sendCommentCreditApplication(this.loanApplicationData.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {},
             });
     }
-
+    changeAmount(val) {
+        this.requestingAmount = val;
+    }
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
             this.loanApplication(params['id']);

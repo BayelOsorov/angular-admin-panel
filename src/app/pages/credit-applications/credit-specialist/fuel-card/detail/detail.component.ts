@@ -95,9 +95,7 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
     }
     sendComment(data) {
         this.fuelCardApplicationsService
-            .sendCommentFuelCardApplication(this.loanApplicationData.id, {
-                data,
-            })
+            .sendCommentFuelCardApplication(this.loanApplicationData.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {},
@@ -109,7 +107,7 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
             min: 1000,
             max: this.loanApplicationData.requestingAmount,
             requestingAmount: this.loanApplicationData.requestingAmount,
-            isAdmin: false,
+            isAdmin: true,
         };
     }
 

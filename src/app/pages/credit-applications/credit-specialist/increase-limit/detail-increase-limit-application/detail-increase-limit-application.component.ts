@@ -130,7 +130,7 @@ export class DetailIncreaseLimitApplicationComponent
                                 max: this.loanApplicationData.requestingAmount,
                                 requestingAmount:
                                     this.loanApplicationData.requestingAmount,
-                                isAdmin: false,
+                                isAdmin: true,
                                 min: item.limit,
                             };
                         }
@@ -144,9 +144,7 @@ export class DetailIncreaseLimitApplicationComponent
     }
     sendComment(data) {
         this.increaseLimitApplicationsService
-            .sendCommentCreditApplication(this.loanApplicationData.id, {
-                data,
-            })
+            .sendCommentCreditApplication(this.loanApplicationData.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {},

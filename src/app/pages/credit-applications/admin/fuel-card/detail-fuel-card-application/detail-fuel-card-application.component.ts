@@ -97,9 +97,7 @@ export class DetailFuelCardApplicationAdminComponent
 
     sendComment(data) {
         this.fuelCardApplicationsService
-            .sendCommentFuelCardApplication(this.loanApplicationData.id, {
-                data,
-            })
+            .sendCommentFuelCardApplication(this.loanApplicationData.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {},

@@ -1,5 +1,5 @@
 <div class="comments mt-5">
-    <div id="messages" class="messages">
+    <div id="messages" class="messages" *ngIf="comments">
         <ng-container *ngFor="let comment of sortArray(comments)">
             <div class="message" *ngIf="userData.sub !== comment.commentatorId">
                 <div class="content">
