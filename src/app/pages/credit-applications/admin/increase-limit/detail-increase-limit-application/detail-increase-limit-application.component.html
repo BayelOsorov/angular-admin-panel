@@ -20,7 +20,10 @@
         [dataScoring]="dataScoring"
         class="detail-block mt-4"
     ></ngx-additional-info>
-    <ngx-update-amount [data]="requestingAmountData"></ngx-update-amount>
+    <ngx-update-amount
+        (changeAmountEvent)="changeAmount($event)"
+        [data]="requestingAmountData"
+    ></ngx-update-amount>
     <ngx-comments
         (sendCommentEvent)="sendComment($event)"
         class="detail-block"
