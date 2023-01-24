@@ -212,6 +212,7 @@
         (editEvent)="suspendVideoIdn()"
         (approveEvent)="approveVideoIdn()"
         (declineEvent)="declineVideoIdn()"
+        (sendVideoEvent)="sendVideo($event)"
     ></ngx-photo-idn-buttons>
     <ngx-photo-idn-buttons
         *ngIf="data.status === 'PhotoIdentificationProcess'"

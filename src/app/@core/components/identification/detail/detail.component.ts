@@ -191,11 +191,21 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
     }
     sendComment(data) {
         this.identificationService
-            .sendComment(this.data.id, data)
+            .sendComment(this.data.id, { callVideoFile: data })
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {
                     this.getDataEvent.emit('');
+                },
+            });
+    }
+    sendVideo(data) {
+        this.identificationService
+            .sendVideo(this.data.id, data)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data1) => {
+                    console.log(data1);
                 },
             });
     }

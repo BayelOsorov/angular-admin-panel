@@ -6,6 +6,7 @@ import {
     Output,
     Input,
 } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IIdentificationDetail } from '../../../models/identification/identification';
 
 @Component({
@@ -18,10 +19,13 @@ export class PhotoIdnButtonsComponent implements OnInit {
     @Output() approveEvent = new EventEmitter();
     @Output() editEvent = new EventEmitter();
     @Output() declineEvent = new EventEmitter();
+    @Output() sendVideoEvent = new EventEmitter();
+
     @Input() openvidu;
 
     @Input() data: IIdentificationDetail;
-    constructor() {}
+    form: FormGroup;
+    constructor(private fb: FormBuilder) {}
     declineUser() {
         this.declineEvent.emit();
     }
@@ -34,5 +38,21 @@ export class PhotoIdnButtonsComponent implements OnInit {
     startVideo() {
         this.openvidu.joinSession();
     }
-    ngOnInit(): void {}
+    sendVideo() {}
+    onFileChange(event) {
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append('callVideoFile', file);
+        this.sendVideoEvent.emit(formData);
+    }
+    onSubmit() {
+        if (this.form.valid) {
+            console.log(this.form.value);
+        }
+    }
+    ngOnInit(): void {
+        this.form = this.fb.group({
+            video: ['', Validators.required],
+        });
+    }
 }

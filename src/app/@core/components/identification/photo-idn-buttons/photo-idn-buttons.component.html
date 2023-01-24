@@ -26,6 +26,25 @@
         </div>
     </div>
     <ng-container *ngIf="data.status === 'VideoIdentificationProcess'">
+        <div
+            [formGroup]="form"
+            (ngSubmit)="onSubmit()"
+            class="d-flex mb-5 mx-auto w-100"
+        >
+            <input
+                nbInput
+                type="file"
+                accept="video/*"
+                id="input-tag"
+                (change)="onFileChange($event)"
+            />
+            <ngx-confirm-buttons
+                (approveEvent)="onSubmit()"
+                status="primary"
+                title="Отправить"
+            >
+            </ngx-confirm-buttons>
+        </div>
         <button
             (click)="startVideo()"
             class="w-50 mx-auto d-flex mb-5"

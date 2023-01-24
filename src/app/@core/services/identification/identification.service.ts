@@ -93,6 +93,13 @@ export class IdentificationService {
             data
         );
     }
+    sendVideo(id, data) {
+        return this.http.post(
+            environment.identificationUrl +
+                `/operator/api/v1/identification-requests/${id}/attach-external-call-video`,
+            data
+        );
+    }
     stopVideo(id, data) {
         return this.http.post<IVideoIdentification>(
             environment.identificationUrl +
