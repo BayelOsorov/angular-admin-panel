@@ -15,6 +15,8 @@ import {
     ViewChild,
     ChangeDetectorRef,
     OnDestroy,
+    Output,
+    EventEmitter,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -49,10 +51,11 @@ import {
         ]),
     ],
 })
-export class DetailComponent implements OnInit, OnDestroy {
+export class IdentificationDetailComponent implements OnInit, OnDestroy {
     @Input() data: IIdentificationDetail;
     @Input() personalData: IPersonalData;
     @ViewChild('openvidu', { static: false }) openvidu: OpenviduComponent;
+    @Output() getDataEvent = new EventEmitter();
     toggle = false;
     isNeedToEdit = false;
     error = '';
@@ -185,6 +188,16 @@ export class DetailComponent implements OnInit, OnDestroy {
             }
             this.error = 'Выберите что нужно отредактировать';
         }
+    }
+    sendComment(data) {
+        this.identificationService
+            .sendComment(this.data.id, data)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: () => {
+                    this.getDataEvent.emit('');
+                },
+            });
     }
     hideEdit(bool) {
         this.isNeedToEdit = bool;

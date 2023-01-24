@@ -86,6 +86,13 @@ export class IdentificationService {
             data
         );
     }
+    sendComment(id, data) {
+        return this.http.post(
+            environment.identificationUrl +
+                `/operator/api/v1/identification-requests-comments?id=${id}`,
+            data
+        );
+    }
     stopVideo(id, data) {
         return this.http.post<IVideoIdentification>(
             environment.identificationUrl +

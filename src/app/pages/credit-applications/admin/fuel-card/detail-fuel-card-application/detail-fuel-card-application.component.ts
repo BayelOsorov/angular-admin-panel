@@ -56,9 +56,9 @@ export class DetailFuelCardApplicationAdminComponent
                 next: (data) => {
                     this.loanApplicationData = data;
                     this.getCreditLine(data.customerId);
+                    this.checkCreditSpecilist(data);
                     this.getScoring(data.id);
                     this.getCustomerData(data.customerId);
-                    this.checkCreditSpecilist(data);
                     this.getRequestingAmount();
                 },
             });

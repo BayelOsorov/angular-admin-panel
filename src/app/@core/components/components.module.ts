@@ -38,7 +38,7 @@ import { RouterModule } from '@angular/router';
 import { WeekdaysComponent } from './catalog/partners/branches/weekdays/weekdays.component';
 import { FeedbacksComponent } from './catalog/partners/feedbacks/feedbacks.component';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { DetailComponent } from './identification/detail/detail.component';
+import { IdentificationDetailComponent } from './identification/detail/detail.component';
 import { NeedToEditComponent } from './identification/need-to-edit/need-to-edit.component';
 import { PhotoIdnButtonsComponent } from './identification/photo-idn-buttons/photo-idn-buttons.component';
 import { UserVideoComponent } from '../openvidu/user-video.component';
@@ -103,6 +103,7 @@ import { BlackListPersonComponent } from './credit-application/black-list-person
 import { StatusBadgeComponent } from './shared/status-badge/status-badge.component';
 import { NbMomentDateModule } from '@nebular/moment';
 import { ListApplicationsComponent } from './credit-application/list-applications/list-applications.component';
+import { OrderByPipe } from './shared/order-by-pipe/order-by.pipe';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -159,7 +160,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         WeekdaysComponent,
         FeedbacksComponent,
         PaginationComponent,
-        DetailComponent,
+        IdentificationDetailComponent,
         NeedToEditComponent,
         PhotoIdnButtonsComponent,
         LightboxImgComponent,
@@ -197,6 +198,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         BlackListPersonComponent,
         StatusBadgeComponent,
         ListApplicationsComponent,
+        OrderByPipe,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -213,7 +215,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         WeekdaysComponent,
         FeedbacksComponent,
         PaginationComponent,
-        DetailComponent,
+        IdentificationDetailComponent,
         NeedToEditComponent,
         PhotoIdnButtonsComponent,
         LightboxImgComponent,
@@ -250,6 +252,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         BlackListPersonComponent,
         StatusBadgeComponent,
         ListApplicationsComponent,
+        OrderByPipe,
     ],
 })
 export class ComponentsModule {}

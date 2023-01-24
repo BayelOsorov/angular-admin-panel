@@ -113,7 +113,9 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
     }
     approvePartner() {
         this.partnerIdentificationService
-            .approvePartnerIdentification(this.partnerId, this.form.value)
+            .approvePartnerIdentification(this.partnerId, {
+                offerContent: this.form.value.comment,
+            })
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.toaster.success('Успешно сделали предложение!');
