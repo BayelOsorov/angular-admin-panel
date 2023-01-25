@@ -25,6 +25,7 @@ export class PhotoIdnButtonsComponent implements OnInit {
 
     @Input() data: IIdentificationDetail;
     form: FormGroup;
+    videoFormData;
     constructor(private fb: FormBuilder) {}
     declineUser() {
         this.declineEvent.emit();
@@ -43,12 +44,10 @@ export class PhotoIdnButtonsComponent implements OnInit {
         const file = event.target.files[0];
         const formData = new FormData();
         formData.append('callVideoFile', file);
-        this.sendVideoEvent.emit(formData);
+        this.videoFormData = formData;
     }
     onSubmit() {
-        if (this.form.valid) {
-            console.log(this.form.value);
-        }
+        this.sendVideoEvent.emit(this.videoFormData);
     }
     ngOnInit(): void {
         this.form = this.fb.group({

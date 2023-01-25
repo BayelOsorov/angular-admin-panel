@@ -1,1 +1,19 @@
-<p>list-salespeople works!</p>
+<nb-card>
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Продажисты</strong>
+
+        <button (click)="openCreateModal()" nbButton status="primary">
+            Добавить
+        </button>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getListSalespeople($event)"
+            (deleteItemEvent)="deleteProduct($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listProducts"
+            [productName]="'ни одного продукта'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

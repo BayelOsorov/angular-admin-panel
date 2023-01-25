@@ -50,6 +50,7 @@ import { DetailFuelCardApplicationAdminComponent } from './credit-applications/a
 import { DetailIncreaseLimitApplicationComponent } from './credit-applications/credit-specialist/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
 import { ListIncreaseLimitApplicationsAdminComponent } from './credit-applications/admin/increase-limit/list-increase-limit-applications/list-increase-limit-applications.component';
 import { DetailIncreaseLimitApplicationAdminComponent } from './credit-applications/admin/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
+import { ListSalespeopleComponent } from './staff/salespeople/list-salespeople/list-salespeople.component';
 
 const routes: Routes = [
     {
@@ -68,6 +69,12 @@ const routes: Routes = [
                 canActivate: [PermissionsGuard],
                 data: { roles: ['admin'] },
                 component: DetailStaffComponent,
+            },
+            {
+                path: 'salespeople',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin'] },
+                component: ListSalespeopleComponent,
             },
             // ! Support Center
             {

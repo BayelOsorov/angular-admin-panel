@@ -23,12 +23,12 @@ export class LightboxImgComponent implements OnInit {
     constructor(private backendService: OldBackendService) {}
     openImage() {
         this.open = true;
-        this.backendService
-            .getBlob(this.imgUrl)
-            .toPromise()
-            .then((res) => {
-                console.log(res);
-            });
+        // this.backendService
+        //     .getBlob(this.imgUrl)
+        //     .toPromise()
+        //     .then((res) => {
+        //         console.log(res);
+        //     });
     }
 
     ngOnInit(): void {}

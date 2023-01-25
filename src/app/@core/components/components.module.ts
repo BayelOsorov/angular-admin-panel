@@ -104,6 +104,7 @@ import { StatusBadgeComponent } from './shared/status-badge/status-badge.compone
 import { NbMomentDateModule } from '@nebular/moment';
 import { ListApplicationsComponent } from './credit-application/list-applications/list-applications.component';
 import { OrderByPipe } from './shared/order-by-pipe/order-by.pipe';
+import { CreateSellerComponent } from './staff/create-seller/create-seller.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -199,6 +200,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         StatusBadgeComponent,
         ListApplicationsComponent,
         OrderByPipe,
+        CreateSellerComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -253,6 +255,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         StatusBadgeComponent,
         ListApplicationsComponent,
         OrderByPipe,
+        CreateSellerComponent,
     ],
 })
 export class ComponentsModule {}
