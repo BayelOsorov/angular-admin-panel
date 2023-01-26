@@ -26,13 +26,10 @@
         </div>
     </div>
     <ng-container *ngIf="data.status === 'VideoIdentificationProcess'">
-        <div
-            [formGroup]="form"
-            (ngSubmit)="onSubmit()"
-            class="d-flex mb-5 mx-auto w-100"
-        >
+        <div class="d-flex mb-5 w-100">
             <input
                 nbInput
+                fullWidth
                 type="file"
                 accept="video/*"
                 id="input-tag"

@@ -51,6 +51,8 @@ import { DetailIncreaseLimitApplicationComponent } from './credit-applications/c
 import { ListIncreaseLimitApplicationsAdminComponent } from './credit-applications/admin/increase-limit/list-increase-limit-applications/list-increase-limit-applications.component';
 import { DetailIncreaseLimitApplicationAdminComponent } from './credit-applications/admin/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
 import { ListSalespeopleComponent } from './staff/salespeople/list-salespeople/list-salespeople.component';
+import { ListPartnerNewsComponent } from './catalog/partner-news/list-partner-news/list-partner-news.component';
+import { ActionsPartnerNewsComponent } from './catalog/partner-news/actions-partner-news/actions-partner-news.component';
 
 const routes: Routes = [
     {
@@ -282,6 +284,19 @@ const routes: Routes = [
                     {
                         path: 'news/update/:id',
                         component: ActionsNewsComponent,
+                    },
+                    // ! Partner News
+                    {
+                        path: 'partner-news',
+                        component: ListPartnerNewsComponent,
+                    },
+                    {
+                        path: 'partner-news/create',
+                        component: ActionsPartnerNewsComponent,
+                    },
+                    {
+                        path: 'partner-news/update/:id',
+                        component: ActionsPartnerNewsComponent,
                     },
                     // ! Partner Proms
                     {

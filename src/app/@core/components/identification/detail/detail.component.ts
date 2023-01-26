@@ -187,11 +187,14 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
                 return;
             }
             this.error = 'Выберите что нужно отредактировать';
+            setTimeout(() => {
+                this.error = '';
+            }, 5000);
         }
     }
     sendComment(data) {
         this.identificationService
-            .sendComment(this.data.id, { callVideoFile: data })
+            .sendComment(this.data.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {

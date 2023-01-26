@@ -1,0 +1,97 @@
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <nb-card>
+            <nb-card-header
+                >{{
+                    partnerNewsId
+                        ? 'Редактирование новости для партнера'
+                        : 'Создание новости для партнера'
+                }}
+            </nb-card-header>
+            <nb-card-body>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Заголовок</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-validation-input
+                                [submitted]="submitted"
+                                [control]="form.get('title')"
+                                placeholder="Введите заголовок"
+                            >
+                            </ngx-validation-input>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label
+                            for="exampleInputEmail1"
+                            class="label col-sm-3 col-form-label"
+                            >Короткий текст новости</label
+                        >
+                        <div class="col-sm-9">
+                            <ngx-validation-input
+                                type="textarea"
+                                [submitted]="submitted"
+                                [control]="form.get('shortContent')"
+                                placeholder="Введите короткий текст новости"
+                            >
+                            </ngx-validation-input>
+                        </div>
+                    </div>
+                    <nb-tabset>
+                        <nb-tab tabTitle="Контент" class="p-0">
+                            <div
+                                class="mt-3 mb-3"
+                                *ngIf="partnerNewsId ? partnerNewsData : true"
+                            >
+                                <ngx-editor
+                                    [submitted]="submitted"
+                                    [data]="partnerNewsData?.content"
+                                    [control]="form.get('content')"
+                                ></ngx-editor>
+                            </div>
+                        </nb-tab>
+                        <nb-tab
+                            class="partner-news"
+                            tabTitle="Предварительный просмотр"
+                        >
+                            <div class="news mobile">
+                                <div class="news__content containerMob">
+                                    <h1 class="news__title">
+                                        {{ form.value.title }}
+                                    </h1>
+                                    <div
+                                        [innerHTML]="
+                                            form.controls.content.value
+                                        "
+                                    ></div>
+                                    <p class="news__date">
+                                        {{
+                                            partnerNewsData
+                                                ? (partnerNewsData.createdAt
+                                                  | date : 'dd.MM.yyyy')
+                                                : '12.10.2023'
+                                        }}
+                                    </p>
+                                </div>
+                            </div>
+                        </nb-tab>
+                    </nb-tabset>
+
+                    <button
+                        class="d-flex mx-auto"
+                        type="submit"
+                        nbButton
+                        status="primary"
+                    >
+                        Подтвердить
+                    </button>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

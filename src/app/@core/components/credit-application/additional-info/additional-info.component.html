@@ -28,10 +28,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        Срок проживание - Срок проживания по фактическому адресу
-                        (мес)
-                    </td>
+                    <td>Срок проживания по фактическому адресу (мес)</td>
                     <td>
                         {{
                             getActualResidenceLoc(
@@ -271,11 +268,10 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-
 <nb-accordion *ngIf="spouseData" multi class="mt-4">
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
-            Дополнительный доход супруга ("и")
+            Данные о супруге
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
@@ -296,16 +292,15 @@
                     <td>{{ spouseData?.phoneNumber }}</td>
                 </tr>
             </table>
-            <ngx-credit-application-need-to-edit
-                [control]="form?.get(['CustomerData.SpouseData.Surname'])"
-                [title]="'ФИО'"
-                [placeholder]="'Введите'"
-            ></ngx-credit-application-need-to-edit>
-            <ngx-credit-application-need-to-edit
-                [control]="form?.get(['CustomerData.SpouseData.PhoneNumber'])"
-                [title]="'Номер телефона'"
-                [placeholder]="'Введите'"
-            ></ngx-credit-application-need-to-edit>
+        </nb-accordion-item-body>
+    </nb-accordion-item>
+</nb-accordion>
+<nb-accordion *ngIf="spouseData" multi class="mt-4">
+    <nb-accordion-item>
+        <nb-accordion-item-header class="justify-content-center">
+            Дополнительный доход супруга ("и")
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
             <table class="w-100">
                 <tr>
                     <td>Работа</td>
@@ -841,6 +836,7 @@
                                 dataScoring.personalInformationScore
                                     .realEstateAvailabilitiesValue.length !== 0
                             "
+                            style="color: #1890ff"
                             (click)="scrollTo('PersonalEstateItems')"
                             >Смотреть</a
                         >
@@ -869,6 +865,7 @@
                                     .personalEstateAvailabilitiesValue
                                     .length !== 0
                             "
+                            style="color: #1890ff"
                             (click)="scrollTo('RealEstateItems')"
                             >Смотреть</a
                         >

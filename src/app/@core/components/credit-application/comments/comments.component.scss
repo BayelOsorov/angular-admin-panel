@@ -3,8 +3,10 @@
 .comments {
     display: block;
     width: 100%;
+
     .messages {
-        height: 400px;
+        display: block;
+        max-height: 400px;
         padding: 20px;
         overflow-y: auto;
     }
@@ -16,7 +18,6 @@
     .my-message {
         width: 100%;
         display: flex;
-        height: auto;
         flex-direction: row-reverse;
         margin-bottom: 15px;
         overflow-x: hidden;

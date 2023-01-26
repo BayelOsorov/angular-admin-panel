@@ -117,17 +117,17 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
             });
     }
     dowloadCredit() {
-        downloadFile(
-            this.creditReportUrl,
-            `Кредитный-Отчет:${
-                this.customerData.identificationInformation.surname +
-                '-' +
-                this.customerData.identificationInformation.name +
-                '-' +
-                this.customerData.identificationInformation.patronymic
-            }`
-        );
-        // window.open(this.data.debtorInformationReportUrl, '_blank');
+        // downloadFile(
+        //     this.creditReportUrl,
+        //     `Кредитный-Отчет:${
+        //         this.customerData.identificationInformation.surname +
+        //         '-' +
+        //         this.customerData.identificationInformation.name +
+        //         '-' +
+        //         this.customerData.identificationInformation.patronymic
+        //     }`
+        // );
+        window.open(this.creditReportUrl, '_blank');
     }
     ngOnInit(): void {
         this.getCustomerRepDelays();

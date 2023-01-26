@@ -1,4 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {
+    Component,
+    OnInit,
+    Input,
+    ViewChild,
+    ElementRef,
+    AfterViewInit,
+} from '@angular/core';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
     selector: 'ngx-identification-files',
@@ -7,7 +16,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class IdentificationFilesComponent implements OnInit {
     @Input() data;
-    constructor() {}
+    constructor(private authService: AuthService, private http: HttpClient) {}
 
     ngOnInit(): void {}
 }

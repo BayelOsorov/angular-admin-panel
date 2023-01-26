@@ -10,12 +10,17 @@
 </nb-alert>
 <div class="detail-info" *ngIf="data">
     <div class="status">
-        <strong>{{ data.createdAt | date : 'dd.MM.yyyy, hh:mm' }}</strong>
+        <strong>{{
+            data.status === 'VideoIdentificationProcess'
+                ? (data.videoIdentificationRequestedAt
+                  | date : 'dd.MM.yyyy, hh:mm')
+                : (data.createdAt | date : 'dd.MM.yyyy, hh:mm')
+        }}</strong>
         <strong>+{{ data.phoneNumber }}</strong>
         <nb-alert status="primary">{{
             data.status === 'VideoIdentificationProcess'
-                ? 'Видео-идентификация '
-                : 'Фото-идентификация'
+                ? 'Видеоидентификация '
+                : 'Фотоидентификация'
         }}</nb-alert>
     </div>
     <div class="detail-block mt-4">

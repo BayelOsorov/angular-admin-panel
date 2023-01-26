@@ -36,8 +36,11 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
             const { startDateTime, endDateTime } = this.form.value;
             const newData = {
                 ...this.form.value,
-                startDateTime: this.dateService.addDay(startDateTime, 1),
-                endDateTime: this.dateService.addDay(endDateTime, 1),
+                startDateTime: this.dateService.addDay(
+                    new Date(startDateTime),
+                    1
+                ),
+                endDateTime: this.dateService.addDay(new Date(endDateTime), 1),
             };
             if (this.partnerPromsData) {
                 this.partnerPromsService
@@ -85,6 +88,8 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe({
                     next: (data) => {
+                        console.log(data.endDateTime);
+
                         this.partnerPromsData = data;
                         this.coverImg = data.cover;
                         this.form.controls['title'].setValue(data.title);

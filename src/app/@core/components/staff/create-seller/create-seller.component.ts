@@ -25,15 +25,17 @@ export class CreateSellerComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.form = this.fb.group({
-            name: ['', [Validators.required, Validators.maxLength(256)]],
-            isActive: [true, Validators.required],
+            userId: ['', [Validators.required, Validators.maxLength(256)]],
         });
-        if (this.itemData) {
-            this.form.controls['name'].setValue(this.itemData.name);
-            this.form.controls['isActive'].setValue(this.itemData.isActive);
-        }
     }
-    getCustomers(val) {}
+    getCustomers(val) {
+        this.salespeopleService
+            .getUserByPhoneNumber(val)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                console.log(res);
+            });
+    }
     onFirstSubmit() {
         this.submitted = true;
         if (this.form.valid) {

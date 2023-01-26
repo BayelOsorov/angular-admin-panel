@@ -3,7 +3,7 @@
         <label for="exampleInputEmail1" class="label">Номер телефона</label>
         <ngx-search-select
             (searchEmit)="getCustomers($event)"
-            [control]="form.get('roles')"
+            [control]="form.get('userId')"
             [isRequired]="true"
             [submitted]="submitted"
             [data]="customers"

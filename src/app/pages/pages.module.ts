@@ -83,6 +83,8 @@ import { ListIncreaseLimitApplicationsAdminComponent } from './credit-applicatio
 import { DetailIncreaseLimitApplicationAdminComponent } from './credit-applications/admin/increase-limit/detail-increase-limit-application/detail-increase-limit-application.component';
 import { ListSalespeopleComponent } from './staff/salespeople/list-salespeople/list-salespeople.component';
 import { DetailSalespeopleComponent } from './staff/salespeople/detail-salespeople/detail-salespeople.component';
+import { ListPartnerNewsComponent } from './catalog/partner-news/list-partner-news/list-partner-news.component';
+import { ActionsPartnerNewsComponent } from './catalog/partner-news/actions-partner-news/actions-partner-news.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -172,6 +174,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         DetailIncreaseLimitApplicationAdminComponent,
         ListSalespeopleComponent,
         DetailSalespeopleComponent,
+        ListPartnerNewsComponent,
+        ActionsPartnerNewsComponent,
     ],
     providers: [
         {

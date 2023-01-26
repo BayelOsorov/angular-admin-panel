@@ -152,6 +152,10 @@ export class PagesComponent {
                     link: '/catalog/partner-proms',
                 },
                 {
+                    title: 'Новости для партнера',
+                    link: '/catalog/partner-news',
+                },
+                {
                     title: 'Новости',
                     link: '/catalog/news',
                 },

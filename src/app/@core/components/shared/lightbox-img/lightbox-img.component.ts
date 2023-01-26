@@ -3,8 +3,10 @@ import {
     OnInit,
     ChangeDetectionStrategy,
     Input,
+    ChangeDetectorRef,
 } from '@angular/core';
 import { Http2ServerRequest } from 'http2';
+import { AuthService } from '../../../services/auth/auth.service';
 import { OldBackendService } from '../../../services/old-backend/old-backend.service';
 import { toBase64 } from '../../../utils/toBase64';
 import { UseHttpImageSourcePipe } from '../secured-image/secured-image.component';
@@ -12,24 +14,48 @@ import { UseHttpImageSourcePipe } from '../secured-image/secured-image.component
     selector: 'ngx-lightbox-img',
     templateUrl: './lightbox-img.component.html',
     styleUrls: ['./lightbox-img.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LightboxImgComponent implements OnInit {
     @Input() imgUrl;
 
-    open;
+    open = false;
     close;
     viewerOpen = false;
-    constructor(private backendService: OldBackendService) {}
+    blobUrl;
+    constructor(
+        private backendService: OldBackendService,
+        private authService: AuthService,
+        private cdr: ChangeDetectorRef
+    ) {}
     openImage() {
         this.open = true;
-        // this.backendService
-        //     .getBlob(this.imgUrl)
-        //     .toPromise()
-        //     .then((res) => {
-        //         console.log(res);
-        //     });
+        fetch(this.imgUrl, {
+            headers: {
+                Authorization: 'Bearer ' + this.authService.getAccessToken(),
+                responseType: 'blob',
+            },
+        })
+            .then((res) => res.blob())
+            .then((myBlob) => {
+                this.open = false;
+                this.cdr.detectChanges();
+                window.open(window.URL.createObjectURL(myBlob));
+            });
+    }
+    getImageBlob() {
+        fetch(this.imgUrl, {
+            headers: {
+                Authorization: 'Bearer ' + this.authService.getAccessToken(),
+                responseType: 'blob',
+            },
+        })
+            .then((res) => res.blob())
+            .then((myBlob) => {
+                this.blobUrl = window.URL.createObjectURL(myBlob);
+            });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        // this.getImageBlob();
+    }
 }
