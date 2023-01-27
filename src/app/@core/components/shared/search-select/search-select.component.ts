@@ -48,7 +48,6 @@ export class SearchSelectComponent implements OnInit, OnDestroy {
                 if (data === null) {
                     this.control.setValue('');
                 }
-                console.log(data);
                 if (
                     Array.isArray(data) &&
                     data.some((item) => typeof item === 'object')

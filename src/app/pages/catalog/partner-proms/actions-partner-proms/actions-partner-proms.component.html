@@ -64,6 +64,20 @@
                         </label>
                         <div class="col-sm-9">
                             <input
+                                type="date"
+                                formControlName="startDateTime"
+                                fullWidth
+                                nbInput
+                                placeholder="Дата начала"
+                                [status]="
+                                submitted && (form.get('startDateTime')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+
+                            <!-- <input
+                                type="text"
                                 formControlName="startDateTime"
                                 fullWidth
                                 nbInput
@@ -75,8 +89,9 @@
                                     : 'basic'
                             "
                             />
+                            <nb-datepicker #formpicker></nb-datepicker> -->
+
                             <!-- format="dd/MM/yyyy" -->
-                            <nb-datepicker #formpicker></nb-datepicker>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -87,6 +102,21 @@
                         </label>
                         <div class="col-sm-9">
                             <input
+                                type="date"
+                                formControlName="endDateTime"
+                                fullWidth
+                                nbInput
+                                placeholder="Дата окончания"
+                                [status]="
+                                submitted && (form.get('endDateTime')).errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'
+                            "
+                            />
+                            <!-- <nb-datepicker #formpickermy></nb-datepicker>
+
+                            <input
+                                type="text"
                                 formControlName="endDateTime"
                                 fullWidth
                                 nbInput
@@ -97,9 +127,7 @@
                                     ? 'danger'
                                     : 'basic'
                             "
-                            />
-
-                            <nb-datepicker #formpickermy></nb-datepicker>
+                            /> -->
                         </div>
                     </div>
                     <div class="form-group row">

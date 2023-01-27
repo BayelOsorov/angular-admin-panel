@@ -31,7 +31,7 @@ export class ListSalespeopleComponent implements OnInit, OnDestroy {
         },
     };
     form = this.fb.group({
-        userIds: [''],
+        userIds: [[]],
     });
     private destroy$: Subject<void> = new Subject<void>();
 

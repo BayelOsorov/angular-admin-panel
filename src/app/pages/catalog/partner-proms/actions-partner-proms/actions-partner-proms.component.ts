@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PartnerPromsService } from '../../../../@core/services/catalog/partner-proms/partner-proms.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
+import * as moment from 'moment';
 @Component({
     templateUrl: './actions-partner-proms.component.html',
     styleUrls: ['./actions-partner-proms.component.scss'],
@@ -33,18 +34,9 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
         this.submitted = true;
 
         if (this.form.valid) {
-            const { startDateTime, endDateTime } = this.form.value;
-            const newData = {
-                ...this.form.value,
-                startDateTime: this.dateService.addDay(
-                    new Date(startDateTime),
-                    1
-                ),
-                endDateTime: this.dateService.addDay(new Date(endDateTime), 1),
-            };
             if (this.partnerPromsData) {
                 this.partnerPromsService
-                    .editPartnerProms(this.partnerPromsData.id, newData)
+                    .editPartnerProms(this.partnerPromsData.id, this.form.value)
                     .pipe(takeUntil(this.destroy$))
                     .subscribe(() => {
                         this.toaster.success('Успешно отредактировано!');
@@ -54,7 +46,7 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
             }
 
             this.partnerPromsService
-                .createPartnerProms(newData)
+                .createPartnerProms(this.form.value)
                 .pipe(takeUntil(this.destroy$))
                 .subscribe(() => {
                     this.toaster.success('Успешно создано!');
@@ -88,8 +80,6 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                 .pipe(takeUntil(this.destroy$))
                 .subscribe({
                     next: (data) => {
-                        console.log(data.endDateTime);
-
                         this.partnerPromsData = data;
                         this.coverImg = data.cover;
                         this.form.controls['title'].setValue(data.title);
@@ -99,10 +89,10 @@ export class ActionsPartnerPromsComponent implements OnInit, OnDestroy {
                         );
                         this.form.controls['hmtlBody'].setValue(data.hmtlBody);
                         this.form.controls['startDateTime'].setValue(
-                            new Date(data.startDateTime)
+                            data.startDateTime.slice(0, 10)
                         );
                         this.form.controls['endDateTime'].setValue(
-                            new Date(data.endDateTime)
+                            data.endDateTime.slice(0, 10)
                         );
                     },
                 });

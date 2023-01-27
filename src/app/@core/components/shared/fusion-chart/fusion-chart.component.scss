@@ -3,3 +3,11 @@
 ::ng-deep rect[fill] {
     fill: nb-theme(background-basic-color-1);
 }
+
+::ng-deep svg {
+    > g[class^='raphael-group-'] {
+        g {
+            fill: none !important;
+        }
+    }
+}
