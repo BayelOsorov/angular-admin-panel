@@ -1,1 +1,36 @@
-<p>detail-salespeople works!</p>
+<nb-card>
+    <nb-card-header>
+        <div [formGroup]="form" class="d-flex justify-content-evenly mt-3">
+            <input
+                class="w-50 mr-5"
+                formControlName="from"
+                fullWidth
+                onfocus="(this.type='date')"
+                type="text"
+                format="dd.MM.yyyy"
+                nbInput
+                placeholder="Дата с"
+            />
+            <input
+                onfocus="(this.type='date')"
+                type="text"
+                placeholder="Дата по"
+                class="w-50 mr-5"
+                formControlName="to"
+                fullWidth
+                format="dd.MM.yyyy"
+                nbInput
+            />
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getListInvitedAccounts($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listInvitedAccounts"
+            [productName]="'ни одного приглашенного аккаунта'"
+            [actions]="false"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

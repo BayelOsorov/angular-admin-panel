@@ -14,7 +14,7 @@ export class CreateSellerComponent implements OnInit, OnDestroy {
     form: FormGroup;
     itemData;
     submitted = false;
-    customers;
+    customers = [];
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private fb: FormBuilder,
@@ -32,8 +32,8 @@ export class CreateSellerComponent implements OnInit, OnDestroy {
         this.salespeopleService
             .getUserByPhoneNumber(val)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => {
-                console.log(res);
+            .subscribe((res: any) => {
+                this.customers = res.items;
             });
     }
     onFirstSubmit() {
@@ -42,9 +42,19 @@ export class CreateSellerComponent implements OnInit, OnDestroy {
             this.salespeopleService
                 .createSalesperson(this.form.value)
                 .pipe(takeUntil(this.destroy$))
-                .subscribe((res) => {
-                    this.toaster.success('Успешно отредактировано!');
-                    this.dialogRef.close('edit');
+                .subscribe({
+                    next: (res) => {
+                        this.toaster.success('Успешно создано!');
+                        this.dialogRef.close('edit');
+                    },
+                    error: (err) => {
+                        console.log(err);
+                        if (err.status === 404) {
+                            this.toaster.error(
+                                'Данный пользователь не участвует в реферальной программе!'
+                            );
+                        }
+                    },
                 });
             return;
         }

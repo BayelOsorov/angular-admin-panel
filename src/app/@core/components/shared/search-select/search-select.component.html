@@ -23,7 +23,7 @@
         <nz-option
             *ngFor="let o of data"
             [nzValue]="o.id"
-            [nzLabel]="o.name"
+            [nzLabel]="o[returnVal]"
         ></nz-option>
     </ng-container>
     <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>

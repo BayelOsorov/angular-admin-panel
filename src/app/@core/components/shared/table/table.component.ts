@@ -27,6 +27,8 @@ export class TableComponent implements OnInit, AfterContentChecked {
     @Input() tableData;
     @Input() productName;
     @Input() delete = true;
+    @Input() edit = true;
+
     @Input() actions = true;
 
     settings = {};
@@ -51,7 +53,7 @@ export class TableComponent implements OnInit, AfterContentChecked {
             actions: this.actions
                 ? {
                       delete: this.delete,
-                      edit: true,
+                      edit: this.edit,
                       add: false,
                       position: 'right',
                       columnTitle: 'Опции',

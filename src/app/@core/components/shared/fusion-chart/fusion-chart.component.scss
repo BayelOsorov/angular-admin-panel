@@ -8,6 +8,7 @@
     > g[class^='raphael-group-'] {
         g {
             fill: none !important;
+            pointer-events: none;
         }
     }
 }

@@ -10,7 +10,9 @@ export class SalespeopleService {
     getListSalespeople(page = 1, filter) {
         return this.http.get(
             environment.salespeopleUrl +
-                `/api/v1/referral-program/sellers/sellers?userIds=${filter.userIds}&page=${page}&pageSize=20`
+                `/api/v1/referral-program/sellers/sellers?${
+                    filter.userIds.length > 0 && 'userIds=' + filter.userIds
+                }&page=${page}&pageSize=20`
         );
     }
     getListInvitedAccounts(page = 1, filter) {
@@ -23,7 +25,8 @@ export class SalespeopleService {
     deleteSalesperson(id: string) {
         return this.http.delete(
             environment.salespeopleUrl +
-                `/api/v1/referral-program/sellers/delete?userId=${id}`
+                `/api/v1/referral-program/sellers/delete`
+            // { userId: id }
         );
     }
     getUserByPhoneNumber(phone) {

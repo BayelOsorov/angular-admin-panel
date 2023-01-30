@@ -26,6 +26,7 @@ export class SearchSelectComponent implements OnInit, OnDestroy {
     @Input() placeholder: string;
     @Input() data;
     @Input() isSearch = false;
+    @Input() returnVal = 'name';
 
     isLoading = false;
     private destroy$: Subject<void> = new Subject<void>();

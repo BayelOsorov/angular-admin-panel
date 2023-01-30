@@ -126,7 +126,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                         lunchHourStart: lunchHourStart_7,
                         lunchHourEnd: lunchHourEnd_7,
                     },
-                ],
+                ].filter((item) => item),
             };
             if (this.branchData) {
                 this.partnersService

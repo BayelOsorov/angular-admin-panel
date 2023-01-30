@@ -7,7 +7,12 @@ import {
     ElementRef,
     AfterViewInit,
 } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
+import {
+    AbstractControl,
+    FormControl,
+    PatternValidator,
+    Validators,
+} from '@angular/forms';
 
 @Component({
     selector: 'ngx-phone-number-input',
@@ -38,13 +43,20 @@ export class PhoneNumberInputComponent implements OnInit {
         }
     }
     onChange(val) {
-        this.value = val;
-        this.control.setValue(val);
+        const newVal = val.replaceAll('-', ' ').replace('+996', '');
+
+        this.value = newVal;
+        this.control.setValue(newVal);
+        console.log(val.replaceAll('-', ''), val.replace('+996', ''));
+
         if (this.control.value.length === 12) {
             this.control.patchValue(
                 '+996' + this.control.value.replaceAll(' ', '')
             );
         }
+    }
+    onPaste(val) {
+        console.log(val);
     }
     ngOnInit(): void {
         this.control.valueChanges.subscribe((val: string) => {

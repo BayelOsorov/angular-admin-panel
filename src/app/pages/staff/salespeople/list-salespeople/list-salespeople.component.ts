@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
@@ -13,21 +15,18 @@ import { tableNumbering } from '../../../../@core/utils';
 })
 export class ListSalespeopleComponent implements OnInit, OnDestroy {
     listProducts;
+    customers = [];
     tableColumns = {
         index: {
             title: '№',
             type: 'number',
             valuePrepareFunction: (value, row, cell) =>
-                tableNumbering(this.listProducts.page, cell.row.index),
+                tableNumbering(this.listProducts.pageNumber, cell.row.index),
         },
-        name: {
-            title: 'Название',
-            type: 'text',
-        },
-        isActive: {
-            title: 'Активен',
-            type: 'text',
-            valuePrepareFunction: (bool) => (bool ? 'Да' : 'Нет'),
+        createdAt: {
+            title: 'Дата добавления',
+            type: 'number',
+            valuePrepareFunction: (item) => this.parseDate(item),
         },
     };
     form = this.fb.group({
@@ -39,9 +38,13 @@ export class ListSalespeopleComponent implements OnInit, OnDestroy {
         private salesPeopleService: SalespeopleService,
         private windowService: NbWindowService,
         private toaster: ToastrService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private datePipe: DatePipe,
+        private router: Router
     ) {}
-
+    parseDate(date) {
+        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+    }
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))
@@ -65,8 +68,16 @@ export class ListSalespeopleComponent implements OnInit, OnDestroy {
                 this.getListSalespeople();
             });
     }
-    onSearch(event) {
-        this.getListSalespeople(1);
+    getCustomers(val) {
+        this.salesPeopleService
+            .getUserByPhoneNumber(val)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                this.customers = res.items;
+            });
+    }
+    onRowSelect(id) {
+        this.router.navigate([`salespeople/detail/${id}`]);
     }
     ngOnDestroy() {
         this.destroy$.next();
@@ -74,7 +85,7 @@ export class ListSalespeopleComponent implements OnInit, OnDestroy {
     }
     public openCreateModal() {
         this.openModal(false, CreateSellerComponent, {
-            title: 'Добавление продукта',
+            title: 'Добавление продажиста',
             context: {},
         });
     }

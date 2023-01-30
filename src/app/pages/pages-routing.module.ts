@@ -53,6 +53,7 @@ import { DetailIncreaseLimitApplicationAdminComponent } from './credit-applicati
 import { ListSalespeopleComponent } from './staff/salespeople/list-salespeople/list-salespeople.component';
 import { ListPartnerNewsComponent } from './catalog/partner-news/list-partner-news/list-partner-news.component';
 import { ActionsPartnerNewsComponent } from './catalog/partner-news/actions-partner-news/actions-partner-news.component';
+import { DetailSalespeopleComponent } from './staff/salespeople/detail-salespeople/detail-salespeople.component';
 
 const routes: Routes = [
     {
@@ -76,7 +77,16 @@ const routes: Routes = [
                 path: 'salespeople',
                 canActivate: [PermissionsGuard],
                 data: { roles: ['admin'] },
-                component: ListSalespeopleComponent,
+                children: [
+                    {
+                        path: '',
+                        component: ListSalespeopleComponent,
+                    },
+                    {
+                        path: 'detail/:id',
+                        component: DetailSalespeopleComponent,
+                    },
+                ],
             },
             // ! Support Center
             {
