@@ -5,6 +5,7 @@ import {
     IIdentificationDetail,
     IPersonalData,
 } from '../../../../@core/models/identification/identification';
+import { ApplicationRequestsService } from '../../../../@core/services/credit-application/credit.service';
 import { IdentificationService } from '../../../../@core/services/identification/identification.service';
 
 @Component({
@@ -14,15 +15,20 @@ import { IdentificationService } from '../../../../@core/services/identification
 export class IdentificationDetailComponent implements OnInit, OnDestroy {
     data: IIdentificationDetail;
     personalData: IPersonalData;
+    customerInfo;
     private destroy$: Subject<void> = new Subject<void>();
 
-    constructor(private identificationService: IdentificationService) {}
+    constructor(
+        private identificationService: IdentificationService,
+        private applicationRequestsService: ApplicationRequestsService
+    ) {}
     getIdentificationDetail() {
         this.identificationService
             .getIdentificationDetail()
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.data = data;
+                this.getCustomerData(data.userId);
                 this.getUserPersonalData({
                     pin: data.pin,
                     documentNumber: data.documentNumber,
@@ -36,6 +42,16 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.personalData = res;
+            });
+    }
+    getCustomerData(id) {
+        this.applicationRequestsService
+            .getCustomerData(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.customerInfo = data;
+                },
             });
     }
     ngOnInit(): void {

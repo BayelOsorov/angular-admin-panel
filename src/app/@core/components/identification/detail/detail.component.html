@@ -8,7 +8,7 @@
         <button ghost nbButton (click)="closeAlert()">X</button>
     </div>
 </nb-alert>
-<div class="detail-info" *ngIf="data">
+<div class="detail-info">
     <div class="status">
         <strong>{{
             data.status === 'VideoIdentificationProcess'
@@ -16,7 +16,10 @@
                   | date : 'dd.MM.yyyy, hh:mm')
                 : (data.createdAt | date : 'dd.MM.yyyy, hh:mm')
         }}</strong>
+
         <strong>+{{ data.phoneNumber }}</strong>
+        <strong>{{ customerInfo.culture.toUpperCase() }}</strong>
+
         <nb-alert status="primary">{{
             data.status === 'VideoIdentificationProcess'
                 ? 'Видеоидентификация '

@@ -6,15 +6,37 @@
             </nb-accordion-item-header>
             <nb-accordion-item-body>
                 <nb-accordion-item *ngFor="let item of data">
-                    <nb-accordion-item-header class="accordion-header row">
-                        <strong class="col-md-4">{{ item.productCode }}</strong>
-                        <strong class="col-md-4"
-                            >Лимит: {{ item.limit }}</strong
-                        >
-                        <strong class="col-md-4"
-                            >Использовано:
-                            {{ getUsedMoney(item.activeContracts) }}</strong
-                        >
+                    <nb-accordion-item-header class="accordion-header d-block">
+                        <div class="">
+                            <div class="d-flex justify-content-center">
+                                <strong class="col-md-4"
+                                    >Одобрил: Фамилия Имя Отчество</strong
+                                >
+                                <strong class="col-md-4"
+                                    >Дата:
+                                    {{
+                                        item.createdAt
+                                            | date : 'dd.MM.yyyy, hh:mm'
+                                    }}</strong
+                                >
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="row">
+                                <strong class="col-md-4">{{
+                                    item.productCode
+                                }}</strong>
+                                <strong class="col-md-4"
+                                    >Лимит: {{ item.limit }}</strong
+                                >
+                                <strong class="col-md-4"
+                                    >Использовано:
+                                    {{
+                                        getUsedMoney(item.activeContracts)
+                                    }}</strong
+                                >
+                            </div>
+                        </div>
                     </nb-accordion-item-header>
                     <nb-accordion-item-body>
                         <nb-accordion-item

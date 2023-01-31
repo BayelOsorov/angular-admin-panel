@@ -110,10 +110,12 @@ export class SupportCenterAnswersActionsComponent implements OnInit, OnDestroy {
                 },
 
                 products:
+                    this.form.value.products &&
                     this.form.value.products.length > 0
                         ? this.form.value.products
                         : [],
             };
+
             if (this.itemData) {
                 this.supportService
                     .updateSupportCenterAnswer(this.itemData.id, newVal)

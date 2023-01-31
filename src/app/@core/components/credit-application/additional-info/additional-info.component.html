@@ -292,6 +292,16 @@
                     <td>{{ spouseData?.phoneNumber }}</td>
                 </tr>
             </table>
+            <ngx-credit-application-need-to-edit
+                [control]="form?.get(['CustomerData.SpouseData.Surname'])"
+                [title]="'ФИО'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
+            <ngx-credit-application-need-to-edit
+                [control]="form?.get(['CustomerData.SpouseData.PhoneNumber'])"
+                [title]="'Номер телефона'"
+                [placeholder]="'Введите'"
+            ></ngx-credit-application-need-to-edit>
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>

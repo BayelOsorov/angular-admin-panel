@@ -10,6 +10,7 @@ import {
     NbBadgeModule,
     NbButtonModule,
     NbCardModule,
+    NbCheckboxModule,
     NbDatepickerModule,
     NbIconModule,
     NbInputModule,
@@ -138,6 +139,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         NbEvaIconsModule,
         NbBadgeModule,
         NzResultModule,
+        NbCheckboxModule,
         NbMomentDateModule,
     ],
     declarations: [

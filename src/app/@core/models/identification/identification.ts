@@ -1,6 +1,8 @@
 export interface IIdentificationDetail {
     id: string;
     createdAt: Date;
+    phoneNumber: string;
+    comments: any;
     photoIdentificationDeclinedAt: Date;
     photoIdentificationApprovedAt: Date;
     videoIdentificationApprovedAt: Date;

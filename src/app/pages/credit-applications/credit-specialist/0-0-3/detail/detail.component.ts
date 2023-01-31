@@ -126,9 +126,12 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
-    declineCredit() {
+    declineCredit(lockoutEndData) {
         this.creditApplicationsService
-            .declineCreditApplication(this.loanApplicationData.id)
+            .declineCreditApplication(
+                this.loanApplicationData.id,
+                lockoutEndData
+            )
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {

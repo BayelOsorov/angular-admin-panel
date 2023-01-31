@@ -212,28 +212,28 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
             email: [''],
             location: ['', Validators.required],
 
-            workingHourStart_1: ['', Validators.required],
-            workingHourEnd_1: ['', Validators.required],
+            workingHourStart_1: [''],
+            workingHourEnd_1: [''],
             lunchHourStart_1: [''],
             lunchHourEnd_1: [''],
 
-            workingHourStart_2: ['', Validators.required],
-            workingHourEnd_2: ['', Validators.required],
+            workingHourStart_2: [''],
+            workingHourEnd_2: [''],
             lunchHourStart_2: [''],
             lunchHourEnd_2: [''],
 
-            workingHourStart_3: ['', Validators.required],
-            workingHourEnd_3: ['', Validators.required],
+            workingHourStart_3: [''],
+            workingHourEnd_3: [''],
             lunchHourStart_3: [''],
             lunchHourEnd_3: [''],
 
-            workingHourStart_4: ['', Validators.required],
-            workingHourEnd_4: ['', Validators.required],
+            workingHourStart_4: [''],
+            workingHourEnd_4: [''],
             lunchHourStart_4: [''],
             lunchHourEnd_4: [''],
 
-            workingHourStart_5: ['', Validators.required],
-            workingHourEnd_5: ['', Validators.required],
+            workingHourStart_5: [''],
+            workingHourEnd_5: [''],
             lunchHourStart_5: [''],
             lunchHourEnd_5: [''],
 

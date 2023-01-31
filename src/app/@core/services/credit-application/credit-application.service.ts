@@ -46,11 +46,11 @@ export class CreditApplicationService {
             data
         );
     }
-    declineCreditApplication(id) {
+    declineCreditApplication(id, data) {
         return this.http.patch(
             environment.creditApplicationUrl +
                 `/operator/api/v1/ocl-requests/${id}/decline`,
-            { comment: 'decline' }
+            data
         );
     }
     needToEditCreditApplication(id, data) {

@@ -126,9 +126,12 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
-    declineCredit() {
+    declineCredit(lockoutEndData) {
         this.fuelCardApplicationsService
-            .declineFuelCardApplication(this.loanApplicationData.id)
+            .declineFuelCardApplication(
+                this.loanApplicationData.id,
+                lockoutEndData
+            )
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {

@@ -43,11 +43,11 @@ export class FuelCardApplicationService {
             data
         );
     }
-    declineFuelCardApplication(id) {
+    declineFuelCardApplication(id, data) {
         return this.http.patch(
             environment.fuelCardUrl +
                 `/operator/api/v1/ocl-requests/${id}/decline`,
-            { comment: 'decline' }
+            data
         );
     }
     needToEditFuelCardApplication(id, data) {

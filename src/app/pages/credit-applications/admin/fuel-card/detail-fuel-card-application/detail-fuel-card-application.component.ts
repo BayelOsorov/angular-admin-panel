@@ -35,7 +35,6 @@ export class DetailFuelCardApplicationAdminComponent
     requestingAmount;
     customerDataForm: FormGroup;
     userData;
-    hasCreditSpecialistRole: boolean;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
@@ -56,7 +55,6 @@ export class DetailFuelCardApplicationAdminComponent
                 next: (data) => {
                     this.loanApplicationData = data;
                     this.getCreditLine(data.customerId);
-                    this.checkCreditSpecilist(data);
                     this.getScoring(data.id);
                     this.getCustomerData(data.customerId);
                     this.getRequestingAmount();
@@ -110,19 +108,10 @@ export class DetailFuelCardApplicationAdminComponent
             requestingAmount: this.loanApplicationData.approvedAmount
                 ? this.loanApplicationData.approvedAmount
                 : this.loanApplicationData.requestingAmount,
-            isAdmin: this.hasCreditSpecialistRole,
+            isAdmin: false,
         };
     }
-    checkCreditSpecilist(data) {
-        if (
-            accessLevel(this.userData.role, 'credit_specialist') &&
-            (data.status === 'InProcess' || data.status === 'Requested')
-        ) {
-            this.getFuelCardCreditSpecialistAccount();
-            this.generateControls();
-            this.hasCreditSpecialistRole = true;
-        }
-    }
+
     changeAmount(val) {
         this.requestingAmount = val;
     }
@@ -142,9 +131,12 @@ export class DetailFuelCardApplicationAdminComponent
                 },
             });
     }
-    declineCredit() {
+    declineCredit(lockoutEndData) {
         this.fuelCardApplicationsService
-            .declineFuelCardApplication(this.loanApplicationData.id)
+            .declineFuelCardApplication(
+                this.loanApplicationData.id,
+                lockoutEndData
+            )
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
@@ -171,67 +163,6 @@ export class DetailFuelCardApplicationAdminComponent
                     this.location.back();
                 },
             });
-    }
-    generateControls() {
-        this.customerDataForm = this.fb.group({
-            'CustomerData.DurationOfActualResidenceLocation': [[]],
-            'CustomerData.DependentsCount': [[]],
-            'CustomerData.EducationDegree': [[]],
-            'CustomerData.MaritalStatus': [[]],
-            // Occupation
-            'CustomerData.Occupation.Income': [[]],
-            'CustomerData.Occupation.WorkAddress': [[]],
-            'CustomerData.Occupation.WorkExperience': [[]],
-            'CustomerData.Occupation.Position': [[]],
-            'CustomerData.Occupation.Type': [[]],
-            'CustomerData.Occupation.Description': [[]],
-            'CustomerData.Occupation.Company': [[]],
-            // SpouseData
-            'CustomerData.SpouseData.Surname': [[]],
-            'CustomerData.SpouseData.PhoneNumber': [[]],
-        });
-        if (this.loanApplicationData.customerData.additionalIncomes) {
-            Object.values(
-                this.loanApplicationData.customerData.additionalIncomes
-            ).map((item, i) =>
-                this.customerDataForm.addControl(
-                    `CustomerData.AdditionalIncomes[${i}].Value.Work`,
-
-                    new FormControl([])
-                )
-            );
-        }
-        if (this.loanApplicationData.customerData.spouseData) {
-            Object.values(
-                this.loanApplicationData.customerData.spouseData.incomes
-            ).map((item, i) =>
-                this.customerDataForm.addControl(
-                    `CustomerData.SpouseData.Incomes[${i}].Value.Work`,
-
-                    new FormControl([])
-                )
-            );
-        }
-        if (this.loanApplicationData.customerData.realEstates) {
-            Object.values(
-                this.loanApplicationData.customerData.realEstates
-            ).map((item, i) =>
-                this.customerDataForm.addControl(
-                    `CustomerData.RealEstates[${i}].Value.Address`,
-                    new FormControl([])
-                )
-            );
-        }
-        if (this.loanApplicationData.customerData.personalEstates) {
-            Object.values(
-                this.loanApplicationData.customerData.personalEstates
-            ).map((item, i) =>
-                this.customerDataForm.addControl(
-                    `CustomerData.PersonalEstates[${i}].Value.Model`,
-                    new FormControl([])
-                )
-            );
-        }
     }
     getFuelCardCreditSpecialistAccount() {
         this.fuelCardApplicationsService

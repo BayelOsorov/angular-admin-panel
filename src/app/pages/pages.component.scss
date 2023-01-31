@@ -1,6 +1,10 @@
 @use '../@theme/styles/themes' as *;
 
 @include nb-install-component() {
+    ::ng-deep input[type='date']::-webkit-calendar-picker-indicator {
+        filter: invert(44%) sepia(79%) saturate(3435%) hue-rotate(185deg)
+            brightness(102%) contrast(107%);
+    }
     ::ng-deep router-outlet + * {
         display: block;
         animation: fade 1s;

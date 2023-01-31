@@ -18,7 +18,6 @@
         *ngIf="loanApplicationData && dataScoring"
         [data]="loanApplicationData"
         [dataScoring]="dataScoring"
-        [form]="customerDataForm"
         (needToEditUserEvent)="needToEditUser()"
         class="detail-block mt-4"
     ></ngx-additional-info>
@@ -30,9 +29,4 @@
         (sendCommentEvent)="sendComment($event)"
         class="detail-block"
     ></ngx-comments>
-    <ngx-credit-application-buttons
-        *ngIf="hasCreditSpecialistRole"
-        (declineEvent)="declineCredit()"
-        (approveEvent)="approveCredit()"
-    ></ngx-credit-application-buttons>
 </nb-card>

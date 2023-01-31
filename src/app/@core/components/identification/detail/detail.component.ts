@@ -29,6 +29,7 @@ import {
     IPersonalData,
 } from '../../../models/identification/identification';
 import { OpenviduComponent } from '../../../openvidu';
+import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
 import { HandleErrorService } from '../../../services/http/handle-error.service';
 import { IdentificationService } from '../../../services/identification/identification.service';
 import {
@@ -54,12 +55,15 @@ import {
 export class IdentificationDetailComponent implements OnInit, OnDestroy {
     @Input() data: IIdentificationDetail;
     @Input() personalData: IPersonalData;
+    @Input() customerInfo;
+
     @ViewChild('openvidu', { static: false }) openvidu: OpenviduComponent;
     @Output() getDataEvent = new EventEmitter();
     toggle = false;
     isNeedToEdit = false;
     error = '';
     identificationAnswers = IdentificationAnswers;
+
     form: FormGroup;
     private destroy$: Subject<void> = new Subject<void>();
 
@@ -212,6 +216,7 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
+
     hideEdit(bool) {
         this.isNeedToEdit = bool;
     }

@@ -5,22 +5,31 @@ import {
     EventEmitter,
     Output,
 } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'ngx-credit-application-buttons',
     templateUrl: './buttons.component.html',
     styleUrls: ['./buttons.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreditApplicationButtonsComponent implements OnInit {
     @Output() approveEvent = new EventEmitter();
     @Output() declineEvent = new EventEmitter();
-    constructor() {}
+    visible = false;
+    form;
+    constructor(private fb: FormBuilder) {}
     approveUser() {
         this.approveEvent.emit();
     }
     declineUser() {
-        this.declineEvent.emit();
+        this.declineEvent.emit(this.form.value);
     }
-    ngOnInit(): void {}
+    onClick(): void {
+        this.visible = true;
+    }
+    ngOnInit(): void {
+        this.form = this.fb.group({
+            lockoutEnd: [null],
+        });
+    }
 }

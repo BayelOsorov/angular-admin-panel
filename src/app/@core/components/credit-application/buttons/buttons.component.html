@@ -9,11 +9,42 @@
     </div>
 
     <div class="col-md-4">
-        <ngx-confirm-buttons
-            (approveEvent)="declineUser()"
+        <ng-template #formPopover>
+            <div *ngIf="visible" class="p-2">
+                <form [formGroup]="form">
+                    <label for="inputLastName" class="label"
+                        >Дата завершения блокировки(можно пропустить)</label
+                    >
+                    <input
+                        type="date"
+                        formControlName="lockoutEnd"
+                        fullWidth
+                        nbInput
+                        placeholder="Дата начала"
+                    />
+                </form>
+
+                <div class="d-flex justify-content-center">
+                    <button
+                        size="small"
+                        nbButton
+                        status="success"
+                        (click)="declineUser()"
+                        ghost
+                    >
+                        Подтвердить
+                    </button>
+                </div>
+            </div>
+        </ng-template>
+        <button
+            class="w-100"
+            nbButton
+            (click)="onClick()"
             status="danger"
-            title="Отклонить"
+            [nbPopover]="formPopover"
         >
-        </ngx-confirm-buttons>
+            Отклонить
+        </button>
     </div>
 </div>

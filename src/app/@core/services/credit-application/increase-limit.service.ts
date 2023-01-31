@@ -46,11 +46,11 @@ export class IncreaseLimitApplicationService {
             data
         );
     }
-    declineCreditApplication(id) {
+    declineCreditApplication(id, data) {
         return this.http.patch(
             environment.creditApplicationUrl +
                 `/operator/api/v1/ucl-requests/${id}/decline`,
-            { comment: 'decline' }
+            data
         );
     }
     needToEditCreditApplication(id, data) {

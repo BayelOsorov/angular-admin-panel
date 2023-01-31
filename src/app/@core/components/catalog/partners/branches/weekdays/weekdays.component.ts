@@ -16,6 +16,11 @@ export class WeekdaysComponent implements OnInit {
     @Input() submitted = false;
 
     constructor() {}
-
+    onChecked() {
+        this.workingHourStart.setValue('');
+        this.workingHourEnd.setValue('');
+        this.lunchHourStart.setValue('');
+        this.lunchHourEnd.setValue('');
+    }
     ngOnInit(): void {}
 }

@@ -50,31 +50,72 @@ export class PagesComponent {
                 'credit_specialist_admin',
             ]),
             children: [
+                // ! For Admins
                 {
                     title: '0-0-3',
-                    link: '/credit-application/0-0-3',
+                    link: '/credit-application/0-0-3/get',
+                    children: !this.getRole([
+                        'admin',
+                        'credit_specialist_admin',
+                    ]) && [
+                        {
+                            title: 'Список',
+                            link: '/credit-application/0-0-3/list',
+                        },
+                        {
+                            title: 'Получение заявки',
+                            link: '/credit-application/0-0-3/get',
+                        },
+                    ],
                 },
                 {
                     title: 'Увеличение лимита',
-                    link: '/credit-application/increase-limit',
+                    link: '/credit-application/increase-limit/get',
+                    children: !this.getRole([
+                        'admin',
+                        'credit_specialist_admin',
+                    ]) && [
+                        {
+                            title: 'Список',
+                            link: '/credit-application/increase-limit/list',
+                        },
+                        {
+                            title: 'Получение заявки',
+                            link: '/credit-application/increase-limit/get',
+                        },
+                    ],
                 },
-                // {
-                //     title: '0-0-6',
-                //     link: '/credit-application/0-0-6',
-                // },
-                // {
-                //     title: '0-0-6',
-                //     link: '/credit-application/0-0-6',
-                // },
-                // {
-                //     title: '0-0-12',
-                //     link: '/credit-application/0-0-12',
-                // },
+
                 {
                     title: 'Топливная карта',
-                    link: '/credit-application/fuel-card',
+                    link: '/credit-application/fuel-card/get',
+                    children: !this.getRole([
+                        'admin',
+                        'credit_specialist_admin',
+                    ]) && [
+                        {
+                            title: 'Список',
+                            link: '/credit-application/fuel-card/list',
+                        },
+                        {
+                            title: 'Получение заявки',
+                            link: '/credit-application/fuel-card/get',
+                        },
+                    ],
                 },
             ],
+            // {
+            //     title: '0-0-6',
+            //     link: '/credit-application/0-0-6',
+            // },
+            // {
+            //     title: '0-0-6',
+            //     link: '/credit-application/0-0-6',
+            // },
+            // {
+            //     title: '0-0-12',
+            //     link: '/credit-application/0-0-12',
+            // },
         },
         {
             title: 'Сотрудники',
@@ -103,6 +144,22 @@ export class PagesComponent {
                 {
                     title: 'Идентификация партнеров',
                     link: '/catalog/partner-identification',
+                },
+            ],
+        },
+        {
+            title: 'Новости',
+            icon: 'calendar-outline',
+            hidden: this.getRole(['admin', 'manager', 'underwriter']),
+
+            children: [
+                {
+                    title: 'Новости для партнера',
+                    link: '/catalog/partner-news',
+                },
+                {
+                    title: 'Новости для клиента',
+                    link: '/catalog/news',
                 },
             ],
         },
@@ -151,14 +208,7 @@ export class PagesComponent {
                     title: 'Акции и Промо',
                     link: '/catalog/partner-proms',
                 },
-                {
-                    title: 'Новости для партнера',
-                    link: '/catalog/partner-news',
-                },
-                {
-                    title: 'Новости',
-                    link: '/catalog/news',
-                },
+
                 {
                     title: 'Отзывы',
                     link: '/catalog/partner-feedbacks',
