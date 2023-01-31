@@ -16,12 +16,12 @@
         type="text"
         fullWidth
         nbInput
+        [maxlength]="maxLength"
         [value]="value"
         [(ngModel)]="value"
         (ngModelChange)="onChange($event)"
-        (keydown)="handlePhone($event)"
         id="exampleInputEmail1"
-        placeholder="555 55 55 55"
+        placeholder="555555555"
         [status]="
         isRequired && submitted && control.errors?.['required']
         ? 'danger'
@@ -29,7 +29,7 @@
         "
     />
 
-    <!--  [(ngModel)]="value"   maxlength="12"-->
+    <!--  [(ngModel)]="value"  (keydown)="handlePhone($event)" maxlength="12"-->
 </div>
 
 <!-- [formControl]="control" -->

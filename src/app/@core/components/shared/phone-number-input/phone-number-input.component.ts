@@ -5,20 +5,13 @@ import {
     Input,
     ViewChild,
     ElementRef,
-    AfterViewInit,
 } from '@angular/core';
-import {
-    AbstractControl,
-    FormControl,
-    PatternValidator,
-    Validators,
-} from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'ngx-phone-number-input',
     templateUrl: './phone-number-input.component.html',
     styleUrls: ['./phone-number-input.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhoneNumberInputComponent implements OnInit {
     @Input() control: AbstractControl = new FormControl();
@@ -26,38 +19,39 @@ export class PhoneNumberInputComponent implements OnInit {
     @Input() isRequired = true;
     @ViewChild('input') input: ElementRef;
     value = '';
+    maxLength = 20;
     constructor() {}
-    handlePhone(num) {
-        const txt = num.key;
-        if ((txt.length === 12 || num.which === 32) && num.which !== 8) {
-            num.preventDefault();
-        }
 
-        if (
-            (this.control.value.length === 3 ||
-                this.control.value.length === 6 ||
-                this.control.value.length === 9) &&
-            num.which !== 8
-        ) {
-            this.value = this.control.value + ' ';
-        }
-    }
     onChange(val) {
-        const newVal = val.replaceAll('-', ' ').replace('+996', '');
+        const newVal = val
+            .replace(/^0+/, '')
+            .replaceAll('-', '')
+            .replaceAll('.', '')
+            .replace('+996', '')
+            .replaceAll(' ', '');
 
-        this.value = newVal;
-        this.control.setValue(newVal);
-        console.log(val.replaceAll('-', ''), val.replace('+996', ''));
-
+        if (newVal.length === 9) {
+            const phone = this.numberWithSpaces(newVal, '### ## ## ##');
+            this.value = phone;
+            this.control.setValue(phone);
+            this.maxLength = 12;
+        }
         if (this.control.value.length === 12) {
             this.control.patchValue(
                 '+996' + this.control.value.replaceAll(' ', '')
             );
         }
     }
-    onPaste(val) {
-        console.log(val);
+    numberWithSpaces(value, pattern) {
+        let i = 0;
+        const phone = value.toString().replace(/\D/gm, '');
+        if (phone.length < 9) {
+            return phone;
+        }
+
+        return pattern.replace(/#/g, (_) => phone[i++]);
     }
+
     ngOnInit(): void {
         this.control.valueChanges.subscribe((val: string) => {
             if (val.includes('+996') && !this.value) {
