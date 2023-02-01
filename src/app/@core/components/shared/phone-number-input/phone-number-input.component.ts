@@ -19,7 +19,7 @@ export class PhoneNumberInputComponent implements OnInit {
     @Input() isRequired = true;
     @ViewChild('input') input: ElementRef;
     value = '';
-    maxLength = 20;
+    maxLength = 9;
     constructor() {}
 
     onChange(val) {
@@ -28,18 +28,19 @@ export class PhoneNumberInputComponent implements OnInit {
             .replaceAll('-', '')
             .replaceAll('.', '')
             .replace('+996', '')
-            .replaceAll(' ', '');
+            .replaceAll(' ', '')
+            .replaceAll('‒', '');
 
         if (newVal.length === 9) {
             const phone = this.numberWithSpaces(newVal, '### ## ## ##');
             this.value = phone;
-            this.control.setValue(phone);
+            this.control.setValue(newVal);
             this.maxLength = 12;
+        } else {
+            this.maxLength = 20;
         }
-        if (this.control.value.length === 12) {
-            this.control.patchValue(
-                '+996' + this.control.value.replaceAll(' ', '')
-            );
+        if (this.control.value.length === 9) {
+            this.control.patchValue('+996' + this.control.value);
         }
     }
     numberWithSpaces(value, pattern) {
@@ -55,7 +56,7 @@ export class PhoneNumberInputComponent implements OnInit {
     ngOnInit(): void {
         this.control.valueChanges.subscribe((val: string) => {
             if (val.includes('+996') && !this.value) {
-                this.value = val.replace('+996', '');
+                this.onChange(val);
                 this.input.nativeElement.focus();
                 this.input.nativeElement.blur();
             }
