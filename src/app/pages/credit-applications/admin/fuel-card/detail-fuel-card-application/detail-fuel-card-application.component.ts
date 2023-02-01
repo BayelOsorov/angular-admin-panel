@@ -183,9 +183,7 @@ export class DetailFuelCardApplicationAdminComponent
             .createFuelCardSpecialistAccount()
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: (data) => {
-                    console.log(data);
-                },
+                next: (data) => {},
             });
     }
     ngOnInit(): void {

@@ -71,7 +71,6 @@ export class ActionsPartnerNewsComponent implements OnInit, OnDestroy {
                 .subscribe({
                     next: (data: any) => {
                         this.partnerNewsData = data;
-                        console.log(data);
 
                         this.form.controls['title'].setValue(data.title);
                         this.form.controls['shortContent'].setValue(

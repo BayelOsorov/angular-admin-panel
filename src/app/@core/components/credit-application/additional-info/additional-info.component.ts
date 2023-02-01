@@ -66,6 +66,12 @@ export class AdditionalInfoComponent implements OnInit {
             (item) => item.value.toLowerCase() === this.work.$type.toLowerCase()
         )?.text;
     }
+    translateWorkAddress(address) {
+        const region = address.split(',')[0];
+        return (
+            this.getResidenceLoc(region) + ',' + address.split(',').slice(1, -1)
+        );
+    }
     getWorkExp(type) {
         return workExperience.find((item) => item.value === type).text;
     }

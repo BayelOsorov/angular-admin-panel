@@ -54,12 +54,12 @@ const EducationEnum = [
     { value: 'SpecializedSecondary', text: 'Среднее-специальное' },
 ];
 const workExperience = [
-    { value: 'OneOrLess', text: 'Один или менее' },
-    { value: 'TwoOrThree', text: 'Два или три' },
-    { value: 'FourOrFive', text: 'Четыре или пять' },
-    { value: 'SixOrEight', text: 'Шесть или восемь' },
-    { value: 'NinOrTen', text: 'Девять или десять' },
-    { value: 'ElevenAndMore', text: 'Одиннацать и более' },
+    { value: 'OneOrLess', text: '1 или менее' },
+    { value: 'TwoOrThree', text: '2 или 3' },
+    { value: 'FourOrFive', text: '4 или 5' },
+    { value: 'SixOrEight', text: '6 или 8' },
+    { value: 'NinOrTen', text: '9 или 10' },
+    { value: 'ElevenAndMore', text: '11 и более' },
 ];
 
 const clientHistoryTypeValue = [
@@ -88,9 +88,9 @@ const dependentsCount = [
 
 const maritalStatus = [
     { value: 'Single', text: 'Не замужем/ не женат' },
-    { value: 'Married', text: 'Женатый' },
+    { value: 'Married', text: 'Женат/ Замужем' },
     { value: 'CivilMarriage', text: 'Гражданский брак' },
-    { value: 'Widow', text: 'Вдова' },
+    { value: 'Widow', text: 'Вдовец/ Вдова' },
     { value: 'Divorced', text: 'В разводе' },
 ];
 const realEstateItemsEnum = [

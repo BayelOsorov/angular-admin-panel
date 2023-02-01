@@ -92,9 +92,7 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
             .createCreditSpecialistAccount()
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: (data) => {
-                    console.log(data);
-                },
+                next: (data) => {},
             });
     }
 
@@ -117,9 +115,7 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
             .createFuelCardSpecialistAccount()
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: (data) => {
-                    console.log(data);
-                },
+                next: (data) => {},
             });
     }
     getApplication() {

@@ -59,8 +59,6 @@ export class SupporCenterCategoriesListComponent implements OnInit, OnDestroy {
             });
     }
     createCategory(data) {
-        console.log(data);
-
         this.supportService
             .createSupportCenterCategory(data)
             .pipe(takeUntil(this.destroy$))

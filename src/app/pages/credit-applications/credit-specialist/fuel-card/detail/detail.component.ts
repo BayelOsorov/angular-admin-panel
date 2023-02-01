@@ -85,7 +85,6 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
-                    console.log(data);
                     this.kibData = data;
                 },
             });

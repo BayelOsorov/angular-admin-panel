@@ -165,7 +165,7 @@
                     </tr>
                     <tr>
                         <td>Адрес</td>
-                        <td>{{ work.workAddress }}</td>
+                        <td>{{ translateWorkAddress(work.workAddress) }}</td>
                     </tr>
                 </table>
                 <nb-accordion
@@ -236,16 +236,17 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <tr>
-                    <td>Работа</td>
-                    <td>Ежемесячный доход</td>
-                </tr>
                 <ng-container
                     *ngFor="
                         let i of objectValues(additionalIncomes);
                         let idx = index
                     "
                 >
+                    <tr>
+                        <td>Работа</td>
+                        <td>Ежемесячный доход</td>
+                    </tr>
+
                     <tr>
                         <td>{{ i.work }}</td>
                         <td>{{ i.value }}</td>
@@ -259,7 +260,6 @@
                                         '].Value.Work'
                                 ])
                             "
-                            [title]="i.work"
                             [placeholder]="'Введите'"
                         ></ngx-credit-application-need-to-edit>
                     </th>
@@ -312,16 +312,17 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <tr>
-                    <td>Работа</td>
-                    <td>Ежемесячный доход</td>
-                </tr>
                 <ng-container
                     *ngFor="
                         let i of objectValues(spouseData.incomes);
                         let idx = index
                     "
                 >
+                    <tr>
+                        <td>Работа</td>
+                        <td>Ежемесячный доход</td>
+                    </tr>
+
                     <tr>
                         <td>{{ i.work }}</td>
                         <td>{{ i.value }}</td>
@@ -335,7 +336,6 @@
                                         '].Value.Work'
                                 ])
                             "
-                            [title]="'Работа'"
                             [placeholder]="'Введите'"
                         ></ngx-credit-application-need-to-edit>
                     </th>
@@ -357,18 +357,19 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <tr>
-                    <td>Тип</td>
-                    <td>Марка</td>
-                    <td>Модель</td>
-                    <td>Год выпуска</td>
-                </tr>
                 <ng-container
                     *ngFor="
                         let i of objectValues(personalEstates);
                         let idx = index
                     "
                 >
+                    <tr>
+                        <td>Тип</td>
+                        <td>Марка</td>
+                        <td>Модель</td>
+                        <td>Год выпуска</td>
+                    </tr>
+
                     <tr>
                         <td>{{ getPersonalEstateType(i.type) }}</td>
                         <td>{{ i.brand }}</td>
@@ -384,7 +385,6 @@
                                         '].Value.Model'
                                 ])
                             "
-                            [title]="getPersonalEstateType(i.type)"
                             [placeholder]="'Введите'"
                         ></ngx-credit-application-need-to-edit>
                     </th>
@@ -405,14 +405,14 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <tr>
-                    <td>Тип</td>
-                    <td>Адрес</td>
-                </tr>
-
                 <ng-container
                     *ngFor="let i of objectValues(realEstates); let idx = index"
                 >
+                    <tr>
+                        <td>Тип</td>
+                        <td>Адрес</td>
+                    </tr>
+
                     <tr>
                         <td>{{ getRealEstateType(i.type) }}</td>
                         <td>{{ i.address }}</td>
@@ -426,16 +426,11 @@
                                         '].Value.Address'
                                 ])
                             "
-                            [title]="getRealEstateType(i.type)"
                             [placeholder]="'Введите'"
                         ></ngx-credit-application-need-to-edit>
                     </th>
                 </ng-container>
             </table>
-            <ng-container
-                *ngFor="let i of objectValues(realEstates); let idx = index"
-            >
-            </ng-container>
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
