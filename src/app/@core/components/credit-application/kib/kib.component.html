@@ -12,12 +12,13 @@
                                 class="d-flex justify-content-center text-center"
                             >
                                 <p class="col-md-4">
-                                    Одобрил: Фамилия Имя Отчество
+                                    Одобрил:
+                                    {{ item.data.ApprovedOperatorFullName }}
                                 </p>
                                 <p class="col-md-4">
                                     Дата:
                                     {{
-                                        item.createdAt
+                                        item.data.ApprovedAt
                                             | date : 'dd.MM.yyyy, hh:mm'
                                     }}
                                 </p>
