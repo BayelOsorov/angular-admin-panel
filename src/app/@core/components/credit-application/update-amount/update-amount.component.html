@@ -1,7 +1,7 @@
 <div class="mt-5" *ngIf="data">
     <nz-slider
         nzDots
-        [nzDisabled]="!data.isAdmin"
+        [nzDisabled]="data.isAdmin"
         [nzMarks]="marks"
         [nzStep]="1000"
         [nzMin]="data.min"
@@ -10,7 +10,7 @@
         [ngModel]="requestingAmount"
     ></nz-slider>
     <button
-        *ngIf="data.isAdmin"
+        *ngIf="!data.isAdmin"
         [disabled]="btnDisabled || requestingAmount === data?.requestingAmount"
         (click)="updateAmount()"
         class="d-flex mx-auto"

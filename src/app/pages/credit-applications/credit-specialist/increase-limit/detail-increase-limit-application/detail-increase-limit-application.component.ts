@@ -127,13 +127,14 @@ export class DetailIncreaseLimitApplicationComponent
             .subscribe({
                 next: (data: [any]) => {
                     this.kibData = data;
-                    data.map((item) => {
+
+                    data.forEach((item) => {
                         if (item.productCode === 'Charmander') {
                             this.requestingAmountData = {
                                 max: this.loanApplicationData.requestingAmount,
                                 requestingAmount:
                                     this.loanApplicationData.requestingAmount,
-                                isAdmin: true,
+                                isAdmin: false,
                                 min: item.limit,
                             };
                         }
@@ -150,7 +151,9 @@ export class DetailIncreaseLimitApplicationComponent
             .sendCommentCreditApplication(this.loanApplicationData.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: () => {},
+                next: () => {
+                    this.loanApplication();
+                },
             });
     }
 

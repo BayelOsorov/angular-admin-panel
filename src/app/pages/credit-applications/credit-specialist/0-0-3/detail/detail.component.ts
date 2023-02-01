@@ -107,7 +107,9 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             .sendCommentCreditApplication(this.loanApplicationData.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: () => {},
+                next: () => {
+                    this.loanApplication();
+                },
             });
     }
     approveCredit() {
@@ -163,7 +165,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
             min: 5000,
             max: this.loanApplicationData.requestingAmount,
             requestingAmount: this.loanApplicationData.requestingAmount,
-            isAdmin: true,
+            isAdmin: false,
         };
     }
     generateControls() {

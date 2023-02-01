@@ -63,8 +63,6 @@ export class UpdateAmountComponent implements OnInit, OnChanges {
     }
     ngOnChanges(): void {
         if (this.data) {
-            console.log(this.data);
-
             this.requestingAmount = this.data.requestingAmount;
         }
     }

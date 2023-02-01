@@ -29,6 +29,7 @@ export class DetailCreditApplicationAdminComponent
     dataScoring: IScoringCreditApplication;
     personalData: IPersonalData;
     kibData;
+    loanId;
     customerData;
     requestingAmountData;
     requestingAmount;
@@ -100,7 +101,9 @@ export class DetailCreditApplicationAdminComponent
             .sendCommentCreditApplication(this.loanApplicationData.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: () => {},
+                next: () => {
+                    this.loanApplication(this.loanId);
+                },
             });
     }
 
@@ -112,7 +115,7 @@ export class DetailCreditApplicationAdminComponent
             requestingAmount: this.loanApplicationData.approvedAmount
                 ? this.loanApplicationData.approvedAmount
                 : this.loanApplicationData.requestingAmount,
-            isAdmin: false,
+            isAdmin: true,
         };
     }
 
@@ -191,7 +194,8 @@ export class DetailCreditApplicationAdminComponent
     }
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
-            this.loanApplication(params['id']);
+            this.loanId = params['id'];
+            this.loanApplication(this.loanId);
         });
         this.userData = this.authService.getUserData();
     }

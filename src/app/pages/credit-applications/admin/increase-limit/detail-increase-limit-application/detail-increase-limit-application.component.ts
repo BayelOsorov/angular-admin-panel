@@ -25,6 +25,7 @@ export class DetailIncreaseLimitApplicationAdminComponent
     personalData: IPersonalData;
     kibData;
     customerData;
+    loanId;
     requestingAmountData;
     requestingAmount;
     private destroy$: Subject<void> = new Subject<void>();
@@ -79,7 +80,7 @@ export class DetailIncreaseLimitApplicationAdminComponent
             .subscribe({
                 next: (data: [any]) => {
                     this.kibData = data;
-                    data.map((item) => {
+                    data.forEach((item) => {
                         if (item.productCode === 'Charmander') {
                             this.requestingAmountData = {
                                 max: this.loanApplicationData.requestingAmount,
@@ -101,7 +102,9 @@ export class DetailIncreaseLimitApplicationAdminComponent
             .sendCommentCreditApplication(this.loanApplicationData.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: () => {},
+                next: () => {
+                    this.loanApplication(this.loanId);
+                },
             });
     }
     changeAmount(val) {
@@ -109,7 +112,8 @@ export class DetailIncreaseLimitApplicationAdminComponent
     }
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
-            this.loanApplication(params['id']);
+            this.loanId = params['id'];
+            this.loanApplication(this.loanId);
         });
     }
     ngOnDestroy() {

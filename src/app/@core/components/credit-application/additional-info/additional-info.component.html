@@ -98,7 +98,7 @@
                     </tr>
                     <tr>
                         <td>Адрес</td>
-                        <td>{{ work.workAddress }}</td>
+                        <td>{{ translateAddress(work.workAddress) }}</td>
                     </tr>
                 </table>
                 <nb-accordion
@@ -165,7 +165,7 @@
                     </tr>
                     <tr>
                         <td>Адрес</td>
-                        <td>{{ translateWorkAddress(work.workAddress) }}</td>
+                        <td>{{ translateAddress(work.workAddress) }}</td>
                     </tr>
                 </table>
                 <nb-accordion
@@ -236,7 +236,8 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <ng-container
+                <div
+                    [class]="!form && 'mt-3'"
                     *ngFor="
                         let i of objectValues(additionalIncomes);
                         let idx = index
@@ -263,7 +264,7 @@
                             [placeholder]="'Введите'"
                         ></ngx-credit-application-need-to-edit>
                     </th>
-                </ng-container>
+                </div>
             </table>
         </nb-accordion-item-body>
     </nb-accordion-item>
@@ -305,14 +306,19 @@
         </nb-accordion-item-body>
     </nb-accordion-item>
 </nb-accordion>
-<nb-accordion *ngIf="spouseData" multi class="mt-4">
+<nb-accordion
+    *ngIf="spouseData && objectValues(spouseData.incomes).length > 0"
+    multi
+    class="mt-4"
+>
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             Дополнительный доход супруга ("и")
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <ng-container
+                <div
+                    [class]="!form && 'mt-3'"
                     *ngFor="
                         let i of objectValues(spouseData.incomes);
                         let idx = index
@@ -339,7 +345,7 @@
                             [placeholder]="'Введите'"
                         ></ngx-credit-application-need-to-edit>
                     </th>
-                </ng-container>
+                </div>
             </table>
         </nb-accordion-item-body>
     </nb-accordion-item>
@@ -357,7 +363,8 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <ng-container
+                <div
+                    [class]="!form && 'mt-3'"
                     *ngFor="
                         let i of objectValues(personalEstates);
                         let idx = index
@@ -388,7 +395,7 @@
                             [placeholder]="'Введите'"
                         ></ngx-credit-application-need-to-edit>
                     </th>
-                </ng-container>
+                </div>
             </table>
         </nb-accordion-item-body>
     </nb-accordion-item>
@@ -405,7 +412,8 @@
         </nb-accordion-item-header>
         <nb-accordion-item-body>
             <table class="w-100">
-                <ng-container
+                <div
+                    [class]="!form && 'mt-3'"
                     *ngFor="let i of objectValues(realEstates); let idx = index"
                 >
                     <tr>
@@ -429,7 +437,7 @@
                             [placeholder]="'Введите'"
                         ></ngx-credit-application-need-to-edit>
                     </th>
-                </ng-container>
+                </div>
             </table>
         </nb-accordion-item-body>
     </nb-accordion-item>

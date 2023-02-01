@@ -33,6 +33,7 @@ export class DetailFuelCardApplicationAdminComponent
     customerData;
     requestingAmountData;
     requestingAmount;
+    loanId;
     customerDataForm: FormGroup;
     userData;
     private destroy$: Subject<void> = new Subject<void>();
@@ -98,7 +99,9 @@ export class DetailFuelCardApplicationAdminComponent
             .sendCommentFuelCardApplication(this.loanApplicationData.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: () => {},
+                next: () => {
+                    this.loanApplication(this.loanId);
+                },
             });
     }
     getRequestingAmount() {
@@ -108,7 +111,7 @@ export class DetailFuelCardApplicationAdminComponent
             requestingAmount: this.loanApplicationData.approvedAmount
                 ? this.loanApplicationData.approvedAmount
                 : this.loanApplicationData.requestingAmount,
-            isAdmin: false,
+            isAdmin: true,
         };
     }
 
@@ -188,7 +191,8 @@ export class DetailFuelCardApplicationAdminComponent
     }
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
-            this.loanApplication(params['id']);
+            this.loanId = params['id'];
+            this.loanApplication(this.loanId);
         });
         this.userData = this.authService.getUserData();
     }
