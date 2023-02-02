@@ -5,6 +5,7 @@ import {
     Input,
     ChangeDetectorRef,
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Http2ServerRequest } from 'http2';
 import { AuthService } from '../../../services/auth/auth.service';
 import { OldBackendService } from '../../../services/old-backend/old-backend.service';
@@ -25,7 +26,8 @@ export class LightboxImgComponent implements OnInit {
     constructor(
         private backendService: OldBackendService,
         private authService: AuthService,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private sanitizer: DomSanitizer
     ) {}
     openImage() {
         this.open = true;
@@ -37,9 +39,13 @@ export class LightboxImgComponent implements OnInit {
         })
             .then((res) => res.blob())
             .then((myBlob) => {
+                const urlCreator = window.URL || window.webkitURL;
+                const imageUrl = urlCreator.createObjectURL(myBlob);
                 this.open = false;
                 this.cdr.detectChanges();
-                window.open(window.URL.createObjectURL(myBlob));
+                // window.location.assign(imageUrl);
+
+                window.open(imageUrl, '_blank');
             });
     }
     getImageBlob() {
