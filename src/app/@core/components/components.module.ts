@@ -17,6 +17,7 @@ import {
     NbListModule,
     NbPopoverModule,
     NbSelectModule,
+    NbSpinnerModule,
     NbStepperModule,
     NbTabsetModule,
     NbTimepickerModule,
@@ -106,6 +107,7 @@ import { NbMomentDateModule } from '@nebular/moment';
 import { ListApplicationsComponent } from './credit-application/list-applications/list-applications.component';
 import { OrderByPipe } from './shared/order-by-pipe/order-by.pipe';
 import { CreateSellerComponent } from './staff/create-seller/create-seller.component';
+import { GlobalLoaderComponent } from './shared/global-loader/global-loader.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -141,6 +143,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         NzResultModule,
         NbCheckboxModule,
         NbMomentDateModule,
+        NbSpinnerModule,
     ],
     declarations: [
         CreateStaffModalComponent,
@@ -203,6 +206,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         ListApplicationsComponent,
         OrderByPipe,
         CreateSellerComponent,
+        GlobalLoaderComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -258,6 +262,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         ListApplicationsComponent,
         OrderByPipe,
         CreateSellerComponent,
+        GlobalLoaderComponent,
     ],
 })
 export class ComponentsModule {}

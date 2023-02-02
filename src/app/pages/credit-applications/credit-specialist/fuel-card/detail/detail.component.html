@@ -1,3 +1,5 @@
+<ngx-global-loader></ngx-global-loader>
+
 <nb-card class="container" *ngIf="loanApplicationData && dataScoring">
     <ngx-credit-application-detail-info
         [data]="loanApplicationData"
@@ -14,6 +16,7 @@
         [data]="loanApplicationData"
         [dataScoring]="dataScoring"
         [form]="customerData"
+        [customerData]="customerInfo"
         (needToEditUserEvent)="needToEditUser()"
         class="detail-block mt-4"
     ></ngx-additional-info>

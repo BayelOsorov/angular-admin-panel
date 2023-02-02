@@ -63,6 +63,7 @@ export class TableComponent implements OnInit, AfterContentChecked {
                 perPage: 20,
                 display: true,
             },
+
             // noDataMessage: 'Список пуст!',
             columns: this.tableColumns,
         };

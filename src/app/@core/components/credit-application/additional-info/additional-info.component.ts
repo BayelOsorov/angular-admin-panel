@@ -31,6 +31,8 @@ export class AdditionalInfoComponent implements OnInit {
     @Output() needToEditUserEvent = new EventEmitter();
     @Input() data;
     @Input() dataScoring;
+    @Input() customerData;
+
     @Input() form;
 
     Math: any;

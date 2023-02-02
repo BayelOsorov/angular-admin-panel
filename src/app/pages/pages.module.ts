@@ -85,6 +85,8 @@ import { ListSalespeopleComponent } from './staff/salespeople/list-salespeople/l
 import { DetailSalespeopleComponent } from './staff/salespeople/detail-salespeople/detail-salespeople.component';
 import { ListPartnerNewsComponent } from './catalog/partner-news/list-partner-news/list-partner-news.component';
 import { ActionsPartnerNewsComponent } from './catalog/partner-news/actions-partner-news/actions-partner-news.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoaderInterceptor } from '../@core/interceptors/loader-interceptor';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;

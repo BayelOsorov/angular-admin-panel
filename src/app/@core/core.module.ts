@@ -19,6 +19,7 @@ import { HttpErrorInterceptor } from './interceptors/error.interceptor';
 import { OpenviduComponent } from './openvidu/openvidu.component';
 import { UserVideoComponent } from './openvidu/user-video.component';
 import { OpenViduVideoComponent } from './openvidu/ov-video.component';
+import { LoaderInterceptor } from './interceptors/loader-interceptor';
 
 const socialLinks = [
     {
@@ -61,6 +62,11 @@ export const NB_CORE_PROVIDERS = [
     {
         provide: HTTP_INTERCEPTORS,
         useClass: HttpErrorInterceptor,
+        multi: true,
+    },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: LoaderInterceptor,
         multi: true,
     },
     // ...DATA_SERVICES,
