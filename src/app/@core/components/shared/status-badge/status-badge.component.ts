@@ -28,7 +28,7 @@ export class StatusBadgeComponent implements ViewCell, OnInit {
             case 'PhotosApproved':
                 return 'primary';
             case 'Canceled':
-                return 'secondary';
+                return 'control';
             case 'VideoIdentificationRequested':
                 return 'primary';
             case 'InProcess':
@@ -36,9 +36,15 @@ export class StatusBadgeComponent implements ViewCell, OnInit {
             case 'EditRequired':
                 return 'warning';
             case 'Timeout':
-                return 'secondary';
+                return 'control';
             case 'Requested':
                 return 'primary';
+            case 'Online':
+                return 'primary';
+            case 'Offline':
+                return 'success';
+            case 'None':
+                return 'control';
             default:
                 return 'primary';
         }

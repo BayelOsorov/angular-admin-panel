@@ -60,6 +60,18 @@ const trEngToRusOwnerST = (value) => {
             return value;
     }
 };
+const translateIdentificationLevels = (status) => {
+    switch (status) {
+        case 'Online':
+            return 'Онлайн';
+        case 'Offline':
+            return 'Оффлайн';
+        case 'None':
+            return 'Не идентифицирован';
+        default:
+            break;
+    }
+};
 const downloadFile = (fileURL, fileName) => {
     // for non-IE
     const save = document.createElement('a');
@@ -92,4 +104,5 @@ export {
     cleanEmptyKeyInObj,
     trEngToRusOwnerST,
     downloadFile,
+    translateIdentificationLevels,
 };

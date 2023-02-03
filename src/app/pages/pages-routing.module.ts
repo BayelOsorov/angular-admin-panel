@@ -54,6 +54,8 @@ import { ListSalespeopleComponent } from './staff/salespeople/list-salespeople/l
 import { ListPartnerNewsComponent } from './catalog/partner-news/list-partner-news/list-partner-news.component';
 import { ActionsPartnerNewsComponent } from './catalog/partner-news/actions-partner-news/actions-partner-news.component';
 import { DetailSalespeopleComponent } from './staff/salespeople/detail-salespeople/detail-salespeople.component';
+import { DetailUserComponent } from './users/detail-user/detail-user.component';
+import { ListUsersComponent } from './users/list-users/list-users.component';
 
 const routes: Routes = [
     {
@@ -85,6 +87,22 @@ const routes: Routes = [
                     {
                         path: 'detail/:id',
                         component: DetailSalespeopleComponent,
+                    },
+                ],
+            },
+            // ! Users
+            {
+                path: 'users',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin', 'credit_specialist', 'collector'] },
+                children: [
+                    {
+                        path: 'list',
+                        component: ListUsersComponent,
+                    },
+                    {
+                        path: 'detail/:id',
+                        component: DetailUserComponent,
                     },
                 ],
             },

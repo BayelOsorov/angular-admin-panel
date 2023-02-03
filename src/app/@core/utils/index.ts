@@ -10,6 +10,7 @@ import {
     cleanEmptyKeyInObj,
     trEngToRusOwnerST,
     downloadFile,
+    translateIdentificationLevels,
 } from './helpers';
 import {
     Position,
@@ -38,6 +39,7 @@ export {
     trEngToRusOwnerST,
     cleanEmptyKeyInObj,
     downloadFile,
+    translateIdentificationLevels,
     Position,
     placeOfWorkType,
     entrepreneurTypeEnum,

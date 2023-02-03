@@ -17,7 +17,7 @@ export class IncreaseLimitApplicationService {
     getCreditApplication() {
         return this.http.get<ICreditApplicationDetail>(
             environment.creditApplicationUrl +
-                `/operator/api/v1/ucl-requests/next-ocl-request`
+                `/operator/api/v1/ucl-requests/next-ucl-request`
         );
     }
     getListCreditApplication(page, filter) {

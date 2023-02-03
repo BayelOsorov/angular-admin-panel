@@ -1,0 +1,133 @@
+<nb-card>
+    <nb-card-header>Батыров Руслан Игревич</nb-card-header>
+    <nb-card-body>
+        <nb-tabset>
+            <nb-tab tabTitle="Персональные данные">
+                <div class="" *ngIf="customerData">
+                    <table class="w-100">
+                        <tr>
+                            <td>ПИН</td>
+                            <td>
+                                {{ customerData.identificationInformation.pin }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Имя</td>
+                            <td>
+                                {{
+                                    customerData.identificationInformation.name
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Фамилия</td>
+                            <td>
+                                {{
+                                    customerData.identificationInformation
+                                        .surname
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Отчество</td>
+                            <td>
+                                {{
+                                    customerData.identificationInformation
+                                        .patronymic
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Пол</td>
+                            <td>
+                                {{
+                                    getGender(
+                                        customerData.identificationInformation
+                                            .gender
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Дата рождения</td>
+                            <td>
+                                {{
+                                    customerData.identificationInformation
+                                        .birthDate | date : 'dd.MM.yyyy'
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Семейное положение</td>
+                            <td>
+                                {{
+                                    getMaritalStatus(
+                                        customerData.identificationInformation
+                                            .maritalStatus
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Адрес прописки</td>
+                            <td>
+                                {{
+                                    getResidenceLoc(
+                                        customerData.identificationInformation
+                                            .residenceAddress.region
+                                    ) +
+                                        ',' +
+                                        customerData.identificationInformation
+                                            .residenceAddress.address
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Паспорт</td>
+                            <td>
+                                {{
+                                    customerData.identificationInformation
+                                        .passport.documentType +
+                                        ' ' +
+                                        customerData.identificationInformation
+                                            .passport.documentNumber
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Дата выдачи</td>
+                            <td>
+                                {{
+                                    customerData.identificationInformation
+                                        .passport.dateOfIssue
+                                        | date : 'dd.MM.yyyy'
+                                }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Кем выдан</td>
+                            <td>
+                                {{
+                                    customerData.identificationInformation
+                                        .passport.authority
+                                }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Срок действия паспорта</td>
+                            <td>
+                                {{
+                                    customerData.identificationInformation
+                                        .passport.dateOfExpiry
+                                        | date : 'dd.MM.yyyy'
+                                }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </nb-tab>
+            <nb-tab tabTitle="Идентификация"> </nb-tab>
+        </nb-tabset>
+    </nb-card-body>
+</nb-card>

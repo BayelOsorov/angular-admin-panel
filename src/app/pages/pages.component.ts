@@ -41,6 +41,17 @@ export class PagesComponent {
             ],
         },
         {
+            title: 'Пользователи',
+            icon: 'people',
+            hidden: this.getRole(['admin', 'credit_specialist', 'collector']),
+            children: [
+                {
+                    title: 'Список пользователей',
+                    link: '/users/list',
+                },
+            ],
+        },
+        {
             title: 'Заявки на кредит',
             icon: 'credit-card-outline',
             link: '/credit-application',

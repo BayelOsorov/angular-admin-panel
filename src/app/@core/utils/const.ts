@@ -80,4 +80,7 @@ export const statusIdentificate = [
     { id: 'InProcess', text: 'В процессе' },
     { id: 'EditRequired', text: 'Нужно отредактировать' },
     { id: 'Timeout', text: 'Время и стекло' },
+    { id: 'Online', text: 'Онлайн' },
+    { id: 'Offline', text: 'Оффлайн' },
+    { id: 'None', text: 'Не идентифицирован' },
 ];
