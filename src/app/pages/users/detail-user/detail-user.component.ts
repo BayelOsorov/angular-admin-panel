@@ -8,6 +8,7 @@ import {
     genderEnum,
     maritalStatus,
     residenceLocationEnum,
+    translateIdentificationLevels,
 } from '../../../@core/utils';
 
 @Component({
@@ -18,6 +19,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     customerData;
     userData;
     applicationId;
+    videos;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private creditService: ApplicationRequestsService,
@@ -32,6 +34,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                 next: (data: any) => {
                     this.userData = data;
                     this.getCustomerData(data.userId);
+                    this.getVideos(data.userId);
                 },
             });
     }
@@ -45,6 +48,14 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                 },
             });
     }
+    getVideos(id) {
+        this.creditService
+            .getCustomerVideoCalls(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.videos = res;
+            });
+    }
     getMaritalStatus(status) {
         return maritalStatus.find((item) => item.value === status)?.text;
     }
@@ -53,6 +64,16 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     }
     getResidenceLoc(loc) {
         return residenceLocationEnum.find((e) => e.value === loc)?.text;
+    }
+    getStatus(status) {
+        return translateIdentificationLevels(status);
+    }
+    onFileChange(event) {
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append('callVideoFile', file);
+        formData.append('fileKey', file, file.name);
+        console.log(formData);
     }
     ngOnInit(): void {
         this.route.params.subscribe((params) => {

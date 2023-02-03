@@ -4,3 +4,11 @@ td {
     padding: 20px 20px;
     text-align: center;
 }
+.user-detail {
+    ::ng-deep .alert-title {
+        border: 1px solid #000;
+        border-bottom: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}

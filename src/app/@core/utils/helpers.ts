@@ -63,9 +63,9 @@ const trEngToRusOwnerST = (value) => {
 const translateIdentificationLevels = (status) => {
     switch (status) {
         case 'Online':
-            return 'Онлайн';
+            return 'Онлайн идентифицирован';
         case 'Offline':
-            return 'Оффлайн';
+            return 'Офлайн идентифицирован';
         case 'None':
             return 'Не идентифицирован';
         default:

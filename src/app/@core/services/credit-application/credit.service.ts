@@ -60,4 +60,10 @@ export class ApplicationRequestsService {
             environment.customerDataUrl + `/admin/api/v1/customers/${id}`
         );
     }
+    getCustomerVideoCalls(id) {
+        return this.http.get(
+            environment.identificationUrl +
+                `/operator/api/v1/video-call-files/${id}/list`
+        );
+    }
 }

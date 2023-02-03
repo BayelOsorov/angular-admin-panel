@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { StatusBadgeComponent } from '../../../@core/components/shared/status-badge/status-badge.component';
+import { ApplicationRequestsService } from '../../../@core/services/credit-application/credit.service';
 import { UsersService } from '../../../@core/services/users/users.service';
 import {
     tableNumbering,
