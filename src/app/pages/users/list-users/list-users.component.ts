@@ -50,6 +50,15 @@ export class ListUsersComponent implements OnInit, OnDestroy {
             type: 'custom',
             renderComponent: StatusBadgeComponent,
         },
+        custom: {
+            title: 'Детали',
+            type: 'html',
+            valuePrepareFunction: () => ` <a
+                          class='color-a increase-height'
+                        >
+                          Подробнее
+                        </a>`,
+        },
         // identificationLevel: {
         //     title: 'Статус',
         //     type: 'text',
