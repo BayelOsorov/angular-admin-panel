@@ -1,8 +1,21 @@
-import { Component } from '@angular/core';
+/* eslint-disable no-eval */
+/* eslint-disable @typescript-eslint/member-ordering */
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, timer, Subscription, Subject } from 'rxjs';
+import { switchMap, tap, share, retry, takeUntil } from 'rxjs/operators';
+import { ApplicationRequestsService } from '../@core/services/credit-application/credit.service';
+import { IdentificationService } from '../@core/services/identification/identification.service';
 import { accessLevel } from '../@core/utils/helpers';
 
 // import { MENU_ITEMS } from './pages-menu';
-
+export interface IdentificationI {
+    photoIdentificationRequestsCount: string;
+    videoIdentificationRequestsCount: string;
+}
+export interface CreditAppI {
+    count: string;
+}
 @Component({
     selector: 'ngx-pages',
     styleUrls: ['pages.component.scss'],
@@ -13,7 +26,7 @@ import { accessLevel } from '../@core/utils/helpers';
         </ngx-one-column-layout>
     `,
 })
-export class PagesComponent {
+export class PagesComponent implements OnInit, OnDestroy {
     userData = JSON.parse(sessionStorage.getItem('0-admin_idp_client'))
         .userData;
     getRole = (roles) => {
@@ -21,9 +34,15 @@ export class PagesComponent {
             return !accessLevel(roles, this.userData.role);
         }
     };
-    // menu = MENU_ITEMS;
 
-    // eslint-disable-next-line @typescript-eslint/member-ordering
+    private identifications$: Observable<IdentificationI>;
+    private ocl$: Observable<CreditAppI>;
+    private ucl$: Observable<CreditAppI>;
+    private fuel$: Observable<CreditAppI>;
+
+    private stopPolling = new Subject();
+    private destroy$: Subject<void> = new Subject<void>();
+
     menu = [
         {
             title: 'Идентификация',
@@ -31,12 +50,16 @@ export class PagesComponent {
             hidden: this.getRole(['admin', 'operator']),
             children: [
                 {
-                    title: 'Идентификация по фотографии',
+                    title: 'по фотографии',
                     link: '/identification/photo',
                 },
                 {
-                    title: 'Идентификация по видео',
+                    title: 'по видео',
                     link: '/identification/video',
+                    badge: {
+                        text: '',
+                        status: 'danger',
+                    },
                 },
             ],
         },
@@ -65,6 +88,7 @@ export class PagesComponent {
                 {
                     title: '0-0-3',
                     link: '/credit-application/0-0-3/get',
+
                     children: !this.getRole([
                         'admin',
                         'credit_specialist_admin',
@@ -115,18 +139,6 @@ export class PagesComponent {
                     ],
                 },
             ],
-            // {
-            //     title: '0-0-6',
-            //     link: '/credit-application/0-0-6',
-            // },
-            // {
-            //     title: '0-0-6',
-            //     link: '/credit-application/0-0-6',
-            // },
-            // {
-            //     title: '0-0-12',
-            //     link: '/credit-application/0-0-12',
-            // },
         },
         {
             title: 'Сотрудники',
@@ -210,10 +222,6 @@ export class PagesComponent {
                     title: 'Партнеры',
                     link: '/catalog/partners',
                 },
-                // {
-                //     title: 'Группы',
-                //     link: '/catalog/groups',
-                // },
 
                 {
                     title: 'Акции и Промо',
@@ -255,4 +263,147 @@ export class PagesComponent {
             ],
         },
     ];
+    constructor(
+        private identificationService: IdentificationService,
+        private creditAppsService: ApplicationRequestsService,
+        private cd: ChangeDetectorRef
+    ) {
+        this.identifications$ = timer(1, 4000).pipe(
+            switchMap(() =>
+                this.identificationService.getIdentificationAppCount()
+            ),
+            retry(5),
+            share(),
+            takeUntil(this.stopPolling)
+        );
+        this.ocl$ = timer(1, 4000).pipe(
+            switchMap(() => this.creditAppsService.getCountOclApp()),
+            retry(5),
+            share(),
+            takeUntil(this.stopPolling)
+        );
+        this.ucl$ = timer(1, 4000).pipe(
+            switchMap(() => this.creditAppsService.getCountUclApp()),
+            retry(5),
+            share(),
+            takeUntil(this.stopPolling)
+        );
+        this.fuel$ = timer(1, 4000).pipe(
+            switchMap(() => this.creditAppsService.getCountFuelApp()),
+            retry(5),
+            share(),
+            takeUntil(this.stopPolling)
+        );
+    }
+
+    getCountIdentification() {
+        this.identifications$.pipe(takeUntil(this.destroy$)).subscribe({
+            next: (data: any) => {
+                this.updateBadgeValue(
+                    this.menu,
+                    'Идентификация',
+                    'по фотографии',
+                    data.photoIdentificationRequestsCount
+                );
+                this.updateBadgeValue(
+                    this.menu,
+                    'Идентификация',
+                    'по видео',
+                    data.videoIdentificationRequestsCount
+                );
+            },
+        });
+    }
+    getCountOcl() {
+        this.ocl$.pipe(takeUntil(this.destroy$)).subscribe({
+            next: (data: any) => {
+                this.updateBadgeValue(
+                    this.menu,
+                    'Заявки на кредит',
+                    '0-0-3',
+                    data.count
+                );
+            },
+        });
+    }
+    getCountUcl() {
+        this.ucl$.pipe(takeUntil(this.destroy$)).subscribe({
+            next: (data: any) => {
+                this.updateBadgeValue(
+                    this.menu,
+                    'Заявки на кредит',
+                    'Увеличение лимита',
+                    data.count
+                );
+            },
+        });
+    }
+    getCountFuel() {
+        this.fuel$.pipe(takeUntil(this.destroy$)).subscribe({
+            next: (data: any) => {
+                this.updateBadgeValue(
+                    this.menu,
+                    'Заявки на кредит',
+                    'Топливная карта',
+                    data.count
+                );
+            },
+        });
+    }
+    updateBadgeValue(
+        arr,
+        parentTitle,
+        childTitle,
+        newValue,
+        badgeStatus = 'info'
+    ) {
+        arr.forEach((item) => {
+            if (!item.children || item.title !== parentTitle) {
+                return;
+            }
+            item.children.forEach((elem) => {
+                if (elem.title !== childTitle) {
+                    return;
+                }
+                // if (elem.children && elem.children.length > 0) {
+                //     elem.children.forEach((child) => {
+                //         if (child.title === 'Получение заявки') {
+                //             Object.assign(child, {
+                //                 badge: {
+                //                     text: newValue,
+                //                     status: badgeStatus,
+                //                 },
+                //             });
+                //         }
+                //     });
+                //     return;
+                // }
+                Object.assign(elem, {
+                    badge: {
+                        text: newValue,
+                        status: badgeStatus,
+                    },
+                });
+            });
+        });
+    }
+    ngOnInit(): void {
+        if (!this.getRole(['operator'])) {
+            this.getCountIdentification();
+        }
+        if (!this.getRole(['credit_specialist'])) {
+            this.getCountOcl();
+            this.getCountUcl();
+            this.getCountFuel();
+        }
+        // this.getCountIdentification();
+        // this.getCountOcl();
+        // this.getCountUcl();
+        // this.getCountFuel();
+    }
+    ngOnDestroy() {
+        this.stopPolling.next();
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
 }

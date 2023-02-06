@@ -107,4 +107,10 @@ export class IdentificationService {
             data
         );
     }
+    getIdentificationAppCount() {
+        return this.http.get<any>(
+            environment.identificationUrl +
+                `/operator/api/v1/identification-requests/new-identification-requests-info`
+        );
+    }
 }

@@ -66,4 +66,22 @@ export class ApplicationRequestsService {
                 `/operator/api/v1/video-call-files/${id}/list`
         );
     }
+    getCountFuelApp() {
+        return this.http.get<any>(
+            environment.fuelCardUrl +
+                `/operator/api/v1/ocl-requests/new-ocl-requests-count`
+        );
+    }
+    getCountOclApp() {
+        return this.http.get<any>(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/ocl-requests/new-ocl-requests-count`
+        );
+    }
+    getCountUclApp() {
+        return this.http.get<any>(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/ucl-requests/new-ucl-requests-count`
+        );
+    }
 }

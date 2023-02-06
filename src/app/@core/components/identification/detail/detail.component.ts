@@ -212,7 +212,7 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
             .sendVideo(this.data.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
-                next: (data1) => {
+                next: () => {
                     this.toastService.success('Видео успешно загрузилось!');
                 },
             });
