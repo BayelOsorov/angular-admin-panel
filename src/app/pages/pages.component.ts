@@ -242,5 +242,17 @@ export class PagesComponent {
                 },
             ],
         },
+        {
+            title: 'Бонусы',
+            icon: 'gift',
+            hidden: this.getRole(['admin', 'underwriter']),
+
+            children: [
+                {
+                    title: 'Партнеры - Бонусы',
+                    link: '/bonuses/partners/list',
+                },
+            ],
+        },
     ];
 }

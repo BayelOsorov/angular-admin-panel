@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="onFirstSubmit()">
+    <div class="form-group">
+        <label for="exampleInputEmail1" class="label">Название партнера</label>
+        <ngx-search-select
+            (searchEmit)="getPartners($event)"
+            [control]="form.get('contractorId')"
+            [isRequired]="true"
+            [submitted]="submitted"
+            [data]="partners"
+            [placeholder]="'Выберите название партнера'"
+        ></ngx-search-select>
+    </div>
+
+    <button class="d-flex mx-auto" type="submit" nbButton status="primary">
+        Добавить
+    </button>
+</form>

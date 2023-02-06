@@ -108,6 +108,8 @@ import { ListApplicationsComponent } from './credit-application/list-application
 import { OrderByPipe } from './shared/order-by-pipe/order-by.pipe';
 import { CreateSellerComponent } from './staff/create-seller/create-seller.component';
 import { GlobalLoaderComponent } from './shared/global-loader/global-loader.component';
+import { CreatePartnerBonuseComponent } from './bonuses/partner-bonuses/create-partner/create-partner-bonuse.component';
+import { CreatePercentagePartnerComponent } from './bonuses/partner-bonuses/create-percentage-partner/create-percentage-partner.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -207,6 +209,8 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         OrderByPipe,
         CreateSellerComponent,
         GlobalLoaderComponent,
+        CreatePartnerBonuseComponent,
+        CreatePercentagePartnerComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -263,6 +267,8 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         OrderByPipe,
         CreateSellerComponent,
         GlobalLoaderComponent,
+        CreatePartnerBonuseComponent,
+        CreatePercentagePartnerComponent,
     ],
 })
 export class ComponentsModule {}

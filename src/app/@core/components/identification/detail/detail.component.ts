@@ -207,12 +207,13 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
             });
     }
     sendVideo(data) {
+        this.toastService.info('Видео загружается, подождите!');
         this.identificationService
             .sendVideo(this.data.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data1) => {
-                    console.log(data1);
+                    this.toastService.success('Видео успешно загрузилось!');
                 },
             });
     }

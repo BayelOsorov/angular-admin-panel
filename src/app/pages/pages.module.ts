@@ -89,6 +89,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from '../@core/interceptors/loader-interceptor';
 import { ListUsersComponent } from './users/list-users/list-users.component';
 import { DetailUserComponent } from './users/detail-user/detail-user.component';
+import { ListPartnerBonusesComponent } from './bonuses/partners/list-partner-bonuses/list-partner-bonuses.component';
+import { DetailPartnerBonusesComponent } from './bonuses/partners/detail-partner-bonuses/detail-partner-bonuses.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -182,6 +184,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ActionsPartnerNewsComponent,
         ListUsersComponent,
         DetailUserComponent,
+        ListPartnerBonusesComponent,
+        DetailPartnerBonusesComponent,
     ],
     providers: [
         {

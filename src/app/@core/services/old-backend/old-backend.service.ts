@@ -16,6 +16,16 @@ export class OldBackendService {
                 `/api/v1/PartnerCategories/Search?name=${name}`
         );
     }
+    getListPartners(name = '') {
+        return this.http.get(
+            environment.baseUrl + `/api/v1/Partners/Search?name=${name}`
+        );
+    }
+    getDetailPartner(id) {
+        return this.http.get(
+            environment.baseUrl + `/api/v1/Partners/Get/${id}`
+        );
+    }
     getUserRelatedFiles(userId) {
         return this.http.get<IUserRelatedFiles>(
             environment.baseUrl +

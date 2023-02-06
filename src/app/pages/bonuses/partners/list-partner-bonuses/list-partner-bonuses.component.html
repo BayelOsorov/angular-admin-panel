@@ -1,0 +1,21 @@
+<nb-card>
+    <nb-card-header class="d-flex justify-content-between">
+        <strong>Партнеры - Бонусы</strong>
+
+        <button (click)="openCreateModal()" nbButton status="primary">
+            Добавить
+        </button>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getListPartners($event)"
+            (deleteItemEvent)="deletePartner($event)"
+            (rowSelectEvent)="getDetail($event)"
+            [edit]="false"
+            [tableColumns]="tableColumns"
+            [tableData]="listPartners"
+            [productName]="'ни одного партнера'"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>
