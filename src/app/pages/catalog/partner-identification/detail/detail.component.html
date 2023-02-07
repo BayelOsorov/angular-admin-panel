@@ -19,11 +19,15 @@
         </nb-card>
         <nb-card>
             <nb-card-header>Пасспорт отправителя</nb-card-header>
-            <nb-card-body class="row">
+            <nb-card-body class="row" *ngIf="passportImages">
                 <ngx-lightbox-img
                     class="col-6 col-sm-3"
-                    *ngFor="let i of passportImages"
-                    [imgUrl]="i"
+                    [imgUrl]="passportImages.passportFrontSideImage"
+                ></ngx-lightbox-img>
+
+                <ngx-lightbox-img
+                    class="col-6 col-sm-3"
+                    [imgUrl]="passportImages.passportBackSideImage"
                 ></ngx-lightbox-img>
             </nb-card-body>
         </nb-card>

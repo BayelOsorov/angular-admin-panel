@@ -76,7 +76,9 @@
             </div>
         </div>
         <div class="form-group">
-            <nb-checkbox (checkedChange)="onChecked()"
+            <nb-checkbox
+                [formControl]="isWeekend"
+                (ngModelChange)="changeMethod($event)"
                 >Выходной день</nb-checkbox
             >
         </div>

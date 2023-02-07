@@ -11,6 +11,7 @@ export class WeekdaysComponent implements OnInit {
     @Input() workingHourEnd: AbstractControl = new FormControl();
     @Input() lunchHourStart: AbstractControl = new FormControl();
     @Input() lunchHourEnd: AbstractControl = new FormControl();
+    @Input() isWeekend: AbstractControl = new FormControl();
 
     @Input() weekDay: string;
     @Input() submitted = false;
@@ -21,6 +22,11 @@ export class WeekdaysComponent implements OnInit {
         this.workingHourEnd.setValue('');
         this.lunchHourStart.setValue('');
         this.lunchHourEnd.setValue('');
+    }
+    changeMethod(val) {
+        if (val) {
+            this.onChecked();
+        }
     }
     ngOnInit(): void {}
 }

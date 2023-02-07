@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
@@ -21,7 +21,7 @@ export class ListUsersComponent implements OnInit, OnDestroy {
         name: [''],
         surname: [''],
         patronymic: [''],
-        status: ['None'],
+        status: [''],
         phone: [''],
     });
     tableColumns = {
@@ -32,7 +32,14 @@ export class ListUsersComponent implements OnInit, OnDestroy {
                 tableNumbering(this.listUsers.pageNumber, cell.row.index),
         },
 
-        name: { title: 'Название', type: 'text' },
+        identificationInformation: {
+            title: 'ФИО',
+            type: 'text',
+            valuePrepareFunction: (item) =>
+                item
+                    ? item.surname + ' ' + item.name + ' ' + item.patronymic
+                    : 'Нет данных',
+        },
         phoneNumber: {
             title: 'Номер телефона',
             type: 'html',
@@ -74,10 +81,23 @@ export class ListUsersComponent implements OnInit, OnDestroy {
         private fb: FormBuilder
     ) {}
     getListUsers(page = 1) {
-        this.usersService
-            .getListUsers(page, this.form.value)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => (this.listUsers = res));
+        const { name, surname, patronymic, phone } = this.form.value;
+        if (name || surname || patronymic || phone) {
+            this.usersService
+                .getListUsers(page, this.form.value)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe((res) => (this.listUsers = res));
+            return;
+        }
+        this.listUsers = {
+            items: [],
+            pageCount: 0,
+            totalItemCount: 0,
+            pageNumber: 1,
+            pageSize: 20,
+            hasPreviousPage: false,
+            hasNextPage: false,
+        };
     }
     getDetailUser(id) {
         this.router.navigate([`users/detail/${id}`]);

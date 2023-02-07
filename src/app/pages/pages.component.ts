@@ -100,6 +100,7 @@ export class PagesComponent implements OnInit, OnDestroy {
                         {
                             title: 'Получение заявки',
                             link: '/credit-application/0-0-3/get',
+                            hidden: this.getRole(['credit_specialist']),
                         },
                     ],
                 },
@@ -117,6 +118,7 @@ export class PagesComponent implements OnInit, OnDestroy {
                         {
                             title: 'Получение заявки',
                             link: '/credit-application/increase-limit/get',
+                            hidden: this.getRole(['credit_specialist']),
                         },
                     ],
                 },
@@ -135,6 +137,7 @@ export class PagesComponent implements OnInit, OnDestroy {
                         {
                             title: 'Получение заявки',
                             link: '/credit-application/fuel-card/get',
+                            hidden: this.getRole(['credit_specialist']),
                         },
                     ],
                 },

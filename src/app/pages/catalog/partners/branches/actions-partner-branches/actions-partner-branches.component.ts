@@ -216,36 +216,43 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
             workingHourEnd_1: [''],
             lunchHourStart_1: [''],
             lunchHourEnd_1: [''],
+            isWeekend_1: [''],
 
             workingHourStart_2: [''],
             workingHourEnd_2: [''],
             lunchHourStart_2: [''],
             lunchHourEnd_2: [''],
+            isWeekend_2: [''],
 
             workingHourStart_3: [''],
             workingHourEnd_3: [''],
             lunchHourStart_3: [''],
             lunchHourEnd_3: [''],
+            isWeekend_3: [''],
 
             workingHourStart_4: [''],
             workingHourEnd_4: [''],
             lunchHourStart_4: [''],
             lunchHourEnd_4: [''],
+            isWeekend_4: [''],
 
             workingHourStart_5: [''],
             workingHourEnd_5: [''],
             lunchHourStart_5: [''],
             lunchHourEnd_5: [''],
+            isWeekend_5: [''],
 
             workingHourStart_6: [''],
             workingHourEnd_6: [''],
             lunchHourStart_6: [''],
             lunchHourEnd_6: [''],
+            isWeekend_6: [''],
 
             workingHourStart_7: [''],
             workingHourEnd_7: [''],
             lunchHourStart_7: [''],
             lunchHourEnd_7: [''],
+            isWeekend_7: [''],
 
             localityId: ['', Validators.required],
             mallId: [null],
@@ -279,7 +286,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                             data.localityId
                         );
                         this.location = data.location.coordinates;
-                        data.workingSchedule.forEach((item) => {
+                        data.schedule.forEach((item) => {
                             switch (item.day) {
                                 case 'Monday':
                                     this.form.controls[
@@ -294,6 +301,9 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                                     this.form.controls[
                                         'lunchHourEnd_1'
                                     ].setValue(item?.lunchHourEnd);
+                                    this.form.controls['isWeekend_1'].setValue(
+                                        item?.isWeekend
+                                    );
 
                                     break;
                                 case 'Tuesday':
@@ -309,7 +319,9 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                                     this.form.controls[
                                         'lunchHourEnd_2'
                                     ].setValue(item?.lunchHourEnd);
-
+                                    this.form.controls['isWeekend_2'].setValue(
+                                        item?.isWeekend
+                                    );
                                     break;
                                 case 'Wednesday':
                                     this.form.controls[
@@ -324,7 +336,9 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                                     this.form.controls[
                                         'lunchHourEnd_3'
                                     ].setValue(item?.lunchHourEnd);
-
+                                    this.form.controls['isWeekend_3'].setValue(
+                                        item?.isWeekend
+                                    );
                                     break;
                                 case 'Thursday':
                                     this.form.controls[
@@ -339,7 +353,9 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                                     this.form.controls[
                                         'lunchHourEnd_4'
                                     ].setValue(item?.lunchHourEnd);
-
+                                    this.form.controls['isWeekend_4'].setValue(
+                                        item?.isWeekend
+                                    );
                                     break;
                                 case 'Friday':
                                     this.form.controls[
@@ -354,7 +370,9 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                                     this.form.controls[
                                         'lunchHourEnd_5'
                                     ].setValue(item?.lunchHourEnd);
-
+                                    this.form.controls['isWeekend_5'].setValue(
+                                        item?.isWeekend
+                                    );
                                     break;
                                 case 'Saturday':
                                     this.form.controls[
@@ -369,7 +387,9 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                                     this.form.controls[
                                         'lunchHourEnd_6'
                                     ].setValue(item?.lunchHourEnd);
-
+                                    this.form.controls['isWeekend_6'].setValue(
+                                        item?.isWeekend
+                                    );
                                     break;
                                 case 'Sunday':
                                     this.form.controls[
@@ -384,7 +404,9 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                                     this.form.controls[
                                         'lunchHourEnd_7'
                                     ].setValue(item?.lunchHourEnd);
-
+                                    this.form.controls['isWeekend_7'].setValue(
+                                        item?.isWeekend
+                                    );
                                     break;
                                 default:
                                     break;

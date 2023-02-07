@@ -8,7 +8,8 @@ import { takeUntil } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
 import { IPartnerIdentificationDetail } from '../../../../@core/models/catalog/partners';
 import { PartnerIdentificationService } from '../../../../@core/services/catalog/partner-identification/partner-identification.service';
-import { OldBackendService } from '../../../../@core/services/old-backend/old-backend.service';
+
+import { UsersService } from '../../../../@core/services/users/users.service';
 import { trEngToRusOwnerST } from '../../../../@core/utils';
 @Component({
     templateUrl: './detail.component.html',
@@ -18,7 +19,7 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
     partner: IPartnerIdentificationDetail;
     partnerId: number;
     branches;
-    passportImages = [];
+    passportImages;
     form;
     tableColumns = {
         index: {
@@ -55,7 +56,7 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private partnerIdentificationService: PartnerIdentificationService,
-        private backendApiService: OldBackendService,
+        private usersService: UsersService,
         private fb: FormBuilder,
         private datePipe: DatePipe,
         private toaster: ToastrService,
@@ -89,6 +90,7 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
             .subscribe((res) => {
                 this.partner = res;
                 this.getUserPassportImages(res.clientId);
+
                 this.branches = {
                     items: res.branches,
                     pageCount: 1,
@@ -101,14 +103,13 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
             });
     }
     getUserPassportImages(userId) {
-        this.backendApiService
-            .getUserRelatedFiles(userId)
+        this.usersService
+            .getDetailUser(userId)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((data) => {
-                this.passportImages = [
-                    data.passport0ImageUrl,
-                    data.passport1ImageUrl,
-                ];
+            .subscribe({
+                next: (data: any) => {
+                    this.passportImages = data.identificationInformation;
+                },
             });
     }
     approvePartner() {

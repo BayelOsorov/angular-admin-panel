@@ -26,7 +26,6 @@ export class IdentificationFilesComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.videos = res;
-                console.log(res);
             });
     }
     ngOnInit(): void {

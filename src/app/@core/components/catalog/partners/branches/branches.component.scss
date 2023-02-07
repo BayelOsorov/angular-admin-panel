@@ -39,6 +39,9 @@
 .work-shedule {
     display: flex;
     justify-content: space-evenly;
+    .danger {
+        background-color: nb-theme(color-danger-default);
+    }
     .shedule-item {
         width: 100%;
         padding-top: 10px;

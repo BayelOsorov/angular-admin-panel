@@ -113,4 +113,23 @@ export class IdentificationService {
                 `/operator/api/v1/identification-requests/new-identification-requests-info`
         );
     }
+    createUserDocument(id, data) {
+        return this.http.post(
+            environment.identificationUrl + `/admin/api/v1/users/files/${id}`,
+            data
+        );
+    }
+    getUserDocuments(id) {
+        return this.http.get(
+            environment.identificationUrl +
+                `/admin/api/v1/users/files/${id}/links`
+        );
+    }
+    offlineIdentificateUser(id) {
+        return this.http.patch(
+            environment.identificationUrl +
+                `/admin/api/v1/users/${id}/offline-identification`,
+            { comment: 'gg' }
+        );
+    }
 }

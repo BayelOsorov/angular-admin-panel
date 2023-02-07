@@ -44,11 +44,8 @@
                 </a>
             </div>
             <div class="work-shedule">
-                <div
-                    *ngFor="let item of branch.workingSchedule"
-                    class="shedule-item"
-                >
-                    <ng-container *ngIf="item.workingHourStart">
+                <ng-container *ngFor="let item of branch.schedule">
+                    <div class="shedule-item" *ngIf="!item.isWeekend">
                         <strong>{{ translateWeekdays(item.day) }}</strong>
                         <p>
                             {{
@@ -57,10 +54,11 @@
                                     item.workingHourEnd
                             }}
                         </p>
-                    </ng-container>
-                    <ng-container *ngIf="!item.workingHourStart">
-                    </ng-container>
-                </div>
+                    </div>
+                    <div class="shedule-item danger" *ngIf="item.isWeekend">
+                        <strong>{{ translateWeekdays(item.day) }}</strong>
+                    </div>
+                </ng-container>
             </div>
         </div>
     </div>

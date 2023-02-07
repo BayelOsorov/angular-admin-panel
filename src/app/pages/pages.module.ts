@@ -91,6 +91,7 @@ import { ListUsersComponent } from './users/list-users/list-users.component';
 import { DetailUserComponent } from './users/detail-user/detail-user.component';
 import { ListPartnerBonusesComponent } from './bonuses/partners/list-partner-bonuses/list-partner-bonuses.component';
 import { DetailPartnerBonusesComponent } from './bonuses/partners/detail-partner-bonuses/detail-partner-bonuses.component';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -127,6 +128,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
             formatOptions: { awareOfUnicodeTokens: false },
         }),
         NbTreeGridModule,
+        NgxDocViewerModule,
         // NbIconModule,
         // NbEvaIconsModule,
     ],

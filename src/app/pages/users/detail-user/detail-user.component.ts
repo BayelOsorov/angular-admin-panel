@@ -1,8 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AuthService } from '../../../@core/services/auth/auth.service';
 import { ApplicationRequestsService } from '../../../@core/services/credit-application/credit.service';
+import { FuelCardApplicationService } from '../../../@core/services/credit-application/fuel-card.service';
+import { IdentificationService } from '../../../@core/services/identification/identification.service';
 import { UsersService } from '../../../@core/services/users/users.service';
 import {
     genderEnum,
@@ -16,14 +21,21 @@ import {
     styleUrls: ['./detail-user.component.scss'],
 })
 export class DetailUserComponent implements OnInit, OnDestroy {
-    customerData;
     userData;
     applicationId;
     videos;
+    document;
+    listDocuments;
+    fuelCardCreditLineData;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private creditService: ApplicationRequestsService,
         private usersService: UsersService,
+        private identificationService: IdentificationService,
+        private toastService: ToastrService,
+        private authService: AuthService,
+        private fuelCardService: FuelCardApplicationService,
+        private sanitizer: DomSanitizer,
         private route: ActivatedRoute
     ) {}
     getUserDetail(id) {
@@ -33,27 +45,104 @@ export class DetailUserComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data: any) => {
                     this.userData = data;
-                    this.getCustomerData(data.userId);
-                    this.getVideos(data.userId);
+                    this.getVideos(data.id);
+                    this.getFuelCardCreditLineStatus();
+                    this.getUserDocuments();
                 },
             });
     }
-    getCustomerData(id) {
-        this.creditService
-            .getCustomerData(id)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-                next: (data) => {
-                    this.customerData = data;
-                },
-            });
-    }
+
     getVideos(id) {
         this.creditService
             .getCustomerVideoCalls(id)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.videos = res;
+            });
+    }
+    offlineIdentificate() {
+        this.identificationService
+            .offlineIdentificateUser(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toastService.success(
+                    'Вы успешно оффлайн идентифицировали!'
+                );
+                this.getUserDetail(this.userData.id);
+            });
+    }
+    closeFuelCardCreditLine() {
+        this.fuelCardService
+            .closeFuelCardCreditLine(
+                this.fuelCardCreditLineData.creditLineDetails.id
+            )
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toastService.success(
+                    'Вы успешно закрыли топливную карту!'
+                );
+                this.getFuelCardCreditLineStatus();
+            });
+    }
+    getFuelCardCreditLineStatus() {
+        this.fuelCardService
+            .getFuelCardCreditLineStatus(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.fuelCardCreditLineData = data;
+            });
+    }
+    sendUserDocument() {
+        this.toastService.info('Файл загружается, подождите!');
+        this.identificationService
+            .createUserDocument(this.userData.id, this.document)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toastService.success('Файл успешно загрузился!');
+                this.getUserDocuments();
+            });
+    }
+    getFiles(files) {
+        const docs = [];
+        files.forEach((link) => {
+            fetch(link, {
+                headers: {
+                    Authorization:
+                        'Bearer ' + this.authService.getAccessToken(),
+                    responseType: 'blob',
+                },
+            })
+                .then((res) => res.blob())
+                .then((myBlob) => {
+                    const blobLink = window.URL.createObjectURL(myBlob);
+                    if (
+                        myBlob.type ===
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                    ) {
+                        docs.push({
+                            url: this.sanitizer.bypassSecurityTrustResourceUrl(
+                                blobLink
+                            ),
+                            type: myBlob.type,
+                        });
+                    }
+
+                    console.log(blobLink, myBlob);
+                })
+                .then(() => {
+                    this.listDocuments = docs;
+                    console.log(this.listDocuments);
+                });
+        });
+    }
+
+    getUserDocuments() {
+        this.identificationService
+            .getUserDocuments(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                // this.listDocuments = data;
+                this.getFiles(data);
             });
     }
     getMaritalStatus(status) {
@@ -71,9 +160,9 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     onFileChange(event) {
         const file = event.target.files[0];
         const formData = new FormData();
-        formData.append('callVideoFile', file);
-        formData.append('fileKey', file, file.name);
-        console.log(formData);
+        formData.append('file', file, file.name);
+
+        this.document = formData;
     }
     ngOnInit(): void {
         this.route.params.subscribe((params) => {

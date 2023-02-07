@@ -1,14 +1,18 @@
 <nb-card *ngIf="userData" class="user-detail">
-    <nb-card-header class="text-center">Батыров Руслан Игревич</nb-card-header>
+    <nb-card-header class="text-center">{{
+        userData &&
+            userData.identificationInformation.surname +
+                ' ' +
+                userData.identificationInformation.name +
+                ' ' +
+                userData.identificationInformation.patronymic
+    }}</nb-card-header>
     <nb-card-body>
         <nb-tabset>
             <nb-tab tabTitle="Персональные данные">
                 <div class="row">
                     <div
-                        *ngIf="
-                            customerData &&
-                            customerData.identificationInformation
-                        "
+                        *ngIf="userData && userData.identificationInformation"
                         class="col-md-8"
                     >
                         <nb-alert outline="basic" class="mb-0 alert-title">
@@ -20,18 +24,14 @@
                             <tr>
                                 <td>ПИН</td>
                                 <td>
-                                    {{
-                                        customerData.identificationInformation
-                                            .pin
-                                    }}
+                                    {{ userData.identificationInformation.pin }}
                                 </td>
                             </tr>
                             <tr>
                                 <td>Имя</td>
                                 <td>
                                     {{
-                                        customerData.identificationInformation
-                                            .name
+                                        userData.identificationInformation.name
                                     }}
                                 </td>
                             </tr>
@@ -39,7 +39,7 @@
                                 <td>Фамилия</td>
                                 <td>
                                     {{
-                                        customerData.identificationInformation
+                                        userData.identificationInformation
                                             .surname
                                     }}
                                 </td>
@@ -48,7 +48,7 @@
                                 <td>Отчество</td>
                                 <td>
                                     {{
-                                        customerData.identificationInformation
+                                        userData.identificationInformation
                                             .patronymic
                                     }}
                                 </td>
@@ -58,8 +58,7 @@
                                 <td>
                                     {{
                                         getGender(
-                                            customerData
-                                                .identificationInformation
+                                            userData.identificationInformation
                                                 .gender
                                         )
                                     }}
@@ -69,7 +68,7 @@
                                 <td>Дата рождения</td>
                                 <td>
                                     {{
-                                        customerData.identificationInformation
+                                        userData.identificationInformation
                                             .birthDate | date : 'dd.MM.yyyy'
                                     }}
                                 </td>
@@ -79,8 +78,7 @@
                                 <td>
                                     {{
                                         getMaritalStatus(
-                                            customerData
-                                                .identificationInformation
+                                            userData.identificationInformation
                                                 .maritalStatus
                                         )
                                     }}
@@ -91,13 +89,11 @@
                                 <td>
                                     {{
                                         getResidenceLoc(
-                                            customerData
-                                                .identificationInformation
+                                            userData.identificationInformation
                                                 .residenceAddress.region
                                         ) +
                                             ',' +
-                                            customerData
-                                                .identificationInformation
+                                            userData.identificationInformation
                                                 .residenceAddress.address
                                     }}
                                 </td>
@@ -106,11 +102,10 @@
                                 <td>Паспорт</td>
                                 <td>
                                     {{
-                                        customerData.identificationInformation
+                                        userData.identificationInformation
                                             .passport.documentType +
                                             ' ' +
-                                            customerData
-                                                .identificationInformation
+                                            userData.identificationInformation
                                                 .passport.documentNumber
                                     }}
                                 </td>
@@ -119,7 +114,7 @@
                                 <td>Дата выдачи</td>
                                 <td>
                                     {{
-                                        customerData.identificationInformation
+                                        userData.identificationInformation
                                             .passport.dateOfIssue
                                             | date : 'dd.MM.yyyy'
                                     }}
@@ -130,7 +125,7 @@
                                 <td>Кем выдан</td>
                                 <td>
                                     {{
-                                        customerData.identificationInformation
+                                        userData.identificationInformation
                                             .passport.authority
                                     }}
                                 </td>
@@ -139,7 +134,7 @@
                                 <td>Срок действия паспорта</td>
                                 <td>
                                     {{
-                                        customerData.identificationInformation
+                                        userData.identificationInformation
                                             .passport.dateOfExpiry
                                             | date : 'dd.MM.yyyy'
                                     }}
@@ -154,6 +149,35 @@
                                 getStatus(userData.identificationLevel)
                             }}</strong>
                         </nb-alert>
+                        <nb-alert
+                            *ngIf="
+                                fuelCardCreditLineData?.creditLineDetails
+                                    ?.isClosed
+                            "
+                            status="warning"
+                            disabled
+                        >
+                            <strong class="text-center">
+                                Топливная карта закрыта</strong
+                            >
+                        </nb-alert>
+                        <ngx-confirm-buttons
+                            (approveEvent)="offlineIdentificate()"
+                            status="danger"
+                            class="mb-4 d-block"
+                            title="Закрыть кредитную линию"
+                        >
+                        </ngx-confirm-buttons>
+                        <ngx-confirm-buttons
+                            *ngIf="
+                                fuelCardCreditLineData?.creditLineDetails
+                                    ?.canBeClosed
+                            "
+                            (approveEvent)="closeFuelCardCreditLine()"
+                            status="danger"
+                            title="Закрыть топливную карту"
+                        >
+                        </ngx-confirm-buttons>
                     </div>
                 </div>
                 <div class="d-flex mt-5 w-100 align-items-center">
@@ -165,7 +189,7 @@
                         (change)="onFileChange($event)"
                     />
                     <ngx-confirm-buttons
-                        (approveEvent)="sendFile()"
+                        (approveEvent)="sendUserDocument()"
                         status="primary"
                         title="Отправить"
                     >
@@ -175,54 +199,36 @@
                     <nb-card-header>Документы</nb-card-header>
                     <nb-card-body>
                         <div
-                            *ngIf="
-                                customerData &&
-                                customerData.identificationInformation
-                            "
+                            *ngIf="listDocuments?.length > 0"
                             class="detail-images row"
                         >
-                            <ngx-lightbox-img
-                                class="col-6 col-sm-3"
-                                [imgUrl]="
-                                    customerData.identificationInformation
-                                        .passportFrontSideImage
-                                "
-                            ></ngx-lightbox-img>
-
-                            <ngx-lightbox-img
-                                class="col-6 col-sm-3"
-                                [imgUrl]="
-                                    customerData.identificationInformation
-                                        .passportBackSideImage
-                                "
-                            ></ngx-lightbox-img>
-                            <ngx-lightbox-img
-                                class="col-6 col-sm-3"
-                                [imgUrl]="
-                                    customerData.identificationInformation
-                                        .selfieWithPassportImage
-                                "
-                            ></ngx-lightbox-img>
-                            <ngx-lightbox-img
-                                class="col-6 col-sm-3"
-                                [imgUrl]="
-                                    customerData.identificationInformation
-                                        .profileImage
-                                "
-                            ></ngx-lightbox-img>
+                            <ng-container *ngFor="let item of listDocuments">
+                                <!-- <iframe
+                                    [src]="item.url"
+                                    width="100%"
+                                    height="300"
+                                    frameborder="0"
+                                ></iframe> -->
+                                <ngx-doc-viewer
+                                    [url]="item.url"
+                                    viewer="mammoth"
+                                    style="width: 100%; height: 50vh"
+                                ></ngx-doc-viewer>
+                            </ng-container>
                         </div>
                     </nb-card-body>
                 </nb-card>
                 <ngx-confirm-buttons
-                    class="w-50 d-block mx-auto"
+                    *ngIf="userData.identificationLevel === 'Online'"
                     (approveEvent)="offlineIdentificate()"
+                    class="w-50 d-block mx-auto"
                     status="primary"
                     title="Идентифицировать офлайн"
                 >
                 </ngx-confirm-buttons>
             </nb-tab>
             <nb-tab
-                [disabled]="!customerData?.identificationInformation"
+                [disabled]="!userData?.identificationInformation"
                 tabTitle="Идентификация"
             >
                 <nb-card>
@@ -230,15 +236,14 @@
                     <nb-card-body>
                         <div
                             *ngIf="
-                                customerData &&
-                                customerData.identificationInformation
+                                userData && userData.identificationInformation
                             "
                             class="detail-images row"
                         >
                             <ngx-lightbox-img
                                 class="col-6 col-sm-3"
                                 [imgUrl]="
-                                    customerData.identificationInformation
+                                    userData.identificationInformation
                                         .passportFrontSideImage
                                 "
                             ></ngx-lightbox-img>
@@ -246,21 +251,21 @@
                             <ngx-lightbox-img
                                 class="col-6 col-sm-3"
                                 [imgUrl]="
-                                    customerData.identificationInformation
+                                    userData.identificationInformation
                                         .passportBackSideImage
                                 "
                             ></ngx-lightbox-img>
                             <ngx-lightbox-img
                                 class="col-6 col-sm-3"
                                 [imgUrl]="
-                                    customerData.identificationInformation
+                                    userData.identificationInformation
                                         .selfieWithPassportImage
                                 "
                             ></ngx-lightbox-img>
                             <ngx-lightbox-img
                                 class="col-6 col-sm-3"
                                 [imgUrl]="
-                                    customerData.identificationInformation
+                                    userData.identificationInformation
                                         .profileImage
                                 "
                             ></ngx-lightbox-img>

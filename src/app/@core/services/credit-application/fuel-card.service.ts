@@ -82,4 +82,15 @@ export class FuelCardApplicationService {
             { comment: 'create' }
         );
     }
+    closeFuelCardCreditLine(id) {
+        return this.http.post(
+            environment.fuelCardUrl + `/admin/api/v1/credit-lines/${id}/close`,
+            { comment: 'close' }
+        );
+    }
+    getFuelCardCreditLineStatus(id) {
+        return this.http.get(
+            environment.fuelCardUrl + `/admin/api/v1/debtors/${id}`
+        );
+    }
 }

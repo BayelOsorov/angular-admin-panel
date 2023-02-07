@@ -7,15 +7,16 @@ import { environment } from '../../../../environments/environment';
 })
 export class UsersService {
     constructor(private http: HttpClient) {}
-    getListUsers(page = 1, filter) {
+
+    getDetailUser(id) {
         return this.http.get(
-            environment.baseUrl +
-                `/administration/api/v2/users?identificationLevels=${filter.status}&name=${filter.name}&surname=${filter.surname}&patronymic=${filter.patronymic}&phoneNumber=${filter.phone}&orderBy=Id DESC&pageNumber=${page}&pageSize=20`
+            environment.customerDataUrl + `/admin/api/v1/customers/${id}`
         );
     }
-    getDetailUser(id: number) {
+    getListUsers(page, filter) {
         return this.http.get(
-            environment.baseUrl + `/administration/api/v2/users/${id}`
+            environment.customerDataUrl +
+                `/admin/api/v1/customers/?identificationLevel=${filter.status}&name=${filter.name}&surname=${filter.surname}&patronymic=${filter.patronymic}&phoneNumber=${filter.phone}&orderBy=Id DESC&pageNumber=${page}&pageSize=20`
         );
     }
 }

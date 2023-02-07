@@ -78,9 +78,10 @@ export interface IDetailPartnerBranch {
     localityId: number;
     mallId: number;
     partnerId: number;
-    workingSchedule: [
+    schedule: [
         {
             day: string;
+            isWeekend: boolean;
             workingHourStart: {
                 hour: number;
                 minute: number;
