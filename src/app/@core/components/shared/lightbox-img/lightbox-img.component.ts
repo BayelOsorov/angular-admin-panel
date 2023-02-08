@@ -18,6 +18,7 @@ import { UseHttpImageSourcePipe } from '../secured-image/secured-image.component
 })
 export class LightboxImgComponent implements OnInit {
     @Input() imgUrl;
+    @Input() safeImgUrl;
 
     open = false;
     close;
@@ -47,6 +48,9 @@ export class LightboxImgComponent implements OnInit {
 
                 window.open(imageUrl, '_blank');
             });
+    }
+    openImageSafe() {
+        window.open(this.safeImgUrl, '_blank');
     }
     getImageBlob() {
         fetch(this.imgUrl, {

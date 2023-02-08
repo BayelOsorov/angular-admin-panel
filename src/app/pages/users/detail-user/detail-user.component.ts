@@ -15,7 +15,7 @@ import {
     residenceLocationEnum,
     translateIdentificationLevels,
 } from '../../../@core/utils';
-
+import * as mammoth from 'mammoth';
 @Component({
     templateUrl: './detail-user.component.html',
     styleUrls: ['./detail-user.component.scss'],
@@ -26,7 +26,9 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     videos;
     document;
     listDocuments;
+    alertStatus;
     fuelCardCreditLineData;
+    public loadDelay = false;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private creditService: ApplicationRequestsService,
@@ -45,9 +47,12 @@ export class DetailUserComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data: any) => {
                     this.userData = data;
+                    console.log(data);
+
                     this.getVideos(data.id);
                     this.getFuelCardCreditLineStatus();
                     this.getUserDocuments();
+                    this.getAlertStatus();
                 },
             });
     }
@@ -59,6 +64,21 @@ export class DetailUserComponent implements OnInit, OnDestroy {
             .subscribe((res) => {
                 this.videos = res;
             });
+    }
+    getAlertStatus() {
+        switch (this.userData.identificationLevel.toLowerCase()) {
+            case 'online':
+                this.alertStatus = 'primary';
+                break;
+            case 'offline':
+                this.alertStatus = 'success';
+                return;
+            case 'none':
+                this.alertStatus = 'basic';
+                return;
+            default:
+                break;
+        }
     }
     offlineIdentificate() {
         this.identificationService
@@ -115,23 +135,17 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                 .then((res) => res.blob())
                 .then((myBlob) => {
                     const blobLink = window.URL.createObjectURL(myBlob);
-                    if (
-                        myBlob.type ===
-                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                    ) {
-                        docs.push({
-                            url: this.sanitizer.bypassSecurityTrustResourceUrl(
-                                blobLink
-                            ),
-                            type: myBlob.type,
-                        });
-                    }
 
-                    console.log(blobLink, myBlob);
-                })
-                .then(() => {
-                    this.listDocuments = docs;
-                    console.log(this.listDocuments);
+                    docs.push({
+                        url: this.sanitizer.bypassSecurityTrustResourceUrl(
+                            blobLink
+                        ),
+                        type: myBlob.type,
+                    });
+                    if (docs.length === files.length) {
+                        this.listDocuments = docs;
+                        console.log(this.listDocuments);
+                    }
                 });
         });
     }
@@ -150,6 +164,9 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     }
     getGender(gender) {
         return genderEnum.find((e) => e.value === gender).text;
+    }
+    isImage(type) {
+        return type.split('/')[0] === 'image';
     }
     getResidenceLoc(loc) {
         return residenceLocationEnum.find((e) => e.value === loc)?.text;

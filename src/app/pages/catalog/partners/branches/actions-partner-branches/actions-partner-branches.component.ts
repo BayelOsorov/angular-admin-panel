@@ -44,6 +44,14 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                 workingHourEnd_1,
                 lunchHourStart_1,
                 lunchHourEnd_1,
+                isWeekend_1,
+                isWeekend_2,
+                isWeekend_3,
+                isWeekend_4,
+                isWeekend_5,
+                isWeekend_6,
+                isWeekend_7,
+
                 workingHourStart_2,
                 workingHourEnd_2,
                 lunchHourStart_2,
@@ -69,7 +77,6 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                 lunchHourStart_7,
                 lunchHourEnd_7,
                 location,
-                phoneNumber,
             } = this.form.value;
             const data = {
                 location: {
@@ -77,56 +84,63 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                     coordinates: location,
                 },
                 workingSchedule: [
-                    workingHourStart_1 && {
+                    {
                         day: 'Monday',
                         workingHourStart: workingHourStart_1,
                         workingHourEnd: workingHourEnd_1,
                         lunchHourStart: lunchHourStart_1,
                         lunchHourEnd: lunchHourEnd_1,
+                        isWeekend: isWeekend_1,
                     },
-                    workingHourStart_2 && {
+                    {
                         day: 'Tuesday',
                         workingHourStart: workingHourStart_2,
                         workingHourEnd: workingHourEnd_2,
                         lunchHourStart: lunchHourStart_2,
                         lunchHourEnd: lunchHourEnd_2,
+                        isWeekend: isWeekend_2,
                     },
-                    workingHourStart_3 && {
+                    {
                         day: 'Wednesday',
                         workingHourStart: workingHourStart_3,
                         workingHourEnd: workingHourEnd_3,
                         lunchHourStart: lunchHourStart_3,
                         lunchHourEnd: lunchHourEnd_3,
+                        isWeekend: isWeekend_3,
                     },
-                    workingHourStart_4 && {
+                    {
                         day: 'Thursday',
                         workingHourStart: workingHourStart_4,
                         workingHourEnd: workingHourEnd_4,
                         lunchHourStart: lunchHourStart_4,
                         lunchHourEnd: lunchHourEnd_4,
+                        isWeekend: isWeekend_4,
                     },
-                    workingHourStart_5 && {
+                    {
                         day: 'Friday',
                         workingHourStart: workingHourStart_5,
                         workingHourEnd: workingHourEnd_5,
                         lunchHourStart: lunchHourStart_5,
                         lunchHourEnd: lunchHourEnd_5,
+                        isWeekend: isWeekend_5,
                     },
-                    workingHourStart_6 && {
+                    {
                         day: 'Saturday',
                         workingHourStart: workingHourStart_6,
                         workingHourEnd: workingHourEnd_6,
                         lunchHourStart: lunchHourStart_6,
                         lunchHourEnd: lunchHourEnd_6,
+                        isWeekend: isWeekend_6,
                     },
-                    workingHourStart_7 && {
+                    {
                         day: 'Sunday',
                         workingHourStart: workingHourStart_7,
                         workingHourEnd: workingHourEnd_7,
                         lunchHourStart: lunchHourStart_7,
                         lunchHourEnd: lunchHourEnd_7,
+                        isWeekend: isWeekend_7,
                     },
-                ].filter((item) => item),
+                ],
             };
             if (this.branchData) {
                 this.partnersService
@@ -141,17 +155,18 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                     });
                 return;
             }
+            console.log(data);
 
-            this.partnersService
-                .createPartnerBranch(this.partnerId, {
-                    ...this.form.value,
-                    ...data,
-                })
-                .pipe(takeUntil(this.destroy$))
-                .subscribe((res) => {
-                    this.toaster.success('Успешно создано!');
-                    this._location.back();
-                });
+            // this.partnersService
+            //     .createPartnerBranch(this.partnerId, {
+            //         ...this.form.value,
+            //         ...data,
+            //     })
+            //     .pipe(takeUntil(this.destroy$))
+            //     .subscribe((res) => {
+            //         this.toaster.success('Успешно создано!');
+            //         this._location.back();
+            //     });
         }
     }
     getLocalities(name = '') {

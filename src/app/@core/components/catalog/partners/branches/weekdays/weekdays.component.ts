@@ -18,10 +18,10 @@ export class WeekdaysComponent implements OnInit {
 
     constructor() {}
     onChecked() {
-        this.workingHourStart.setValue('');
-        this.workingHourEnd.setValue('');
-        this.lunchHourStart.setValue('');
-        this.lunchHourEnd.setValue('');
+        this.workingHourStart.setValue(null);
+        this.workingHourEnd.setValue(null);
+        this.lunchHourStart.setValue(null);
+        this.lunchHourEnd.setValue(null);
     }
     changeMethod(val) {
         if (val) {

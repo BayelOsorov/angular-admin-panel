@@ -56,10 +56,6 @@ export class PagesComponent implements OnInit, OnDestroy {
                 {
                     title: 'по видео',
                     link: '/identification/video',
-                    badge: {
-                        text: '',
-                        status: 'danger',
-                    },
                 },
             ],
         },

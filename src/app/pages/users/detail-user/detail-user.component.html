@@ -1,12 +1,15 @@
 <nb-card *ngIf="userData" class="user-detail">
-    <nb-card-header class="text-center">{{
-        userData &&
+    <nb-card-header
+        *ngIf="userData && userData.identificationInformation"
+        class="text-center"
+        >{{
             userData.identificationInformation.surname +
                 ' ' +
                 userData.identificationInformation.name +
                 ' ' +
                 userData.identificationInformation.patronymic
-    }}</nb-card-header>
+        }}</nb-card-header
+    >
     <nb-card-body>
         <nb-tabset>
             <nb-tab tabTitle="Персональные данные">
@@ -144,7 +147,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        <nb-alert status="success">
+                        <nb-alert [status]="alertStatus">
                             <strong class="text-center">{{
                                 getStatus(userData.identificationLevel)
                             }}</strong>
@@ -180,7 +183,10 @@
                         </ngx-confirm-buttons>
                     </div>
                 </div>
-                <div class="d-flex mt-5 w-100 align-items-center">
+                <div
+                    *ngIf="userData && userData.identificationInformation"
+                    class="d-flex mt-5 w-100 align-items-center"
+                >
                     <input
                         nbInput
                         fullWidth
@@ -195,7 +201,10 @@
                     >
                     </ngx-confirm-buttons>
                 </div>
-                <nb-card class="mt-5">
+                <nb-card
+                    class="mt-5"
+                    *ngIf="userData && userData.identificationInformation"
+                >
                     <nb-card-header>Документы</nb-card-header>
                     <nb-card-body>
                         <div
@@ -203,17 +212,23 @@
                             class="detail-images row"
                         >
                             <ng-container *ngFor="let item of listDocuments">
-                                <!-- <iframe
+                                <iframe
+                                    *ngIf="!isImage(item.type)"
                                     [src]="item.url"
                                     width="100%"
-                                    height="300"
+                                    height="500"
                                     frameborder="0"
-                                ></iframe> -->
-                                <ngx-doc-viewer
+                                ></iframe>
+                                <ngx-lightbox-img
+                                    *ngIf="isImage(item.type)"
+                                    class="col-6 col-sm-3"
+                                    [safeImgUrl]="item.url"
+                                ></ngx-lightbox-img>
+                                <!-- <ngx-doc-viewer
                                     [url]="item.url"
                                     viewer="mammoth"
                                     style="width: 100%; height: 50vh"
-                                ></ngx-doc-viewer>
+                                ></ngx-doc-viewer> -->
                             </ng-container>
                         </div>
                     </nb-card-body>
