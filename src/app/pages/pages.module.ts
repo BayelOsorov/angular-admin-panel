@@ -129,7 +129,6 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         }),
         NbTreeGridModule,
         NgxDocViewerModule,
-
         // NbIconModule,
         // NbEvaIconsModule,
     ],

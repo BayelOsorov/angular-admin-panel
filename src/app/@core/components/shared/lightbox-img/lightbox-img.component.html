@@ -22,7 +22,11 @@
                 <i style="font-size: 50px" class="nb-close"></i>
             </a>
 
-            <!-- <img class="main-img" [src]="imgUrl | useHttpImgSrc" /> -->
+            <img
+                (click)="zoomOn = !zoomOn"
+                [class]="zoomOn ? 'main-img img-zoom' : 'main-img'"
+                [src]="safeImgUrl"
+            />
         </div>
     </div>
 </ng-container>

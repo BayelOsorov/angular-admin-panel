@@ -47,6 +47,11 @@ img {
 .main-img {
     top: 50%;
     height: 70%;
-
+    cursor: zoom-in;
     transform: translateY(-50%);
+}
+.img-zoom {
+    transform: scale(2, 2.5);
+    -webkit-transition: all 300ms 0ms ease-in-out;
+    transition: all 300ms 0ms ease-in-out;
 }

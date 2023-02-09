@@ -213,7 +213,10 @@
                         >
                             <ng-container *ngFor="let item of listDocuments">
                                 <iframe
-                                    *ngIf="!isImage(item.type)"
+                                    *ngIf="
+                                        !isImage(item.type) &&
+                                        item.type !== 'video/mp4'
+                                    "
                                     [src]="item.url"
                                     width="100%"
                                     height="500"
@@ -224,6 +227,12 @@
                                     class="col-6 col-sm-3"
                                     [safeImgUrl]="item.url"
                                 ></ngx-lightbox-img>
+                                <video
+                                    *ngIf="item.type === 'video/mp4'"
+                                    controls
+                                    class="col-6 col-sm-3"
+                                    [src]="item.url"
+                                ></video>
                                 <!-- <ngx-doc-viewer
                                     [url]="item.url"
                                     viewer="mammoth"

@@ -4,6 +4,8 @@ import {
     ChangeDetectionStrategy,
     Input,
     ChangeDetectorRef,
+    ViewChild,
+    ElementRef,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Http2ServerRequest } from 'http2';
@@ -19,11 +21,12 @@ import { UseHttpImageSourcePipe } from '../secured-image/secured-image.component
 export class LightboxImgComponent implements OnInit {
     @Input() imgUrl;
     @Input() safeImgUrl;
-
     open = false;
     close;
     viewerOpen = false;
     blobUrl;
+    zoomOn;
+    myThumbnail = 'https://wittlock.github.io/ngx-image-zoom/assets/thumb.jpg';
     constructor(
         private backendService: OldBackendService,
         private authService: AuthService,
@@ -50,7 +53,7 @@ export class LightboxImgComponent implements OnInit {
             });
     }
     openImageSafe() {
-        window.open(this.safeImgUrl, '_blank');
+        this.open = true;
     }
     getImageBlob() {
         fetch(this.imgUrl, {

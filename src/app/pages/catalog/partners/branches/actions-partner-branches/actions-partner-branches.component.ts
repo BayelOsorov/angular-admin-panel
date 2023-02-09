@@ -83,7 +83,7 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                     type: 'Point',
                     coordinates: location,
                 },
-                workingSchedule: [
+                schedule: [
                     {
                         day: 'Monday',
                         workingHourStart: workingHourStart_1,
@@ -155,18 +155,17 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                     });
                 return;
             }
-            console.log(data);
 
-            // this.partnersService
-            //     .createPartnerBranch(this.partnerId, {
-            //         ...this.form.value,
-            //         ...data,
-            //     })
-            //     .pipe(takeUntil(this.destroy$))
-            //     .subscribe((res) => {
-            //         this.toaster.success('Успешно создано!');
-            //         this._location.back();
-            //     });
+            this.partnersService
+                .createPartnerBranch(this.partnerId, {
+                    ...this.form.value,
+                    ...data,
+                })
+                .pipe(takeUntil(this.destroy$))
+                .subscribe((res) => {
+                    this.toaster.success('Успешно создано!');
+                    this._location.back();
+                });
         }
     }
     getLocalities(name = '') {
@@ -231,43 +230,43 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
             workingHourEnd_1: [''],
             lunchHourStart_1: [''],
             lunchHourEnd_1: [''],
-            isWeekend_1: [''],
+            isWeekend_1: [false],
 
             workingHourStart_2: [''],
             workingHourEnd_2: [''],
             lunchHourStart_2: [''],
             lunchHourEnd_2: [''],
-            isWeekend_2: [''],
+            isWeekend_2: [false],
 
             workingHourStart_3: [''],
             workingHourEnd_3: [''],
             lunchHourStart_3: [''],
             lunchHourEnd_3: [''],
-            isWeekend_3: [''],
+            isWeekend_3: [false],
 
             workingHourStart_4: [''],
             workingHourEnd_4: [''],
             lunchHourStart_4: [''],
             lunchHourEnd_4: [''],
-            isWeekend_4: [''],
+            isWeekend_4: [false],
 
             workingHourStart_5: [''],
             workingHourEnd_5: [''],
             lunchHourStart_5: [''],
             lunchHourEnd_5: [''],
-            isWeekend_5: [''],
+            isWeekend_5: [false],
 
             workingHourStart_6: [''],
             workingHourEnd_6: [''],
             lunchHourStart_6: [''],
             lunchHourEnd_6: [''],
-            isWeekend_6: [''],
+            isWeekend_6: [false],
 
             workingHourStart_7: [''],
             workingHourEnd_7: [''],
             lunchHourStart_7: [''],
             lunchHourEnd_7: [''],
-            isWeekend_7: [''],
+            isWeekend_7: [false],
 
             localityId: ['', Validators.required],
             mallId: [null],

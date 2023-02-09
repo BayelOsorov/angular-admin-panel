@@ -25,7 +25,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     applicationId;
     videos;
     document;
-    listDocuments;
+    listDocuments = [];
     alertStatus;
     fuelCardCreditLineData;
     public loadDelay = false;
@@ -47,7 +47,6 @@ export class DetailUserComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data: any) => {
                     this.userData = data;
-                    console.log(data);
 
                     this.getVideos(data.id);
                     this.getFuelCardCreditLineStatus();
@@ -123,7 +122,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
             });
     }
     getFiles(files) {
-        const docs = [];
+        this.listDocuments = [];
         files.forEach((link) => {
             fetch(link, {
                 headers: {
@@ -136,16 +135,12 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                 .then((myBlob) => {
                     const blobLink = window.URL.createObjectURL(myBlob);
 
-                    docs.push({
+                    this.listDocuments.push({
                         url: this.sanitizer.bypassSecurityTrustResourceUrl(
                             blobLink
                         ),
                         type: myBlob.type,
                     });
-                    if (docs.length === files.length) {
-                        this.listDocuments = docs;
-                        console.log(this.listDocuments);
-                    }
                 });
         });
     }
