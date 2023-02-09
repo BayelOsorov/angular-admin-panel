@@ -15,7 +15,6 @@ import {
     residenceLocationEnum,
     translateIdentificationLevels,
 } from '../../../@core/utils';
-import * as mammoth from 'mammoth';
 @Component({
     templateUrl: './detail-user.component.html',
     styleUrls: ['./detail-user.component.scss'],
@@ -134,13 +133,16 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                 .then((res) => res.blob())
                 .then((myBlob) => {
                     const blobLink = window.URL.createObjectURL(myBlob);
+                    // if (myBlob.type === 'application/octet-stream') {
 
+                    // }
                     this.listDocuments.push({
                         url: this.sanitizer.bypassSecurityTrustResourceUrl(
                             blobLink
                         ),
                         type: myBlob.type,
                     });
+                    console.log(this.listDocuments);
                 });
         });
     }

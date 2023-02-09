@@ -96,6 +96,36 @@ const downloadFile = (fileURL, fileName) => {
     }
 };
 
+const imageExtensions = ['.png', '.jpeg', '.jpg', '.gif'];
+const documentExtensions = [
+    '.pdf',
+    '.doc',
+    '.docx',
+    '.xls',
+    '.xlsx',
+    '.ppt',
+    '.pptx',
+];
+const audioExtensions = ['.mp3', '.wav', '.m4a'];
+const videoExtensions = ['.mp4', '.mov', '.avi', '.mkv'];
+const textExtensions = ['.txt', '.csv'];
+
+const getFileType = (fileExtension) => {
+    switch (true) {
+        case imageExtensions.includes(fileExtension):
+            return 'image';
+        case documentExtensions.includes(fileExtension):
+            return 'document';
+        case audioExtensions.includes(fileExtension):
+            return 'audio';
+        case videoExtensions.includes(fileExtension):
+            return 'video';
+        case textExtensions.includes(fileExtension):
+            return 'text';
+        default:
+            return 'unknown';
+    }
+};
 export {
     translateMaritalStatus,
     truncateText,

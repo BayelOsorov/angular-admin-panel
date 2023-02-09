@@ -215,24 +215,38 @@
                                 <iframe
                                     *ngIf="
                                         !isImage(item.type) &&
-                                        item.type !== 'video/mp4'
+                                        item.type !== 'video/mp4' &&
+                                        item.type !== 'audio/mpeg'
                                     "
                                     [src]="item.url"
                                     width="100%"
-                                    height="500"
+                                    height="100%"
                                     frameborder="0"
                                 ></iframe>
                                 <ngx-lightbox-img
                                     *ngIf="isImage(item.type)"
-                                    class="col-6 col-sm-3"
+                                    class="col-6 col-sm-3 mt-2 mb-2"
                                     [safeImgUrl]="item.url"
                                 ></ngx-lightbox-img>
                                 <video
-                                    *ngIf="item.type === 'video/mp4'"
+                                    *ngIf="
+                                        item.type === 'video/mp4' ||
+                                        item.type === 'audio/mpeg'
+                                    "
                                     controls
                                     class="col-6 col-sm-3"
                                     [src]="item.url"
                                 ></video>
+                                <audio
+                                    *ngIf="
+                                        item.type === 'application/octet-stream'
+                                    "
+                                    controls
+                                    [src]="item.url"
+                                >
+                                    <!-- <source [src]="item.url" type="audio/ogg" /> -->
+                                    Your browser does not support the audio tag.
+                                </audio>
                                 <!-- <ngx-doc-viewer
                                     [url]="item.url"
                                     viewer="mammoth"
@@ -311,3 +325,21 @@
         </nb-tabset>
     </nb-card-body>
 </nb-card>
+<!-- <ng-container *ngIf="getFileType(fileExtension) === 'image'">
+  <img [src]="filePath" alt="File">
+</ng-container>
+<ng-container *ngIf="getFileType(fileExtension) === 'document'">
+  <p>This is a document file.</p>
+</ng-container>
+<ng-container *ngIf="getFileType(fileExtension) === 'audio'">
+  <p>This is an audio file.</p>
+</ng-container>
+<ng-container *ngIf="getFileType(fileExtension) === 'video'">
+  <p>This is a video file.</p>
+</ng-container>
+<ng-container *ngIf="getFileType(fileExtension) === 'text'">
+  <p>This is a text file.</p>
+</ng-container>
+<ng-container *ngIf="getFileType(fileExtension) === 'unknown'">
+  <p>This file type is unknown.</p>
+</ng-container> -->
