@@ -46,7 +46,6 @@ export class AdditionalInfoComponent implements OnInit {
         this.Math = Math;
     }
     scrollToElement($element): void {
-        console.log($element);
         $element.scrollIntoView({
             behavior: 'smooth',
             block: 'start',
@@ -55,8 +54,6 @@ export class AdditionalInfoComponent implements OnInit {
     }
 
     scrollTo(element: any): void {
-        console.log(document.getElementById(element) as HTMLElement, element);
-
         (document.getElementById(element) as HTMLElement).scrollIntoView({
             behavior: 'smooth',
             block: 'center',

@@ -31,8 +31,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                     }
                 },
                 (err: HttpErrorResponse) => {
-                    console.log(err);
-
                     this.error.handleError(err);
                     observer.error(err);
                 }

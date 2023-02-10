@@ -96,19 +96,12 @@ const downloadFile = (fileURL, fileName) => {
     }
 };
 
-const imageExtensions = ['.png', '.jpeg', '.jpg', '.gif'];
-const documentExtensions = [
-    '.pdf',
-    '.doc',
-    '.docx',
-    '.xls',
-    '.xlsx',
-    '.ppt',
-    '.pptx',
-];
-const audioExtensions = ['.mp3', '.wav', '.m4a'];
-const videoExtensions = ['.mp4', '.mov', '.avi', '.mkv'];
-const textExtensions = ['.txt', '.csv'];
+const imageExtensions = ['png', 'jpeg', 'jpg', 'gif'];
+const documentExtensions = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
+const pdf = ['pdf'];
+const audioExtensions = ['mp3', 'wav', 'm4a'];
+const videoExtensions = ['mp4', 'mov', 'avi', 'mkv'];
+const textExtensions = ['txt', 'csv'];
 
 const getFileType = (fileExtension) => {
     switch (true) {
@@ -122,10 +115,19 @@ const getFileType = (fileExtension) => {
             return 'video';
         case textExtensions.includes(fileExtension):
             return 'text';
+        case pdf.includes(fileExtension):
+            return 'pdf';
         default:
             return 'unknown';
     }
 };
+const checkRolePermission = (roles, accessRole) => {
+    const hasAccess = Array.isArray(roles)
+        ? accessRole.some((i) => roles.includes(i))
+        : accessRole.includes(roles);
+    return hasAccess;
+};
+
 export {
     translateMaritalStatus,
     truncateText,
@@ -135,4 +137,6 @@ export {
     trEngToRusOwnerST,
     downloadFile,
     translateIdentificationLevels,
+    checkRolePermission,
+    getFileType,
 };

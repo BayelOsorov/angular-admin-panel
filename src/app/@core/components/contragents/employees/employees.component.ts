@@ -33,7 +33,5 @@ export class EmployeesComponent implements OnInit {
     };
     constructor() {}
 
-    ngOnInit(): void {
-        console.log(this.data);
-    }
+    ngOnInit(): void {}
 }

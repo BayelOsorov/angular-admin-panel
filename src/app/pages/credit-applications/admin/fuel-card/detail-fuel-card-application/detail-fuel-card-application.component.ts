@@ -171,10 +171,8 @@ export class DetailFuelCardApplicationAdminComponent
         this.fuelCardApplicationsService
             .getFuelCardSpecialistAccount()
             .toPromise()
-            .then((res) => console.log(res))
+            .then()
             .catch((e) => {
-                console.log(e, ' fuel card');
-
                 if (e.status === 0) {
                     this.createFuelCardCreditSpecialistAccount();
                 }

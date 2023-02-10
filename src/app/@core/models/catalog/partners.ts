@@ -133,6 +133,7 @@ export interface IPartnerFeedback {
         name: string;
     };
     createDateTime: Date;
+    passedModeration: boolean;
 }
 export interface IPartnerIdentificationDetail {
     id: number;

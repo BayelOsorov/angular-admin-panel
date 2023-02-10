@@ -15,14 +15,13 @@
                                 Редактировать
                             </button>
 
-                            <button
-                                class="d-block mt-3 w-50"
-                                nbButton
+                            <ngx-confirm-buttons
+                                (approveEvent)="deleteContragent()"
                                 status="danger"
-                                (click)="deleteContragent()"
+                                title="Удалить"
+                                class="d-block mt-3 w-50"
                             >
-                                Удалить
-                            </button>
+                            </ngx-confirm-buttons>
                         </div>
                         <div class="col-md-8">
                             <div class="partner-board row">

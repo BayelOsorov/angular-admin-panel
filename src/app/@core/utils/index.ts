@@ -11,6 +11,8 @@ import {
     trEngToRusOwnerST,
     downloadFile,
     translateIdentificationLevels,
+    checkRolePermission,
+    getFileType,
 } from './helpers';
 import {
     Position,
@@ -40,6 +42,8 @@ export {
     cleanEmptyKeyInObj,
     downloadFile,
     translateIdentificationLevels,
+    checkRolePermission,
+    getFileType,
     Position,
     placeOfWorkType,
     entrepreneurTypeEnum,

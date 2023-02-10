@@ -35,7 +35,6 @@ export class HttpInterceptorService implements HttpInterceptor {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 401) {
                         token = this.authService.getAccessToken();
-                        console.log('refresh ' + token);
                     }
                 }
                 return throwError(err);

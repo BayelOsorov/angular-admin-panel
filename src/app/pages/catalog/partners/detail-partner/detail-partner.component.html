@@ -26,21 +26,20 @@
                             >
                                 Редактировать
                             </button>
-                            <button
-                                class="d-block mt-3 w-50"
-                                nbButton
+                            <!-- <ngx-confirm-buttons
+                                (approveEvent)="sendUserDocument()"
                                 status="info"
-                            >
-                                Деактивировать
-                            </button>
-                            <button
+                                title="Деактивировать"
                                 class="d-block mt-3 w-50"
-                                nbButton
-                                status="danger"
-                                (click)="deletePartner()"
                             >
-                                Удалить
-                            </button>
+                            </ngx-confirm-buttons> -->
+                            <ngx-confirm-buttons
+                                (approveEvent)="deletePartner()"
+                                status="danger"
+                                title="Удалить"
+                                class="d-block mt-3 w-50"
+                            >
+                            </ngx-confirm-buttons>
                         </div>
                         <div class="col-md-8">
                             <div class="partner-board row">
@@ -102,7 +101,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="header">
+                            <!-- <div class="header">
                                 <div>
                                     <p>Короткое описание на RU</p>
                                 </div>
@@ -172,7 +171,7 @@
                                         {{ i.name + ',' }}
                                     </ng-container>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- </nb-card> -->
                         </div>
                     </div>

@@ -175,9 +175,8 @@ export class DetailCreditApplicationAdminComponent
         this.creditApplicationsService
             .getCreditSpecialistAccount()
             .toPromise()
-            .then((res) => console.log(res))
+            .then()
             .catch((e) => {
-                console.log(e, ' fuel card');
                 if (e.status === 403) {
                     this.createCreditSpecialistAccount();
                 }

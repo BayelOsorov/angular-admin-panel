@@ -55,9 +55,7 @@ export class DetailSalespeopleComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listInvitedAccounts = res));
     }
-    goToDetail() {
-        console.log('sdsds');
-    }
+    goToDetail() {}
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))

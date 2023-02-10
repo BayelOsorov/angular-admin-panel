@@ -10,7 +10,9 @@ import { FuelCardApplicationService } from '../../../@core/services/credit-appli
 import { IdentificationService } from '../../../@core/services/identification/identification.service';
 import { UsersService } from '../../../@core/services/users/users.service';
 import {
+    checkRolePermission,
     genderEnum,
+    getFileType,
     maritalStatus,
     residenceLocationEnum,
     translateIdentificationLevels,
@@ -27,6 +29,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     listDocuments = [];
     alertStatus;
     fuelCardCreditLineData;
+    canOfflineIdentificate;
     public loadDelay = false;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -122,8 +125,8 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     }
     getFiles(files) {
         this.listDocuments = [];
-        files.forEach((link) => {
-            fetch(link, {
+        files.forEach((item) => {
+            fetch(item.url, {
                 headers: {
                     Authorization:
                         'Bearer ' + this.authService.getAccessToken(),
@@ -133,16 +136,13 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                 .then((res) => res.blob())
                 .then((myBlob) => {
                     const blobLink = window.URL.createObjectURL(myBlob);
-                    // if (myBlob.type === 'application/octet-stream') {
 
-                    // }
                     this.listDocuments.push({
                         url: this.sanitizer.bypassSecurityTrustResourceUrl(
                             blobLink
                         ),
-                        type: myBlob.type,
+                        type: getFileType(item.fileName.split('.')[1]),
                     });
-                    console.log(this.listDocuments);
                 });
         });
     }
@@ -155,6 +155,12 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                 // this.listDocuments = data;
                 this.getFiles(data);
             });
+    }
+    checkPermission() {
+        const userAuthData = this.authService.getUserData();
+        this.canOfflineIdentificate = checkRolePermission(userAuthData.role, [
+            'kyc_underwriter',
+        ]);
     }
     getMaritalStatus(status) {
         return maritalStatus.find((item) => item.value === status)?.text;
@@ -183,6 +189,8 @@ export class DetailUserComponent implements OnInit, OnDestroy {
             this.applicationId = params['id'];
             this.getUserDetail(this.applicationId);
         });
+
+        this.checkPermission();
     }
     ngOnDestroy() {
         this.destroy$.next();

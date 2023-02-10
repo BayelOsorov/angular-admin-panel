@@ -59,14 +59,13 @@
                 </div>
 
                 <div class="col-md-4">
-                    <button
-                        class="w-100"
-                        nbButton
+                    <ngx-confirm-buttons
+                        (approveEvent)="deleteFeedback()"
                         status="danger"
-                        (click)="deleteFeedback()"
+                        title="Удалить"
+                        class="w-100"
                     >
-                        Удалить
-                    </button>
+                    </ngx-confirm-buttons>
                 </div>
             </div>
         </div>

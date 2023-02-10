@@ -57,8 +57,6 @@ export class IdentificationGetComponent implements OnInit, OnDestroy {
                     this.router.navigate([`identification/detail/${data.id}`]);
                 },
                 error: (err) => {
-                    console.log(err, 'error rrerere');
-
                     this.videoIdentificationToggle = false;
                 },
             });

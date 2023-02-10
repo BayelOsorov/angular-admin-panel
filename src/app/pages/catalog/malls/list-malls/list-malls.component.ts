@@ -72,9 +72,7 @@ export class ListMallsComponent implements OnInit, OnDestroy {
             this.localities = data.items;
         });
     }
-    changeType(type) {
-        console.log(type);
-    }
+    changeType(type) {}
 
     updateMall(data) {
         this.router.navigate([`catalog/malls/update/${data.id}`]);

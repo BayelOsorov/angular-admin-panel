@@ -31,7 +31,6 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         this.submitted = true;
-        console.log(this.form);
 
         if (this.form.valid) {
             if (this.legalContractorData) {
@@ -117,9 +116,7 @@ export class ActionsLegalContractorComponent implements OnInit, OnDestroy {
             type: this.legalBeneficiary,
         });
     }
-    onSelect(val) {
-        console.log(val);
-    }
+    onSelect(val) {}
     deleteBeneficary(id) {
         this.beneficiaries = this.beneficiaries.filter(
             (item) => item.id !== id

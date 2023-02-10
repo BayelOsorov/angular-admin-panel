@@ -16,7 +16,7 @@ import { trEngToRusOwnerST } from '../../../../@core/utils';
     styleUrls: ['./detail.component.scss'],
 })
 export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
-    partner: IPartnerIdentificationDetail;
+    partner;
     partnerId: number;
     branches;
     passportImages;

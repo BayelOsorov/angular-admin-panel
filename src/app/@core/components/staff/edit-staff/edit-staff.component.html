@@ -24,10 +24,9 @@
     <div class="form-group">
         <label for="exampleInputPassword1" class="label">Роли</label>
         <ngx-search-select
-            (searchEmit)="getRoles($event)"
+            (searchEmit)="getRoles()"
             [control]="form.get('roles')"
             [isRequired]="true"
-            [submitted]="submitted"
             [data]="roles"
             mode="multiple"
             returnVal="title"

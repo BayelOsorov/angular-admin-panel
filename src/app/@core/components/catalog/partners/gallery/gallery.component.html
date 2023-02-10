@@ -1,27 +1,7 @@
-<div class="form-group row">
-    <div class="col-sm-9">
-        <!-- <form (submit)="onSubmit()" class="d-flex">
-            <input
-                id="exampleInputPassword1"
-                placeholder="Галерея"
-                type="file"
-                (change)="onFileChange($event)"
-                id="formFile"
-                multiple
-            />
-            <button class="d-flex mx-auto" type="submit" nbButton status="primary" class="ml-2">
-                Добавить
-            </button>
-        </form> -->
-        <button
-            (click)="openCreateModal()"
-            nbButton
-            status="primary"
-            class="ml-2"
-        >
-            Добавить
-        </button>
-    </div>
+<div class="float-right">
+    <button (click)="openCreateModal()" nbButton status="primary" class="ml-2">
+        Добавить
+    </button>
 </div>
 
 <div *ngIf="images">

@@ -86,7 +86,7 @@ export class ContragentsDetailComponent implements OnInit, OnDestroy {
             );
     }
 
-    getBeneficiares() {
+    getBeneficiaries() {
         this.legalContractorsService
             .getLegalContractorBeneficiariesList(this.contractorId)
             .pipe(takeUntil(this.destroy$))
@@ -108,7 +108,7 @@ export class ContragentsDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.toaster.success('Успешно удалено!');
-                this.getBeneficiares();
+                this.getBeneficiaries();
             });
     }
     editBeneficiary(data) {
@@ -137,7 +137,7 @@ export class ContragentsDetailComponent implements OnInit, OnDestroy {
     }
     ngOnInit(): void {
         this.getEmployees();
-        this.getBeneficiares();
+        this.getBeneficiaries();
     }
     ngOnDestroy() {
         this.destroy$.next();

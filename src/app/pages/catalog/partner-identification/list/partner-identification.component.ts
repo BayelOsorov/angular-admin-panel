@@ -89,9 +89,7 @@ export class PartnerIdentificationComponent implements OnInit, OnDestroy {
             this.categories = data.items;
         });
     }
-    changeType(type) {
-        console.log(type);
-    }
+    changeType(type) {}
 
     detailPartner(data) {
         this.router.navigate([

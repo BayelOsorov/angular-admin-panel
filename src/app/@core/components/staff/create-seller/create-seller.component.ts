@@ -48,7 +48,6 @@ export class CreateSellerComponent implements OnInit, OnDestroy {
                         this.dialogRef.close('edit');
                     },
                     error: (err) => {
-                        console.log(err);
                         if (err.status === 404) {
                             this.toaster.error(
                                 'Данный пользователь не участвует в реферальной программе!'
