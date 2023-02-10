@@ -211,25 +211,85 @@
                             *ngIf="listDocuments?.length > 0"
                             class="detail-images row"
                         >
-                            <ng-container *ngFor="let item of listDocuments">
+                            <ng-container
+                                *ngFor="
+                                    let item of listDocuments;
+                                    let idx = index
+                                "
+                            >
+                                <div
+                                    (click)="dowloadDocument(item.url)"
+                                    *ngIf="item.type === 'document'"
+                                    class="document mt-2 col-6 col-sm-3"
+                                >
+                                    <ng-container
+                                        *ngIf="
+                                            item.fileType === 'doc' ||
+                                            item.fileType === 'docx'
+                                        "
+                                    >
+                                        <img
+                                            src="../../../../assets/word.png"
+                                            alt=""
+                                            width="50"
+                                        />
+                                        <br />
+                                        <p>Word документ -{{ idx }}(скачать)</p>
+                                    </ng-container>
+                                    <ng-container
+                                        *ngIf="
+                                            item.fileType === 'xls' ||
+                                            item.fileType === 'xlsx'
+                                        "
+                                    >
+                                        <img
+                                            src="../../../../assets/excel.png"
+                                            alt=""
+                                            width="50"
+                                        />
+                                        <br />
+                                        <p>Excel документ-{{ idx }}(скачать)</p>
+                                    </ng-container>
+                                    <ng-container
+                                        *ngIf="
+                                            item.fileType !== 'xls' &&
+                                            item.fileType !== 'xlsx' &&
+                                            item.fileType !== 'doc' &&
+                                            item.fileType !== 'docx'
+                                        "
+                                    >
+                                        <img
+                                            src="../../../../assets/file.png"
+                                            alt=""
+                                            width="50"
+                                        />
+                                        <br />
+                                        <p>Документ-{{ idx }}(скачать)</p>
+                                    </ng-container>
+                                </div>
+
+                                <ngx-lightbox-img
+                                    *ngIf="item.type === 'image'"
+                                    class="col-6 col-sm-3 mt-2"
+                                    [safeImgUrl]="item.url"
+                                ></ngx-lightbox-img>
+
                                 <iframe
                                     *ngIf="item.type === 'pdf'"
                                     [src]="item.url"
                                     width="100%"
                                     height="500"
                                     frameborder="0"
+                                    class="mt-2"
                                 ></iframe>
-                                <ngx-lightbox-img
-                                    *ngIf="item.type === 'image'"
-                                    class="col-6 col-sm-3 mt-2"
-                                    [safeImgUrl]="item.url"
-                                ></ngx-lightbox-img>
+
                                 <video
                                     *ngIf="item.type === 'video'"
                                     controls
                                     class="col-6 col-sm-3 mt-2"
                                     [src]="item.url"
                                 ></video>
+
                                 <audio
                                     *ngIf="item.type === 'audio'"
                                     class="col-6 col-sm-3 mt-2"

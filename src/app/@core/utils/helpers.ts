@@ -99,7 +99,7 @@ const downloadFile = (fileURL, fileName) => {
 const imageExtensions = ['png', 'jpeg', 'jpg', 'gif'];
 const documentExtensions = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
 const pdf = ['pdf'];
-const audioExtensions = ['mp3', 'wav', 'm4a'];
+const audioExtensions = ['mp3', 'wav', 'm4a', 'ogg'];
 const videoExtensions = ['mp4', 'mov', 'avi', 'mkv'];
 const textExtensions = ['txt', 'csv'];
 
@@ -114,7 +114,7 @@ const getFileType = (fileExtension) => {
         case videoExtensions.includes(fileExtension):
             return 'video';
         case textExtensions.includes(fileExtension):
-            return 'text';
+            return 'document'; // return 'text' ;
         case pdf.includes(fileExtension):
             return 'pdf';
         default:

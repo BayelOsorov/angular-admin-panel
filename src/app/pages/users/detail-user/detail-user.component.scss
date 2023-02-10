@@ -11,4 +11,19 @@ td {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
     }
+    .document {
+        cursor: pointer;
+    }
+
+    .image-container,
+    .video-container,
+    .audio-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .pdf-container {
+        display: block;
+        width: 100%;
+    }
 }

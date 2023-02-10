@@ -11,6 +11,7 @@ import { IdentificationService } from '../../../@core/services/identification/id
 import { UsersService } from '../../../@core/services/users/users.service';
 import {
     checkRolePermission,
+    downloadFile,
     genderEnum,
     getFileType,
     maritalStatus,
@@ -118,7 +119,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
         this.identificationService
             .createUserDocument(this.userData.id, this.document)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => {
+            .subscribe(() => {
                 this.toastService.success('Файл успешно загрузился!');
                 this.getUserDocuments();
             });
@@ -136,17 +137,28 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                 .then((res) => res.blob())
                 .then((myBlob) => {
                     const blobLink = window.URL.createObjectURL(myBlob);
-
+                    const type = getFileType(item.fileName.split('.')[1]);
                     this.listDocuments.push({
-                        url: this.sanitizer.bypassSecurityTrustResourceUrl(
-                            blobLink
-                        ),
-                        type: getFileType(item.fileName.split('.')[1]),
+                        url:
+                            type === 'document'
+                                ? blobLink
+                                : this.sanitizer.bypassSecurityTrustResourceUrl(
+                                      blobLink
+                                  ),
+                        type,
+                        fileType: item.fileName.split('.')[1],
                     });
                 });
         });
     }
-
+    dowloadDocument(url) {
+        downloadFile(
+            url,
+            this.userData.identificationInformation.surname +
+                '-' +
+                this.userData.identificationInformation.name
+        );
+    }
     getUserDocuments() {
         this.identificationService
             .getUserDocuments(this.userData.id)
