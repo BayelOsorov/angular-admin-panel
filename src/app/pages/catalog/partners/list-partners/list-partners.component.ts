@@ -51,7 +51,6 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listPartner = res));
     }
-    onSearch(event) {}
     updatePartner(data) {
         this.router.navigate([`catalog/partners/update/${data.id}`]);
     }

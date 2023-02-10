@@ -3,7 +3,7 @@
         <strong>Партнеры</strong>
         <div class="d-flex justify-content-between mt-3">
             <ngx-input-search
-                (searchEvent)="onSearch($event)"
+                (searchEvent)="getPartners(1, $event)"
                 placeholder="Поиск по названию"
             >
             </ngx-input-search>
