@@ -35,14 +35,14 @@
                     </button>
                 </div>
             </div>
-            <div class="icons ml-3">
+            <!-- <div class="icons ml-3">
                 <a [href]="'tel:' + branch?.phoneNumber">
                     <i style="font-size: 45px" class="nb-phone"></i>
                 </a>
                 <a *ngIf="branch.email" [href]="'mailto:' + branch?.email">
                     <i style="font-size: 45px" class="nb-email"></i>
                 </a>
-            </div>
+            </div> -->
             <div class="work-shedule">
                 <ng-container *ngFor="let item of branch.schedule">
                     <div class="shedule-item" *ngIf="!item.isWeekend">

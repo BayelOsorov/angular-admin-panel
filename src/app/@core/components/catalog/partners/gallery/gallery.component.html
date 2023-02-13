@@ -1,11 +1,11 @@
-<div class="float-right">
+<div class="float-right mb-2">
     <button (click)="openCreateModal()" nbButton status="primary" class="ml-2">
         Добавить
     </button>
 </div>
 
 <div *ngIf="images">
-    <div class="col-sm-9">
+    <div class="col-sm-9 mt-5">
         <div class="gallery" *ngIf="images && images.items.length > 0">
             <ng-container *ngFor="let i of images.items">
                 <div class="gallery__item">

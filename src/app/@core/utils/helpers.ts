@@ -2,7 +2,7 @@
 const translateMaritalStatus = (str: string) => {
     switch (str) {
         case 'Married':
-            return 'Женат';
+            return 'Женат/ Замужем';
 
         default:
             return 'Неизвестно';
