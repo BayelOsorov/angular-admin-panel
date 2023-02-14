@@ -49,7 +49,9 @@ export class CustomMapComponent implements OnInit {
     };
     tooltip = L.Tooltip;
     ngOnInit() {
-        this.map = L.map('map').setView(
+        this.map = L.map('map', {
+            scrollWheelZoom: false,
+        }).setView(
             this.baseLocation ? this.baseLocation : [42.867695, 74.610897],
             12
         );
