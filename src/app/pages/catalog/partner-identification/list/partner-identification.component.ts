@@ -65,6 +65,15 @@ export class PartnerIdentificationComponent implements OnInit, OnDestroy {
             type: 'custom',
             renderComponent: StatusBadgeComponent,
         },
+        custom: {
+            title: 'Детали',
+            type: 'html',
+            valuePrepareFunction: () => `<a
+                          class='color-a increase-height'
+                        >
+                          Подробнее
+                        </a>`,
+        },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(

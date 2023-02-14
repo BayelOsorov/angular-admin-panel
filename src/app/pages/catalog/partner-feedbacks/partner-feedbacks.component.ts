@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { StatusBadgeComponent } from '../../../@core/components/shared/status-badge/status-badge.component';
 import { IListPartnerFeedbacks } from '../../../@core/models/catalog/partners';
 import { PartnerFeedbacksService } from '../../../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
 import { PartnersService } from '../../../@core/services/catalog/partners/partners.service';
@@ -44,10 +45,15 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
             type: 'text',
             valuePrepareFunction: (item) => item.name,
         },
+        // passedModeration: {
+        //     title: 'Статус',
+        //     type: 'text',
+        //     valuePrepareFunction: (bool) => (bool ? 'Одобренный' : 'Ожидание'),
+        // },
         passedModeration: {
             title: 'Статус',
-            type: 'text',
-            valuePrepareFunction: (bool) => (bool ? 'Одобренный' : 'Ожидание'),
+            type: 'custom',
+            renderComponent: StatusBadgeComponent,
         },
     };
 

@@ -46,7 +46,7 @@ export class PagesComponent implements OnInit, OnDestroy {
     menu = [
         {
             title: 'Идентификация',
-            icon: 'list',
+            icon: 'list-outline',
             hidden: this.getRole(['admin', 'operator']),
             children: [
                 {
@@ -141,7 +141,7 @@ export class PagesComponent implements OnInit, OnDestroy {
         },
         {
             title: 'Сотрудники',
-            icon: 'people',
+            icon: 'people-outline',
             hidden: this.getRole(['admin']),
             children: [
                 {

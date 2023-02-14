@@ -10,7 +10,7 @@ import { statusIdentificate } from '../../../utils/const';
 export class StatusBadgeComponent implements ViewCell, OnInit {
     @Input() value: string | number;
     @Input() rowData: any;
-    renderValue: string;
+    renderValue: string | boolean;
     status: string;
     constructor() {}
     getStatus() {
@@ -43,6 +43,12 @@ export class StatusBadgeComponent implements ViewCell, OnInit {
                 return 'primary';
             case 'Offline':
                 return 'success';
+            case 'None':
+                return 'control';
+            case true:
+                return 'success';
+            case false:
+                return 'primary';
             case 'None':
                 return 'control';
             default:

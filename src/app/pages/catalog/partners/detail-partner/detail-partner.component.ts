@@ -1,13 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IDetailBrand } from '../../../../@core/models/catalog/brand';
-import {
-    IDetailProduct,
-    IDetailTag,
-} from '../../../../@core/models/catalog/catalog';
 import { IDetailCategory } from '../../../../@core/models/catalog/category';
 import { IListPartnerFeedbacks } from '../../../../@core/models/catalog/partners';
 import { PartnerFeedbacksService } from '../../../../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
