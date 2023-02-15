@@ -1,12 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NbMomentDateService } from '@nebular/moment';
-import {
-    NbSortDirection,
-    NbSortRequest,
-    NbTreeGridDataSource,
-    NbTreeGridDataSourceBuilder,
-} from '@nebular/theme';
+
 import * as moment from 'moment';
+import { getProductCode } from '../../../utils';
 
 @Component({
     selector: 'ngx-kib',
@@ -15,7 +10,7 @@ import * as moment from 'moment';
 })
 export class KibComponent implements OnInit {
     @Input() data;
-
+    getProductCode = getProductCode;
     constructor() {}
     getUsedMoney(data) {
         let sum = 0;

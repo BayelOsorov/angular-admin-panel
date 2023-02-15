@@ -5,7 +5,7 @@ import { ICreditApplicationDetail } from '../../../models/credit-application/cre
 import { AuthService } from '../../../services/auth/auth.service';
 import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
 import { OldBackendService } from '../../../services/old-backend/old-backend.service';
-import { downloadFile } from '../../../utils';
+import { downloadFile, getProductCode } from '../../../utils';
 
 @Component({
     selector: 'ngx-credit-application-detail-info',
@@ -23,7 +23,7 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
     creditReportUrl;
     trustLevel;
     repaymentDays;
-
+    getProductCode = getProductCode;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private applicationRequestsService: ApplicationRequestsService,

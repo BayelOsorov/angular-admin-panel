@@ -96,7 +96,10 @@
             <nb-alert status="info" *ngFor="let product of kibData">
                 <div class="d-flex justify-content-around align-items-center">
                     <i style="font-size: 25px" class="nb-info"></i>
-                    <p>Подключен продукт {{ product.productCode }}</p>
+                    <p>
+                        Подключен продукт
+                        {{ getProductCode(product.productCode) }}
+                    </p>
                 </div>
             </nb-alert>
             <!-- <nb-alert status="danger">

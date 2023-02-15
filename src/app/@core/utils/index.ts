@@ -13,6 +13,7 @@ import {
     translateIdentificationLevels,
     checkRolePermission,
     getFileType,
+    getProductCode,
 } from './helpers';
 import {
     Position,
@@ -44,6 +45,7 @@ export {
     translateIdentificationLevels,
     checkRolePermission,
     getFileType,
+    getProductCode,
     Position,
     placeOfWorkType,
     entrepreneurTypeEnum,

@@ -1,7 +1,6 @@
 /* eslint-disable no-eval */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Observable, timer, Subscription, Subject } from 'rxjs';
 import { switchMap, tap, share, retry, takeUntil } from 'rxjs/operators';
 import { ApplicationRequestsService } from '../@core/services/credit-application/credit.service';
@@ -176,11 +175,11 @@ export class PagesComponent implements OnInit, OnDestroy {
 
             children: [
                 {
-                    title: 'Новости для партнера',
+                    title: 'для партнера',
                     link: '/catalog/partner-news',
                 },
                 {
-                    title: 'Новости для клиента',
+                    title: 'для клиента',
                     link: '/catalog/news',
                 },
             ],

@@ -60,6 +60,16 @@ const trEngToRusOwnerST = (value) => {
             return value;
     }
 };
+const getProductCode = (productCode) => {
+    switch (productCode) {
+        case 'Charmander':
+            return '0-0-3';
+        case 'Pikachu':
+            return 'Топливная карта';
+        default:
+            return productCode;
+    }
+};
 const translateIdentificationLevels = (status) => {
     switch (status) {
         case 'Online':
@@ -139,4 +149,5 @@ export {
     translateIdentificationLevels,
     checkRolePermission,
     getFileType,
+    getProductCode,
 };
