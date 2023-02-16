@@ -54,12 +54,12 @@ const EducationEnum = [
     { value: 'SpecializedSecondary', text: 'Среднее-специальное' },
 ];
 const workExperience = [
-    { value: 'OneOrLess', text: '1 или менее' },
-    { value: 'TwoOrThree', text: '2 или 3' },
-    { value: 'FourOrFive', text: '4 или 5' },
-    { value: 'SixOrEight', text: '6 или 8' },
-    { value: 'NinOrTen', text: '9 или 10' },
-    { value: 'ElevenAndMore', text: '11 и более' },
+    { value: 'OneOrLess', text: 'до 1 года' },
+    { value: 'TwoOrThree', text: 'от 1 до 3 лет' },
+    { value: 'FourOrFive', text: 'от 3 до 5 лет' },
+    { value: 'SixOrEight', text: 'от 5 до 8 лет' },
+    { value: 'NinOrTen', text: 'от 8 до 10 лет' },
+    { value: 'ElevenAndMore', text: 'от 10 и более' },
 ];
 
 const clientHistoryTypeValue = [
