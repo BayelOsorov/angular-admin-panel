@@ -1,16 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { StatusBadgeComponent } from '../../../@core/components/shared/status-badge/status-badge.component';
-import { ApplicationRequestsService } from '../../../@core/services/credit-application/credit.service';
 import { UsersService } from '../../../@core/services/users/users.service';
-import {
-    tableNumbering,
-    translateIdentificationLevels,
-} from '../../../@core/utils';
+import { tableNumbering } from '../../../@core/utils';
 @Component({
     templateUrl: './list-users.component.html',
     styleUrls: ['./list-users.component.scss'],

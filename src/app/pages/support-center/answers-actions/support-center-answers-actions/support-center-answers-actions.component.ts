@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NbWindowRef } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';

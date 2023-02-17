@@ -7,7 +7,7 @@ import {
     ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NbDialogService, NbWindowService } from '@nebular/theme';
+import { NbWindowService } from '@nebular/theme';
 import { Subscription } from 'rxjs';
 import { ChangePasswordModalComponent } from '../../../@core/components/staff/change-password-modal/change-password-modal.component';
 import { EditStaffComponent } from '../../../@core/components/staff/edit-staff/edit-staff.component';

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { map, map as mapRx, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { CreatePartnerBonuseComponent } from '../../../../@core/components/bonuses/partner-bonuses/create-partner/create-partner-bonuse.component';
 import { PartnerBonusesService } from '../../../../@core/services/bonuses/partner-bonuses.service';
 import { OldBackendService } from '../../../../@core/services/old-backend/old-backend.service';

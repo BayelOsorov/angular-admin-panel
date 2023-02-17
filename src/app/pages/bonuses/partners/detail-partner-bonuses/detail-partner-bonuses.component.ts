@@ -6,7 +6,6 @@ import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { CreatePartnerBonuseComponent } from '../../../../@core/components/bonuses/partner-bonuses/create-partner/create-partner-bonuse.component';
 import { CreatePercentagePartnerComponent } from '../../../../@core/components/bonuses/partner-bonuses/create-percentage-partner/create-percentage-partner.component';
 import { PartnerBonusesService } from '../../../../@core/services/bonuses/partner-bonuses.service';
 import { tableNumbering } from '../../../../@core/utils';
