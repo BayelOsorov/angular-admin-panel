@@ -19,7 +19,7 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
     partner;
     partnerId: number;
     branches;
-    passportImages;
+    customerData;
     form;
     tableColumns = {
         index: {
@@ -89,7 +89,7 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.partner = res;
-                this.getUserPassportImages(res.clientId);
+                this.getUserCustomerData(res.clientId);
 
                 this.branches = {
                     items: res.branches,
@@ -102,13 +102,13 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
                 };
             });
     }
-    getUserPassportImages(userId) {
+    getUserCustomerData(userId) {
         this.usersService
             .getDetailUser(userId)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data: any) => {
-                    this.passportImages = data.identificationInformation;
+                    this.customerData = data;
                 },
             });
     }

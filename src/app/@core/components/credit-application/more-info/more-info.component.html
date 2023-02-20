@@ -29,7 +29,9 @@
         [fullname]="
             customerData.identificationInformation.surname +
             ' ' +
-            customerData.identificationInformation.name
+            customerData.identificationInformation.name +
+            ' ' +
+            customerData.identificationInformation?.patronymic
         "
         class="detail-block"
     ></ngx-black-list-person>
