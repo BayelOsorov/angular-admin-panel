@@ -10,7 +10,7 @@ import { truncateDecimals } from '../../../utils';
     styleUrls: ['./black-list-person.component.scss'],
 })
 export class BlackListPersonComponent implements OnInit, OnDestroy {
-    @Input() fullname = 'Генри Сехудо';
+    @Input() fullname;
     Math = Math;
     blackList;
     truncateDecimals;

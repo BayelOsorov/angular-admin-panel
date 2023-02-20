@@ -9,7 +9,7 @@ import { ApplicationRequestsService } from '../../../services/credit-application
     styleUrls: ['./soc-fond.component.scss'],
 })
 export class SocFondComponent implements OnInit, OnDestroy {
-    @Input() pin = '20040405032203';
+    @Input() pin;
     socialFund;
     private destroy$: Subject<void> = new Subject<void>();
 

@@ -9,8 +9,8 @@ import { truncateDecimals } from '../../../utils';
     templateUrl: './tax-inspection.component.html',
     styleUrls: ['./tax-inspection.component.scss'],
 })
-export class TaxInspectionComponent implements OnInit {
-    @Input() pin = '20040405032203';
+export class TaxInspectionComponent implements OnInit, OnDestroy {
+    @Input() pin;
     objectValues = Object.values;
     taxPayer;
     socialFundBalance;

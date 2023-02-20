@@ -6,30 +6,24 @@ import {
     trigger,
 } from '@angular/animations';
 import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import {
     Component,
     OnInit,
-    ChangeDetectionStrategy,
     Input,
     ViewChild,
-    ChangeDetectorRef,
     OnDestroy,
     Output,
     EventEmitter,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { environment } from '../../../../../environments/environment';
 import {
     IIdentificationDetail,
     IPersonalData,
 } from '../../../models/identification/identification';
 import { OpenviduComponent } from '../../../openvidu';
-import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
 import { HandleErrorService } from '../../../services/http/handle-error.service';
 import { IdentificationService } from '../../../services/identification/identification.service';
 import {
@@ -38,7 +32,6 @@ import {
     IdentificationAnswers,
     maritalStatus,
     residenceLocationEnum,
-    translateMaritalStatus,
 } from '../../../utils';
 @Component({
     selector: 'ngx-identification-detail',
@@ -70,9 +63,7 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
     constructor(
         private identificationService: IdentificationService,
         private toastService: ToastrService,
-        private router: Router,
         private location: Location,
-        private http: HttpClient,
         private errorService: HandleErrorService,
         private fb: FormBuilder
     ) {}
