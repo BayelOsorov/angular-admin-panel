@@ -172,7 +172,11 @@
                     <tr>
                         <td>Адрес прописки</td>
                         <td>
-                            {{ personalData.residenceAddress }}
+                            {{
+                                getResidenceLoc(personalData.residenceRegion) +
+                                    ', ' +
+                                    personalData.residenceAddress
+                            }}
                         </td>
                     </tr>
                 </table>

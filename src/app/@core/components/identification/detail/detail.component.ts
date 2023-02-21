@@ -73,6 +73,7 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
     getGender(val) {
         return genderEnum.find((e) => e.value === val).text;
     }
+
     approvePhotoIdn() {
         this.identificationService
             .approvePhotoIdentification(this.data.id)
