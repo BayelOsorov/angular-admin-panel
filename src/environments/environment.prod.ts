@@ -22,8 +22,4 @@ export const environment = {
     customersUrl: 'https://cash2u.io:1001',
     partnerNewsUrl: 'https://cash2u.io:8050',
     partnerBonusesUrl: 'https://cash2u.io:7777',
-
-    // baseUrl: 'https://cash2u.io:2001',
-    // baseUrlOidc: 'https://cash2u.io:2021',
-    // catalogUrl: 'https://cash2u.io:28001',
 };
