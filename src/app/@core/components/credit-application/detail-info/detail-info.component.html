@@ -17,7 +17,7 @@
         </nb-alert>
     </div>
     <div class="chart d-flex mt-3">
-        <nb-card class="col-md-8" *ngIf="trustLevel">
+        <nb-card class="graphic col-md-8" *ngIf="trustLevel">
             <nb-alert
                 class="row justify-content-center"
                 [status]="trustLevel.status"
@@ -79,13 +79,13 @@
                     <p>Значится в списке террористов</p>
                 </div>
             </nb-alert>
-            <nb-alert *ngIf="taxPayer?.debt" status="success">
+            <nb-alert *ngIf="!taxPayer?.debt" status="success">
                 <div class="d-flex justify-content-around align-items-center">
                     <i style="font-size: 35px" class="nb-checkmark-circle"></i>
                     <p>Задолженности по налогам и страховым взносам нет</p>
                 </div>
             </nb-alert>
-            <nb-alert *ngIf="!taxPayer?.debt" status="danger">
+            <nb-alert *ngIf="taxPayer?.debt" status="danger">
                 <div class="d-flex justify-content-around align-items-center">
                     <i style="font-size: 35px" class="nb-alert"></i>
                     <p>

@@ -88,7 +88,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.toastService.success(
-                    'Вы успешно оффлайн идентифицировали!'
+                    'Вы успешно офлайн идентифицировали!'
                 );
                 this.getUserDetail(this.userData.id);
             });

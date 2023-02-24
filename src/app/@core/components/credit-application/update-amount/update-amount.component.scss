@@ -5,3 +5,9 @@
 ::ng-deep .ant-slider-track {
     background-color: nb-theme(alert-info-background-color);
 }
+@media (max-width: 425px) {
+    .approve-btn {
+        width: 100%;
+        font-size: 15px;
+    }
+}

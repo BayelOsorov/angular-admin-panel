@@ -27,4 +27,16 @@
         margin-top: 5px;
         margin-left: 5px;
     }
+    @media (max-width: 768px) {
+        .chart {
+            display: block !important;
+            .alerts {
+                width: 100%;
+                max-width: 100%;
+            }
+            .graphic {
+                max-width: 100%;
+            }
+        }
+    }
 }

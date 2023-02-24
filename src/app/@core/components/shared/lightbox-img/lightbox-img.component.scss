@@ -56,3 +56,19 @@ img {
     -webkit-transition: all 300ms 0ms ease-in-out;
     transition: all 300ms 0ms ease-in-out;
 }
+// new
+.image-container-light {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    overflow: hidden;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    button {
+        margin-right: 30px;
+    }
+}

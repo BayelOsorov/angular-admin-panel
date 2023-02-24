@@ -11,7 +11,7 @@ export class StaffService {
     getListStaff(page = 1, name = '') {
         return this.http.get<IListStaff>(
             environment.baseUrlOidc +
-                `/Administration/api/v1/Users/Search?name=${name}&page=${page}&pageSize=20`
+                `/Administration/api/v1/Users/Search?name=${name}&pageNumber=${page}&pageSize=20`
         );
     }
     getDetailStaff(id: string) {

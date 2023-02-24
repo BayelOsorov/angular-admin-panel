@@ -1,6 +1,10 @@
-<ng-container *ngIf="!safeImgUrl">
+<ng-container>
     <div class="image-container">
-        <img width="80%" (click)="openImage()" [src]="imgUrl | useHttpImgSrc" />
+        <img
+            width="80%"
+            (click)="openImage()"
+            [src]="imgUrl ? (imgUrl | useHttpImgSrc) : safeImgUrl"
+        />
     </div>
     <div *ngIf="open" class="viewer-container">
         <div class="viewer-content">
@@ -8,25 +12,28 @@
                 <i style="font-size: 50px" class="nb-close"></i>
             </a>
 
-            <!-- <img class="main-img" [src]="imgUrl | useHttpImgSrc" /> -->
-        </div>
-    </div>
-</ng-container>
-<ng-container *ngIf="safeImgUrl">
-    <div class="image-container">
-        <img width="80%" (click)="openImageSafe()" [src]="safeImgUrl" />
-    </div>
-    <div *ngIf="open" class="viewer-container">
-        <div class="viewer-content">
-            <a class="close-button" (click)="open = false">
-                <i style="font-size: 50px" class="nb-close"></i>
-            </a>
-
-            <img
-                (click)="zoomOn = !zoomOn"
-                [class]="zoomOn ? 'main-img img-zoom' : 'main-img'"
-                [src]="safeImgUrl"
-            />
+            <div class="image-container-light" #imageContainer>
+                <img
+                    [src]="imgUrl ? (imgUrl | useHttpImgSrc) : safeImgUrl"
+                    class="main-img"
+                    #imageElement
+                    (dblclick)="zoomIn()"
+                    (mouseup)="onImageMouseUp($event)"
+                    (mousedown)="onImageMouseDown($event)"
+                    (mousemove)="onImageMouseMove($event)"
+                    (dragstart)="onImageMouseMove($event)"
+                    (wheel)="onImageWheel($event)"
+                />
+            </div>
+            <div class="controls">
+                <!-- <button nbButton (click)="toggleFullscreen()">
+                    На весь экран
+                </button> -->
+                <button nbButton (click)="zoomOut()">-</button>
+                <button nbButton (click)="zoomIn()">+</button>
+                <button nbButton (click)="rotateLeft()">↺</button>
+                <button nbButton (click)="rotateRight()">↻</button>
+            </div>
         </div>
     </div>
 </ng-container>
