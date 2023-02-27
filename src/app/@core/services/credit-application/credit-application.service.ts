@@ -26,6 +26,12 @@ export class CreditApplicationService {
                 `/admin/api/v1/ocl-requests/search?pageNumber=${page}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
         );
     }
+    getListCreditApplicationByCustomerId(page, customerId) {
+        return this.http.get<ICreditApplicationList>(
+            environment.creditApplicationUrl +
+                `/admin/api/v1/ocl-requests/search?pageNumber=${page}&customerId=${customerId}&pageSize=20`
+        );
+    }
     getCreditApplicationDetailAdmin(id) {
         return this.http.get<ICreditApplicationDetail>(
             environment.creditApplicationUrl +

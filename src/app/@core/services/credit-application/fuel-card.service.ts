@@ -31,6 +31,12 @@ export class FuelCardApplicationService {
                 `/admin/api/v1/ocl-requests/search?pageNumber=${page}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
         );
     }
+    getListFuelCardApplicationByCustomerId(page, customerId) {
+        return this.http.get<ICreditApplicationList>(
+            environment.fuelCardUrl +
+                `/admin/api/v1/ocl-requests/search?pageNumber=${page}&customerId=${customerId}&pageSize=20`
+        );
+    }
     getFuelCardApplicationDetailAdmin(id) {
         return this.http.get<ICreditApplicationDetail>(
             environment.fuelCardUrl + `/admin/api/v1/ocl-requests/${id}/details`

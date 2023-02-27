@@ -46,7 +46,7 @@ export class PagesComponent implements OnInit, OnDestroy {
         {
             title: 'Идентификация',
             icon: 'list-outline',
-            hidden: this.getRole(['admin', 'operator']),
+            hidden: this.getRole(['admin', 'operator', 'kyc_manager']),
             children: [
                 {
                     title: 'по фотографии',
@@ -55,6 +55,11 @@ export class PagesComponent implements OnInit, OnDestroy {
                 {
                     title: 'по видео',
                     link: '/identification/video',
+                },
+                {
+                    title: 'Список',
+                    link: '/identification/list',
+                    hidden: this.getRole(['kyc_manager', 'admin']),
                 },
             ],
         },

@@ -14,6 +14,7 @@ import {
     checkRolePermission,
     getFileType,
     getProductCode,
+    isPhone,
 } from './helpers';
 import {
     Position,
@@ -46,6 +47,7 @@ export {
     checkRolePermission,
     getFileType,
     getProductCode,
+    isPhone,
     Position,
     placeOfWorkType,
     entrepreneurTypeEnum,

@@ -377,6 +377,7 @@
                 tabTitle="Продукт '0-0-3'"
             >
                 <ngx-loan-application-user-detail
+                    [userData]="userData"
                     [kibData]="loanApplKibData"
                 ></ngx-loan-application-user-detail>
             </nb-tab>
@@ -386,6 +387,7 @@
                 tabTitle="Продукт 'Топливная карта'"
             >
                 <ngx-fuel-card-user-detail
+                    [userData]="userData"
                     [kibData]="fuelCardApplKibData"
                 ></ngx-fuel-card-user-detail>
             </nb-tab>

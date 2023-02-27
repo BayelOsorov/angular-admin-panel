@@ -1,1 +1,11 @@
+<ngx-custom-table
+    (changePageEvent)="getListApplications($event)"
+    (rowSelectEvent)="onRowSelect($event)"
+    [tableColumns]="tableColumns"
+    [tableData]="listApplications"
+    [productName]="'ни одной заявки'"
+    [actions]="false"
+    class="mb-5 d-block"
+>
+</ngx-custom-table>
 <ngx-kib [data]="kibData"> </ngx-kib>

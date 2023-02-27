@@ -13,4 +13,25 @@
     nb-layout-header.fixed {
         z-index: 100 !important;
     }
+    .credit-filter {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    @media (max-width: 768px) {
+        .credit-filter {
+            flex-wrap: wrap;
+            ngx-input-search {
+                margin-right: 0 !important;
+                width: 100% !important;
+            }
+            input {
+                width: 100% !important;
+                margin-right: 0 !important;
+                margin-bottom: 25px;
+            }
+            nb-select {
+                width: 100% !important;
+            }
+        }
+    }
 }
