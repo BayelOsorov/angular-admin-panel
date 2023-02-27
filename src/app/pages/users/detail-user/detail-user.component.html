@@ -372,6 +372,23 @@
                     </nb-card-body>
                 </nb-card>
             </nb-tab>
+            <nb-tab
+                [disabled]="!userData?.identificationInformation"
+                tabTitle="Продукт '0-0-3'"
+            >
+                <ngx-loan-application-user-detail
+                    [kibData]="loanApplKibData"
+                ></ngx-loan-application-user-detail>
+            </nb-tab>
+
+            <nb-tab
+                [disabled]="!userData?.identificationInformation"
+                tabTitle="Продукт 'Топливная карта'"
+            >
+                <ngx-fuel-card-user-detail
+                    [kibData]="fuelCardApplKibData"
+                ></ngx-fuel-card-user-detail>
+            </nb-tab>
         </nb-tabset>
     </nb-card-body>
 </nb-card>

@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, Input } from '@angular/core';
+import {
+    Component,
+    OnDestroy,
+    OnInit,
+    Input,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
@@ -7,6 +13,7 @@ import { ApplicationRequestsService } from '../../../services/credit-application
     selector: 'ngx-soc-fond',
     templateUrl: './soc-fond.component.html',
     styleUrls: ['./soc-fond.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Default,
 })
 export class SocFondComponent implements OnInit, OnDestroy {
     @Input() pin;
@@ -22,6 +29,8 @@ export class SocFondComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
+                    console.log('work');
+
                     this.socialFund = data;
                 },
             });

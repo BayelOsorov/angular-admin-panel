@@ -199,6 +199,5 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
 
         UseHttpImageSourcePipe,
     ],
-    exports: [],
 })
 export class PagesModule {}

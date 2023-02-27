@@ -31,6 +31,8 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     alertStatus;
     fuelCardCreditLineData;
     canOfflineIdentificate;
+    loanApplKibData = [];
+    fuelCardApplKibData = [];
     public loadDelay = false;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -55,6 +57,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                     this.getFuelCardCreditLineStatus();
                     this.getUserDocuments();
                     this.getAlertStatus();
+                    this.getLocalCreditBureauInfo(data.id);
                 },
             });
     }
@@ -150,6 +153,23 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                     });
                 });
         });
+    }
+    getLocalCreditBureauInfo(id) {
+        this.creditService
+            .getCustomerCreditLines(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data: [any]) => {
+                    data.find((obj) => {
+                        if (obj.productCode === 'Charmander') {
+                            this.loanApplKibData.push(obj);
+                        }
+                        if (obj.productCode === 'Pikachu') {
+                            this.fuelCardApplKibData.push(obj);
+                        }
+                    });
+                },
+            });
     }
     dowloadDocument(url) {
         downloadFile(
