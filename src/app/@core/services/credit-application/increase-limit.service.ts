@@ -85,6 +85,13 @@ export class IncreaseLimitApplicationService {
             environment.creditApplicationUrl + `/operator/api/v1/account`
         );
     }
+    resetDeclinedCreditApplication(id) {
+        return this.http.patch(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/customers/${id}/update-ucl-creation-lockout-end`,
+            { lockoutEnd: null }
+        );
+    }
     createCreditSpecialistAccount() {
         return this.http.post(
             environment.creditApplicationUrl + `/operator/api/v1/account`,

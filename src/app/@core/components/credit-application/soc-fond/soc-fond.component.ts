@@ -29,8 +29,6 @@ export class SocFondComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
-                    console.log('work');
-
                     this.socialFund = data;
                 },
             });

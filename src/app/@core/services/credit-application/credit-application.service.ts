@@ -66,6 +66,13 @@ export class CreditApplicationService {
             data
         );
     }
+    resetDeclinedCreditApplication(id) {
+        return this.http.patch(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/customers/${id}/update-ocl-creation-lockout-end`,
+            { lockoutEnd: null }
+        );
+    }
     sendCommentCreditApplication(id, data) {
         return this.http.post(
             environment.creditApplicationUrl +

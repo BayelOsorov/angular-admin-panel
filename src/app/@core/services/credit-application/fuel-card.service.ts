@@ -49,6 +49,13 @@ export class FuelCardApplicationService {
             data
         );
     }
+    resetDeclinedFuelCardApplication(id) {
+        return this.http.patch(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/customers/${id}/update-ocl-creation-lockout-end`,
+            { lockoutEnd: null }
+        );
+    }
     declineFuelCardApplication(id, data) {
         return this.http.patch(
             environment.fuelCardUrl +

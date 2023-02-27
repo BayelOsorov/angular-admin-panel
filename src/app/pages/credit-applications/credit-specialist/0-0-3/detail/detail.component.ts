@@ -127,6 +127,7 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
+
     declineCredit(lockoutEndData) {
         this.creditApplicationsService
             .declineCreditApplication(

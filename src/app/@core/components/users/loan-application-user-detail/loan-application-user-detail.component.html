@@ -3,9 +3,18 @@
     (rowSelectEvent)="onRowSelect($event)"
     [tableColumns]="tableColumns"
     [tableData]="listApplications"
-    [productName]="'ни одной заявки'"
+    [productName]="'ни одной заявки на 0-0-3'"
     [actions]="false"
     class="mb-5 d-block"
 >
 </ngx-custom-table>
 <ngx-kib [data]="kibData"> </ngx-kib>
+<!-- *ngIf="canresetDeclinedApp" -->
+<ngx-confirm-buttons
+    *ngIf="canresetDeclinedApp"
+    class="d-block mt-5 w-50"
+    (approveEvent)="resetDeclinedApp()"
+    status="warning"
+    title="Сбросить блокировку заявки"
+>
+</ngx-confirm-buttons>

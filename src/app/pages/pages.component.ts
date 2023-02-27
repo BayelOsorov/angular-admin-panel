@@ -56,11 +56,11 @@ export class PagesComponent implements OnInit, OnDestroy {
                     title: 'по видео',
                     link: '/identification/video',
                 },
-                {
-                    title: 'Список',
-                    link: '/identification/list',
-                    hidden: this.getRole(['kyc_manager', 'admin']),
-                },
+                // {
+                //     title: 'Список',
+                //     link: '/identification/list',
+                //     hidden: this.getRole(['kyc_manager', 'admin']),
+                // },
             ],
         },
         {
@@ -190,7 +190,7 @@ export class PagesComponent implements OnInit, OnDestroy {
             ],
         },
         {
-            title: 'Каталог партнера',
+            title: 'Каталог партнеров',
             icon: 'edit-2-outline',
             link: '/catalog',
             hidden: this.getRole(['admin', 'manager', 'underwriter']),

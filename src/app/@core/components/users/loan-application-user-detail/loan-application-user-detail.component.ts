@@ -11,9 +11,10 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { tableNumbering } from '../../../../@core/utils';
+import { checkRolePermission, tableNumbering } from '../../../../@core/utils';
 import { StatusBadgeComponent } from '../../../../@core/components/shared/status-badge/status-badge.component';
 import { CreditApplicationService } from '../../../../@core/services/credit-application/credit-application.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
     selector: 'ngx-loan-application-user-detail',
@@ -25,7 +26,7 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
     @Input() userData;
     listApplications;
-
+    canresetDeclinedApp: boolean;
     tableColumns = {
         index: {
             title: '№',
@@ -67,7 +68,7 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
         private creditApplicationsService: CreditApplicationService,
         private toaster: ToastrService,
         private router: Router,
-        private fb: FormBuilder,
+        private authService: AuthService,
         private datePipe: DatePipe
     ) {}
     parseDate(date) {
@@ -82,8 +83,25 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
     onRowSelect(id) {
         this.router.navigate(['/credit-application/0-0-3/list/detail/' + id]);
     }
+    resetDeclinedApp() {
+        this.creditApplicationsService
+            .resetDeclinedCreditApplication(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: () => {
+                    this.toaster.success('Время блокировки успешно сброшено!');
+                },
+            });
+    }
+    checkPermission() {
+        const userAuthData = this.authService.getUserData();
+        this.canresetDeclinedApp = checkRolePermission(userAuthData.role, [
+            'credit_specialist_admin',
+        ]);
+    }
     ngOnInit(): void {
         this.getListApplications();
+        this.checkPermission();
     }
     ngOnDestroy() {
         this.destroy$.next();

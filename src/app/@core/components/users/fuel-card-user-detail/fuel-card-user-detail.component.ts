@@ -11,9 +11,10 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { tableNumbering } from '../../../utils';
+import { checkRolePermission, tableNumbering } from '../../../utils';
 import { StatusBadgeComponent } from '../../shared/status-badge/status-badge.component';
 import { FuelCardApplicationService } from '../../../services/credit-application/fuel-card.service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
     selector: 'ngx-fuel-card-user-detail',
@@ -25,7 +26,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
     @Input() userData;
     listApplications;
-
+    canresetDeclinedApp: boolean;
     tableColumns = {
         index: {
             title: '№',
@@ -67,7 +68,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
         private fuelCardApplicationsService: FuelCardApplicationService,
         private toaster: ToastrService,
         private router: Router,
-        private fb: FormBuilder,
+        private authService: AuthService,
         private datePipe: DatePipe
     ) {}
     parseDate(date) {
@@ -84,8 +85,25 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             '/credit-application/fuel-card/list/detail/' + id,
         ]);
     }
+    checkPermission() {
+        const userAuthData = this.authService.getUserData();
+        this.canresetDeclinedApp = checkRolePermission(userAuthData.role, [
+            'credit_specialist_admin',
+        ]);
+    }
+    resetDeclinedApp() {
+        this.fuelCardApplicationsService
+            .resetDeclinedFuelCardApplication(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: () => {
+                    this.toaster.success('Время блокировки успешно сброшено!');
+                },
+            });
+    }
     ngOnInit(): void {
         this.getListApplications();
+        this.checkPermission();
     }
     ngOnDestroy() {
         this.destroy$.next();
