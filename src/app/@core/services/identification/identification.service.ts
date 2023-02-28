@@ -12,10 +12,14 @@ import {
 })
 export class IdentificationService {
     constructor(private http: HttpClient) {}
-    getListPhotoIdentification(page, filter) {
+    getListIdentification(page, filter) {
         return this.http.get(
-            environment.creditApplicationUrl +
-                `/admin/api/v1/identification-requests?pageNumber=${page}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
+            environment.identificationUrl +
+                `/admin/api/v1/identification-requests?pageNumber=${page}&pin=${
+                    filter.pin
+                }${
+                    filter.status && `&statusList=${filter.status}`
+                }&phoneNumber=${filter.phoneNumber}&pageSize=20`
         );
     }
     getPhotoIdentification() {

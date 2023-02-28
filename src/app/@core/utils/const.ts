@@ -70,6 +70,27 @@ export const statusIdentificate = [
     { id: 'Online', text: 'Онлайн' },
     { id: 'Offline', text: 'Офлайн' },
     { id: 'None', text: 'Не идентифицирован' },
+
+    { id: 'PhotoIdentificationRequest', text: 'Запрошена фотоидентификация' },
+    { id: 'PhotoIdentificationProcess', text: 'В процессе фотоидентификации' },
+    { id: 'PhotoIdentificationApprove', text: 'Одобрена фотоидентификация' },
+    {
+        id: 'PhotoIdentificationEditRequired',
+        text: 'Нужно отредактировать фотоидентификацию',
+    },
+    { id: 'PhotoIdentificationDecline', text: 'Отклонена видеоидентификация' },
+    { id: 'VideoIdentificationRequest', text: 'Запрошена видеоидентификация' },
+    { id: 'VideoIdentificationProcess', text: 'В процессе видеоидентификации' },
+    {
+        id: 'VideoIdentificationSuspend',
+        text: 'Приостановлена видеоидентификации',
+    },
+    { id: 'VideoIdentificationApprove', text: 'Одобрена видеоидентификация' },
+    {
+        id: 'VideoIdentificationDecline',
+        text: 'Нужно отредактировать видеоидентификацию',
+    },
+
     { id: true, text: 'Одобренный' },
     { id: false, text: 'Ожидание' },
 ];

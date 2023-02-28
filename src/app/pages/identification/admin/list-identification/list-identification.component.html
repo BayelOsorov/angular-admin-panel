@@ -1,0 +1,70 @@
+<nb-card>
+    <nb-card-header>
+        <div [formGroup]="form" class="d-flex justify-content-evenly mt-3">
+            <ngx-input-search
+                class="mr-5"
+                placeholder="ИНН"
+                [control]="form.get('pin')"
+            >
+            </ngx-input-search>
+            <ngx-input-search
+                class="mr-5"
+                placeholder="Номер телефона"
+                [control]="form.get('phoneNumber')"
+            >
+            </ngx-input-search>
+            <nb-select
+                class="w-50"
+                fullWidth
+                placeholder="Тип"
+                formControlName="status"
+            >
+                <nb-option value="">Все</nb-option>
+                <nb-option value="Approved">Одобренный</nb-option>
+
+                <nb-option value="Timeout">Время и стекло</nb-option>
+                <nb-option value="PhotoIdentificationRequest"
+                    >Запрошена фотоидентификация</nb-option
+                >
+                <nb-option value="PhotoIdentificationProcess"
+                    >В процессе - фотоидентификации</nb-option
+                >
+                <nb-option value="PhotoIdentificationApprove"
+                    >Одобренный - фотоидентификация</nb-option
+                >
+                <nb-option value="PhotoIdentificationEditRequired"
+                    >Нужно отредактировать - фотоидентификация</nb-option
+                >
+                <nb-option value="PhotoIdentificationDecline"
+                    >Отклоненный - фотоидентификация</nb-option
+                >
+                <nb-option value="VideoIdentificationRequest"
+                    >Запрошена видеоидентификация</nb-option
+                >
+                <nb-option value="VideoIdentificationProcess"
+                    >В процессе - видеоидентификация</nb-option
+                >
+                <nb-option value="VideoIdentificationSuspend"
+                    >Приостановлена - видеоидентификация</nb-option
+                >
+                <nb-option value="VideoIdentificationApprove"
+                    >Одобренный - видеоидентификация</nb-option
+                >
+                <nb-option value="VideoIdentificationDecline"
+                    >Отклоненный - видеоидентификация</nb-option
+                >
+            </nb-select>
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ngx-custom-table
+            (changePageEvent)="getListApplications($event)"
+            (rowSelectEvent)="onRowSelect($event)"
+            [tableColumns]="tableColumns"
+            [tableData]="listApplications"
+            [productName]="'ни одной заявки'"
+            [actions]="false"
+        >
+        </ngx-custom-table> </nb-card-body
+></nb-card>

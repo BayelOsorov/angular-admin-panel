@@ -56,11 +56,11 @@ export class PagesComponent implements OnInit, OnDestroy {
                     title: 'по видео',
                     link: '/identification/video',
                 },
-                // {
-                //     title: 'Список',
-                //     link: '/identification/list',
-                //     hidden: this.getRole(['kyc_manager', 'admin']),
-                // },
+                {
+                    title: 'Список',
+                    link: '/identification/list',
+                    hidden: this.getRole(['kyc_manager', 'admin']),
+                },
             ],
         },
         {

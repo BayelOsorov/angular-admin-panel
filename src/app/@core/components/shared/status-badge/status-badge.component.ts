@@ -43,8 +43,27 @@ export class StatusBadgeComponent implements ViewCell, OnInit {
                 return 'primary';
             case 'Offline':
                 return 'success';
-            case 'None':
+
+            case 'PhotoIdentificationRequest':
+                return 'info';
+            case 'PhotoIdentificationProcess':
+                return 'primary';
+            case 'PhotoIdentificationApprove':
+                return 'success';
+            case 'PhotoIdentificationEditRequired':
+                return 'warning';
+            case 'PhotoIdentificationDecline':
+                return 'danger';
+            case 'VideoIdentificationRequest':
+                return 'info';
+            case 'VideoIdentificationProcess':
+                return 'primary';
+            case 'VideoIdentificationSuspend':
                 return 'control';
+            case 'VideoIdentificationApprove':
+                return 'success';
+            case 'VideoIdentificationDecline':
+                return 'danger';
             case true:
                 return 'success';
             case false:

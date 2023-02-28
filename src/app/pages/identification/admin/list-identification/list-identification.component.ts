@@ -5,20 +5,20 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { StatusBadgeComponent } from '../../../../../@core/components/shared/status-badge/status-badge.component';
-import { CreditApplicationService } from '../../../../../@core/services/credit-application/credit-application.service';
-import { tableNumbering } from '../../../../../@core/utils';
+import { StatusBadgeComponent } from '../../../../@core/components/shared/status-badge/status-badge.component';
+import { IdentificationService } from '../../../../@core/services/identification/identification.service';
+import { tableNumbering } from '../../../../@core/utils';
 @Component({
-    templateUrl: './credit-application-list.component.html',
-    styleUrls: ['./credit-application-list.component.scss'],
+    templateUrl: './list-identification.component.html',
+    styleUrls: ['./list-identification.component.scss'],
 })
-export class CreditApplicationListAdminComponent implements OnInit, OnDestroy {
+export class ListIdentificationComponent implements OnInit, OnDestroy {
     listApplications;
     localities = [];
     form = this.fb.group({
-        from: [''],
-        to: [''],
-        status: ['Requested'],
+        pin: [''],
+        phoneNumber: [''],
+        status: [''],
         page: [1],
     });
     tableColumns = {
@@ -31,21 +31,25 @@ export class CreditApplicationListAdminComponent implements OnInit, OnDestroy {
                     cell.row.index
                 ),
         },
-        // custom: {
-        //     title: 'ФИО',
-        //     type: 'text',
-        //     valuePrepareFunction: (item) => this.parseDate(item),
-        // },
+
+        phoneNumber: {
+            title: 'Номер телефона',
+            type: 'html',
+            valuePrepareFunction: (item) => ` <a
+                          href='tel:${item}'
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          class='color-a'
+                        >
+                          +${item}
+                        </a>`,
+        },
         createdAt: {
             title: 'Дата',
             type: 'text',
             valuePrepareFunction: (item) => this.parseDate(item),
         },
-        processors: {
-            title: 'Оператор',
-            type: 'text',
-            valuePrepareFunction: (item) => item[item.length - 1]?.fullname,
-        },
+
         status: {
             title: 'Статус',
             type: 'custom',
@@ -63,7 +67,7 @@ export class CreditApplicationListAdminComponent implements OnInit, OnDestroy {
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
-        private creditApplicationsService: CreditApplicationService,
+        private identificationService: IdentificationService,
         private toaster: ToastrService,
         private router: Router,
         private fb: FormBuilder,
@@ -73,12 +77,14 @@ export class CreditApplicationListAdminComponent implements OnInit, OnDestroy {
         return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
     }
     getListApplications(page = 1) {
-        this.creditApplicationsService
-            .getListCreditApplication(page, this.form.value)
+        this.identificationService
+            .getListIdentification(page, this.form.value)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listApplications = res));
     }
-    goToDetail() {}
+    onRowSelect(id) {
+        this.router.navigate([this.router.url + '/detail/' + id]);
+    }
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))

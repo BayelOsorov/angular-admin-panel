@@ -92,6 +92,7 @@ import { DetailUserComponent } from './users/detail-user/detail-user.component';
 import { ListPartnerBonusesComponent } from './bonuses/partners/list-partner-bonuses/list-partner-bonuses.component';
 import { DetailPartnerBonusesComponent } from './bonuses/partners/detail-partner-bonuses/detail-partner-bonuses.component';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { ListIdentificationComponent } from './identification/admin/list-identification/list-identification.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -188,6 +189,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         DetailUserComponent,
         ListPartnerBonusesComponent,
         DetailPartnerBonusesComponent,
+        ListIdentificationComponent,
     ],
     providers: [
         {
