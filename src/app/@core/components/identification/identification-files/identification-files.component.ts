@@ -13,6 +13,7 @@ export class IdentificationFilesComponent implements OnInit, OnDestroy {
     @Input() data;
     videos;
     private destroy$: Subject<void> = new Subject<void>();
+
     constructor(
         private authService: AuthService,
         private creditService: ApplicationRequestsService
@@ -22,9 +23,15 @@ export class IdentificationFilesComponent implements OnInit, OnDestroy {
             .getCustomerVideoCalls(this.data.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
-                this.videos = res;
+                this.videos = this.sortArray(res);
             });
     }
+    sortArray = (arr) =>
+        arr.sort(
+            (a, b) =>
+                new Date(a.createdAt).valueOf() -
+                new Date(b.createdAt).valueOf()
+        );
     ngOnInit(): void {
         this.getVideos();
     }
