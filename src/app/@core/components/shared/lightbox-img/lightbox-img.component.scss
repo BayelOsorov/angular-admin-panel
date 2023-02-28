@@ -27,7 +27,8 @@
     color: white;
     cursor: pointer;
     /* Give some padding and background colour so text is always legible */
-    background-color: black;
+    background-color: transparent;
+    border: none;
     padding: 7px;
     /* z-index must be higher than container's so it's always on top */
     z-index: 9999999;

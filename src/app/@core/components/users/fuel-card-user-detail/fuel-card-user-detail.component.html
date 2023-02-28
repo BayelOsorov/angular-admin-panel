@@ -8,12 +8,12 @@
     class="mb-5 d-block"
 >
 </ngx-custom-table>
-<ngx-kib [data]="kibData"> </ngx-kib>
 <ngx-confirm-buttons
-    *ngIf="canresetDeclinedApp"
-    class="d-block mt-5 w-50"
+    *ngIf="canresetDeclinedApp && hasDeclinedApp"
+    class="d-block mb-5 w-50 mx-auto"
     (approveEvent)="resetDeclinedApp()"
-    status="warning"
+    status="danger"
     title="Сбросить блокировку заявки"
 >
 </ngx-confirm-buttons>
+<ngx-kib [data]="kibData"> </ngx-kib>

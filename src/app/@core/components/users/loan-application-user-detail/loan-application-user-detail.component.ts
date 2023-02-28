@@ -20,13 +20,14 @@ import { AuthService } from '../../../services/auth/auth.service';
     selector: 'ngx-loan-application-user-detail',
     templateUrl: './loan-application-user-detail.component.html',
     styleUrls: ['./loan-application-user-detail.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Default,
+    // changeDetection: ChangeDetectionStrategy.Default,
 })
 export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
     @Input() userData;
     listApplications;
     canresetDeclinedApp: boolean;
+    hasDeclinedApp: boolean;
     tableColumns = {
         index: {
             title: '№',
@@ -78,7 +79,12 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
         this.creditApplicationsService
             .getListCreditApplicationByCustomerId(page, this.userData.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => (this.listApplications = res));
+            .subscribe((res) => {
+                this.listApplications = res;
+                if (res.items.find((obj) => obj.status === 'Declined')) {
+                    this.hasDeclinedApp = true;
+                }
+            });
     }
     onRowSelect(id) {
         this.router.navigate(['/credit-application/0-0-3/list/detail/' + id]);

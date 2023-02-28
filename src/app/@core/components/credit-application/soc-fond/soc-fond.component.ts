@@ -13,7 +13,7 @@ import { ApplicationRequestsService } from '../../../services/credit-application
     selector: 'ngx-soc-fond',
     templateUrl: './soc-fond.component.html',
     styleUrls: ['./soc-fond.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Default,
+    // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SocFondComponent implements OnInit, OnDestroy {
     @Input() pin;

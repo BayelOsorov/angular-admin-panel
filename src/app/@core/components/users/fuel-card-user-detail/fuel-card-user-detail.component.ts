@@ -20,13 +20,14 @@ import { AuthService } from '../../../services/auth/auth.service';
     selector: 'ngx-fuel-card-user-detail',
     templateUrl: './fuel-card-user-detail.component.html',
     styleUrls: ['./fuel-card-user-detail.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Default,
+    // changeDetection: ChangeDetectionStrategy.Default,
 })
 export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
     @Input() userData;
     listApplications;
     canresetDeclinedApp: boolean;
+    hasDeclinedApp;
     tableColumns = {
         index: {
             title: '№',
@@ -78,7 +79,12 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
         this.fuelCardApplicationsService
             .getListFuelCardApplicationByCustomerId(page, this.userData.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => (this.listApplications = res));
+            .subscribe((res) => {
+                this.listApplications = res;
+                if (res.items.find((obj) => obj.status === 'Declined')) {
+                    this.hasDeclinedApp = true;
+                }
+            });
     }
     onRowSelect(id) {
         this.router.navigate([
