@@ -64,10 +64,7 @@ import * as Widgets from 'fusioncharts/fusioncharts.widgets';
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CreditApplicationMoreInfoComponent } from './credit-application/more-info/more-info.component';
-import {
-    FsIconComponent,
-    KibComponent,
-} from './credit-application/kib/kib.component';
+import { KibComponent } from './credit-application/kib/kib.component';
 import { SocFondComponent } from './credit-application/soc-fond/soc-fond.component';
 import { IdentificationFilesComponent } from './identification/identification-files/identification-files.component';
 import { PassportDataComponent } from './credit-application/passport-data/passport-data.component';
@@ -186,7 +183,6 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         CreditApplicationDetailInfoComponent,
         CreditApplicationMoreInfoComponent,
         KibComponent,
-        FsIconComponent,
         SocFondComponent,
         IdentificationFilesComponent,
         PassportDataComponent,
@@ -246,7 +242,6 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         CreditApplicationDetailInfoComponent,
         CreditApplicationMoreInfoComponent,
         KibComponent,
-        FsIconComponent,
         SocFondComponent,
         IdentificationFilesComponent,
         ContragentsDetailComponent,
