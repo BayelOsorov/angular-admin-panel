@@ -1,6 +1,6 @@
 <nb-alert
     *ngIf="fuelCardCreditLineData?.creditLineDetails?.isClosed"
-    status="warning"
+    status="danger"
     disabled
     class="float-right w-20"
 >
@@ -17,7 +17,7 @@
 >
 </ngx-custom-table>
 <ngx-confirm-buttons
-    *ngIf="canresetDeclinedApp && hasDeclinedApp"
+    *ngIf="canresetDeclinedApp && hasDeclinedApp && allDeclinedApp"
     class="d-block mb-5 w-50 mx-auto"
     (approveEvent)="resetDeclinedApp()"
     status="danger"

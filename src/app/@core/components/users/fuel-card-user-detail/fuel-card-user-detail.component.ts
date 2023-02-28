@@ -29,6 +29,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
     canresetDeclinedApp: boolean;
     hasDeclinedApp;
     fuelCardCreditLineData;
+    allDeclinedApp = false;
     tableColumns = {
         index: {
             title: '№',
@@ -85,6 +86,9 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
                 this.listApplications = res;
                 if (res.items.find((obj) => obj.status === 'Declined')) {
                     this.hasDeclinedApp = true;
+                }
+                if (res.items.every((obj) => obj.status === 'Declined')) {
+                    this.allDeclinedApp = true;
                 }
             });
     }
