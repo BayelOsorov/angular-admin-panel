@@ -73,6 +73,19 @@ export class CreditApplicationService {
             { lockoutEnd: null }
         );
     }
+
+    closeCustomerCreditLine(id) {
+        return this.http.get(
+            environment.closeCreditLineUrl +
+                `/api/v1/administration/Account/CloseCreditLine/${id}`
+        );
+    }
+    getCustomerCreditLineStatus(id) {
+        return this.http.get(
+            environment.closeCreditLineUrl +
+                `/api/v1/administration/Account/CreditLine/${id}`
+        );
+    }
     sendCommentCreditApplication(id, data) {
         return this.http.post(
             environment.creditApplicationUrl +

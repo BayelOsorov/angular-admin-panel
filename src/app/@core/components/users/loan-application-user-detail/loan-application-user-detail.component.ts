@@ -26,6 +26,7 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
     @Input() userData;
     listApplications;
+    creditLineData;
     canresetDeclinedApp: boolean;
     hasDeclinedApp: boolean;
     tableColumns = {
@@ -70,7 +71,8 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         private router: Router,
         private authService: AuthService,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private toastService: ToastrService
     ) {}
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
@@ -84,6 +86,32 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                 if (res.items.find((obj) => obj.status === 'Declined')) {
                     this.hasDeclinedApp = true;
                 }
+            });
+    }
+    getCreditLineStatus() {
+        this.creditApplicationsService
+            .getCustomerCreditLineStatus(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.creditLineData = data;
+            });
+    }
+    closeCreditLine() {
+        this.creditApplicationsService
+            .closeCustomerCreditLine(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (res) => {
+                    this.toastService.success(
+                        'Вы успешно закрыли кредитную линию!'
+                    );
+                    this.getCreditLineStatus();
+                },
+                error: () => {
+                    this.toastService.error(
+                        'Невозможно закрыть кредитную линию!'
+                    );
+                },
             });
     }
     onRowSelect(id) {
@@ -106,6 +134,7 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
         ]);
     }
     ngOnInit(): void {
+        this.getCreditLineStatus();
         this.getListApplications();
         this.checkPermission();
     }

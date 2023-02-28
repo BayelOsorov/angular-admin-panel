@@ -1,3 +1,11 @@
+<nb-alert
+    *ngIf="creditLineData && creditLineData.isClosed"
+    status="warning"
+    disabled
+    class="float-right w-20"
+>
+    <strong class="text-center"> Топливная карта закрыта</strong>
+</nb-alert>
 <ngx-custom-table
     (changePageEvent)="getListApplications($event)"
     (rowSelectEvent)="onRowSelect($event)"
@@ -14,6 +22,14 @@
     (approveEvent)="resetDeclinedApp()"
     status="danger"
     title="Сбросить блокировку заявки"
+>
+</ngx-confirm-buttons>
+<ngx-confirm-buttons
+    class="d-block mb-5 w-50 mx-auto"
+    *ngIf="!creditLineData?.isClosed && listApplications?.items.length > 0"
+    (approveEvent)="closeCreditLine()"
+    status="danger"
+    title="Закрыть кредитную линию"
 >
 </ngx-confirm-buttons>
 <ngx-kib [data]="kibData"> </ngx-kib>

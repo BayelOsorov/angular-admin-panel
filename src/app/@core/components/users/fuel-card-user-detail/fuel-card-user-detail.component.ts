@@ -28,6 +28,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
     listApplications;
     canresetDeclinedApp: boolean;
     hasDeclinedApp;
+    fuelCardCreditLineData;
     tableColumns = {
         index: {
             title: '№',
@@ -70,7 +71,8 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         private router: Router,
         private authService: AuthService,
-        private datePipe: DatePipe
+        private datePipe: DatePipe,
+        private toastService: ToastrService
     ) {}
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
@@ -107,7 +109,29 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
+    getFuelCardCreditLineStatus() {
+        this.fuelCardApplicationsService
+            .getFuelCardCreditLineStatus(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.fuelCardCreditLineData = data;
+            });
+    }
+    closeFuelCardCreditLine() {
+        this.fuelCardApplicationsService
+            .closeFuelCardCreditLine(
+                this.fuelCardCreditLineData.creditLineDetails.id
+            )
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res) => {
+                this.toastService.success(
+                    'Вы успешно закрыли топливную карту!'
+                );
+                this.getFuelCardCreditLineStatus();
+            });
+    }
     ngOnInit(): void {
+        this.getFuelCardCreditLineStatus();
         this.getListApplications();
         this.checkPermission();
     }

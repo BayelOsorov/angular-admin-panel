@@ -27,4 +27,5 @@ export const environment = {
     customersUrl: 'https://stage.c2u.io:1001',
     partnerNewsUrl: 'https://stage.c2u.io:8050',
     partnerBonusesUrl: 'https://stage.c2u.io:7777',
+    closeCreditLineUrl: 'https://stage.c2u.io:8001',
 };

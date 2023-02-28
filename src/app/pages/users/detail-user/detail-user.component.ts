@@ -54,7 +54,6 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                     this.userData = data;
 
                     this.getVideos(data.id);
-                    this.getFuelCardCreditLineStatus();
                     this.getUserDocuments();
                     this.getAlertStatus();
                     this.getLocalCreditBureauInfo(data.id);
@@ -96,27 +95,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
                 this.getUserDetail(this.userData.id);
             });
     }
-    closeFuelCardCreditLine() {
-        this.fuelCardService
-            .closeFuelCardCreditLine(
-                this.fuelCardCreditLineData.creditLineDetails.id
-            )
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((res) => {
-                this.toastService.success(
-                    'Вы успешно закрыли топливную карту!'
-                );
-                this.getFuelCardCreditLineStatus();
-            });
-    }
-    getFuelCardCreditLineStatus() {
-        this.fuelCardService
-            .getFuelCardCreditLineStatus(this.userData.id)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((data) => {
-                this.fuelCardCreditLineData = data;
-            });
-    }
+
     sendUserDocument() {
         this.toastService.info('Файл загружается, подождите!');
         this.identificationService
