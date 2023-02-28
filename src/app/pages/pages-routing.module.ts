@@ -59,6 +59,7 @@ import { ListUsersComponent } from './users/list-users/list-users.component';
 import { ListPartnerBonusesComponent } from './bonuses/partners/list-partner-bonuses/list-partner-bonuses.component';
 import { DetailPartnerBonusesComponent } from './bonuses/partners/detail-partner-bonuses/detail-partner-bonuses.component';
 import { ListIdentificationComponent } from './identification/admin/list-identification/list-identification.component';
+import { DetailIdentificationAdminComponent } from './identification/admin/detail-identification-admin/detail-identification-admin.component';
 
 const routes: Routes = [
     {
@@ -395,6 +396,12 @@ const routes: Routes = [
                 canActivate: [PermissionsGuard],
                 data: { roles: ['admin', 'kyc_manager'] },
                 component: ListIdentificationComponent,
+            },
+            {
+                path: 'identification/list/detail/:id',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin', 'kyc_manager'] },
+                component: DetailIdentificationAdminComponent,
             },
             {
                 path: 'identification/detail/:id',

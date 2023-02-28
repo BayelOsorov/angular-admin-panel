@@ -40,6 +40,12 @@ export class IdentificationService {
                 `/operator/api/v1/identification-requests/in-process`
         );
     }
+    getIdentificationDetailById(id) {
+        return this.http.get<IIdentificationDetail>(
+            environment.identificationUrl +
+                `/admin/api/v1/identification-requests/${id}`
+        );
+    }
     getUserPersonalData(data) {
         return this.http.get<IPersonalData>(
             environment.identificationUrl +

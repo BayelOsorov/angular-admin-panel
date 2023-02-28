@@ -1,0 +1,11 @@
+<nb-card>
+    <nb-card-body>
+        <ngx-identification-detail
+            *ngIf="data && customerInfo"
+            [data]="data"
+            [personalData]="personalData"
+            [customerInfo]="customerInfo"
+            (getDataEvent)="getIdentificationDetail()"
+        ></ngx-identification-detail>
+    </nb-card-body>
+</nb-card>

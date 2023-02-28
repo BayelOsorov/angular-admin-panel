@@ -18,7 +18,7 @@ export class ListIdentificationComponent implements OnInit, OnDestroy {
     form = this.fb.group({
         pin: [''],
         phoneNumber: [''],
-        status: [''],
+        status: ['PhotoIdentificationRequest'],
         page: [1],
     });
     tableColumns = {
@@ -83,7 +83,7 @@ export class ListIdentificationComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listApplications = res));
     }
     onRowSelect(id) {
-        this.router.navigate([this.router.url + '/detail/' + id]);
+        this.router.navigate(['/identification/list/detail/' + id]);
     }
     ngOnInit(): void {
         this.form.valueChanges
