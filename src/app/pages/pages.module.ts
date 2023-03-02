@@ -15,6 +15,7 @@ import {
     NbListModule,
     NbMenuModule,
     NbPopoverModule,
+    NbRouteTabsetModule,
     NbSelectModule,
     NbSpinnerModule,
     NbTabsetModule,
@@ -91,7 +92,7 @@ import { ListUsersComponent } from './users/list-users/list-users.component';
 import { DetailUserComponent } from './users/detail-user/detail-user.component';
 import { ListPartnerBonusesComponent } from './bonuses/partners/list-partner-bonuses/list-partner-bonuses.component';
 import { DetailPartnerBonusesComponent } from './bonuses/partners/detail-partner-bonuses/detail-partner-bonuses.component';
-import { NgxDocViewerModule } from 'ngx-doc-viewer';
+
 import { ListIdentificationComponent } from './identification/admin/list-identification/list-identification.component';
 import { DetailIdentificationAdminComponent } from './identification/admin/detail-identification-admin/detail-identification-admin.component';
 
@@ -130,7 +131,6 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
             formatOptions: { awareOfUnicodeTokens: false },
         }),
         NbTreeGridModule,
-        NgxDocViewerModule,
         // NbIconModule,
         // NbEvaIconsModule,
     ],

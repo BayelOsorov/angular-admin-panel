@@ -26,4 +26,27 @@ td {
         display: block;
         width: 100%;
     }
+    @media (max-width: 768px) {
+        ::ng-deep nb-tabset nb-tab {
+            padding: 0;
+            padding-top: 20px;
+        }
+        .info {
+            display: block;
+            flex-direction: column-reverse;
+        }
+        .personal {
+            max-width: 100%;
+        }
+        .status {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        .detail-images {
+            display: block;
+        }
+        .load-file {
+            display: block !important;
+        }
+    }
 }

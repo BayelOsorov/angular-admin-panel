@@ -23,7 +23,7 @@ export class PartnerFeedbacksDetailComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute
     ) {}
     parseDate(date) {
-        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+        return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getDetailPartnerFeedback() {
         this.partnerFeedbacksService

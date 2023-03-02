@@ -17,7 +17,7 @@
 >
 </ngx-custom-table>
 <ngx-confirm-buttons
-    *ngIf="canresetDeclinedApp && hasDeclinedApp && allDeclinedApp"
+    *ngIf="(canresetDeclinedApp && hasDeclinedApp) || allDeclinedApp"
     class="d-block mb-5 w-50 mx-auto"
     (approveEvent)="resetDeclinedApp()"
     status="danger"
@@ -32,4 +32,4 @@
     title="Закрыть топливную карту"
 >
 </ngx-confirm-buttons>
-<ngx-kib [data]="kibData"> </ngx-kib>
+<ngx-kib *ngIf="listApplications?.length > 0" [data]="kibData"> </ngx-kib>

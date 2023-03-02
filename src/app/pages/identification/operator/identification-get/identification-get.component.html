@@ -3,6 +3,7 @@
         <nb-card-header>Идентификация по фотографии</nb-card-header>
         <nb-card-body class="d-flex justify-content-center">
             <button
+                [nbSpinner]="loading | async"
                 (click)="photoIdentification()"
                 nbSpinnerStatus="info"
                 nbSpinnerSize="medium"
@@ -18,6 +19,7 @@
         <nb-card-header>Идентификация по видео</nb-card-header>
         <nb-card-body class="d-flex justify-content-center">
             <button
+                [nbSpinner]="loading | async"
                 (click)="videoIdentification()"
                 nbSpinnerStatus="info"
                 nbSpinnerSize="medium"

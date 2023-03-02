@@ -67,7 +67,7 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
         private fb: FormBuilder
     ) {}
     parseDate(date) {
-        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+        return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getPartnerFeedbacks(page = 1, filter = {}) {
         this.partnerFeedbacksService

@@ -1,39 +1,57 @@
-<nb-alert
-    *ngIf="creditLineData && creditLineData.isClosed"
-    status="danger"
-    disabled
-    class="float-right w-20"
->
-    <strong class="text-center"> Кредитная линия закрыта</strong>
-</nb-alert>
-<ngx-custom-table
-    (changePageEvent)="getListApplications($event)"
-    (rowSelectEvent)="onRowSelect($event)"
-    [tableColumns]="tableColumns"
-    [tableData]="listApplications"
-    [productName]="'ни одной заявки на 0-0-3'"
-    [actions]="false"
-    class="mb-5 d-block"
->
-</ngx-custom-table>
-<ngx-confirm-buttons
-    *ngIf="canresetDeclinedApp && hasDeclinedApp && allDeclinedApp"
-    class="d-block mb-5 w-50 mx-auto"
-    (approveEvent)="resetDeclinedApp()"
-    status="danger"
-    title="Сбросить блокировку заявки"
->
-</ngx-confirm-buttons>
-<ngx-confirm-buttons
-    class="d-block mb-5 w-50 mx-auto"
-    *ngIf="
-        !creditLineData?.isClosed &&
-        !allDeclinedApp &&
-        listApplications?.items.length > 0
-    "
-    (approveEvent)="closeCreditLine()"
-    status="danger"
-    title="Закрыть кредитную линию"
->
-</ngx-confirm-buttons>
-<ngx-kib [data]="kibData"> </ngx-kib>
+<div>
+    <nb-alert
+        *ngIf="creditLineData && creditLineData.isClosed"
+        status="danger"
+        disabled
+        class="float-right w-20"
+    >
+        <strong class="text-center"> Кредитная линия закрыта</strong>
+    </nb-alert>
+
+    <ngx-custom-table
+        (changePageEvent)="getListApplications($event)"
+        (rowSelectEvent)="onRowSelect0_0_3($event)"
+        [tableColumns]="tableColumns"
+        [tableData]="listApplications0_0_3"
+        [productName]="'ни одной заявки на 0-0-3'"
+        [actions]="false"
+        class="mb-5 d-block"
+    >
+    </ngx-custom-table>
+    <ngx-custom-table
+        (changePageEvent)="getListIncreaseLimitApplications($event)"
+        (rowSelectEvent)="onRowSelectIncreaseLimit($event)"
+        [tableColumns]="tableColumns"
+        [tableData]="listApplicationsIncreaseLimit"
+        [productName]="'ни одной заявки на увеличение лимита'"
+        [actions]="false"
+        class="mb-5 d-block"
+    >
+    </ngx-custom-table>
+    <ngx-confirm-buttons
+        *ngIf="
+            canresetDeclinedApp &&
+            (allDeclinedApp0_0_3 || allDeclinedAppIncreaseLimit) &&
+            (hasDeclinedApp0_0_3 || hasDeclinedAppIncreaseLimit)
+        "
+        class="d-block mb-5 w-50 mx-auto"
+        (approveEvent)="resetDeclinedApp()"
+        status="danger"
+        title="Сбросить блокировку заявки"
+    >
+    </ngx-confirm-buttons>
+    <ngx-confirm-buttons
+        class="d-block mb-5 w-50 mx-auto"
+        *ngIf="
+            !creditLineData?.isClosed &&
+            (!allDeclinedApp0_0_3 || !allDeclinedAppIncreaseLimit) &&
+            listApplications0_0_3?.items.length > 0
+        "
+        (approveEvent)="closeCreditLine()"
+        status="danger"
+        title="Закрыть кредитную линию"
+    >
+    </ngx-confirm-buttons>
+    <ngx-kib *ngIf="listApplications0_0_3?.items.length > 0" [data]="kibData">
+    </ngx-kib>
+</div>

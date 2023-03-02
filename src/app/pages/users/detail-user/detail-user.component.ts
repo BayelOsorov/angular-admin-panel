@@ -33,6 +33,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     canOfflineIdentificate;
     loanApplKibData = [];
     fuelCardApplKibData = [];
+
     public loadDelay = false;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(

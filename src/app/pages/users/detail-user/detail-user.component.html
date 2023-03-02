@@ -13,10 +13,10 @@
     <nb-card-body>
         <nb-tabset>
             <nb-tab tabTitle="Персональные данные">
-                <div class="row">
+                <div class="row info">
                     <div
                         *ngIf="userData && userData.identificationInformation"
-                        class="col-md-8"
+                        class="col-md-8 personal"
                     >
                         <nb-alert outline="basic" class="mb-0 alert-title">
                             <strong class="text-center"
@@ -152,7 +152,7 @@
                         </table>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-4 status">
                         <nb-alert [status]="alertStatus">
                             <strong class="text-center">{{
                                 getStatus(userData.identificationLevel)
@@ -162,7 +162,7 @@
                 </div>
                 <div
                     *ngIf="userData && userData.identificationInformation"
-                    class="d-flex mt-5 w-100 align-items-center"
+                    class="d-flex mt-5 w-100 align-items-center load-file"
                 >
                     <input
                         nbInput
@@ -371,21 +371,3 @@
         </nb-tabset>
     </nb-card-body>
 </nb-card>
-<!-- <ng-container *ngIf="getFileType(fileExtension) === 'image'">
-  <img [src]="filePath" alt="File">
-</ng-container>
-<ng-container *ngIf="getFileType(fileExtension) === 'document'">
-  <p>This is a document file.</p>
-</ng-container>
-<ng-container *ngIf="getFileType(fileExtension) === 'audio'">
-  <p>This is an audio file.</p>
-</ng-container>
-<ng-container *ngIf="getFileType(fileExtension) === 'video'">
-  <p>This is a video file.</p>
-</ng-container>
-<ng-container *ngIf="getFileType(fileExtension) === 'text'">
-  <p>This is a text file.</p>
-</ng-container>
-<ng-container *ngIf="getFileType(fileExtension) === 'unknown'">
-  <p>This file type is unknown.</p>
-</ng-container> -->

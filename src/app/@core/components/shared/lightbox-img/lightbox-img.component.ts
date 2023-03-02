@@ -1,18 +1,14 @@
 import {
     Component,
     OnInit,
-    ChangeDetectionStrategy,
     Input,
     ChangeDetectorRef,
     ViewChild,
     ElementRef,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Http2ServerRequest } from 'http2';
 import { AuthService } from '../../../services/auth/auth.service';
 import { OldBackendService } from '../../../services/old-backend/old-backend.service';
-import { toBase64 } from '../../../utils/toBase64';
-import { UseHttpImageSourcePipe } from '../secured-image/secured-image.component';
 @Component({
     selector: 'ngx-lightbox-img',
     templateUrl: './lightbox-img.component.html',

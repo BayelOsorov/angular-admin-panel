@@ -15,6 +15,7 @@ import {
     getFileType,
     getProductCode,
     isPhone,
+    getAlertStatus,
 } from './helpers';
 import {
     Position,
@@ -48,6 +49,7 @@ export {
     getFileType,
     getProductCode,
     isPhone,
+    getAlertStatus,
     Position,
     placeOfWorkType,
     entrepreneurTypeEnum,

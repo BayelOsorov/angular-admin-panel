@@ -85,7 +85,7 @@ export class PartnerIdentificationComponent implements OnInit, OnDestroy {
         private datePipe: DatePipe
     ) {}
     parseDate(date) {
-        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+        return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getPartners(page = 1) {
         this.partnerIdentificationService

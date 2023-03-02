@@ -6,11 +6,13 @@ import { takeUntil } from 'rxjs/operators';
 import { CreditApplicationService } from '../../../../@core/services/credit-application/credit-application.service';
 import { FuelCardApplicationService } from '../../../../@core/services/credit-application/fuel-card.service';
 import { IncreaseLimitApplicationService } from '../../../../@core/services/credit-application/increase-limit.service';
+import { LoaderService } from '../../../../@core/services/http/loader.service';
 @Component({
     templateUrl: './get-credit-applications.component.html',
     styleUrls: ['./get-credit-applications.component.scss'],
 })
 export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
+    loading;
     applications;
     endUrl;
     private destroy$: Subject<void> = new Subject<void>();
@@ -20,8 +22,11 @@ export class GetCreditApplicationsComponent implements OnInit, OnDestroy {
         public creditApplication: CreditApplicationService,
         public increaseLimitApplicationService: IncreaseLimitApplicationService,
 
-        public fuelCardApplication: FuelCardApplicationService
-    ) {}
+        public fuelCardApplication: FuelCardApplicationService,
+        private loaderService: LoaderService
+    ) {
+        this.loading = this.loaderService.isLoading;
+    }
     loanApplication() {
         this.creditApplication
             .getCreditApplication()

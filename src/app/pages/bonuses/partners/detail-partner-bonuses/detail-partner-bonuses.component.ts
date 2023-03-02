@@ -60,7 +60,7 @@ export class DetailPartnerBonusesComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute
     ) {}
     parseDate(date) {
-        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+        return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getListPartnerPercentages(page = 1) {
         this.partnerBonuses

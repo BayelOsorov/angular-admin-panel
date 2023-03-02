@@ -109,6 +109,8 @@ import { CreatePartnerBonuseComponent } from './bonuses/partner-bonuses/create-p
 import { CreatePercentagePartnerComponent } from './bonuses/partner-bonuses/create-percentage-partner/create-percentage-partner.component';
 import { LoanApplicationUserDetailComponent } from './users/loan-application-user-detail/loan-application-user-detail.component';
 import { FuelCardUserDetailComponent } from './users/fuel-card-user-detail/fuel-card-user-detail.component';
+import { IdentificationAdminDetailComponent } from './identification/admin-detail/identification-admin-detail/identification-admin-detail.component';
+import { BtnLoaderComponent } from './shared/btn-loader/btn-loader.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -211,6 +213,8 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         CreatePercentagePartnerComponent,
         LoanApplicationUserDetailComponent,
         FuelCardUserDetailComponent,
+        IdentificationAdminDetailComponent,
+        BtnLoaderComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -270,6 +274,8 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         CreatePercentagePartnerComponent,
         LoanApplicationUserDetailComponent,
         FuelCardUserDetailComponent,
+        IdentificationAdminDetailComponent,
+        BtnLoaderComponent,
     ],
 })
 export class ComponentsModule {}

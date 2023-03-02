@@ -1,52 +1,22 @@
-<nb-alert *ngIf="error" class="sticky-alert slideInDown" status="danger"
-    ><div class="my-alert">
-        <div class="alert-text">
-            <i class="nb-info"></i>
-            <p>{{ error }}</p>
-        </div>
-
-        <button ghost nbButton (click)="closeAlert()">X</button>
-    </div>
-</nb-alert>
 <div class="detail-info">
     <div class="status">
-        <strong>{{
-            data.status === 'VideoIdentificationProcess'
-                ? (data.videoIdentificationRequestedAt
-                  | date : 'dd.MM.yyyy, HH:mm')
-                : (data.createdAt | date : 'dd.MM.yyyy, HH:mm')
-        }}</strong>
+        <strong>{{ data.createdAt | date : 'dd.MM.yyyy, HH:mm' }}</strong>
 
         <strong>+{{ data.phoneNumber }}</strong>
         <strong>{{ customerInfo.culture.toUpperCase() }}</strong>
 
-        <nb-alert status="primary">{{
-            data.status === 'VideoIdentificationProcess'
-                ? 'Видеоидентификация '
-                : 'Фотоидентификация'
+        <nb-alert [status]="alertStatus.status">{{
+            alertStatus.title
         }}</nb-alert>
     </div>
     <div class="detail-block mt-4">
         <div class="row">
             <div class="first col-md-6">
                 <p class="mx-auto">{{ data.pin }}</p>
-                <ngx-identification-need-to-edit
-                    *ngIf="data.status === 'PhotoIdentificationProcess'"
-                    [data]="identificationAnswers.pin"
-                    [control]="form.get('Pin')"
-                    placeholder="Введите"
-                >
-                </ngx-identification-need-to-edit>
+
                 <p class="mx-auto mt-4">
                     {{ data.documentType + ' ' + data.documentNumber }}
                 </p>
-                <ngx-identification-need-to-edit
-                    *ngIf="data.status === 'PhotoIdentificationProcess'"
-                    [data]="identificationAnswers.documentNumber"
-                    [control]="form.get('DocumentNumber')"
-                    placeholder="Введите"
-                >
-                </ngx-identification-need-to-edit>
             </div>
             <div class="second col-md-6">
                 <nb-alert
@@ -76,13 +46,6 @@
                 <ngx-lightbox-img
                     [imgUrl]="data.passportFrontSideImageUrl"
                 ></ngx-lightbox-img>
-                <ngx-identification-need-to-edit
-                    *ngIf="data.status === 'PhotoIdentificationProcess'"
-                    [data]="identificationAnswers.passportFrontSideImage"
-                    [control]="form.get('PassportFrontSideImageId')"
-                    placeholder="Введите"
-                >
-                </ngx-identification-need-to-edit>
             </div>
             <div *ngIf="personalData" class="second col-md-6">
                 <table class="w-100">
@@ -122,14 +85,6 @@
                 <ngx-lightbox-img
                     [imgUrl]="data.passportBackSideImageUrl"
                 ></ngx-lightbox-img>
-
-                <ngx-identification-need-to-edit
-                    *ngIf="data.status === 'PhotoIdentificationProcess'"
-                    [data]="identificationAnswers.passportBackSideImage"
-                    [control]="form.get('PassportBackSideImageId')"
-                    placeholder="Введите"
-                >
-                </ngx-identification-need-to-edit>
             </div>
             <div *ngIf="personalData" class="second col-md-6">
                 <table class="w-100">
@@ -187,13 +142,7 @@
                 <ngx-lightbox-img
                     [imgUrl]="data.selfieWithPassportImageUrl"
                 ></ngx-lightbox-img>
-                <ngx-identification-need-to-edit
-                    *ngIf="data.status === 'PhotoIdentificationProcess'"
-                    [data]="identificationAnswers.selfieWithPassportImage"
-                    [control]="form.get('SelfieWithPassportImageId')"
-                    placeholder="Введите"
-                >
-                </ngx-identification-need-to-edit>
+
                 <p class="mx-auto mt-4">
                     {{
                         getResidenceLoc(data.address.region) +
@@ -203,13 +152,6 @@
                             data.address.street
                     }}
                 </p>
-                <ngx-identification-need-to-edit
-                    *ngIf="data.status === 'PhotoIdentificationProcess'"
-                    [data]="identificationAnswers.address"
-                    [control]="form.get('Address')"
-                    placeholder="Введите"
-                >
-                </ngx-identification-need-to-edit>
             </div>
             <div *ngIf="personalData" class="second col-md-6">
                 <ngx-lightbox-img
@@ -218,32 +160,30 @@
             </div>
         </div>
     </div>
+    <nb-accordion class="mt-5" multi *ngIf="data.videoIdentificationApprovedAt">
+        <nb-accordion-item>
+            <nb-accordion-item-header class="justify-content-center">
+                Видео
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <div
+                    *ngIf="data.videoIdentificationCallFiles.length > 0"
+                    class="row mt-3 iden-videos"
+                >
+                    <video
+                        *ngFor="let item of data.videoIdentificationCallFiles"
+                        controls
+                        class="col-6 col-sm-3"
+                        [src]="item.url | useHttpImgSrc"
+                    ></video>
+                </div>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
 
     <ngx-comments
         [comments]="data.comments"
         (sendCommentEvent)="sendComment($event)"
         class="detail-block"
     ></ngx-comments>
-    <ngx-photo-idn-buttons
-        *ngIf="data.status === 'VideoIdentificationProcess'"
-        [data]="data"
-        [openvidu]="openvidu"
-        (editEvent)="suspendVideoIdn()"
-        (approveEvent)="approveVideoIdn()"
-        (declineEvent)="declineVideoIdn()"
-        (sendVideoEvent)="sendVideo($event)"
-    ></ngx-photo-idn-buttons>
-    <ngx-photo-idn-buttons
-        *ngIf="data.status === 'PhotoIdentificationProcess'"
-        [data]="data"
-        [openvidu]="openvidu"
-        (editEvent)="editPhotoIdn()"
-        (approveEvent)="approvePhotoIdn()"
-        (declineEvent)="declinePhotoIdn()"
-    ></ngx-photo-idn-buttons>
-    <ngx-openvidu
-        *ngIf="data.status === 'VideoIdentificationProcess'"
-        #openvidu
-        [data]="data"
-    ></ngx-openvidu>
 </div>

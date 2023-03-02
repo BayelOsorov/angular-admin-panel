@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './@core/core.module';
 import { ThemeModule } from './@theme/theme.module';
@@ -19,7 +19,9 @@ import { AuthConfigModule } from './auth/auth-config.module';
 import { ComponentsModule } from './@core/components/components.module';
 import { DemoNgZorroAntdModule } from './@core/utils/ng-zorro-antd.module';
 import { ToastrModule } from 'ngx-toastr';
-
+import { DatePipe, registerLocaleData } from '@angular/common';
+import localeKy from '@angular/common/locales/ky';
+registerLocaleData(localeKy);
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -47,6 +49,8 @@ import { ToastrModule } from 'ngx-toastr';
             positionClass: 'toast-top-right',
         }),
     ],
+    providers: [{ provide: LOCALE_ID, useValue: 'ky_KG' }],
+
     bootstrap: [AppComponent],
 })
 export class AppModule {}

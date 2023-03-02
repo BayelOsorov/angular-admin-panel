@@ -29,7 +29,10 @@
                     [imgUrl]="data.identificationInformation.profileImage"
                 ></ngx-lightbox-img>
             </div>
-            <div *ngIf="videos && videos.length > 0" class="row mt-3">
+            <div
+                *ngIf="videos && videos.length > 0"
+                class="row mt-3 iden-videos"
+            >
                 <video
                     *ngFor="let item of videos"
                     controls

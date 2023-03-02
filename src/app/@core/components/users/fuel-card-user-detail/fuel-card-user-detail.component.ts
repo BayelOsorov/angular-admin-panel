@@ -76,7 +76,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
         private toastService: ToastrService
     ) {}
     parseDate(date) {
-        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+        return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getListApplications(page = 1) {
         this.fuelCardApplicationsService
@@ -84,10 +84,16 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.listApplications = res;
-                if (res.items.find((obj) => obj.status === 'Declined')) {
+                if (
+                    res.items.length > 0 &&
+                    res.items.find((obj) => obj.status === 'Declined')
+                ) {
                     this.hasDeclinedApp = true;
                 }
-                if (res.items.every((obj) => obj.status === 'Declined')) {
+                if (
+                    res.items.length > 0 &&
+                    res.items.every((obj) => obj.status === 'Declined')
+                ) {
                     this.allDeclinedApp = true;
                 }
             });

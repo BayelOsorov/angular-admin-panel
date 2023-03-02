@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LoaderService } from '../../../../@core/services/http/loader.service';
 import { IdentificationService } from '../../../../@core/services/identification/identification.service';
 
 @Component({
@@ -11,23 +12,23 @@ import { IdentificationService } from '../../../../@core/services/identification
     styleUrls: ['./identification-get.component.scss'],
 })
 export class IdentificationGetComponent implements OnInit, OnDestroy {
-    photoIdentificationToggle = false;
-    videoIdentificationToggle = false;
+    loading;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private identificationService: IdentificationService,
         public router: Router,
-        private toaster: ToastrService
-    ) {}
+        private toaster: ToastrService,
+        private loaderService: LoaderService
+    ) {
+        this.loading = this.loaderService.isLoading;
+    }
     photoIdentification() {
-        this.photoIdentificationToggle = true;
         this.identificationService
             .getPhotoIdentification()
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
-                    // this.photoIdentificationToggle = false;
                     if (!data) {
                         return this.toaster.warning(
                             'На данный момент нет заякок на фотоидентификацию!'
@@ -35,9 +36,7 @@ export class IdentificationGetComponent implements OnInit, OnDestroy {
                     }
                     this.router.navigate([`identification/detail/${data.id}`]);
                 },
-                error: () => {
-                    this.photoIdentificationToggle = false;
-                },
+                error: () => {},
             });
     }
     videoIdentification() {
@@ -48,7 +47,6 @@ export class IdentificationGetComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
-                    this.videoIdentificationToggle = false;
                     if (!data) {
                         return this.toaster.warning(
                             'На данный момент нет заякок на видеоидентификацию!'
@@ -56,12 +54,12 @@ export class IdentificationGetComponent implements OnInit, OnDestroy {
                     }
                     this.router.navigate([`identification/detail/${data.id}`]);
                 },
-                error: (err) => {
-                    this.videoIdentificationToggle = false;
-                },
+                error: (err) => {},
             });
     }
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log(this.loaderService);
+    }
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();

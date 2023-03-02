@@ -67,7 +67,7 @@ export class ListPartnerBonusesComponent implements OnInit, OnDestroy {
         private oldBackService: OldBackendService
     ) {}
     parseDate(date) {
-        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+        return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getListPartners(page = 1) {
         this.partnerBonuses

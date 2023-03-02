@@ -3,6 +3,7 @@
         <!-- <nb-card-header>Идентификация по фотографии</nb-card-header> -->
         <nb-card-body class="d-flex justify-content-center">
             <button
+                [nbSpinner]="loading | async"
                 (click)="getApplication()"
                 nbSpinnerStatus="info"
                 nbSpinnerSize="medium"

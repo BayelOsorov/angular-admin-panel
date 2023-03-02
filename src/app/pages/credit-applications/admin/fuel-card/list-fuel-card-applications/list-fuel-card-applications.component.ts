@@ -34,7 +34,10 @@ export class ListFuelCardApplicationsAdminComponent
                     cell.row.index
                 ),
         },
-
+        customerFullName: {
+            title: 'ФИО',
+            type: 'text',
+        },
         createdAt: {
             title: 'Дата',
             type: 'text',
@@ -69,7 +72,7 @@ export class ListFuelCardApplicationsAdminComponent
         private datePipe: DatePipe
     ) {}
     parseDate(date) {
-        return this.datePipe.transform(date, 'dd.MM.yyyy, hh:mm');
+        return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getListApplications(page = 1) {
         this.fuelCardApplicationsService
