@@ -146,6 +146,7 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
+
     onRowSelect0_0_3(id) {
         this.router.navigate(['/credit-application/0-0-3/list/detail/' + id]);
     }
@@ -160,7 +161,21 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {
-                    this.toaster.success('Время блокировки успешно сброшено!');
+                    this.toaster.success(
+                        'Время блокировки 0-0-3 успешно сброшено!'
+                    );
+                },
+            });
+    }
+    resetIncreaseLimitDeclinedApp() {
+        this.increaseLimitApplicationsService
+            .resetDeclinedCreditApplication(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: () => {
+                    this.toaster.success(
+                        'Время блокировки увеличении лимита успешно сброшено!'
+                    );
                 },
             });
     }

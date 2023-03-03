@@ -30,14 +30,24 @@
     </ngx-custom-table>
     <ngx-confirm-buttons
         *ngIf="
-            canresetDeclinedApp &&
-            (allDeclinedApp0_0_3 || allDeclinedAppIncreaseLimit) &&
-            (hasDeclinedApp0_0_3 || hasDeclinedAppIncreaseLimit)
+            canresetDeclinedApp && allDeclinedApp0_0_3 && hasDeclinedApp0_0_3
         "
         class="d-block mb-5 w-50 mx-auto"
         (approveEvent)="resetDeclinedApp()"
         status="danger"
-        title="Сбросить блокировку заявки"
+        title="Сбросить блокировку заявки на 0-0-3"
+    >
+    </ngx-confirm-buttons>
+    <ngx-confirm-buttons
+        *ngIf="
+            canresetDeclinedApp &&
+            allDeclinedAppIncreaseLimit &&
+            hasDeclinedAppIncreaseLimit
+        "
+        class="d-block mb-5 w-50 mx-auto"
+        (approveEvent)="resetIncreaseLimitDeclinedApp()"
+        status="danger"
+        title="Сбросить блокировку заявки на увеличение лимита"
     >
     </ngx-confirm-buttons>
     <ngx-confirm-buttons
