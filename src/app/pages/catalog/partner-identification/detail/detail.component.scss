@@ -11,6 +11,13 @@
         }
     }
 }
+.pi-comment {
+    .text {
+        margin-top: 10px;
+        width: fit-content;
+        background-color: nb-theme(alert-warning-background-color);
+    }
+}
 
 @include nb-install-component() {
     .font-row {

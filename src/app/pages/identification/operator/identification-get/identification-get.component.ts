@@ -12,17 +12,13 @@ import { IdentificationService } from '../../../../@core/services/identification
     styleUrls: ['./identification-get.component.scss'],
 })
 export class IdentificationGetComponent implements OnInit, OnDestroy {
-    loading;
     private destroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private identificationService: IdentificationService,
         public router: Router,
-        private toaster: ToastrService,
-        private loaderService: LoaderService
-    ) {
-        this.loading = this.loaderService.isLoading;
-    }
+        private toaster: ToastrService
+    ) {}
     photoIdentification() {
         this.identificationService
             .getPhotoIdentification()
@@ -57,9 +53,7 @@ export class IdentificationGetComponent implements OnInit, OnDestroy {
                 error: (err) => {},
             });
     }
-    ngOnInit(): void {
-        console.log(this.loaderService);
-    }
+    ngOnInit(): void {}
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();

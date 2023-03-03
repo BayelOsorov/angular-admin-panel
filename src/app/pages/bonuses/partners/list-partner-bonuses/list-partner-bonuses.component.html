@@ -1,10 +1,20 @@
 <nb-card>
-    <nb-card-header class="d-flex justify-content-between">
+    <nb-card-header class="">
         <strong>Партнеры - Бонусы</strong>
-
-        <button (click)="openCreateModal()" nbButton status="primary">
-            Добавить
-        </button>
+        <div class="d-flex justify-content-between mt-2">
+            <ngx-search-select
+                class="select-width"
+                size="large"
+                (searchEmit)="getPartners($event)"
+                [control]="form.get('externalId')"
+                [isRequired]="false"
+                [data]="contractorPartners"
+                [placeholder]="'Введите название партнера'"
+            ></ngx-search-select>
+            <button (click)="openCreateModal()" nbButton status="primary">
+                Добавить
+            </button>
+        </div>
     </nb-card-header>
 
     <nb-card-body>

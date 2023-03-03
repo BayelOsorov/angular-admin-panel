@@ -111,6 +111,7 @@ import { LoanApplicationUserDetailComponent } from './users/loan-application-use
 import { FuelCardUserDetailComponent } from './users/fuel-card-user-detail/fuel-card-user-detail.component';
 import { IdentificationAdminDetailComponent } from './identification/admin-detail/identification-admin-detail/identification-admin-detail.component';
 import { BtnLoaderComponent } from './shared/btn-loader/btn-loader.component';
+import { InputSearchComponent } from './shared/input-search/input-search.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -215,6 +216,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         FuelCardUserDetailComponent,
         IdentificationAdminDetailComponent,
         BtnLoaderComponent,
+        InputSearchComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -276,6 +278,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         FuelCardUserDetailComponent,
         IdentificationAdminDetailComponent,
         BtnLoaderComponent,
+        InputSearchComponent,
     ],
 })
 export class ComponentsModule {}

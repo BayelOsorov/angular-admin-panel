@@ -8,10 +8,10 @@ import { HttpOptions } from '../../utils';
 })
 export class PartnerBonusesService {
     constructor(private http: HttpClient) {}
-    getListContractors(page = 1) {
+    getListContractors(page = 1, filter) {
         return this.http.get(
             environment.partnerBonusesUrl +
-                `/admin/api/v1/contractors?pageNumber=${page}&pageSize=20`
+                `/admin/api/v1/contractors?externalId=${filter.externalId}&pageNumber=${page}&pageSize=20`
         );
     }
     getDetailContractor(id: number) {

@@ -3,15 +3,17 @@
         <nb-accordion-item-header class="row social-fund">
             <div class="col-md-4"></div>
             <div class="col-md-4 text-center">Социальный фонд</div>
-
-            <a
-                target="_blank"
-                rel="noopener noreferrer"
-                class="pr-5 col-md-4 text-right"
-                [routerLink]="['/credit-application/social-fund/' + pin]"
-                >все</a
-            >
+            <div class="col-md-4">
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-right"
+                    [routerLink]="['/credit-application/social-fund/' + pin]"
+                    >все</a
+                >
+            </div>
         </nb-accordion-item-header>
+
         <nb-accordion-item-body>
             <table class="w-100" *ngIf="socialFund.operationResult">
                 <tr>

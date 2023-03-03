@@ -176,9 +176,9 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
                 this.localities = data.items;
             });
     }
-    getMalls(name = '') {
+    getMalls(name = '', localityId?) {
         this.mallsService
-            .getListMalls(1, name)
+            .getListMalls(1, { name, localityId })
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.malls = data.items;
@@ -271,10 +271,17 @@ export class ActionsPartnerBranchesComponent implements OnInit, OnDestroy {
             localityId: ['', Validators.required],
             mallId: [null],
         });
-        this.route.params.subscribe((params) => {
+        this.route.params.pipe(takeUntil(this.destroy$)).subscribe((params) => {
             this.branchId = params['branchId'];
             this.partnerId = params['partnerId'];
         });
+        this.form.valueChanges
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((val) => {
+                if (val.localityId) {
+                    this.getMalls('', val.localityId);
+                }
+            });
         this.getLocalities();
         this.getMalls();
         if (this.branchId) {

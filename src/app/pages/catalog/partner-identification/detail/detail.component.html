@@ -364,5 +364,9 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="partner.comment" class="pi-comment">
+            <strong>Комментарий:</strong>
+            <p class="text">- "{{ partner.comment }}"</p>
+        </div>
     </div>
 </nb-card>

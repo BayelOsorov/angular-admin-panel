@@ -1,45 +1,71 @@
 <nb-card>
     <nb-card-header>
-        <div
-            [formGroup]="filterForm"
-            class="d-flex justify-content-evenly mt-3"
-        >
-            <input
-                class="w-50 mr-5"
-                formControlName="from"
-                fullWidth
-                onfocus="(this.type='date')"
-                type="text"
-                format="dd.MM.yyyy"
-                nbInput
-                placeholder="Дата с"
-            />
-            <input
-                onfocus="(this.type='date')"
-                type="text"
-                placeholder="Дата по"
-                class="w-50 mr-5"
-                formControlName="to"
-                fullWidth
-                format="dd.MM.yyyy"
-                nbInput
-            />
-            <nb-select
-                class="w-50"
-                fullWidth
-                placeholder="Тип"
-                formControlName="status"
-            >
-                <nb-option value="">Все</nb-option>
-                <nb-option value="Requested">Ожидание</nb-option>
-                <nb-option value="InProcess">В процессе</nb-option>
-                <nb-option value="Approved">Одобренный</nb-option>
-                <nb-option value="Declined">Отклоненный</nb-option>
-                <nb-option value="EditRequired"
-                    >Нужно отредактировать</nb-option
+        <div [formGroup]="filterForm" class="mt-3">
+            <div class="credit-filter">
+                <input
+                    class="w-50 mr-5"
+                    formControlName="from"
+                    fullWidth
+                    onfocus="(this.type='date')"
+                    type="text"
+                    format="dd.MM.yyyy"
+                    nbInput
+                    placeholder="Дата с"
+                />
+                <input
+                    onfocus="(this.type='date')"
+                    type="text"
+                    placeholder="Дата по"
+                    class="w-50 mr-5"
+                    formControlName="to"
+                    fullWidth
+                    format="dd.MM.yyyy"
+                    nbInput
+                />
+                <nb-select
+                    class="w-50"
+                    fullWidth
+                    placeholder="Тип"
+                    formControlName="status"
                 >
-                <nb-option value="Timeout">Время и стекло</nb-option>
-            </nb-select>
+                    <nb-option value="">Все</nb-option>
+                    <nb-option value="Requested">Ожидание</nb-option>
+                    <nb-option value="InProcess">В процессе</nb-option>
+                    <nb-option value="Approved">Одобренный</nb-option>
+                    <nb-option value="Declined">Отклоненный</nb-option>
+                    <nb-option value="EditRequired"
+                        >Нужно отредактировать</nb-option
+                    >
+                    <nb-option value="Timeout">Время и стекло</nb-option>
+                </nb-select>
+            </div>
+            <div class="credit-filter mt-3">
+                <ngx-input-search
+                    class="w-50 mr-5"
+                    placeholder="Фамилия"
+                    [control]="filterForm.get('surname')"
+                >
+                </ngx-input-search>
+                <ngx-input-search
+                    class="w-50 mr-5"
+                    placeholder="Имя"
+                    [control]="filterForm.get('name')"
+                >
+                </ngx-input-search>
+
+                <ngx-input-search
+                    class="w-50 mr-5"
+                    placeholder="Отчество"
+                    [control]="filterForm.get('patronymic')"
+                >
+                </ngx-input-search>
+                <ngx-input-search
+                    class="w-50"
+                    placeholder="Номер телефона"
+                    [control]="filterForm.get('phoneNumber')"
+                >
+                </ngx-input-search>
+            </div>
         </div>
     </nb-card-header>
 

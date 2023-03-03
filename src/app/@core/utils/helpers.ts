@@ -111,8 +111,8 @@ const downloadFile = (fileURL, fileName) => {
 const imageExtensions = ['png', 'jpeg', 'jpg', 'gif'];
 const documentExtensions = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
 const pdf = ['pdf'];
-const audioExtensions = ['mp3', 'wav', 'm4a', 'ogg'];
-const videoExtensions = ['mp4', 'mov', 'avi', 'mkv'];
+const audioExtensions = ['mp3', 'wav', 'm4a', 'ogg', 'wma'];
+const videoExtensions = ['mp4', 'mov', 'avi', 'mkv', 'wmv'];
 const textExtensions = ['txt', 'csv'];
 
 const getFileType = (fileExtension) => {

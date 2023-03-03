@@ -4,8 +4,8 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
+import { takeUntil, catchError } from 'rxjs/operators';
 import { CreatePartnerBonuseComponent } from '../../../../@core/components/bonuses/partner-bonuses/create-partner/create-partner-bonuse.component';
 import { PartnerBonusesService } from '../../../../@core/services/bonuses/partner-bonuses.service';
 import { OldBackendService } from '../../../../@core/services/old-backend/old-backend.service';
@@ -17,13 +17,9 @@ import { tableNumbering } from '../../../../@core/utils';
 })
 export class ListPartnerBonusesComponent implements OnInit, OnDestroy {
     listPartners;
-
+    contractorPartners;
     form = this.fb.group({
-        name: [''],
-        surname: [''],
-        patronymic: [''],
-        status: ['None'],
-        phone: [''],
+        externalId: [''],
     });
     tableColumns = {
         index: {
@@ -69,23 +65,38 @@ export class ListPartnerBonusesComponent implements OnInit, OnDestroy {
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
+    getPartners(val) {
+        this.oldBackService
+            .getListPartners(val)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((res: any) => {
+                this.contractorPartners = res.items;
+            });
+    }
     getListPartners(page = 1) {
         this.partnerBonuses
-            .getListContractors(page)
+            .getListContractors(page, this.form.value)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res: any) => {
                 if (res.items.length > 0) {
                     const newPartners = [];
+                    let partnerCount = 0;
                     res.items.forEach((item) => {
                         this.oldBackService
                             .getDetailPartner(item.externalId)
-                            .pipe(takeUntil(this.destroy$))
+                            .pipe(
+                                takeUntil(this.destroy$),
+                                catchError((error: any) => of(null))
+                            )
                             .subscribe((partner: any) => {
-                                newPartners.push({
-                                    ...item,
-                                    name: partner.name,
-                                });
-                                if (res.items.length === newPartners.length) {
+                                partnerCount++;
+                                if (partner) {
+                                    newPartners.push({
+                                        ...item,
+                                        name: partner.name,
+                                    });
+                                }
+                                if (partnerCount === res.items.length) {
                                     this.listPartners = {
                                         ...res,
                                         items: newPartners,
@@ -129,6 +140,9 @@ export class ListPartnerBonusesComponent implements OnInit, OnDestroy {
             );
     }
     ngOnInit(): void {
+        this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+            this.getListPartners();
+        });
         this.getListPartners();
     }
     ngOnDestroy() {

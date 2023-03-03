@@ -18,6 +18,10 @@ export class CreditApplicationListAdminComponent implements OnInit, OnDestroy {
     form = this.fb.group({
         from: [''],
         to: [''],
+        surname: [''],
+        name: [''],
+        patronymic: [''],
+        phoneNumber: [''],
         status: ['Requested'],
         page: [1],
     });

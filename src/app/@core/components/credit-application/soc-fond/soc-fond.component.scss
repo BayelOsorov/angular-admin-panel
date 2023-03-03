@@ -10,6 +10,13 @@ td {
 td {
     width: 100vw;
 }
+.social-fund {
+    justify-content: center;
+    .text-right {
+        margin-left: 16vw;
+    }
+}
+
 @media (max-width: 768px) {
     .social-fund {
         display: block;
