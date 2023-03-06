@@ -31,8 +31,8 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
 
     creditLineData;
     canresetDeclinedApp: boolean;
-    hasDeclinedApp0_0_3: boolean;
-    hasDeclinedAppIncreaseLimit: boolean;
+    hasDeclinedApp0_0_3 = false;
+    hasDeclinedAppIncreaseLimit = false;
     allDeclinedApp0_0_3 = false;
     allDeclinedAppIncreaseLimit = false;
 
@@ -112,11 +112,13 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.listApplicationsIncreaseLimit = res;
-                if (res.items.find((obj) => obj.status === 'Declined')) {
-                    this.hasDeclinedAppIncreaseLimit = true;
-                }
-                if (res.items.every((obj) => obj.status === 'Declined')) {
-                    this.allDeclinedAppIncreaseLimit = true;
+                if (res.items.length > 0) {
+                    if (res.items.find((obj) => obj.status === 'Declined')) {
+                        this.hasDeclinedAppIncreaseLimit = true;
+                    }
+                    if (res.items.every((obj) => obj.status === 'Declined')) {
+                        this.allDeclinedAppIncreaseLimit = true;
+                    }
                 }
             });
     }
