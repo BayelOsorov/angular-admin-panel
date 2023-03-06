@@ -23,8 +23,12 @@ export class IncreaseLimitApplicationService {
     getListCreditApplication(page, filter) {
         return this.http.get<ICreditApplicationList>(
             environment.creditApplicationUrl +
-                `/admin/api/v1/ucl-requests/search?pageNumber=${page}&name=${filter.name}&surname=${filter.surname}&patronymic=${filter.patronymic}&phoneNumber=${filter.phoneNumber}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
+                `/admin/api/v1/ucl-requests/search?pageNumber=${page}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
         );
+        // return this.http.get<ICreditApplicationList>(
+        //     environment.creditApplicationUrl +
+        //         `/admin/api/v1/ucl-requests/search?pageNumber=${page}&name=${filter.name}&surname=${filter.surname}&patronymic=${filter.patronymic}&phoneNumber=${filter.phoneNumber}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
+        // );
     }
     getListCreditApplicationByCustomerId(page, customerId) {
         return this.http.get<ICreditApplicationList>(

@@ -5,19 +5,11 @@
         disabled
         class="float-right w-20"
     >
-        <strong class="text-center"> Кредитная линия закрыта</strong>
     </nb-alert>
-
-    <ngx-custom-table
-        (changePageEvent)="getListApplications($event)"
-        (rowSelectEvent)="onRowSelect0_0_3($event)"
-        [tableColumns]="tableColumns"
-        [tableData]="listApplications0_0_3"
-        [productName]="'ни одной заявки на 0-0-3'"
-        [actions]="false"
-        class="mb-5 d-block"
+    <strong *ngIf="listApplicationsIncreaseLimit?.items.length > 0"
+        >Заявки на увеличение</strong
     >
-    </ngx-custom-table>
+
     <ngx-custom-table
         (changePageEvent)="getListIncreaseLimitApplications($event)"
         (rowSelectEvent)="onRowSelectIncreaseLimit($event)"
@@ -25,9 +17,23 @@
         [tableData]="listApplicationsIncreaseLimit"
         [productName]="'ни одной заявки на увеличение лимита'"
         [actions]="false"
-        class="mb-5 d-block"
+        class="mb-5 mt-2 d-block"
     >
     </ngx-custom-table>
+    <strong *ngIf="listApplications0_0_3?.items.length > 0"
+        >Основная заявка</strong
+    >
+    <ngx-custom-table
+        (changePageEvent)="getListApplications($event)"
+        (rowSelectEvent)="onRowSelect0_0_3($event)"
+        [tableColumns]="tableColumns"
+        [tableData]="listApplications0_0_3"
+        [productName]="'ни одной заявки на 0-0-3'"
+        [actions]="false"
+        class="mb-5 mt-2 d-block"
+    >
+    </ngx-custom-table>
+
     <ngx-confirm-buttons
         *ngIf="
             canresetDeclinedApp && (hasDeclinedApp0_0_3 || allDeclinedApp0_0_3)

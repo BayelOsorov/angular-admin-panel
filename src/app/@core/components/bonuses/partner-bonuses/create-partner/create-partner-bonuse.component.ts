@@ -52,9 +52,9 @@ export class CreatePartnerBonuseComponent implements OnInit, OnDestroy {
                         this.dialogRef.close('edit');
                     },
                     error: (err) => {
-                        if (err.status === 404) {
-                            this.toaster.error(
-                                'Данный пользователь не участвует в реферальной программе!'
+                        if (err.error === 'Contractor already exists') {
+                            return this.toaster.error(
+                                'Данный партнер уже создан в бонусной системе!'
                             );
                         }
                     },
