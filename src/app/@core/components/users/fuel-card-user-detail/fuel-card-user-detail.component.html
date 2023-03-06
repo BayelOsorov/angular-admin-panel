@@ -17,7 +17,7 @@
 >
 </ngx-custom-table>
 <ngx-confirm-buttons
-    *ngIf="(canresetDeclinedApp && hasDeclinedApp) || allDeclinedApp"
+    *ngIf="canresetDeclinedApp && (hasDeclinedApp || allDeclinedApp)"
     class="d-block mb-5 w-50 mx-auto"
     (approveEvent)="resetDeclinedApp()"
     status="danger"
