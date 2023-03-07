@@ -2,11 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { CreateStaffModalComponent } from '../../../@core/components/staff/create-staff-modal/create-staff-modal/create-staff-modal.component';
 import { IListStaff } from '../../../@core/models/staff/staff';
 import { StaffService } from '../../../@core/services/staff/staff.service';
 import { tableNumbering } from '../../../@core/utils';
+
+import { takeUntil } from 'rxjs/operators';
 @Component({
     templateUrl: './staff.component.html',
     styleUrls: ['./staff.component.scss'],
@@ -38,6 +40,7 @@ export class StaffComponent implements OnInit, OnDestroy {
             valuePrepareFunction: (value) => this.getRoles(value),
         },
     };
+    private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private staffService: StaffService,
         private router: Router,
@@ -51,6 +54,8 @@ export class StaffComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
     getListStaff(page = 1, name = '') {
         this.subscription = this.staffService
@@ -63,12 +68,15 @@ export class StaffComponent implements OnInit, OnDestroy {
         this.getListStaff(1, name);
     }
     onDelete(id): void {
-        this.staffService.deleteStaff(id).subscribe({
-            next: () => {
-                this.toaster.success('Успешно удалено!');
-                this.getListStaff(1);
-            },
-        });
+        this.staffService
+            .deleteStaff(id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: () => {
+                    this.toaster.success('Успешно удалено!');
+                    this.getListStaff(1);
+                },
+            });
     }
     openEdit(data) {
         this.router.navigate([`staff-detail/${data.id}`]);

@@ -94,9 +94,12 @@ export class PartnerIdentificationComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listPartners = res));
     }
     getCategories(name = '') {
-        this.backendService.getListCategories(name).subscribe((data) => {
-            this.categories = data.items;
-        });
+        this.backendService
+            .getListCategories(name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.categories = data.items;
+            });
     }
     changeType(type) {}
 

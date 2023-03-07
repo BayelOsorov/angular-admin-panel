@@ -21,7 +21,8 @@ import { environment } from '../../../environments/environment.prod';
 import { IIdentificationDetail } from '../models/identification/identification';
 import { IdentificationService } from '../services/identification/identification.service';
 import { generateGuid } from '../utils/toBase64';
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'ngx-openvidu',
     templateUrl: './openvidu.component.html',
@@ -45,7 +46,7 @@ export class OpenviduComponent implements OnInit, OnDestroy {
     // Main video of the page, will be 'publisher' or one of the 'subscribers',
     // updated by click event in UserVideoComponent children
     mainStreamManager: StreamManager;
-
+    private destroy$: Subject<void> = new Subject<void>();
     constructor(private identificationService: IdentificationService) {
         this.generateParticipantInfo();
     }
@@ -83,37 +84,39 @@ export class OpenviduComponent implements OnInit, OnDestroy {
             console.warn(exception);
         });
 
-        this.createSession().subscribe((data) => {
-            this.session
-                .connect(data.token, { clientData: this.myUserName })
-                .then(() => {
-                    const publisher: Publisher = this.OV.initPublisher(
-                        undefined,
-                        {
-                            audioSource: undefined, // The source of audio. If undefined default microphone
-                            videoSource: undefined, // The source of video. If undefined default webcam
-                            publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
-                            publishVideo: true, // Whether you want to start publishing with your video enabled or not
-                            resolution: '640x480', // The resolution of your video
-                            frameRate: 30, // The frame rate of your video
-                            insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
-                            mirror: false, // Whether to mirror your local video or not
-                        }
-                    );
+        this.createSession()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.session
+                    .connect(data.token, { clientData: this.myUserName })
+                    .then(() => {
+                        const publisher: Publisher = this.OV.initPublisher(
+                            undefined,
+                            {
+                                audioSource: undefined, // The source of audio. If undefined default microphone
+                                videoSource: undefined, // The source of video. If undefined default webcam
+                                publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
+                                publishVideo: true, // Whether you want to start publishing with your video enabled or not
+                                resolution: '640x480', // The resolution of your video
+                                frameRate: 30, // The frame rate of your video
+                                insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
+                                mirror: false, // Whether to mirror your local video or not
+                            }
+                        );
 
-                    this.session.publish(publisher);
+                        this.session.publish(publisher);
 
-                    this.mainStreamManager = publisher;
-                    this.publisher = publisher;
-                })
-                .catch((error) => {
-                    console.log(
-                        'There was an error connecting to the session:',
-                        error.code,
-                        error.message
-                    );
-                });
-        });
+                        this.mainStreamManager = publisher;
+                        this.publisher = publisher;
+                    })
+                    .catch((error) => {
+                        console.log(
+                            'There was an error connecting to the session:',
+                            error.code,
+                            error.message
+                        );
+                    });
+            });
     }
 
     leaveSession() {

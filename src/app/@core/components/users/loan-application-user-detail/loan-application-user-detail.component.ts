@@ -4,6 +4,8 @@ import {
     OnInit,
     ChangeDetectionStrategy,
     Input,
+    OnChanges,
+    ChangeDetectorRef,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
@@ -21,7 +23,7 @@ import { IncreaseLimitApplicationService } from '../../../services/credit-applic
     selector: 'ngx-loan-application-user-detail',
     templateUrl: './loan-application-user-detail.component.html',
     styleUrls: ['./loan-application-user-detail.component.scss'],
-    // changeDetection: ChangeDetectionStrategy.Default,
+    // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
@@ -72,6 +74,18 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                         </a>`,
         },
     };
+    tableColumnsIncreaseLimit = {
+        ...this.tableColumns,
+        index: {
+            title: '№',
+            type: 'number',
+            valuePrepareFunction: (value, row, cell) =>
+                tableNumbering(
+                    this.listApplicationsIncreaseLimit.pageNumber,
+                    cell.row.index
+                ),
+        },
+    };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private creditApplicationsService: CreditApplicationService,
@@ -81,7 +95,8 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
         private router: Router,
         private authService: AuthService,
         private datePipe: DatePipe,
-        private toastService: ToastrService
+        private toastService: ToastrService,
+        private cdr: ChangeDetectorRef
     ) {}
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
@@ -92,18 +107,16 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.listApplications0_0_3 = res;
-                if (
-                    res.items.length > 0 &&
-                    res.items.find((obj) => obj.status === 'Declined')
-                ) {
-                    this.hasDeclinedApp0_0_3 = true;
-                }
-                if (
-                    res.items.length > 0 &&
-                    res.items.every((obj) => obj.status === 'Declined')
-                ) {
-                    this.allDeclinedApp0_0_3 = true;
-                }
+                this.hasDeclinedApp0_0_3 = this.hasDeclinedApp(res.items);
+                this.allDeclinedApp0_0_3 = this.hasEveryDeclinedApp(res.items);
+                // if (res.items.length > 0) {
+                //     if (res.items.find((obj) => obj.status === 'Declined')) {
+                //         this.hasDeclinedApp0_0_3 = true;
+                //     }
+                //     if (res.items.every((obj) => obj.status === 'Declined')) {
+                //         this.allDeclinedApp0_0_3 = true;
+                //     }
+                // }
             });
     }
     getListIncreaseLimitApplications(page = 1) {
@@ -112,14 +125,20 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.listApplicationsIncreaseLimit = res;
-                if (res.items.length > 0) {
-                    if (res.items.find((obj) => obj.status === 'Declined')) {
-                        this.hasDeclinedAppIncreaseLimit = true;
-                    }
-                    if (res.items.every((obj) => obj.status === 'Declined')) {
-                        this.allDeclinedAppIncreaseLimit = true;
-                    }
-                }
+                this.hasDeclinedAppIncreaseLimit = this.hasDeclinedApp(
+                    res.items
+                );
+                this.allDeclinedAppIncreaseLimit = this.hasEveryDeclinedApp(
+                    res.items
+                );
+                // if (res.items.length > 0) {
+                //     if (res.items.find((obj) => obj.status === 'Declined')) {
+                //         this.hasDeclinedAppIncreaseLimit = true;
+                //     }
+                //     if (res.items.every((obj) => obj.status === 'Declined')) {
+                //         this.allDeclinedAppIncreaseLimit = true;
+                //     }
+                // }
             });
     }
     getCreditLineStatus() {
@@ -148,7 +167,12 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
-
+    hasDeclinedApp(arr) {
+        return arr.length > 0 && arr.find((obj) => obj.status === 'Declined');
+    }
+    hasEveryDeclinedApp(arr) {
+        return arr.length > 0 && arr.every((obj) => obj.status === 'Declined');
+    }
     onRowSelect0_0_3(id) {
         this.router.navigate(['/credit-application/0-0-3/list/detail/' + id]);
     }
