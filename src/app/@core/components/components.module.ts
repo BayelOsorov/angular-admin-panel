@@ -2,6 +2,7 @@ import {
     CUSTOM_ELEMENTS_SCHEMA,
     NgModule,
     NO_ERRORS_SCHEMA,
+    InjectionToken,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -279,6 +280,9 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         IdentificationAdminDetailComponent,
         BtnLoaderComponent,
         InputSearchComponent,
+    ],
+    providers: [
+        // set up the providers
     ],
 })
 export class ComponentsModule {}

@@ -9,6 +9,7 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '../../../services/auth/auth.service';
 import { OldBackendService } from '../../../services/old-backend/old-backend.service';
+import { UseHttpImageSourcePipe } from '../secured-image/secured-image.component';
 @Component({
     selector: 'ngx-lightbox-img',
     templateUrl: './lightbox-img.component.html',
@@ -37,6 +38,7 @@ export class LightboxImgComponent implements OnInit {
     private dragStartScrollLeft = 0;
     private dragStartScrollTop = 0;
     constructor(
+        private useHttpImageService: UseHttpImageSourcePipe,
         private backendService: OldBackendService,
         private authService: AuthService,
         private cdr: ChangeDetectorRef,
@@ -45,38 +47,11 @@ export class LightboxImgComponent implements OnInit {
 
     openImage() {
         this.open = true;
-        // fetch(this.imgUrl, {
-        //     headers: {
-        //         Authorization: 'Bearer ' + this.authService.getAccessToken(),
-        //         responseType: 'blob',
-        //     },
-        // })
-        //     .then((res) => res.blob())
-        //     .then((myBlob) => {
-        //         const urlCreator = window.URL || window.webkitURL;
-        //         const imageUrl = urlCreator.createObjectURL(myBlob);
-        //         this.open = false;
-        //         this.cdr.detectChanges();
-        //         // window.location.assign(imageUrl);
-
-        //         window.open(imageUrl, '_blank');
-        //     });
     }
     openImageSafe() {
         this.open = true;
     }
-    getImageBlob() {
-        fetch(this.imgUrl, {
-            headers: {
-                Authorization: 'Bearer ' + this.authService.getAccessToken(),
-                responseType: 'blob',
-            },
-        })
-            .then((res) => res.blob())
-            .then((myBlob) => {
-                this.blobUrl = window.URL.createObjectURL(myBlob);
-            });
-    }
+
     toggleFullscreen() {
         const elem = this.imageElement.nativeElement;
         if (!this.isFullscreen) {

@@ -14,7 +14,6 @@ import {
     switchMap,
     tap,
 } from 'rxjs/operators';
-
 @Pipe({
     name: 'useHttpImgSrc',
     pure: false,
@@ -22,9 +21,9 @@ import {
 export class UseHttpImageSourcePipe implements PipeTransform, OnDestroy {
     private subscription = new Subscription();
     private transformValue = new BehaviorSubject<string>('');
-
     private latestValue!: string | SafeUrl;
-
+    private loadingImagePath!: string;
+    private errorImagePath!: string;
     constructor(
         private httpClient: HttpClient,
         private domSanitizer: DomSanitizer,
@@ -39,14 +38,31 @@ export class UseHttpImageSourcePipe implements PipeTransform, OnDestroy {
 
         return of(this.latestValue);
     }
-    transform(imagePath: string) {
-        // we emit a new value
+    transform(
+        imagePath: string,
+        loadingImagePath = 'https://cdn.dribbble.com/users/664475/screenshots/5411820/dribbble.gif',
+        // loadingImagePath = 'https://cdn.dribbble.com/users/1092116/screenshots/2857934/loading-indicator-dribbble2.gif',
+        errorImagePath = 'https://avatars.mds.yandex.net/i?id=98a0979d2252816a50f53d8596cedef6188825f3-5118451-images-thumbs&n=13'
+    ) {
+        this.setLoadingAndErrorImagePaths(loadingImagePath, errorImagePath);
+        if (!imagePath) {
+            return this.errorImagePath;
+        }
+
         this.transformValue.next(imagePath);
-
-        // we always return the latest value
-        return this.latestValue;
+        return this.latestValue || this.loadingImagePath;
     }
-
+    private setLoadingAndErrorImagePaths(
+        loadingImagePath: string,
+        errorImagePath: string
+    ): void {
+        if (this.loadingImagePath && this.errorImagePath) {
+            return;
+        }
+        this.loadingImagePath = loadingImagePath;
+        this.errorImagePath = errorImagePath;
+    }
+    // eslint-disable-next-line @typescript-eslint/member-ordering
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
