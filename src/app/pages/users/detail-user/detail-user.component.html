@@ -13,17 +13,17 @@
     <nb-card-body>
         <nb-tabset>
             <nb-tab tabTitle="Персональные данные">
-                <!-- <ngx-users-personal-info
+                <ngx-users-personal-info
                     [userData]="userData"
                     (getUserDetail)="getUserDetail($event)"
                 >
-                </ngx-users-personal-info> -->
+                </ngx-users-personal-info>
             </nb-tab>
             <nb-tab
                 [disabled]="!userData?.identificationInformation"
                 tabTitle="Идентификация"
             >
-                <!-- <nb-card>
+                <nb-card>
                     <nb-card-header>Идентификация клиента</nb-card-header>
                     <nb-card-body>
                         <div
@@ -74,7 +74,7 @@
                             ></video>
                         </div>
                     </nb-card-body>
-                </nb-card> -->
+                </nb-card>
             </nb-tab>
             <nb-tab
                 [disabled]="!userData?.identificationInformation"
@@ -90,10 +90,10 @@
                 [disabled]="!userData?.identificationInformation"
                 tabTitle="Продукт 'Топливная карта'"
             >
-                <!-- <ngx-fuel-card-user-detail
+                <ngx-fuel-card-user-detail
                     [userData]="userData"
                     [kibData]="fuelCardApplKibData"
-                ></ngx-fuel-card-user-detail> -->
+                ></ngx-fuel-card-user-detail>
             </nb-tab>
         </nb-tabset>
     </nb-card-body>
