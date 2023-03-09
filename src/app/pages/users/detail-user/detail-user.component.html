@@ -1,6 +1,6 @@
 <nb-card *ngIf="userData" class="user-detail">
     <nb-card-header
-        *ngIf="userData && userData.identificationInformation"
+        *ngIf="userData.identificationInformation"
         class="text-center"
         >{{
             userData.identificationInformation.surname +
@@ -23,58 +23,11 @@
                 [disabled]="!userData?.identificationInformation"
                 tabTitle="Идентификация"
             >
-                <nb-card>
-                    <nb-card-header>Идентификация клиента</nb-card-header>
-                    <nb-card-body>
-                        <div
-                            *ngIf="
-                                userData && userData.identificationInformation
-                            "
-                            class="detail-images row"
-                        >
-                            <ngx-lightbox-img
-                                class="col-6 col-sm-3"
-                                [imgUrl]="
-                                    userData.identificationInformation
-                                        .passportFrontSideImage
-                                "
-                            ></ngx-lightbox-img>
-
-                            <ngx-lightbox-img
-                                class="col-6 col-sm-3"
-                                [imgUrl]="
-                                    userData.identificationInformation
-                                        .passportBackSideImage
-                                "
-                            ></ngx-lightbox-img>
-                            <ngx-lightbox-img
-                                class="col-6 col-sm-3"
-                                [imgUrl]="
-                                    userData.identificationInformation
-                                        .selfieWithPassportImage
-                                "
-                            ></ngx-lightbox-img>
-                            <ngx-lightbox-img
-                                class="col-6 col-sm-3"
-                                [imgUrl]="
-                                    userData.identificationInformation
-                                        .profileImage
-                                "
-                            ></ngx-lightbox-img>
-                        </div>
-                        <div
-                            *ngIf="videos && videos.length > 0"
-                            class="detail-images row mt-3"
-                        >
-                            <video
-                                *ngFor="let item of videos"
-                                controls
-                                class="col-6 col-sm-3"
-                                [src]="item.url | useHttpImgSrc"
-                            ></video>
-                        </div>
-                    </nb-card-body>
-                </nb-card>
+                <ngx-users-identification-info
+                    [userData]="userData"
+                    [videos]="videos"
+                >
+                </ngx-users-identification-info>
             </nb-tab>
             <nb-tab
                 [disabled]="!userData?.identificationInformation"

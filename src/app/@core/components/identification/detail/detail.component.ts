@@ -7,6 +7,7 @@ import {
     OnDestroy,
     Output,
     EventEmitter,
+    ChangeDetectorRef,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -37,12 +38,13 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
     @Input() customerInfo;
 
     @ViewChild('openvidu', { static: false }) openvidu: OpenviduComponent;
+    @ViewChild('accordionItem') accordion;
     @Output() getDataEvent = new EventEmitter();
     toggle = false;
     isNeedToEdit = false;
     error = '';
     identificationAnswers = IdentificationAnswers;
-
+    toastrLoader;
     form: FormGroup;
     private destroy$: Subject<void> = new Subject<void>();
 
@@ -51,8 +53,18 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
         private toastService: ToastrService,
         private location: Location,
         private errorService: HandleErrorService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private cdr: ChangeDetectorRef
     ) {}
+    collapsedChange(val) {
+        if (!val) {
+            this.getDataEvent.emit();
+            this.cdr.detectChanges();
+        }
+    }
+    trackByFn(index, item) {
+        return item.id;
+    }
     getDataToggle() {
         this.toggle = !this.toggle;
     }
@@ -184,13 +196,21 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
+
     sendVideo(data) {
-        this.toastService.info('Видео загружается, подождите!');
+        this.toastrLoader = this.toastService.info(
+            'Видео загружается, подождите!',
+            '',
+            {
+                timeOut: 10000000,
+            }
+        );
         this.identificationService
             .sendVideo(this.data.id, data)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {
+                    this.toastService.clear();
                     this.toastService.success('Видео успешно загрузилось!');
                 },
             });

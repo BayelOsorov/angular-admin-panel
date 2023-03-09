@@ -5,7 +5,9 @@
                 <strong>Локальный КИБ </strong>
             </nb-accordion-item-header>
             <nb-accordion-item-body>
-                <nb-accordion-item *ngFor="let item of data">
+                <nb-accordion-item
+                    *ngFor="let item of data; trackBy: trackByFn"
+                >
                     <nb-accordion-item-header class="accordion-header d-block">
                         <div>
                             <div
@@ -45,7 +47,8 @@
                         <nb-accordion-item
                             *ngFor="
                                 let contract of item.activeContracts;
-                                let idx = index
+                                let idx = index;
+                                trackBy: trackByFn
                             "
                         >
                             <nb-accordion-item-header
@@ -68,8 +71,11 @@
                             <nb-accordion-item-body>
                                 <ng-container
                                     *ngFor="
-                                        let repDate of contract.repaymentDates;
-                                        let idx = index
+                                        let repDate of sortArray(
+                                            contract.repaymentDates
+                                        );
+                                        let idx = index;
+                                        trackBy: trackByFn
                                     "
                                 >
                                     <nb-accordion-item
@@ -123,7 +129,8 @@
                                             <table class="w-100 text-center">
                                                 <tr
                                                     *ngFor="
-                                                        let repayment of repDate.repayments
+                                                        let repayment of repDate.repayments;
+                                                        trackBy: trackByFn
                                                     "
                                                     class="row justify-content-between"
                                                 >
@@ -131,11 +138,13 @@
                                                         title="Дата"
                                                         class="col-md-4"
                                                     >
-                                                        {{
-                                                            repayment.createdAt
-                                                                | date
-                                                                    : 'dd.MM.yyyy'
-                                                        }}
+                                                        <p>
+                                                            {{
+                                                                repayment.createdAt
+                                                                    | date
+                                                                        : 'dd.MM.yyyy'
+                                                            }}
+                                                        </p>
                                                     </td>
                                                     <td
                                                         title="Сумма"

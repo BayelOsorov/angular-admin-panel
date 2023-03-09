@@ -1,21 +1,14 @@
-import {
-    CUSTOM_ELEMENTS_SCHEMA,
-    LOCALE_ID,
-    NgModule,
-    NO_ERRORS_SCHEMA,
-} from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
     NbAlertModule,
     NbButtonModule,
     NbCardModule,
     NbDatepickerModule,
     NbIconDefinition,
-    NbIconModule,
     NbInputModule,
     NbListModule,
     NbMenuModule,
     NbPopoverModule,
-    NbRouteTabsetModule,
     NbSelectModule,
     NbSpinnerModule,
     NbTabsetModule,
@@ -85,8 +78,7 @@ import { ListSalespeopleComponent } from './staff/salespeople/list-salespeople/l
 import { DetailSalespeopleComponent } from './staff/salespeople/detail-salespeople/detail-salespeople.component';
 import { ListPartnerNewsComponent } from './catalog/partner-news/list-partner-news/list-partner-news.component';
 import { ActionsPartnerNewsComponent } from './catalog/partner-news/actions-partner-news/actions-partner-news.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LoaderInterceptor } from '../@core/interceptors/loader-interceptor';
+
 import { ListUsersComponent } from './users/list-users/list-users.component';
 import { DetailUserComponent } from './users/detail-user/detail-user.component';
 import { ListPartnerBonusesComponent } from './bonuses/partners/list-partner-bonuses/list-partner-bonuses.component';

@@ -30,6 +30,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class OpenviduComponent implements OnInit, OnDestroy {
     @Input() data: IIdentificationDetail;
+
     APPLICATION_SERVER_URL = environment.identificationUrl;
 
     // OpenVidu objects

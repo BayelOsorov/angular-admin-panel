@@ -21,11 +21,6 @@ export class LightboxImgComponent implements OnInit {
     @ViewChild('imageElement') imageElement: ElementRef;
     @ViewChild('imageContainer') imageContainer: ElementRef;
     open = false;
-    close;
-    viewerOpen = false;
-    blobUrl;
-    zoomOn;
-    myThumbnail = 'https://wittlock.github.io/ngx-image-zoom/assets/thumb.jpg';
 
     // new
 
@@ -46,9 +41,6 @@ export class LightboxImgComponent implements OnInit {
     ) {}
 
     openImage() {
-        this.open = true;
-    }
-    openImageSafe() {
         this.open = true;
     }
 

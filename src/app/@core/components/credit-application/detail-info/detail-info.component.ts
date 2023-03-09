@@ -3,7 +3,9 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ICreditApplicationDetail } from '../../../models/credit-application/credit-application';
 import { AuthService } from '../../../services/auth/auth.service';
+import { CreditApplicationService } from '../../../services/credit-application/credit-application.service';
 import { ApplicationRequestsService } from '../../../services/credit-application/credit.service';
+import { FuelCardApplicationService } from '../../../services/credit-application/fuel-card.service';
 import { OldBackendService } from '../../../services/old-backend/old-backend.service';
 import { downloadFile, getProductCode } from '../../../utils';
 
@@ -23,12 +25,16 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
     creditReportUrl;
     trustLevel;
     repaymentDays;
+    creditLineData;
+    fuelCardCreditLineData;
     getProductCode = getProductCode;
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private applicationRequestsService: ApplicationRequestsService,
         private api: OldBackendService,
-        private authService: AuthService
+        private authService: AuthService,
+        private creditApplicationsService: CreditApplicationService,
+        private fuelCardApplicationsService: FuelCardApplicationService
     ) {}
     getTrustLevel() {
         const score = this.dataScoring.score;
@@ -71,9 +77,28 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
                 return { status: 'primary', title: '' };
         }
     }
+    getCreditLineStatus() {
+        this.creditApplicationsService
+            .getCustomerCreditLineStatus(this.data.customerId)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.creditLineData = data;
+            });
+    }
+    getFuelCardCreditLineStatus() {
+        this.fuelCardApplicationsService
+            .getFuelCardCreditLineStatus(this.data.customerId)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data) => {
+                this.fuelCardCreditLineData = data;
+            });
+    }
     getBlackListPerson() {
+        const { name, surname, patronymic } =
+            this.customerData?.identificationInformation;
+
         this.applicationRequestsService
-            .getBlackListPerson('Генри Сехудо')
+            .getBlackListPerson(surname + ' ' + name + ' ' + patronymic)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (data) => {
@@ -134,6 +159,8 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
         this.getTrustLevel();
         this.getBlackListPerson();
         this.getCreditReport();
+        this.getCreditLineStatus();
+        this.getFuelCardCreditLineStatus();
     }
     ngOnDestroy() {
         this.destroy$.next();

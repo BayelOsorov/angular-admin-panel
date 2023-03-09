@@ -23,7 +23,7 @@ import { IncreaseLimitApplicationService } from '../../../services/credit-applic
     selector: 'ngx-loan-application-user-detail',
     templateUrl: './loan-application-user-detail.component.html',
     styleUrls: ['./loan-application-user-detail.component.scss'],
-    // changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
@@ -32,12 +32,15 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
     listApplicationsIncreaseLimit;
 
     creditLineData;
-    canresetDeclinedApp: boolean;
+    hasRoleToResetDeclinedApp: boolean;
     hasDeclinedApp0_0_3 = false;
     hasDeclinedAppIncreaseLimit = false;
     allDeclinedApp0_0_3 = false;
     allDeclinedAppIncreaseLimit = false;
 
+    canResetApp0_0_3 = false;
+    canResetAppIncreaseLimit = false;
+    canCloseCreditLine = false;
     tableColumns = {
         index: {
             title: '№',
@@ -109,14 +112,11 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                 this.listApplications0_0_3 = res;
                 this.hasDeclinedApp0_0_3 = this.hasDeclinedApp(res.items);
                 this.allDeclinedApp0_0_3 = this.hasEveryDeclinedApp(res.items);
-                // if (res.items.length > 0) {
-                //     if (res.items.find((obj) => obj.status === 'Declined')) {
-                //         this.hasDeclinedApp0_0_3 = true;
-                //     }
-                //     if (res.items.every((obj) => obj.status === 'Declined')) {
-                //         this.allDeclinedApp0_0_3 = true;
-                //     }
-                // }
+                this.canResetApp0_0_3 =
+                    this.hasRoleToResetDeclinedApp &&
+                    (this.hasDeclinedApp0_0_3 || this.allDeclinedApp0_0_3) &&
+                    !this.creditLineData?.isClosed;
+                this.cdr.markForCheck();
             });
     }
     getListIncreaseLimitApplications(page = 1) {
@@ -131,14 +131,12 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                 this.allDeclinedAppIncreaseLimit = this.hasEveryDeclinedApp(
                     res.items
                 );
-                // if (res.items.length > 0) {
-                //     if (res.items.find((obj) => obj.status === 'Declined')) {
-                //         this.hasDeclinedAppIncreaseLimit = true;
-                //     }
-                //     if (res.items.every((obj) => obj.status === 'Declined')) {
-                //         this.allDeclinedAppIncreaseLimit = true;
-                //     }
-                // }
+                this.canResetAppIncreaseLimit =
+                    this.hasRoleToResetDeclinedApp &&
+                    (this.hasDeclinedAppIncreaseLimit ||
+                        this.allDeclinedAppIncreaseLimit) &&
+                    !this.creditLineData?.isClosed;
+                this.cdr.markForCheck();
             });
     }
     getCreditLineStatus() {
@@ -147,6 +145,13 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.creditLineData = data;
+                this.canCloseCreditLine =
+                    !this.creditLineData?.isClosed &&
+                    (!this.allDeclinedApp0_0_3 ||
+                        !this.allDeclinedAppIncreaseLimit) &&
+                    this.listApplications0_0_3?.items.length > 0;
+
+                this.cdr.markForCheck();
             });
     }
     closeCreditLine() {
@@ -168,10 +173,13 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             });
     }
     hasDeclinedApp(arr) {
-        return arr.length > 0 && arr.find((obj) => obj.status === 'Declined');
+        return Boolean(arr.find((obj) => obj.status === 'Declined'));
     }
     hasEveryDeclinedApp(arr) {
-        return arr.length > 0 && arr.every((obj) => obj.status === 'Declined');
+        return (
+            arr.length > 0 &&
+            Boolean(arr.every((obj) => obj.status === 'Declined'))
+        );
     }
     onRowSelect0_0_3(id) {
         this.router.navigate(['/credit-application/0-0-3/list/detail/' + id]);
@@ -207,15 +215,17 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
     }
     checkPermission() {
         const userAuthData = this.authService.getUserData();
-        this.canresetDeclinedApp = checkRolePermission(userAuthData.role, [
-            'credit_specialist_admin',
-        ]);
+        this.hasRoleToResetDeclinedApp = checkRolePermission(
+            userAuthData.role,
+            ['credit_specialist_admin']
+        );
+        this.cdr.markForCheck();
     }
     ngOnInit(): void {
-        this.getCreditLineStatus();
         this.getListIncreaseLimitApplications();
         this.getListApplications();
         this.checkPermission();
+        this.getCreditLineStatus();
     }
     ngOnDestroy() {
         this.destroy$.next();

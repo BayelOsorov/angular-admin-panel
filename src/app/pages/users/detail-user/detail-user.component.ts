@@ -22,6 +22,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
         private usersService: UsersService,
         private route: ActivatedRoute
     ) {}
+
     getUserDetail() {
         this.usersService
             .getDetailUser(this.applicationId)

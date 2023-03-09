@@ -5,6 +5,8 @@ import {
     EventEmitter,
     Output,
     Input,
+    ViewChild,
+    ElementRef,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IIdentificationDetail } from '../../../models/identification/identification';
@@ -22,8 +24,8 @@ export class PhotoIdnButtonsComponent implements OnInit {
     @Output() sendVideoEvent = new EventEmitter();
 
     @Input() openvidu;
-
     @Input() data: IIdentificationDetail;
+    @ViewChild('inputFile') inputFile: ElementRef;
     form: FormGroup;
     videoFormData;
     constructor(private fb: FormBuilder) {}
@@ -48,6 +50,7 @@ export class PhotoIdnButtonsComponent implements OnInit {
     }
     onSubmit() {
         this.sendVideoEvent.emit(this.videoFormData);
+        this.inputFile.nativeElement.value = '';
     }
     ngOnInit(): void {
         this.form = this.fb.group({

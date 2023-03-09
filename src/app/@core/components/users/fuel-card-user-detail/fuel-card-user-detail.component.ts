@@ -4,6 +4,7 @@ import {
     OnInit,
     ChangeDetectionStrategy,
     Input,
+    ChangeDetectorRef,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
@@ -20,7 +21,7 @@ import { AuthService } from '../../../services/auth/auth.service';
     selector: 'ngx-fuel-card-user-detail',
     templateUrl: './fuel-card-user-detail.component.html',
     styleUrls: ['./fuel-card-user-detail.component.scss'],
-    // changeDetection: ChangeDetectionStrategy.Default,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
@@ -73,7 +74,8 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
         private router: Router,
         private authService: AuthService,
         private datePipe: DatePipe,
-        private toastService: ToastrService
+        private toastService: ToastrService,
+        private cdr: ChangeDetectorRef
     ) {}
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
@@ -96,6 +98,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
                 ) {
                     this.allDeclinedApp = true;
                 }
+                this.cdr.markForCheck();
             });
     }
     onRowSelect(id) {
@@ -108,6 +111,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
         this.canresetDeclinedApp = checkRolePermission(userAuthData.role, [
             'credit_specialist_admin',
         ]);
+        this.cdr.markForCheck();
     }
     resetDeclinedApp() {
         this.fuelCardApplicationsService
@@ -125,6 +129,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.fuelCardCreditLineData = data;
+                this.cdr.markForCheck();
             });
     }
     closeFuelCardCreditLine() {

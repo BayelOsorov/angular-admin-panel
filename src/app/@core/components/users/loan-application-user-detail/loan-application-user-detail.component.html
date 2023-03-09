@@ -34,12 +34,7 @@
 </ngx-custom-table>
 
 <ngx-confirm-buttons
-    *ngIf="
-        canresetDeclinedApp &&
-        (hasDeclinedApp0_0_3 || allDeclinedApp0_0_3) &&
-        creditLineData &&
-        !creditLineData.isClosed
-    "
+    *ngIf="canResetApp0_0_3"
     class="d-block mb-5 w-50 mx-auto"
     (approveEvent)="resetDeclinedApp()"
     status="danger"
@@ -47,12 +42,7 @@
 >
 </ngx-confirm-buttons>
 <ngx-confirm-buttons
-    *ngIf="
-        canresetDeclinedApp &&
-        (hasDeclinedAppIncreaseLimit || allDeclinedAppIncreaseLimit) &&
-        creditLineData &&
-        !creditLineData.isClosed
-    "
+    *ngIf="canResetAppIncreaseLimit"
     class="d-block mb-5 w-50 mx-auto"
     (approveEvent)="resetIncreaseLimitDeclinedApp()"
     status="danger"
@@ -60,12 +50,8 @@
 >
 </ngx-confirm-buttons>
 <ngx-confirm-buttons
+    *ngIf="canCloseCreditLine"
     class="d-block mb-5 w-50 mx-auto"
-    *ngIf="
-        !creditLineData?.isClosed &&
-        (!allDeclinedApp0_0_3 || !allDeclinedAppIncreaseLimit) &&
-        listApplications0_0_3?.items.length > 0
-    "
     (approveEvent)="closeCreditLine()"
     status="danger"
     title="Закрыть кредитную линию"

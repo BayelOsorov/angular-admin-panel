@@ -97,15 +97,29 @@
                     </p>
                 </div>
             </nb-alert>
-            <nb-alert status="info" *ngFor="let product of kibData">
-                <div class="d-flex justify-content-around align-items-center">
-                    <i style="font-size: 25px" class="nb-info"></i>
-                    <p>
-                        Подключен продукт
-                        {{ getProductCode(product.productCode) }}
-                    </p>
-                </div>
-            </nb-alert>
+            <ng-container *ngFor="let product of kibData">
+                <nb-alert
+                    [status]="
+                        (product.productCode === 'Charmander' &&
+                            creditLineData?.isClosed) ||
+                        (product.productCode === 'Pikachu' &&
+                            fuelCardCreditLineData?.creditLineDetails.isClosed)
+                            ? 'danger'
+                            : 'info'
+                    "
+                >
+                    <div
+                        class="d-flex justify-content-around align-items-center"
+                    >
+                        <i style="font-size: 25px" class="nb-info"></i>
+                        <p>
+                            Подключен продукт
+                            {{ getProductCode(product.productCode) }}
+                        </p>
+                    </div>
+                </nb-alert>
+            </ng-container>
+
             <!-- <nb-alert status="danger">
                 <div class="d-flex justify-content-around align-items-center">
                     <i style="font-size: 35px" class="nb-alert"></i>

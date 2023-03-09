@@ -1,4 +1,4 @@
-<div class="row info">
+<div class="row user-personal-info">
     <div *ngIf="userData.identificationInformation" class="col-md-8 personal">
         <nb-alert outline="basic" class="mb-0 alert-title">
             <strong class="text-center">Персональная информация</strong>
@@ -134,8 +134,14 @@
 <nb-card class="mt-5" *ngIf="userData.identificationInformation">
     <nb-card-header>Документы</nb-card-header>
     <nb-card-body>
-        <div *ngIf="listDocuments.length > 0" class="detail-images row">
-            <ng-container *ngFor="let item of listDocuments; let idx = index">
+        <div *ngIf="listDocuments.length > 0" class="detail-docs row">
+            <ng-container
+                *ngFor="
+                    let item of listDocuments;
+                    let idx = index;
+                    trackBy: trackByFn
+                "
+            >
                 <div
                     (click)="dowloadDocument(item.url)"
                     *ngIf="item.type === 'document'"
@@ -175,7 +181,8 @@
                             item.fileType !== 'xls' &&
                             item.fileType !== 'xlsx' &&
                             item.fileType !== 'doc' &&
-                            item.fileType !== 'docx'
+                            item.fileType !== 'docx' &&
+                            item.fileType !== 'wmv'
                         "
                     >
                         <img
@@ -185,6 +192,23 @@
                         />
                         <br />
                         <p>Документ-{{ idx }}(скачать)</p>
+                    </ng-container>
+
+                    <ng-container
+                        (click)="dowloadDocument(item.url)"
+                        *ngIf="item.fileType === 'wmv'"
+                        class="document mt-2 col-6 col-sm-3"
+                    >
+                        <img
+                            src="../../../../assets/video-ico.png"
+                            alt=""
+                            width="50"
+                        />
+                        <br />
+                        <p>
+                            Видео -
+                            {{ idx + 1 }}(скачать)
+                        </p>
                     </ng-container>
                 </div>
 

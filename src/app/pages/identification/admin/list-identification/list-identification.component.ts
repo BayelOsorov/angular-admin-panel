@@ -18,7 +18,7 @@ export class ListIdentificationComponent implements OnInit, OnDestroy {
     form = this.fb.group({
         pin: [''],
         phoneNumber: [''],
-        status: ['PhotoIdentificationRequest'],
+        status: [''],
         page: [1],
     });
     tableColumns = {

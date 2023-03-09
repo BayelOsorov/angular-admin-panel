@@ -49,6 +49,9 @@ export class UsersPersonalInfoComponent implements OnInit {
         private sanitizer: DomSanitizer,
         private cdr: ChangeDetectorRef
     ) {}
+    trackByFn(index, item) {
+        return item.id; // unique id corresponding to the item
+    }
     checkPermission() {
         const userAuthData = this.authService.getUserData();
         this.canOfflineIdentificate = checkRolePermission(userAuthData.role, [
@@ -56,6 +59,8 @@ export class UsersPersonalInfoComponent implements OnInit {
         ]);
     }
     dowloadDocument(url) {
+        console.log(url);
+
         downloadFile(
             url,
             this.userData.identificationInformation.surname +
@@ -112,6 +117,7 @@ export class UsersPersonalInfoComponent implements OnInit {
                                   ),
                         type,
                         fileType: item.fileName.split('.')[1],
+                        id: Date.now(),
                     });
                     this.cdr.markForCheck();
                 });
@@ -126,6 +132,7 @@ export class UsersPersonalInfoComponent implements OnInit {
                     'Вы успешно офлайн идентифицировали!'
                 );
                 this.getDetailUser.emit();
+                this.cdr.markForCheck();
             });
     }
     getAlertStatus() {

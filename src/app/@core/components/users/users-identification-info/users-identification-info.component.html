@@ -1,0 +1,41 @@
+<nb-card>
+    <nb-card-header>Идентификация клиента</nb-card-header>
+    <nb-card-body>
+        <div
+            *ngIf="userData && userData.identificationInformation"
+            class="detail-images row"
+        >
+            <ngx-lightbox-img
+                class="col-6 col-sm-3"
+                [imgUrl]="
+                    userData.identificationInformation.passportFrontSideImage
+                "
+            ></ngx-lightbox-img>
+
+            <ngx-lightbox-img
+                class="col-6 col-sm-3"
+                [imgUrl]="
+                    userData.identificationInformation.passportBackSideImage
+                "
+            ></ngx-lightbox-img>
+            <ngx-lightbox-img
+                class="col-6 col-sm-3"
+                [imgUrl]="
+                    userData.identificationInformation.selfieWithPassportImage
+                "
+            ></ngx-lightbox-img>
+            <ngx-lightbox-img
+                class="col-6 col-sm-3"
+                [imgUrl]="userData.identificationInformation.profileImage"
+            ></ngx-lightbox-img>
+        </div>
+        <div *ngIf="videos && videos.length > 0" class="detail-images row mt-3">
+            <video
+                *ngFor="let item of videos; trackBy: trackByFn"
+                controls
+                class="col-6 col-sm-3 video"
+                [src]="item.url | useHttpImgSrc"
+            ></video>
+        </div>
+    </nb-card-body>
+</nb-card>

@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 
 import * as moment from 'moment';
 import { getProductCode } from '../../../utils';
@@ -7,11 +12,19 @@ import { getProductCode } from '../../../utils';
     selector: 'ngx-kib',
     templateUrl: './kib.component.html',
     styleUrls: ['./kib.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class KibComponent implements OnInit {
     @Input() data;
     getProductCode = getProductCode;
     constructor() {}
+    trackByFn(index, item) {
+        return item.id;
+    }
+    sortArray = (arr) =>
+        arr.sort(
+            (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
+        );
     getUsedMoney(data) {
         let sum = 0;
         data.map((item) => {

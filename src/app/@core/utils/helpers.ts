@@ -109,17 +109,25 @@ const downloadFile = (fileURL, fileName) => {
 };
 
 const imageExtensions = ['png', 'jpeg', 'jpg', 'gif'];
-const documentExtensions = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
+const documentExtensionsDowload = [
+    'doc',
+    'docx',
+    'xls',
+    'xlsx',
+    'ppt',
+    'pptx',
+    'wmv',
+];
 const pdf = ['pdf'];
 const audioExtensions = ['mp3', 'wav', 'm4a', 'ogg', 'wma'];
-const videoExtensions = ['mp4', 'mov', 'avi', 'mkv', 'wmv'];
+const videoExtensions = ['mp4', 'mov', 'avi', 'mkv'];
 const textExtensions = ['txt', 'csv'];
 
 const getFileType = (fileExtension) => {
     switch (true) {
         case imageExtensions.includes(fileExtension):
             return 'image';
-        case documentExtensions.includes(fileExtension):
+        case documentExtensionsDowload.includes(fileExtension):
             return 'document';
         case audioExtensions.includes(fileExtension):
             return 'audio';

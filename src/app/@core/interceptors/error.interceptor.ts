@@ -7,9 +7,10 @@ import {
     HttpResponse,
     HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
+import { retry } from 'rxjs/operators';
 import { HandleErrorService } from '../services/http/handle-error.service';
-import { environment } from '../../../environments/environment';
+
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
     constructor(private error: HandleErrorService) {}
@@ -24,17 +25,19 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
         return new Observable((observer) => {
-            next.handle(req).subscribe(
-                (res: HttpResponse<any>) => {
-                    if (res instanceof HttpResponse) {
-                        observer.next(res);
+            next.handle(req)
+                // .pipe(retry(1))
+                .subscribe(
+                    (res: HttpResponse<any>) => {
+                        if (res instanceof HttpResponse) {
+                            observer.next(res);
+                        }
+                    },
+                    (err: HttpErrorResponse) => {
+                        this.error.handleError(err);
+                        observer.error(err);
                     }
-                },
-                (err: HttpErrorResponse) => {
-                    this.error.handleError(err);
-                    observer.error(err);
-                }
-            );
+                );
         });
     }
 
