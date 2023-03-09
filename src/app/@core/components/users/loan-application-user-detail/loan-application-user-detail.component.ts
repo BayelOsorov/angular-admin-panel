@@ -136,6 +136,11 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                     (this.hasDeclinedAppIncreaseLimit ||
                         this.allDeclinedAppIncreaseLimit) &&
                     !this.creditLineData?.isClosed;
+
+                this.canCloseCreditLine =
+                    !this.creditLineData?.isClosed &&
+                    (!this.allDeclinedApp0_0_3 ||
+                        !this.allDeclinedAppIncreaseLimit);
                 this.cdr.markForCheck();
             });
     }
@@ -145,11 +150,6 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.creditLineData = data;
-                this.canCloseCreditLine =
-                    !this.creditLineData?.isClosed &&
-                    (!this.allDeclinedApp0_0_3 ||
-                        !this.allDeclinedAppIncreaseLimit) &&
-                    this.listApplications0_0_3?.items.length > 0;
 
                 this.cdr.markForCheck();
             });
@@ -222,10 +222,10 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
     }
     ngOnInit(): void {
-        this.getListIncreaseLimitApplications();
-        this.getListApplications();
-        this.checkPermission();
         this.getCreditLineStatus();
+        this.getListApplications();
+        this.getListIncreaseLimitApplications();
+        this.checkPermission();
     }
     ngOnDestroy() {
         this.destroy$.next();
