@@ -60,6 +60,26 @@ export class FuelCardApplicationService {
             { lockoutEnd: null }
         );
     }
+    getLockoutEndFuelCardApplication(id) {
+        // return this.http.patch(
+        //     environment.fuelCardUrl +
+        //         `/operator/api/v1/customers/${id}/update-ocl-creation-lockout-end`,
+        //     { lockoutEnd: null }
+        // );
+    }
+    getPostponeFuelCardApplicationDetail(id) {
+        return this.http.get<ICreditApplicationDetail>(
+            environment.fuelCardUrl +
+                `/operator/api/v1/ocl-requests/${id}/postponed-in-process`
+        );
+    }
+    postponeFuelCardApplication(id) {
+        return this.http.patch(
+            environment.fuelCardUrl +
+                `/operator/api/v1/ocl-requests/${id}/postpone`,
+            { data: '' }
+        );
+    }
     declineFuelCardApplication(id, data) {
         return this.http.patch(
             environment.fuelCardUrl +

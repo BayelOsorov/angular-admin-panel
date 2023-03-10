@@ -7,7 +7,14 @@
         >
         </ngx-confirm-buttons>
     </div>
-
+    <div class="col-md-4 approve-btn">
+        <ngx-confirm-buttons
+            (approveEvent)="postponeUser()"
+            status="warning"
+            title="отложить"
+        >
+        </ngx-confirm-buttons>
+    </div>
     <div class="col-md-4">
         <ng-template #formPopover>
             <div *ngIf="visible" class="p-2">

@@ -1,9 +1,23 @@
 <nb-card>
     <ng-container>
-        <!-- <nb-card-header>Идентификация по фотографии</nb-card-header> -->
         <nb-card-body class="d-flex justify-content-center">
             <ngx-button title="Получить заявку" (clickEvent)="getApplication()">
             </ngx-button>
+        </nb-card-body>
+    </ng-container>
+</nb-card>
+<nb-card>
+    <ng-container>
+        <nb-card-body>
+            <ngx-custom-table
+                (changePageEvent)="getListCreditApplications($event)"
+                (rowSelectEvent)="onRowSelect($event)"
+                [tableColumns]="tableColumns"
+                [tableData]="listApplications"
+                [productName]="'ни одной заявки'"
+                [actions]="false"
+            >
+            </ngx-custom-table>
         </nb-card-body>
     </ng-container>
 </nb-card>

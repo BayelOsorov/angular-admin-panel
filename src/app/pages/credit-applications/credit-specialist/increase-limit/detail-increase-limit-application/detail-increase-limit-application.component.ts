@@ -89,6 +89,19 @@ export class DetailIncreaseLimitApplicationComponent
                 },
             });
     }
+    postponeCredit() {
+        this.increaseLimitApplicationsService
+            .postponeCreditApplication(this.loanApplicationData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.toaster.success(
+                        'Вы успешно отложили заявку на увеличение лимита!'
+                    );
+                    this.location.back();
+                },
+            });
+    }
     approveCredit() {
         this.increaseLimitApplicationsService
             .approveCreditApplication(this.loanApplicationData.id, {
@@ -98,7 +111,7 @@ export class DetailIncreaseLimitApplicationComponent
             .subscribe({
                 next: (data) => {
                     this.toaster.success(
-                        'Вы успешно подтвердили заявку на кредит!'
+                        'Вы успешно подтвердили заявку на увеличение лимита!'
                     );
                     this.location.back();
                 },
@@ -114,7 +127,7 @@ export class DetailIncreaseLimitApplicationComponent
             .subscribe({
                 next: (data) => {
                     this.toaster.success(
-                        'Вы успешно отклонили заявку на кредит!'
+                        'Вы успешно отклонили заявку на увеличение лимита!'
                     );
                     this.location.back();
                 },
@@ -168,7 +181,7 @@ export class DetailIncreaseLimitApplicationComponent
             .subscribe({
                 next: (data) => {
                     this.toaster.success(
-                        'Вы успешно отправили на редактирование заявку на кредит!'
+                        'Вы успешно отправили на редактирование заявку на увеличение лимита!'
                     );
                     this.location.back();
                 },

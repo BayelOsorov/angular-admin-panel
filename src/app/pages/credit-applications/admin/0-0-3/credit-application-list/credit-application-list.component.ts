@@ -35,10 +35,7 @@ export class CreditApplicationListAdminComponent implements OnInit, OnDestroy {
                     cell.row.index
                 ),
         },
-        customerFullName: {
-            title: 'ФИО',
-            type: 'text',
-        },
+
         createdAt: {
             title: 'Дата',
             type: 'text',

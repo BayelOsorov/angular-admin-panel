@@ -102,6 +102,19 @@ export class IncreaseLimitApplicationService {
             { lockoutEnd: null }
         );
     }
+    getPostponeCreditApplicationDetail(id) {
+        return this.http.get<ICreditApplicationDetail>(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/ucl-requests/${id}/postponed-in-process`
+        );
+    }
+    postponeCreditApplication(id) {
+        return this.http.patch(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/ucl-requests/${id}/postpone`,
+            { data: '' }
+        );
+    }
     createCreditSpecialistAccount() {
         return this.http.post(
             environment.creditApplicationUrl + `/operator/api/v1/account`,

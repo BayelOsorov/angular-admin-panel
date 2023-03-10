@@ -198,13 +198,13 @@
                     </nb-accordion-item>
                 </nb-accordion>
                 <ngx-credit-application-need-to-edit
-                    [control]="form?.get(['CustomerData.Occupation.Position'])"
-                    [title]="'Должность'"
+                    [control]="form?.get(['CustomerData.Occupation.Company'])"
+                    [title]="'Название компании'"
                     [placeholder]="'Введите'"
                 ></ngx-credit-application-need-to-edit>
                 <ngx-credit-application-need-to-edit
-                    [control]="form?.get(['CustomerData.Occupation.Company'])"
-                    [title]="'Название компании'"
+                    [control]="form?.get(['CustomerData.Occupation.Position'])"
+                    [title]="'Должность'"
                     [placeholder]="'Введите'"
                 ></ngx-credit-application-need-to-edit>
             </ng-container>

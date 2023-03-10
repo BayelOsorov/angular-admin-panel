@@ -175,6 +175,8 @@ const getAlertStatus = (value) => {
             return 'primary';
         case 'Online':
             return 'primary';
+        case 'Postponed':
+            return 'control';
         case 'Offline':
             return 'success';
 

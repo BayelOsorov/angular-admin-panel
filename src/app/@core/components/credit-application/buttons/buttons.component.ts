@@ -15,11 +15,16 @@ import { FormBuilder } from '@angular/forms';
 export class CreditApplicationButtonsComponent implements OnInit {
     @Output() approveEvent = new EventEmitter();
     @Output() declineEvent = new EventEmitter();
+    @Output() postponeEvent = new EventEmitter();
+
     visible = false;
     form;
     constructor(private fb: FormBuilder) {}
     approveUser() {
         this.approveEvent.emit();
+    }
+    postponeUser() {
+        this.postponeEvent.emit();
     }
     declineUser() {
         this.declineEvent.emit(this.form.value);

@@ -112,6 +112,19 @@ export class CreditApplicationDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
+    postponeCredit() {
+        this.creditApplicationsService
+            .postponeCreditApplication(this.loanApplicationData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.toaster.success(
+                        'Вы успешно отложили заявку на кредит!'
+                    );
+                    this.location.back();
+                },
+            });
+    }
     approveCredit() {
         this.creditApplicationsService
             .approveCreditApplication(this.loanApplicationData.id, {

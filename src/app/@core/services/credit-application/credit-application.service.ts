@@ -77,7 +77,19 @@ export class CreditApplicationService {
             { lockoutEnd: null }
         );
     }
-
+    getPostponeCreditApplicationDetail(id) {
+        return this.http.get<ICreditApplicationDetail>(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/ocl-requests/${id}/postponed-in-process`
+        );
+    }
+    postponeCreditApplication(id) {
+        return this.http.patch(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/ocl-requests/${id}/postpone`,
+            { data: '' }
+        );
+    }
     closeCustomerCreditLine(id) {
         return this.http.get(
             environment.closeCreditLineUrl +

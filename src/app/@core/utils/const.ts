@@ -68,6 +68,8 @@ export const statusIdentificate = [
     { id: 'EditRequired', text: 'Нужно отредактировать' },
     { id: 'Timeout', text: 'Время и стекло' },
     { id: 'Online', text: 'Онлайн' },
+    { id: 'Postponed', text: 'Отложенный' },
+
     { id: 'Offline', text: 'Офлайн' },
     { id: 'None', text: 'Не идентифицирован' },
 

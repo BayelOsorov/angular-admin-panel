@@ -111,7 +111,19 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
             isAdmin: false,
         };
     }
-
+    postponeCredit() {
+        this.fuelCardApplicationsService
+            .postponeFuelCardApplication(this.loanApplicationData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+                next: (data) => {
+                    this.toaster.success(
+                        'Вы успешно отложили заявку на топливную карту!'
+                    );
+                    this.location.back();
+                },
+            });
+    }
     approveCredit() {
         this.fuelCardApplicationsService
             .approveFuelCardApplication(this.loanApplicationData.id, {
@@ -121,7 +133,7 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data) => {
                     this.toaster.success(
-                        'Вы успешно подтвердили заявку на кредит!'
+                        'Вы успешно подтвердили заявку на топливную карту!'
                     );
                     this.location.back();
                 },
@@ -137,7 +149,7 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data) => {
                     this.toaster.success(
-                        'Вы успешно отклонили заявку на кредит!'
+                        'Вы успешно отклонили заявку на топливную карту!'
                     );
                     this.location.back();
                 },
@@ -154,7 +166,7 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data) => {
                     this.toaster.success(
-                        'Вы успешно отправили на редактирование заявку на кредит!'
+                        'Вы успешно отправили на редактирование заявку на топливную карту!'
                     );
                     this.location.back();
                 },
