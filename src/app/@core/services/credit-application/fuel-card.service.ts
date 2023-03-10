@@ -60,12 +60,10 @@ export class FuelCardApplicationService {
             { lockoutEnd: null }
         );
     }
-    getLockoutEndFuelCardApplication(id) {
-        // return this.http.patch(
-        //     environment.fuelCardUrl +
-        //         `/operator/api/v1/customers/${id}/update-ocl-creation-lockout-end`,
-        //     { lockoutEnd: null }
-        // );
+    getLockoutEndFuelCardApplicationInfo(id) {
+        return this.http.get(
+            environment.fuelCardUrl + `/operator/api/v1/customers/${id}`
+        );
     }
     getPostponeFuelCardApplicationDetail(id) {
         return this.http.get<ICreditApplicationDetail>(

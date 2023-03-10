@@ -7,15 +7,13 @@ import {
     ChangeDetectorRef,
 } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { checkRolePermission, tableNumbering } from '../../../utils';
+import { tableNumbering } from '../../../utils';
 import { StatusBadgeComponent } from '../../shared/status-badge/status-badge.component';
 import { FuelCardApplicationService } from '../../../services/credit-application/fuel-card.service';
-import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
     selector: 'ngx-fuel-card-user-detail',
@@ -26,11 +24,11 @@ import { AuthService } from '../../../services/auth/auth.service';
 export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
     @Input() userData;
+    @Input() hasRoleToResetDeclinedApp;
     listApplications;
-    canresetDeclinedApp: boolean;
-    hasDeclinedApp;
     fuelCardCreditLineData;
-    allDeclinedApp = false;
+    canResetFuelCard = false;
+    isLastDeclined = false;
     tableColumns = {
         index: {
             title: '№',
@@ -72,7 +70,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
         private fuelCardApplicationsService: FuelCardApplicationService,
         private toaster: ToastrService,
         private router: Router,
-        private authService: AuthService,
+
         private datePipe: DatePipe,
         private toastService: ToastrService,
         private cdr: ChangeDetectorRef
@@ -86,17 +84,8 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.listApplications = res;
-                if (
-                    res.items.length > 0 &&
-                    res.items.find((obj) => obj.status === 'Declined')
-                ) {
-                    this.hasDeclinedApp = true;
-                }
-                if (
-                    res.items.length > 0 &&
-                    res.items.every((obj) => obj.status === 'Declined')
-                ) {
-                    this.allDeclinedApp = true;
+                if (res.items[0]?.status === 'Declined') {
+                    this.isLastDeclined = true;
                 }
                 this.cdr.markForCheck();
             });
@@ -106,13 +95,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             '/credit-application/fuel-card/list/detail/' + id,
         ]);
     }
-    checkPermission() {
-        const userAuthData = this.authService.getUserData();
-        this.canresetDeclinedApp = checkRolePermission(userAuthData.role, [
-            'credit_specialist_admin',
-        ]);
-        this.cdr.markForCheck();
-    }
+
     resetDeclinedApp() {
         this.fuelCardApplicationsService
             .resetDeclinedFuelCardApplication(this.userData.id)
@@ -120,6 +103,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: () => {
                     this.toaster.success('Время блокировки успешно сброшено!');
+                    this.getFuelCardLockoutEndInfo();
                 },
             });
     }
@@ -129,6 +113,20 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.fuelCardCreditLineData = data;
+                this.cdr.markForCheck();
+            });
+    }
+    getFuelCardLockoutEndInfo() {
+        this.fuelCardApplicationsService
+            .getLockoutEndFuelCardApplicationInfo(this.userData.id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data: any) => {
+                this.canResetFuelCard =
+                    !this.fuelCardCreditLineData?.creditLineDetails?.isClosed &&
+                    this.hasRoleToResetDeclinedApp &&
+                    this.isLastDeclined &&
+                    Boolean(data.oclRequestCreationLockoutEnd);
+
                 this.cdr.markForCheck();
             });
     }
@@ -148,7 +146,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.getFuelCardCreditLineStatus();
         this.getListApplications();
-        this.checkPermission();
+        this.getFuelCardLockoutEndInfo();
     }
     ngOnDestroy() {
         this.destroy$.next();

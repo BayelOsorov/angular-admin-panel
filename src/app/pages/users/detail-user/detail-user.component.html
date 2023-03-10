@@ -34,6 +34,7 @@
                 tabTitle="Продукт '0-0-3'"
             >
                 <ngx-loan-application-user-detail
+                    [hasRoleToResetDeclinedApp]="hasRoleToResetDeclinedApp"
                     [userData]="userData"
                     [kibData]="loanApplKibData"
                 ></ngx-loan-application-user-detail>
@@ -44,6 +45,7 @@
                 tabTitle="Продукт 'Топливная карта'"
             >
                 <ngx-fuel-card-user-detail
+                    [hasRoleToResetDeclinedApp]="hasRoleToResetDeclinedApp"
                     [userData]="userData"
                     [kibData]="fuelCardApplKibData"
                 ></ngx-fuel-card-user-detail>

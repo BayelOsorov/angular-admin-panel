@@ -72,6 +72,8 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
                 return { status: 'primary', title: 'Ожидание' };
             case 'Approved':
                 return { status: 'success', title: 'Одобренный' };
+            case 'Postponed':
+                return { status: 'control', title: 'Отложенный' };
 
             default:
                 return { status: 'primary', title: '' };

@@ -28,19 +28,19 @@ import { IncreaseLimitApplicationService } from '../../../services/credit-applic
 export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
     @Input() kibData;
     @Input() userData;
+    @Input() hasRoleToResetDeclinedApp;
+
     listApplications0_0_3;
     listApplicationsIncreaseLimit;
 
     creditLineData;
-    hasRoleToResetDeclinedApp: boolean;
-    hasDeclinedApp0_0_3 = false;
-    hasDeclinedAppIncreaseLimit = false;
-    allDeclinedApp0_0_3 = false;
-    allDeclinedAppIncreaseLimit = false;
-
     canResetApp0_0_3 = false;
     canResetAppIncreaseLimit = false;
     canCloseCreditLine = false;
+
+    isLastDeclined0_0_3 = false;
+    isLastDeclinedIncreaseLimit = false;
+
     tableColumns = {
         index: {
             title: '№',
@@ -96,7 +96,6 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
 
         private toaster: ToastrService,
         private router: Router,
-        private authService: AuthService,
         private datePipe: DatePipe,
         private toastService: ToastrService,
         private cdr: ChangeDetectorRef
@@ -110,16 +109,17 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.listApplications0_0_3 = res;
-                this.hasDeclinedApp0_0_3 = this.hasDeclinedApp(res.items);
-                this.allDeclinedApp0_0_3 = this.hasEveryDeclinedApp(res.items);
+                if (res.items[0]?.status === 'Declined') {
+                    this.isLastDeclined0_0_3 = true;
+                }
                 this.canResetApp0_0_3 =
                     this.hasRoleToResetDeclinedApp &&
-                    (this.hasDeclinedApp0_0_3 || this.allDeclinedApp0_0_3) &&
+                    this.isLastDeclined0_0_3 &&
                     !this.creditLineData?.isClosed;
+
                 this.canCloseCreditLine =
                     !this.creditLineData?.isClosed &&
-                    (!this.allDeclinedApp0_0_3 ||
-                        !this.allDeclinedAppIncreaseLimit) &&
+                    !this.isLastDeclined0_0_3 &&
                     this.listApplications0_0_3.items.length > 0;
                 this.cdr.markForCheck();
             });
@@ -130,16 +130,13 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.listApplicationsIncreaseLimit = res;
-                this.hasDeclinedAppIncreaseLimit = this.hasDeclinedApp(
-                    res.items
-                );
-                this.allDeclinedAppIncreaseLimit = this.hasEveryDeclinedApp(
-                    res.items
-                );
+                if (res.items[0]?.status === 'Declined') {
+                    this.isLastDeclinedIncreaseLimit = true;
+                }
+
                 this.canResetAppIncreaseLimit =
                     this.hasRoleToResetDeclinedApp &&
-                    (this.hasDeclinedAppIncreaseLimit ||
-                        this.allDeclinedAppIncreaseLimit) &&
+                    this.isLastDeclinedIncreaseLimit &&
                     !this.creditLineData?.isClosed;
 
                 this.cdr.markForCheck();
@@ -173,15 +170,6 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
-    hasDeclinedApp(arr) {
-        return Boolean(arr.find((obj) => obj.status === 'Declined'));
-    }
-    hasEveryDeclinedApp(arr) {
-        return (
-            arr.length > 0 &&
-            Boolean(arr.every((obj) => obj.status === 'Declined'))
-        );
-    }
     onRowSelect0_0_3(id) {
         this.router.navigate(['/credit-application/0-0-3/list/detail/' + id]);
     }
@@ -214,19 +202,11 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
-    checkPermission() {
-        const userAuthData = this.authService.getUserData();
-        this.hasRoleToResetDeclinedApp = checkRolePermission(
-            userAuthData.role,
-            ['credit_specialist_admin']
-        );
-        this.cdr.markForCheck();
-    }
+
     ngOnInit(): void {
         this.getCreditLineStatus();
         this.getListApplications();
         this.getListIncreaseLimitApplications();
-        this.checkPermission();
     }
     ngOnDestroy() {
         this.destroy$.next();

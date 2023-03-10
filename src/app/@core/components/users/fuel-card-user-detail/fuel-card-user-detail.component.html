@@ -4,7 +4,7 @@
     disabled
     class="float-right w-20"
 >
-    <strong class="text-center"> Топливная карта закрыта</strong>
+    <strong class="text-center">Топливная карта закрыта</strong>
 </nb-alert>
 <ngx-custom-table
     (changePageEvent)="getListApplications($event)"
@@ -17,7 +17,7 @@
 >
 </ngx-custom-table>
 <ngx-confirm-buttons
-    *ngIf="canresetDeclinedApp && (hasDeclinedApp || allDeclinedApp)"
+    *ngIf="canResetFuelCard"
     class="d-block mb-5 w-50 mx-auto"
     (approveEvent)="resetDeclinedApp()"
     status="danger"
