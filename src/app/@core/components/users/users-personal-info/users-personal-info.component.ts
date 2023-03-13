@@ -59,8 +59,6 @@ export class UsersPersonalInfoComponent implements OnInit {
         ]);
     }
     dowloadDocument(url) {
-        console.log(url);
-
         downloadFile(
             url,
             this.userData.identificationInformation.surname +

@@ -115,6 +115,7 @@ import { BtnLoaderComponent } from './shared/btn-loader/btn-loader.component';
 import { InputSearchComponent } from './shared/input-search/input-search.component';
 import { UsersPersonalInfoComponent } from './users/users-personal-info/users-personal-info.component';
 import { UsersIdentificationInfoComponent } from './users/users-identification-info/users-identification-info.component';
+import { IdentificationVideosComponent } from './identification/identification-videos/identification-videos.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -222,6 +223,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         InputSearchComponent,
         UsersPersonalInfoComponent,
         UsersIdentificationInfoComponent,
+        IdentificationVideosComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -286,6 +288,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         InputSearchComponent,
         UsersPersonalInfoComponent,
         UsersIdentificationInfoComponent,
+        IdentificationVideosComponent,
     ],
     providers: [
         // set up the providers

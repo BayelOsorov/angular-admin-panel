@@ -7,7 +7,6 @@ import {
     OnDestroy,
     Output,
     EventEmitter,
-    ChangeDetectorRef,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -53,18 +52,9 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
         private toastService: ToastrService,
         private location: Location,
         private errorService: HandleErrorService,
-        private fb: FormBuilder,
-        private cdr: ChangeDetectorRef
+        private fb: FormBuilder
     ) {}
-    collapsedChange(val) {
-        if (!val) {
-            this.getDataEvent.emit();
-            this.cdr.detectChanges();
-        }
-    }
-    trackByFn(index, item) {
-        return item.id;
-    }
+
     getDataToggle() {
         this.toggle = !this.toggle;
     }
@@ -210,6 +200,7 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: () => {
+                    this.getDataEvent.emit('');
                     this.toastService.clear();
                     this.toastService.success('Видео успешно загрузилось!');
                 },

@@ -73,3 +73,14 @@ img {
         margin-right: 30px;
     }
 }
+@media (max-width: 425px) {
+    .viewer-container {
+        .controls {
+            display: none;
+        }
+        .close-button {
+            right: 20vw;
+            top: 120px;
+        }
+    }
+}

@@ -160,7 +160,13 @@
             </div>
         </div>
     </div>
-    <nb-accordion class="mt-5" multi *ngIf="data.videoIdentificationApprovedAt">
+    <ngx-identification-videos
+        class="mt-5 d-block"
+        *ngIf="data.videoIdentificationApprovedAt"
+        [videos]="data.videoIdentificationCallFiles"
+    >
+    </ngx-identification-videos>
+    <!-- <nb-accordion class="mt-5" multi *ngIf="data.videoIdentificationApprovedAt">
         <nb-accordion-item>
             <nb-accordion-item-header class="justify-content-center">
                 Видео
@@ -179,7 +185,7 @@
                 </div>
             </nb-accordion-item-body>
         </nb-accordion-item>
-    </nb-accordion>
+    </nb-accordion> -->
 
     <ngx-comments
         [comments]="data.comments"
