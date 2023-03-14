@@ -97,9 +97,9 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             });
     }
     onRowSelect(id) {
-        // this.router.navigate([
-        //     '/credit-application/fuel-card/list/detail/' + id,
-        // ]);
+        this.router.navigate([
+            '/credit-application/fuel-card/list/detail/' + id,
+        ]);
     }
     click() {
         console.log('sss');
