@@ -50,6 +50,10 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             type: 'text',
             valuePrepareFunction: (item) => item[item.length - 1]?.fullname,
         },
+        approvedAmount: {
+            title: 'Одобренная сумма',
+            type: 'text',
+        },
         status: {
             title: 'Статус',
             type: 'custom',
@@ -93,9 +97,12 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             });
     }
     onRowSelect(id) {
-        this.router.navigate([
-            '/credit-application/fuel-card/list/detail/' + id,
-        ]);
+        // this.router.navigate([
+        //     '/credit-application/fuel-card/list/detail/' + id,
+        // ]);
+    }
+    click() {
+        console.log('sss');
     }
 
     resetDeclinedApp() {

@@ -62,6 +62,10 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             type: 'text',
             valuePrepareFunction: (item) => item[item.length - 1]?.fullname,
         },
+        approvedAmount: {
+            title: 'Одобренная сумма',
+            type: 'text',
+        },
         status: {
             title: 'Статус',
             type: 'custom',
