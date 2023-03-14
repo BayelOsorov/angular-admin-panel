@@ -149,6 +149,7 @@ export class DetailIncreaseLimitApplicationComponent
                                     this.loanApplicationData.requestingAmount,
                                 isAdmin: false,
                                 min: item.limit,
+                                status: this.loanApplicationData.status,
                             };
                         }
                     });

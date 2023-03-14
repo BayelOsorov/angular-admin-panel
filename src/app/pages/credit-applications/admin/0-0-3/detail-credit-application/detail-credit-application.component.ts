@@ -116,6 +116,7 @@ export class DetailCreditApplicationAdminComponent
                 ? this.loanApplicationData.approvedAmount
                 : this.loanApplicationData.requestingAmount,
             isAdmin: true,
+            status: this.loanApplicationData.status,
         };
     }
 

@@ -57,6 +57,9 @@ export class UpdateAmountComponent implements OnInit, OnChanges {
         this.btnDisabled = false;
         this.requestingAmount = val;
     }
+    formatter() {
+        return 'Одобренная сумма';
+    }
     updateAmount() {
         this.btnDisabled = true;
         this.changeAmountEvent.emit(this.requestingAmount);

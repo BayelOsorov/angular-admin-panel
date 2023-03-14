@@ -5,6 +5,15 @@
 ::ng-deep .ant-slider-track {
     background-color: nb-theme(alert-info-background-color);
 }
+.approved-dots {
+    ::ng-deep .ant-slider-handle {
+        background-color: nb-theme(alert-success-background-color) !important;
+        width: 20px;
+        height: 20px;
+        margin-top: -8.2px;
+        border: none;
+    }
+}
 @media (max-width: 425px) {
     .approve-btn {
         width: 100%;

@@ -90,6 +90,7 @@ export class DetailIncreaseLimitApplicationAdminComponent
                                     : this.loanApplicationData.requestingAmount,
                                 isAdmin: true,
                                 min: item.limit,
+                                status: this.loanApplicationData.status,
                             };
                         }
                     });

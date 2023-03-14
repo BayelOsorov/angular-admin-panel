@@ -84,9 +84,11 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => {
                 this.listApplications = res;
+
                 if (res.items[0]?.status === 'Declined') {
                     this.isLastDeclined = true;
                 }
+                this.getFuelCardLockoutEndInfo();
                 this.cdr.markForCheck();
             });
     }
@@ -146,7 +148,6 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.getFuelCardCreditLineStatus();
         this.getListApplications();
-        this.getFuelCardLockoutEndInfo();
     }
     ngOnDestroy() {
         this.destroy$.next();

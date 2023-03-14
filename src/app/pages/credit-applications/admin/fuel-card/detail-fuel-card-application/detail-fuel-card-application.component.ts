@@ -112,6 +112,7 @@ export class DetailFuelCardApplicationAdminComponent
                 ? this.loanApplicationData.approvedAmount
                 : this.loanApplicationData.requestingAmount,
             isAdmin: true,
+            status: this.loanApplicationData.status,
         };
     }
 

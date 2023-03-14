@@ -12,7 +12,7 @@
                 {{ data.createdAt | date : 'dd.MM.yyyy, HH:mm' }}
             </p>
         </div>
-        <nb-alert [status]="getStatus().status"
+        <nb-alert class="mt-2" [status]="getStatus().status"
             >{{ getStatus().title }}
         </nb-alert>
     </div>

@@ -1,39 +1,75 @@
-<nb-accordion *ngIf="videos.length > 0" multi>
-    <nb-accordion-item (collapsedChange)="collapsedChange($event)">
-        <nb-accordion-item-header class="justify-content-center">
-            Видео
-        </nb-accordion-item-header>
-        <nb-accordion-item-body>
-            <div class="row mt-3 iden-videos">
-                <ng-container *ngIf="wmvVideos.length > 0">
-                    <div
-                        *ngFor="
-                            let item of wmvVideos;
-                            let idx = index;
-                            trackBy: trackByFn
-                        "
-                        (click)="dowloadVideo(item.blobUrl)"
-                        class="document mt-2 col-6 col-sm-3"
-                    >
-                        <img
-                            src="../../../../../assets/video-ico.png"
-                            alt=""
-                            width="50"
-                        />
-                        <br />
-                        <p>Видео-{{ idx + 1 }} (скачать)</p>
-                    </div>
-                </ng-container>
+<ng-container *ngIf="withAccordion">
+    <nb-accordion *ngIf="videos.length > 0" multi>
+        <nb-accordion-item (collapsedChange)="collapsedChange($event)">
+            <nb-accordion-item-header class="justify-content-center">
+                Видео
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <div class="row mt-3 iden-videos">
+                    <ng-container *ngIf="wmvVideos.length > 0">
+                        <div
+                            *ngFor="
+                                let item of wmvVideos;
+                                let idx = index;
+                                trackBy: trackByFn
+                            "
+                            (click)="dowloadVideo(item.blobUrl)"
+                            class="document mt-2 col-6 col-sm-3"
+                        >
+                            <img
+                                src="../../../../../assets/video-ico.png"
+                                alt=""
+                                width="50"
+                            />
+                            <br />
+                            <p>Видео-{{ idx + 1 }} (скачать)</p>
+                        </div>
+                    </ng-container>
 
-                <ng-container *ngFor="let item of videos; trackBy: trackByFn">
-                    <video
-                        *ngIf="!isWmv(item.url)"
-                        controls
-                        class="col-6 col-sm-3 mt-2"
-                        [src]="item.url | useHttpImgSrc"
-                    ></video>
-                </ng-container>
+                    <ng-container
+                        *ngFor="let item of videos; trackBy: trackByFn"
+                    >
+                        <video
+                            *ngIf="!isWmv(item.url)"
+                            controls
+                            class="col-6 col-sm-3 mt-2"
+                            [src]="item.url | useHttpImgSrc"
+                        ></video>
+                    </ng-container>
+                </div>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</ng-container>
+<ng-container *ngIf="!withAccordion && videos?.length > 0">
+    <div class="row mt-3 iden-videos">
+        <ng-container *ngIf="wmvVideos.length > 0">
+            <div
+                *ngFor="
+                    let item of wmvVideos;
+                    let idx = index;
+                    trackBy: trackByFn
+                "
+                (click)="dowloadVideo(item.blobUrl)"
+                class="document mt-2 col-6 col-sm-3"
+            >
+                <img
+                    src="../../../../../assets/video-ico.png"
+                    alt=""
+                    width="50"
+                />
+                <br />
+                <p>Видео-{{ idx + 1 }} (скачать)</p>
             </div>
-        </nb-accordion-item-body>
-    </nb-accordion-item>
-</nb-accordion>
+        </ng-container>
+
+        <ng-container *ngFor="let item of videos; trackBy: trackByFn">
+            <video
+                *ngIf="!isWmv(item.url)"
+                controls
+                class="col-6 col-sm-3 mt-2"
+                [src]="item.url | useHttpImgSrc"
+            ></video>
+        </ng-container>
+    </div>
+</ng-container>

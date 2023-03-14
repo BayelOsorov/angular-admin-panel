@@ -20,6 +20,8 @@ import { downloadFile } from '../../../utils';
 })
 export class IdentificationVideosComponent implements OnInit, OnChanges {
     @Input() videos;
+    @Input() withAccordion = true;
+
     @Output() getDataEvent = new EventEmitter();
     wmvVideos = [];
     videosChanged;
@@ -30,28 +32,30 @@ export class IdentificationVideosComponent implements OnInit, OnChanges {
 
     getWmvVideos() {
         this.wmvVideos = [];
-        this.videos.forEach((item) => {
-            if (this.isWmv(item.url)) {
-                let wmvCount = 0;
-                fetch(item.url, {
-                    headers: {
-                        Authorization:
-                            'Bearer ' + this.authService.getAccessToken(),
-                        responseType: 'blob',
-                    },
-                })
-                    .then((res) => res.blob())
-                    .then((myBlob) => {
-                        wmvCount++;
-                        const blobLink = window.URL.createObjectURL(myBlob);
-                        this.wmvVideos.push({ blobUrl: blobLink, ...item });
+        if (this.videos && this.videos.length > 0) {
+            this.videos.forEach((item) => {
+                if (this.isWmv(item.url)) {
+                    let wmvCount = 0;
+                    fetch(item.url, {
+                        headers: {
+                            Authorization:
+                                'Bearer ' + this.authService.getAccessToken(),
+                            responseType: 'blob',
+                        },
+                    })
+                        .then((res) => res.blob())
+                        .then((myBlob) => {
+                            wmvCount++;
+                            const blobLink = window.URL.createObjectURL(myBlob);
+                            this.wmvVideos.push({ blobUrl: blobLink, ...item });
 
-                        if (wmvCount === this.wmvVideos.length) {
-                            this.cdr.markForCheck();
-                        }
-                    });
-            }
-        });
+                            if (wmvCount === this.wmvVideos.length) {
+                                this.cdr.markForCheck();
+                            }
+                        });
+                }
+            });
+        }
     }
     collapsedChange(val) {
         if (!val) {

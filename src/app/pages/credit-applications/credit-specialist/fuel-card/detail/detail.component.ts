@@ -109,6 +109,7 @@ export class FuelCardApplicationDetailComponent implements OnInit, OnDestroy {
             max: this.loanApplicationData.requestingAmount,
             requestingAmount: this.loanApplicationData.requestingAmount,
             isAdmin: false,
+            status: this.loanApplicationData.status,
         };
     }
     postponeCredit() {

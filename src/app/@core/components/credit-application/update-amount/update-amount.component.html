@@ -1,5 +1,6 @@
 <div class="mt-5" *ngIf="data">
     <nz-slider
+        [class]="data.status === 'Approved' ? 'approved-dots' : ''"
         nzDots
         [nzDisabled]="data.isAdmin"
         [nzMarks]="marks"
@@ -8,6 +9,7 @@
         [nzMax]="data.max"
         (ngModelChange)="onChange($event)"
         [ngModel]="requestingAmount"
+        [nzTipFormatter]="data.status === 'Approved' ? formatter : null"
     ></nz-slider>
     <button
         *ngIf="!data.isAdmin"
