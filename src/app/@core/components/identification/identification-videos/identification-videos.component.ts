@@ -25,6 +25,7 @@ export class IdentificationVideosComponent implements OnInit, OnChanges {
     @Output() getDataEvent = new EventEmitter();
     wmvVideos = [];
     videosChanged;
+    wmvVideoLoading = false;
     constructor(
         private cdr: ChangeDetectorRef,
         private authService: AuthService
@@ -35,7 +36,7 @@ export class IdentificationVideosComponent implements OnInit, OnChanges {
         if (this.videos && this.videos.length > 0) {
             this.videos.forEach((item) => {
                 if (this.isWmv(item.url)) {
-                    let wmvCount = 0;
+                    this.wmvVideoLoading = true;
                     fetch(item.url, {
                         headers: {
                             Authorization:
@@ -45,13 +46,10 @@ export class IdentificationVideosComponent implements OnInit, OnChanges {
                     })
                         .then((res) => res.blob())
                         .then((myBlob) => {
-                            wmvCount++;
                             const blobLink = window.URL.createObjectURL(myBlob);
                             this.wmvVideos.push({ blobUrl: blobLink, ...item });
-
-                            if (wmvCount === this.wmvVideos.length) {
-                                this.cdr.markForCheck();
-                            }
+                            this.wmvVideoLoading = false;
+                            this.cdr.markForCheck();
                         });
                 }
             });
@@ -87,6 +85,8 @@ export class IdentificationVideosComponent implements OnInit, OnChanges {
         }
     }
     ngOnInit(): void {
-        this.getWmvVideos();
+        if (!this.withAccordion) {
+            this.getWmvVideos();
+        }
     }
 }

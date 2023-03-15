@@ -131,7 +131,11 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((data: any) => {
                 this.canResetFuelCard =
-                    !this.fuelCardCreditLineData?.creditLineDetails?.isClosed &&
+                    (
+                        !this.fuelCardCreditLineData?.creditLineDetails
+                            ?.isClosed ||
+                        this.fuelCardCreditLineData?.creditLineDetails
+                    )?.isClosed &&
                     this.hasRoleToResetDeclinedApp &&
                     this.isLastDeclined &&
                     Boolean(data.oclRequestCreationLockoutEnd);

@@ -194,22 +194,17 @@
                         <p>Документ-{{ idx }}(скачать)</p>
                     </ng-container>
 
-                    <ng-container
+                    <div
                         (click)="dowloadDocument(item.url)"
                         *ngIf="item.fileType === 'wmv'"
-                        class="document mt-2 col-6 col-sm-3"
+                        class="document"
                     >
                         <img
-                            src="../../../../assets/video-ico.png"
+                            src="../../../../assets/video-preview.png"
                             alt=""
-                            width="50"
+                            width="100%"
                         />
-                        <br />
-                        <p>
-                            Видео -
-                            {{ idx + 1 }}(скачать)
-                        </p>
-                    </ng-container>
+                    </div>
                 </div>
 
                 <ngx-lightbox-img
