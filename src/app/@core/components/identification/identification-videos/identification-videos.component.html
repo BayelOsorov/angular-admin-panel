@@ -6,6 +6,10 @@
             </nb-accordion-item-header>
             <nb-accordion-item-body>
                 <div class="row mt-3 iden-videos">
+                    <div *ngIf="wmvVideoLoading" class="overlay">
+                        <div class="lds-hourglass"></div>
+                    </div>
+
                     <ng-container *ngIf="wmvVideos.length > 0">
                         <div
                             *ngFor="
@@ -14,15 +18,13 @@
                                 trackBy: trackByFn
                             "
                             (click)="dowloadVideo(item.blobUrl)"
-                            class="document mt-2 col-6 col-sm-3"
+                            class="document col-6 col-sm-3 mt-2"
                         >
                             <img
-                                src="../../../../../assets/video-ico.png"
+                                src="../../../../../assets/video-preview.png"
                                 alt=""
-                                width="50"
+                                width="100%"
                             />
-                            <br />
-                            <p>Видео-{{ idx + 1 }} (скачать)</p>
                         </div>
                     </ng-container>
 
@@ -43,6 +45,10 @@
 </ng-container>
 <ng-container *ngIf="!withAccordion && videos?.length > 0">
     <div class="row mt-3 iden-videos">
+        <div *ngIf="wmvVideoLoading" class="overlay">
+            <div class="lds-hourglass"></div>
+        </div>
+
         <ng-container *ngIf="wmvVideos.length > 0">
             <div
                 *ngFor="
@@ -51,15 +57,13 @@
                     trackBy: trackByFn
                 "
                 (click)="dowloadVideo(item.blobUrl)"
-                class="document mt-2 col-6 col-sm-3"
+                class="document col-6 col-sm-3 mt-2"
             >
                 <img
-                    src="../../../../../assets/video-ico.png"
+                    src="../../../../../assets/video-preview.png"
                     alt=""
-                    width="50"
+                    width="100%"
                 />
-                <br />
-                <p>Видео-{{ idx + 1 }} (скачать)</p>
             </div>
         </ng-container>
 
@@ -73,3 +77,4 @@
         </ng-container>
     </div>
 </ng-container>
+<ng-template> </ng-template>
