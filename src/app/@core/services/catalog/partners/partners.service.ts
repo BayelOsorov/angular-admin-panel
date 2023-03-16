@@ -5,7 +5,6 @@ import {
     IDetailPartner,
     IDetailPartnerBranch,
     IListPartner,
-    IListPartnerFeedbacks,
     IListPartnerImages,
 } from '../../../models/catalog/partners';
 import { HttpOptions } from '../../../utils';
@@ -15,11 +14,10 @@ import { HttpOptions } from '../../../utils';
 })
 export class PartnersService {
     constructor(private http: HttpClient) {}
-    //  ! Partners CRUD
     getListPartners(page = 1, name = '') {
         return this.http.get<IListPartner>(
             environment.catalogUrl +
-                `/Administration/api/v1/partners?name=${name}&page=${page}&pageSize=20`
+                `/Administration/api/v1/partners?name=${name}&page=${page}&OrderType=asc&OderBy=CreateAt&pageSize=20`
         );
     }
 
