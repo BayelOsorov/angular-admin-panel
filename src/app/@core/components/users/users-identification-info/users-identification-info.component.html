@@ -29,13 +29,7 @@
                 [imgUrl]="userData.identificationInformation.profileImage"
             ></ngx-lightbox-img>
         </div>
-        <!-- <div *ngIf="videos && videos.length > 0" class="detail-images row mt-3"> -->
-        <!-- <video
-                *ngFor="let item of videos; trackBy: trackByFn"
-                controls
-                class="col-6 col-sm-3 video"
-                [src]="item.url | useHttpImgSrc"
-            ></video> -->
+
         <ngx-identification-videos
             *ngIf="videos"
             [withAccordion]="false"

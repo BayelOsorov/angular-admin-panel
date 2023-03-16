@@ -14,3 +14,8 @@
 ::ng-deep .increase-height {
     line-height: 35px !important;
 }
+@media (max-width: 425px) {
+    .custom-table {
+        overflow-x: auto;
+    }
+}

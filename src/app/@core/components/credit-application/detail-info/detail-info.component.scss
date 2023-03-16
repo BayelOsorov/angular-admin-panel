@@ -39,4 +39,17 @@
             }
         }
     }
+    @media (max-width: 425px) {
+        .status {
+            margin-top: 15px;
+            display: block;
+            text-align: center;
+        }
+        .custom-alert {
+            display: block;
+        }
+        .right-text {
+            text-align: start !important;
+        }
+    }
 }

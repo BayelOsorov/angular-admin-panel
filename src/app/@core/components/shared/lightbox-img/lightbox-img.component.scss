@@ -75,12 +75,21 @@ img {
 }
 @media (max-width: 425px) {
     .viewer-container {
+        overflow-y: hidden;
+    }
+    .viewer-container {
         .controls {
             display: none;
         }
+
         .close-button {
-            right: 20vw;
-            top: 120px;
+            top: 0px;
+        }
+        .main-img {
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 100%;
         }
     }
 }

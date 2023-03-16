@@ -18,7 +18,7 @@
                                 trackBy: trackByFn
                             "
                             (click)="dowloadVideo(item.blobUrl)"
-                            class="document col-6 col-sm-3 mt-2"
+                            class="iden-video col-6 col-sm-3 mt-2"
                         >
                             <img
                                 src="../../../../../assets/video-preview.png"
@@ -34,7 +34,7 @@
                         <video
                             *ngIf="!isWmv(item.url)"
                             controls
-                            class="col-6 col-sm-3 mt-2"
+                            class="iden-video col-6 col-sm-3 mt-2"
                             [src]="item.url | useHttpImgSrc"
                         ></video>
                     </ng-container>
@@ -57,7 +57,7 @@
                     trackBy: trackByFn
                 "
                 (click)="dowloadVideo(item.blobUrl)"
-                class="document col-6 col-sm-3 mt-2"
+                class="iden-video col-6 col-sm-3 mt-2"
             >
                 <img
                     src="../../../../../assets/video-preview.png"
@@ -71,7 +71,7 @@
             <video
                 *ngIf="!isWmv(item.url)"
                 controls
-                class="col-6 col-sm-3 mt-2"
+                class="col-6 col-sm-3 mt-2 iden-video"
                 [src]="item.url | useHttpImgSrc"
             ></video>
         </ng-container>

@@ -1,13 +1,14 @@
 <ng-container *ngIf="tableData && tableData.items.length > 0">
-    <ng2-smart-table
-        [settings]="settings"
-        [source]="tableData.items"
-        (delete)="onDelete($event)"
-        (edit)="onEdit($event)"
-        (userRowSelect)="onRowSelect($event)"
-    >
-    </ng2-smart-table>
-
+    <div class="custom-table">
+        <ng2-smart-table
+            [settings]="settings"
+            [source]="tableData.items"
+            (delete)="onDelete($event)"
+            (edit)="onEdit($event)"
+            (userRowSelect)="onRowSelect($event)"
+        >
+        </ng2-smart-table>
+    </div>
     <ngx-pagination
         (changePageEvent)="changePage($event)"
         [data]="tableData"
