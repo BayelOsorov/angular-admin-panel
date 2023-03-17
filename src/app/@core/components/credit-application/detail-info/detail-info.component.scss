@@ -48,8 +48,21 @@
         .custom-alert {
             display: block;
         }
+        .alert-c {
+            margin-left: 0.1px;
+            margin-right: 0.1px;
+        }
         .right-text {
             text-align: start !important;
+            justify-content: start !important;
         }
+        .alerts {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        // .graphic {
+        //     padding-left: 0;
+        //     padding-right: 0;
+        // }
     }
 }

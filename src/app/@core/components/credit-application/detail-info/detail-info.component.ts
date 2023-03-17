@@ -154,7 +154,9 @@ export class CreditApplicationDetailInfoComponent implements OnInit, OnDestroy {
         //         this.customerData.identificationInformation.patronymic
         //     }`
         // );
-        window.open(this.creditReportUrl, '_blank');
+        setTimeout(() => {
+            window.open(this.creditReportUrl, '_blank');
+        });
     }
     ngOnInit(): void {
         this.getCustomerRepDelays();
