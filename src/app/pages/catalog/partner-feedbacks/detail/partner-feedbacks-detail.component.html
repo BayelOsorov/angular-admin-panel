@@ -48,14 +48,13 @@
         <div *ngIf="!feedbackData.passedModeration" class="mt-5 mb-3">
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                    <button
-                        class="w-100"
-                        nbButton
+                    <ngx-confirm-buttons
+                        (approveEvent)="approveFeedback()"
                         status="success"
-                        (click)="approveFeedback()"
+                        title="Одобрить"
+                        class="w-100"
                     >
-                        Одобрить
-                    </button>
+                    </ngx-confirm-buttons>
                 </div>
 
                 <div class="col-md-4">
