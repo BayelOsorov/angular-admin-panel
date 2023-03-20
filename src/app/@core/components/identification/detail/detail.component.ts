@@ -22,7 +22,8 @@ import { IdentificationService } from '../../../services/identification/identifi
 import {
     cleanEmptyKeyInObj,
     genderEnum,
-    IdentificationAnswers,
+    IdentificationAnswersRu,
+    IdentificationAnswersKg,
     maritalStatus,
     residenceLocationEnum,
 } from '../../../utils';
@@ -42,7 +43,7 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
     toggle = false;
     isNeedToEdit = false;
     error = '';
-    identificationAnswers = IdentificationAnswers;
+    identificationAnswers;
     toastrLoader;
     form: FormGroup;
     private destroy$: Subject<void> = new Subject<void>();
@@ -221,6 +222,11 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.identificationAnswers =
+            this.customerInfo?.culture === 'Kg'
+                ? IdentificationAnswersKg
+                : IdentificationAnswersRu;
+
         this.form = this.fb.group({
             PassportFrontSideImageId: [[]],
             PassportBackSideImageId: [[]],

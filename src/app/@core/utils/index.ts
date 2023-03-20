@@ -1,7 +1,11 @@
 import { LayoutService } from './layout.service';
 import { StateService } from './state.service';
 import { GeneratePassword } from './generatePassword';
-import { HttpOptions, IdentificationAnswers } from './const';
+import {
+    HttpOptions,
+    IdentificationAnswersRu,
+    IdentificationAnswersKg,
+} from './const';
 import { tableNumbering } from './tableNumbering';
 import {
     translateMaritalStatus,
@@ -61,7 +65,8 @@ export {
     dependentsCount,
     maritalStatus,
     realEstateItemsEnum,
-    IdentificationAnswers,
+    IdentificationAnswersRu,
+    IdentificationAnswersKg,
     personalEstateItemsEnum,
     HttpOptions,
     EducationEnum,

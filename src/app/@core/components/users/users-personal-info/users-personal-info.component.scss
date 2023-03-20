@@ -31,6 +31,9 @@ td {
     .user-personal-info {
         display: block;
         flex-direction: column-reverse;
+        .personal {
+            overflow-x: auto;
+        }
     }
     .detail-docs {
         display: block !important;

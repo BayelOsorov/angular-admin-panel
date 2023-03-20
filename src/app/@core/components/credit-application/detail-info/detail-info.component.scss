@@ -40,6 +40,10 @@
         }
     }
     @media (max-width: 425px) {
+        .remove-margin {
+            margin-left: -15px;
+            margin-right: -15px;
+        }
         .status {
             margin-top: 15px;
             display: block;

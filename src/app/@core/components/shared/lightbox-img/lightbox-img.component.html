@@ -15,7 +15,7 @@
             <div class="image-container-light" #imageContainer>
                 <img
                     [src]="imgUrl ? (imgUrl | useHttpImgSrc) : safeImgUrl"
-                    class="main-img"
+                    class="main-img main-img-desktop"
                     #imageElement
                     (dblclick)="zoomIn()"
                     (mouseup)="onImageMouseUp($event)"
@@ -23,6 +23,11 @@
                     (mousemove)="onImageMouseMove($event)"
                     (dragstart)="onImageMouseMove($event)"
                     (wheel)="onImageWheel($event)"
+                />
+                <img
+                    [src]="imgUrl ? (imgUrl | useHttpImgSrc) : safeImgUrl"
+                    class="main-img main-img-mobile"
+                    #imageElement
                 />
             </div>
             <div class="controls">

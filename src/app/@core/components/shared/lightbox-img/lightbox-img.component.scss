@@ -7,7 +7,7 @@
     height: 100vh;
     background-color: black;
     /* High z-index value makes sure viewer is on top */
-    z-index: 999999;
+    z-index: 999999999999999;
 }
 
 .viewer-content {
@@ -51,6 +51,10 @@ img {
     cursor: zoom-in;
     transform: translateY(-50%);
 }
+// ! hide main-img-mobile
+.main-img-mobile {
+    display: none;
+}
 .img-zoom {
     transform: scale(2, 2.5);
 
@@ -74,6 +78,13 @@ img {
     }
 }
 @media (max-width: 425px) {
+    .main-img-mobile {
+        display: block;
+    }
+    // ! hide main-img-desktop
+    .main-img-desktop {
+        display: none;
+    }
     .viewer-container {
         overflow-y: hidden;
     }
@@ -83,7 +94,7 @@ img {
         }
 
         .close-button {
-            top: 0px;
+            top: 100px;
         }
         .main-img {
             right: 0;
