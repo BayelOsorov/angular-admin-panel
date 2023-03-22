@@ -101,9 +101,6 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
             '/credit-application/fuel-card/list/detail/' + id,
         ]);
     }
-    click() {
-        console.log('sss');
-    }
 
     resetDeclinedApp() {
         this.fuelCardApplicationsService

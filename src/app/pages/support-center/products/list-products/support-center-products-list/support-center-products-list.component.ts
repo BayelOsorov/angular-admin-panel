@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NbWindowRef, NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
@@ -34,7 +33,6 @@ export class SupportCenterProductsListComponent implements OnInit, OnDestroy {
     constructor(
         private supportService: SupportCenterService,
         private toaster: ToastrService,
-        private domSanitizer: DomSanitizer,
         private router: Router,
         private windowService: NbWindowService,
         @Optional() private dialogRef: NbWindowRef<any>

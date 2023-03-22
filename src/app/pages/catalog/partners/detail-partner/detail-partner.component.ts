@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IDetailCategory } from '../../../../@core/models/catalog/category';
 import { IListPartnerFeedbacks } from '../../../../@core/models/catalog/partners';
 import { PartnerFeedbacksService } from '../../../../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';

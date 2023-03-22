@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbWindowRef, NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -53,12 +51,9 @@ export class SupportCenterProductDetailComponent implements OnInit, OnDestroy {
     constructor(
         private supportService: SupportCenterService,
         private toaster: ToastrService,
-        private domSanitizer: DomSanitizer,
         private router: Router,
         private route: ActivatedRoute,
-        private fb: FormBuilder,
-        private windowService: NbWindowService,
-        @Optional() private dialogRef: NbWindowRef<any>
+        private fb: FormBuilder
     ) {}
     ngOnInit(): void {
         this.form.valueChanges
