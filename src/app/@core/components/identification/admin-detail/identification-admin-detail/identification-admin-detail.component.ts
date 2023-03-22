@@ -2,14 +2,10 @@ import {
     Component,
     OnInit,
     Input,
-    ViewChild,
-    OnDestroy,
     Output,
     EventEmitter,
     ChangeDetectionStrategy,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {

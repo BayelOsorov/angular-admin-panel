@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -26,6 +27,11 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
             renderComponent: AvatarImgComponent,
         },
         name: { title: 'Название', type: 'text' },
+        createdAt: {
+            title: 'Дата создания',
+            type: 'text',
+            valuePrepareFunction: (item) => this.parseDate(item),
+        },
         categories: {
             title: 'Категория',
             type: 'text',
@@ -43,8 +49,12 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
     constructor(
         private partnersService: PartnersService,
         private toaster: ToastrService,
-        private router: Router
+        private router: Router,
+        private datePipe: DatePipe
     ) {}
+    parseDate(date) {
+        return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
+    }
     getPartners(page = 1, name = '') {
         this.partnersService
             .getListPartners(page, name)

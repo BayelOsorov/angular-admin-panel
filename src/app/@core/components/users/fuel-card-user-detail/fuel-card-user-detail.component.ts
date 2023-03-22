@@ -75,9 +75,9 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         private router: Router,
 
-        private datePipe: DatePipe,
         private toastService: ToastrService,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private datePipe: DatePipe
     ) {}
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');

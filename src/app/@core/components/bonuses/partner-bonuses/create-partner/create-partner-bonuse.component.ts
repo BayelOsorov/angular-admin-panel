@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PartnerBonusesService } from '../../../../services/bonuses/partner-bonuses.service';
-import { PartnersService } from '../../../../services/catalog/partners/partners.service';
 import { OldBackendService } from '../../../../services/old-backend/old-backend.service';
 @Component({
     selector: 'ngx-create-partner-bonuse',
