@@ -27,11 +27,7 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
             renderComponent: AvatarImgComponent,
         },
         name: { title: 'Название', type: 'text' },
-        createdAt: {
-            title: 'Дата создания',
-            type: 'text',
-            valuePrepareFunction: (item) => this.parseDate(item),
-        },
+
         categories: {
             title: 'Категория',
             type: 'text',
@@ -43,6 +39,11 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
             type: 'text',
             valuePrepareFunction: (value) =>
                 value.length > 0 ? value.map((item) => item.name) : '',
+        },
+        createdAt: {
+            title: 'Дата создания',
+            type: 'text',
+            valuePrepareFunction: (item) => this.parseDate(item),
         },
     };
     private destroy$: Subject<void> = new Subject<void>();
