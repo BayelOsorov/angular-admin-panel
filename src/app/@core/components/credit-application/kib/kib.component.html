@@ -44,7 +44,9 @@
                     <nb-accordion-item-body>
                         <nb-accordion-item
                             *ngFor="
-                                let contract of item.activeContracts;
+                                let contract of sortArrayCreatedAt(
+                                    item.activeContracts
+                                );
                                 let idx = index;
                                 trackBy: trackByFn
                             "
@@ -55,13 +57,11 @@
                                 <strong class="col-md-4"
                                     >{{ contract.contractorName }}
                                 </strong>
-                                <strong
-                                    title="Дата создания"
-                                    class="col-md-4"
+                                <strong title="Дата создания" class="col-md-4"
                                     >{{
                                         contract.createdAt | date : 'dd.MM.yyyy'
-                                    }}</strong
-                                >
+                                    }}
+                                </strong>
                                 <strong title="Сумма" class="col-md-4"
                                     >{{ contract.amount }}
                                 </strong>

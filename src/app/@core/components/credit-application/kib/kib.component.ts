@@ -25,6 +25,12 @@ export class KibComponent implements OnInit {
         arr.sort(
             (a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf()
         );
+    sortArrayCreatedAt = (arr) =>
+        arr.sort(
+            (a, b) =>
+                new Date(a.createdAt).valueOf() -
+                new Date(b.createdAt).valueOf()
+        );
     getUsedMoney(data) {
         let sum = 0;
         data.map((item) => {
