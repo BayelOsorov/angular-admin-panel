@@ -93,7 +93,11 @@
                                             <div class="card__text">
                                                 <p>Рейтинг</p>
                                                 <strong class="float-right">
-                                                    {{ partner.rating }}
+                                                    {{
+                                                        truncateDecimals(
+                                                            partner.rating
+                                                        )
+                                                    }}
                                                 </strong>
                                             </div>
                                         </div>

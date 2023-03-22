@@ -1,10 +1,6 @@
-import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NbWindowRef } from '@nebular/theme';
-import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { SupportCenterService } from '../../../services/support-center/support-center.service';
 @Component({
     selector: 'ngx-actions-modal',
     templateUrl: './actions-modal.component.html',
@@ -18,12 +14,7 @@ export class SupportCenterActionsModalComponent implements OnInit, OnDestroy {
     updateItem;
     submitted = false;
     private destroy$: Subject<void> = new Subject<void>();
-    constructor(
-        private fb: FormBuilder,
-        private toaster: ToastrService,
-        private supportService: SupportCenterService,
-        @Optional() private dialogRef: NbWindowRef<any>
-    ) {}
+    constructor(private fb: FormBuilder) {}
 
     ngOnInit(): void {
         this.form = this.fb.group({

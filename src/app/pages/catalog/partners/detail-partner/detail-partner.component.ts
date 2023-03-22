@@ -7,6 +7,7 @@ import { IDetailCategory } from '../../../../@core/models/catalog/category';
 import { IListPartnerFeedbacks } from '../../../../@core/models/catalog/partners';
 import { PartnerFeedbacksService } from '../../../../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
+import { truncateDecimals } from '../../../../@core/utils';
 @Component({
     templateUrl: './detail-partner.component.html',
     styleUrls: ['./detail-partner.component.scss'],
@@ -24,7 +25,9 @@ export class DetailPartnerComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router
     ) {}
-
+    truncateDecimals(rate) {
+        return truncateDecimals(rate, 1);
+    }
     getDetailPartner() {
         this.partnersService
             .getDetailPartner(this.partnerId)
