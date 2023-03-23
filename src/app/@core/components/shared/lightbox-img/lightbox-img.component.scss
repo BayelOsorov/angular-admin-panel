@@ -8,6 +8,7 @@
     background-color: black;
     /* High z-index value makes sure viewer is on top */
     z-index: 999999999999999;
+    overflow-y: unset;
 }
 
 .viewer-content {

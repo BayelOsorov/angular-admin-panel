@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AvatarImgComponent } from '../../../../@core/components/shared/avatar-img/avatar-img.component';
 import { PartnerNewsService } from '../../../../@core/services/catalog/partner-news/partner-news.service';
 import { tableNumbering, truncateText } from '../../../../@core/utils';
 @Component({
