@@ -1,6 +1,5 @@
-
 stages:
-  - build
+    - build
 
 build-job:
     image: docker
@@ -13,7 +12,7 @@ build-job:
         - echo "Compile complete."
     artifacts:
         paths:
-            - "/builds/zeus.kg/finappclient/operator-dashboard/"
-  rules:
-    - if: $CI_COMMIT_BRANCH == "stage"
-      when: always
+            - '/builds/zeus.kg/finappclient/operator-dashboard/'
+    rules:
+        - if: $CI_COMMIT_BRANCH == "stage"
+          when: always
