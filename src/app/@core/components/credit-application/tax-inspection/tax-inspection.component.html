@@ -1,15 +1,22 @@
-<nb-accordion multi *ngIf="taxPayer && socialFundBalance">
+<nb-accordion
+    multi
+    *ngIf="
+        taxPayer &&
+        socialFundBalance &&
+        (objectValues(socialFundBalance?.farms).length > 0 ||
+            objectValues(socialFundBalance?.paysheets).length > 0)
+    "
+>
     <nb-accordion-item>
         <nb-accordion-item-header class="justify-content-center">
             ГНС
         </nb-accordion-item-header>
         <nb-accordion-item-body>
-            <div
-                *ngIf="
-                    socialFundBalance.farms &&
-                    objectValues(socialFundBalance.farms).length > 0
-                "
-            >
+            <!-- *ngIf="
+                socialFundBalance.farms &&
+                objectValues(socialFundBalance.farms).length > 0
+            " -->
+            <div>
                 <p class="text-center pt-2">Состояние задолженности по КФ</p>
                 <table class="w-100">
                     <ng-container
@@ -39,12 +46,11 @@
                     </ng-container>
                 </table>
             </div>
-            <div
-                *ngIf="
-                    socialFundBalance.paysheets &&
-                    objectValues(socialFundBalance.paysheets).length > 0
-                "
-            >
+            <!-- *ngIf="
+                socialFundBalance.paysheets &&
+                objectValues(socialFundBalance.paysheets).length > 0
+            " -->
+            <div>
                 <p class="text-center pt-2">
                     Состояние задолженности по отчетам РВ
                 </p>
