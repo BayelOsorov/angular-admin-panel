@@ -1,8 +1,8 @@
 /* eslint-disable no-eval */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Observable, timer, Subscription, Subject } from 'rxjs';
-import { switchMap, tap, share, retry, takeUntil } from 'rxjs/operators';
+import { Observable, timer, Subject } from 'rxjs';
+import { switchMap, share, retry, takeUntil } from 'rxjs/operators';
 import { ApplicationRequestsService } from '../@core/services/credit-application/credit.service';
 import { IdentificationService } from '../@core/services/identification/identification.service';
 import { accessLevel } from '../@core/utils/helpers';
@@ -60,6 +60,21 @@ export class PagesComponent implements OnInit, OnDestroy {
                     title: 'Список',
                     link: '/identification/list',
                     hidden: this.getRole(['kyc_manager', 'admin']),
+                },
+            ],
+        },
+        {
+            title: 'Отчеты',
+            icon: 'file-text-outline',
+            hidden: this.getRole(['admin', 'operator', 'kyc_manager']),
+            children: [
+                {
+                    title: 'Клиент не получил финальный статус',
+                    link: '/reports/identification/in-process',
+                },
+                {
+                    title: 'Клиент не прошел идентификацию',
+                    link: '/reports/identification/not-identified',
                 },
             ],
         },

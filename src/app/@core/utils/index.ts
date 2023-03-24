@@ -20,6 +20,7 @@ import {
     getProductCode,
     isPhone,
     getAlertStatus,
+    getHoursAndMinutes,
 } from './helpers';
 import {
     Position,
@@ -54,6 +55,7 @@ export {
     getProductCode,
     isPhone,
     getAlertStatus,
+    getHoursAndMinutes,
     Position,
     placeOfWorkType,
     entrepreneurTypeEnum,

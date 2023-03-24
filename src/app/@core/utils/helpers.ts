@@ -226,6 +226,31 @@ const isPhone = () => {
     })(navigator.userAgent || navigator.vendor);
     return check;
 };
+const getHoursAndMinutes = () => {
+    const options = [];
+    for (let i = 10; i <= 50; i += 10) {
+        options.push({
+            value: i.toString(),
+            title: i.toString() + ' минут',
+        });
+    }
+
+    for (let i = 1; i <= 12; i++) {
+        let title = i.toString() + ' час';
+        if (i === 1) {
+            title += '';
+        } else if (i < 5) {
+            title += 'а';
+        } else {
+            title += 'ов';
+        }
+        options.push({
+            value: (i * 60).toString(),
+            title,
+        });
+    }
+    return options;
+};
 export {
     translateMaritalStatus,
     truncateText,
@@ -240,4 +265,5 @@ export {
     getProductCode,
     isPhone,
     getAlertStatus,
+    getHoursAndMinutes,
 };

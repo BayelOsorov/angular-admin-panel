@@ -86,6 +86,8 @@ import { DetailPartnerBonusesComponent } from './bonuses/partners/detail-partner
 
 import { ListIdentificationComponent } from './identification/admin/list-identification/list-identification.component';
 import { DetailIdentificationAdminComponent } from './identification/admin/detail-identification-admin/detail-identification-admin.component';
+import { ListNotIdentifiedCustomersComponent } from './reports/list-not-identified-customers/list-not-identified-customers.component';
+import { ListIdentifiedCustomersComponent } from './reports/list-identified-customers/list-identified-customers.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -182,6 +184,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         DetailPartnerBonusesComponent,
         ListIdentificationComponent,
         DetailIdentificationAdminComponent,
+        ListNotIdentifiedCustomersComponent,
+        ListIdentifiedCustomersComponent,
     ],
     providers: [
         {

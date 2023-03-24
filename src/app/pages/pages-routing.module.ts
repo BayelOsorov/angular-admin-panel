@@ -60,6 +60,8 @@ import { ListPartnerBonusesComponent } from './bonuses/partners/list-partner-bon
 import { DetailPartnerBonusesComponent } from './bonuses/partners/detail-partner-bonuses/detail-partner-bonuses.component';
 import { ListIdentificationComponent } from './identification/admin/list-identification/list-identification.component';
 import { DetailIdentificationAdminComponent } from './identification/admin/detail-identification-admin/detail-identification-admin.component';
+import { ListNotIdentifiedCustomersComponent } from './reports/list-not-identified-customers/list-not-identified-customers.component';
+import { ListIdentifiedCustomersComponent } from './reports/list-identified-customers/list-identified-customers.component';
 
 const routes: Routes = [
     {
@@ -103,6 +105,35 @@ const routes: Routes = [
                     {
                         path: 'list',
                         component: ListUsersComponent,
+                    },
+                    {
+                        path: 'detail/:id',
+                        component: DetailUserComponent,
+                    },
+                ],
+            },
+            // ! Reports
+            {
+                path: 'reports',
+                canActivate: [PermissionsGuard],
+                data: { roles: ['admin'] },
+                children: [
+                    {
+                        path: 'identification',
+                        children: [
+                            {
+                                path: 'in-process',
+                                component: ListIdentifiedCustomersComponent,
+                            },
+                            {
+                                path: 'not-identified',
+                                component: ListNotIdentifiedCustomersComponent,
+                            },
+                            {
+                                path: 'detail/:id',
+                                component: DetailUserComponent,
+                            },
+                        ],
                     },
                     {
                         path: 'detail/:id',

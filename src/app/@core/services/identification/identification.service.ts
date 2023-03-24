@@ -147,4 +147,16 @@ export class IdentificationService {
             { comment: 'gg' }
         );
     }
+    getListIdentificateObservation(page, filter) {
+        return this.http.get(
+            environment.identificationUrl +
+                `/admin/api/v1/customer-identification-observation/in-process?pageNumber=${page}&minutes=${filter.minutes}&dateTime=${filter.dateTime}&pageSize=20`
+        );
+    }
+    getListNoneIdentificateObservation(page, filter) {
+        return this.http.get(
+            environment.identificationUrl +
+                `/admin/api/v1/customer-identification-observation/not-identified?pageNumber=${page}&minutes=${filter.minutes}&dateTime=${filter.dateTime}&pageSize=20`
+        );
+    }
 }

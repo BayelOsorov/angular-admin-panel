@@ -131,15 +131,15 @@
                     </nb-accordion-item>
                 </nb-accordion>
                 <ngx-credit-application-need-to-edit
+                    [control]="form?.get(['CustomerData.Occupation.Type'])"
+                    [title]="'Вид деятельности'"
+                    [placeholder]="'Введите'"
+                ></ngx-credit-application-need-to-edit>
+                <ngx-credit-application-need-to-edit
                     [control]="
                         form?.get(['CustomerData.Occupation.Description'])
                     "
                     [title]="'Описание деятельности'"
-                    [placeholder]="'Введите'"
-                ></ngx-credit-application-need-to-edit>
-                <ngx-credit-application-need-to-edit
-                    [control]="form?.get(['CustomerData.Occupation.Type'])"
-                    [title]="'Вид деятельности'"
                     [placeholder]="'Введите'"
                 ></ngx-credit-application-need-to-edit>
             </ng-container>

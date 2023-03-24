@@ -19,9 +19,15 @@ import { AuthConfigModule } from './auth/auth-config.module';
 import { ComponentsModule } from './@core/components/components.module';
 import { DemoNgZorroAntdModule } from './@core/utils/ng-zorro-antd.module';
 import { ToastrModule } from 'ngx-toastr';
-import { DatePipe, registerLocaleData } from '@angular/common';
+import {
+    DatePipe,
+    registerLocaleData,
+    DATE_PIPE_DEFAULT_TIMEZONE,
+} from '@angular/common';
 import localeKy from '@angular/common/locales/ky';
-registerLocaleData(localeKy);
+import localeRu from '@angular/common/locales/ru';
+
+registerLocaleData(localeRu);
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -49,7 +55,10 @@ registerLocaleData(localeKy);
             positionClass: 'toast-top-right',
         }),
     ],
-    providers: [{ provide: LOCALE_ID, useValue: 'ky_KG' }],
+    providers: [
+        { provide: LOCALE_ID, useValue: 'ru_Ru' },
+        { provide: DATE_PIPE_DEFAULT_TIMEZONE, useValue: 'Asia/Bishkek' },
+    ],
 
     bootstrap: [AppComponent],
 })
