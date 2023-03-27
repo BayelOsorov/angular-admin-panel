@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../../@core/components/shared/avatar-img/avatar-img.component';
+import { CustomDatePipe } from '../../../../@core/components/shared/date-pipe/date.pipe';
 import { IListPartner } from '../../../../@core/models/catalog/partners';
 import { PartnersService } from '../../../../@core/services/catalog/partners/partners.service';
 import { tableNumbering } from '../../../../@core/utils';
@@ -51,7 +52,7 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
         private partnersService: PartnersService,
         private toaster: ToastrService,
         private router: Router,
-        private datePipe: DatePipe
+        private datePipe: CustomDatePipe
     ) {}
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');

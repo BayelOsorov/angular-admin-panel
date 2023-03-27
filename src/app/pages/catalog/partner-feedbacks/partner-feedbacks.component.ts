@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CustomDatePipe } from '../../../@core/components/shared/date-pipe/date.pipe';
 import { StatusBadgeComponent } from '../../../@core/components/shared/status-badge/status-badge.component';
 import { IListPartnerFeedbacks } from '../../../@core/models/catalog/partners';
 import { PartnerFeedbacksService } from '../../../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
@@ -61,7 +62,7 @@ export class PartnerFeedbacksComponent implements OnInit, OnDestroy {
     constructor(
         private partnerFeedbacksService: PartnerFeedbacksService,
         private partnerService: PartnersService,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private toaster: ToastrService,
         private router: Router,
         private fb: FormBuilder

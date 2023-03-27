@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from '../../../../../environments/environment';
+import { CustomDatePipe } from '../../../../@core/components/shared/date-pipe/date.pipe';
 import { IPartnerIdentificationDetail } from '../../../../@core/models/catalog/partners';
 import { PartnerIdentificationService } from '../../../../@core/services/catalog/partner-identification/partner-identification.service';
 
@@ -58,7 +59,7 @@ export class PartnerIdentificationDetailComponent implements OnInit, OnDestroy {
         private partnerIdentificationService: PartnerIdentificationService,
         private usersService: UsersService,
         private fb: FormBuilder,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private toaster: ToastrService,
         private location: Location,
         private route: ActivatedRoute

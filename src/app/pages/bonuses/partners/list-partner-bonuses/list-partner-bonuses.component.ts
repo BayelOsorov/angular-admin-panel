@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { of, Subject } from 'rxjs';
 import { takeUntil, catchError } from 'rxjs/operators';
 import { CreatePartnerBonuseComponent } from '../../../../@core/components/bonuses/partner-bonuses/create-partner/create-partner-bonuse.component';
+import { CustomDatePipe } from '../../../../@core/components/shared/date-pipe/date.pipe';
 import { PartnerBonusesService } from '../../../../@core/services/bonuses/partner-bonuses.service';
 import { OldBackendService } from '../../../../@core/services/old-backend/old-backend.service';
 import { tableNumbering } from '../../../../@core/utils';
@@ -59,7 +60,7 @@ export class ListPartnerBonusesComponent implements OnInit, OnDestroy {
         private router: Router,
         private fb: FormBuilder,
         private windowService: NbWindowService,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private oldBackService: OldBackendService
     ) {}
     parseDate(date) {

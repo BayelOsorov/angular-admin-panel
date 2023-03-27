@@ -88,6 +88,7 @@ import { ListIdentificationComponent } from './identification/admin/list-identif
 import { DetailIdentificationAdminComponent } from './identification/admin/detail-identification-admin/detail-identification-admin.component';
 import { ListNotIdentifiedCustomersComponent } from './reports/list-not-identified-customers/list-not-identified-customers.component';
 import { ListIdentifiedCustomersComponent } from './reports/list-identified-customers/list-identified-customers.component';
+import { CustomDatePipe } from '../@core/components/shared/date-pipe/date.pipe';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -196,6 +197,7 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         { provide: NZ_ICONS, useValue: icons },
 
         UseHttpImageSourcePipe,
+        CustomDatePipe,
     ],
 })
 export class PagesModule {}

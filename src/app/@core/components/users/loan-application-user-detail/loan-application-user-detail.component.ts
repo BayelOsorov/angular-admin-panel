@@ -18,6 +18,7 @@ import { StatusBadgeComponent } from '../../../../@core/components/shared/status
 import { CreditApplicationService } from '../../../../@core/services/credit-application/credit-application.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { IncreaseLimitApplicationService } from '../../../services/credit-application/increase-limit.service';
+import { CustomDatePipe } from '../../shared/date-pipe/date.pipe';
 
 @Component({
     selector: 'ngx-loan-application-user-detail',
@@ -100,7 +101,7 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
 
         private toaster: ToastrService,
         private router: Router,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private toastService: ToastrService,
         private cdr: ChangeDetectorRef
     ) {}

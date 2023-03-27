@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CustomDatePipe } from '../../../../@core/components/shared/date-pipe/date.pipe';
 import { PartnerNewsService } from '../../../../@core/services/catalog/partner-news/partner-news.service';
 import { tableNumbering, truncateText } from '../../../../@core/utils';
 @Component({
@@ -40,7 +41,7 @@ export class ListPartnerNewsComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private partnerNewsService: PartnerNewsService,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private toaster: ToastrService,
         private router: Router
     ) {}

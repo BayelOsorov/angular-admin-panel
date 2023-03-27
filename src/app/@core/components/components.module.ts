@@ -116,6 +116,7 @@ import { UsersPersonalInfoComponent } from './users/users-personal-info/users-pe
 import { UsersIdentificationInfoComponent } from './users/users-identification-info/users-identification-info.component';
 import { IdentificationVideosComponent } from './identification/identification-videos/identification-videos.component';
 import { ListIdentificationCustomersComponent } from './reports/list-identification-customers/list-identification-customers.component';
+import { CustomDatePipe } from './shared/date-pipe/date.pipe';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -225,6 +226,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         UsersIdentificationInfoComponent,
         IdentificationVideosComponent,
         ListIdentificationCustomersComponent,
+        CustomDatePipe,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -291,6 +293,7 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         UsersIdentificationInfoComponent,
         IdentificationVideosComponent,
         ListIdentificationCustomersComponent,
+        CustomDatePipe,
     ],
     providers: [
         // set up the providers

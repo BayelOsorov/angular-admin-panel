@@ -251,6 +251,23 @@ const getHoursAndMinutes = () => {
     }
     return options;
 };
+const FormatDate = (date) => {
+    console.log(date.includes('Z'));
+
+    if (!date.includes('+00:00') && !date.includes('Z')) {
+        date = 21600000 + Date.parse(date);
+    }
+    const toDate = (newDate) =>
+        new Intl.DateTimeFormat('ru-Ru', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        }).format(new Date(newDate));
+
+    return toDate(date);
+};
 export {
     translateMaritalStatus,
     truncateText,
@@ -266,4 +283,5 @@ export {
     isPhone,
     getAlertStatus,
     getHoursAndMinutes,
+    FormatDate,
 };

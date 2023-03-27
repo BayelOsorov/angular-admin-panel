@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AvatarImgComponent } from '../../../../@core/components/shared/avatar-img/avatar-img.component';
+import { CustomDatePipe } from '../../../../@core/components/shared/date-pipe/date.pipe';
 import { IListPartnerProms } from '../../../../@core/models/catalog/catalog';
 import { PartnerPromsService } from '../../../../@core/services/catalog/partner-proms/partner-proms.service';
 import { tableNumbering } from '../../../../@core/utils';
@@ -46,7 +47,7 @@ export class ListPartnerPromsComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private partnerPromsService: PartnerPromsService,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private toaster: ToastrService,
         private router: Router
     ) {}

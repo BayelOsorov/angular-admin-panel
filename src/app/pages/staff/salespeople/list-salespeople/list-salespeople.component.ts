@@ -6,6 +6,7 @@ import { NbWindowService } from '@nebular/theme';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CustomDatePipe } from '../../../../@core/components/shared/date-pipe/date.pipe';
 import { CreateSellerComponent } from '../../../../@core/components/staff/create-seller/create-seller.component';
 import { SalespeopleService } from '../../../../@core/services/staff/salespeople.service';
 import { tableNumbering } from '../../../../@core/utils';
@@ -39,7 +40,7 @@ export class ListSalespeopleComponent implements OnInit, OnDestroy {
         private windowService: NbWindowService,
         private toaster: ToastrService,
         private fb: FormBuilder,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private router: Router
     ) {}
     parseDate(date) {

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CustomDatePipe } from '../../../../../@core/components/shared/date-pipe/date.pipe';
 import { StatusBadgeComponent } from '../../../../../@core/components/shared/status-badge/status-badge.component';
 import { IncreaseLimitApplicationService } from '../../../../../@core/services/credit-application/increase-limit.service';
 import { tableNumbering } from '../../../../../@core/utils';
@@ -70,7 +71,7 @@ export class ListIncreaseLimitApplicationsAdminComponent
         private toaster: ToastrService,
         private router: Router,
         private fb: FormBuilder,
-        private datePipe: DatePipe
+        private datePipe: CustomDatePipe
     ) {}
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');

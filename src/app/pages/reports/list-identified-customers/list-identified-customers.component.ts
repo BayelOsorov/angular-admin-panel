@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CustomDatePipe } from '../../../@core/components/shared/date-pipe/date.pipe';
 import { IdentificationService } from '../../../@core/services/identification/identification.service';
 import { tableNumbering } from '../../../@core/utils';
 @Component({
@@ -52,7 +53,7 @@ export class ListIdentifiedCustomersComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         private router: Router,
         private fb: FormBuilder,
-        private datePipe: DatePipe
+        private datePipe: CustomDatePipe
     ) {}
     parseDate(date) {
         // console.log(this.datePipe.transform(date, 'full'));

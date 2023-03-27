@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CreatePercentagePartnerComponent } from '../../../../@core/components/bonuses/partner-bonuses/create-percentage-partner/create-percentage-partner.component';
+import { CustomDatePipe } from '../../../../@core/components/shared/date-pipe/date.pipe';
 import { PartnerBonusesService } from '../../../../@core/services/bonuses/partner-bonuses.service';
 import { tableNumbering } from '../../../../@core/utils';
 @Component({
@@ -56,7 +57,7 @@ export class DetailPartnerBonusesComponent implements OnInit, OnDestroy {
         private router: Router,
         private fb: FormBuilder,
         private windowService: NbWindowService,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private route: ActivatedRoute
     ) {}
     parseDate(date) {

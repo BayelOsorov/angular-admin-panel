@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CustomDatePipe } from '../../../../@core/components/shared/date-pipe/date.pipe';
 import { SalespeopleService } from '../../../../@core/services/staff/salespeople.service';
 import { tableNumbering } from '../../../../@core/utils';
 @Component({
@@ -43,7 +44,7 @@ export class DetailSalespeopleComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         private router: Router,
         private fb: FormBuilder,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private route: ActivatedRoute
     ) {}
     parseDate(date) {

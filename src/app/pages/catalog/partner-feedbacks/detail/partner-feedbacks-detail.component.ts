@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CustomDatePipe } from '../../../../@core/components/shared/date-pipe/date.pipe';
 import { IPartnerFeedback } from '../../../../@core/models/catalog/partners';
 import { PartnerFeedbacksService } from '../../../../@core/services/catalog/partner-feedbacks/partner-feedbacks.service';
 
@@ -17,7 +18,7 @@ export class PartnerFeedbacksDetailComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private partnerFeedbacksService: PartnerFeedbacksService,
-        private datePipe: DatePipe,
+        private datePipe: CustomDatePipe,
         private toaster: ToastrService,
         private location: Location,
         private route: ActivatedRoute

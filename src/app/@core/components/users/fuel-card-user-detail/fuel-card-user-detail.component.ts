@@ -14,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 import { tableNumbering } from '../../../utils';
 import { StatusBadgeComponent } from '../../shared/status-badge/status-badge.component';
 import { FuelCardApplicationService } from '../../../services/credit-application/fuel-card.service';
+import { CustomDatePipe } from '../../shared/date-pipe/date.pipe';
 
 @Component({
     selector: 'ngx-fuel-card-user-detail',
@@ -77,7 +78,7 @@ export class FuelCardUserDetailComponent implements OnInit, OnDestroy {
 
         private toastService: ToastrService,
         private cdr: ChangeDetectorRef,
-        private datePipe: DatePipe
+        private datePipe: CustomDatePipe
     ) {}
     parseDate(date) {
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');

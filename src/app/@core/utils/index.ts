@@ -21,6 +21,7 @@ import {
     isPhone,
     getAlertStatus,
     getHoursAndMinutes,
+    FormatDate,
 } from './helpers';
 import {
     Position,
@@ -56,6 +57,7 @@ export {
     isPhone,
     getAlertStatus,
     getHoursAndMinutes,
+    FormatDate,
     Position,
     placeOfWorkType,
     entrepreneurTypeEnum,
