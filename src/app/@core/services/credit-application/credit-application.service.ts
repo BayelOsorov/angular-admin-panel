@@ -32,6 +32,18 @@ export class CreditApplicationService {
                 `/admin/api/v1/ocl-requests/search?pageNumber=${page}&customerId=${customerId}&pageSize=20`
         );
     }
+    getListOclObservation(page, filter) {
+        return this.http.get(
+            environment.creditApplicationUrl +
+                `/admin/api/v1/ocl-requests/ocl-process-observation/in-process?pageNumber=${page}&minutes=${filter.minutes}&dateTime=${filter.dateTime}&pageSize=20`
+        );
+    }
+    getListNoneOclObservation(page, filter) {
+        return this.http.get(
+            environment.creditApplicationUrl +
+                `/admin/api/v1/ocl-requests/ocl-process-observation/dont-have-ocl?pageNumber=${page}&minutes=${filter.minutes}&dateTime=${filter.dateTime}&pageSize=20`
+        );
+    }
     getCreditApplicationDetailAdmin(id) {
         return this.http.get<ICreditApplicationDetail>(
             environment.creditApplicationUrl +

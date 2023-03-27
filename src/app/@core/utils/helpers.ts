@@ -252,8 +252,6 @@ const getHoursAndMinutes = () => {
     return options;
 };
 const FormatDate = (date) => {
-    console.log(date.includes('Z'));
-
     if (!date.includes('+00:00') && !date.includes('Z')) {
         date = 21600000 + Date.parse(date);
     }

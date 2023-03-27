@@ -69,12 +69,38 @@ export class PagesComponent implements OnInit, OnDestroy {
             hidden: this.getRole(['admin', 'operator', 'kyc_manager']),
             children: [
                 {
-                    title: 'Клиент не получил финальный статус',
-                    link: '/reports/identification/in-process',
+                    title: 'Идентификация',
+                    children: [
+                        {
+                            title: 'Клиент не получил финальный статус',
+                            link: '/reports/identification/in-process',
+                        },
+                        {
+                            title: 'Клиент не прошел идентификацию',
+                            link: '/reports/identification/not-identified',
+                        },
+                    ],
                 },
                 {
-                    title: 'Клиент не прошел идентификацию',
-                    link: '/reports/identification/not-identified',
+                    title: '0-0-3',
+                    children: [
+                        {
+                            title: 'Клиент не получил финальный статус',
+                            link: '/reports/0-0-3/in-process',
+                        },
+                        {
+                            title: 'Клиент не прошел идентификацию',
+                            link: '/reports/0-0-3/not-identified',
+                        },
+                    ],
+                },
+                {
+                    title: 'Топливная карта',
+                    children: [],
+                },
+                {
+                    title: 'Увеличение лимита',
+                    children: [],
                 },
             ],
         },

@@ -89,6 +89,8 @@ import { DetailIdentificationAdminComponent } from './identification/admin/detai
 import { ListNotIdentifiedCustomersComponent } from './reports/list-not-identified-customers/list-not-identified-customers.component';
 import { ListIdentifiedCustomersComponent } from './reports/list-identified-customers/list-identified-customers.component';
 import { CustomDatePipe } from '../@core/components/shared/date-pipe/date.pipe';
+import { ListNotOclCustomersComponent } from './reports/list-not-ocl-customers/list-not-ocl-customers.component';
+import { ListOclCustomersComponent } from './reports/list-ocl-customers/list-ocl-customers.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -187,6 +189,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         DetailIdentificationAdminComponent,
         ListNotIdentifiedCustomersComponent,
         ListIdentifiedCustomersComponent,
+        ListNotOclCustomersComponent,
+        ListOclCustomersComponent,
     ],
     providers: [
         {

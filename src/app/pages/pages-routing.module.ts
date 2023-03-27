@@ -62,6 +62,8 @@ import { ListIdentificationComponent } from './identification/admin/list-identif
 import { DetailIdentificationAdminComponent } from './identification/admin/detail-identification-admin/detail-identification-admin.component';
 import { ListNotIdentifiedCustomersComponent } from './reports/list-not-identified-customers/list-not-identified-customers.component';
 import { ListIdentifiedCustomersComponent } from './reports/list-identified-customers/list-identified-customers.component';
+import { ListNotOclCustomersComponent } from './reports/list-not-ocl-customers/list-not-ocl-customers.component';
+import { ListOclCustomersComponent } from './reports/list-ocl-customers/list-ocl-customers.component';
 
 const routes: Routes = [
     {
@@ -136,8 +138,21 @@ const routes: Routes = [
                         ],
                     },
                     {
-                        path: 'detail/:id',
-                        component: DetailUserComponent,
+                        path: '0-0-3',
+                        children: [
+                            {
+                                path: 'in-process',
+                                component: ListOclCustomersComponent,
+                            },
+                            {
+                                path: 'not-identified',
+                                component: ListNotOclCustomersComponent,
+                            },
+                            {
+                                path: 'detail/:id',
+                                component: DetailUserComponent,
+                            },
+                        ],
                     },
                 ],
             },
