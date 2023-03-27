@@ -1,5 +1,5 @@
 <div class="row user-personal-info">
-    <div *ngIf="userData.identificationInformation" class="col-md-8 personal">
+    <div class="col-md-8 personal">
         <nb-alert outline="basic" class="mb-0 alert-title">
             <strong class="text-center">Персональная информация</strong>
         </nb-alert>
@@ -11,99 +11,104 @@
                     {{ userData.phoneNumber }}
                 </td>
             </tr>
-            <tr>
-                <td>ПИН</td>
-                <td>
-                    {{ userData.identificationInformation.pin }}
-                </td>
-            </tr>
-            <tr>
-                <td>Имя</td>
-                <td>
-                    {{ userData.identificationInformation.name }}
-                </td>
-            </tr>
-            <tr>
-                <td>Фамилия</td>
-                <td>
-                    {{ userData.identificationInformation.surname }}
-                </td>
-            </tr>
-            <tr>
-                <td>Отчество</td>
-                <td>
-                    {{ userData.identificationInformation.patronymic }}
-                </td>
-            </tr>
-            <tr>
-                <td>Пол</td>
-                <td>
-                    {{ gender }}
-                </td>
-            </tr>
-            <tr>
-                <td>Дата рождения</td>
-                <td>
-                    {{
-                        userData.identificationInformation.birthDate
-                            | date : 'dd.MM.yyyy'
-                    }}
-                </td>
-            </tr>
-            <tr>
-                <td>Семейное положение</td>
-                <td>
-                    {{ maritalStatus }}
-                </td>
-            </tr>
-            <tr>
-                <td>Адрес прописки</td>
-                <td>
-                    {{
-                        residenceLoc +
-                            ', ' +
-                            userData.identificationInformation.residenceAddress
-                                .address
-                    }}
-                </td>
-            </tr>
-            <tr>
-                <td>Паспорт</td>
-                <td>
-                    {{
-                        userData.identificationInformation.passport
-                            .documentType +
-                            ' ' +
+            <ng-container *ngIf="userData.identificationInformation">
+                <tr>
+                    <td>ПИН</td>
+                    <td>
+                        {{ userData.identificationInformation.pin }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Имя</td>
+                    <td>
+                        {{ userData.identificationInformation.name }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Фамилия</td>
+                    <td>
+                        {{ userData.identificationInformation.surname }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Отчество</td>
+                    <td>
+                        {{ userData.identificationInformation.patronymic }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Пол</td>
+                    <td>
+                        {{ gender }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Дата рождения</td>
+                    <td>
+                        {{
+                            userData.identificationInformation.birthDate
+                                | date : 'dd.MM.yyyy'
+                        }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Семейное положение</td>
+                    <td>
+                        {{ maritalStatus }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Адрес прописки</td>
+                    <td>
+                        {{
+                            residenceLoc +
+                                ', ' +
+                                userData.identificationInformation
+                                    .residenceAddress.address
+                        }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Паспорт</td>
+                    <td>
+                        {{
                             userData.identificationInformation.passport
-                                .documentNumber
-                    }}
-                </td>
-            </tr>
-            <tr>
-                <td>Дата выдачи</td>
-                <td>
-                    {{
-                        userData.identificationInformation.passport.dateOfIssue
-                            | date : 'dd.MM.yyyy'
-                    }}
-                </td>
-            </tr>
+                                .documentType +
+                                ' ' +
+                                userData.identificationInformation.passport
+                                    .documentNumber
+                        }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Дата выдачи</td>
+                    <td>
+                        {{
+                            userData.identificationInformation.passport
+                                .dateOfIssue | date : 'dd.MM.yyyy'
+                        }}
+                    </td>
+                </tr>
 
-            <tr>
-                <td>Кем выдан</td>
-                <td>
-                    {{ userData.identificationInformation.passport.authority }}
-                </td>
-            </tr>
-            <tr>
-                <td>Срок действия паспорта</td>
-                <td>
-                    {{
-                        userData.identificationInformation.passport.dateOfExpiry
-                            | date : 'dd.MM.yyyy'
-                    }}
-                </td>
-            </tr>
+                <tr>
+                    <td>Кем выдан</td>
+                    <td>
+                        {{
+                            userData.identificationInformation.passport
+                                .authority
+                        }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Срок действия паспорта</td>
+                    <td>
+                        {{
+                            userData.identificationInformation.passport
+                                .dateOfExpiry | date : 'dd.MM.yyyy'
+                        }}
+                    </td>
+                </tr>
+            </ng-container>
         </table>
     </div>
 

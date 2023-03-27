@@ -174,10 +174,12 @@ export class UsersPersonalInfoComponent implements OnInit {
         );
     }
     ngOnInit(): void {
-        this.getMaritalStatus();
-        this.getResidenceLoc();
+        if (this.userData.identificationInformation) {
+            this.getMaritalStatus();
+            this.getResidenceLoc();
+            this.getGender();
+        }
         this.getStatus();
-        this.getGender();
         this.getAlertStatus();
         this.checkPermission();
         this.getUserDocuments();

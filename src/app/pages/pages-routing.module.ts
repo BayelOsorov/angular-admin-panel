@@ -64,6 +64,8 @@ import { ListNotIdentifiedCustomersComponent } from './reports/list-not-identifi
 import { ListIdentifiedCustomersComponent } from './reports/list-identified-customers/list-identified-customers.component';
 import { ListNotOclCustomersComponent } from './reports/list-not-ocl-customers/list-not-ocl-customers.component';
 import { ListOclCustomersComponent } from './reports/list-ocl-customers/list-ocl-customers.component';
+import { ListFuelCardCustomersComponent } from './reports/list-fuel-card-customers/list-fuel-card-customers.component';
+import { ListNotFuelCardCustomersComponent } from './reports/list-not-fuel-card-customers/list-not-fuel-card-customers.component';
 
 const routes: Routes = [
     {
@@ -131,10 +133,6 @@ const routes: Routes = [
                                 path: 'not-identified',
                                 component: ListNotIdentifiedCustomersComponent,
                             },
-                            {
-                                path: 'detail/:id',
-                                component: DetailUserComponent,
-                            },
                         ],
                     },
                     {
@@ -145,12 +143,21 @@ const routes: Routes = [
                                 component: ListOclCustomersComponent,
                             },
                             {
-                                path: 'not-identified',
+                                path: 'dont-have-ocl',
                                 component: ListNotOclCustomersComponent,
                             },
+                        ],
+                    },
+                    {
+                        path: 'fuel-card',
+                        children: [
                             {
-                                path: 'detail/:id',
-                                component: DetailUserComponent,
+                                path: 'in-process',
+                                component: ListFuelCardCustomersComponent,
+                            },
+                            {
+                                path: 'dont-have-ocl',
+                                component: ListNotFuelCardCustomersComponent,
                             },
                         ],
                     },

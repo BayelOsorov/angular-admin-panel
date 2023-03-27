@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,13 +5,13 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CustomDatePipe } from '../../../@core/components/shared/date-pipe/date.pipe';
-import { IdentificationService } from '../../../@core/services/identification/identification.service';
+import { FuelCardApplicationService } from '../../../@core/services/credit-application/fuel-card.service';
 import { tableNumbering } from '../../../@core/utils';
 @Component({
-    templateUrl: './list-not-identified-customers.component.html',
-    styleUrls: ['./list-not-identified-customers.component.scss'],
+    templateUrl: './list-not-fuel-card-customers.component.html',
+    styleUrls: ['./list-not-fuel-card-customers.component.scss'],
 })
-export class ListNotIdentifiedCustomersComponent implements OnInit, OnDestroy {
+export class ListNotFuelCardCustomersComponent implements OnInit, OnDestroy {
     listApplications;
     localities = [];
     form = this.fb.group({
@@ -31,8 +30,8 @@ export class ListNotIdentifiedCustomersComponent implements OnInit, OnDestroy {
                 ),
         },
 
-        createdAt: {
-            title: 'Дата создания',
+        identifiedAt: {
+            title: 'Прошел идентификацию',
             type: 'text',
             valuePrepareFunction: (item) => this.parseDate(item),
         },
@@ -49,7 +48,7 @@ export class ListNotIdentifiedCustomersComponent implements OnInit, OnDestroy {
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
-        private identificationService: IdentificationService,
+        private fuelCardApplicationService: FuelCardApplicationService,
         private toaster: ToastrService,
         private router: Router,
         private fb: FormBuilder,
@@ -61,8 +60,8 @@ export class ListNotIdentifiedCustomersComponent implements OnInit, OnDestroy {
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getListApplications(page = 1) {
-        this.identificationService
-            .getListNoneIdentificateObservation(page, this.form.value)
+        this.fuelCardApplicationService
+            .getListNoneFuelObservation(page, this.form.value)
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listApplications = res));
     }

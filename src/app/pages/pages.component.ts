@@ -72,11 +72,11 @@ export class PagesComponent implements OnInit, OnDestroy {
                     title: 'Идентификация',
                     children: [
                         {
-                            title: 'Клиент не получил финальный статус',
+                            title: 'Не завершившие идентификацию',
                             link: '/reports/identification/in-process',
                         },
                         {
-                            title: 'Клиент не прошел идентификацию',
+                            title: 'Не идентифицированные',
                             link: '/reports/identification/not-identified',
                         },
                     ],
@@ -85,22 +85,27 @@ export class PagesComponent implements OnInit, OnDestroy {
                     title: '0-0-3',
                     children: [
                         {
-                            title: 'Клиент не получил финальный статус',
+                            title: 'Не завершили заявку',
                             link: '/reports/0-0-3/in-process',
                         },
                         {
-                            title: 'Клиент не прошел идентификацию',
-                            link: '/reports/0-0-3/not-identified',
+                            title: 'Не подали заявку',
+                            link: '/reports/0-0-3/dont-have-ocl',
                         },
                     ],
                 },
                 {
                     title: 'Топливная карта',
-                    children: [],
-                },
-                {
-                    title: 'Увеличение лимита',
-                    children: [],
+                    children: [
+                        {
+                            title: 'Не завершили заявку',
+                            link: '/reports/fuel-card/in-process',
+                        },
+                        {
+                            title: 'Не подали заявку',
+                            link: '/reports/fuel-card/dont-have-ocl',
+                        },
+                    ],
                 },
             ],
         },

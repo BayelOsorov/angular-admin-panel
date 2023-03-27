@@ -15,6 +15,7 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     userData;
     applicationId;
     videos;
+    isIdentificated = false;
     hasRoleToResetDeclinedApp = false;
     loanApplKibData = [];
     fuelCardApplKibData = [];
@@ -40,6 +41,9 @@ export class DetailUserComponent implements OnInit, OnDestroy {
             .subscribe({
                 next: (data: any) => {
                     this.userData = data;
+                    this.isIdentificated = Boolean(
+                        data.identificationInformation
+                    );
 
                     this.getVideos(data.id);
                     this.getLocalCreditBureauInfo(data.id);

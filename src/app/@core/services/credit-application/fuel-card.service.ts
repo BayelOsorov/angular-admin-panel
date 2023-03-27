@@ -30,10 +30,18 @@ export class FuelCardApplicationService {
             environment.fuelCardUrl +
                 `/admin/api/v1/ocl-requests/search?pageNumber=${page}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
         );
-        // return this.http.get<ICreditApplicationList>(
-        //     environment.fuelCardUrl +
-        //         `/admin/api/v1/ocl-requests/search?pageNumber=${page}&name=${filter.name}&surname=${filter.surname}&patronymic=${filter.patronymic}&phoneNumber=${filter.phoneNumber}&from=${filter.from}&to=${filter.to}&status=${filter.status}&pageSize=20`
-        // );
+    }
+    getListFuelObservation(page, filter) {
+        return this.http.get(
+            environment.fuelCardUrl +
+                `/admin/api/v1/ocl-requests/ocl-process-observation/in-process?pageNumber=${page}&minutes=${filter.minutes}&dateTime=${filter.dateTime}&pageSize=20`
+        );
+    }
+    getListNoneFuelObservation(page, filter) {
+        return this.http.get(
+            environment.fuelCardUrl +
+                `/admin/api/v1/ocl-requests/ocl-process-observation/dont-have-ocl?pageNumber=${page}&minutes=${filter.minutes}&dateTime=${filter.dateTime}&pageSize=20`
+        );
     }
     getListFuelCardApplicationByCustomerId(page, customerId) {
         return this.http.get<ICreditApplicationList>(

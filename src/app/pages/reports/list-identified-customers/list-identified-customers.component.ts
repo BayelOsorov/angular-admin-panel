@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CustomDatePipe } from '../../../@core/components/shared/date-pipe/date.pipe';
+import { StatusBadgeComponent } from '../../../@core/components/shared/status-badge/status-badge.component';
 import { IdentificationService } from '../../../@core/services/identification/identification.service';
 import { tableNumbering } from '../../../@core/utils';
 @Component({
@@ -36,7 +37,13 @@ export class ListIdentifiedCustomersComponent implements OnInit, OnDestroy {
             type: 'text',
             valuePrepareFunction: (item) => this.parseDate(item),
         },
-
+        identificationRequestDto: {
+            title: 'Статус',
+            type: 'custom',
+            valuePrepareFunction: (item) =>
+                item.actualIdentificationRequestStatus,
+            renderComponent: StatusBadgeComponent,
+        },
         custom: {
             title: 'Детали',
             type: 'html',
@@ -67,7 +74,7 @@ export class ListIdentifiedCustomersComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listApplications = res));
     }
     onRowSelect(id) {
-        this.router.navigate(['/identification/list/detail/' + id]);
+        this.router.navigate(['/users/detail/' + id]);
     }
     ngOnInit(): void {
         this.form.valueChanges

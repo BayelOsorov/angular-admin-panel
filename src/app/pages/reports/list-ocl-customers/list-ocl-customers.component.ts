@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CustomDatePipe } from '../../../@core/components/shared/date-pipe/date.pipe';
+import { StatusBadgeComponent } from '../../../@core/components/shared/status-badge/status-badge.component';
 import { CreditApplicationService } from '../../../@core/services/credit-application/credit-application.service';
 import { tableNumbering } from '../../../@core/utils';
 @Component({
@@ -35,7 +36,18 @@ export class ListOclCustomersComponent implements OnInit, OnDestroy {
             type: 'text',
             valuePrepareFunction: (item) => this.parseDate(item),
         },
-
+        customEl: {
+            title: 'Подал заявку',
+            type: 'text',
+            valuePrepareFunction: (value, item) =>
+                this.parseDate(item.identificationRequestDto.createdAt),
+        },
+        identificationRequestDto: {
+            title: 'Статус',
+            type: 'custom',
+            valuePrepareFunction: (item) => item.actualOclRequestStatus,
+            renderComponent: StatusBadgeComponent,
+        },
         custom: {
             title: 'Детали',
             type: 'html',
@@ -66,7 +78,7 @@ export class ListOclCustomersComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listApplications = res));
     }
     onRowSelect(id) {
-        this.router.navigate(['/identification/list/detail/' + id]);
+        this.router.navigate(['/users/detail/' + id]);
     }
     ngOnInit(): void {
         this.form.valueChanges

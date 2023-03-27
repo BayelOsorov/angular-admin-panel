@@ -66,7 +66,7 @@ export class ListNotOclCustomersComponent implements OnInit, OnDestroy {
             .subscribe((res) => (this.listApplications = res));
     }
     onRowSelect(id) {
-        this.router.navigate(['/identification/list/detail/' + id]);
+        this.router.navigate(['/users/detail/' + id]);
     }
     ngOnInit(): void {
         this.form.valueChanges

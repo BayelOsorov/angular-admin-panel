@@ -19,21 +19,17 @@
                 >
                 </ngx-users-personal-info>
             </nb-tab>
-            <nb-tab
-                [disabled]="!userData?.identificationInformation"
-                tabTitle="Идентификация"
-            >
+            <nb-tab [disabled]="!isIdentificated" tabTitle="Идентификация">
                 <ngx-users-identification-info
+                    *ngIf="isIdentificated"
                     [userData]="userData"
                     [videos]="videos"
                 >
                 </ngx-users-identification-info>
             </nb-tab>
-            <nb-tab
-                [disabled]="!userData?.identificationInformation"
-                tabTitle="Продукт '0-0-3'"
-            >
+            <nb-tab [disabled]="!isIdentificated" tabTitle="Продукт '0-0-3'">
                 <ngx-loan-application-user-detail
+                    *ngIf="isIdentificated"
                     [hasRoleToResetDeclinedApp]="hasRoleToResetDeclinedApp"
                     [userData]="userData"
                     [kibData]="loanApplKibData"
@@ -41,10 +37,11 @@
             </nb-tab>
 
             <nb-tab
-                [disabled]="!userData?.identificationInformation"
+                [disabled]="!isIdentificated"
                 tabTitle="Продукт 'Топливная карта'"
             >
                 <ngx-fuel-card-user-detail
+                    *ngIf="isIdentificated"
                     [hasRoleToResetDeclinedApp]="hasRoleToResetDeclinedApp"
                     [userData]="userData"
                     [kibData]="fuelCardApplKibData"

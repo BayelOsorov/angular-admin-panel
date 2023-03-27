@@ -32,13 +32,13 @@ export class ListIdentificationCustomersComponent implements OnInit {
         private fb: FormBuilder
     ) {}
     onRowSelect(id) {
-        this.router.navigate([this.router.url + '/detail/' + id]);
+        this.router.navigate(['/users/detail/' + id]);
     }
     ngOnInit(): void {
         this.options = getHoursAndMinutes();
     }
-    ngOnDestroy() {
-        this.destroy$.next();
-        this.destroy$.complete();
-    }
+    // ngOnDestroy() {
+    //     this.destroy$.next();
+    //     this.destroy$.complete();
+    // }
 }

@@ -91,6 +91,8 @@ import { ListIdentifiedCustomersComponent } from './reports/list-identified-cust
 import { CustomDatePipe } from '../@core/components/shared/date-pipe/date.pipe';
 import { ListNotOclCustomersComponent } from './reports/list-not-ocl-customers/list-not-ocl-customers.component';
 import { ListOclCustomersComponent } from './reports/list-ocl-customers/list-ocl-customers.component';
+import { ListFuelCardCustomersComponent } from './reports/list-fuel-card-customers/list-fuel-card-customers.component';
+import { ListNotFuelCardCustomersComponent } from './reports/list-not-fuel-card-customers/list-not-fuel-card-customers.component';
 
 const antDesignIcons = AllIcons as unknown as {
     [key: string]: NbIconDefinition;
@@ -191,6 +193,8 @@ const icons: NbIconDefinition[] = Object.keys(antDesignIcons).map(
         ListIdentifiedCustomersComponent,
         ListNotOclCustomersComponent,
         ListOclCustomersComponent,
+        ListFuelCardCustomersComponent,
+        ListNotFuelCardCustomersComponent,
     ],
     providers: [
         {
