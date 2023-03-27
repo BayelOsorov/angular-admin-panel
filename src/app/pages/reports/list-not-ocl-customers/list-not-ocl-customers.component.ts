@@ -55,8 +55,6 @@ export class ListNotOclCustomersComponent implements OnInit, OnDestroy {
         private datePipe: CustomDatePipe
     ) {}
     parseDate(date) {
-        // console.log(this.datePipe.transform(date, 'full'));
-
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getListApplications(page = 1) {
