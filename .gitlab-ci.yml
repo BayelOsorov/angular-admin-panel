@@ -5,7 +5,9 @@ build-job:
     image: docker
     stage: build
     services:
-        - docker:dind
+        - name: docker:dind
+          command: ['--tls=false']
+
     script:
         - echo "Compiling the code..."
         - docker-compose build
