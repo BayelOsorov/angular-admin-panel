@@ -37,8 +37,4 @@ export class ListIdentificationCustomersComponent implements OnInit {
     ngOnInit(): void {
         this.options = getHoursAndMinutes();
     }
-    // ngOnDestroy() {
-    //     this.destroy$.next();
-    //     this.destroy$.complete();
-    // }
 }
