@@ -10,7 +10,7 @@ build-job:
 
     script:
         - echo "Compiling the code..."
-        - docker-compose build
+        - docker compose build
         - echo "Compile complete."
     artifacts:
         paths:
