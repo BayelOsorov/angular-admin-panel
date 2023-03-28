@@ -109,3 +109,24 @@
         transform: translateY(0);
     }
 }
+@media (max-width: 425px) {
+    .detail-info {
+        .status {
+            display: block;
+            height: auto;
+            text-align: center;
+            strong {
+                display: block;
+                margin-top: 10px;
+            }
+            nb-alert {
+                margin-top: 10px;
+            }
+        }
+    }
+    .lightbox-img {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+}

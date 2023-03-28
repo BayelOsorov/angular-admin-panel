@@ -10,7 +10,9 @@ export class HandleErrorService {
         let errorMessage = '';
         if (err.status === 0 || err.status === 500) {
             errorMessage = 'Ошибка сервера';
-            return this.toaster.error(errorMessage);
+            return this.toaster.error(errorMessage, '', {
+                timeOut: 0.1,
+            });
         }
         if (err.status === 404) {
             if (err.error) {
@@ -34,7 +36,7 @@ export class HandleErrorService {
                 }
             }
         } else {
-            errorMessage = 'Ошибка сервера';
+            // errorMessage = 'Ошибка сервера';
         }
         this.toaster.error(errorMessage);
     }
