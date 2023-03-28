@@ -82,6 +82,12 @@ img {
     .main-img-mobile {
         display: block;
     }
+    .image-container-light {
+        margin-top: 100px;
+        img {
+            height: auto;
+        }
+    }
     // ! hide main-img-desktop
     .main-img-desktop {
         display: none;
