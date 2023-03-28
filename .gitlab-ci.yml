@@ -10,7 +10,6 @@ build-job:
 
     script:
         - echo "Compiling the code..."
-        - export DOCKER_HOST=tcp://127.0.0.1:2375 && docker build --pull -t ${CI_REGISTRY_IMAGE} .
         - docker-compose build
         - echo "Compile complete."
     artifacts:
