@@ -18,7 +18,7 @@
 </ngx-custom-table>
 <ngx-confirm-buttons
     *ngIf="canResetFuelCard"
-    class="d-block mb-5 w-50 mx-auto"
+    class="responsive-btn"
     (approveEvent)="resetDeclinedApp()"
     status="danger"
     title="Сбросить блокировку заявки"
@@ -26,7 +26,7 @@
 </ngx-confirm-buttons>
 <ngx-confirm-buttons
     *ngIf="fuelCardCreditLineData?.creditLineDetails?.canBeClosed"
-    class="d-block mb-5 w-50 mx-auto"
+    class="responsive-btn"
     (approveEvent)="closeFuelCardCreditLine()"
     status="danger"
     title="Закрыть топливную карту"

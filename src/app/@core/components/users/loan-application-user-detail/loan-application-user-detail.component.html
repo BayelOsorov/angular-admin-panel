@@ -35,7 +35,7 @@
 
 <ngx-confirm-buttons
     *ngIf="canResetApp0_0_3"
-    class="d-block mb-5 w-50 mx-auto"
+    class="responsive-btn"
     (approveEvent)="resetDeclinedApp()"
     status="danger"
     title="Сбросить блокировку заявки на 0-0-3"
@@ -43,7 +43,7 @@
 </ngx-confirm-buttons>
 <ngx-confirm-buttons
     *ngIf="canResetAppIncreaseLimit"
-    class="d-block mb-5 w-50 mx-auto"
+    class="responsive-btn"
     (approveEvent)="resetIncreaseLimitDeclinedApp()"
     status="danger"
     title="Сбросить блокировку заявки на увеличение лимита"
@@ -51,7 +51,7 @@
 </ngx-confirm-buttons>
 <ngx-confirm-buttons
     *ngIf="canCloseCreditLine"
-    class="d-block mb-5 w-50 mx-auto"
+    class="responsive-btn"
     (approveEvent)="closeCreditLine()"
     status="danger"
     title="Закрыть кредитную линию"

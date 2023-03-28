@@ -44,7 +44,7 @@ export class ListPartnersComponent implements OnInit, OnDestroy {
         createdAt: {
             title: 'Дата создания',
             type: 'text',
-            valuePrepareFunction: (item) => this.parseDate(item),
+            valuePrepareFunction: (item) => item && this.parseDate(item),
         },
     };
     private destroy$: Subject<void> = new Subject<void>();

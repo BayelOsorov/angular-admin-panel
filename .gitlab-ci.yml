@@ -6,13 +6,13 @@ build-job:
     stage: build
     services:
         - name: docker:dind
-          command: ['--tls=false']
 
     script:
         - echo "Compiling the code..."
         - docker-compose build
         - echo "Compile complete."
     artifacts:
+        expire_in: 1 week
         paths:
             - '/builds/zeus.kg/finappclient/operator-dashboard/'
     rules:
