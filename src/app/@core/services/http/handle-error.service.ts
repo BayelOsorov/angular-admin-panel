@@ -11,7 +11,7 @@ export class HandleErrorService {
         if (err.status === 0 || err.status === 500) {
             errorMessage = 'Ошибка сервера';
             return this.toaster.error(errorMessage, '', {
-                timeOut: 0.1,
+                timeOut: 1000,
             });
         }
         if (err.status === 404) {

@@ -98,29 +98,30 @@ export class CreditApplicationService {
             { data: '' }
         );
     }
-    // closeCustomerCreditLine(id) {
-    //     return this.http.get(
-    //         environment.creditApplicationUrl +
-    //             `/admin/api/v1/credit-lines/${id}/close`
-    //     );
-    // }
-    // getCustomerCreditLineStatus(id) {
-    //     return this.http.get(
-    //         environment.creditApplicationUrl + `/admin/api/v1/customers/${id}`
-    //     );
-    // }
     closeCustomerCreditLine(id) {
-        return this.http.get(
-            environment.closeCreditLineUrl +
-                `/api/v1/administration/Account/CloseCreditLine/${id}`
+        return this.http.post(
+            environment.creditApplicationUrl +
+                `/admin/api/v1/credit-lines/${id}/close`,
+            { data: '' }
         );
     }
     getCustomerCreditLineStatus(id) {
         return this.http.get(
-            environment.closeCreditLineUrl +
-                `/api/v1/administration/Account/CreditLine/${id}`
+            environment.creditApplicationUrl + `/admin/api/v1/customers/${id}`
         );
     }
+    // closeCustomerCreditLine(id) {
+    //     return this.http.get(
+    //         environment.closeCreditLineUrl +
+    //             `/api/v1/administration/Account/CloseCreditLine/${id}`
+    //     );
+    // }
+    // getCustomerCreditLineStatus(id) {
+    //     return this.http.get(
+    //         environment.closeCreditLineUrl +
+    //             `/api/v1/administration/Account/CreditLine/${id}`
+    //     );
+    // }
     sendCommentCreditApplication(id, data) {
         return this.http.post(
             environment.creditApplicationUrl +

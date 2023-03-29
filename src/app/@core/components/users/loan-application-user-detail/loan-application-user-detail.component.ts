@@ -117,14 +117,9 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                 if (res.items[0]?.status === 'Declined') {
                     this.isLastDeclined0_0_3 = true;
                 }
-                // this.canResetApp0_0_3 =
-                //     this.hasRoleToResetDeclinedApp &&
-                //     this.isLastDeclined0_0_3 &&
-                //     !this.creditLineData?.isClosed;
-                // this.canCloseCreditLine =
-                //     !this.creditLineData.isClosed &&
-                //     !this.isLastDeclined0_0_3 &&
-                //     this.listApplications0_0_3.items.length > 0;
+                this.canResetApp0_0_3 =
+                    this.hasRoleToResetDeclinedApp && this.isLastDeclined0_0_3;
+
                 this.cdr.markForCheck();
             });
     }
@@ -138,11 +133,9 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                     this.isLastDeclinedIncreaseLimit = true;
                 }
 
-                // this.canResetAppIncreaseLimit =
-                //     this.hasRoleToResetDeclinedApp &&
-                //     this.isLastDeclinedIncreaseLimit &&
-                //     !this.creditLineData?.isClosed;
-
+                this.canResetAppIncreaseLimit =
+                    this.hasRoleToResetDeclinedApp &&
+                    this.isLastDeclinedIncreaseLimit;
                 this.cdr.markForCheck();
             });
     }
@@ -152,13 +145,18 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((data) => {
                 this.creditLineData = data;
-                this.getStatuses();
+                this.canCloseCreditLine =
+                    this.creditLineData.creditLineDetails?.canBeClosed;
+                if (this.creditLineData.creditLineDetails?.isClosed) {
+                    this.canResetAppIncreaseLimit = false;
+                    this.canResetApp0_0_3 = false;
+                }
                 this.cdr.markForCheck();
             });
     }
     closeCreditLine() {
         this.creditApplicationsService
-            .closeCustomerCreditLine(this.userData.id)
+            .closeCustomerCreditLine(this.creditLineData.creditLineDetails.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe({
                 next: (res) => {
@@ -206,24 +204,7 @@ export class LoanApplicationUserDetailComponent implements OnInit, OnDestroy {
                 },
             });
     }
-    getStatuses() {
-        if (this.creditLineData) {
-            this.canResetApp0_0_3 =
-                this.hasRoleToResetDeclinedApp &&
-                this.isLastDeclined0_0_3 &&
-                !this.creditLineData.isClosed;
 
-            this.canCloseCreditLine =
-                !this.creditLineData.isClosed &&
-                !this.isLastDeclined0_0_3 &&
-                this.listApplications0_0_3.items.length > 0;
-
-            this.canResetAppIncreaseLimit =
-                this.hasRoleToResetDeclinedApp &&
-                this.isLastDeclinedIncreaseLimit &&
-                !this.creditLineData.isClosed;
-        }
-    }
     ngOnInit(): void {
         this.getCreditLineStatus();
         this.getListApplications();
