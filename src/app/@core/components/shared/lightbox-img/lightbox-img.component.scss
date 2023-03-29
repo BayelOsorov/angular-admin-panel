@@ -1,14 +1,14 @@
 .viewer-container {
-    /* Container must be fixed and occupy full screen */
     position: fixed;
     left: 0;
     top: 0;
     width: 100vw;
-    height: 100vh;
+    height: auto;
     background-color: black;
-    /* High z-index value makes sure viewer is on top */
     z-index: 999999999999999;
     overflow-y: hidden;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .viewer-content {

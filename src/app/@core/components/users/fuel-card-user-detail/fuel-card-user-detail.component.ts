@@ -6,7 +6,6 @@ import {
     Input,
     ChangeDetectorRef,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';

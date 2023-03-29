@@ -1,10 +1,8 @@
-import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { LoaderService } from '../../../../@core/services/http/loader.service';
 import { IdentificationService } from '../../../../@core/services/identification/identification.service';
 
 @Component({
@@ -36,8 +34,6 @@ export class IdentificationGetComponent implements OnInit, OnDestroy {
             });
     }
     videoIdentification() {
-        // this.videoIdentificationToggle = true;
-
         this.identificationService
             .getVideoIdentification()
             .pipe(takeUntil(this.destroy$))

@@ -98,6 +98,17 @@ export class CreditApplicationService {
             { data: '' }
         );
     }
+    // closeCustomerCreditLine(id) {
+    //     return this.http.get(
+    //         environment.creditApplicationUrl +
+    //             `/admin/api/v1/credit-lines/${id}/close`
+    //     );
+    // }
+    // getCustomerCreditLineStatus(id) {
+    //     return this.http.get(
+    //         environment.creditApplicationUrl + `/admin/api/v1/customers/${id}`
+    //     );
+    // }
     closeCustomerCreditLine(id) {
         return this.http.get(
             environment.closeCreditLineUrl +
