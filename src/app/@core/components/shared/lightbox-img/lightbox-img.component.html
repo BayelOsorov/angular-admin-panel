@@ -25,9 +25,9 @@
                     (wheel)="onImageWheel($event)"
                 />
                 <img
+                    #imageElement
                     [src]="imgUrl ? (imgUrl | useHttpImgSrc) : safeImgUrl"
                     class="main-img-mobile"
-                    #imageElement
                 />
             </div>
             <div class="controls">

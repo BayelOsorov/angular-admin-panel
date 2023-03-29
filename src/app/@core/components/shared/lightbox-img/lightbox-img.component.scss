@@ -8,7 +8,7 @@
     background-color: black;
     /* High z-index value makes sure viewer is on top */
     z-index: 999999999999999;
-    overflow-y: unset;
+    overflow-y: hidden;
 }
 
 .viewer-content {
@@ -79,11 +79,17 @@ img {
     }
 }
 @media (max-width: 425px) {
+    .viewer-container::-webkit-scrollbar {
+        display: none;
+    }
     .main-img-mobile {
         display: block;
     }
     .image-container-light {
+        pointer-events: none;
         margin-top: 100px;
+        height: auto;
+        overflow-y: hidden;
         img {
             height: auto;
         }
@@ -96,6 +102,7 @@ img {
         overflow-y: hidden;
     }
     .viewer-container {
+        overflow-y: hidden;
         .controls {
             display: none;
         }

@@ -1,17 +1,19 @@
 <nb-card>
     <ng-container *ngIf="router.url.endsWith('photo')">
         <nb-card-header>Идентификация по фотографии</nb-card-header>
-        <nb-card-body class="d-flex justify-content-center">
-            <ngx-button
-                title="Получить заявку на фотоидентификацию"
-                (clickEvent)="photoIdentification()"
-            >
-            </ngx-button>
+        <nb-card-body class="get-iden">
+            <div>
+                <ngx-button
+                    title="Получить заявку на фотоидентификацию"
+                    (clickEvent)="photoIdentification()"
+                >
+                </ngx-button>
+            </div>
         </nb-card-body>
     </ng-container>
     <ng-container *ngIf="router.url.endsWith('video')">
         <nb-card-header>Идентификация по видео</nb-card-header>
-        <nb-card-body class="d-flex justify-content-center">
+        <nb-card-body class="get-iden">
             <ngx-button
                 title="Получить заявку на видеоидентификацию"
                 (clickEvent)="videoIdentification()"

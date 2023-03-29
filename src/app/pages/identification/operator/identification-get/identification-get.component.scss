@@ -1,0 +1,9 @@
+.get-iden {
+    display: flex;
+    justify-content: center;
+}
+@media (max-width: 425px) {
+    .get-iden {
+        display: block;
+    }
+}

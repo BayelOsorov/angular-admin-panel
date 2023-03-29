@@ -1,15 +1,4 @@
-import {
-    Component,
-    OnInit,
-    Input,
-    ChangeDetectorRef,
-    ViewChild,
-    ElementRef,
-} from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { AuthService } from '../../../services/auth/auth.service';
-import { OldBackendService } from '../../../services/old-backend/old-backend.service';
-import { UseHttpImageSourcePipe } from '../secured-image/secured-image.component';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 @Component({
     selector: 'ngx-lightbox-img',
     templateUrl: './lightbox-img.component.html',
@@ -21,9 +10,6 @@ export class LightboxImgComponent implements OnInit {
     @ViewChild('imageElement') imageElement: ElementRef;
     @ViewChild('imageContainer') imageContainer: ElementRef;
     open = false;
-
-    // new
-
     private isFullscreen = false;
     private currentZoom = 1;
     private currentRotation = 0;
@@ -32,13 +18,7 @@ export class LightboxImgComponent implements OnInit {
     private dragStartY = 0;
     private dragStartScrollLeft = 0;
     private dragStartScrollTop = 0;
-    constructor(
-        private useHttpImageService: UseHttpImageSourcePipe,
-        private backendService: OldBackendService,
-        private authService: AuthService,
-        private cdr: ChangeDetectorRef,
-        private sanitizer: DomSanitizer
-    ) {}
+    constructor() {}
 
     openImage() {
         this.open = true;
