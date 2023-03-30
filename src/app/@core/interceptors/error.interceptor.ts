@@ -25,19 +25,17 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             return next.handle(req);
         }
         return new Observable((observer) => {
-            next.handle(req)
-                // .pipe(retry(1))
-                .subscribe(
-                    (res: HttpResponse<any>) => {
-                        if (res instanceof HttpResponse) {
-                            observer.next(res);
-                        }
-                    },
-                    (err: HttpErrorResponse) => {
-                        this.error.handleError(err);
-                        observer.error(err);
+            next.handle(req).subscribe(
+                (res: HttpResponse<any>) => {
+                    if (res instanceof HttpResponse) {
+                        observer.next(res);
                     }
-                );
+                },
+                (err: HttpErrorResponse) => {
+                    this.error.handleError(err);
+                    observer.error(err);
+                }
+            );
         });
     }
 

@@ -4,19 +4,15 @@ import {
     OnInit,
     ChangeDetectionStrategy,
     Input,
-    OnChanges,
     ChangeDetectorRef,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { checkRolePermission, tableNumbering } from '../../../../@core/utils';
+import { tableNumbering } from '../../../../@core/utils';
 import { StatusBadgeComponent } from '../../../../@core/components/shared/status-badge/status-badge.component';
 import { CreditApplicationService } from '../../../../@core/services/credit-application/credit-application.service';
-import { AuthService } from '../../../services/auth/auth.service';
 import { IncreaseLimitApplicationService } from '../../../services/credit-application/increase-limit.service';
 import { CustomDatePipe } from '../../shared/date-pipe/date.pipe';
 

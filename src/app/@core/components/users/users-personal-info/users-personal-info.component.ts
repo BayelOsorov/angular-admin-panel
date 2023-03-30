@@ -10,7 +10,6 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../services/auth/auth.service';
-import { FuelCardApplicationService } from '../../../services/credit-application/fuel-card.service';
 import { IdentificationService } from '../../../services/identification/identification.service';
 import {
     checkRolePermission,
@@ -31,7 +30,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class UsersPersonalInfoComponent implements OnInit {
     @Input() userData;
-    @Output() getDetailUser = new EventEmitter();
+    @Output() getUserDetail = new EventEmitter();
     canOfflineIdentificate: boolean;
     alertStatus: string;
     status: string;
@@ -129,7 +128,7 @@ export class UsersPersonalInfoComponent implements OnInit {
                 this.toastService.success(
                     'Вы успешно офлайн идентифицировали!'
                 );
-                this.getDetailUser.emit();
+                this.getUserDetail.emit();
                 this.cdr.markForCheck();
             });
     }
