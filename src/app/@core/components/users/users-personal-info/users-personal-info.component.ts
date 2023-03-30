@@ -6,6 +6,8 @@ import {
     ChangeDetectorRef,
     Output,
     EventEmitter,
+    OnChanges,
+    SimpleChanges,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
@@ -28,7 +30,7 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./users-personal-info.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersPersonalInfoComponent implements OnInit {
+export class UsersPersonalInfoComponent implements OnInit, OnChanges {
     @Input() userData;
     @Output() getUserDetail = new EventEmitter();
     canOfflineIdentificate: boolean;
@@ -129,10 +131,12 @@ export class UsersPersonalInfoComponent implements OnInit {
                     'Вы успешно офлайн идентифицировали!'
                 );
                 this.getUserDetail.emit();
+
                 this.cdr.markForCheck();
             });
     }
     getAlertStatus() {
+        this.getStatusTitle();
         switch (this.userData.identificationLevel.toLowerCase()) {
             case 'online':
                 this.alertStatus = 'primary';
@@ -167,10 +171,15 @@ export class UsersPersonalInfoComponent implements OnInit {
                 this.userData.identificationInformation.residenceAddress.region
         )?.text;
     }
-    getStatus() {
+    getStatusTitle() {
         this.status = translateIdentificationLevels(
             this.userData.identificationLevel
         );
+    }
+    ngOnChanges(changes: SimpleChanges): void {
+        if (!changes?.userData.firstChange) {
+            this.getAlertStatus();
+        }
     }
     ngOnInit(): void {
         if (this.userData.identificationInformation) {
@@ -178,7 +187,7 @@ export class UsersPersonalInfoComponent implements OnInit {
             this.getResidenceLoc();
             this.getGender();
         }
-        this.getStatus();
+
         this.getAlertStatus();
         this.checkPermission();
         this.getUserDocuments();

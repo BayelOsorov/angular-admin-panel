@@ -46,12 +46,6 @@ export class ListPartnerBonusesComponent implements OnInit, OnDestroy {
                           Подробнее
                         </a>`,
         },
-        // identificationLevel: {
-        //     title: 'Статус',
-        //     type: 'text',
-        //     valuePrepareFunction: (status) =>
-        //         translateIdentificationLevels(status),
-        // },
     };
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
