@@ -27,7 +27,10 @@
                 >
                 </ngx-users-identification-info>
             </nb-tab>
-            <nb-tab [disabled]="!isIdentificated" tabTitle="Продукт '0-0-3'">
+            <nb-tab
+                [disabled]="!isIdentificated || !hasAccessToProducts"
+                tabTitle="Продукт '0-0-3'"
+            >
                 <ngx-loan-application-user-detail
                     *ngIf="isIdentificated"
                     [hasRoleToResetDeclinedApp]="hasRoleToResetDeclinedApp"
@@ -37,7 +40,7 @@
             </nb-tab>
 
             <nb-tab
-                [disabled]="!isIdentificated"
+                [disabled]="!isIdentificated || !hasAccessToProducts"
                 tabTitle="Продукт 'Топливная карта'"
             >
                 <ngx-fuel-card-user-detail

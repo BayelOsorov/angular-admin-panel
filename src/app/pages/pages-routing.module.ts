@@ -104,10 +104,28 @@ const routes: Routes = [
             {
                 path: 'users',
                 canActivate: [PermissionsGuard],
-                data: { roles: ['admin', 'credit_specialist', 'collector'] },
+                data: {
+                    roles: [
+                        'admin',
+                        'credit_specialist',
+                        'collector',
+                        'credit_specialist_admin',
+                        'operator',
+                        'kyc_manager',
+                    ],
+                },
                 children: [
                     {
                         path: 'list',
+                        canActivate: [PermissionsGuard],
+                        data: {
+                            roles: [
+                                'admin',
+                                'credit_specialist',
+                                'collector',
+                                'credit_specialist_admin',
+                            ],
+                        },
                         component: ListUsersComponent,
                     },
                     {
@@ -120,10 +138,22 @@ const routes: Routes = [
             {
                 path: 'reports',
                 canActivate: [PermissionsGuard],
-                data: { roles: ['admin'] },
+                data: {
+                    roles: [
+                        'admin',
+                        'operator',
+                        'kyc_manager',
+                        'credit_specialist_admin',
+                        'credit_specialist',
+                    ],
+                },
                 children: [
                     {
                         path: 'identification',
+                        canActivate: [PermissionsGuard],
+                        data: {
+                            roles: ['admin', 'operator', 'kyc_manager'],
+                        },
                         children: [
                             {
                                 path: 'in-process',
@@ -137,6 +167,14 @@ const routes: Routes = [
                     },
                     {
                         path: '0-0-3',
+                        canActivate: [PermissionsGuard],
+                        data: {
+                            roles: [
+                                'admin',
+                                'credit_specialist_admin',
+                                'credit_specialist',
+                            ],
+                        },
                         children: [
                             {
                                 path: 'in-process',
@@ -150,6 +188,14 @@ const routes: Routes = [
                     },
                     {
                         path: 'fuel-card',
+                        canActivate: [PermissionsGuard],
+                        data: {
+                            roles: [
+                                'admin',
+                                'credit_specialist_admin',
+                                'credit_specialist',
+                            ],
+                        },
                         children: [
                             {
                                 path: 'in-process',

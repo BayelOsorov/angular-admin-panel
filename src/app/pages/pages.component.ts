@@ -66,10 +66,17 @@ export class PagesComponent implements OnInit, OnDestroy {
         {
             title: 'Отчеты',
             icon: 'file-text-outline',
-            hidden: this.getRole(['admin', 'operator', 'kyc_manager']),
+            hidden: this.getRole([
+                'admin',
+                'operator',
+                'kyc_manager',
+                'credit_specialist_admin',
+                'credit_specialist',
+            ]),
             children: [
                 {
                     title: 'Идентификация',
+                    hidden: this.getRole(['admin', 'operator', 'kyc_manager']),
                     children: [
                         {
                             title: 'Не завершившие идентификацию',
@@ -83,6 +90,11 @@ export class PagesComponent implements OnInit, OnDestroy {
                 },
                 {
                     title: '0-0-3',
+                    hidden: this.getRole([
+                        'admin',
+                        'credit_specialist_admin',
+                        'credit_specialist',
+                    ]),
                     children: [
                         {
                             title: 'Не завершили заявку',
@@ -96,6 +108,11 @@ export class PagesComponent implements OnInit, OnDestroy {
                 },
                 {
                     title: 'Топливная карта',
+                    hidden: this.getRole([
+                        'admin',
+                        'credit_specialist_admin',
+                        'credit_specialist',
+                    ]),
                     children: [
                         {
                             title: 'Не завершили заявку',

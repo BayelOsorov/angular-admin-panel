@@ -17,6 +17,8 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     videos;
     isIdentificated = false;
     hasRoleToResetDeclinedApp = false;
+    hasAccessToProducts = false;
+
     loanApplKibData = [];
     fuelCardApplKibData = [];
 
@@ -27,12 +29,20 @@ export class DetailUserComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private authService: AuthService
     ) {}
-    checkPermission() {
+    checkPermissionForResetProducts() {
         const userAuthData = this.authService.getUserData();
         this.hasRoleToResetDeclinedApp = checkRolePermission(
             userAuthData.role,
             ['credit_specialist_admin']
         );
+    }
+    checkAccessToProducts() {
+        const userAuthData = this.authService.getUserData();
+        this.hasAccessToProducts = checkRolePermission(userAuthData.role, [
+            'credit_specialist_admin',
+            'admin',
+            'credit_specialist',
+        ]);
     }
     getUserDetail() {
         this.usersService
@@ -79,7 +89,8 @@ export class DetailUserComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.checkPermission();
+        this.checkPermissionForResetProducts();
+        this.checkAccessToProducts();
         this.route.params.subscribe((params) => {
             this.applicationId = params['id'];
             this.getUserDetail();
