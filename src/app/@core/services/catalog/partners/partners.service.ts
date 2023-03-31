@@ -17,7 +17,7 @@ export class PartnersService {
     getListPartners(page = 1, name = '') {
         return this.http.get<IListPartner>(
             environment.catalogUrl +
-                `/Administration/api/v1/partners?name=${name}&page=${page}&orderType=desc&oderBy=createdAt&pageSize=20`
+                `/Administration/api/v1/partners?name=${name}&page=${page}&orderType=desc&orderBy=CreatedAt&pageSize=20`
         );
     }
 

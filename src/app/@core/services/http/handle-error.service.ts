@@ -15,10 +15,11 @@ export class HandleErrorService {
             });
         }
         if (err.status === 404) {
-            if (err.error) {
-                return this.toaster.error(err.error.title);
-            }
-            return this.toaster.error(err.message);
+            // if (err.error) {
+            //     return this.toaster.error(err.error.title);
+            // }
+            // return this.toaster.error(err.message);
+            return this.toaster.error(err.url, 'Ничего не найдено');
         }
         if (err.error) {
             if (err && err.error.errors) {
