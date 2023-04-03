@@ -159,4 +159,11 @@ export class IdentificationService {
                 `/admin/api/v1/customer-identification-observation/not-identified?pageNumber=${page}&minutes=${filter.minutes}&dateTime=${filter.dateTime}&pageSize=20`
         );
     }
+    sendReportCommentIdentification(id, data) {
+        return this.http.post(
+            environment.identificationUrl +
+                `/operator/api/v1/customers/${id}/observation-comments`,
+            data
+        );
+    }
 }

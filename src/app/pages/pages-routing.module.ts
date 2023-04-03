@@ -163,6 +163,10 @@ const routes: Routes = [
                                 path: 'not-identified',
                                 component: ListNotIdentifiedCustomersComponent,
                             },
+                            {
+                                path: 'identified/:isIdentified/detail/:id',
+                                component: DetailUserComponent,
+                            },
                         ],
                     },
                     {
@@ -184,6 +188,10 @@ const routes: Routes = [
                                 path: 'dont-have-ocl',
                                 component: ListNotOclCustomersComponent,
                             },
+                            {
+                                path: 'detail/:id',
+                                component: DetailUserComponent,
+                            },
                         ],
                     },
                     {
@@ -204,6 +212,10 @@ const routes: Routes = [
                             {
                                 path: 'dont-have-ocl',
                                 component: ListNotFuelCardCustomersComponent,
+                            },
+                            {
+                                path: 'detail/:id',
+                                component: DetailUserComponent,
                             },
                         ],
                     },

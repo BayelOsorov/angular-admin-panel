@@ -37,12 +37,14 @@
         </div>
     </div>
 </ng-template>
-<button
-    class="w-100"
-    nbButton
-    (click)="onClick()"
-    [status]="status"
-    [nbPopover]="form"
->
-    {{ title }}
-</button>
+<div class="confirm-dialog">
+    <button
+        class="w-100"
+        nbButton
+        (click)="onClick()"
+        [status]="status"
+        [nbPopover]="form"
+    >
+        {{ title }}
+    </button>
+</div>

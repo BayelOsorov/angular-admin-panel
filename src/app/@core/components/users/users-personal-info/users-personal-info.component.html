@@ -116,6 +116,7 @@
         <nb-alert [status]="alertStatus">
             <strong class="text-center">{{ status }}</strong>
         </nb-alert>
+        <ngx-comments-reports *ngIf="isReportPage"></ngx-comments-reports>
     </div>
 </div>
 <div

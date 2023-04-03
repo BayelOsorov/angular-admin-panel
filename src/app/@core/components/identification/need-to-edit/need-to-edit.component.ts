@@ -1,10 +1,18 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    OnDestroy,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+} from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'ngx-identification-need-to-edit',
     templateUrl: './need-to-edit.component.html',
     styleUrls: ['./need-to-edit.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NeedToEditComponent implements OnInit, OnDestroy {
     @Input() control: AbstractControl = new FormControl();
@@ -16,56 +24,16 @@ export class NeedToEditComponent implements OnInit, OnDestroy {
     @Input() placeholder: string;
     @Input() data;
 
-    constructor() {}
+    constructor(private cdr: ChangeDetectorRef) {}
     onChange(val) {
         this.control.patchValue([val]);
     }
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.control.valueChanges.subscribe((res) => {
+            if (res.length === 0) {
+                this.cdr.markForCheck();
+            }
+        });
+    }
     ngOnDestroy() {}
-    // @Input() isNeedToEdit;
-    // @Input() data: IIdentificationDetail;
-
-    // @Output() hideEditEvent = new EventEmitter();
-
-    // form: FormGroup;
-
-    // private destroy$: Subject<void> = new Subject<void>();
-    // constructor(
-    //     private fb: FormBuilder,
-    //     private identificationService: IdentificationService,
-    //     private toastService: ToastrService,
-    //     private location: Location
-    // ) {}
-    // hide() {
-    //     this.hideEditEvent.emit(false);
-    // }
-    // onSubmit() {
-    //     if (this.form.valid) {
-    //         this.identificationService
-    //             .needToEditPhotoIdentification(this.data.id, {
-    //                 editRequiredProperties: this.form.value,
-    //             })
-    //             .pipe(takeUntil(this.destroy$))
-    //             .subscribe(() => {
-    //                 this.toastService.success(
-    //                     'Вы успешно отправили на редактирование фотоидентификацию!'
-    //                 );
-    //                 this.location.back();
-    //             });
-    //     }
-    // }
-    // ngOnInit(): void {
-    //     this.form = this.fb.group({
-    //         PassportFrontSideImageId: [[]],
-    //         PassportBackSideImageId: [[]],
-    //         Address: [[]],
-    //         Pin: [[]],
-    //         SelfieWithPassportImageId: [[]],
-    //         DocumentNumber: [[]],
-    //     });
-    // }
-    // ngOnDestroy() {
-    //     this.destroy$.next();
-    //     this.destroy$.complete();
-    // }
 }

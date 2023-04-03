@@ -63,8 +63,6 @@ export class ListIdentifiedCustomersComponent implements OnInit, OnDestroy {
         private datePipe: CustomDatePipe
     ) {}
     parseDate(date) {
-        // console.log(this.datePipe.transform(date, 'full'));
-
         return this.datePipe.transform(date, 'dd.MM.yyyy, HH:mm');
     }
     getListApplications(page = 1) {
@@ -73,9 +71,7 @@ export class ListIdentifiedCustomersComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listApplications = res));
     }
-    onRowSelect(id) {
-        this.router.navigate(['/users/detail/' + id]);
-    }
+
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))

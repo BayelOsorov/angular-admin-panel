@@ -136,4 +136,11 @@ export class FuelCardApplicationService {
             environment.fuelCardUrl + `/admin/api/v1/debtors/${id}`
         );
     }
+    sendReportComment(id, data) {
+        return this.http.post(
+            environment.fuelCardUrl +
+                `/operator/api/v1/customers/${id}/observation-comments`,
+            data
+        );
+    }
 }

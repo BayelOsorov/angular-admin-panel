@@ -24,6 +24,7 @@ import {
 } from '../../../utils';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Component({
     selector: 'ngx-users-personal-info',
     templateUrl: './users-personal-info.component.html',
@@ -40,7 +41,7 @@ export class UsersPersonalInfoComponent implements OnInit, OnChanges {
     residenceLoc: string;
     gender: string;
     document;
-
+    isReportPage;
     listDocuments = [];
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -48,7 +49,8 @@ export class UsersPersonalInfoComponent implements OnInit, OnChanges {
         private identificationService: IdentificationService,
         private toastService: ToastrService,
         private sanitizer: DomSanitizer,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        public router: Router
     ) {}
     trackByFn(index, item) {
         return item.id; // unique id corresponding to the item
@@ -182,6 +184,8 @@ export class UsersPersonalInfoComponent implements OnInit, OnChanges {
         }
     }
     ngOnInit(): void {
+        this.isReportPage = this.router.url.split('/')[1] === 'reports';
+
         if (this.userData.identificationInformation) {
             this.getMaritalStatus();
             this.getResidenceLoc();

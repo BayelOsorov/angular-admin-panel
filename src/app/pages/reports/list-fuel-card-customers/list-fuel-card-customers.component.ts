@@ -62,7 +62,7 @@ export class ListFuelCardCustomersComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
         private fuelCardApplicationService: FuelCardApplicationService,
-        private toaster: ToastrService,
+
         private router: Router,
         private fb: FormBuilder,
         private datePipe: CustomDatePipe
@@ -76,9 +76,7 @@ export class ListFuelCardCustomersComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listApplications = res));
     }
-    onRowSelect(id) {
-        this.router.navigate(['/users/detail/' + id]);
-    }
+
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))

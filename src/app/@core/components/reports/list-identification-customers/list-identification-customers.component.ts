@@ -23,16 +23,14 @@ export class ListIdentificationCustomersComponent implements OnInit {
     @Input() tableColumns;
     @Input() listApplications;
     @Input() filterForm;
+    @Input() detailPath;
+
     options = [];
 
     private destroy$: Subject<void> = new Subject<void>();
-    constructor(
-        private toaster: ToastrService,
-        private router: Router,
-        private fb: FormBuilder
-    ) {}
+    constructor(private router: Router) {}
     onRowSelect(id) {
-        this.router.navigate(['/users/detail/' + id]);
+        this.router.navigate([this.detailPath + id]);
     }
     ngOnInit(): void {
         this.options = getHoursAndMinutes();

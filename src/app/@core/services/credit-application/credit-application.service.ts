@@ -153,4 +153,11 @@ export class CreditApplicationService {
             { comment: 'create' }
         );
     }
+    sendReportComment(id, data) {
+        return this.http.post(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/customers/${id}/observation-comments`,
+            data
+        );
+    }
 }

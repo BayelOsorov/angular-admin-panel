@@ -4,3 +4,104 @@
         color: white;
     }
 }
+// $duration: 10s;
+
+// @-webkit-keyframes ticker {
+//     0% {
+//         -webkit-transform: translate3d(0, 0, 0);
+//         transform: translate3d(0, 0, 0);
+//         visibility: visible;
+//     }
+
+//     100% {
+//         -webkit-transform: translate3d(-100%, 0, 0);
+//         transform: translate3d(-100%, 0, 0);
+//     }
+// }
+
+// @keyframes ticker {
+//     0% {
+//         -webkit-transform: translate3d(0, 0, 0);
+//         transform: translate3d(0, 0, 0);
+//         visibility: visible;
+//     }
+
+//     100% {
+//         -webkit-transform: translate3d(-100%, 0, 0);
+//         transform: translate3d(-100%, 0, 0);
+//     }
+// }
+
+// .ticker-wrap {
+//     // position: fixed;
+//     bottom: 0;
+//     width: 100%;
+//     overflow: hidden;
+//     // height: 4rem;
+//     background-color: rgba(#000, 0.9);
+//     // padding-left: 100%;
+//     box-sizing: content-box;
+
+//     .ticker {
+//         display: inline-block;
+//         // height: 4rem;
+//         // line-height: 4rem;
+//         white-space: nowrap;
+//         padding-right: 100%;
+//         box-sizing: content-box;
+
+//         -webkit-animation-iteration-count: infinite;
+//         animation-iteration-count: infinite;
+//         -webkit-animation-timing-function: linear;
+//         animation-timing-function: linear;
+//         -webkit-animation-name: ticker;
+//         animation-name: ticker;
+//         -webkit-animation-duration: $duration;
+//         animation-duration: $duration;
+
+//         &__item {
+//             display: inline-block;
+
+//             padding: 0 2rem;
+//             font-size: 2rem;
+//             color: white;
+//         }
+//     }
+// }
+.confirm-dialog {
+    // .ticker {
+    //     overflow: hidden;
+    //     display: flex;
+    // }
+    // .ticker__list {
+    //     display: flex;
+    //     margin-top: 20px;
+    //     animation: ticker 15s infinite linear;
+    // }
+    // .ticker:hover .ticker__list {
+    //     animation-play-state: paused;
+    // }
+    // .ticker__item {
+    //     margin-right: 20px;
+    // }
+    // @-moz-keyframes ticker {
+    //     100% {
+    //         transform: translateX(-100%);
+    //     }
+    // }
+    // @-webkit-keyframes ticker {
+    //     100% {
+    //         transform: translateX(-100%);
+    //     }
+    // }
+    // @-o-keyframes ticker {
+    //     100% {
+    //         transform: translateX(-100%);
+    //     }
+    // }
+    // @keyframes ticker {
+    //     100% {
+    //         transform: translateX(-100%);
+    //     }
+    // }
+}

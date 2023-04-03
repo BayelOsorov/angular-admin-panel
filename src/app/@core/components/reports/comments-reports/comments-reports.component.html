@@ -1,0 +1,13 @@
+<ngx-identification-need-to-edit
+    [data]=""
+    [control]="form.get('body')"
+    placeholder="Введите комментарий"
+>
+</ngx-identification-need-to-edit>
+<ngx-confirm-buttons
+    (approveEvent)="sendComment()"
+    class="w-100 d-block mt-2 identidicate-btn"
+    status="primary"
+    title="отправить"
+>
+</ngx-confirm-buttons>

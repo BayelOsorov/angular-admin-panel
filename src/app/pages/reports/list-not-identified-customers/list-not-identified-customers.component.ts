@@ -64,9 +64,7 @@ export class ListNotIdentifiedCustomersComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe((res) => (this.listApplications = res));
     }
-    onRowSelect(id) {
-        this.router.navigate(['/users/detail/' + id]);
-    }
+
     ngOnInit(): void {
         this.form.valueChanges
             .pipe(takeUntil(this.destroy$))
