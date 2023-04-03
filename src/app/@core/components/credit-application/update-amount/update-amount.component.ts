@@ -20,7 +20,8 @@ export class UpdateAmountComponent implements OnInit, OnChanges {
     @Input() data;
     btnDisabled = false;
     requestingAmount;
-    marks: NzMarks = {
+    objectKeys = Object.keys;
+    marks = {
         1000: '1000',
         2000: '2000',
         3000: '3000',
@@ -56,6 +57,9 @@ export class UpdateAmountComponent implements OnInit, OnChanges {
     onChange(val) {
         this.btnDisabled = false;
         this.requestingAmount = val;
+    }
+    trackByFn(index, item) {
+        return item;
     }
     formatter() {
         return 'Одобренная сумма';

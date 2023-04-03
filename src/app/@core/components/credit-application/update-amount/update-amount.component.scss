@@ -5,6 +5,36 @@
 ::ng-deep .ant-slider-track {
     background-color: nb-theme(alert-info-background-color);
 }
+.update-amount {
+    .mobile-update-amount {
+        display: none;
+    }
+}
+::ng-deep .ant-radio,
+.ant-radio-group,
+.ant-radio-wrapper {
+    color: nb-theme(card-text-color);
+}
+::ng-deep .ant-radio-disabled + span {
+    color: nb-theme(card-text-color);
+}
+::ng-deep .ant-radio-disabled .ant-radio-inner {
+    background-color: #b3b3b3 !important;
+    border-color: #b3b3b3 !important;
+}
+::ng-deep .ant-radio-checked {
+    .ant-radio-disabled,
+    .ant-radio-inner,
+    .ant-radio-inner::after {
+        background-color: nb-theme(alert-success-background-color) !important;
+        border-color: nb-theme(alert-success-background-color) !important;
+        width: 20px;
+        height: 20px;
+    }
+    .ant-radio-inner {
+        top: 1.5px;
+    }
+}
 .approved-dots {
     ::ng-deep .ant-slider-handle {
         background-color: nb-theme(alert-success-background-color) !important;
@@ -18,5 +48,19 @@
     .approve-btn {
         width: 100%;
         font-size: 15px;
+    }
+    .update-amount {
+        .desktop-upd-am {
+            display: none;
+        }
+
+        .mobile-update-amount {
+            display: block;
+            margin: 0 auto;
+            width: 90%;
+            .radio-label {
+                padding: 10px;
+            }
+        }
     }
 }
