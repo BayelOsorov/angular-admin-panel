@@ -24,7 +24,6 @@
                         <span>
                             {{
                                 translateAnswers(comment?.callAnswerCategory) +
-                                    ' - ' +
                                     comment.body
                             }}</span
                         >
@@ -45,20 +44,22 @@
         class="select mb-2 mt-3"
         fullWidth
         placeholder="Выберите"
+        [status]="submitted && form.controls?.callAnswerCategory.errors?.['required']
+                                    ? 'danger'
+                                    : 'basic'"
     >
         <nb-option *ngFor="let item of selectOptions" [value]="item.value">{{
             item.label
         }}</nb-option>
     </nb-select>
 
-    <textarea
-        formControlName="body"
-        type="text"
-        nbInput
-        fullWidth
-        id="exampleInputEmail1"
+    <ngx-validation-input
+        [submitted]="submitted"
+        [control]="form.controls.body"
         placeholder="Введите комментарий"
-    ></textarea>
+        type="textarea"
+    >
+    </ngx-validation-input>
 </div>
 
 <ngx-confirm-buttons

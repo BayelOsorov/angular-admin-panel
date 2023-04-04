@@ -29,6 +29,7 @@ export class CommentsReportsComponent implements OnInit, AfterViewChecked {
     @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
     userData;
+    submitted = false;
     constructor(
         public router: Router,
         private authService: AuthService,
@@ -41,6 +42,8 @@ export class CommentsReportsComponent implements OnInit, AfterViewChecked {
                 new Date(b.createdAt).valueOf()
         );
     sendComment() {
+        this.form.controls.operationType.setValue('10');
+        this.submitted = true;
         this.sendCommentEvent.emit();
     }
 
@@ -53,10 +56,15 @@ export class CommentsReportsComponent implements OnInit, AfterViewChecked {
         } catch (err) {}
     }
     translateAnswers(val) {
-        return callAnswers.find((item) => item.value === val)?.label;
+        return val
+            ? callAnswers.find((item) => item.value === val)?.label + ' - '
+            : '';
     }
     ngAfterViewChecked() {
         this.scrollToBottom();
+        if (this.form.valid) {
+            this.submitted = false;
+        }
     }
     trackByFn(index, item) {
         return item.id;

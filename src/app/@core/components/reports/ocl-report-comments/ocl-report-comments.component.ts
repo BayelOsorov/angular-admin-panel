@@ -37,7 +37,7 @@ const selectOptions = [
 export class OclReportCommentsComponent implements OnInit, OnDestroy {
     customerId;
     listComments;
-    selectOptions = selectOptions;
+    selectOptions;
     form = this.fb.group({
         body: ['', Validators.required],
         operationType: [10, Validators.required],
