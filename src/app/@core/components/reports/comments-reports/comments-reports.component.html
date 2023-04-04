@@ -1,3 +1,38 @@
+<div class="comments mt-5">
+    <div
+        #scrollMe
+        id="messages"
+        class="messages"
+        *ngIf="listComments && listComments.totalItemCount > 0"
+    >
+        <ng-container
+            *ngFor="
+                let comment of sortArray(listComments.items);
+                trackByFn: trackByFn
+            "
+        >
+            <div class="message">
+                <div class="content">
+                    <div class="content__header">
+                        <span>{{
+                            userData.sub === comment.operator.id
+                                ? 'Вы'
+                                : comment.comment.operator.fullname
+                        }}</span>
+                    </div>
+                    <div class="text">
+                        <span> {{ comment.body }}</span>
+                    </div>
+                    <div class="date">
+                        {{ comment.createdAt | date : 'dd.MM.yyyy, HH:mm' }}
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <div id="anchor"></div>
+    </div>
+</div>
+
 <ngx-identification-need-to-edit
     [data]=""
     [control]="form.get('body')"

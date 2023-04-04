@@ -160,4 +160,10 @@ export class CreditApplicationService {
             data
         );
     }
+    getListReportComments(id) {
+        return this.http.get(
+            environment.creditApplicationUrl +
+                `/operator/api/v1/customers/${id}/observation-comments`
+        );
+    }
 }

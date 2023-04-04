@@ -138,7 +138,7 @@ export const statusIdentificate = [
     { id: 'VideoIdentificationProcess', text: 'В процессе видеоидентификации' },
     {
         id: 'VideoIdentificationSuspend',
-        text: 'Приостановлена видеоидентификации',
+        text: 'Ожидание запроса на видеоидентификацию',
     },
     { id: 'VideoIdentificationApprove', text: 'Одобрена видеоидентификация' },
     {

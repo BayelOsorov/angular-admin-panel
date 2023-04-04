@@ -166,4 +166,10 @@ export class IdentificationService {
             data
         );
     }
+    getListReportCommentIdentification(id) {
+        return this.http.get(
+            environment.identificationUrl +
+                `/operator/api/v1/customers/${id}/observation-comments`
+        );
+    }
 }
