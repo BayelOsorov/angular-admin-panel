@@ -241,7 +241,7 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <div
-                    [class]="!form && 'mt-3'"
+                    [class]="!form ? 'mt-3' : ''"
                     *ngFor="
                         let i of objectValues(additionalIncomes);
                         let idx = index
@@ -322,7 +322,7 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <div
-                    [class]="!form && 'mt-3'"
+                    [class]="!form ? 'mt-3' : ''"
                     *ngFor="
                         let i of objectValues(spouseData.incomes);
                         let idx = index
@@ -368,7 +368,7 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <div
-                    [class]="!form && 'mt-3'"
+                    [class]="!form ? 'mt-3' : ''"
                     *ngFor="
                         let i of objectValues(personalEstates);
                         let idx = index
@@ -417,7 +417,7 @@
         <nb-accordion-item-body>
             <table class="w-100">
                 <div
-                    [class]="!form && 'mt-3'"
+                    [class]="!form ? 'mt-3' : ''"
                     *ngFor="let i of objectValues(realEstates); let idx = index"
                 >
                     <tr>
