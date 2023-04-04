@@ -86,20 +86,27 @@
                 </ngx-identification-need-to-edit>
             </div>
             <div *ngIf="personalData" class="second col-md-6">
-                <table class="w-100">
-                    <tr>
-                        <td>Имя</td>
-                        <td>{{ personalData.name }}</td>
-                    </tr>
+                <table
+                    *ngIf="personalData.passportType.toLowerCase() === 'id'"
+                    class="w-100"
+                >
                     <tr>
                         <td>Фамилия</td>
                         <td>{{ personalData.surname }}</td>
                     </tr>
                     <tr>
+                        <td>Имя</td>
+                        <td>{{ personalData.name }}</td>
+                    </tr>
+
+                    <tr>
                         <td>Отчество</td>
                         <td>{{ personalData.patronymic }}</td>
                     </tr>
-
+                    <tr>
+                        <td>Пол</td>
+                        <td>{{ getGender(personalData.gender) }}</td>
+                    </tr>
                     <tr>
                         <td>Дата рождения</td>
                         <td>
@@ -114,6 +121,47 @@
                                 personalData.dateOfExpiry | date : 'dd.MM.yyyy'
                             }}
                         </td>
+                    </tr>
+                </table>
+                <table
+                    *ngIf="personalData.passportType.toLowerCase() !== 'id'"
+                    class="w-100"
+                >
+                    <tr>
+                        <td>Фамилия</td>
+                        <td>{{ personalData.surname }}</td>
+                    </tr>
+                    <tr>
+                        <td>Имя</td>
+                        <td>{{ personalData.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Отчество</td>
+                        <td>{{ personalData.patronymic }}</td>
+                    </tr>
+                    <tr>
+                        <td>Дата рождения</td>
+                        <td>
+                            {{ personalData.birthDate | date : 'dd.MM.yyyy' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Пол</td>
+                        <td>{{ getGender(personalData.gender) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Паспорт</td>
+                        <td>
+                            {{
+                                personalData.passportType +
+                                    ' ' +
+                                    personalData.documentNumber
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ПИН</td>
+                        <td>{{ personalData.pin }}</td>
                     </tr>
                 </table>
             </div>
@@ -134,7 +182,20 @@
                 </ngx-identification-need-to-edit>
             </div>
             <div *ngIf="personalData" class="second col-md-6">
-                <table class="w-100">
+                <table
+                    *ngIf="personalData.passportType.toLowerCase() === 'id'"
+                    class="w-100"
+                >
+                    <tr>
+                        <td>Кем выдан</td>
+                        <td>{{ personalData.authority }}</td>
+                    </tr>
+                    <tr>
+                        <td>Дата выдачи</td>
+                        <td>
+                            {{ personalData.dateOfIssue | date : 'dd.MM.yyyy' }}
+                        </td>
+                    </tr>
                     <tr>
                         <td>ПИН</td>
                         <td>{{ personalData.pin }}</td>
@@ -148,21 +209,6 @@
                                     personalData.documentNumber
                             }}
                         </td>
-                    </tr>
-
-                    <tr>
-                        <td>Кем выдан</td>
-                        <td>{{ personalData.authority }}</td>
-                    </tr>
-                    <tr>
-                        <td>Дата выдачи</td>
-                        <td>
-                            {{ personalData.dateOfIssue | date : 'dd.MM.yyyy' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Пол</td>
-                        <td>{{ getGender(personalData.gender) }}</td>
                     </tr>
 
                     <tr>
@@ -180,6 +226,45 @@
                                     personalData.residenceAddress
                             }}
                         </td>
+                    </tr>
+                </table>
+                <table
+                    *ngIf="personalData.passportType.toLowerCase() !== 'id'"
+                    class="w-100"
+                >
+                    <tr>
+                        <td>Семейное положение</td>
+                        <td>
+                            {{ getMaritalStatus(personalData.maritalStatus) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Адрес прописки</td>
+                        <td>
+                            {{
+                                getResidenceLoc(personalData.residenceRegion) +
+                                    ', ' +
+                                    personalData.residenceAddress
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Дата выдачи</td>
+                        <td>
+                            {{ personalData.dateOfIssue | date : 'dd.MM.yyyy' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Срок действия паспорта</td>
+                        <td>
+                            {{
+                                personalData.dateOfExpiry | date : 'dd.MM.yyyy'
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Кем выдан</td>
+                        <td>{{ personalData.authority }}</td>
                     </tr>
                 </table>
             </div>
