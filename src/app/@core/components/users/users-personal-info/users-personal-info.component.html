@@ -116,7 +116,16 @@
         <nb-alert [status]="alertStatus">
             <strong class="text-center">{{ status }}</strong>
         </nb-alert>
-        <ngx-comments-reports *ngIf="isReportPage"></ngx-comments-reports>
+        <!-- <ngx-comments-reports *ngIf="isReportPage"></ngx-comments-reports> -->
+        <ngx-fuel-card-report-comments
+            *ngIf="reportProduct === 'fuel-card'"
+        ></ngx-fuel-card-report-comments>
+        <ngx-identification-report-comments
+            *ngIf="reportProduct === 'identification'"
+        ></ngx-identification-report-comments>
+        <ngx-ocl-report-comments
+            *ngIf="reportProduct === '0-0-3'"
+        ></ngx-ocl-report-comments>
     </div>
 </div>
 <div

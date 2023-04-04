@@ -8,20 +8,26 @@
         <ng-container
             *ngFor="
                 let comment of sortArray(listComments.items);
-                trackByFn: trackByFn
+                trackBy: trackByFn
             "
         >
             <div class="message">
                 <div class="content">
-                    <div class="content__header">
+                    <div *ngIf="comment.operator" class="content__header">
                         <span>{{
                             userData.sub === comment.operator.id
                                 ? 'Вы'
-                                : comment.comment.operator.fullname
+                                : comment.operator.fullname
                         }}</span>
                     </div>
                     <div class="text">
-                        <span> {{ comment.body }}</span>
+                        <span>
+                            {{
+                                translateAnswers(comment?.callAnswerCategory) +
+                                    ' - ' +
+                                    comment.body
+                            }}</span
+                        >
                     </div>
                     <div class="date">
                         {{ comment.createdAt | date : 'dd.MM.yyyy, HH:mm' }}
@@ -33,12 +39,28 @@
     </div>
 </div>
 
-<ngx-identification-need-to-edit
-    [data]=""
-    [control]="form.get('body')"
-    placeholder="Введите комментарий"
->
-</ngx-identification-need-to-edit>
+<div [formGroup]="form">
+    <nb-select
+        formControlName="callAnswerCategory"
+        class="select mb-2 mt-3"
+        fullWidth
+        placeholder="Выберите"
+    >
+        <nb-option *ngFor="let item of selectOptions" [value]="item.value">{{
+            item.label
+        }}</nb-option>
+    </nb-select>
+
+    <textarea
+        formControlName="body"
+        type="text"
+        nbInput
+        fullWidth
+        id="exampleInputEmail1"
+        placeholder="Введите комментарий"
+    ></textarea>
+</div>
+
 <ngx-confirm-buttons
     (approveEvent)="sendComment()"
     class="w-100 d-block mt-2 identidicate-btn"

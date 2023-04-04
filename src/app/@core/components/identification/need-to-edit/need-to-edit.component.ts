@@ -28,12 +28,6 @@ export class NeedToEditComponent implements OnInit, OnDestroy {
     onChange(val) {
         this.control.patchValue([val]);
     }
-    ngOnInit(): void {
-        this.control.valueChanges.subscribe((res) => {
-            if (res.length === 0) {
-                this.cdr.markForCheck();
-            }
-        });
-    }
+    ngOnInit(): void {}
     ngOnDestroy() {}
 }

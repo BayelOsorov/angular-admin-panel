@@ -118,6 +118,9 @@ import { IdentificationVideosComponent } from './identification/identification-v
 import { ListIdentificationCustomersComponent } from './reports/list-identification-customers/list-identification-customers.component';
 import { CustomDatePipe } from './shared/date-pipe/date.pipe';
 import { CommentsReportsComponent } from './reports/comments-reports/comments-reports.component';
+import { IdentificationReportCommentsComponent } from './reports/identification-report-comments/identification-report-comments.component';
+import { OclReportCommentsComponent } from './reports/ocl-report-comments/ocl-report-comments.component';
+import { FuelCardReportCommentsComponent } from './reports/fuel-card-report-comments/fuel-card-report-comments.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
@@ -229,6 +232,9 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         ListIdentificationCustomersComponent,
         CustomDatePipe,
         CommentsReportsComponent,
+        IdentificationReportCommentsComponent,
+        OclReportCommentsComponent,
+        FuelCardReportCommentsComponent,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
     exports: [
@@ -297,6 +303,9 @@ FusionChartsModule.fcRoot(FusionCharts, Widgets, FusionTheme);
         ListIdentificationCustomersComponent,
         CustomDatePipe,
         CommentsReportsComponent,
+        IdentificationReportCommentsComponent,
+        OclReportCommentsComponent,
+        FuelCardReportCommentsComponent,
     ],
     providers: [
         // set up the providers

@@ -41,7 +41,7 @@ export class UsersPersonalInfoComponent implements OnInit, OnChanges {
     residenceLoc: string;
     gender: string;
     document;
-    isReportPage;
+    reportProduct;
     listDocuments = [];
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
@@ -184,7 +184,7 @@ export class UsersPersonalInfoComponent implements OnInit, OnChanges {
         }
     }
     ngOnInit(): void {
-        this.isReportPage = this.router.url.split('/')[1] === 'reports';
+        this.reportProduct = this.router.url.split('/')[2];
 
         if (this.userData.identificationInformation) {
             this.getMaritalStatus();

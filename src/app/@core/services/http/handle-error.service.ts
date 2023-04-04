@@ -8,6 +8,7 @@ export class HandleErrorService {
     constructor(private toaster: ToastrService) {}
     public handleError(err) {
         let errorMessage = '';
+
         if (err.status === 0 || err.status === 500) {
             errorMessage = 'Ошибка сервера';
             return this.toaster.error(errorMessage, '', {
@@ -38,6 +39,7 @@ export class HandleErrorService {
             }
         } else {
             // errorMessage = 'Ошибка сервера';
+            return;
         }
         this.toaster.error(errorMessage);
     }

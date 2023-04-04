@@ -28,6 +28,11 @@ export class IdentificationService {
                 `/operator/api/v1/identification-requests/next-photo-identification-request`
         );
     }
+    getOperatorAccount() {
+        return this.http.get(
+            environment.identificationUrl + `/operator/api/v1/account`
+        );
+    }
     getVideoIdentification() {
         return this.http.get<IIdentificationDetail>(
             environment.identificationUrl +
@@ -166,10 +171,10 @@ export class IdentificationService {
             data
         );
     }
-    getListReportCommentIdentification(id) {
+    getListReportCommentIdentification(id, operationType) {
         return this.http.get(
             environment.identificationUrl +
-                `/operator/api/v1/customers/${id}/observation-comments`
+                `/operator/api/v1/customers/${id}/observation-comments?operationType=${operationType}&pageSize=999999999`
         );
     }
 }

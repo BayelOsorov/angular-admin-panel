@@ -146,7 +146,7 @@ export class FuelCardApplicationService {
     getListReportComments(id) {
         return this.http.get(
             environment.fuelCardUrl +
-                `/operator/api/v1/customers/${id}/observation-comments`
+                `/operator/api/v1/customers/${id}/observation-comments?pageSize=999999999`
         );
     }
 }
