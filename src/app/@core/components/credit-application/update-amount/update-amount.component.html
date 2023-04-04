@@ -17,7 +17,11 @@
     ></nz-slider>
 
     <nz-radio-group
-        class="mobile-update-amount"
+        [class]="
+            data.status === 'Approved'
+                ? 'mobile-update-amount approved-radio'
+                : 'mobile-update-amount'
+        "
         (nzOnChange)="onChange($event)"
         [(ngModel)]="requestingAmount"
         [nzDisabled]="data.isAdmin"

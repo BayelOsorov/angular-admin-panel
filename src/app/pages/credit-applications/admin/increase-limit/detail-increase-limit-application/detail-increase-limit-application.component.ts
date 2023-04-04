@@ -80,6 +80,7 @@ export class DetailIncreaseLimitApplicationAdminComponent
             .subscribe({
                 next: (data: [any]) => {
                     this.kibData = data;
+
                     data.forEach((item) => {
                         if (item.productCode === 'Charmander') {
                             this.requestingAmountData = {
