@@ -134,17 +134,21 @@
                         <label
                             for="exampleInputPassword1"
                             class="label col-sm-3 col-form-label"
-                            >Контент</label
+                            >Описание</label
                         >
-                        <div
-                            class="col-sm-9"
-                            *ngIf="partnerPromsId ? partnerPromsData : true"
-                        >
-                            <ngx-editor
+                        <div class="col-sm-9">
+                            <!-- <ngx-editor
                                 [submitted]="submitted"
                                 [data]="partnerPromsData?.hmtlBody"
                                 [control]="form.get('hmtlBody')"
-                            ></ngx-editor>
+                            ></ngx-editor> -->
+                            <ngx-validation-input
+                                type="textarea"
+                                [submitted]="submitted"
+                                [control]="form.get('hmtlBody')"
+                                placeholder="Введите описание"
+                            >
+                            </ngx-validation-input>
                         </div>
                     </div>
                     <button
