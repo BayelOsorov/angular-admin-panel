@@ -12,21 +12,40 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-const selectOptions = [
-    { label: 'Случайно скачал', value: '10' },
-    { label: 'Не было время пройти фото видео идентификацию', value: '20' },
+export const appAnswerCategories = [
+    { label: 'Скачал ради интереса', value: 'DownloadedForInterest' },
     {
-        label: 'Перезвоните позже (утром, вечером, через час, завтра)',
-        value: '30',
+        label: 'Завершит позже, не оказалась подтверждающих документов рядом',
+        value: 'FinishLaterDoNotHaveDocuments',
     },
-    { label: 'Дозвонились (сбросил)', value: '40' },
-    { label: 'Дозвонились (ответил другое лицо)', value: '50' },
-    { label: 'Не отвечает', value: '60' },
-    { label: 'Не дозвонились (сбросил)', value: '70' },
-    { label: 'Не дозвонились (отключен/недоступен)', value: '80' },
-    { label: 'Не дозвонились (не обслуживается)', value: '90' },
-    { label: 'Напишите на whatsapp/telegram', value: '100' },
-    { label: 'Другое', value: '110' },
+    {
+        label: 'Завершит позже сейчас нет времени',
+        value: 'FinishLaterDoNotHaveFreeTime',
+    },
+    {
+        label: 'Уже не требуется',
+        value: 'NoLoggerNeeded',
+    },
+    {
+        label: 'Завершит заявку на кредит в скором времени',
+        value: 'WillCompleteSoon',
+    },
+    {
+        label: 'Требовалась помощь по заполнению - помогли',
+        value: 'NeededHelpFillingOut',
+    },
+    {
+        label: 'Негативный отзыв',
+        value: 'NegativeFeedback',
+    },
+    {
+        label: 'Завершит в магазине перед покупкой',
+        value: 'FinishedInShopBeforeShopping',
+    },
+    {
+        label: 'Другое',
+        value: 'Other',
+    },
 ];
 @Component({
     selector: 'ngx-ocl-report-comments',
@@ -37,10 +56,11 @@ const selectOptions = [
 export class OclReportCommentsComponent implements OnInit, OnDestroy {
     customerId;
     listComments;
-    selectOptions;
+    selectOptions = appAnswerCategories;
     form = this.fb.group({
         body: ['', Validators.required],
         operationType: [10, Validators.required],
+        callAnswerCategory: ['', Validators.required],
     });
     private destroy$: Subject<void> = new Subject<void>();
     constructor(

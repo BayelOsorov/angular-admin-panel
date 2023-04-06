@@ -13,7 +13,8 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { identificationAnswerCategories } from '../identification-report-comments/identification-report-comments.component';
-const callAnswers = [...identificationAnswerCategories];
+import { appAnswerCategories } from '../ocl-report-comments/ocl-report-comments.component';
+const callAnswers = [...identificationAnswerCategories, ...appAnswerCategories];
 @Component({
     selector: 'ngx-comments-reports',
     templateUrl: './comments-reports.component.html',

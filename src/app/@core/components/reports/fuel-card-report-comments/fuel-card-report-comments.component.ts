@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { appAnswerCategories } from '../ocl-report-comments/ocl-report-comments.component';
 const selectOptions = [
     { label: 'Случайно скачал', value: '10' },
     { label: 'Не было время пройти фото видео идентификацию', value: '20' },
@@ -37,10 +38,11 @@ const selectOptions = [
 export class FuelCardReportCommentsComponent implements OnInit, OnDestroy {
     customerId;
     listComments;
-    selectOptions;
+    selectOptions = appAnswerCategories;
     form = this.fb.group({
         body: ['', Validators.required],
         operationType: [10, Validators.required],
+        callAnswerCategory: ['', Validators.required],
     });
     private destroy$: Subject<void> = new Subject<void>();
     constructor(
