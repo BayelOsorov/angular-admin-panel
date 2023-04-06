@@ -38,7 +38,7 @@
     </div>
 </ng-template>
 <button
-    class="w-100"
+    [class]="title.length > 25 ? 'w-100 default-confirm' : 'w-100'"
     nbButton
     (click)="onClick()"
     [status]="status"
@@ -46,3 +46,22 @@
 >
     {{ title }}
 </button>
+<!-- <div class="ticker">
+    <button
+        class="w-100"
+        nbButton
+        (click)="onClick()"
+        [status]="status"
+        [nbPopover]="form"
+    >
+        <section>
+            <div class="scroll">
+                <div>
+                    <span>
+                        {{ title }}
+                    </span>
+                </div>
+            </div>
+        </section>
+    </button>
+</div> -->

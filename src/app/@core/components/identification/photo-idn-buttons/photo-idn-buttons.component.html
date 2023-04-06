@@ -1,6 +1,6 @@
 <div class="mt-5">
     <div *ngIf="data.status === 'PhotoIdentificationProcess'" class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 conf-btn">
             <ngx-confirm-buttons
                 (approveEvent)="approveUser()"
                 status="success"
@@ -8,7 +8,7 @@
             >
             </ngx-confirm-buttons>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 conf-btn">
             <ngx-confirm-buttons
                 (approveEvent)="editUser()"
                 status="warning"
@@ -16,7 +16,7 @@
             >
             </ngx-confirm-buttons>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 conf-btn">
             <ngx-confirm-buttons
                 (approveEvent)="declineUser()"
                 status="danger"
