@@ -223,7 +223,7 @@ export class IdentificationDetailComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.identificationAnswers =
-            this.customerInfo?.culture === 'Kg'
+            this.customerInfo?.culture === 'Ky'
                 ? IdentificationAnswersKg
                 : IdentificationAnswersRu;
 

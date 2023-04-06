@@ -7,7 +7,6 @@ import {
     EventEmitter,
 } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
-import { log } from 'console';
 
 @Component({
     selector: 'ngx-confirm-buttons',
