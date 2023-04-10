@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { SupportCenterService } from '../../../services/support-center/support-center.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { NbWindowRef, NbWindowService } from '@nebular/theme';
 @Component({
     selector: 'ngx-actions-modal',
     templateUrl: './actions-modal.component.html',
@@ -14,7 +18,14 @@ export class SupportCenterActionsModalComponent implements OnInit, OnDestroy {
     updateItem;
     submitted = false;
     private destroy$: Subject<void> = new Subject<void>();
-    constructor(private fb: FormBuilder) {}
+    constructor(
+        private fb: FormBuilder,
+        private supportService: SupportCenterService,
+        private toaster: ToastrService,
+        private router: Router,
+        private windowService: NbWindowService,
+        private dialogRef: NbWindowRef<any>
+    ) {}
 
     ngOnInit(): void {
         this.form = this.fb.group({

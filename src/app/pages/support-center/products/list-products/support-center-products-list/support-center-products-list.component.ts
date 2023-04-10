@@ -35,7 +35,7 @@ export class SupportCenterProductsListComponent implements OnInit, OnDestroy {
         private toaster: ToastrService,
         private router: Router,
         private windowService: NbWindowService,
-        @Optional() private dialogRef: NbWindowRef<any>
+        @Optional() public dialogRef: NbWindowRef<any>
     ) {}
     ngOnInit(): void {
         this.getProducts();
