@@ -9,7 +9,6 @@ import {
     Output,
 } from '@angular/core';
 import { NbWindowService } from '@nebular/theme';
-import { BrandsService } from '../../../services/catalog/brands/brands.service';
 
 @Component({
     selector: 'ngx-custom-table',
@@ -34,8 +33,7 @@ export class TableComponent implements OnInit, AfterContentChecked {
     settings = {};
     constructor(
         private cd: ChangeDetectorRef,
-        private windowService: NbWindowService,
-        private brandService: BrandsService
+        private windowService: NbWindowService
     ) {}
 
     ngOnInit(): void {
